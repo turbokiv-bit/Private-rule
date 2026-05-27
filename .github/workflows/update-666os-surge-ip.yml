@@ -3,7 +3,7 @@ name: Update 666OS Surge IP Rules
 "on":
   workflow_dispatch:
   schedule:
-    - cron: "0 22 * * *​"
+    - cron: '0 22 * * *​'
 
 permissions:
   contents: write
@@ -19,21 +19,20 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.11"
+          python-version: '3.11'
 
       - name: Convert 666OS Mihomo IP rules to Surge
-        run: |
-          python scripts/convert_666os_mihomo_ip_to_surge.py
+        run: python scripts/convert_666os_mihomo_ip_to_surge.py
 
       - name: Commit and push changes
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
 
           if [ -n "$(git status --porcelain)" ]; then
             git add surge/ip
-            git commit -m "chore: update 666OS Surge IP rules"
+            git commit -m 'chore: update 666OS Surge IP rules'
             git push
           else
-            echo "No changes to commit"
+            echo 'No changes to commit'
           fi
