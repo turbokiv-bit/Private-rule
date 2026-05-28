@@ -1,0 +1,56 @@
+name: Update Centralmatrix3 Matrix-io Ruleset
+
+on:
+  schedule:
+    # 每天北京时间 04:10 自动运行
+    # GitHub Actions 的 cron 使用 UTC 时间
+    # 北京时间 04:10 = UTC 20:10
+    - cron: "10 20 * * *"
+
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-centralmatrix3-matrix-io-ruleset:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout your repository
+        uses: actions/checkout@v4
+
+      - name: Checkout Centralmatrix3 Matrix-io repository
+        uses: actions/checkout@v4
+        with:
+          repository: Centralmatrix3/Matrix-io
+          ref: master
+          path: centralmatrix3-matrix-io
+          sparse-checkout: |
+            Surge/Ruleset
+          sparse-checkout-cone-mode: true
+
+      - name: Sync Ruleset directory to Centralmatrix3/Matrix-io/Surge/Ruleset
+        run: |
+          rm -rf Centralmatrix3/Matrix-io/Surge/Ruleset
+          mkdir -p Centralmatrix3/Matrix-io/Surge/Ruleset
+          cp -a centralmatrix3-matrix-io/Surge/Ruleset/. Centralmatrix3/Matrix-io/Surge/Ruleset/
+
+          echo "Synced files:"
+          find Centralmatrix3/Matrix-io/Surge/Ruleset -maxdepth 2 -type f | sort | head -100
+
+      - name: Commit and push if changed
+        run: |
+          git status --short -- Centralmatrix3/Matrix-io/Surge/Ruleset
+
+          if [ -z "$(git status --porcelain -- Centralmatrix3/Matrix-io/Surge/Ruleset)" ]; then
+            echo "No changes to commit."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add Centralmatrix3/Matrix-io/Surge/Ruleset
+          git commit -m "chore: sync Centralmatrix3 Matrix-io Ruleset"
+          git push
