@@ -1,0 +1,50 @@
+name: Update Country MMDB
+
+on:
+  schedule:
+    # 每天北京时间 03:40 自动运行
+    # GitHub Actions 的 cron 使用 UTC 时间
+    # 北京时间 03:40 = UTC 19:40
+    - cron: "40 19 * * *"
+
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-country-mmdb:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout your repository
+        uses: actions/checkout@v4
+
+      - name: Download Country.mmdb
+        run: |
+          mkdir -p MMDB
+          curl -L \
+            --fail \
+            --retry 3 \
+            --retry-delay 5 \
+            -o MMDB/Country.mmdb \
+            https://raw.githubusercontent.com/alecthw/mmdb_china_ip_list/release/Country.mmdb
+
+          echo "Downloaded file:"
+          ls -lh MMDB/Country.mmdb
+
+      - name: Commit and push if changed
+        run: |
+          git status --short -- MMDB/Country.mmdb
+
+          if [ -z "$(git status --porcelain -- MMDB/Country.mmdb)" ]; then
+            echo "No changes to commit."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add MMDB/Country.mmdb
+          git commit -m "chore: update Country.mmdb"
+          git push
