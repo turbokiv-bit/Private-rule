@@ -1,0 +1,58 @@
+name: Update MetaCubeX Meta Rules Dat
+
+on:
+  schedule:
+    # 每天北京时间 04:00 自动运行
+    # GitHub Actions 的 cron 使用 UTC 时间
+    # 北京时间 04:00 = UTC 20:00
+    - cron: "0 20 * * *"
+
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-metacubex-meta-rules-dat:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout your repository
+        uses: actions/checkout@v4
+
+      - name: Checkout MetaCubeX meta-rules-dat repository
+        uses: actions/checkout@v4
+        with:
+          repository: MetaCubeX/meta-rules-dat
+          ref: meta
+          path: metacubex-meta-rules-dat
+
+      - name: Sync meta branch to MetaCubeX/meta-rules-dat
+        run: |
+          rm -rf MetaCubeX/meta-rules-dat
+          mkdir -p MetaCubeX/meta-rules-dat
+
+          rsync -a \
+            --delete \
+            --exclude='.git' \
+            metacubex-meta-rules-dat/ \
+            MetaCubeX/meta-rules-dat/
+
+          echo "Synced files:"
+          find MetaCubeX/meta-rules-dat -maxdepth 2 -type f | sort | head -100
+
+      - name: Commit and push if changed
+        run: |
+          git status --short -- MetaCubeX/meta-rules-dat
+
+          if [ -z "$(git status --porcelain -- MetaCubeX/meta-rules-dat)" ]; then
+            echo "No changes to commit."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add MetaCubeX/meta-rules-dat
+          git commit -m "chore: sync MetaCubeX meta-rules-dat"
+          git push
