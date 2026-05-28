@@ -1,53 +1,54 @@
-name: Update Sukka Ruleset List
+name: Update Sukka List
 
 on:
   schedule:
-    # 每天北京时间 03:20 执行
-    # GitHub Actions 使用 UTC 时间，所以这里是 UTC 19:2
-        - cron: "0 7-23/3 * * *"
+    # 每天北京时间 03:20 自动运行
+    # GitHub Actions 使用 UTC 时间，所以这里是 UTC 19:20
+    - cron: "0 7-23/3 * * *"
   workflow_dispatch:
 
 permissions:
   contents: write
 
 jobs:
-  update:
+  update-sukka-list:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout current repository
+      - name: Checkout your repository
         uses: actions/checkout@v4
 
-      - name: Checkout SukkaLab ruleset List
+      - name: Checkout SukkaLab ruleset repository
         uses: actions/checkout@v4
         with:
           repository: SukkaLab/ruleset.skk.moe
           ref: master
-          path: upstream
+          path: sukka-ruleset
           sparse-checkout: |
             List
           sparse-checkout-cone-mode: true
 
       - name: Sync List directory
         run: |
+          rm -rf List
           mkdir -p List
-          rsync -av --delete upstream/List/ List/
+          cp -a sukka-ruleset/List/. List/
 
-      - name: Check changes
-        id: changes
+          echo "Synced files:"
+          find List -maxdepth 2 -type f | sort | head -100
+
+      - name: Commit and push if changed
         run: |
-          if git diff --quiet; then
-            echo "changed=false" >> "$GITHUB_OUTPUT"
-          else
-            echo "changed=true" >> "$GITHUB_OUTPUT"
+          git status --short
+
+          if git diff --quiet -- List; then
+            echo "No changes to commit."
+            exit 0
           fi
 
-      - name: Commit and push changes
-        if: steps.changes.outputs.changed == 'true'
-        run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
           git add List
-          git commit -m "chore: update Sukka ruleset List"
+          git commit -m "chore: sync Sukka List"
           git push
