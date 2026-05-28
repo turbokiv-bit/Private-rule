@@ -1,0 +1,56 @@
+name: Update 666OS Surge
+
+on:
+  schedule:
+    # 每天北京时间 03:30 自动运行
+    # GitHub Actions 的 cron 使用 UTC 时间
+    # 北京时间 03:30 = UTC 19:30
+    - cron: "30 19 * * *"
+
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-666os-surge:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout your repository
+        uses: actions/checkout@v4
+
+      - name: Checkout 666OS rules repository
+        uses: actions/checkout@v4
+        with:
+          repository: 666OS/rules
+          ref: release
+          path: rules-666os
+          sparse-checkout: |
+            surge
+          sparse-checkout-cone-mode: true
+
+      - name: Sync surge directory to 666OS/surge
+        run: |
+          rm -rf 666OS/surge
+          mkdir -p 666OS/surge
+          cp -a rules-666os/surge/. 666OS/surge/
+
+          echo "Synced files:"
+          find 666OS/surge -maxdepth 2 -type f | sort | head -100
+
+      - name: Commit and push if changed
+        run: |
+          git status --short -- 666OS/surge
+
+          if [ -z "$(git status --porcelain -- 666OS/surge)" ]; then
+            echo "No changes to commit."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add 666OS/surge
+          git commit -m "chore: sync 666OS surge rules"
+          git push
