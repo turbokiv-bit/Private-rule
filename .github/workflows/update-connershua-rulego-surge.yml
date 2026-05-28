@@ -1,0 +1,56 @@
+name: Update ConnersHua RuleGo Surge
+
+on:
+  schedule:
+    # 每天北京时间 03:50 自动运行
+    # GitHub Actions 的 cron 使用 UTC 时间
+    # 北京时间 03:50 = UTC 19:50
+    - cron: "50 19 * * *"
+
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-connershua-rulego-surge:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout your repository
+        uses: actions/checkout@v4
+
+      - name: Checkout ConnersHua RuleGo repository
+        uses: actions/checkout@v4
+        with:
+          repository: ConnersHua/RuleGo
+          ref: master
+          path: connershua-rulego
+          sparse-checkout: |
+            Surge
+          sparse-checkout-cone-mode: true
+
+      - name: Sync Surge directory to ConnersHua/RuleGo/Surge
+        run: |
+          rm -rf ConnersHua/RuleGo/Surge
+          mkdir -p ConnersHua/RuleGo/Surge
+          cp -a connershua-rulego/Surge/. ConnersHua/RuleGo/Surge/
+
+          echo "Synced files:"
+          find ConnersHua/RuleGo/Surge -maxdepth 2 -type f | sort | head -100
+
+      - name: Commit and push if changed
+        run: |
+          git status --short -- ConnersHua/RuleGo/Surge
+
+          if [ -z "$(git status --porcelain -- ConnersHua/RuleGo/Surge)" ]; then
+            echo "No changes to commit."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add ConnersHua/RuleGo/Surge
+          git commit -m "chore: sync ConnersHua RuleGo Surge"
+          git push
