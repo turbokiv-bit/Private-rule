@@ -4,7 +4,7 @@ on:
   schedule:
     # 每天北京时间 03:20 自动运行
     # GitHub Actions 使用 UTC 时间，所以这里是 UTC 19:20
-    - cron: "0 7-23/3 * * *"
+    - cron: "0 7 * * *"
   workflow_dispatch:
 
 permissions:
@@ -30,18 +30,18 @@ jobs:
 
       - name: Sync List directory
         run: |
-          rm -rf List
-          mkdir -p List
-          cp -a sukka-ruleset/List/. List/
+          rm -rf Sukka/List
+          mkdir -p Sukka/List
+          cp -a sukka-ruleset/List/. Sukka/List/
 
           echo "Synced files:"
-          find List -maxdepth 2 -type f | sort | head -100
+          find Sukka/List -maxdepth 2 -type f | sort | head -100
 
       - name: Commit and push if changed
         run: |
           git status --short
 
-          if git diff --quiet -- List; then
+          if git diff --quiet -- Sukka/List; then
             echo "No changes to commit."
             exit 0
           fi
@@ -49,6 +49,6 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          git add List
+          git add Sukka/List
           git commit -m "chore: sync Sukka List"
           git push
