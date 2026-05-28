@@ -3,9 +3,8 @@ name: Update Sukka Ruleset List
 on:
   schedule:
     # 每天北京时间 03:20 执行
-    # GitHub Actions 使用 UTC 时间，所以这里是 UTC 19:20
-    - cron: "20 19 * * *​"
-
+    # GitHub Actions 使用 UTC 时间，所以这里是 UTC 19:2
+        - cron: "0 7-23/3 * * *"
   workflow_dispatch:
 
 permissions:
