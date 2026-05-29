@@ -1,5 +1,5 @@
 payload:
-    - +.getlantern.org
+    - +.freeweibo.com
     - +.ntc.party
     - +.browserleaks.com
     - +.bypasscensorship.org
@@ -17,7 +17,7 @@ payload:
     - +.hiddify.com
     - +.jitsi.org
     - +.lokinet.org
-    - +.lantern.io
+    - +.freezhihu.org
     - +.onionshare.org
     - +.ooni.org
     - +.openvpn.net
@@ -42,28 +42,30 @@ payload:
     - +.wireguard.com
     - +.zeronet.io
     - +.metacubex.one
-    - +.v2ray.com
-    - +.v2ray.cool
-    - +.v2fly.org
-    - +.wikiunblocked.org
-    - +.akasha.world
-    - +.greatfire.org
-    - +.torproject.org
-    - +.epicbrowser.com
     - +.applecensorship.com
     - +.freebrowser.org
     - +.freewechat.com
-    - +.freeweibo.com
-    - +.freezhihu.org
-    - +.googlecensorship.org
-    - +.paskoocheh.com
+    - +.citizenlab.org
+    - +.akasha.world
+    - +.v2ray.cool
+    - +.greatfire.org
     - +.greatfirevpn.com
     - +.pao-pao.net
-    - +.ahmia.fi
-    - +.haveibeenpwned.com
-    - +.pwnedpasswords.com
+    - +.wikiunblocked.org
+    - +.paskoocheh.com
     - +.softether.org
     - +.softether-download.com
+    - +.v2ray.com
+    - +.googlecensorship.org
+    - +.v2fly.org
+    - +.citizenlab.ca
+    - +.ahmia.fi
+    - +.epicbrowser.com
+    - +.haveibeenpwned.com
+    - +.pwnedpasswords.com
+    - +.getlantern.org
+    - +.lantern.io
+    - +.torproject.org
     - +.opengw.net
     - +.vpngate.jp
     - +.vpngate.net
@@ -81,8 +83,8 @@ payload:
     - +.4everland.io
     - +.dweb.link
     - +.censorship.no
-    - +.citizenlab.org
-    - +.citizenlab.ca
+    - +.twister.net.co
+    - +.xtls.github.io
     - +.trojan-gfw.github.io
     - +.ipfs.anonymize.com
     - +.ipfs.runfission.com
@@ -91,6 +93,4 @@ payload:
     - +.ipfs.best-practice.se
     - +.ipfs.lain.la
     - +.ipfs.fleek.co
-    - +.xtls.github.io
-    - +.twister.net.co
     - +.ipfs.eth.aragon.network
