@@ -190,6 +190,12 @@ DOMAIN-SUFFIX,tw.ntp.org.cn
 DOMAIN-SUFFIX,us.ntp.org.cn
 DOMAIN-SUFFIX,xnotify.xboxlive.com
 DOMAIN-SUFFIX,zte.home
+DOMAIN-KEYWORD,time
+DOMAIN-KEYWORD,time1
+DOMAIN-KEYWORD,time2
+DOMAIN-KEYWORD,time3
+DOMAIN-KEYWORD,time4
+DOMAIN-KEYWORD,time5
 PROCESS-NAME,shadowsocks-win.exe
 PROCESS-NAME,shadowsocksr-win.exe
 PROCESS-NAME,simple-obfs.exe
