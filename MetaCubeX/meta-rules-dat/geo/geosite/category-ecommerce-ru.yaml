@@ -1,8 +1,6 @@
 payload:
-    - +.avito.ru
-    - +.avito.st
-    - +.ozon.travel
-    - +.ozonstatus.ru
+    - +.wbr.by
+    - +.ozon.by
     - +.ozoncard.ru
     - +.o3team.ru
     - +.o-courier.ru
@@ -10,7 +8,7 @@ payload:
     - +.ozon-dostavka.ru
     - +.ozoncamp.pro
     - +.ozon.tech
-    - +.ozon.by
+    - +.wbrep.ru
     - +.ozon.com
     - +.o3.ru
     - +.xn--e1adjldbbpv.xn--90ais
@@ -39,7 +37,7 @@ payload:
     - +.ozonsport.ru
     - +.ozon.tm
     - +.ozonusercontent.com
-    - +.digital-wb.ru
+    - +.ozon.travel
     - +.digitalwb.ru
     - +.etradebook.ru
     - +.geobasket.ru
@@ -71,11 +69,11 @@ payload:
     - +.wbmail.ru
     - +.wbmotivator.ru
     - +.wbpay.ru
-    - +.wbr.by
-    - +.wbrep.ru
-    - +.wbstatic.net
-    - +.wbstatic.ru
+    - +.digital-wb.ru
+    - +.ozonstatus.ru
     - +.wbtek.ru
+    - +.wbstatic.ru
+    - +.wbstatic.net
     - +.wbwh.ru
     - +.wbwh.tech
     - +.wibes.com
@@ -136,10 +134,12 @@ payload:
     - +.wolfberries.ru
     - +.xn--80acbjgmges7ca.xn--p1ai
     - +.xn--80acbjgsdq2cl.xn--p1ai
-    - +.ozon.com.by
+    - +.avito.ru
+    - +.avito.st
     - +.ozonru.co.il
     - +.ozon.com.kz
     - +.ewisdom.us.kg
+    - +.ozon.com.by
     - +.wildberries.co.il
     - ad.ozone.ru
     - adv.ozon.ru

@@ -21,3 +21,7 @@ payload:
     - +.developer.allizom.org
     - +.mdn.allizom.net
     - +.mdn.mozit.cloud
+    - ads-img.mozilla.org
+    - ads.mozilla.org
+    - incoming.telemetry.mozilla.org
+    - incoming-telemetry.thunderbird.net

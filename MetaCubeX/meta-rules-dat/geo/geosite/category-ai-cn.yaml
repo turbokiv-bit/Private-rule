@@ -1,21 +1,21 @@
 payload:
     - cueme-api.quark.cn
     - ai.zhaomi.cn
-    - +.miaibox.com
+    - +.askdiandian.com
     - +.tongyi.com
     - +.liblib.tv
     - +.rwkv.cn
     - +.rwkv.com
     - +.tapnow.top
-    - +.yoma.cn
+    - +.xiaomimimo.com
     - +.qianwen.com
     - +.liblib.art
     - +.qwenlm.ai
-    - +.trae.guru
     - +.xiaoaiassist.com
+    - +.diandianlife.top
     - +.antafu.com
     - +.antaq.com
-    - +.trae.cn
+    - +.miaibox.com
     - +.tiangong.cn
     - +.bigmodel.cn
     - +.chatglm.cn
@@ -25,13 +25,13 @@ payload:
     - +.kimi.com
     - +.moonshot.ai
     - +.moonshot.cn
-    - +.tcwqqdy.guru
+    - +.yoma.cn
     - +.hailuoai.com
     - +.minimaxi.com
     - +.xingyeai.com
     - +.codebuddy.cn
-    - +.mcprev.cn
-    - +.mchost.guru
+    - +.trae.guru
+    - +.trae.cn
     - +.baichuan-ai.com
     - +.cueme.cn
     - +.n.cn
@@ -51,9 +51,6 @@ payload:
     - +.linka2a.net
     - +.qwen.ai
     - +.liblib.cloud
-    - +.xiaomimimo.com
-    - +.askdiandian.com
-    - +.diandianlife.top
     - +.deepseek.com
     - +.butterfly-static.cn
     - +.butterflyai.cn
@@ -91,11 +88,14 @@ payload:
     - +.marscode.cn
     - +.mcbaas.work
     - +.mcdemo.show
+    - +.mchost.guru
+    - +.mcprev.cn
+    - +.tcwqqdy.guru
     - +.yuanqi.tencent.com
     - +.hunyuan.tencent.com
     - +.xinghuo.xfyun.cn
+    - +.marscode.com.cn
+    - +.trae.com.cn
     - +.yiyan.baidu.com
     - +.tongyi.aliyun.com
     - +.qianwen.aliyun.com
-    - +.marscode.com.cn
-    - +.trae.com.cn
