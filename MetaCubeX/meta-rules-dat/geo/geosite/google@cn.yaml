@@ -112,6 +112,7 @@ payload:
     - www.destinationurl.com
     - www.gstatic.com
     - www.pxcc.com
+    - redirector.c.play.google.com
     - pki-goog.l.google.com
     - c.pki.goog
     - i.pki.goog
@@ -119,6 +120,5 @@ payload:
     - crl.pki.goog
     - crls.pki.goog
     - ocsp.pki.goog
-    - +.ggpht.cn
-    - redirector.c.play.google.com
     - firebase-settings.crashlytics.com
+    - +.ggpht.cn

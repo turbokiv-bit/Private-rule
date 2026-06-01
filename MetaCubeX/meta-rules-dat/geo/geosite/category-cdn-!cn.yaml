@@ -76,6 +76,14 @@ payload:
     - +.iamakamai.net
     - +.soasta-dswb.com
     - +.srtcdn.net
+    - +.pagecdn.com
+    - +.pagecdn.io
+    - +.vrcdn.cloud
+    - +.vrcdn.live
+    - +.vrcdn.video
+    - +.quantil.com
+    - +.stackpath.com
+    - +.stackpath.dev
     - +.cdn77.com
     - +.cdn77.org
     - +.argotunnel.com
@@ -142,13 +150,6 @@ payload:
     - +.zencdn.net
     - +.imgix.com
     - +.imgix.net
-    - +.pagecdn.com
-    - +.pagecdn.io
-    - +.stackpath.com
-    - +.stackpath.dev
-    - +.vrcdn.cloud
-    - +.vrcdn.live
-    - +.vrcdn.video
     - +.esm.run
     - +.jsdelivr.com
     - +.jsdelivr.net
@@ -160,7 +161,6 @@ payload:
     - +.llnw.net
     - +.llnwd.net
     - +.llnwi.net
-    - +.quantil.com
     - +.akamai.co.kr
     - +.one.one.one
     - +.accdn.com.cn

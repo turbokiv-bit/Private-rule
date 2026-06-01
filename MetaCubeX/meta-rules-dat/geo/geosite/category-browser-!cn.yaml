@@ -1,4 +1,5 @@
 payload:
+    - mozilla-ohttp.fastly-edge.com
     - +.chrome
     - +.librewolf.net
     - +.firefox.com

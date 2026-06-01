@@ -1,4 +1,5 @@
 payload:
+    - DOMAIN,mozilla-ohttp.fastly-edge.com
     - DOMAIN-SUFFIX,chrome
     - DOMAIN-SUFFIX,librewolf.net
     - DOMAIN-SUFFIX,firefox.com

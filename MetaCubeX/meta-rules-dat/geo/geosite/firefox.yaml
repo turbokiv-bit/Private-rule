@@ -1,3 +1,4 @@
 payload:
+    - mozilla-ohttp.fastly-edge.com
     - +.firefox.com
     - +.firefoxusercontent.com
