@@ -11,7 +11,7 @@ payload:
     - p8-juejin.byteimg.com
     - p9-juejin.byteimg.com
     - +.bytexservice.com
-    - +.cozefn.cn
+    - +.coze.cn
     - +.activity-dy.com
     - +.activity01.com
     - +.activity02.com
@@ -436,8 +436,8 @@ payload:
     - +.bdegnine.com
     - +.bplslb.com
     - +.bpltm.com
-    - +.dongchediapp.com
-    - +.dongchedi.com
+    - +.yoma.cn
+    - +.trae.guru
     - +.byte-dns.com
     - +.byte-dns.net
     - +.bytehouse.cn
@@ -583,10 +583,18 @@ payload:
     - +.zjytxd.cn
     - +.zjytxp.cn
     - +.zvip.cn
+    - +.dcarapi.com
+    - +.dcarimg.com
+    - +.dcarlive.com
+    - +.dcarstatic.com
+    - +.dcarvod.com
+    - +.dcdapp.com
+    - +.dongchedi.com
+    - +.dongchediapp.com
     - +.butterfly-static.cn
     - +.butterflyai.cn
     - +.coze-dns-01.com
-    - +.coze.cn
+    - +.bytexopen.com
     - +.coze.email
     - +.coze.site
     - +.cozeapp.net
@@ -594,7 +602,7 @@ payload:
     - +.cozebuild.com
     - +.cozecdn.com
     - +.cozedeploy.com
-    - +.bytexopen.com
+    - +.cozefn.cn
     - +.cozeide.cn
     - +.cozesdk.com
     - +.cozetest.cn
@@ -679,28 +687,20 @@ payload:
     - +.woaihuoshan.com
     - +.wohst8.com
     - +.douyinpay.com
-    - +.dcdapp.com
-    - +.dcarvod.com
+    - +.trae.cn
+    - +.tcwqqdy.guru
     - +.doudou.com
     - +.marscode.cn
     - +.mcbaas.work
     - +.mcdemo.show
     - +.mchost.guru
     - +.mcprev.cn
-    - +.tcwqqdy.guru
-    - +.trae.cn
-    - +.trae.guru
-    - +.yoma.cn
-    - +.dcarstatic.com
-    - +.dcarlive.com
-    - +.dcarapi.com
-    - +.dcarimg.com
-    - +.trae.com.cn
-    - +.marscode.com.cn
     - +.qishuimusic.com.cn
     - +.qishui.com.cn
     - +.okr.com.cn
     - +.gogokid.com.cn
+    - +.marscode.com.cn
+    - +.trae.com.cn
     - +.larksuite.com.ttdns2.com
     - +.larksuite.com.ttdns1.com
     - +.byteglb.com
