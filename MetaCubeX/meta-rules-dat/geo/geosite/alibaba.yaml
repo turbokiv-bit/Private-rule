@@ -3,8 +3,8 @@ payload:
     - +.alipay
     - +.taobao
     - +.tmall
-    - +.feizhu.cn
-    - +.cloudeagle.cn
+    - +.wdjimg.com
+    - +.xiami.fm
     - +.95095.com
     - +.ali-health.com
     - +.aliapp.org
@@ -20,7 +20,7 @@ payload:
     - +.alibabaued.com
     - +.alibabausercontent.com
     - +.alifanyi.com
-    - +.aligames.com
+    - +.alihealth.cn
     - +.aliimg.com
     - +.alikmd.com
     - +.alimama.cn
@@ -52,9 +52,9 @@ payload:
     - +.atatech.org
     - +.b2byao.com
     - +.bazai.com
-    - +.bcvbw.com
+    - +.goofish.com
     - +.cheng.xin
-    - +.iuynfg.com
+    - +.cloudeagle.cn
     - +.damai.cn
     - +.dayu.com
     - +.dfkhgj.com
@@ -74,6 +74,7 @@ payload:
     - +.liangxinyao.com
     - +.m-now.cn
     - +.maitix.com
+    - +.mappcloud.com
     - +.mdeer.com
     - +.mei.com
     - +.miaostreet.com
@@ -82,13 +83,12 @@ payload:
     - +.philanthropy.xin
     - +.phpwind.com
     - +.phpwind.net
+    - +.pp.cn
     - +.qingtingtrip.com
     - +.rexpos.cn
     - +.shenjing.com
-    - +.shuqi.com
-    - +.ztna-dingtalk.com
-    - +.shuqireader.com
     - +.sparenode.com
+    - +.elenet.me
     - +.supet.com
     - +.tanx.com
     - +.ttpod.com
@@ -98,6 +98,7 @@ payload:
     - +.yunos-inc.com
     - +.yunos.com
     - +.yushanfang.com
+    - +.zimgs.cn
     - +.zuodao.com
     - +.aliexpress.com
     - +.aliexpress-media.com
@@ -137,31 +138,43 @@ payload:
     - +.myquark.cn
     - +.quark.cn
     - +.alitrip.com
-    - +.56che.com
+    - +.feizhu.cn
     - +.feizhu.com
-    - +.shujupie.com
+    - +.fliggy.com
+    - +.iuynfg.com
     - +.xiami.com
-    - +.88cha.com
-    - +.xiami.fm
+    - +.npmmirror.com
     - +.xiami.net
     - +.koubei.com
-    - +.wandoujia.com
-    - +.wdjimg.com
-    - +.25pp.com
     - +.zhisheng.com
-    - +.npmmirror.com
-    - +.goofish.com
+    - +.56che.com
+    - +.25pp.com
+    - +.wandoujia.com
+    - +.88cha.com
+    - +.bcvbw.com
     - +.kaola.com
     - +.kaolacdn.com
     - +.lydaas.cn
     - +.lydaas.com
-    - +.lwurl.to
-    - +.laiwang.com
-    - +.dingtalkcloud.com
+    - +.elemecdn.com
+    - +.elemecdn.cn
+    - +.eleme.io
     - +.lydaas.net
     - +.lydass.cn
-    - +.dingtalkapps.com
+    - +.eleme.cn
     - +.lydass.net
+    - +.9xsecndns.cn
+    - +.kumiao.com
+    - +.mmstat.com
+    - +.soku.com
+    - +.tudou.com
+    - +.ykimg.com
+    - +.youku.com
+    - +.9game.cn
+    - +.aligames.com
+    - +.jiaoyimao.cn
+    - +.jiaoyimao.com
+    - +.lingxigames.com
     - +.alibabadns.com
     - +.alicdn.com
     - +.alicloudapi.com
@@ -176,6 +189,7 @@ payload:
     - +.aliyuncdn.com
     - +.aliyuncdn.net
     - +.aliyunfile.com
+    - +.aliyunidaas.com
     - +.aliyunpds.com
     - +.cdngslb.com
     - +.fcapp.run
@@ -203,24 +217,60 @@ payload:
     - +.kunlunwe.com
     - +.mxhichina.com
     - +.myalicdn.com
-    - +.dingtalk.net
-    - +.dingtalk.com
-    - +.dingtalk.cn
-    - +.dingding.xin
+    - +.ele.to
+    - +.ele.me
+    - +.doservice.com
+    - +.guoguo-app.com
+    - +.dianwoda.com
+    - +.dianwoda.cn
+    - +.danniao.com
+    - +.cainiaoyizhan.com
+    - +.cainiao.com
+    - +.cainiao-inc.com
+    - +.56xiniao.com
+    - +.gaode.com
     - +.ddurl.to
-    - +.whalecloud.com
-    - +.uyunad.com
-    - +.umtrack.com
-    - +.umsns.com
-    - +.umengcloud.com
+    - +.dingding.xin
+    - +.dingtalk.cn
+    - +.dingtalk.com
+    - +.dingtalk.net
+    - +.dingtalkapps.com
+    - +.dingtalkcloud.com
+    - +.laiwang.com
+    - +.lwurl.to
+    - +.ztna-dingtalk.com
+    - +.teambition.com
+    - +.teambition.net
+    - +.teambitionapis.com
+    - +.uc.cn
+    - +.uc123.com
+    - +.ucweb.com
+    - +.uczzd.cn
+    - +.11222.cn
+    - +.aliwx.net
+    - +.ishuqi.com
+    - +.shuqi.com
+    - +.shuqiapi.com
+    - +.shuqiread.com
+    - +.shuqireader.com
+    - +.sqreader.com
+    - +.autonavi.com
+    - +.cnzz.com
+    - +.mobmore.com
+    - +.puata.info
+    - +.shujupie.com
     - +.umeng.com
-    - +.fliggy.com
+    - +.umengcloud.com
+    - +.umsns.com
+    - +.umtrack.com
+    - +.uyunad.com
+    - +.whalecloud.com
     - +.alicloudccp.com
     - +.alipan.com
     - +.aliyundrive.cloud
     - +.aliyundrive.com
     - +.aliyundrive.net
-    - +.puata.info
+    - +.anav.com
     - +.a-map.cn
     - +.a-map.co
     - +.a-map.link
@@ -228,54 +278,25 @@ payload:
     - +.acloudrender.com
     - +.amap.com
     - +.amapauto.com
-    - +.anav.com
-    - +.autonavi.com
-    - +.gaode.com
-    - +.cainiao-inc.com
-    - +.cainiao.com
-    - +.cainiaoyizhan.com
-    - +.guoguo-app.com
-    - +.mobmore.com
-    - +.doservice.com
-    - +.ele.me
-    - +.ele.to
-    - +.eleme.cn
-    - +.eleme.io
-    - +.elemecdn.cn
-    - +.elemecdn.com
-    - +.elenet.me
-    - +.teambition.com
-    - +.teambition.net
-    - +.teambitionapis.com
-    - +.9game.cn
-    - +.kumiao.com
-    - +.youku.com
-    - +.ykimg.com
-    - +.mmstat.com
-    - +.soku.com
-    - +.uc.cn
-    - +.uc123.com
-    - +.ucweb.com
-    - +.uczzd.cn
-    - +.cnzz.com
-    - +.saee.org.cn
-    - +.oss-cn-nanjing.aliyuncs.com
-    - +.cainiao.com.cn
     - +.oss-cn-wulanchabu.aliyuncs.com
+    - +.saee.org.cn
+    - +.cainiao.com.cn
+    - +.oss-cn-hangzhou.aliyuncs.com
     - +.oss-cn-shenzhen.aliyuncs.com
     - +.oss-cn-shanghai.aliyuncs.com
-    - +.oss-cn-heyuan.aliyuncs.com
+    - +.oss-cn-qingdao.aliyuncs.com
     - +.alihealth.com.cn
+    - +.oss-cn-heyuan.aliyuncs.com
+    - +.oss-cn-nanjing.aliyuncs.com
     - +.oss-cn-zhangjiakou.aliyuncs.com
     - +.oss-cn-guangzhou.aliyuncs.com
-    - +.oss-cn-hangzhou.aliyuncs.com
     - +.oss-cn-chengdu.aliyuncs.com
     - +.oss-cn-beijing.aliyuncs.com
     - +.lydass.com.cn
     - +.lydaas.com.cn
-    - +.oss-cn-huhehaote.aliyuncs.com
+    - +.aliwx.com.cn
     - +.alipay.com.cn
-    - +.oss-cn-qingdao.aliyuncs.com
+    - +.oss-cn-huhehaote.aliyuncs.com
     - +.alihealth.hk
     - +.ae-rus.net
     - +.aedns.ru
@@ -310,14 +331,27 @@ payload:
     - +.tns.simba.taobao.com
     - +.track.lc.quark.cn
     - +.v6-adashx.ut.taobao.com
-    - +.alibabacloud.co.in
-    - +.alibabacloud.com
-    - +.alibabacloud.com.au
-    - +.alibabacloud.com.hk
-    - +.alibabacloud.com.my
-    - +.alibabacloud.com.sg
-    - +.alibabacloud.com.tw
-    - +.alicloud.com
+    - +.ad.api.3g.youku.com
+    - +.ad.api.mobile.youku.com
+    - +.ad.mobile.youku.com
+    - +.adashx.ut.youku.com
+    - +.atm.youku.com
+    - +.e.stat.ykimg.com
+    - +.ems.youku.com
+    - +.guanggaoad.youku.com
+    - +.h-adashx.ut.youku.com
+    - +.lstat.youku.com
+    - +.mobilemsg.youku.com
+    - +.msg.youku.com
+    - +.p-log.ykimg.com
+    - +.passport-log.youku.com
+    - +.pl.youku.com
+    - +.s-adashx.ut.youku.com
+    - +.stat.youku.com
+    - +.statis.api.3g.youku.com
+    - +.v6-adashx.ut.youku.com
+    - +.yk-ssp.ad.youku.com
+    - +.ykad-data.youku.com
     - +.oss-ap-northeast-1.aliyuncs.com
     - +.oss-ap-northeast-2.aliyuncs.com
     - +.oss-ap-south-1.aliyuncs.com
@@ -342,36 +376,6 @@ payload:
     - +.baichuan-sdk.alicdn.com
     - +.nbsdk-baichuan.alicdn.com
     - +.tce.alicdn.com
-    - +.adashx.ut.amap.com
-    - +.dualstack-logs.amap.com
-    - +.logs.amap.com
-    - +.optimus-ads.amap.com
-    - +.v6-adashx.ut.amap.com
-    - +.v6-adashx.ut.cainiao.com
-    - +.adashx.ut.ele.me
-    - +.h-adashx.ut.ele.me
-    - +.v6-adashx.ut.ele.me
-    - +.ad.api.3g.youku.com
-    - +.ad.api.mobile.youku.com
-    - +.ad.mobile.youku.com
-    - +.adashx.ut.youku.com
-    - +.atm.youku.com
-    - +.e.stat.ykimg.com
-    - +.ems.youku.com
-    - +.guanggaoad.youku.com
-    - +.h-adashx.ut.youku.com
-    - +.lstat.youku.com
-    - +.mobilemsg.youku.com
-    - +.msg.youku.com
-    - +.p-log.ykimg.com
-    - +.passport-log.youku.com
-    - +.pl.youku.com
-    - +.s-adashx.ut.youku.com
-    - +.stat.youku.com
-    - +.statis.api.3g.youku.com
-    - +.v6-adashx.ut.youku.com
-    - +.yk-ssp.ad.youku.com
-    - +.ykad-data.youku.com
     - +.ads.uc.cn
     - +.adslot.uc.cn
     - +.aaid.umeng.com
@@ -396,3 +400,20 @@ payload:
     - +.utoken.umeng.com
     - +.w.cnzz.com
     - +.z.gds.cnzz.com
+    - +.alibabacloud.co.in
+    - +.alibabacloud.com
+    - +.alibabacloud.com.au
+    - +.alibabacloud.com.hk
+    - +.alibabacloud.com.my
+    - +.alibabacloud.com.sg
+    - +.alibabacloud.com.tw
+    - +.alicloud.com
+    - +.adashx.ut.amap.com
+    - +.dualstack-logs.amap.com
+    - +.logs.amap.com
+    - +.optimus-ads.amap.com
+    - +.v6-adashx.ut.amap.com
+    - +.v6-adashx.ut.cainiao.com
+    - +.adashx.ut.ele.me
+    - +.h-adashx.ut.ele.me
+    - +.v6-adashx.ut.ele.me
