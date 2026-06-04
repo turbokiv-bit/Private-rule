@@ -53,6 +53,9 @@ payload:
     - +.baichuan-sdk.alicdn.com
     - +.nbsdk-baichuan.alicdn.com
     - +.tce.alicdn.com
+    - +.adashx.ut.ele.me
+    - +.h-adashx.ut.ele.me
+    - +.v6-adashx.ut.ele.me
     - +.ads.uc.cn
     - +.adslot.uc.cn
     - +.aaid.umeng.com
@@ -83,6 +86,3 @@ payload:
     - +.optimus-ads.amap.com
     - +.v6-adashx.ut.amap.com
     - +.v6-adashx.ut.cainiao.com
-    - +.adashx.ut.ele.me
-    - +.h-adashx.ut.ele.me
-    - +.v6-adashx.ut.ele.me

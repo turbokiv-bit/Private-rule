@@ -1,5 +1,5 @@
 payload:
-    - +.freewechat.com
+    - +.softether-download.com
     - +.ntc.party
     - +.browserleaks.com
     - +.bypasscensorship.org
@@ -17,7 +17,7 @@ payload:
     - +.hiddify.com
     - +.jitsi.org
     - +.lokinet.org
-    - +.freeweibo.com
+    - +.torproject.org
     - +.onionshare.org
     - +.ooni.org
     - +.openvpn.net
@@ -42,29 +42,28 @@ payload:
     - +.wireguard.com
     - +.zeronet.io
     - +.metacubex.one
+    - +.getlantern.org
+    - +.lantern.io
+    - +.softether.org
+    - +.greatfire.org
+    - +.akasha.world
+    - +.freeweibo.com
+    - +.v2ray.cool
+    - +.v2fly.org
+    - +.citizenlab.ca
+    - +.citizenlab.org
     - +.epicbrowser.com
     - +.applecensorship.com
     - +.freebrowser.org
-    - +.softether.org
-    - +.akasha.world
-    - +.citizenlab.ca
+    - +.freewechat.com
+    - +.v2ray.com
+    - +.freezhihu.org
     - +.googlecensorship.org
-    - +.greatfire.org
+    - +.ahmia.fi
     - +.greatfirevpn.com
     - +.pao-pao.net
     - +.wikiunblocked.org
-    - +.getlantern.org
-    - +.lantern.io
-    - +.censorship.no
-    - +.freezhihu.org
-    - +.citizenlab.org
     - +.paskoocheh.com
-    - +.ahmia.fi
-    - +.softether-download.com
-    - +.torproject.org
-    - +.v2ray.com
-    - +.v2ray.cool
-    - +.v2fly.org
     - +.opengw.net
     - +.vpngate.jp
     - +.vpngate.net
@@ -81,9 +80,9 @@ payload:
     - +.crustwebsites.net
     - +.4everland.io
     - +.dweb.link
-    - +.haveibeenpwned.com
+    - +.censorship.no
     - +.pwnedpasswords.com
-    - +.xtls.github.io
+    - +.haveibeenpwned.com
     - +.trojan-gfw.github.io
     - +.ipfs.anonymize.com
     - +.ipfs.runfission.com
@@ -92,5 +91,6 @@ payload:
     - +.ipfs.best-practice.se
     - +.ipfs.lain.la
     - +.ipfs.fleek.co
+    - +.xtls.github.io
     - +.twister.net.co
     - +.ipfs.eth.aragon.network
