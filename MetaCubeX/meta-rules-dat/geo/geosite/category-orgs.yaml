@@ -29,10 +29,34 @@ payload:
     - +.creativecommons.engineering
     - +.licensebuttons.net
     - +.csis.org
+    - +.f-dro1d.org
+    - +.f-droid.com
+    - +.f-droid.org
+    - +.fdroid.org
+    - +.nist.gov
+    - +.time.gov
+    - +.paskoocheh.com
+    - +.ppy.sh
     - +.emojipedia.org
     - +.worldemojiawards.com
     - +.worldemojiday.com
     - +.xn--yt8h.la
+    - +.attestation.app
+    - +.grapheneos.app
+    - +.grapheneos.ca
+    - +.grapheneos.com
+    - +.grapheneos.dev
+    - +.grapheneos.foundation
+    - +.grapheneos.info
+    - +.grapheneos.net
+    - +.grapheneos.network
+    - +.grapheneos.online
+    - +.grapheneos.org
+    - +.grapheneos.ovh
+    - +.grapheneos.page
+    - +.grapheneos.social
+    - +.seamlessupdate.app
+    - +.vanadium.app
     - +.ieee.org
     - +.ieee.tv
     - +.tryengineering.org
@@ -87,6 +111,14 @@ payload:
     - +.signalprocessingsociety.org
     - +.technologyandsociety.org
     - +.vtsociety.org
+    - +.acousticbrainz.org
+    - +.bookbrainz.org
+    - +.coverartarchive.org
+    - +.critiquebrainz.org
+    - +.listenbrainz.org
+    - +.messybrainz.org
+    - +.metabrainz.org
+    - +.musicbrainz.org
     - +.openmaps.org
     - +.openstreetmap.com
     - +.openstreetmap.net
@@ -98,35 +130,3 @@ payload:
     - +.stateofthemap.org
     - +.rolfoundation.org
     - +.rolsociety.org
-    - +.f-dro1d.org
-    - +.f-droid.com
-    - +.f-droid.org
-    - +.fdroid.org
-    - +.attestation.app
-    - +.grapheneos.app
-    - +.grapheneos.ca
-    - +.grapheneos.com
-    - +.grapheneos.dev
-    - +.grapheneos.foundation
-    - +.grapheneos.info
-    - +.grapheneos.net
-    - +.grapheneos.network
-    - +.grapheneos.online
-    - +.grapheneos.org
-    - +.grapheneos.ovh
-    - +.grapheneos.page
-    - +.grapheneos.social
-    - +.seamlessupdate.app
-    - +.vanadium.app
-    - +.acousticbrainz.org
-    - +.bookbrainz.org
-    - +.coverartarchive.org
-    - +.critiquebrainz.org
-    - +.listenbrainz.org
-    - +.messybrainz.org
-    - +.metabrainz.org
-    - +.musicbrainz.org
-    - +.nist.gov
-    - +.time.gov
-    - +.paskoocheh.com
-    - +.ppy.sh

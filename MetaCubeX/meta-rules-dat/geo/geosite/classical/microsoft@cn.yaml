@@ -66,6 +66,10 @@ payload:
     - DOMAIN,vz.download.prss.microsoft.com
     - DOMAIN,wscont1.apps.microsoft.com
     - DOMAIN,wscont2.apps.microsoft.com
+    - DOMAIN-SUFFIX,microsoftnews.cn
+    - DOMAIN-SUFFIX,msn.cn
+    - DOMAIN-SUFFIX,browser.events.data.msn.cn
+    - DOMAIN-SUFFIX,xboxlive.cn
     - DOMAIN-SUFFIX,21vbc.com
     - DOMAIN-SUFFIX,21vbluecloud.com
     - DOMAIN-SUFFIX,21vbluecloud.net
@@ -164,7 +168,3 @@ payload:
     - DOMAIN-SUFFIX,microsoftreactor.com.cn
     - DOMAIN-SUFFIX,reactorms.com.cn
     - DOMAIN,www.microsoft.com
-    - DOMAIN-SUFFIX,microsoftnews.cn
-    - DOMAIN-SUFFIX,msn.cn
-    - DOMAIN-SUFFIX,browser.events.data.msn.cn
-    - DOMAIN-SUFFIX,xboxlive.cn

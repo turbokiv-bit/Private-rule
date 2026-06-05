@@ -10,8 +10,8 @@ payload:
     - p7-juejin.byteimg.com
     - p8-juejin.byteimg.com
     - p9-juejin.byteimg.com
-    - +.meegobeta.com
-    - +.vegtm.net
+    - +.feishuoffice.cn
+    - +.volcdem.com
     - +.activity-dy.com
     - +.activity01.com
     - +.activity02.com
@@ -295,7 +295,7 @@ payload:
     - +.baike.com
     - +.wukong.com
     - +.wukongwenda.cn
-    - +.bytexopen.com
+    - +.feishumeetings.cn
     - +.365yg.com
     - +.gogokid.com
     - +.hapierxia.com
@@ -317,38 +317,6 @@ payload:
     - +.faceu.com
     - +.ulikecam.com
     - +.rsproxy.cn
-    - +.butterfly-static.cn
-    - +.butterflyai.cn
-    - +.coze-dns-01.com
-    - +.coze.cn
-    - +.coze.email
-    - +.coze.site
-    - +.cozeapp.net
-    - +.cozebaas.cn
-    - +.cozebuild.com
-    - +.cozecdn.com
-    - +.cozedeploy.com
-    - +.cozefn.cn
-    - +.cozeide.cn
-    - +.cozesdk.com
-    - +.cozetest.cn
-    - +.cozetest2.cn
-    - +.cozetest3.cn
-    - +.dbbuilding.fun
-    - +.building.fun
-    - +.instreet.com
-    - +.doubao-dev.com
-    - +.doubao.com
-    - +.doubaocdn.com
-    - +.hi-butterfly.cn
-    - +.maoxiangai.com
-    - +.myparallelstory.com
-    - +.oceancloudapi.com
-    - +.obriccloud.com
-    - +.obricclouddw.com
-    - +.picpic-ai.cn
-    - +.pixeldance.com
-    - +.api-building.fun
     - +.baseopendev.com
     - +.bytecloud.com
     - +.byteoc.com
@@ -356,9 +324,8 @@ payload:
     - +.bytexns.cn
     - +.bytexns.com
     - +.bytexns.net
-    - +.wukongwenda.com
-    - +.99uri.com
-    - +.larkofficeapp-pre.com
+    - +.bytexopen.com
+    - +.meegobeta.com
     - +.okr.cn
     - +.okr.com
     - +.vscenevideo.com
@@ -388,9 +355,9 @@ payload:
     - +.feishuimg-pre.com
     - +.feishuimg.com
     - +.feishukacdn.com
-    - +.feishumeetings.cn
-    - +.feishumeetings.com
-    - +.feishuoffice.cn
+    - +.wukongwenda.com
+    - +.99uri.com
+    - +.awemeuglang.com
     - +.feishuoffice.com
     - +.feishuopenplatformrecord.com
     - +.feishupkg.com
@@ -416,7 +383,7 @@ payload:
     - +.larkoffice.com
     - +.statuslarkoffice.com
     - +.larkofficeapp-boe.com
-    - +.99uri.cn
+    - +.larkofficeapp-pre.com
     - +.larkofficeapp.com
     - +.larkofficeboe.com
     - +.lark.cn
@@ -432,27 +399,23 @@ payload:
     - +.larksuitecdn.com
     - +.larksuiteimg-boe.com
     - +.larksuiteimg-pre.com
-    - +.doudou.com
-    - +.marscode.cn
-    - +.mcbaas.work
-    - +.mcdemo.show
-    - +.dongchediapp.com
-    - +.dongchedi.com
-    - +.mchost.guru
-    - +.mcprev.cn
-    - +.tcwqqdy.guru
-    - +.trae.cn
-    - +.trae.guru
-    - +.yoma.cn
-    - +.dcdapp.com
+    - +.dcarapi.com
+    - +.dcarimg.com
+    - +.dcarlive.com
+    - +.dcarstatic.com
+    - +.api-building.fun
+    - +.pixeldance.com
     - +.dcarvod.com
+    - +.dcdapp.com
+    - +.dongchedi.com
+    - +.dongchediapp.com
     - +.activity-wbsj.com
     - +.aihst8.com
     - +.amemv.cn
     - +.amemv.com
     - +.amemv.net
     - +.awemeughun.com
-    - +.awemeuglang.com
+    - +.99uri.cn
     - +.awemeugsoul.com
     - +.awemeugwave.com
     - +.betastar.cn
@@ -510,8 +473,8 @@ payload:
     - +.woaihuoshan.com
     - +.wohst8.com
     - +.douyinpay.com
-    - +.dcarstatic.com
-    - +.dcarlive.com
+    - +.picpic-ai.cn
+    - +.obricclouddw.com
     - +.activity-zhendingtech.com
     - +.changdunovel.com
     - +.fanqiecopyright.com
@@ -545,6 +508,18 @@ payload:
     - +.juejin.cn
     - +.juejin.im
     - +.xitu.io
+    - +.doudou.com
+    - +.marscode.cn
+    - +.mcbaas.work
+    - +.mcdemo.show
+    - +.mchost.guru
+    - +.mcprev.cn
+    - +.tcwqqdy.guru
+    - +.trae.cn
+    - +.trae.guru
+    - +.yoma.cn
+    - +.obriccloud.com
+    - +.oceancloudapi.com
     - +.aigc-cloud.com
     - +.bdegnine.com
     - +.bplslb.com
@@ -595,6 +570,7 @@ payload:
     - +.veew-alb-ts.com
     - +.vegalb.com
     - +.vegslb.com
+    - +.vegtm.net
     - +.veicplive.com
     - +.ve-imcloud.com
     - +.vemarsdev.com
@@ -618,7 +594,7 @@ payload:
     - +.volccdn.com
     - +.volcddos001.com
     - +.volcddos.com
-    - +.volcdem.com
+    - +.feishumeetings.com
     - +.volcdlspace.cn
     - +.volcdn.com
     - +.volc-dns.com
@@ -693,12 +669,36 @@ payload:
     - +.zjytxd.cn
     - +.zjytxp.cn
     - +.zvip.cn
-    - +.dcarapi.com
-    - +.dcarimg.com
-    - +.qishuimusic.com.cn
-    - +.qishui.com.cn
+    - +.butterfly-static.cn
+    - +.butterflyai.cn
+    - +.coze-dns-01.com
+    - +.coze.cn
+    - +.coze.email
+    - +.coze.site
+    - +.cozeapp.net
+    - +.cozebaas.cn
+    - +.cozebuild.com
+    - +.cozecdn.com
+    - +.cozedeploy.com
+    - +.cozefn.cn
+    - +.cozeide.cn
+    - +.cozesdk.com
+    - +.cozetest.cn
+    - +.cozetest2.cn
+    - +.cozetest3.cn
+    - +.dbbuilding.fun
+    - +.building.fun
+    - +.instreet.com
+    - +.doubao-dev.com
+    - +.doubao.com
+    - +.doubaocdn.com
+    - +.hi-butterfly.cn
+    - +.maoxiangai.com
+    - +.myparallelstory.com
     - +.trae.com.cn
     - +.marscode.com.cn
+    - +.qishuimusic.com.cn
+    - +.qishui.com.cn
     - +.okr.com.cn
     - +.gogokid.com.cn
     - +.larksuite.com.ttdns2.com
@@ -735,13 +735,6 @@ payload:
     - +.pglstatp-toutiao.com
     - +.sf3-ttcdn-tos.pstatp.com
     - +.shoppingads.cn
-    - +.coze.com
-    - +.marscode.com
-    - +.trae.ai
-    - +.cici.com
-    - +.ciciai.com
-    - +.ciciaicdn.com
-    - +.dola.com
     - ads3-normal-hl.zijieapi.com
     - ads3-normal.zijieapi.com
     - ads5-normal-hl.zijieapi.com
@@ -794,3 +787,10 @@ payload:
     - roovza.launches.appsflyersdk.com
     - roovza.skadsdk.appsflyersdk.com
     - +.analytics.tiktok.com
+    - +.coze.com
+    - +.marscode.com
+    - +.trae.ai
+    - +.cici.com
+    - +.ciciai.com
+    - +.ciciaicdn.com
+    - +.dola.com
