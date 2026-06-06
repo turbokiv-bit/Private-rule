@@ -1,12 +1,12 @@
 payload:
-    - fbcdn-a.akamaihd.net
     - e122475.dscg.akamaiedge.net
     - licdn.cn.cdn20.com
     - linkedin.sc.omtrdc.net
     - st-ok-pts.cdn-vk.ru
     - st-ok.cdn-vk.ru
-    - +.fburl.com
-    - +.facecbook.com
+    - fbcdn-a.akamaihd.net
+    - +.faceboom.com
+    - +.facebookgraphsearch.com
     - +.joinmastodon.org
     - +.mastodon.online
     - +.mastodon.social
@@ -14,6 +14,90 @@ payload:
     - +.bsky.app
     - +.bsky.network
     - +.bsky.social
+    - +.bizographics.com
+    - +.licdn.com
+    - +.linkedin.at
+    - +.linkedin.com
+    - +.lnkd.in
+    - +.odnoklassniki.eu
+    - +.odnoklasniki.ua
+    - +.apiok.ru
+    - +.odnoklasniki.by
+    - +.odnoklassniki.lv
+    - +.odnoklassniki.am
+    - +.odnoklassniki.by
+    - +.odnoklassniki.ru
+    - +.odkl.ru
+    - +.insideok.ru
+    - +.okcdn.ru
+    - +.odnoklassniki.tj
+    - +.ok.me
+    - +.ok.ru
+    - +.okl.lt
+    - +.oktech.ru
+    - +.twitter.jp
+    - +.x.com
+    - +.cms-twdigitalassets.com
+    - +.t.co
+    - +.tellapart.com
+    - +.tweetdeck.com
+    - +.twimg.com
+    - +.twitpic.com
+    - +.twitter.biz
+    - +.twittercommunity.com
+    - +.pscp.tv
+    - +.periscope.tv
+    - +.twitter.com
+    - +.twitterflightschool.com
+    - +.twitterinc.com
+    - +.twitteroauth.com
+    - +.twitterstat.us
+    - +.twtrdns.net
+    - +.twttr.com
+    - +.twttr.net
+    - +.twvid.com
+    - +.vine.co
+    - +.threads.net
+    - +.threads.com
+    - +.mixi.net
+    - +.mixi.jp
+    - +.mvk.com
+    - +.vk.cc
+    - +.vk.com
+    - +.vk.design
+    - +.vk.link
+    - +.vk.ru
+    - +.vkontakte.com
+    - +.vkontakte.ru
+    - +.cdn-vk.net
+    - +.cdn-vk.ru
+    - +.userapi.com
+    - +.userapi.ru
+    - +.vk-cdn.me
+    - +.vk-cdn.net
+    - +.vk-portal.net
+    - +.vkcache.com
+    - +.vkcdnservice.com
+    - +.vkcloud-static.ru
+    - +.vktech-static.ru
+    - +.vkuser.net
+    - +.vkusercdn.ru
+    - +.vkuserphoto.ru
+    - +.vkuseraudio.com
+    - +.vkuseraudio.net
+    - +.vkuseraudio.ru
+    - +.vkuserlive.com
+    - +.onlyfans.com
+    - +.vkuservideo.com
+    - +.vkuservideo.net
+    - +.vkuservideo.ru
+    - +.vk.me
+    - +.vkmessenger.app
+    - +.vkmessenger.com
+    - +.vkpay.app
+    - +.vkpay.com
+    - +.vkpay.io
+    - +.vkpay.ru
     - +.aboutfacebook.com
     - +.accessfacebookfromschool.com
     - +.acebooik.com
@@ -80,14 +164,14 @@ payload:
     - +.faceboobok.com
     - +.facebooc.com
     - +.faceboock.com
-    - +.facebood.com
+    - +.faceboonk.com
     - +.facebooe.com
     - +.faceboof.com
     - +.facebooi.com
     - +.facebooik.com
     - +.facebooik.org
     - +.facebooj.com
-    - +.onlyfans.com
+    - +.facebook-corp.com
     - +.facebook-covid-19.com
     - +.facebook-ebook.com
     - +.facebook-forum.com
@@ -151,7 +235,7 @@ payload:
     - +.facebookfacebook.com
     - +.facebookflow.com
     - +.facebookgames.com
-    - +.facebookgraphsearch.com
+    - +.faceboon.com
     - +.facebookgraphsearch.info
     - +.facebookgroups.com
     - +.facebookhome.cc
@@ -164,7 +248,7 @@ payload:
     - +.facebooklikeexchange.com
     - +.facebooklive.com
     - +.facebooklivestaging.net
-    - +.fbworkmail.com
+    - +.facebooklivestaging.org
     - +.facebooklogin.com
     - +.facebooklogin.info
     - +.facebookloginhelp.net
@@ -219,9 +303,9 @@ payload:
     - +.facebool.com
     - +.facebool.info
     - +.facebooll.com
-    - +.faceboom.com
-    - +.faceboon.com
-    - +.faceboonk.com
+    - +.vkuserlive.net
+    - +.truthsocial.com
+    - +.facebood.com
     - +.faceboooik.com
     - +.faceboook.com
     - +.faceboop.com
@@ -235,7 +319,7 @@ payload:
     - +.facebyook.com
     - +.facebzook.com
     - +.facecbgook.com
-    - +.fbwat.ch
+    - +.facecbook.com
     - +.facecbook.org
     - +.facecook.com
     - +.facecook.org
@@ -303,9 +387,9 @@ payload:
     - +.fbthirdpartypixel.com
     - +.fbthirdpartypixel.net
     - +.fbthirdpartypixel.org
-    - +.facebook-corp.com
-    - +.truthsocial.com
-    - +.facebooklivestaging.org
+    - +.fburl.com
+    - +.fbwat.ch
+    - +.fbworkmail.com
     - +.fcacebook.com
     - +.fcaebook.com
     - +.fcebook.com
@@ -407,28 +491,6 @@ payload:
     - +.redkix.com
     - +.workplace.com
     - +.workplaceusecases.com
-    - +.twitter.jp
-    - +.x.com
-    - +.cms-twdigitalassets.com
-    - +.t.co
-    - +.tellapart.com
-    - +.tweetdeck.com
-    - +.twimg.com
-    - +.twitpic.com
-    - +.twitter.biz
-    - +.twittercommunity.com
-    - +.pscp.tv
-    - +.periscope.tv
-    - +.twitter.com
-    - +.twitterflightschool.com
-    - +.twitterinc.com
-    - +.twitteroauth.com
-    - +.twitterstat.us
-    - +.twtrdns.net
-    - +.twttr.com
-    - +.twttr.net
-    - +.twvid.com
-    - +.vine.co
     - +.achat-followers-instagram.com
     - +.acheter-followers-instagram.com
     - +.acheterdesfollowersinstagram.com
@@ -501,11 +563,6 @@ payload:
     - +.onlineinstagram.com
     - +.web-instagram.net
     - +.wwwinstagram.com
-    - +.bizographics.com
-    - +.licdn.com
-    - +.linkedin.at
-    - +.linkedin.com
-    - +.lnkd.in
     - +.misskey.io
     - +.misskeyusercontent.jp
     - +.oekakiskey.com
@@ -525,91 +582,29 @@ payload:
     - +.misskey.design
     - +.misskey.flowers
     - +.9ineverse.com
-    - +.mixi.jp
-    - +.mixi.net
-    - +.vkpay.ru
-    - +.vkpay.io
-    - +.vkpay.com
-    - +.vkpay.app
-    - +.vkmessenger.com
-    - +.vkmessenger.app
-    - +.vk.me
-    - +.vkuservideo.ru
-    - +.vkuservideo.net
-    - +.vkuservideo.com
-    - +.vkuserlive.net
-    - +.vkuserlive.com
-    - +.vkuseraudio.ru
-    - +.vkuseraudio.net
-    - +.vkuseraudio.com
-    - +.vkuserphoto.ru
-    - +.vkusercdn.ru
-    - +.vkuser.net
-    - +.odnoklassniki.eu
-    - +.odnoklasniki.ua
-    - +.apiok.ru
-    - +.odnoklasniki.by
-    - +.odnoklassniki.lv
-    - +.odnoklassniki.am
-    - +.odnoklassniki.by
-    - +.odnoklassniki.ru
-    - +.odkl.ru
-    - +.insideok.ru
-    - +.okcdn.ru
-    - +.odnoklassniki.tj
-    - +.ok.me
-    - +.ok.ru
-    - +.okl.lt
-    - +.oktech.ru
-    - +.vktech-static.ru
-    - +.threads.com
-    - +.threads.net
-    - +.mvk.com
-    - +.vk.cc
-    - +.vk.com
-    - +.vk.design
-    - +.vk.link
-    - +.vk.ru
-    - +.vkontakte.com
-    - +.vkontakte.ru
-    - +.cdn-vk.net
-    - +.cdn-vk.ru
-    - +.userapi.com
-    - +.userapi.ru
-    - +.vk-cdn.me
-    - +.vk-cdn.net
-    - +.vk-portal.net
-    - +.vkcache.com
-    - +.vkcdnservice.com
-    - +.vkcloud-static.ru
-    - +.mi.kochudaho.me
-    - +.l-0005.l-msedge.net
-    - +.mk.shrimpia.network
-    - +.mk.yopo.work
-    - +.mi.mashiro.site
+    - +.misskey.always-we-need.games
+    - +.mixi.co.jp
     - +.mi.nakn.jp
     - +.misskey.04.si
-    - +.odnoklassniki.co.ee
-    - +.msk.ilnk.info
-    - +.mof.kemomi.me
-    - +.msk.kitazawa.me
-    - +.labo.wovs.tk
     - +.misskey.yukineko.me
-    - +.misskey.always-we-need.games
-    - +.misskey.ranranhome.info
-    - +.misskey.noellabo.jp
+    - +.mk.shrimpia.network
+    - +.mk.yopo.work
     - +.misskey.gamelore.fun
-    - +.mixi.co.jp
     - +.l-0005.dc-msedge.net
+    - +.msk.kitazawa.me
+    - +.mof.kemomi.me
+    - +.misskey.ranranhome.info
+    - +.mi.mashiro.site
+    - +.mi.kochudaho.me
+    - +.labo.wovs.tk
+    - +.msk.ilnk.info
+    - +.odnoklassniki.co.ee
+    - +.misskey.noellabo.jp
+    - +.l-0005.l-msedge.net
     - +.twitter.map.fastly.net
-    - +.analytics.facebook.com
-    - +.facebookads.com
-    - +.pixel.facebook.com
-    - +.ads-twitter.com
-    - +.graph.instagram.com
-    - +.graph-fallback.instagram.com
     - +.licdn.cn
     - +.linkedin.cn
+    - +.ads-twitter.com
     - +.adv.vk.com
     - +.analytics.vk.com
     - +.ms.vk.com
@@ -625,3 +620,8 @@ payload:
     - analytics.vk.ru
     - stats.vk-portal.net
     - target.vk.com
+    - +.analytics.facebook.com
+    - +.facebookads.com
+    - +.pixel.facebook.com
+    - +.graph.instagram.com
+    - +.graph-fallback.instagram.com

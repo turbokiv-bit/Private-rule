@@ -48,7 +48,6 @@ payload:
     - +.trace.qq.com
     - +.ugdtimg.com
     - +.wit.qq.com
-    - +.badjs.weixinbridge.com
     - +.ad.tencentmusic.com
     - +.adstats.tencentmusic.com
     - +.monitor.music.qq.com
@@ -62,3 +61,4 @@ payload:
     - +.adbehavior.ximalaya.com
     - +.adse.wsa.ximalaya.com
     - +.adse.ximalaya.com
+    - +.badjs.weixinbridge.com

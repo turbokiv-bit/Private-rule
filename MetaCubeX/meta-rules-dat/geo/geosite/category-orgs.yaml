@@ -1,5 +1,4 @@
 payload:
-    - csis-prod.s3.amazonaws.com
     - a.ppy.sh
     - assets.ppy.sh
     - c.ppy.sh
@@ -9,6 +8,7 @@ payload:
     - notify.ppy.sh
     - sentry.ppy.sh
     - spectator.ppy.sh
+    - csis-prod.s3.amazonaws.com
     - +.aomedia.org
     - +.atypi.org
     - +.change.org
@@ -24,11 +24,7 @@ payload:
     - +.who.int
     - +.wi-fi.org
     - +.wto.org
-    - +.ccstatic.org
-    - +.creativecommons.org
-    - +.creativecommons.engineering
-    - +.licensebuttons.net
-    - +.csis.org
+    - +.ppy.sh
     - +.f-dro1d.org
     - +.f-droid.com
     - +.f-droid.org
@@ -36,11 +32,6 @@ payload:
     - +.nist.gov
     - +.time.gov
     - +.paskoocheh.com
-    - +.ppy.sh
-    - +.emojipedia.org
-    - +.worldemojiawards.com
-    - +.worldemojiday.com
-    - +.xn--yt8h.la
     - +.attestation.app
     - +.grapheneos.app
     - +.grapheneos.ca
@@ -130,3 +121,12 @@ payload:
     - +.stateofthemap.org
     - +.rolfoundation.org
     - +.rolsociety.org
+    - +.ccstatic.org
+    - +.creativecommons.org
+    - +.creativecommons.engineering
+    - +.licensebuttons.net
+    - +.csis.org
+    - +.emojipedia.org
+    - +.worldemojiawards.com
+    - +.worldemojiday.com
+    - +.xn--yt8h.la
