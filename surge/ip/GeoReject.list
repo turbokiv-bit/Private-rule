@@ -1,1 +1,30 @@
-这里写 GeoReject.list 的新内容
+PROTOCOL,STUN
+DOMAIN-SUFFIX,dreport.meituan.net
+DOMAIN-SUFFIX,d.meituan.net
+DOMAIN,dnspod.meituan.httpdns.qcloud.com
+IP-CIDR,202.90.110.46/32,no-resolve
+IP-CIDR,202.90.108.13/32,no-resolve
+IP-CIDR,194.221.250.50/32,no-resolve
+DOMAIN,cdn.liftoff-creatives.io
+DOMAIN,impression-east.liftoff.io
+DOMAIN,ingest.insights.ninetailed.co
+DOMAIN,experience.ninetailed.co
+DOMAIN-SUFFIX,ninetailed.co
+DOMAIN-SUFFIX,aniview.com
+DOMAIN-SUFFIX,creativecdn.com
+DOMAIN-SUFFIX,criteo.com
+DOMAIN-SUFFIX,crwdcntrl.net
+DOMAIN-SUFFIX,ctolabperfstats.com
+DOMAIN-SUFFIX,demdex.net
+DOMAIN-SUFFIX,everesttech.net
+DOMAIN-SUFFIX,getpublica.com
+DOMAIN-SUFFIX,leadstecgz.com
+DOMAIN-SUFFIX,ltmsphrcl.net
+DOMAIN-SUFFIX,mxpnl.com
+DOMAIN-SUFFIX,omtrdc.net
+DOMAIN-SUFFIX,pubmatic.com
+DOMAIN-SUFFIX,redsoapp.com
+DOMAIN-SUFFIX,rtbhouse.com
+DOMAIN-SUFFIX,smadex.com
+DOMAIN-SUFFIX,tvsquared.com
+AND,((DOMAIN-KEYWORD,amemv.com,extended-matching), (PROTOCOL,UDP))
