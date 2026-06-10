@@ -3,8 +3,6 @@ payload:
     - DOMAIN,redirect.archlinux.org
     - DOMAIN,nmcheck.gnome.org
     - DOMAIN,connectivitycheck.gstatic.com
-    - DOMAIN,www.gstatic.com
-    - DOMAIN,www.google.com
     - DOMAIN,networkcheck.kde.org
     - DOMAIN,edge-http.microsoft.com
     - DOMAIN,www.qualcomm.com
@@ -19,6 +17,7 @@ payload:
     - DOMAIN-SUFFIX,ipv6check-udp.steamserver.net
     - DOMAIN-SUFFIX,test.steampowered.com
     - DOMAIN-SUFFIX,captive.apple.com
+    - DOMAIN,www.gstatic.com
     - DOMAIN,connectivitycheck.platform.hihonorcloud.com
     - DOMAIN,connectivitycheck.platform.hicloud.com
     - DOMAIN,connect.rom.miui.com
