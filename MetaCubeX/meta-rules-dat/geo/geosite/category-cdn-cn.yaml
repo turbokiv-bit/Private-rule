@@ -6,19 +6,6 @@ payload:
     - +.jiashule.com
     - +.jiasule.com
     - +.yunaq.com
-    - +.fastcdn.com
-    - +.acadn.cn
-    - +.bbbcdns.com
-    - +.dlgslb.cn
-    - +.dlgslb.net
-    - +.dwion.com
-    - +.acadn.com
-    - +.tlgslb.com
-    - +.globalcdn.cn
-    - +.flxdns.com
-    - +.flxdns.cn
-    - +.mcadn.cn
-    - +.tlgslb.cn
     - +.qbox.me
     - +.qiniu.com
     - +.qiniucdn.com
@@ -48,6 +35,7 @@ payload:
     - +.lxdns.org
     - +.mwcdns.com
     - +.mwcloudcdn.com
+    - +.npsv6.com
     - +.ourdvsss.com
     - +.qtlcdn.cn
     - +.qtlcdn.com
@@ -70,6 +58,19 @@ payload:
     - +.bootcdn.net
     - +.bootcss.com
     - +.phpcomposer.com
+    - +.fastcdn.com
+    - +.acadn.cn
+    - +.bbbcdns.com
+    - +.dlgslb.cn
+    - +.dlgslb.net
+    - +.dwion.com
+    - +.acadn.com
+    - +.tlgslb.com
+    - +.globalcdn.cn
+    - +.flxdns.com
+    - +.flxdns.cn
+    - +.mcadn.cn
+    - +.tlgslb.cn
     - +.dfyun.com.cn
     - +.fastcdn.com.cn
     - +.cf-china.info

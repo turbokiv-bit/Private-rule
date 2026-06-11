@@ -66,6 +66,10 @@ payload:
     - DOMAIN,vz.download.prss.microsoft.com
     - DOMAIN,wscont1.apps.microsoft.com
     - DOMAIN,wscont2.apps.microsoft.com
+    - DOMAIN-SUFFIX,microsoftreactor.cn
+    - DOMAIN-SUFFIX,microsoftreactor.com.cn
+    - DOMAIN-SUFFIX,reactorms.com.cn
+    - DOMAIN,www.microsoft.com
     - DOMAIN-SUFFIX,microsoftnews.cn
     - DOMAIN-SUFFIX,msn.cn
     - DOMAIN-SUFFIX,browser.events.data.msn.cn
@@ -164,7 +168,3 @@ payload:
     - DOMAIN-SUFFIX,th.bing.com
     - DOMAIN,bj1.api.bing.com
     - DOMAIN,emoi-cncdn.bing.com
-    - DOMAIN-SUFFIX,microsoftreactor.cn
-    - DOMAIN-SUFFIX,microsoftreactor.com.cn
-    - DOMAIN-SUFFIX,reactorms.com.cn
-    - DOMAIN,www.microsoft.com
