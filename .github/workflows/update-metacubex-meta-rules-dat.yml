@@ -20,12 +20,22 @@ jobs:
       - name: Checkout your repository
         uses: actions/checkout@v4
 
-      - name: Checkout MetaCubeX meta-rules-dat repository
-        uses: actions/checkout@v4
-        with:
-          repository: MetaCubeX/meta-rules-dat
-          ref: meta
-          path: metacubex-meta-rules-dat
+      - name: Clone MetaCubeX meta-rules-dat repository
+        run: |
+          rm -rf metacubex-meta-rules-dat
+
+          git clone \
+            --depth 1 \
+            --single-branch \
+            --branch meta \
+            https://github.com/MetaCubeX/meta-rules-dat.git \
+            metacubex-meta-rules-dat
+
+          echo "Upstream files:"
+          find metacubex-meta-rules-dat -maxdepth 4 -type f | sort | head -100
+
+          echo "Upstream .list file count:"
+          find metacubex-meta-rules-dat -type f -iname "​*.list" | wc -l
 
       - name: Sync meta branch to MetaCubeX/meta-rules-dat
         run: |
@@ -39,10 +49,10 @@ jobs:
             MetaCubeX/meta-rules-dat/
 
           echo "Synced files:"
-          find MetaCubeX/meta-rules-dat -maxdepth 3 -type f | sort | head -100
+          find MetaCubeX/meta-rules-dat -maxdepth 4 -type f | sort | head -100
 
-          echo "List file count before convert:"
-          find MetaCubeX/meta-rules-dat -name "​*.list" -type f | wc -l
+          echo "Synced .list file count:"
+          find MetaCubeX/meta-rules-dat -type f -iname "​*.list" | wc -l
 
       - name: Convert .list files to Surge rule-set format
         run: |
@@ -103,41 +113,6 @@ jobs:
                   return False
               return True
 
-          def strip_comment(line: str) -> str:
-              line = line.strip()
-
-              # 保留整行注释
-              if line.startswith("#"):
-                  return line
-
-              # 去掉常见行内注释
-              if " #" in line:
-                  line = line.split(" #", 1)[0].strip()
-
-              return line
-
-          def strip_yaml(line: str) -> str:
-              line = line.strip()
-
-              # Clash YAML:
-              # - DOMAIN-SUFFIX,example.com
-              if line.startswith("- "):
-                  line = line[2:].strip()
-
-              # 去掉首尾引号
-              if len(line) >= 2 and line[0] == line[-1] and line[0] in {"'", '"'}:
-                  line = line[1:-1].strip()
-
-              return line
-
-          def strip_attributes(line: str) -> str:
-              # MetaCubeX geosite 可能带属性：
-              # example.com @cn
-              # domain:example.com @ads
-              if " @" in line:
-                  line = line.split(" @", 1)[0].strip()
-              return line
-
           def normalize_rule(raw: str):
               line = raw.strip().lstrip("\ufeff")
 
@@ -154,9 +129,23 @@ jobs:
               if re.match(r"^[A-Za-z0-9_-]+:\s*$", line):
                   return None
 
-              line = strip_yaml(line)
-              line = strip_comment(line)
-              line = strip_attributes(line)
+              # YAML list 格式：
+              # - DOMAIN-SUFFIX,example.com
+              if line.startswith("- "):
+                  line = line[2:].strip()
+
+              # 去掉首尾引号
+              if len(line) >= 2 and line[0] == line[-1] and line[0] in {"'", '"'}:
+                  line = line[1:-1].strip()
+
+              # 去掉常见行内注释
+              if " #" in line:
+                  line = line.split(" #", 1)[0].strip()
+
+              # 去掉 MetaCubeX 属性：
+              # example.com @cn
+              if " @" in line:
+                  line = line.split(" @", 1)[0].strip()
 
               if not line:
                   return None
@@ -185,14 +174,9 @@ jobs:
 
                       return f"{rule_type},{value}"
 
-              # MetaCubeX / geosite 常见格式：
-              # domain:example.com
-              # full:example.com
-              # keyword:google
-              # regexp:^https?://
-              # suffix:example.com
               lower = line.lower()
 
+              # geosite 常见格式
               if lower.startswith("domain:"):
                   value = line.split(":", 1)[1].strip()
                   if looks_like_domain(value):
@@ -218,8 +202,7 @@ jobs:
                   if value:
                       return f"URL-REGEX,{value}"
 
-              # AdGuard / domain list 常见格式：
-              # ||example.com^
+              # AdGuard 格式
               if line.startswith("||") and line.endswith("^"):
                   value = line[2:-1].strip()
                   if looks_like_domain(value):
@@ -237,21 +220,17 @@ jobs:
                   if looks_like_domain(value):
                       return f"DOMAIN-SUFFIX,{value}"
 
-              # IP CIDR：
-              # 1.1.1.0/24
-              # 2400::/12
+              # IP CIDR
               ip_version = is_cidr(line)
               if ip_version == 4:
                   return f"IP-CIDR,{line}"
               if ip_version == 6:
                   return f"IP-CIDR6,{line}"
 
-              # 纯域名：
-              # example.com
+              # 纯域名
               if looks_like_domain(line):
                   return f"DOMAIN-SUFFIX,{line}"
 
-              # 无法识别的行跳过
               return None
 
           def convert_file(path: Path):
@@ -270,7 +249,6 @@ jobs:
                   if rule is None:
                       continue
 
-                  # 注释不去重，规则去重
                   if not rule.startswith("#"):
                       if rule in seen:
                           continue
@@ -298,7 +276,7 @@ jobs:
           print(f"Found .list files: {len(list_files)}")
 
           if len(list_files) == 0:
-              raise SystemExit("No .list files found.")
+              raise SystemExit("No .list files found after clone and sync.")
 
           changed_count = 0
 
@@ -310,11 +288,11 @@ jobs:
           print(f"Converted .list files count: {changed_count}")
           PY
 
-          echo "List file count after convert:"
-          find MetaCubeX/meta-rules-dat -name "​*.list" -type f | wc -l
+          echo "Converted .list file count:"
+          find MetaCubeX/meta-rules-dat -type f -iname "​*.list" | wc -l
 
           echo "Converted list sample:"
-          find MetaCubeX/meta-rules-dat -name "​*.list" -type f | sort | head -20
+          find MetaCubeX/meta-rules-dat -type f -iname "​*.list" | sort | head -20
 
       - name: Commit and push if changed
         run: |
