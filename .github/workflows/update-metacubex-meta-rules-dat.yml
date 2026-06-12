@@ -1,3 +1,4 @@
+
 name: Update MetaCubeX Meta Rules Dat
 
 on:
@@ -20,12 +21,27 @@ jobs:
       - name: Checkout your repository
         uses: actions/checkout@v4
 
-      - name: Checkout MetaCubeX meta-rules-dat repository
-        uses: actions/checkout@v4
-        with:
-          repository: MetaCubeX/meta-rules-dat
-          ref: meta
-          path: metacubex-meta-rules-dat
+      - name: Download MetaCubeX meta branch
+        run: |
+          rm -rf metacubex-meta-rules-dat
+          mkdir -p metacubex-meta-rules-dat
+
+          curl -L \
+            --fail \
+            --retry 3 \
+            --retry-delay 5 \
+            https://github.com/MetaCubeX/meta-rules-dat/archive/refs/heads/meta.tar.gz \
+            -o metacubex-meta-rules-dat.tar.gz
+
+          tar -xzf metacubex-meta-rules-dat.tar.gz \
+            --strip-components=1 \
+            -C metacubex-meta-rules-dat
+
+          echo "Upstream files:"
+          find metacubex-meta-rules-dat -maxdepth 4 -type f | sort | head -100
+
+          echo "Upstream .list file count:"
+          find metacubex-meta-rules-dat -type f -iname "​*.list" | wc -l
 
       - name: Sync meta branch to MetaCubeX/meta-rules-dat
         run: |
@@ -34,23 +50,25 @@ jobs:
 
           rsync -a \
             --delete \
-            --exclude='.git' \
             metacubex-meta-rules-dat/ \
             MetaCubeX/meta-rules-dat/
 
           echo "Synced files:"
-          find MetaCubeX/meta-rules-dat -maxdepth 2 -type f | sort | head -100
+          find MetaCubeX/meta-rules-dat -maxdepth 4 -type f | sort | head -100
 
-      - name: Convert list files to Surge rule-set format
+          echo "Synced .list file count:"
+          find MetaCubeX/meta-rules-dat -type f -iname "​*.list" | wc -l
+
+      - name: Convert .list files to Surge rule-set format
         run: |
           python3 <<'PY'
           from pathlib import Path
+          import ipaddress
           import re
 
           root = Path("MetaCubeX/meta-rules-dat")
 
-          # Surge 常见支持的规则类型
-          supported_types = {
+          surge_types = {
               "DOMAIN",
               "DOMAIN-SUFFIX",
               "DOMAIN-KEYWORD",
@@ -58,117 +76,228 @@ jobs:
               "IP-CIDR",
               "IP-CIDR6",
               "IP-ASN",
-              "GEOIP",
-              "PROCESS-NAME",
               "USER-AGENT",
               "URL-REGEX",
+              "PROCESS-NAME",
               "DEST-PORT",
               "SRC-IP",
               "SRC-IP-CIDR",
               "IN-PORT",
               "PROTOCOL",
-              "AND",
-              "OR",
-              "NOT",
           }
 
-          def clean_line(line: str) -> str:
-              line = line.strip()
+          skip_types = {
+              "MATCH",
+              "FINAL",
+              "RULE-SET",
+              "GEOSITE",
+              "GEOIP",
+          }
+
+          def is_cidr(value: str):
+              try:
+                  network = ipaddress.ip_network(value, strict=False)
+                  if "/" not in value:
+                      return None
+                  return network.version
+              except Exception:
+                  return None
+
+          def looks_like_domain(value: str) -> bool:
+              if not value:
+                  return False
+              if value.startswith("#"):
+                  return False
+              if " " in value:
+                  return False
+              if "/" in value:
+                  return False
+              if "," in value:
+                  return False
+              if "." not in value:
+                  return False
+              return True
+
+          def normalize_rule(raw: str):
+              line = raw.strip().lstrip("\ufeff")
 
               if not line:
-                  return ""
+                  return None
 
-              # 去掉 UTF-8 BOM
-              line = line.lstrip("\ufeff")
-
-              # 跳过 YAML 标题
-              if line in {"payload:", "rules:", "rule-providers:"}:
-                  return ""
-
-              # 跳过纯注释
               if line.startswith("#"):
                   return line
 
-              # 处理 Clash YAML 列表格式：
-              # - DOMAIN-SUFFIX,example.com
-              # - 'DOMAIN-SUFFIX,example.com'
-              # - "DOMAIN-SUFFIX,example.com"
+              if line in {"payload:", "rules:", "rule-providers:"}:
+                  return None
+
+              if re.match(r"^[A-Za-z0-9_-]+:\s*$", line):
+                  return None
+
               if line.startswith("- "):
                   line = line[2:].strip()
 
-              # 去掉首尾引号
-              if len(line) >= 2:
-                  if (line[0] == line[-1]) and line[0] in {"'", '"'}:
-                      line = line[1:-1].strip()
+              if len(line) >= 2 and line[0] == line[-1] and line[0] in {"'", '"'}:
+                  line = line[1:-1].strip()
 
-              # 去掉行内 YAML 注释，但尽量避免误伤 URL-REGEX
               if " #" in line:
                   line = line.split(" #", 1)[0].strip()
 
+              if " @" in line:
+                  line = line.split(" @", 1)[0].strip()
+
               if not line:
-                  return ""
+                  return None
 
-              # 如果是 YAML key，跳过
-              if re.match(r"^[A-Za-z0-9_-]+:\s*$", line):
-                  return ""
+              if line.startswith("#"):
+                  return line
 
-              return line
+              parts = [p.strip() for p in line.split(",") if p.strip()]
+
+              if len(parts) >= 2:
+                  rule_type = parts[0].upper()
+
+                  if rule_type in skip_types:
+                      return None
+
+                  if rule_type in surge_types:
+                      value = parts[1]
+
+                      if rule_type in {"IP-CIDR", "IP-CIDR6"}:
+                          if any(p.lower() == "no-resolve" for p in parts[2:]):
+                              return f"{rule_type},{value},no-resolve"
+                          return f"{rule_type},{value}"
+
+                      return f"{rule_type},{value}"
+
+              lower = line.lower()
+
+              if lower.startswith("domain:"):
+                  value = line.split(":", 1)[1].strip()
+                  if looks_like_domain(value):
+                      return f"DOMAIN-SUFFIX,{value}"
+
+              if lower.startswith("suffix:"):
+                  value = line.split(":", 1)[1].strip()
+                  if looks_like_domain(value):
+                      return f"DOMAIN-SUFFIX,{value}"
+
+              if lower.startswith("full:"):
+                  value = line.split(":", 1)[1].strip()
+                  if looks_like_domain(value):
+                      return f"DOMAIN,{value}"
+
+              if lower.startswith("keyword:"):
+                  value = line.split(":", 1)[1].strip()
+                  if value:
+                      return f"DOMAIN-KEYWORD,{value}"
+
+              if lower.startswith("regexp:"):
+                  value = line.split(":", 1)[1].strip()
+                  if value:
+                      return f"URL-REGEX,{value}"
+
+              if line.startswith("||") and line.endswith("^"):
+                  value = line[2:-1].strip()
+                  if looks_like_domain(value):
+                      return f"DOMAIN-SUFFIX,{value}"
+
+              if line.startswith("+."):
+                  value = line[2:].strip()
+                  if looks_like_domain(value):
+                      return f"DOMAIN-SUFFIX,{value}"
+
+              if line.startswith("."):
+                  value = line[1:].strip()
+                  if looks_like_domain(value):
+                      return f"DOMAIN-SUFFIX,{value}"
+
+              ip_version = is_cidr(line)
+
+              if ip_version == 4:
+                  return f"IP-CIDR,{line}"
+
+              if ip_version == 6:
+                  return f"IP-CIDR6,{line}"
+
+              if looks_like_domain(line):
+                  return f"DOMAIN-SUFFIX,{line}"
+
+              return None
 
           def convert_file(path: Path):
               try:
                   text = path.read_text(encoding="utf-8")
               except UnicodeDecodeError:
-                  return
+                  print(f"Skip non-utf8 file: {path}")
+                  return False
 
               output = []
-              changed = False
+              seen = set()
 
-              for raw in text.splitlines():
-                  line = clean_line(raw)
+              for raw_line in text.splitlines():
+                  rule = normalize_rule(raw_line)
 
-                  if not line:
-                      changed = True
+                  if rule is None:
                       continue
 
-                  if line.startswith("#"):
-                      output.append(line)
-                      continue
+                  if not rule.startswith("#"):
+                      if rule in seen:
+                          continue
+                      seen.add(rule)
 
-                  rule_type = line.split(",", 1)[0].strip()
+                  output.append(rule)
 
-                  # 只保留 Surge 可识别的规则行
-                  if rule_type in supported_types:
-                      output.append(line)
-                      if line != raw.strip():
-                          changed = True
-                  else:
-                      # 常见 Clash 专用规则，Surge rule-set 里不直接保留
-                      # 例如：MATCH、FINAL、RULE-SET、GEOSITE、GEOIP 视情况可能不适合 rule-set
-                      output.append(f"# Unsupported or skipped: {line}")
-                      changed = True
+              if not output:
+                  print(f"Skip empty after convert: {path}")
+                  return False
 
               new_text = "\n".join(output).rstrip() + "\n"
 
               if new_text != text:
                   path.write_text(new_text, encoding="utf-8")
                   print(f"Converted: {path}")
+                  return True
 
-          # 转换所有 .list 文件
-          for path in root.rglob("​*.list"):
-              if path.is_file():
-                  convert_file(path)
+              print(f"No need convert: {path}")
+              return False
 
-          print("Surge list conversion finished.")
+          list_files = sorted(
+              file for file in root.rglob("​*​")
+              if file.is_file() and file.suffix.lower() == ".list"
+          )
+
+          print(f"Source root exists: {root.exists()}")
+          print(f"Found .list files: {len(list_files)}")
+
+          if len(list_files) == 0:
+              print("Debug files:")
+              for file in sorted(root.rglob("​*​"))[:200]:
+                  if file.is_file():
+                      print(file)
+              raise SystemExit("No .list files found.")
+
+          changed_count = 0
+
+          for file in list_files:
+              if convert_file(file):
+                  changed_count += 1
+
+          print(f"Converted .list files count: {changed_count}")
           PY
 
-          echo "Converted list files:"
-          find MetaCubeX/meta-rules-dat -name "​*.list" -type f | sort | head -100
+          echo "Converted .list file count:"
+          find MetaCubeX/meta-rules-dat -type f -iname "​*.list" | wc -l
+
+          echo "Converted list sample:"
+          find MetaCubeX/meta-rules-dat -type f -iname "​*.list" | sort | head -20
 
       - name: Commit and push if changed
         run: |
           git status --short -- MetaCubeX/meta-rules-dat
 
-          if [ -z "$(git status --porcelain -- MetaCubeX/meta-rules-dat)" ]; then
+          git add -A MetaCubeX/meta-rules-dat
+
+          if git diff --cached --quiet -- MetaCubeX/meta-rules-dat; then
             echo "No changes to commit."
             exit 0
           fi
@@ -176,6 +305,5 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          git add MetaCubeX/meta-rules-dat
-          git commit -m "chore: sync and convert MetaCubeX meta-rules-dat"
+          git commit -m "chore: sync MetaCubeX meta-rules-dat and convert list to Surge"
           git push
