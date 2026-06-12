@@ -39,12 +39,14 @@ jobs:
             MetaCubeX/meta-rules-dat/
 
           echo "Original synced files:"
-          find MetaCubeX/meta-rules-dat -maxdepth 2 -type f | sort | head -100
+          find MetaCubeX/meta-rules-dat -maxdepth 3 -type f | sort | head -100
 
       - name: Generate Surge rule-set files
         run: |
+          # 删除旧目录，避免大小写混乱
           rm -rf MetaCubeX/Surge
-          mkdir -p MetaCubeX/Surge
+          rm -rf MetaCubeX/surge
+          mkdir -p MetaCubeX/surge
 
           python3 <<'PY'
           from pathlib import Path
@@ -52,7 +54,7 @@ jobs:
           import re
 
           source_root = Path("MetaCubeX/meta-rules-dat")
-          output_root = Path("MetaCubeX/Surge")
+          output_root = Path("MetaCubeX/surge")
 
           supported_types = {
               "DOMAIN",
@@ -77,6 +79,7 @@ jobs:
               "FINAL",
               "RULE-SET",
               "GEOSITE",
+              "GEOIP",
           }
 
           def is_ip_cidr(value: str) -> bool:
@@ -106,26 +109,7 @@ jobs:
                   return False
               return True
 
-          def strip_yaml_list_prefix(line: str) -> str:
-              line = line.strip()
-              if line.startswith("- "):
-                  line = line[2:].strip()
-              return line
-
-          def strip_quotes(line: str) -> str:
-              line = line.strip()
-              if len(line) >= 2 and line[0] == line[-1] and line[0] in {"'", '"'}:
-                  line = line[1:-1].strip()
-              return line
-
-          def remove_inline_comment(line: str) -> str:
-              # 避免误伤 URL-REGEX，只处理常见的空格加注释
-              if " #" in line:
-                  line = line.split(" #", 1)[0].strip()
-              return line
-
           def normalize_rule(line: str):
-              raw = line
               line = line.strip().lstrip("\ufeff")
 
               if not line:
@@ -134,16 +118,25 @@ jobs:
               if line.startswith("#"):
                   return line
 
-              # 跳过 YAML 结构行
+              # 跳过 YAML 结构
               if line in {"payload:", "rules:", "rule-providers:"}:
                   return None
 
               if re.match(r"^[A-Za-z0-9_-]+:\s*$", line):
                   return None
 
-              line = strip_yaml_list_prefix(line)
-              line = strip_quotes(line)
-              line = remove_inline_comment(line)
+              # 处理 YAML list:
+              # - DOMAIN-SUFFIX,example.com
+              if line.startswith("- "):
+                  line = line[2:].strip()
+
+              # 去掉首尾引号
+              if len(line) >= 2 and line[0] == line[-1] and line[0] in {"'", '"'}:
+                  line = line[1:-1].strip()
+
+              # 去掉常见行内注释
+              if " #" in line:
+                  line = line.split(" #", 1)[0].strip()
 
               if not line:
                   return None
@@ -151,26 +144,18 @@ jobs:
               if line.startswith("#"):
                   return line
 
-              # 处理 Clash YAML:
-              # - DOMAIN-SUFFIX,example.com
-              # - 'DOMAIN-SUFFIX,example.com'
               parts = [p.strip() for p in line.split(",") if p.strip()]
 
+              # 已经是规则格式
               if len(parts) >= 2:
                   rule_type = parts[0].upper()
 
                   if rule_type in skip_types:
                       return None
 
-                  if rule_type == "GEOIP":
-                      # Surge rule-set 文件里一般不放 GEOIP，避免和普通规则集混用
-                      return None
-
                   if rule_type in supported_types:
                       value = parts[1]
 
-                      # Surge rule-set 通常不带策略名，所以只保留规则类型和值
-                      # 但 IP-CIDR/IP-CIDR6 可以保留 no-resolve
                       if rule_type in {"IP-CIDR", "IP-CIDR6"}:
                           if any(p.lower() == "no-resolve" for p in parts[2:]):
                               return f"{rule_type},{value},no-resolve"
@@ -178,10 +163,10 @@ jobs:
 
                       return f"{rule_type},{value}"
 
-              # 处理纯域名列表
-              # example.com -> DOMAIN-SUFFIX,example.com
-              # .example.com -> DOMAIN-SUFFIX,example.com
-              # +.example.com -> DOMAIN-SUFFIX,example.com
+              # 纯域名：
+              # example.com
+              # .example.com
+              # +.example.com
               if line.startswith("+."):
                   domain = line[2:].strip()
                   if looks_like_domain(domain):
@@ -192,6 +177,7 @@ jobs:
                   if looks_like_domain(domain):
                       return f"DOMAIN-SUFFIX,{domain}"
 
+              # 纯 IP CIDR
               if is_ip_cidr(line):
                   if is_ipv6_cidr(line):
                       return f"IP-CIDR6,{line}"
@@ -200,7 +186,6 @@ jobs:
               if looks_like_domain(line):
                   return f"DOMAIN-SUFFIX,{line}"
 
-              # 无法识别的行跳过
               return None
 
           def convert_file(src: Path):
@@ -210,7 +195,7 @@ jobs:
               try:
                   text = src.read_text(encoding="utf-8")
               except UnicodeDecodeError:
-                  return
+                  return 0
 
               output = []
               seen = set()
@@ -221,7 +206,6 @@ jobs:
                   if rule is None:
                       continue
 
-                  # 注释不去重，规则去重
                   if not rule.startswith("#"):
                       if rule in seen:
                           continue
@@ -230,27 +214,36 @@ jobs:
                   output.append(rule)
 
               if not output:
-                  return
+                  return 0
 
               dst.parent.mkdir(parents=True, exist_ok=True)
               dst.write_text("\n".join(output).rstrip() + "\n", encoding="utf-8")
               print(f"Generated: {dst}")
+              return 1
+
+          count = 0
 
           for src in source_root.rglob("​*.list"):
               if src.is_file():
-                  convert_file(src)
+                  count += convert_file(src)
 
-          print("Surge rule-set generation finished.")
+          print(f"Generated Surge files count: {count}")
+
+          if count == 0:
+              raise SystemExit("No Surge files generated. Please check source .list files.")
           PY
 
           echo "Generated Surge files:"
-          find MetaCubeX/Surge -type f | sort | head -100
+          find MetaCubeX/surge -type f | sort | head -100
+
+          echo "Generated Surge file count:"
+          find MetaCubeX/surge -type f | wc -l
 
       - name: Commit and push if changed
         run: |
-          git status --short -- MetaCubeX/meta-rules-dat MetaCubeX/Surge
+          git status --short -- MetaCubeX/meta-rules-dat MetaCubeX/surge MetaCubeX/Surge
 
-          if [ -z "$(git status --porcelain -- MetaCubeX/meta-rules-dat MetaCubeX/Surge)" ]; then
+          if [ -z "$(git status --porcelain -- MetaCubeX/meta-rules-dat MetaCubeX/surge MetaCubeX/Surge)" ]; then
             echo "No changes to commit."
             exit 0
           fi
@@ -258,6 +251,8 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          git add MetaCubeX/meta-rules-dat MetaCubeX/Surge
+          git add MetaCubeX/meta-rules-dat MetaCubeX/surge
+          git add -A MetaCubeX/Surge || true
+
           git commit -m "chore: sync MetaCubeX meta-rules-dat and generate Surge rules"
           git push
