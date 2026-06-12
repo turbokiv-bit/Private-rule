@@ -41,14 +41,17 @@ jobs:
           echo "Original synced files:"
           find MetaCubeX/meta-rules-dat -maxdepth 3 -type f | sort | head -100
 
+          echo "Original .list file count:"
+          find MetaCubeX/meta-rules-dat -name "​*.list" -type f | wc -l
+
       - name: Generate Surge rule-set files
         run: |
-          # 删除旧目录，避免大小写混乱
+          # 删除旧的大小写目录，避免 GitHub 路径混乱
           rm -rf MetaCubeX/Surge
           rm -rf MetaCubeX/surge
           mkdir -p MetaCubeX/surge
 
-          python3 <<'PY'
+          python3 - <<'PY'
           from pathlib import Path
           import ipaddress
           import re
@@ -125,7 +128,7 @@ jobs:
               if re.match(r"^[A-Za-z0-9_-]+:\s*$", line):
                   return None
 
-              # 处理 YAML list:
+              # YAML list:
               # - DOMAIN-SUFFIX,example.com
               if line.startswith("- "):
                   line = line[2:].strip()
@@ -163,7 +166,7 @@ jobs:
 
                       return f"{rule_type},{value}"
 
-              # 纯域名：
+              # 纯域名格式：
               # example.com
               # .example.com
               # +.example.com
@@ -195,6 +198,7 @@ jobs:
               try:
                   text = src.read_text(encoding="utf-8")
               except UnicodeDecodeError:
+                  print(f"Skip non-utf8 file: {src}")
                   return 0
 
               output = []
@@ -221,38 +225,28 @@ jobs:
               print(f"Generated: {dst}")
               return 1
 
+          list_files = list(source_root.rglob("​*.list"))
+
+          print(f"Source root exists: {source_root.exists()}")
+          print(f"Found .list files: {len(list_files)}")
+
           count = 0
 
-          for src in source_root.rglob("​*.list"):
+          for src in list_files:
               if src.is_file():
                   count += convert_file(src)
 
           print(f"Generated Surge files count: {count}")
 
           if count == 0:
-              raise SystemExit("No Surge files generated. Please check source .list files.")
+              print("Warning: no Surge files generated.")
+              print("This workflow will continue so you can inspect synced original files.")
           PY
 
           echo "Generated Surge files:"
-          find MetaCubeX/surge -type f | sort | head -100
+          find MetaCubeX/surge -type f | sort | head -100 || true
 
           echo "Generated Surge file count:"
-          find MetaCubeX/surge -type f | wc -l
+          find MetaCubeX/surge -type f | wc -l || true
 
-      - name: Commit and push if changed
-        run: |
-          git status --short -- MetaCubeX/meta-rules-dat MetaCubeX/surge MetaCubeX/Surge
-
-          if [ -z "$(git status --porcelain -- MetaCubeX/meta-rules-dat MetaCubeX/surge MetaCubeX/Surge)" ]; then
-            echo "No changes to commit."
-            exit 0
-          fi
-
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-
-          git add MetaCubeX/meta-rules-dat MetaCubeX/surge
-          git add -A MetaCubeX/Surge || true
-
-          git commit -m "chore: sync MetaCubeX meta-rules-dat and generate Surge rules"
-          git push
+       - name: Commit and
