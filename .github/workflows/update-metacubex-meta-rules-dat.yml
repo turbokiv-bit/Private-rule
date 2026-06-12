@@ -5,7 +5,7 @@ on:
     # 每天北京时间 04:00 自动运行
     # GitHub Actions 的 cron 使用 UTC 时间
     # 北京时间 04:00 = UTC 20:00
-    - cron: "30 20 * * *"
+    - cron: "0 20 * * *"
 
   workflow_dispatch:
 
@@ -20,12 +20,21 @@ jobs:
       - name: Checkout your repository
         uses: actions/checkout@v4
 
-      - name: Checkout MetaCubeX meta-rules-dat repository
-        uses: actions/checkout@v4
-        with:
-          repository: MetaCubeX/meta-rules-dat
-          ref: meta
-          path: metacubex-meta-rules-dat
+      - name: Clone MetaCubeX meta-rules-dat
+        run: |
+          rm -rf metacubex-meta-rules-dat
+          git clone \
+            --depth 1 \
+            --single-branch \
+            --branch meta \
+            https://github.com/MetaCubeX/meta-rules-dat.git \
+            metacubex-meta-rules-dat
+
+          echo "Upstream root files:"
+          find metacubex-meta-rules-dat -maxdepth 3 -type f | sort | head -100
+
+          echo "Upstream .list file count:"
+          find metacubex-meta-rules-dat -name "​*.list" -type f | wc -l
 
       - name: Sync original meta branch
         run: |
@@ -46,12 +55,11 @@ jobs:
 
       - name: Generate Surge rule-set files
         run: |
-          # 删除旧的大小写目录，避免 GitHub 路径混乱
           rm -rf MetaCubeX/Surge
           rm -rf MetaCubeX/surge
           mkdir -p MetaCubeX/surge
 
-          python3 - <<'PY'
+          python3 <<'PY'
           from pathlib import Path
           import ipaddress
           import re
@@ -121,23 +129,18 @@ jobs:
               if line.startswith("#"):
                   return line
 
-              # 跳过 YAML 结构
               if line in {"payload:", "rules:", "rule-providers:"}:
                   return None
 
               if re.match(r"^[A-Za-z0-9_-]+:\s*$", line):
                   return None
 
-              # YAML list:
-              # - DOMAIN-SUFFIX,example.com
               if line.startswith("- "):
                   line = line[2:].strip()
 
-              # 去掉首尾引号
               if len(line) >= 2 and line[0] == line[-1] and line[0] in {"'", '"'}:
                   line = line[1:-1].strip()
 
-              # 去掉常见行内注释
               if " #" in line:
                   line = line.split(" #", 1)[0].strip()
 
@@ -149,7 +152,6 @@ jobs:
 
               parts = [p.strip() for p in line.split(",") if p.strip()]
 
-              # 已经是规则格式
               if len(parts) >= 2:
                   rule_type = parts[0].upper()
 
@@ -166,10 +168,6 @@ jobs:
 
                       return f"{rule_type},{value}"
 
-              # 纯域名格式：
-              # example.com
-              # .example.com
-              # +.example.com
               if line.startswith("+."):
                   domain = line[2:].strip()
                   if looks_like_domain(domain):
@@ -180,7 +178,6 @@ jobs:
                   if looks_like_domain(domain):
                       return f"DOMAIN-SUFFIX,{domain}"
 
-              # 纯 IP CIDR
               if is_ip_cidr(line):
                   if is_ipv6_cidr(line):
                       return f"IP-CIDR6,{line}"
@@ -239,14 +236,28 @@ jobs:
           print(f"Generated Surge files count: {count}")
 
           if count == 0:
-              print("Warning: no Surge files generated.")
-              print("This workflow will continue so you can inspect synced original files.")
+              raise SystemExit("No Surge files generated. Please check source files.")
           PY
 
           echo "Generated Surge files:"
-          find MetaCubeX/surge -type f | sort | head -100 || true
+          find MetaCubeX/surge -type f | sort | head -100
 
           echo "Generated Surge file count:"
-          find MetaCubeX/surge -type f | wc -l || true
+          find MetaCubeX/surge -type f | wc -l
 
-          - name: Commit and
+      - name: Commit and push if changed
+        run: |
+          git status --short -- MetaCubeX
+
+          git add -A MetaCubeX
+
+          if git diff --cached --quiet -- MetaCubeX; then
+            echo "No changes to commit."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git commit -m "chore: sync MetaCubeX meta-rules-dat and generate Surge rules"
+          git push
