@@ -20,23 +20,14 @@ jobs:
       - name: Checkout your repository
         uses: actions/checkout@v4
 
-      - name: Clone MetaCubeX meta-rules-dat
-        run: |
-          rm -rf metacubex-meta-rules-dat
-          git clone \
-            --depth 1 \
-            --single-branch \
-            --branch meta \
-            https://github.com/MetaCubeX/meta-rules-dat.git \
-            metacubex-meta-rules-dat
+      - name: Checkout MetaCubeX meta-rules-dat repository
+        uses: actions/checkout@v4
+        with:
+          repository: MetaCubeX/meta-rules-dat
+          ref: meta
+          path: metacubex-meta-rules-dat
 
-          echo "Upstream root files:"
-          find metacubex-meta-rules-dat -maxdepth 3 -type f | sort | head -100
-
-          echo "Upstream .list file count:"
-          find metacubex-meta-rules-dat -name "​*.list" -type f | wc -l
-
-      - name: Sync original meta branch
+      - name: Sync meta branch to MetaCubeX/meta-rules-dat
         run: |
           rm -rf MetaCubeX/meta-rules-dat
           mkdir -p MetaCubeX/meta-rules-dat
@@ -47,27 +38,22 @@ jobs:
             metacubex-meta-rules-dat/ \
             MetaCubeX/meta-rules-dat/
 
-          echo "Original synced files:"
+          echo "Synced files:"
           find MetaCubeX/meta-rules-dat -maxdepth 3 -type f | sort | head -100
 
-          echo "Original .list file count:"
+          echo "List file count before convert:"
           find MetaCubeX/meta-rules-dat -name "​*.list" -type f | wc -l
 
-      - name: Generate Surge rule-set files
+      - name: Convert .list files to Surge rule-set format
         run: |
-          rm -rf MetaCubeX/Surge
-          rm -rf MetaCubeX/surge
-          mkdir -p MetaCubeX/surge
-
           python3 <<'PY'
           from pathlib import Path
           import ipaddress
           import re
 
-          source_root = Path("MetaCubeX/meta-rules-dat")
-          output_root = Path("MetaCubeX/surge")
+          root = Path("MetaCubeX/meta-rules-dat")
 
-          supported_types = {
+          surge_types = {
               "DOMAIN",
               "DOMAIN-SUFFIX",
               "DOMAIN-KEYWORD",
@@ -93,35 +79,67 @@ jobs:
               "GEOIP",
           }
 
-          def is_ip_cidr(value: str) -> bool:
-              try:
-                  ipaddress.ip_network(value, strict=False)
-                  return "/" in value
-              except Exception:
-                  return False
-
-          def is_ipv6_cidr(value: str) -> bool:
+          def is_cidr(value: str):
               try:
                   network = ipaddress.ip_network(value, strict=False)
-                  return network.version == 6 and "/" in value
+                  if "/" not in value:
+                      return None
+                  return network.version
               except Exception:
-                  return False
+                  return None
 
           def looks_like_domain(value: str) -> bool:
               if not value:
+                  return False
+              if value.startswith("#"):
                   return False
               if " " in value:
                   return False
               if "/" in value:
                   return False
-              if value.startswith("#"):
+              if "," in value:
                   return False
               if "." not in value:
                   return False
               return True
 
-          def normalize_rule(line: str):
-              line = line.strip().lstrip("\ufeff")
+          def strip_comment(line: str) -> str:
+              line = line.strip()
+
+              # 保留整行注释
+              if line.startswith("#"):
+                  return line
+
+              # 去掉常见行内注释
+              if " #" in line:
+                  line = line.split(" #", 1)[0].strip()
+
+              return line
+
+          def strip_yaml(line: str) -> str:
+              line = line.strip()
+
+              # Clash YAML:
+              # - DOMAIN-SUFFIX,example.com
+              if line.startswith("- "):
+                  line = line[2:].strip()
+
+              # 去掉首尾引号
+              if len(line) >= 2 and line[0] == line[-1] and line[0] in {"'", '"'}:
+                  line = line[1:-1].strip()
+
+              return line
+
+          def strip_attributes(line: str) -> str:
+              # MetaCubeX geosite 可能带属性：
+              # example.com @cn
+              # domain:example.com @ads
+              if " @" in line:
+                  line = line.split(" @", 1)[0].strip()
+              return line
+
+          def normalize_rule(raw: str):
+              line = raw.strip().lstrip("\ufeff")
 
               if not line:
                   return None
@@ -129,20 +147,16 @@ jobs:
               if line.startswith("#"):
                   return line
 
+              # 跳过 YAML 结构行
               if line in {"payload:", "rules:", "rule-providers:"}:
                   return None
 
               if re.match(r"^[A-Za-z0-9_-]+:\s*$", line):
                   return None
 
-              if line.startswith("- "):
-                  line = line[2:].strip()
-
-              if len(line) >= 2 and line[0] == line[-1] and line[0] in {"'", '"'}:
-                  line = line[1:-1].strip()
-
-              if " #" in line:
-                  line = line.split(" #", 1)[0].strip()
+              line = strip_yaml(line)
+              line = strip_comment(line)
+              line = strip_attributes(line)
 
               if not line:
                   return None
@@ -150,6 +164,9 @@ jobs:
               if line.startswith("#"):
                   return line
 
+              # 已经是规则格式：
+              # DOMAIN-SUFFIX,example.com
+              # IP-CIDR,1.1.1.0/24
               parts = [p.strip() for p in line.split(",") if p.strip()]
 
               if len(parts) >= 2:
@@ -158,7 +175,7 @@ jobs:
                   if rule_type in skip_types:
                       return None
 
-                  if rule_type in supported_types:
+                  if rule_type in surge_types:
                       value = parts[1]
 
                       if rule_type in {"IP-CIDR", "IP-CIDR6"}:
@@ -168,35 +185,81 @@ jobs:
 
                       return f"{rule_type},{value}"
 
+              # MetaCubeX / geosite 常见格式：
+              # domain:example.com
+              # full:example.com
+              # keyword:google
+              # regexp:^https?://
+              # suffix:example.com
+              lower = line.lower()
+
+              if lower.startswith("domain:"):
+                  value = line.split(":", 1)[1].strip()
+                  if looks_like_domain(value):
+                      return f"DOMAIN-SUFFIX,{value}"
+
+              if lower.startswith("suffix:"):
+                  value = line.split(":", 1)[1].strip()
+                  if looks_like_domain(value):
+                      return f"DOMAIN-SUFFIX,{value}"
+
+              if lower.startswith("full:"):
+                  value = line.split(":", 1)[1].strip()
+                  if looks_like_domain(value):
+                      return f"DOMAIN,{value}"
+
+              if lower.startswith("keyword:"):
+                  value = line.split(":", 1)[1].strip()
+                  if value:
+                      return f"DOMAIN-KEYWORD,{value}"
+
+              if lower.startswith("regexp:"):
+                  value = line.split(":", 1)[1].strip()
+                  if value:
+                      return f"URL-REGEX,{value}"
+
+              # AdGuard / domain list 常见格式：
+              # ||example.com^
+              if line.startswith("||") and line.endswith("^"):
+                  value = line[2:-1].strip()
+                  if looks_like_domain(value):
+                      return f"DOMAIN-SUFFIX,{value}"
+
+              # +.example.com
               if line.startswith("+."):
-                  domain = line[2:].strip()
-                  if looks_like_domain(domain):
-                      return f"DOMAIN-SUFFIX,{domain}"
+                  value = line[2:].strip()
+                  if looks_like_domain(value):
+                      return f"DOMAIN-SUFFIX,{value}"
 
+              # .example.com
               if line.startswith("."):
-                  domain = line[1:].strip()
-                  if looks_like_domain(domain):
-                      return f"DOMAIN-SUFFIX,{domain}"
+                  value = line[1:].strip()
+                  if looks_like_domain(value):
+                      return f"DOMAIN-SUFFIX,{value}"
 
-              if is_ip_cidr(line):
-                  if is_ipv6_cidr(line):
-                      return f"IP-CIDR6,{line}"
+              # IP CIDR：
+              # 1.1.1.0/24
+              # 2400::/12
+              ip_version = is_cidr(line)
+              if ip_version == 4:
                   return f"IP-CIDR,{line}"
+              if ip_version == 6:
+                  return f"IP-CIDR6,{line}"
 
+              # 纯域名：
+              # example.com
               if looks_like_domain(line):
                   return f"DOMAIN-SUFFIX,{line}"
 
+              # 无法识别的行跳过
               return None
 
-          def convert_file(src: Path):
-              rel = src.relative_to(source_root)
-              dst = output_root / rel
-
+          def convert_file(path: Path):
               try:
-                  text = src.read_text(encoding="utf-8")
+                  text = path.read_text(encoding="utf-8")
               except UnicodeDecodeError:
-                  print(f"Skip non-utf8 file: {src}")
-                  return 0
+                  print(f"Skip non-utf8 file: {path}")
+                  return False
 
               output = []
               seen = set()
@@ -207,6 +270,7 @@ jobs:
                   if rule is None:
                       continue
 
+                  # 注释不去重，规则去重
                   if not rule.startswith("#"):
                       if rule in seen:
                           continue
@@ -215,43 +279,50 @@ jobs:
                   output.append(rule)
 
               if not output:
-                  return 0
+                  print(f"Skip empty after convert: {path}")
+                  return False
 
-              dst.parent.mkdir(parents=True, exist_ok=True)
-              dst.write_text("\n".join(output).rstrip() + "\n", encoding="utf-8")
-              print(f"Generated: {dst}")
-              return 1
+              new_text = "\n".join(output).rstrip() + "\n"
 
-          list_files = list(source_root.rglob("​*.list"))
+              if new_text != text:
+                  path.write_text(new_text, encoding="utf-8")
+                  print(f"Converted: {path}")
+                  return True
 
-          print(f"Source root exists: {source_root.exists()}")
+              print(f"No need convert: {path}")
+              return False
+
+          list_files = sorted(root.rglob("​*.list"))
+
+          print(f"Source root exists: {root.exists()}")
           print(f"Found .list files: {len(list_files)}")
 
-          count = 0
+          if len(list_files) == 0:
+              raise SystemExit("No .list files found.")
 
-          for src in list_files:
-              if src.is_file():
-                  count += convert_file(src)
+          changed_count = 0
 
-          print(f"Generated Surge files count: {count}")
+          for file in list_files:
+              if file.is_file():
+                  if convert_file(file):
+                      changed_count += 1
 
-          if count == 0:
-              raise SystemExit("No Surge files generated. Please check source files.")
+          print(f"Converted .list files count: {changed_count}")
           PY
 
-          echo "Generated Surge files:"
-          find MetaCubeX/surge -type f | sort | head -100
+          echo "List file count after convert:"
+          find MetaCubeX/meta-rules-dat -name "​*.list" -type f | wc -l
 
-          echo "Generated Surge file count:"
-          find MetaCubeX/surge -type f | wc -l
+          echo "Converted list sample:"
+          find MetaCubeX/meta-rules-dat -name "​*.list" -type f | sort | head -20
 
       - name: Commit and push if changed
         run: |
-          git status --short -- MetaCubeX
+          git status --short -- MetaCubeX/meta-rules-dat
 
-          git add -A MetaCubeX
+          git add -A MetaCubeX/meta-rules-dat
 
-          if git diff --cached --quiet -- MetaCubeX; then
+          if git diff --cached --quiet -- MetaCubeX/meta-rules-dat; then
             echo "No changes to commit."
             exit 0
           fi
@@ -259,5 +330,5 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          git commit -m "chore: sync MetaCubeX meta-rules-dat and generate Surge rules"
+          git commit -m "chore: sync MetaCubeX meta-rules-dat and convert list to Surge"
           git push
