@@ -249,4 +249,4 @@ jobs:
           echo "Generated Surge file count:"
           find MetaCubeX/surge -type f | wc -l || true
 
-       - name: Commit and
+          - name: Commit and
