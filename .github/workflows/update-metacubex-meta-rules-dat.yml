@@ -5,7 +5,7 @@ on:
     # 每天北京时间 04:00 自动运行
     # GitHub Actions 的 cron 使用 UTC 时间
     # 北京时间 04:00 = UTC 20:00
-    - cron: "0 20 * * *"
+    - cron: "0 20 * * *​"
 
   workflow_dispatch:
 
@@ -27,7 +27,7 @@ jobs:
           ref: meta
           path: metacubex-meta-rules-dat
 
-      - name: Sync meta branch to MetaCubeX/meta-rules-dat
+      - name: Sync original meta branch
         run: |
           rm -rf MetaCubeX/meta-rules-dat
           mkdir -p MetaCubeX/meta-rules-dat
@@ -38,14 +38,219 @@ jobs:
             metacubex-meta-rules-dat/ \
             MetaCubeX/meta-rules-dat/
 
-          echo "Synced files:"
+          echo "Original synced files:"
           find MetaCubeX/meta-rules-dat -maxdepth 2 -type f | sort | head -100
+
+      - name: Generate Surge rule-set files
+        run: |
+          rm -rf MetaCubeX/Surge
+          mkdir -p MetaCubeX/Surge
+
+          python3 <<'PY'
+          from pathlib import Path
+          import ipaddress
+          import re
+
+          source_root = Path("MetaCubeX/meta-rules-dat")
+          output_root = Path("MetaCubeX/Surge")
+
+          supported_types = {
+              "DOMAIN",
+              "DOMAIN-SUFFIX",
+              "DOMAIN-KEYWORD",
+              "DOMAIN-WILDCARD",
+              "IP-CIDR",
+              "IP-CIDR6",
+              "IP-ASN",
+              "USER-AGENT",
+              "URL-REGEX",
+              "PROCESS-NAME",
+              "DEST-PORT",
+              "SRC-IP",
+              "SRC-IP-CIDR",
+              "IN-PORT",
+              "PROTOCOL",
+          }
+
+          skip_types = {
+              "MATCH",
+              "FINAL",
+              "RULE-SET",
+              "GEOSITE",
+          }
+
+          def is_ip_cidr(value: str) -> bool:
+              try:
+                  ipaddress.ip_network(value, strict=False)
+                  return "/" in value
+              except Exception:
+                  return False
+
+          def is_ipv6_cidr(value: str) -> bool:
+              try:
+                  network = ipaddress.ip_network(value, strict=False)
+                  return network.version == 6 and "/" in value
+              except Exception:
+                  return False
+
+          def looks_like_domain(value: str) -> bool:
+              if not value:
+                  return False
+              if " " in value:
+                  return False
+              if "/" in value:
+                  return False
+              if value.startswith("#"):
+                  return False
+              if "." not in value:
+                  return False
+              return True
+
+          def strip_yaml_list_prefix(line: str) -> str:
+              line = line.strip()
+              if line.startswith("- "):
+                  line = line[2:].strip()
+              return line
+
+          def strip_quotes(line: str) -> str:
+              line = line.strip()
+              if len(line) >= 2 and line[0] == line[-1] and line[0] in {"'", '"'}:
+                  line = line[1:-1].strip()
+              return line
+
+          def remove_inline_comment(line: str) -> str:
+              # 避免误伤 URL-REGEX，只处理常见的空格加注释
+              if " #" in line:
+                  line = line.split(" #", 1)[0].strip()
+              return line
+
+          def normalize_rule(line: str):
+              raw = line
+              line = line.strip().lstrip("\ufeff")
+
+              if not line:
+                  return None
+
+              if line.startswith("#"):
+                  return line
+
+              # 跳过 YAML 结构行
+              if line in {"payload:", "rules:", "rule-providers:"}:
+                  return None
+
+              if re.match(r"^[A-Za-z0-9_-]+:\s*$", line):
+                  return None
+
+              line = strip_yaml_list_prefix(line)
+              line = strip_quotes(line)
+              line = remove_inline_comment(line)
+
+              if not line:
+                  return None
+
+              if line.startswith("#"):
+                  return line
+
+              # 处理 Clash YAML:
+              # - DOMAIN-SUFFIX,example.com
+              # - 'DOMAIN-SUFFIX,example.com'
+              parts = [p.strip() for p in line.split(",") if p.strip()]
+
+              if len(parts) >= 2:
+                  rule_type = parts[0].upper()
+
+                  if rule_type in skip_types:
+                      return None
+
+                  if rule_type == "GEOIP":
+                      # Surge rule-set 文件里一般不放 GEOIP，避免和普通规则集混用
+                      return None
+
+                  if rule_type in supported_types:
+                      value = parts[1]
+
+                      # Surge rule-set 通常不带策略名，所以只保留规则类型和值
+                      # 但 IP-CIDR/IP-CIDR6 可以保留 no-resolve
+                      if rule_type in {"IP-CIDR", "IP-CIDR6"}:
+                          if any(p.lower() == "no-resolve" for p in parts[2:]):
+                              return f"{rule_type},{value},no-resolve"
+                          return f"{rule_type},{value}"
+
+                      return f"{rule_type},{value}"
+
+              # 处理纯域名列表
+              # example.com -> DOMAIN-SUFFIX,example.com
+              # .example.com -> DOMAIN-SUFFIX,example.com
+              # +.example.com -> DOMAIN-SUFFIX,example.com
+              if line.startswith("+."):
+                  domain = line[2:].strip()
+                  if looks_like_domain(domain):
+                      return f"DOMAIN-SUFFIX,{domain}"
+
+              if line.startswith("."):
+                  domain = line[1:].strip()
+                  if looks_like_domain(domain):
+                      return f"DOMAIN-SUFFIX,{domain}"
+
+              if is_ip_cidr(line):
+                  if is_ipv6_cidr(line):
+                      return f"IP-CIDR6,{line}"
+                  return f"IP-CIDR,{line}"
+
+              if looks_like_domain(line):
+                  return f"DOMAIN-SUFFIX,{line}"
+
+              # 无法识别的行跳过
+              return None
+
+          def convert_file(src: Path):
+              rel = src.relative_to(source_root)
+              dst = output_root / rel
+
+              try:
+                  text = src.read_text(encoding="utf-8")
+              except UnicodeDecodeError:
+                  return
+
+              output = []
+              seen = set()
+
+              for raw_line in text.splitlines():
+                  rule = normalize_rule(raw_line)
+
+                  if rule is None:
+                      continue
+
+                  # 注释不去重，规则去重
+                  if not rule.startswith("#"):
+                      if rule in seen:
+                          continue
+                      seen.add(rule)
+
+                  output.append(rule)
+
+              if not output:
+                  return
+
+              dst.parent.mkdir(parents=True, exist_ok=True)
+              dst.write_text("\n".join(output).rstrip() + "\n", encoding="utf-8")
+              print(f"Generated: {dst}")
+
+          for src in source_root.rglob("​*.list"):
+              if src.is_file():
+                  convert_file(src)
+
+          print("Surge rule-set generation finished.")
+          PY
+
+          echo "Generated Surge files:"
+          find MetaCubeX/Surge -type f | sort | head -100
 
       - name: Commit and push if changed
         run: |
-          git status --short -- MetaCubeX/meta-rules-dat
+          git status --short -- MetaCubeX/meta-rules-dat MetaCubeX/Surge
 
-          if [ -z "$(git status --porcelain -- MetaCubeX/meta-rules-dat)" ]; then
+          if [ -z "$(git status --porcelain -- MetaCubeX/meta-rules-dat MetaCubeX/Surge)" ]; then
             echo "No changes to commit."
             exit 0
           fi
@@ -53,6 +258,6 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          git add MetaCubeX/meta-rules-dat
-          git commit -m "chore: sync MetaCubeX meta-rules-dat"
+          git add MetaCubeX/meta-rules-dat MetaCubeX/Surge
+          git commit -m "chore: sync MetaCubeX meta-rules-dat and generate Surge rules"
           git push
