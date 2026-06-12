@@ -5,7 +5,7 @@ on:
     # 每天北京时间 04:00 自动运行
     # GitHub Actions 的 cron 使用 UTC 时间
     # 北京时间 04:00 = UTC 20:00
-        - cron: "00 20 * * *"
+     - cron: "00 20 * * *"
 
   workflow_dispatch:
 
