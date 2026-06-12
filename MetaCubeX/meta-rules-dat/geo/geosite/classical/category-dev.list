@@ -591,7 +591,6 @@ DOMAIN-SUFFIX,developer.apple.com
 DOMAIN-SUFFIX,visualstudio.co.uk
 DOMAIN-SUFFIX,mcr.microsoft.com
 DOMAIN-SUFFIX,greenend.org.uk
-DOMAIN-REGEX,.+\.dkr\.ecr\.[^\.]+\.amazonaws\.com$
 DOMAIN-SUFFIX,collector.github.com
 DOMAIN,copilot-telemetry-service.githubusercontent.com
 DOMAIN,copilot-telemetry.githubusercontent.com

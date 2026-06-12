@@ -781,12 +781,9 @@ DOMAIN-SUFFIX,steam.cdn.on.net
 DOMAIN-SUFFIX,edge.steam-dns.top.comcast.net
 DOMAIN-SUFFIX,steam.cdn.slingshot.co.nz
 DOMAIN-SUFFIX,steam.cdn.orcon.net.nz
-DOMAIN-REGEX,^epicgames-download\d\.akamaized\.net$
 DOMAIN-SUFFIX,bluearchive-cn.com
 DOMAIN-SUFFIX,leagueoflegends.cn
 DOMAIN-SUFFIX,lpl.com.cn
-DOMAIN-REGEX,^cdn\d-epicgames-\d+\.file\.myqcloud\.com$
-DOMAIN-REGEX,^epicgames-download\d-\d+\.file\.myqcloud\.com$
 DOMAIN-SUFFIX,log-upload-os.hoyoverse.com
 DOMAIN,uplaypc-s-ubisoft.cdn.ubi.com
 DOMAIN-SUFFIX,legendofzelda.cn
@@ -825,9 +822,6 @@ DOMAIN,menu-static.gog-statics.com
 DOMAIN,productcard.gog-statics.com
 DOMAIN,static-login.gog-statics.com
 DOMAIN,www4-static.gog-statics.com
-DOMAIN-REGEX,^cdn-akamai-.+\.gog-services\.com$
-DOMAIN-REGEX,^gog-cdn-.+\.footprint\.net$
-DOMAIN-REGEX,^images(-\d)?\.gog-statics\.com$
 DOMAIN,gog-cdn-fastly.gog.com
 DOMAIN,gog-cdn.akamaized.net
 DOMAIN-SUFFIX,yostar.cn

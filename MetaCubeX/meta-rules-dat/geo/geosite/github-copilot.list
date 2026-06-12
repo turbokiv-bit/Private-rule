@@ -1,6 +1,6 @@
-copilot-proxy.githubusercontent.com
-copilot-workspace.githubnext.com
-copilotprodattachments.blob.core.windows.net
-+.githubcopilot.com
-copilot-telemetry-service.githubusercontent.com
-copilot-telemetry.githubusercontent.com
+DOMAIN-SUFFIX,copilot-proxy.githubusercontent.com
+DOMAIN-SUFFIX,copilot-workspace.githubnext.com
+DOMAIN-SUFFIX,copilotprodattachments.blob.core.windows.net
+DOMAIN-SUFFIX,githubcopilot.com
+DOMAIN-SUFFIX,copilot-telemetry-service.githubusercontent.com
+DOMAIN-SUFFIX,copilot-telemetry.githubusercontent.com

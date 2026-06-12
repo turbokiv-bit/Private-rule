@@ -1,4 +1,4 @@
-android.googlesource.com
-+.android
-+.android.com
-+.androidify.com
+DOMAIN-SUFFIX,android.googlesource.com
+DOMAIN-SUFFIX,+.android
+DOMAIN-SUFFIX,android.com
+DOMAIN-SUFFIX,androidify.com

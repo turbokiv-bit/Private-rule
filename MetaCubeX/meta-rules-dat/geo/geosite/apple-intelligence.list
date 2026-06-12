@@ -1,5 +1,5 @@
-apple-relay.apple.com
-apple-relay.cloudflare.com
-apple-relay.fastly-edge.com
-apple-relay.mask.apple-dns.net
-gspe1-ssl.ls.apple.com
+DOMAIN-SUFFIX,apple-relay.apple.com
+DOMAIN-SUFFIX,apple-relay.cloudflare.com
+DOMAIN-SUFFIX,apple-relay.fastly-edge.com
+DOMAIN-SUFFIX,apple-relay.mask.apple-dns.net
+DOMAIN-SUFFIX,gspe1-ssl.ls.apple.com

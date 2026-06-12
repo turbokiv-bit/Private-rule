@@ -182,7 +182,6 @@ DOMAIN,rtlog3-applog.fqnovel.com
 DOMAIN,rtlog5-applog-hl.fqnovel.com
 DOMAIN,rtlog5-applog.fqnovel.com
 DOMAIN-SUFFIX,analytics.tiktok.com
-DOMAIN-REGEX,^speed\.(coe|open)\.ad\.[a-z]{2,6}\.prod\.hosts\.ooklaserver\.net$
 DOMAIN-SUFFIX,snapads.com
 DOMAIN-SUFFIX,a.alimama.cn
 DOMAIN-SUFFIX,adash-c.m.taobao.com

@@ -1,7 +1,7 @@
-+.alphassl.com
-+.easy-signing.com
-+.globalsign.cn
-+.globalsign.com
-+.globalsigncdn.com
-cdn.globalsigncdn.com.cdn.cloudflare.net
-crl.globalsign.net
+DOMAIN-SUFFIX,alphassl.com
+DOMAIN-SUFFIX,easy-signing.com
+DOMAIN-SUFFIX,globalsign.cn
+DOMAIN-SUFFIX,globalsign.com
+DOMAIN-SUFFIX,globalsigncdn.com
+DOMAIN-SUFFIX,cdn.globalsigncdn.com.cdn.cloudflare.net
+DOMAIN-SUFFIX,crl.globalsign.net

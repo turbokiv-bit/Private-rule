@@ -241,8 +241,6 @@ DOMAIN-SUFFIX,att.cn
 DOMAIN-SUFFIX,attcorp.cn
 DOMAIN-SUFFIX,quickconnect.cn
 DOMAIN-SUFFIX,synology.cn
-DOMAIN-SUFFIX,yahoo.cn
-DOMAIN-SUFFIX,yahoo.com.cn
 DOMAIN-SUFFIX,geforce.cn
 DOMAIN-SUFFIX,gputechconf.cn
 DOMAIN-SUFFIX,nvidia.cn
@@ -587,8 +585,6 @@ DOMAIN-SUFFIX,amzndns-cn.biz
 DOMAIN-SUFFIX,amzndns-cn.cn
 DOMAIN-SUFFIX,amzndns-cn.com
 DOMAIN-SUFFIX,amzndns-cn.net
-DOMAIN-REGEX,.+\.awsdns-cn-[0-9][0-9]\.(biz|com|net|top)$
-DOMAIN-REGEX,.+\.awsdns-cn-[0-9][a-e0-9]\.cn$
 DOMAIN-SUFFIX,kindle.cn
 DOMAIN-SUFFIX,kindleoasis.cn
 DOMAIN-SUFFIX,kindleoasis.com.cn
@@ -816,8 +812,6 @@ DOMAIN,www.pxcc.com
 DOMAIN,crashlyticsreports-pa.googleapis.com
 DOMAIN,firebase-settings.crashlytics.com
 DOMAIN,update.crashlytics.com
-DOMAIN-REGEX,^r+[0-9]+(---|\.)sn-(2x3|ni5|j5o)\w{5}\.xn--ngstr-lra8j\.com$
-DOMAIN-REGEX,^r+[0-9]+(---|\.)sn-(2x3|ni5|j5o)\w{5}\.googlevideo\.com$
 DOMAIN,redirector.c.play.google.com
 DOMAIN,pki-goog.l.google.com
 DOMAIN,c.pki.goog

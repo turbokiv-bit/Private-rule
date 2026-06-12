@@ -1,6 +1,6 @@
-crl.microsoft.com
-mscrl.microsoft.com
-ocsp.microsoft.com
-oneocsp.microsoft.com
-+.msocsp.com
-www.microsoft.com
+DOMAIN-SUFFIX,crl.microsoft.com
+DOMAIN-SUFFIX,mscrl.microsoft.com
+DOMAIN-SUFFIX,ocsp.microsoft.com
+DOMAIN-SUFFIX,oneocsp.microsoft.com
+DOMAIN-SUFFIX,msocsp.com
+DOMAIN-SUFFIX,www.microsoft.com

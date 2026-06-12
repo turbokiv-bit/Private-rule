@@ -1,5 +1,5 @@
-+.kontur.ru
-+.kontur.host
-+.kontur-inc.com
-metrika.kontur.ru
-sentry.kontur.host
+DOMAIN-SUFFIX,kontur.ru
+DOMAIN-SUFFIX,kontur.host
+DOMAIN-SUFFIX,kontur-inc.com
+DOMAIN-SUFFIX,metrika.kontur.ru
+DOMAIN-SUFFIX,sentry.kontur.host

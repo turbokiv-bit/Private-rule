@@ -147,7 +147,6 @@ DOMAIN-SUFFIX,ad-delivery.net
 DOMAIN-SUFFIX,adcolony.com
 DOMAIN-SUFFIX,adinplay.com
 DOMAIN-SUFFIX,adnxs.com
-DOMAIN-SUFFIX,ads.trafficjunky.net
 DOMAIN-SUFFIX,advertserve.com
 DOMAIN-SUFFIX,adview.cn
 DOMAIN-SUFFIX,casalemedia.com
@@ -236,7 +235,6 @@ DOMAIN,rtlog3-applog.fqnovel.com
 DOMAIN,rtlog5-applog-hl.fqnovel.com
 DOMAIN,rtlog5-applog.fqnovel.com
 DOMAIN-SUFFIX,analytics.tiktok.com
-DOMAIN-REGEX,^speed\.(coe|open)\.ad\.[a-z]{2,6}\.prod\.hosts\.ooklaserver\.net$
 DOMAIN-SUFFIX,snapads.com
 DOMAIN-SUFFIX,a.alimama.cn
 DOMAIN-SUFFIX,adash-c.m.taobao.com

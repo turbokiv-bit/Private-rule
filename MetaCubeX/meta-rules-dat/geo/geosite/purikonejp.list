@@ -1,4 +1,4 @@
-prd-priconne-redive.akamaized.net
-+.priconne-redive.jp
-+.api-priconne-redive.cygames.jp
-+.omotenashi.cygames.jp
+DOMAIN-SUFFIX,prd-priconne-redive.akamaized.net
+DOMAIN-SUFFIX,priconne-redive.jp
+DOMAIN-SUFFIX,api-priconne-redive.cygames.jp
+DOMAIN-SUFFIX,omotenashi.cygames.jp

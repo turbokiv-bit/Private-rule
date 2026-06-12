@@ -224,5 +224,4 @@ DOMAIN-SUFFIX,gouhuo.qq.com
 DOMAIN-SUFFIX,roblox.qq.com
 DOMAIN-SUFFIX,goto-game.net.cn
 DOMAIN-SUFFIX,roco.qq.com
-DOMAIN-REGEX,^.+-mihayo\.akamaized\.net$
 DOMAIN-SUFFIX,log-upload.mihoyo.com

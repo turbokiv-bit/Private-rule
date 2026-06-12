@@ -1,6 +1,6 @@
-mozilla-ohttp.fastly-edge.com
-+.extendfirefox.com
-+.firefox.com
-+.firefox.hu
-+.firefoxtweetmachine.com
-+.firefoxusercontent.com
+DOMAIN-SUFFIX,mozilla-ohttp.fastly-edge.com
+DOMAIN-SUFFIX,extendfirefox.com
+DOMAIN-SUFFIX,firefox.com
+DOMAIN-SUFFIX,firefox.hu
+DOMAIN-SUFFIX,firefoxtweetmachine.com
+DOMAIN-SUFFIX,firefoxusercontent.com

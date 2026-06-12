@@ -1,2 +1,2 @@
-+.sentry.io
-+.sentry-cdn.com
+DOMAIN-SUFFIX,sentry.io
+DOMAIN-SUFFIX,sentry-cdn.com

@@ -128,4 +128,3 @@ DOMAIN,tplogin.cn
 DOMAIN,www.asusrouter.com
 DOMAIN,www.miwifi.com
 DOMAIN,www.routerlogin.com
-DOMAIN-REGEX,^[a-z]([a-z0-9-]{0,61}[a-z0-9])?$

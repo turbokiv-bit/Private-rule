@@ -145,7 +145,6 @@ DOMAIN-SUFFIX,host.livekit.cloud
 DOMAIN-SUFFIX,coderabbit.gallery.vsassets.io
 DOMAIN-SUFFIX,gateway.ai.cloudflare.com
 DOMAIN-SUFFIX,openai.com.cdn.cloudflare.net
-DOMAIN-REGEX,^chatgpt-async-webps-prod-\S+-\d+\.webpubsub\.azure\.com$
 DOMAIN,copilot-telemetry-service.githubusercontent.com
 DOMAIN,copilot-telemetry.githubusercontent.com
 DOMAIN,o33249.ingest.sentry.io

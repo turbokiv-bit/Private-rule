@@ -1,5 +1,5 @@
-client-teamviewer-com.trafficmanager.net
-teamviewer.com.cdn.cloudflare.net
-+.teamviewer.com
-+.teamviewer.us
-+.teamviewer.cn
+DOMAIN-SUFFIX,client-teamviewer-com.trafficmanager.net
+DOMAIN-SUFFIX,teamviewer.com.cdn.cloudflare.net
+DOMAIN-SUFFIX,teamviewer.com
+DOMAIN-SUFFIX,teamviewer.us
+DOMAIN-SUFFIX,teamviewer.cn

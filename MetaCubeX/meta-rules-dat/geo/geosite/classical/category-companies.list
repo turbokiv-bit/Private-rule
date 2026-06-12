@@ -75,7 +75,6 @@ DOMAIN,gigabyte2.azureedge.net
 DOMAIN,sa78gs.wpc.edgecastcdn.net
 DOMAIN,sni1dcb6gl.wpc.edgecastcdn.net
 DOMAIN,dell.my.site.com
-DOMAIN,cdn.js7k.com
 DOMAIN,nvidia.custhelp.com
 DOMAIN,nvidia.tt.omtrdc.net
 DOMAIN,mozilla-ohttp.fastly-edge.com
@@ -7476,8 +7475,6 @@ DOMAIN-SUFFIX,affinity.api.serifservices.com
 DOMAIN-SUFFIX,itunes-apple.com.akadns.net
 DOMAIN-SUFFIX,courier-push-apple.com.akadns.net
 DOMAIN-SUFFIX,gtlsca.nat.gov.tw
-DOMAIN-REGEX,^ewcdn[0-9]+\.nowe\.com$
-DOMAIN-REGEX,.+\.awsdns-[0-9][0-9]\.(co\.uk|com|net|org)$
 DOMAIN-KEYWORD,1drv
 DOMAIN-KEYWORD,onedrive
 DOMAIN-KEYWORD,skydrive
@@ -7621,7 +7618,6 @@ DOMAIN-SUFFIX,powerapps.cn
 DOMAIN-SUFFIX,powerappsportals.cn
 DOMAIN-SUFFIX,powerautomate.cn
 DOMAIN-SUFFIX,powerbi.cn
-DOMAIN-SUFFIX,sharepoint.cn
 DOMAIN-SUFFIX,clarity.ms
 DOMAIN-SUFFIX,microsoftads.com
 DOMAIN-SUFFIX,msads.net
@@ -7636,10 +7632,8 @@ DOMAIN,cdn.marketplaceimages.windowsphone.com
 DOMAIN,cn.windowssearch.com
 DOMAIN,ctldl.windowsupdate.com
 DOMAIN,devblogs.microsoft.com
-DOMAIN,developer.microsoft.com
 DOMAIN,docs.microsoft.com
 DOMAIN,download.microsoft.com
-DOMAIN,download.visualstudio.microsoft.com
 DOMAIN,f.c2r.ts.cdn.office.net
 DOMAIN,fs.microsoft.com
 DOMAIN,learn.microsoft.com
@@ -7818,11 +7812,6 @@ DOMAIN-SUFFIX,attcorp.cn
 DOMAIN-SUFFIX,quickconnect.cn
 DOMAIN-SUFFIX,synology.cn
 DOMAIN,sentry.iptv.rt.ru
-DOMAIN-SUFFIX,yahoo.cn
-DOMAIN-SUFFIX,yahoo.com.cn
-DOMAIN-SUFFIX,ads.yahoo.com
-DOMAIN-SUFFIX,gemini.yahoo.com
-DOMAIN-SUFFIX,ysm.yahoo.com
 DOMAIN-SUFFIX,e.mindbox.ru
 DOMAIN-SUFFIX,g.mindbox.ru
 DOMAIN-SUFFIX,s.mindbox.ru
@@ -7962,7 +7951,6 @@ DOMAIN,misc-assets.itunes.apple.com
 DOMAIN,musicstatus.music.apple.com
 DOMAIN,mvod.itunes.apple.com
 DOMAIN,myapp.itunes.apple.com
-DOMAIN,np-edge.itunes.apple.com
 DOMAIN,osxapps.itunes.apple.com
 DOMAIN,pd-nk.itunes.apple.com
 DOMAIN,pd.itunes.apple.com
@@ -8238,8 +8226,6 @@ DOMAIN-SUFFIX,amzndns-cn.biz
 DOMAIN-SUFFIX,amzndns-cn.cn
 DOMAIN-SUFFIX,amzndns-cn.com
 DOMAIN-SUFFIX,amzndns-cn.net
-DOMAIN-REGEX,.+\.awsdns-cn-[0-9][0-9]\.(biz|com|net|top)$
-DOMAIN-REGEX,.+\.awsdns-cn-[0-9][a-e0-9]\.cn$
 DOMAIN-SUFFIX,kindle.cn
 DOMAIN-SUFFIX,kindleoasis.cn
 DOMAIN-SUFFIX,kindleoasis.com.cn
@@ -8528,8 +8514,6 @@ DOMAIN,alt4-mtalk.google.com
 DOMAIN,alt5-mtalk.google.com
 DOMAIN,alt6-mtalk.google.com
 DOMAIN,mtalk.google.com
-DOMAIN-REGEX,^r+[0-9]+(---|\.)sn-(2x3|ni5|j5o)\w{5}\.xn--ngstr-lra8j\.com$
-DOMAIN-REGEX,^r+[0-9]+(---|\.)sn-(2x3|ni5|j5o)\w{5}\.googlevideo\.com$
 DOMAIN,redirector.c.play.google.com
 DOMAIN,pki-goog.l.google.com
 DOMAIN,c.pki.goog

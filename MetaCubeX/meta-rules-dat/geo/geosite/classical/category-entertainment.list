@@ -1802,14 +1802,6 @@ DOMAIN-SUFFIX,hbo.com.c.footprint.net
 DOMAIN-SUFFIX,steam.cdn.slingshot.co.nz
 DOMAIN-SUFFIX,prod.service.minerva.devices.a2z.com
 DOMAIN-SUFFIX,disneyplus.com.ssl.sc.omtrdc.net
-DOMAIN-REGEX,^[0-9]+vod-adaptive\.akamaized\.net$
-DOMAIN-REGEX,(^|\.)apiproxy-device-prod-nlb-.+\.amazonaws\.com$
-DOMAIN-REGEX,(^|\.)apiproxy-website-nlb-prod-.+\.amazonaws\.com$
-DOMAIN-REGEX,(^|\.)dualstack\.apiproxy-.+\.amazonaws\.com$
-DOMAIN-REGEX,(^|\.)dualstack\.ichnaea-web-.+\.amazonaws\.com$
-DOMAIN-REGEX,^hses[1-7]?\.akamaized\.net$
-DOMAIN-REGEX,^epicgames-download\d\.akamaized\.net$
-DOMAIN-REGEX,^ewcdn[0-9]+\.nowe\.com$
 DOMAIN-SUFFIX,ads-pixiv.net
 DOMAIN,adeventtracker.spotify.com
 DOMAIN,adstudio-assets.scdn.co
@@ -1857,8 +1849,6 @@ DOMAIN-SUFFIX,analytics.tiktok.com
 DOMAIN-SUFFIX,bluearchive-cn.com
 DOMAIN-SUFFIX,leagueoflegends.cn
 DOMAIN-SUFFIX,lpl.com.cn
-DOMAIN-REGEX,^cdn\d-epicgames-\d+\.file\.myqcloud\.com$
-DOMAIN-REGEX,^epicgames-download\d-\d+\.file\.myqcloud\.com$
 DOMAIN-SUFFIX,log-upload-os.hoyoverse.com
 DOMAIN,uplaypc-s-ubisoft.cdn.ubi.com
 DOMAIN-SUFFIX,legendofzelda.cn
@@ -1897,9 +1887,6 @@ DOMAIN,menu-static.gog-statics.com
 DOMAIN,productcard.gog-statics.com
 DOMAIN,static-login.gog-statics.com
 DOMAIN,www4-static.gog-statics.com
-DOMAIN-REGEX,^cdn-akamai-.+\.gog-services\.com$
-DOMAIN-REGEX,^gog-cdn-.+\.footprint\.net$
-DOMAIN-REGEX,^images(-\d)?\.gog-statics\.com$
 DOMAIN,gog-cdn-fastly.gog.com
 DOMAIN,gog-cdn.akamaized.net
 DOMAIN-SUFFIX,yostar.cn
