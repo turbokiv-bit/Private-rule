@@ -1,4 +1,3 @@
-
 name: Update MetaCubeX Meta Rules Dat
 
 on:
@@ -38,10 +37,7 @@ jobs:
             -C metacubex-meta-rules-dat
 
           echo "Upstream files:"
-          find metacubex-meta-rules-dat -maxdepth 4 -type f | sort | head -100
-
-          echo "Upstream .list file count:"
-          find metacubex-meta-rules-dat -type f -iname "​*.list" | wc -l
+          find metacubex-meta-rules-dat -maxdepth 4 -type f | head -100
 
       - name: Sync meta branch to MetaCubeX/meta-rules-dat
         run: |
@@ -54,12 +50,9 @@ jobs:
             MetaCubeX/meta-rules-dat/
 
           echo "Synced files:"
-          find MetaCubeX/meta-rules-dat -maxdepth 4 -type f | sort | head -100
+          find MetaCubeX/meta-rules-dat -maxdepth 4 -type f | head -100
 
-          echo "Synced .list file count:"
-          find MetaCubeX/meta-rules-dat -type f -iname "​*.list" | wc -l
-
-      - name: Convert .list files to Surge rule-set format
+      - name: Convert list files to Surge rule-set format
         run: |
           python3 <<'PY'
           from pathlib import Path
@@ -261,20 +254,22 @@ jobs:
               print(f"No need convert: {path}")
               return False
 
+          # 用 chr(42) 代替星号，避免复制时混入零宽空格
+          list_pattern = chr(42) + ".list"
           list_files = sorted(
-              file for file in root.rglob("​*​")
-              if file.is_file() and file.suffix.lower() == ".list"
+              file for file in root.rglob(list_pattern)
+              if file.is_file()
           )
 
           print(f"Source root exists: {root.exists()}")
-          print(f"Found .list files: {len(list_files)}")
+          print(f"Found list files: {len(list_files)}")
 
           if len(list_files) == 0:
               print("Debug files:")
-              for file in sorted(root.rglob("​*​"))[:200]:
+              for file in sorted(root.rglob(chr(42)))[:200]:
                   if file.is_file():
                       print(file)
-              raise SystemExit("No .list files found.")
+              raise SystemExit("No list files found.")
 
           changed_count = 0
 
@@ -282,14 +277,11 @@ jobs:
               if convert_file(file):
                   changed_count += 1
 
-          print(f"Converted .list files count: {changed_count}")
+          print(f"Converted list files count: {changed_count}")
           PY
 
-          echo "Converted .list file count:"
-          find MetaCubeX/meta-rules-dat -type f -iname "​*.list" | wc -l
-
           echo "Converted list sample:"
-          find MetaCubeX/meta-rules-dat -type f -iname "​*.list" | sort | head -20
+          python3 -c 'from pathlib import Path; files=sorted(Path("MetaCubeX/meta-rules-dat").rglob(chr(42)+".list")); print("\n".join(str(f) for f in files[:20])); print("Total:", len(files))'
 
       - name: Commit and push if changed
         run: |
