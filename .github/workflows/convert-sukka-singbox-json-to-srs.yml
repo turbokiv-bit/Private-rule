@@ -1,0 +1,170 @@
+name: Convert Sukka sing-box JSON to SRS
+
+on:
+  schedule:
+    # 每天北京时间 04:50 自动运行
+    # GitHub Actions 使用 UTC 时间
+    # 北京时间 04:50 = UTC 20:50
+    - cron: "30 21 * * *"
+
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  convert-sukka-singbox-json-to-srs:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout your repository
+        uses: actions/checkout@v4
+
+      - name: Install sing-box
+        run: |
+          set -e
+
+          SING_BOX_URL="$(python3 - <<'PY'
+          import json
+          import re
+          import urllib.request
+
+          api = "https://api.github.com/repos/SagerNet/sing-box/releases/latest"
+
+          with urllib.request.urlopen(api) as response:
+              data = json.load(response)
+
+          for asset in data.get("assets", []):
+              name = asset.get("name", "")
+              url = asset.get("browser_download_url", "")
+
+              if re.search(r"linux-amd64.*\.tar\.gz$", name):
+                  print(url)
+                  break
+          PY
+          )"
+
+          if [ -z "$SING_BOX_URL" ]; then
+            echo "Cannot find sing-box linux-amd64 tar.gz asset."
+            exit 1
+          fi
+
+          echo "Downloading sing-box from:"
+          echo "$SING_BOX_URL"
+
+          curl -L --fail --retry 3 --retry-delay 5 "$SING_BOX_URL" -o sing-box.tar.gz
+
+          rm -rf sing-box-bin
+          mkdir -p sing-box-bin
+
+          tar -xzf sing-box.tar.gz -C sing-box-bin --strip-components=1
+
+          chmod +x sing-box-bin/sing-box
+
+          ./sing-box-bin/sing-box version
+
+      - name: Compile Sukka sing-box JSON to SRS
+        run: |
+          set -e
+
+          rm -rf Sing-box-rule/Sukka
+          mkdir -p Sing-box-rule/Sukka
+
+          echo "Check source directory:"
+          ls -la Sukka || true
+          ls -la Sukka/sing-box || true
+
+          python3 - <<'PY'
+          from pathlib import Path
+          import json
+          import os
+          import subprocess
+
+          source_root = Path("Sukka/sing-box")
+          output_root = Path("Sing-box-rule/Sukka")
+
+          if not source_root.exists():
+              raise SystemExit("Source directory not found: Sukka/sing-box")
+
+          json_files = []
+
+          for dirpath, dirnames, filenames in os.walk(source_root):
+              dirnames.sort()
+              filenames.sort()
+
+              for filename in filenames:
+                  if filename.lower().endswith(".json"):
+                      json_files.append(Path(dirpath) / filename)
+
+          print(f"Found JSON files: {len(json_files)}")
+
+          if not json_files:
+              raise SystemExit("No JSON files found in Sukka/sing-box")
+
+          compiled = 0
+          skipped = 0
+
+          for json_path in json_files:
+              rel = json_path.relative_to(source_root)
+              srs_path = output_root / rel.with_suffix(".srs")
+
+              # 简单检查是否是 sing-box rule-set JSON
+              try:
+                  data = json.loads(json_path.read_text(encoding="utf-8"))
+              except Exception as e:
+                  print(f"Skip invalid JSON: {json_path} ({e})")
+                  skipped += 1
+                  continue
+
+              if not isinstance(data, dict) or "rules" not in data:
+                  print(f"Skip non rule-set JSON: {json_path}")
+                  skipped += 1
+                  continue
+
+              srs_path.parent.mkdir(parents=True, exist_ok=True)
+
+              print(f"Compiling: {json_path} -> {srs_path}")
+
+              subprocess.run(
+                  [
+                      "./sing-box-bin/sing-box",
+                      "rule-set",
+                      "compile",
+                      "--output",
+                      str(srs_path),
+                      str(json_path),
+                  ],
+                  check=True,
+              )
+
+              compiled += 1
+
+          print(f"Compiled SRS files: {compiled}")
+          print(f"Skipped JSON files: {skipped}")
+
+          if compiled == 0:
+              raise SystemExit("No JSON files compiled.")
+          PY
+
+          echo "Generated SRS files:"
+          find Sing-box-rule/Sukka -type f -name "​*.srs" | sort | head -100
+
+          echo "Total SRS files:"
+          find Sing-box-rule/Sukka -type f -name "​*.srs" | wc -l
+
+      - name: Commit and push if changed
+        run: |
+          git status --short -- Sing-box-rule/Sukka
+
+          git add -A Sing-box-rule/Sukka
+
+          if git diff --cached --quiet -- Sing-box-rule/Sukka; then
+            echo "No changes to commit."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git commit -m "chore: compile Sukka sing-box JSON to SRS"
+          git push
