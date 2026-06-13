@@ -18,6 +18,12 @@ payload:
     - DOMAIN-SUFFIX,cloudflareprod.com
     - DOMAIN-SUFFIX,cloudflarestaging.com
     - DOMAIN-SUFFIX,cloudflarestoragegw.com
+    - DOMAIN-SUFFIX,starbucks.com.cn
+    - DOMAIN-SUFFIX,4008-517-517.cn
+    - DOMAIN-SUFFIX,mcd.cn
+    - DOMAIN-SUFFIX,mcdchina.net
+    - DOMAIN-SUFFIX,mcdonalds.com.cn
+    - DOMAIN-REGEX,^.+-mihayo\.akamaized\.net$
     - DOMAIN-SUFFIX,a2z.org.cn
     - DOMAIN-SUFFIX,amazonaws.cn
     - DOMAIN-SUFFIX,amazonaws.com.cn
@@ -69,9 +75,3 @@ payload:
     - DOMAIN-SUFFIX,ntp.neu.edu.cn
     - DOMAIN-SUFFIX,ntp.ntsc.ac.cn
     - DOMAIN-SUFFIX,ntp.org.cn
-    - DOMAIN-REGEX,^.+-mihayo\.akamaized\.net$
-    - DOMAIN-SUFFIX,4008-517-517.cn
-    - DOMAIN-SUFFIX,mcd.cn
-    - DOMAIN-SUFFIX,mcdchina.net
-    - DOMAIN-SUFFIX,mcdonalds.com.cn
-    - DOMAIN-SUFFIX,starbucks.com.cn

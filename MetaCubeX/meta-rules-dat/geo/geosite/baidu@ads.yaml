@@ -12,7 +12,6 @@ payload:
     - +.cpro.baidustatic.com
     - +.cpu.baidu.com
     - +.cstm.baidu.com
-    - +.dlswbr.baidu.com
     - +.drmcmm.baidu.com
     - +.duiwai.baidu.com
     - +.dup.baidustatic.com
@@ -30,7 +29,6 @@ payload:
     - +.hmma.baidu.com
     - +.imgstat.baidu.com
     - +.iwanad.baidu.com
-    - +.miao.baidu.com
     - +.miaowu.baidu.com
     - +.mipcache.bdstatic.com
     - +.mobads.baidu.com

@@ -1,8 +1,8 @@
 payload:
     - end-api.shallow.ink
     - end.shallow.ink
-    - +.mihayo.com
-    - +.goto-game.org
+    - +.7k7k.com
+    - +.9xgame.com
     - +.arcaea.cn
     - +.astral-vector.com
     - +.feihuo.com
@@ -26,6 +26,21 @@ payload:
     - +.winegame.net
     - +.wo1wan.com
     - +.ycgame.com
+    - +.9game.cn
+    - +.aligames.com
+    - +.jiaoyimao.cn
+    - +.jiaoyimao.com
+    - +.lingxigames.com
+    - +.sl916.com
+    - +.cowlevel.net
+    - +.cdncl.net
+    - +.kurogames.com
+    - +.kurogames.net
+    - +.aki-game.com
+    - +.vrzwk.cn
+    - +.vrzwk.com
+    - +.vrzwk.net
+    - +.vrzwk.top
     - +.dobest.com
     - +.langrenclub.com
     - +.sanguosha.com
@@ -79,7 +94,7 @@ payload:
     - +.haohaowan.net
     - +.i3839.com
     - +.ihykb.com
-    - +.7k7k.com
+    - +.img4399.com
     - +.mail4399.com
     - +.maindown4399.com
     - +.me4399.com
@@ -102,18 +117,14 @@ payload:
     - +.biligame.co
     - +.biligame.com
     - +.biligame.net
-    - +.sl916.com
     - +.hero.com
     - +.herogame.com
     - +.heroesports.com
     - +.shyxhy.com
     - +.yingxiong.com
-    - +.kurogames.com
-    - +.kurogames.net
-    - +.aki-game.com
-    - +.mahjongcup.cn
-    - +.9xgame.com
-    - +.img4399.com
+    - +.mhystatic.com
+    - +.mhyurl.cn
+    - +.mihayo.com
     - +.mihayou.com
     - +.mihoyo.com
     - +.mihoyocg.com
@@ -138,7 +149,7 @@ payload:
     - +.gdtimg.com
     - +.goto-game.com
     - +.yxdmgame.com
-    - +.mhyurl.cn
+    - +.goto-game.org
     - +.happyhlddz.com
     - +.hdyxgame.com
     - +.hkgcloudcs.com
@@ -148,7 +159,7 @@ payload:
     - +.ludosuperstar.cn
     - +.ludoworld.net
     - +.mahjongai.net
-    - +.mhystatic.com
+    - +.mahjongcup.cn
     - +.mahjongcup.com
     - +.mahjongcup.net
     - +.metalrevolution.com
@@ -206,19 +217,8 @@ payload:
     - +.scsentry.cn
     - +.supercellcommunity.cn
     - +.supercellsupport.cn
-    - +.9game.cn
-    - +.aligames.com
-    - +.jiaoyimao.cn
-    - +.jiaoyimao.com
-    - +.lingxigames.com
-    - +.vrzwk.top
-    - +.cowlevel.net
-    - +.cdncl.net
     - +.tiancity.com
     - +.tiancitycdn.com
-    - +.vrzwk.cn
-    - +.vrzwk.com
-    - +.vrzwk.net
     - +.werepository.com.cn
     - +.wegame.com.cn
     - +.gouhuo.qq.com

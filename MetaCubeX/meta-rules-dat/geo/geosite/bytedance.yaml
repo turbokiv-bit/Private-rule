@@ -1,6 +1,4 @@
 payload:
-    - p3-novel.byteimg.com
-    - p6-novel.byteimg.com
     - p1-juejin.byteimg.com
     - p2-juejin.byteimg.com
     - p3-juejin.byteimg.com
@@ -10,8 +8,10 @@ payload:
     - p7-juejin.byteimg.com
     - p8-juejin.byteimg.com
     - p9-juejin.byteimg.com
-    - +.trae.guru
-    - +.veew-alb-cn2.com
+    - p3-novel.byteimg.com
+    - p6-novel.byteimg.com
+    - +.awemeuglang.com
+    - +.bytedance.com
     - +.activity-dy.com
     - +.activity01.com
     - +.activity02.com
@@ -82,7 +82,7 @@ payload:
     - +.byted.org
     - +.bytedance-boe.net
     - +.bytedance.cn
-    - +.bytedance.com
+    - +.awemeugsoul.com
     - +.bytedance.net
     - +.bytedance.org
     - +.bytedanceapi.com
@@ -254,7 +254,7 @@ payload:
     - +.zijiewap.cn
     - +.zijiewap.com
     - +.zijiewap.net
-    - +.zilrms.com
+    - +.99uri.cn
     - +.ziyrta.com
     - +.zjbyte.cn
     - +.zjbyte.com
@@ -295,7 +295,7 @@ payload:
     - +.baike.com
     - +.wukong.com
     - +.wukongwenda.cn
-    - +.tcwqqdy.guru
+    - +.wukongwenda.com
     - +.365yg.com
     - +.gogokid.com
     - +.hapierxia.com
@@ -317,49 +317,9 @@ payload:
     - +.faceu.com
     - +.ulikecam.com
     - +.rsproxy.cn
-    - +.activity-zhendingtech.com
-    - +.changdunovel.com
-    - +.fanqiecopyright.com
-    - +.fanqienovel.com
-    - +.fanqieopen.com
-    - +.fanqieopenpic.com
-    - +.fanqieopenstatic.com
-    - +.fanqieopenvod.com
-    - +.fanqiesdk.com
-    - +.fanqiesdkpic.com
-    - +.fanqiesdkstatic.com
-    - +.fanqiesdkvod.com
-    - +.fqnovel-op.com
-    - +.fqnovel.com
-    - +.fqnovelim.com
-    - +.fqnovelop.com
-    - +.fqnovelpic.com
-    - +.fqnovelstatic.com
-    - +.fqnovelvod.com
-    - +.fqopenplatform.com
-    - +.ihaohaoxuexi.com
-    - +.muyewx.com
-    - +.novelfm.com
-    - +.novelfmpic.com
-    - +.novelfmstatic.com
-    - +.novelfmvod.com
-    - +.qznovel.com
-    - +.qznovelpic.com
-    - +.qznovelstatic.com
-    - +.qznovelvod.com
     - +.juejin.cn
     - +.juejin.im
     - +.xitu.io
-    - +.doudou.com
-    - +.marscode.cn
-    - +.mcbaas.work
-    - +.mcdemo.show
-    - +.mchost.guru
-    - +.mcprev.cn
-    - +.wukongwenda.com
-    - +.99uri.com
-    - +.huoshangroup.com
-    - +.yoma.cn
     - +.butterfly-static.cn
     - +.butterflyai.cn
     - +.coze-dns-01.com
@@ -398,9 +358,9 @@ payload:
     - +.amemv.com
     - +.amemv.net
     - +.awemeughun.com
-    - +.awemeuglang.com
-    - +.awemeugsoul.com
-    - +.awemeugwave.com
+    - +.zilrms.com
+    - +.99uri.com
+    - +.getsays.cn
     - +.betastar.cn
     - +.boxdouyin.com
     - +.cookicut.com
@@ -416,7 +376,7 @@ payload:
     - +.duoshan.com
     - +.huoshan.com
     - +.huoshancdn.com
-    - +.99uri.cn
+    - +.huoshangroup.com
     - +.huoshanimg.com
     - +.huoshanlive.com
     - +.huoshanparty.com
@@ -430,6 +390,7 @@ payload:
     - +.huoshanzhibo.cn
     - +.huoshanzhibo.com
     - +.huoshanzhibo.net
+    - +.hypercachenode.com
     - +.idouyinliving.com
     - +.idouyinpic.com
     - +.idouyinstatic.com
@@ -456,11 +417,37 @@ payload:
     - +.woaihuoshan.com
     - +.wohst8.com
     - +.douyinpay.com
+    - +.activity-zhendingtech.com
+    - +.changdunovel.com
+    - +.fanqiecopyright.com
+    - +.fanqienovel.com
+    - +.fanqieopen.com
+    - +.fanqieopenpic.com
+    - +.fanqieopenstatic.com
+    - +.fanqieopenvod.com
+    - +.fanqiesdk.com
+    - +.fanqiesdkpic.com
+    - +.fanqiesdkstatic.com
+    - +.fanqiesdkvod.com
+    - +.fqnovel-op.com
+    - +.fqnovel.com
+    - +.fqnovelim.com
+    - +.fqnovelop.com
+    - +.fqnovelpic.com
+    - +.fqnovelstatic.com
+    - +.fqnovelvod.com
+    - +.fqopenplatform.com
+    - +.ihaohaoxuexi.com
+    - +.muyewx.com
+    - +.novelfm.com
+    - +.novelfmpic.com
+    - +.novelfmstatic.com
+    - +.novelfmvod.com
+    - +.qznovel.com
+    - +.qznovelpic.com
+    - +.qznovelstatic.com
+    - +.qznovelvod.com
     - +.baseopendev.com
-    - +.dongchediapp.com
-    - +.dongchedi.com
-    - +.dcdapp.com
-    - +.dcarvod.com
     - +.bytecloud.com
     - +.byteoc.com
     - +.bytewebservice.com
@@ -509,7 +496,7 @@ payload:
     - +.feishuvc.com
     - +.getfeishu.cn
     - +.getfeishu.com
-    - +.getsays.cn
+    - +.awemeugwave.com
     - +.getsays.com
     - +.lackvc.cn
     - +.securityfeishu.cn
@@ -542,12 +529,25 @@ payload:
     - +.larksuitecdn.com
     - +.larksuiteimg-boe.com
     - +.larksuiteimg-pre.com
+    - +.doudou.com
+    - +.dongchediapp.com
+    - +.dongchedi.com
+    - +.dcdapp.com
+    - +.dcarvod.com
     - +.dcarstatic.com
     - +.dcarlive.com
     - +.dcarimg.com
+    - +.marscode.cn
+    - +.mcbaas.work
+    - +.mcdemo.show
+    - +.mchost.guru
+    - +.mcprev.cn
+    - +.tcwqqdy.guru
+    - +.trae.cn
+    - +.trae.guru
+    - +.yoma.cn
     - +.dcarapi.com
     - +.zvip.cn
-    - +.zjytxp.cn
     - +.aigc-cloud.com
     - +.bdegnine.com
     - +.bplslb.com
@@ -594,7 +594,7 @@ payload:
     - +.vedsalb.com
     - +.veefdev.com
     - +.veew-alb-cn1.com
-    - +.trae.cn
+    - +.veew-alb-cn2.com
     - +.veew-alb-ts.com
     - +.vegalb.com
     - +.vegslb.com
@@ -695,11 +695,12 @@ payload:
     - +.ytxptz.cn
     - +.zebracdn.com
     - +.zjytxd.cn
+    - +.zjytxp.cn
+    - +.trae.com.cn
+    - +.marscode.com.cn
     - +.okr.com.cn
     - +.qishuimusic.com.cn
     - +.qishui.com.cn
-    - +.trae.com.cn
-    - +.marscode.com.cn
     - +.gogokid.com.cn
     - +.larksuite.com.ttdns1.com
     - +.larksuite.com.ttdns2.com
