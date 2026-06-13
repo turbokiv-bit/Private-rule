@@ -1,0 +1,315 @@
+name: Convert Surge IP Rules to sing-box SRS
+
+on:
+  schedule:
+    # 每天北京时间 04:20 自动运行
+    # GitHub Actions 使用 UTC 时间
+    # 北京时间 04:20 = UTC 20:20
+    - cron: "20 20 * * *"
+
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  convert-singbox-srs:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout your repository
+        uses: actions/checkout@v4
+
+      - name: Install sing-box
+        run: |
+          set -e
+
+          python3 - <<'PY'
+          import json
+          import urllib.request
+          import re
+
+          api = "https://api.github.com/repos/SagerNet/sing-box/releases/latest"
+
+          with urllib.request.urlopen(api) as response:
+              data = json.load(response)
+
+          assets = data.get("assets", [])
+
+          target = None
+
+          for asset in assets:
+              name = asset.get("name", "")
+              url = asset.get("browser_download_url", "")
+
+              if re.search(r"linux-amd64.*\.tar\.gz$", name):
+                  target = url
+                  break
+
+          if not target:
+              raise SystemExit("Cannot find sing-box linux-amd64 tar.gz asset.")
+
+          print(target)
+          PY
+
+          SING_BOX_URL="$(python3 - <<'PY'
+          import json
+          import urllib.request
+          import re
+
+          api = "https://api.github.com/repos/SagerNet/sing-box/releases/latest"
+
+          with urllib.request.urlopen(api) as response:
+              data = json.load(response)
+
+          for asset in data.get("assets", []):
+              name = asset.get("name", "")
+              url = asset.get("browser_download_url", "")
+
+              if re.search(r"linux-amd64.*\.tar\.gz$", name):
+                  print(url)
+                  break
+          PY
+          )"
+
+          curl -L --fail --retry 3 --retry-delay 5 "$SING_BOX_URL" -o sing-box.tar.gz
+
+          rm -rf sing-box-bin
+          mkdir -p sing-box-bin
+
+          tar -xzf sing-box.tar.gz -C sing-box-bin --strip-components=1
+
+          chmod +x sing-box-bin/sing-box
+
+          ./sing-box-bin/sing-box version
+
+      - name: Convert surge/ip to sing-box source JSON
+        run: |
+          set -e
+
+          rm -rf Sing-box-rule
+          mkdir -p Sing-box-rule
+
+          python3 - <<'PY'
+          from pathlib import Path
+          import ipaddress
+          import json
+          import re
+
+          source_root = Path("surge/ip")
+          output_root = Path("Sing-box-rule")
+          temp_root = Path(".sing-box-rule-json")
+
+          temp_root.mkdir(parents=True, exist_ok=True)
+
+          if not source_root.exists():
+              raise SystemExit("Source directory not found: surge/ip")
+
+          def clean_line(line: str) -> str:
+              line = line.strip().lstrip("\ufeff")
+
+              if not line:
+                  return ""
+
+              if line.startswith("#"):
+                  return ""
+
+              if line.startswith("//"):
+                  return ""
+
+              if " #" in line:
+                  line = line.split(" #", 1)[0].strip()
+
+              if " //" in line:
+                  line = line.split(" //", 1)[0].strip()
+
+              return line
+
+          def normalize_cidr(value: str):
+              value = value.strip()
+
+              try:
+                  network = ipaddress.ip_network(value, strict=False)
+                  return str(network)
+              except Exception:
+                  return None
+
+          def parse_line(line: str):
+              line = clean_line(line)
+
+              if not line:
+                  return None
+
+              # Surge:
+              # IP-CIDR,1.1.1.0/24,no-resolve
+              # IP-CIDR6,2400::/12,no-resolve
+              parts = [p.strip() for p in line.split(",") if p.strip()]
+
+              if len(parts) >= 2:
+                  rule_type = parts[0].upper()
+                  value = parts[1]
+
+                  if rule_type in {"IP-CIDR", "IP-CIDR6"}:
+                      return normalize_cidr(value)
+
+              # 纯 CIDR：
+              # 1.1.1.0/24
+              # 2400::/12
+              if "/" in line:
+                  return normalize_cidr(line)
+
+              return None
+
+          def convert_file(src: Path):
+              rel = src.relative_to(source_root)
+
+              # 输出名保持相对路径，但后缀统一改成 .srs
+              json_path = temp_root / rel.with_suffix(".json")
+              srs_path = output_root / rel.with_suffix(".srs")
+
+              cidrs = []
+              seen = set()
+
+              try:
+                  text = src.read_text(encoding="utf-8")
+              except UnicodeDecodeError:
+                  print(f"Skip non-utf8 file: {src}")
+                  return None
+
+              for raw in text.splitlines():
+                  cidr = parse_line(raw)
+
+                  if not cidr:
+                      continue
+
+                  if cidr in seen:
+                      continue
+
+                  seen.add(cidr)
+                  cidrs.append(cidr)
+
+              if not cidrs:
+                  print(f"Skip empty IP rule file: {src}")
+                  return None
+
+              json_path.parent.mkdir(parents=True, exist_ok=True)
+              srs_path.parent.mkdir(parents=True, exist_ok=True)
+
+              source = {
+                  "version": 3,
+                  "rules": [
+                      {
+                          "ip_cidr": cidrs
+                      }
+                  ]
+              }
+
+              json_path.write_text(
+                  json.dumps(source, ensure_ascii=False, indent=2) + "\n",
+                  encoding="utf-8"
+              )
+
+              print(f"Generated source JSON: {json_path}")
+              return json_path, srs_path
+
+          input_files = []
+
+          for path in sorted(source_root.rglob("​*​")):
+              if path.is_file():
+                  input_files.append(path)
+
+          print(f"Found source files: {len(input_files)}")
+
+          if not input_files:
+              raise SystemExit("No files found in surge/ip")
+
+          mapping = []
+
+          for file in input_files:
+              result = convert_file(file)
+
+              if result:
+                  mapping.append(result)
+
+          if not mapping:
+              raise SystemExit("No valid IP rules converted.")
+
+          manifest = {
+              "items": [
+                  {
+                      "json": str(json_path),
+                      "srs": str(srs_path)
+                  }
+                  for json_path, srs_path in mapping
+              ]
+          }
+
+          Path(".sing-box-rule-manifest.json").write_text(
+              json.dumps(manifest, indent=2) + "\n",
+              encoding="utf-8"
+          )
+
+          print(f"Prepared sing-box source files: {len(mapping)}")
+          PY
+
+      - name: Compile sing-box SRS files
+        run: |
+          set -e
+
+          python3 - <<'PY'
+          import json
+          import subprocess
+          from pathlib import Path
+
+          manifest = json.loads(Path(".sing-box-rule-manifest.json").read_text(encoding="utf-8"))
+
+          items = manifest.get("items", [])
+
+          if not items:
+              raise SystemExit("No items to compile.")
+
+          for item in items:
+              json_path = item["json"]
+              srs_path = item["srs"]
+
+              Path(srs_path).parent.mkdir(parents=True, exist_ok=True)
+
+              print(f"Compiling: {json_path} -> {srs_path}")
+
+              subprocess.run(
+                  [
+                      "./sing-box-bin/sing-box",
+                      "rule-set",
+                      "compile",
+                      "--output",
+                      srs_path,
+                      json_path,
+                  ],
+                  check=True,
+              )
+
+          print(f"Compiled SRS files: {len(items)}")
+          PY
+
+          echo "Generated SRS files:"
+          find Sing-box-rule -type f -name "​*.srs" | sort | head -100
+
+          echo "Total SRS files:"
+          find Sing-box-rule -type f -name "​*.srs" | wc -l
+
+      - name: Commit and push if changed
+        run: |
+          git status --short -- Sing-box-rule
+
+          git add -A Sing-box-rule
+
+          if git diff --cached --quiet -- Sing-box-rule; then
+            echo "No changes to commit."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git commit -m "chore: convert Surge IP rules to sing-box SRS"
+          git push
