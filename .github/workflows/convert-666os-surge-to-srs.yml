@@ -1,0 +1,405 @@
+name: Convert 666OS Surge Rules to sing-box SRS
+
+on:
+  schedule:
+    # 每天北京时间 04:40 自动运行
+    # GitHub Actions 使用 UTC 时间
+    # 北京时间 04:40 = UTC 20:40
+    - cron: "40 20 * * *"
+
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  convert-666os-surge-to-srs:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout your repository
+        uses: actions/checkout@v4
+
+      - name: Install sing-box
+        run: |
+          set -e
+
+          SING_BOX_URL="$(python3 - <<'PY'
+          import json
+          import re
+          import urllib.request
+
+          api = "https://api.github.com/repos/SagerNet/sing-box/releases/latest"
+
+          with urllib.request.urlopen(api) as response:
+              data = json.load(response)
+
+          for asset in data.get("assets", []):
+              name = asset.get("name", "")
+              url = asset.get("browser_download_url", "")
+
+              if re.search(r"linux-amd64.*\.tar\.gz$", name):
+                  print(url)
+                  break
+          PY
+          )"
+
+          if [ -z "$SING_BOX_URL" ]; then
+            echo "Cannot find sing-box linux-amd64 tar.gz asset."
+            exit 1
+          fi
+
+          echo "Downloading sing-box from:"
+          echo "$SING_BOX_URL"
+
+          curl -L --fail --retry 3 --retry-delay 5 "$SING_BOX_URL" -o sing-box.tar.gz
+
+          rm -rf sing-box-bin
+          mkdir -p sing-box-bin
+
+          tar -xzf sing-box.tar.gz -C sing-box-bin --strip-components=1
+
+          chmod +x sing-box-bin/sing-box
+
+          ./sing-box-bin/sing-box version
+
+      - name: Convert 666OS/surge to sing-box source JSON
+        run: |
+          set -e
+
+          rm -rf Sing-box-rule/666OS
+          rm -rf .sing-box-rule-json-666os
+          rm -f .sing-box-rule-manifest-666os.json
+
+          mkdir -p Sing-box-rule/666OS
+          mkdir -p .sing-box-rule-json-666os
+
+          echo "Check source directory:"
+          ls -la 666OS || true
+          ls -la 666OS/surge || true
+
+          python3 - <<'PY'
+          from pathlib import Path
+          import ipaddress
+          import json
+          import os
+
+          source_root = Path("666OS/surge")
+          output_root = Path("Sing-box-rule/666OS")
+          temp_root = Path(".sing-box-rule-json-666os")
+
+          if not source_root.exists():
+              raise SystemExit("Source directory not found: 666OS/surge")
+
+          def clean_line(line: str) -> str:
+              line = line.strip().lstrip("\ufeff")
+
+              if not line:
+                  return ""
+
+              if line.startswith("#"):
+                  return ""
+
+              if line.startswith("//"):
+                  return ""
+
+              if " #" in line:
+                  line = line.split(" #", 1)[0].strip()
+
+              if " //" in line:
+                  line = line.split(" //", 1)[0].strip()
+
+              return line.strip()
+
+          def normalize_cidr(value: str):
+              value = value.strip()
+
+              try:
+                  network = ipaddress.ip_network(value, strict=False)
+                  return str(network)
+              except Exception:
+                  return None
+
+          def looks_like_domain(value: str) -> bool:
+              if not value:
+                  return False
+              if " " in value:
+                  return False
+              if "/" in value:
+                  return False
+              if "," in value:
+                  return False
+              if value.startswith("#"):
+                  return False
+              if "." not in value:
+                  return False
+              return True
+
+          def add_unique(bucket: dict, key: str, value: str):
+              if not value:
+                  return
+
+              if key not in bucket:
+                  bucket[key] = []
+
+              if value not in bucket[key]:
+                  bucket[key].append(value)
+
+          def parse_line(line: str, bucket: dict):
+              line = clean_line(line)
+
+              if not line:
+                  return
+
+              if line.startswith("- "):
+                  line = line[2:].strip()
+
+              if len(line) >= 2 and line[0] == line[-1] and line[0] in {"'", '"'}:
+                  line = line[1:-1].strip()
+
+              if not line:
+                  return
+
+              parts = [p.strip() for p in line.split(",") if p.strip()]
+
+              if len(parts) >= 2:
+                  rule_type = parts[0].upper()
+                  value = parts[1].strip()
+
+                  if rule_type in {"IP-CIDR", "IP-CIDR6"}:
+                      cidr = normalize_cidr(value)
+                      if cidr:
+                          add_unique(bucket, "ip_cidr", cidr)
+                      return
+
+                  if rule_type == "DOMAIN":
+                      add_unique(bucket, "domain", value)
+                      return
+
+                  if rule_type == "DOMAIN-SUFFIX":
+                      add_unique(bucket, "domain_suffix", value)
+                      return
+
+                  if rule_type == "DOMAIN-KEYWORD":
+                      add_unique(bucket, "domain_keyword", value)
+                      return
+
+                  if rule_type == "DOMAIN-WILDCARD":
+                      v = value
+                      if v.startswith("​*."):
+                          v = v[2:]
+                      elif v.startswith("."):
+                          v = v[1:]
+                      add_unique(bucket, "domain_suffix", v)
+                      return
+
+                  if rule_type in {"DOMAIN-REGEX", "URL-REGEX"}:
+                      add_unique(bucket, "domain_regex", value)
+                      return
+
+              if "/" in line:
+                  cidr = normalize_cidr(line)
+                  if cidr:
+                      add_unique(bucket, "ip_cidr", cidr)
+                  return
+
+              if line.startswith("+."):
+                  value = line[2:].strip()
+                  if looks_like_domain(value):
+                      add_unique(bucket, "domain_suffix", value)
+                  return
+
+              if line.startswith("."):
+                  value = line[1:].strip()
+                  if looks_like_domain(value):
+                      add_unique(bucket, "domain_suffix", value)
+                  return
+
+              if line.startswith("||") and line.endswith("^"):
+                  value = line[2:-1].strip()
+                  if looks_like_domain(value):
+                      add_unique(bucket, "domain_suffix", value)
+                  return
+
+              if looks_like_domain(line):
+                  add_unique(bucket, "domain_suffix", line)
+                  return
+
+          def list_source_files(root: Path):
+              files = []
+
+              for dirpath, dirnames, filenames in os.walk(root):
+                  dirnames.sort()
+                  filenames.sort()
+
+                  for filename in filenames:
+                      path = Path(dirpath) / filename
+
+                      if path.suffix.lower() in {".list", ".conf", ".txt"}:
+                          files.append(path)
+
+              return files
+
+          def convert_file(src: Path):
+              rel = src.relative_to(source_root)
+
+              json_path = temp_root / rel.with_suffix(".json")
+              srs_path = output_root / rel.with_suffix(".srs")
+
+              try:
+                  text = src.read_text(encoding="utf-8")
+              except UnicodeDecodeError:
+                  print(f"Skip non-utf8 file: {src}")
+                  return None
+
+              bucket = {}
+
+              for raw in text.splitlines():
+                  parse_line(raw, bucket)
+
+              if not bucket:
+                  print(f"Skip empty rule file: {src}")
+                  return None
+
+              rule = {}
+
+              for key in [
+                  "domain",
+                  "domain_suffix",
+                  "domain_keyword",
+                  "domain_regex",
+                  "ip_cidr",
+              ]:
+                  values = bucket.get(key)
+                  if values:
+                      rule[key] = values
+
+              if not rule:
+                  print(f"Skip unsupported rule file: {src}")
+                  return None
+
+              json_path.parent.mkdir(parents=True, exist_ok=True)
+              srs_path.parent.mkdir(parents=True, exist_ok=True)
+
+              source = {
+                  "version": 3,
+                  "rules": [
+                      rule
+                  ]
+              }
+
+              json_path.write_text(
+                  json.dumps(source, ensure_ascii=False, indent=2) + "\n",
+                  encoding="utf-8"
+              )
+
+              print(f"Generated source JSON: {json_path}")
+              return json_path, srs_path
+
+          input_files = list_source_files(source_root)
+
+          print(f"Found source files: {len(input_files)}")
+
+          if not input_files:
+              print("Debug directory tree:")
+              for dirpath, dirnames, filenames in os.walk(source_root):
+                  print(dirpath)
+                  for filename in filenames[:20]:
+                      print("  " + filename)
+              raise SystemExit("No files found in 666OS/surge")
+
+          mapping = []
+
+          for file in input_files:
+              result = convert_file(file)
+
+              if result:
+                  mapping.append(result)
+
+          if not mapping:
+              raise SystemExit("No valid rules converted.")
+
+          manifest = {
+              "items": [
+                  {
+                      "json": str(json_path),
+                      "srs": str(srs_path)
+                  }
+                  for json_path, srs_path in mapping
+              ]
+          }
+
+          Path(".sing-box-rule-manifest-666os.json").write_text(
+              json.dumps(manifest, indent=2) + "\n",
+              encoding="utf-8"
+          )
+
+          print(f"Prepared sing-box source files: {len(mapping)}")
+          PY
+
+      - name: Compile sing-box SRS files
+        run: |
+          set -e
+
+          python3 - <<'PY'
+          import json
+          import subprocess
+          from pathlib import Path
+
+          manifest_path = Path(".sing-box-rule-manifest-666os.json")
+
+          if not manifest_path.exists():
+              raise SystemExit("Manifest not found: .sing-box-rule-manifest-666os.json")
+
+          manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+
+          items = manifest.get("items", [])
+
+          if not items:
+              raise SystemExit("No items to compile.")
+
+          for item in items:
+              json_path = item["json"]
+              srs_path = item["srs"]
+
+              Path(srs_path).parent.mkdir(parents=True, exist_ok=True)
+
+              print(f"Compiling: {json_path} -> {srs_path}")
+
+              subprocess.run(
+                  [
+                      "./sing-box-bin/sing-box",
+                      "rule-set",
+                      "compile",
+                      "--output",
+                      srs_path,
+                      json_path,
+                  ],
+                  check=True,
+              )
+
+          print(f"Compiled SRS files: {len(items)}")
+          PY
+
+          echo "Generated SRS files:"
+          find Sing-box-rule/666OS -type f -name "​*.srs" | sort | head -100
+
+          echo "Total SRS files:"
+          find Sing-box-rule/666OS -type f -name "​*.srs" | wc -l
+
+      - name: Commit and push if changed
+        run: |
+          git status --short -- Sing-box-rule/666OS
+
+          git add -A Sing-box-rule/666OS
+
+          if git diff --cached --quiet -- Sing-box-rule/666OS; then
+            echo "No changes to commit."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git commit -m "chore: convert 666OS Surge rules to sing-box SRS"
+          git push
