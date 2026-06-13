@@ -1,0 +1,79 @@
+name: Update sing-box Rules
+
+on:
+  schedule:
+    # 每天北京时间 04:30 自动运行
+    # GitHub Actions 使用 UTC 时间
+    # 北京时间 04:30 = UTC 20:30
+    - cron: "30 20 * * *"
+
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-sing-box-rules:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout your repository
+        uses: actions/checkout@v4
+
+      - name: Checkout SukkaLab ruleset sing-box
+        uses: actions/checkout@v4
+        with:
+          repository: SukkaLab/ruleset.skk.moe
+          ref: master
+          path: sukka-ruleset
+          sparse-checkout: |
+            sing-box
+          sparse-checkout-cone-mode: true
+
+      - name: Checkout MetaCubeX meta-rules-dat sing branch
+        uses: actions/checkout@v4
+        with:
+          repository: MetaCubeX/meta-rules-dat
+          ref: sing
+          path: metacubex-meta-rules-dat-sing
+
+      - name: Sync SukkaLab sing-box
+        run: |
+          rm -rf Sukka/sing-box
+          mkdir -p Sukka/sing-box
+
+          cp -a sukka-ruleset/sing-box/. Sukka/sing-box/
+
+          echo "Synced SukkaLab sing-box files:"
+          find Sukka/sing-box -maxdepth 3 -type f | sort | head -100
+
+      - name: Sync MetaCubeX sing branch
+        run: |
+          rm -rf MetaCubeX/meta-rules-dat-sing
+          mkdir -p MetaCubeX/meta-rules-dat-sing
+
+          rsync -a \
+            --delete \
+            --exclude='.git' \
+            metacubex-meta-rules-dat-sing/ \
+            MetaCubeX/meta-rules-dat-sing/
+
+          echo "Synced MetaCubeX sing files:"
+          find MetaCubeX/meta-rules-dat-sing -maxdepth 3 -type f | sort | head -100
+
+      - name: Commit and push if changed
+        run: |
+          git status --short -- Sukka/sing-box MetaCubeX/meta-rules-dat-sing
+
+          git add -A Sukka/sing-box MetaCubeX/meta-rules-dat-sing
+
+          if git diff --cached --quiet -- Sukka/sing-box MetaCubeX/meta-rules-dat-sing; then
+            echo "No changes to commit."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git commit -m "chore: sync sing-box rules"
+          git push
