@@ -1,11 +1,11 @@
-name: Convert Surge IP Rules to sing-box SRS
+name: Convert Surge Rules to sing-box SRS
 
 on:
   schedule:
     # 每天北京时间 04:20 自动运行
     # GitHub Actions 使用 UTC 时间
     # 北京时间 04:20 = UTC 20:20
-    - cron: "20 20 * * *"
+    - cron: "50 20 * * *"
 
   workflow_dispatch:
 
@@ -83,6 +83,7 @@ jobs:
           import ipaddress
           import json
           import os
+          import re
 
           source_root = Path("surge/ip")
           output_root = Path("Sing-box-rule")
@@ -109,7 +110,7 @@ jobs:
               if " //" in line:
                   line = line.split(" //", 1)[0].strip()
 
-              return line
+              return line.strip()
 
           def normalize_cidr(value: str):
               value = value.strip()
@@ -120,31 +121,120 @@ jobs:
               except Exception:
                   return None
 
-          def parse_line(line: str):
+          def looks_like_domain(value: str) -> bool:
+              if not value:
+                  return False
+              if " " in value:
+                  return False
+              if "/" in value:
+                  return False
+              if "," in value:
+                  return False
+              if value.startswith("#"):
+                  return False
+              if "." not in value:
+                  return False
+              return True
+
+          def add_unique(bucket: dict, key: str, value: str):
+              if not value:
+                  return
+
+              if key not in bucket:
+                  bucket[key] = []
+
+              if value not in bucket[key]:
+                  bucket[key].append(value)
+
+          def parse_line(line: str, bucket: dict):
               line = clean_line(line)
 
               if not line:
-                  return None
+                  return
 
-              # Surge 格式：
-              # IP-CIDR,1.1.1.0/24,no-resolve
-              # IP-CIDR6,2400::/12,no-resolve
+              # 去掉 YAML list 前缀
+              if line.startswith("- "):
+                  line = line[2:].strip()
+
+              # 去掉引号
+              if len(line) >= 2 and line[0] == line[-1] and line[0] in {"'", '"'}:
+                  line = line[1:-1].strip()
+
+              if not line:
+                  return
+
               parts = [p.strip() for p in line.split(",") if p.strip()]
 
+              # Surge 规则格式
               if len(parts) >= 2:
                   rule_type = parts[0].upper()
-                  value = parts[1]
+                  value = parts[1].strip()
 
                   if rule_type in {"IP-CIDR", "IP-CIDR6"}:
-                      return normalize_cidr(value)
+                      cidr = normalize_cidr(value)
+                      if cidr:
+                          add_unique(bucket, "ip_cidr", cidr)
+                      return
 
-              # 纯 CIDR：
-              # 1.1.1.0/24
-              # 2400::/12
+                  if rule_type == "DOMAIN":
+                      add_unique(bucket, "domain", value)
+                      return
+
+                  if rule_type == "DOMAIN-SUFFIX":
+                      add_unique(bucket, "domain_suffix", value)
+                      return
+
+                  if rule_type == "DOMAIN-KEYWORD":
+                      add_unique(bucket, "domain_keyword", value)
+                      return
+
+                  if rule_type == "DOMAIN-WILDCARD":
+                      # sing-box 没有完全等价的 DOMAIN-WILDCARD
+                      # 常见 *.example.com 转成 domain_suffix example.com
+                      v = value
+                      if v.startswith("​*."):
+                          v = v[2:]
+                      elif v.startswith("."):
+                          v = v[1:]
+                      add_unique(bucket, "domain_suffix", v)
+                      return
+
+                  if rule_type in {"DOMAIN-REGEX", "URL-REGEX"}:
+                      add_unique(bucket, "domain_regex", value)
+                      return
+
+              # 纯 CIDR
               if "/" in line:
-                  return normalize_cidr(line)
+                  cidr = normalize_cidr(line)
+                  if cidr:
+                      add_unique(bucket, "ip_cidr", cidr)
+                  return
 
-              return None
+              # +.example.com
+              if line.startswith("+."):
+                  value = line[2:].strip()
+                  if looks_like_domain(value):
+                      add_unique(bucket, "domain_suffix", value)
+                  return
+
+              # .example.com
+              if line.startswith("."):
+                  value = line[1:].strip()
+                  if looks_like_domain(value):
+                      add_unique(bucket, "domain_suffix", value)
+                  return
+
+              # ||example.com^
+              if line.startswith("||") and line.endswith("^"):
+                  value = line[2:-1].strip()
+                  if looks_like_domain(value):
+                      add_unique(bucket, "domain_suffix", value)
+                  return
+
+              # 纯域名
+              if looks_like_domain(line):
+                  add_unique(bucket, "domain_suffix", line)
+                  return
 
           def list_source_files(root: Path):
               files = []
@@ -155,7 +245,10 @@ jobs:
 
                   for filename in filenames:
                       path = Path(dirpath) / filename
-                      files.append(path)
+
+                      # 只转换常见规则文本文件
+                      if path.suffix.lower() in {".list", ".conf", ".txt"}:
+                          files.append(path)
 
               return files
 
@@ -165,29 +258,36 @@ jobs:
               json_path = temp_root / rel.with_suffix(".json")
               srs_path = output_root / rel.with_suffix(".srs")
 
-              cidrs = []
-              seen = set()
-
               try:
                   text = src.read_text(encoding="utf-8")
               except UnicodeDecodeError:
                   print(f"Skip non-utf8 file: {src}")
                   return None
 
+              bucket = {}
+
               for raw in text.splitlines():
-                  cidr = parse_line(raw)
+                  parse_line(raw, bucket)
 
-                  if not cidr:
-                      continue
+              if not bucket:
+                  print(f"Skip empty rule file: {src}")
+                  return None
 
-                  if cidr in seen:
-                      continue
+              rule = {}
 
-                  seen.add(cidr)
-                  cidrs.append(cidr)
+              for key in [
+                  "domain",
+                  "domain_suffix",
+                  "domain_keyword",
+                  "domain_regex",
+                  "ip_cidr",
+              ]:
+                  values = bucket.get(key)
+                  if values:
+                      rule[key] = values
 
-              if not cidrs:
-                  print(f"Skip empty IP rule file: {src}")
+              if not rule:
+                  print(f"Skip unsupported rule file: {src}")
                   return None
 
               json_path.parent.mkdir(parents=True, exist_ok=True)
@@ -196,9 +296,7 @@ jobs:
               source = {
                   "version": 3,
                   "rules": [
-                      {
-                          "ip_cidr": cidrs
-                      }
+                      rule
                   ]
               }
 
@@ -231,7 +329,7 @@ jobs:
                   mapping.append(result)
 
           if not mapping:
-              raise SystemExit("No valid IP rules converted.")
+              raise SystemExit("No valid rules converted.")
 
           manifest = {
               "items": [
@@ -315,5 +413,5 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          git commit -m "chore: convert Surge IP rules to sing-box SRS"
+          git commit -m "chore: convert Surge rules to sing-box SRS"
           git push
