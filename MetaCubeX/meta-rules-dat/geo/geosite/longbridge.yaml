@@ -1,10 +1,12 @@
 payload:
     - +.longbridge.cloud
+    - +.longbridge.cn
     - +.longbridge.com
     - +.longbridge.global
     - +.longbridge.hk
     - +.longbridge.sg
     - +.longbridgeapp.com
+    - +.longbridgehk.com
     - +.longportapp.com
     - +.lbctrl.com
     - +.lbkrs.com

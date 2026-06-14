@@ -14,6 +14,7 @@ payload:
     - DOMAIN,steamuserimages-a.akamaihd.net
     - DOMAIN,steamvideo-a.akamaihd.net
     - DOMAIN,steamcloudsweden.blob.core.windows.net
+    - DOMAIN,steamugcquincy.blob.core.windows.net
     - DOMAIN-SUFFIX,valve.net
     - DOMAIN-SUFFIX,steamdeck.com
     - DOMAIN-SUFFIX,steam.tv

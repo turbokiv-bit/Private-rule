@@ -30,11 +30,11 @@ payload:
     - DOMAIN-SUFFIX,misskey.design
     - DOMAIN-SUFFIX,misskey.flowers
     - DOMAIN-SUFFIX,9ineverse.com
+    - DOMAIN-SUFFIX,mixi.jp
+    - DOMAIN-SUFFIX,mixi.net
     - DOMAIN-SUFFIX,odnoklassniki.eu
     - DOMAIN-SUFFIX,odnoklasniki.ua
     - DOMAIN-SUFFIX,apiok.ru
-    - DOMAIN-SUFFIX,odnoklasniki.by
-    - DOMAIN-SUFFIX,odnoklassniki.lv
     - DOMAIN-SUFFIX,lnkd.in
     - DOMAIN-SUFFIX,linkedin.com
     - DOMAIN-SUFFIX,linkedin.at
@@ -45,6 +45,11 @@ payload:
     - DOMAIN-SUFFIX,redkix.com
     - DOMAIN-SUFFIX,facebookwork.com
     - DOMAIN-SUFFIX,zuckerberg.net
+    - DOMAIN-SUFFIX,zuckerberg.com
+    - DOMAIN-SUFFIX,wwwmfacebook.com
+    - DOMAIN-SUFFIX,wwwfacebook.com
+    - DOMAIN-SUFFIX,odnoklasniki.by
+    - DOMAIN-SUFFIX,odnoklassniki.lv
     - DOMAIN-SUFFIX,odnoklassniki.am
     - DOMAIN-SUFFIX,odnoklassniki.by
     - DOMAIN-SUFFIX,odnoklassniki.ru
@@ -56,14 +61,10 @@ payload:
     - DOMAIN-SUFFIX,ok.ru
     - DOMAIN-SUFFIX,okl.lt
     - DOMAIN-SUFFIX,oktech.ru
-    - DOMAIN-SUFFIX,zuckerberg.com
-    - DOMAIN-SUFFIX,wwwmfacebook.com
-    - DOMAIN-SUFFIX,wwwfacebook.com
     - DOMAIN-SUFFIX,wwwfacebok.com
     - DOMAIN-SUFFIX,www-facebook.com
     - DOMAIN-SUFFIX,worldhack.com
-    - DOMAIN-SUFFIX,threads.com
-    - DOMAIN-SUFFIX,threads.net
+    - DOMAIN-SUFFIX,whyfacebook.com
     - DOMAIN-SUFFIX,mvk.com
     - DOMAIN-SUFFIX,vk.cc
     - DOMAIN-SUFFIX,vk.com
@@ -86,8 +87,8 @@ payload:
     - DOMAIN-SUFFIX,vkuser.net
     - DOMAIN-SUFFIX,vkusercdn.ru
     - DOMAIN-SUFFIX,vkuserphoto.ru
-    - DOMAIN-SUFFIX,vkuseraudio.com
     - DOMAIN-SUFFIX,onlyfans.com
+    - DOMAIN-SUFFIX,vkuseraudio.net
     - DOMAIN-SUFFIX,vkuseraudio.ru
     - DOMAIN-SUFFIX,vkuserlive.com
     - DOMAIN-SUFFIX,vkuserlive.net
@@ -163,8 +164,8 @@ payload:
     - DOMAIN-SUFFIX,instangram.com
     - DOMAIN-SUFFIX,instanttelegram.com
     - DOMAIN-SUFFIX,instaplayer.net
-    - DOMAIN-SUFFIX,instastyle.tv
     - DOMAIN-SUFFIX,facebook.shop
+    - DOMAIN-SUFFIX,instgram.com
     - DOMAIN-SUFFIX,intagram.com
     - DOMAIN-SUFFIX,intagrm.com
     - DOMAIN-SUFFIX,intgram.com
@@ -176,9 +177,8 @@ payload:
     - DOMAIN-SUFFIX,onlineinstagram.com
     - DOMAIN-SUFFIX,web-instagram.net
     - DOMAIN-SUFFIX,wwwinstagram.com
-    - DOMAIN-SUFFIX,mixi.jp
-    - DOMAIN-SUFFIX,mixi.net
-    - DOMAIN-SUFFIX,whyfacebook.com
+    - DOMAIN-SUFFIX,threads.com
+    - DOMAIN-SUFFIX,threads.net
     - DOMAIN-SUFFIX,twitter.jp
     - DOMAIN-SUFFIX,x.com
     - DOMAIN-SUFFIX,cms-twdigitalassets.com
@@ -303,9 +303,9 @@ payload:
     - DOMAIN-SUFFIX,facebook.in
     - DOMAIN-SUFFIX,fecebook.net
     - DOMAIN-SUFFIX,facebook.nl
-    - DOMAIN-SUFFIX,vkuseraudio.net
+    - DOMAIN-SUFFIX,vkuseraudio.com
     - DOMAIN-SUFFIX,truthsocial.com
-    - DOMAIN-SUFFIX,instgram.com
+    - DOMAIN-SUFFIX,instastyle.tv
     - DOMAIN-SUFFIX,facebook.tv
     - DOMAIN-SUFFIX,facebook.us
     - DOMAIN-SUFFIX,facebook.wang
@@ -593,13 +593,13 @@ payload:
     - DOMAIN-SUFFIX,l-0005.l-msedge.net
     - DOMAIN-SUFFIX,msk.ilnk.info
     - DOMAIN-SUFFIX,misskey.04.si
-    - DOMAIN-SUFFIX,odnoklassniki.co.ee
+    - DOMAIN-SUFFIX,mixi.co.jp
     - DOMAIN-SUFFIX,mk.shrimpia.network
     - DOMAIN-SUFFIX,misskey.yukineko.me
     - DOMAIN-SUFFIX,misskey.always-we-need.games
     - DOMAIN-SUFFIX,misskey.ranranhome.info
     - DOMAIN-SUFFIX,misskey.noellabo.jp
-    - DOMAIN-SUFFIX,mixi.co.jp
+    - DOMAIN-SUFFIX,odnoklassniki.co.ee
     - DOMAIN-SUFFIX,l-0005.dc-msedge.net
     - DOMAIN-SUFFIX,twitter.map.fastly.net
     - DOMAIN-SUFFIX,adv.vk.com
