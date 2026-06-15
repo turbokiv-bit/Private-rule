@@ -6,5 +6,6 @@ payload:
     - DOMAIN-SUFFIX,okx.ac
     - DOMAIN-SUFFIX,okx.cab
     - DOMAIN-SUFFIX,okx.com
+    - DOMAIN-SUFFIX,xlayer.tech
     - DOMAIN-SUFFIX,okx.com.cdn.cloudflare.net
     - DOMAIN-SUFFIX,oklink.com

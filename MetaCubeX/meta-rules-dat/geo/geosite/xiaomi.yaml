@@ -1,6 +1,6 @@
 payload:
     - +.xiaomiprint.com
-    - +.miaibox.com
+    - +.miot-spec.org
     - +.mi-fds.com
     - +.mi-idc.com
     - +.mi-img.com
@@ -26,8 +26,8 @@ payload:
     - +.mgslb.com
     - +.xiaominr.com
     - +.xiaomimobile.com
+    - +.xiaomisa.cn
     - +.mi-dun.com
-    - +.xiaomimimo.com
     - +.xiaomisa.net
     - +.xiaomisa.org
     - +.xiaomiwear.com
@@ -42,13 +42,13 @@ payload:
     - +.youpin.cn
     - +.zmifi.com
     - +.saxyit.com
-    - +.xiaoaiassist.com
-    - +.miot-spec.org
-    - +.xiaomisa.cn
     - +.xiaomisa.com
-    - +.youpin.com.cn
-    - +.xiaomiinc.com.cn
+    - +.miaibox.com
+    - +.xiaoaiassist.com
+    - +.xiaomimimo.com
     - +.xiaomidns.com.cn
+    - +.xiaomiinc.com.cn
+    - +.youpin.com.cn
     - +.c.mi.com
     - +.global.market.xiaomi.com
     - +.a.market.xiaomi.com
