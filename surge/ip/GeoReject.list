@@ -1,4 +1,3 @@
-PROTOCOL,STUN
 DOMAIN-SUFFIX,dreport.meituan.net
 DOMAIN-SUFFIX,d.meituan.net
 DOMAIN,dnspod.meituan.httpdns.qcloud.com
@@ -27,4 +26,3 @@ DOMAIN-SUFFIX,redsoapp.com
 DOMAIN-SUFFIX,rtbhouse.com
 DOMAIN-SUFFIX,smadex.com
 DOMAIN-SUFFIX,tvsquared.com
-AND,((DOMAIN-KEYWORD,amemv.com,extended-matching), (PROTOCOL,UDP))
