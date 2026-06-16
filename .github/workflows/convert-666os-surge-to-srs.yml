@@ -67,7 +67,6 @@ jobs:
         run: |
           set -e
 
-          rm -rf Sing-box-rule/666OS
           rm -rf .sing-box-rule-json-666os
           rm -f .sing-box-rule-manifest-666os.json
 
@@ -382,10 +381,23 @@ jobs:
           PY
 
           echo "Generated SRS files:"
-          find Sing-box-rule/666OS -type f -name "​*.srs" | sort | head -100
+          find Sing-box-rule/666OS -type f -name "*.srs" | sort | head -100
 
           echo "Total SRS files:"
-          find Sing-box-rule/666OS -type f -name "​*.srs" | wc -l
+          find Sing-box-rule/666OS -type f -name "*.srs" | wc -l
+
+      - name: Safety check generated SRS files
+        run: |
+          set -e
+
+          count="$(find Sing-box-rule/666OS -type f -name "*.srs" | wc -l)"
+
+          echo "SRS file count: $count"
+
+          if [ "$count" -eq 0 ]; then
+            echo "No SRS files generated. Stop to avoid deleting existing files."
+            exit 1
+          fi
 
       - name: Commit and push if changed
         run: |
@@ -403,3 +415,4 @@ jobs:
 
           git commit -m "chore: convert 666OS Surge rules to sing-box SRS"
           git push
+
