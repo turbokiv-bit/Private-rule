@@ -1,0 +1,59 @@
+name: Update SagerNet sing-geosite
+
+on:
+  schedule:
+    # 每天北京时间 05:20 自动运行
+    # GitHub Actions 使用 UTC 时间
+    # 北京时间 05:20 = UTC 21:20
+    - cron: "20 22 * * *"
+
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-sagernet-sing-geosite:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout your repository
+        uses: actions/checkout@v4
+
+      - name: Checkout SagerNet sing-geosite rule-set branch
+        uses: actions/checkout@v4
+        with:
+          repository: SagerNet/sing-geosite
+          ref: rule-set
+          path: sagernet-sing-geosite
+
+      - name: Sync SagerNet sing-geosite
+        run: |
+          rm -rf SagerNet/sing-geosite
+          mkdir -p SagerNet/sing-geosite
+
+          rsync -a \
+            --delete \
+            --exclude='.git' \
+            sagernet-sing-geosite/ \
+            SagerNet/sing-geosite/
+
+          echo "Synced files:"
+          find SagerNet/sing-geosite -maxdepth 3 -type f | sort | head -100
+
+      - name: Commit and push if changed
+        run: |
+          git status --short -- SagerNet/sing-geosite
+
+          git add -A SagerNet/sing-geosite
+
+          if git diff --cached --quiet -- SagerNet/sing-geosite; then
+            echo "No changes to commit."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git commit -m "chore: sync SagerNet sing-geosite rule-set"
+          git push
