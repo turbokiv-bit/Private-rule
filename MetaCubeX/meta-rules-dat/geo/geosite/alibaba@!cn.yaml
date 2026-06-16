@@ -9,8 +9,6 @@ payload:
     - +.alipaymo.com
     - +.tmall.ru
     - +.fliggy.hk
-    - +.youku.tv
-    - +.youkuplay.com
     - +.alibabacloud.co.in
     - +.alibabacloud.com
     - +.alibabacloud.com.au
@@ -34,3 +32,5 @@ payload:
     - +.oss-me-east-1.aliyuncs.com
     - +.oss-us-east-1.aliyuncs.com
     - +.oss-us-west-1.aliyuncs.com
+    - +.youku.tv
+    - +.youkuplay.com

@@ -111,8 +111,8 @@ payload:
     - www.destinationurl.com
     - www.gstatic.com
     - www.pxcc.com
-    - +.ggpht.cn
     - redirector.c.play.google.com
+    - +.ggpht.cn
     - pki-goog.l.google.com
     - c.pki.goog
     - i.pki.goog
