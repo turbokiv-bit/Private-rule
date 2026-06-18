@@ -443,12 +443,6 @@ payload:
     - DOMAIN-SUFFIX,xboxservices.com
     - DOMAIN-SUFFIX,xboxstudios.com
     - DOMAIN-SUFFIX,xbx.lv
-    - DOMAIN-SUFFIX,beth.games
-    - DOMAIN-SUFFIX,bethesda.net
-    - DOMAIN-SUFFIX,bethesdagamestudios.com
-    - DOMAIN-SUFFIX,bethsoft.com
-    - DOMAIN-SUFFIX,doom.com
-    - DOMAIN-SUFFIX,elderscrolls.com
     - DOMAIN-SUFFIX,forza.net
     - DOMAIN-SUFFIX,forzamotorsport.net
     - DOMAIN-SUFFIX,forzaracingchampionship.com
@@ -461,6 +455,12 @@ payload:
     - DOMAIN-SUFFIX,mojang.com
     - DOMAIN-SUFFIX,asobostudio.com
     - DOMAIN-SUFFIX,flightsimulator.com
+    - DOMAIN-SUFFIX,beth.games
+    - DOMAIN-SUFFIX,bethesda.net
+    - DOMAIN-SUFFIX,bethesdagamestudios.com
+    - DOMAIN-SUFFIX,bethsoft.com
+    - DOMAIN-SUFFIX,doom.com
+    - DOMAIN-SUFFIX,elderscrolls.com
     - DOMAIN-SUFFIX,microsoft.be
     - DOMAIN-SUFFIX,aadrm.com
     - DOMAIN-SUFFIX,azure-devices-int.net

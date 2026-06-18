@@ -20,5 +20,6 @@ payload:
     - DOMAIN-SUFFIX,samsungqbe.com
     - DOMAIN-SUFFIX,samsungrs.com
     - DOMAIN-SUFFIX,smartthings.com
+    - DOMAIN-SUFFIX,samsungadhub.com
     - DOMAIN-SUFFIX,samsungads.com
     - DOMAIN-SUFFIX,samsungeshop.com.cn
