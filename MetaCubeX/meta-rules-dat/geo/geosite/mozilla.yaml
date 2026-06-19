@@ -1,24 +1,24 @@
 payload:
     - mozilla-ohttp.fastly-edge.com
     - mdn.mozillademos.org
-    - +.mozilla.pe
-    - +.interforest.org
+    - +.allizom.net
+    - +.allizom.org
     - +.bugzilla.org
     - +.detodosparatodos.org
     - +.discovershiretoko.org
     - +.ecmascript.org
     - +.extensionworkshop.com
-    - +.mdnyalp.dev
+    - +.foxkeh.com
     - +.foxkeh.jp
     - +.getfirebug.com
     - +.getpersonas.com
     - +.getpocket.com
     - +.hackasaurus.org
-    - +.allizom.net
+    - +.interforest.org
     - +.itisatrap.org
     - +.learningfreedomandtheweb.org
     - +.lizardwrangler.com
-    - +.mozilla.pt
+    - +.mecha-mozilla.org
     - +.mozaws.net
     - +.mozgcp.net
     - +.mozilla-europe.org
@@ -33,9 +33,8 @@ payload:
     - +.mozilla.lt
     - +.mozilla.net
     - +.mozilla.org
-    - +.foxkeh.com
-    - +.allizom.org
-    - +.mecha-mozilla.org
+    - +.mozilla.pe
+    - +.mozilla.pt
     - +.mozilla.ro
     - +.mozillabd.org
     - +.mozillademos.org
@@ -53,7 +52,9 @@ payload:
     - +.popcornjs.org
     - +.publicsuffix.org
     - +.seamonkey-project.org
+    - +.tb.pro
     - +.thunderbird.net
+    - +.thundermail.com
     - +.webmademovies.org
     - +.extendfirefox.com
     - +.firefox.com
@@ -62,6 +63,7 @@ payload:
     - +.firefoxusercontent.com
     - +.mdn.dev
     - +.mdnplay.dev
+    - +.mdnyalp.dev
     - +.mozilla.org.uk
     - ads-img.mozilla.org
     - ads.mozilla.org

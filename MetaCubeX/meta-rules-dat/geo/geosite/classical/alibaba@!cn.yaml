@@ -24,6 +24,8 @@ payload:
     - DOMAIN-SUFFIX,oss-me-east-1.aliyuncs.com
     - DOMAIN-SUFFIX,oss-us-east-1.aliyuncs.com
     - DOMAIN-SUFFIX,oss-us-west-1.aliyuncs.com
+    - DOMAIN-SUFFIX,youku.tv
+    - DOMAIN-SUFFIX,youkuplay.com
     - DOMAIN-SUFFIX,alibabacloud.co.in
     - DOMAIN-SUFFIX,alibabacloud.com
     - DOMAIN-SUFFIX,alibabacloud.com.au
@@ -32,5 +34,3 @@ payload:
     - DOMAIN-SUFFIX,alibabacloud.com.sg
     - DOMAIN-SUFFIX,alibabacloud.com.tw
     - DOMAIN-SUFFIX,alicloud.com
-    - DOMAIN-SUFFIX,youku.tv
-    - DOMAIN-SUFFIX,youkuplay.com
