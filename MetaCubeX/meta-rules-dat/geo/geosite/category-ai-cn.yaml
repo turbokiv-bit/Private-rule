@@ -1,21 +1,21 @@
 payload:
     - cueme-api.quark.cn
     - ai.zhaomi.cn
-    - +.deepseek.com
+    - +.askdiandian.com
     - +.qianwen.com
     - +.liblib.tv
     - +.rwkv.cn
     - +.rwkv.com
     - +.tapnow.top
-    - +.diandianlife.top
+    - +.xiaomimimo.com
     - +.linka2a.net
     - +.qwen.ai
     - +.qwenlm.ai
-    - +.askdiandian.com
+    - +.xiaoaiassist.com
     - +.tongyi.com
     - +.antafu.com
     - +.antaq.com
-    - +.xiaomimimo.com
+    - +.miaibox.com
     - +.tiangong.cn
     - +.bigmodel.cn
     - +.chatglm.cn
@@ -25,14 +25,14 @@ payload:
     - +.kimi.com
     - +.moonshot.ai
     - +.moonshot.cn
-    - +.xiaoaiassist.com
+    - +.yoma.cn
     - +.hailuoai.com
     - +.minimaxi.com
     - +.xingyeai.com
     - +.codebuddy.cn
-    - +.miaibox.com
-    - +.yoma.cn
     - +.trae.guru
+    - +.trae.cn
+    - +.tcwqqdy.guru
     - +.baichuan-ai.com
     - +.cueme.cn
     - +.n.cn
@@ -49,9 +49,11 @@ payload:
     - +.clawhub-mirror.com
     - +.skillhub.cn
     - +.safeskill.cn
-    - +.instreet.com
+    - +.dbbuilding.fun
     - +.liblib.cloud
-    - +.cozecdn.com
+    - +.cozebaas.cn
+    - +.diandianlife.top
+    - +.deepseek.com
     - +.butterfly-static.cn
     - +.butterflyai.cn
     - +.coze-dns-01.com
@@ -59,9 +61,9 @@ payload:
     - +.coze.email
     - +.coze.site
     - +.cozeapp.net
-    - +.cozebaas.cn
-    - +.cozebuild.com
     - +.liblib.art
+    - +.cozebuild.com
+    - +.cozecdn.com
     - +.cozedeploy.com
     - +.cozefn.cn
     - +.cozeide.cn
@@ -69,9 +71,9 @@ payload:
     - +.cozetest.cn
     - +.cozetest2.cn
     - +.cozetest3.cn
-    - +.dbbuilding.fun
-    - +.building.fun
     - +.zhiexa.com
+    - +.building.fun
+    - +.instreet.com
     - +.doubao-dev.com
     - +.doubao.com
     - +.doubaocdn.com
@@ -90,14 +92,12 @@ payload:
     - +.mcdemo.show
     - +.mchost.guru
     - +.mcprev.cn
-    - +.tcwqqdy.guru
-    - +.trae.cn
     - +.yuanqi.tencent.com
     - +.yuanbao.tencent.com
-    - +.marscode.com.cn
-    - +.trae.com.cn
     - +.hunyuan.tencent.com
     - +.xinghuo.xfyun.cn
+    - +.marscode.com.cn
+    - +.trae.com.cn
     - +.yiyan.baidu.com
     - +.tongyi.aliyun.com
     - +.qianwen.aliyun.com

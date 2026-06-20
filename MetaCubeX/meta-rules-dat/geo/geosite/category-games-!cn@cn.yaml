@@ -1,6 +1,4 @@
 payload:
-    - +.xboxlive.cn
-    - +.bluearchive-cn.com
     - +.legendofzelda.cn
     - +.legendofzelda.com.cn
     - +.miitomo.com.cn
@@ -13,8 +11,7 @@ payload:
     - +.mariokart.cn
     - +.mariokart.com.cn
     - +.supermariobros.com.cn
-    - +.leagueoflegends.cn
-    - +.lpl.com.cn
+    - uplaypc-s-ubisoft.cdn.ubi.com
     - +.steamserver.net
     - +.steamusercontent.com
     - +.csgo.wmsj.cn
@@ -32,8 +29,10 @@ payload:
     - xz.pphimalayanrt.com
     - +.steamchina.com
     - +.gstore.val.manlaxy.com
-    - uplaypc-s-ubisoft.cdn.ubi.com
+    - +.leagueoflegends.cn
+    - +.lpl.com.cn
     - +.yostar.cn
+    - +.bluearchive-cn.com
     - gog.qtlglb.com
     - gogalaxy.gog-statics.com
     - menu-static.gog-statics.com
@@ -42,3 +41,4 @@ payload:
     - www4-static.gog-statics.com
     - gog-cdn-fastly.gog.com
     - gog-cdn.akamaized.net
+    - +.xboxlive.cn

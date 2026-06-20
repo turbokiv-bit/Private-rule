@@ -1,18 +1,5 @@
 payload:
-    - +.alphassl.com
-    - +.easy-signing.com
-    - +.globalsign.cn
-    - +.globalsign.com
-    - +.globalsigncdn.com
-    - cdn.globalsigncdn.com.cdn.cloudflare.net
-    - crl.globalsign.net
-    - +.oemssl.cn
-    - +.oemssl.cn.cdn.cloudflare.net
-    - +.sectigochina.com
-    - +.sectigochina.com.cdn.cloudflare.net
-    - +.trust-provider.cn
-    - +.dcocsp.cn
-    - +.digicert.cn
+    - www.microsoft.com
     - www.entrust.cn
     - pki-goog.l.google.com
     - c.pki.goog
@@ -21,6 +8,15 @@ payload:
     - crl.pki.goog
     - crls.pki.goog
     - ocsp.pki.goog
+    - +.alphassl.com
+    - +.easy-signing.com
+    - +.globalsign.cn
+    - +.globalsign.com
+    - +.globalsigncdn.com
+    - cdn.globalsigncdn.com.cdn.cloudflare.net
+    - crl.globalsign.net
+    - +.dcocsp.cn
+    - +.digicert.cn
     - +.sslcom.cn
     - certs-lb.apple.com.akadns.net
     - certs.apple.com
@@ -30,4 +26,8 @@ payload:
     - ocsp2.apple.com
     - valid.apple.com
     - valid.origin-apple.com.akadns.net
-    - www.microsoft.com
+    - +.oemssl.cn
+    - +.oemssl.cn.cdn.cloudflare.net
+    - +.sectigochina.com
+    - +.sectigochina.com.cdn.cloudflare.net
+    - +.trust-provider.cn
