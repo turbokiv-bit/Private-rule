@@ -210,6 +210,8 @@ DOMAIN-SUFFIX,github-production-repository-image-32fea6.s3.amazonaws.com
 DOMAIN-SUFFIX,github-production-upload-manifest-file-7fdce7.s3.amazonaws.com
 DOMAIN-SUFFIX,github-production-user-asset-6210df.s3.amazonaws.com
 DOMAIN-SUFFIX,gitlab-assets.oss-cn-hongkong.aliyuncs.com
+DOMAIN-SUFFIX,gog-cdn-lumen.secure2.footprint.net
+DOMAIN-SUFFIX,gog-cdn.akamaized.net
 DOMAIN-SUFFIX,google-ohttp-relay-safebrowsing.fastly-edge.com
 DOMAIN-SUFFIX,hamivideo.hinet.net
 DOMAIN-SUFFIX,hammerandchisel.ssl.zendesk.com

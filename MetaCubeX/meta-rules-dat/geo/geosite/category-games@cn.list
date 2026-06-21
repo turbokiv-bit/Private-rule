@@ -1,3 +1,4 @@
+DOMAIN-SUFFIX,bluearchive-cn.com
 DOMAIN-SUFFIX,legendofzelda.cn
 DOMAIN-SUFFIX,legendofzelda.com.cn
 DOMAIN-SUFFIX,miitomo.com.cn
@@ -10,7 +11,8 @@ DOMAIN-SUFFIX,xn--mts47c3w9b1qr.cn
 DOMAIN-SUFFIX,mariokart.cn
 DOMAIN-SUFFIX,mariokart.com.cn
 DOMAIN-SUFFIX,supermariobros.com.cn
-DOMAIN-SUFFIX,uplaypc-s-ubisoft.cdn.ubi.com
+DOMAIN-SUFFIX,leagueoflegends.cn
+DOMAIN-SUFFIX,lpl.com.cn
 DOMAIN-SUFFIX,steamserver.net
 DOMAIN-SUFFIX,steamusercontent.com
 DOMAIN-SUFFIX,csgo.wmsj.cn
@@ -28,16 +30,7 @@ DOMAIN-SUFFIX,lv.queniujq.cn
 DOMAIN-SUFFIX,xz.pphimalayanrt.com
 DOMAIN-SUFFIX,steamchina.com
 DOMAIN-SUFFIX,gstore.val.manlaxy.com
-DOMAIN-SUFFIX,leagueoflegends.cn
-DOMAIN-SUFFIX,lpl.com.cn
-DOMAIN-SUFFIX,yostar.cn
-DOMAIN-SUFFIX,bluearchive-cn.com
-DOMAIN-SUFFIX,gog.qtlglb.com
-DOMAIN-SUFFIX,gogalaxy.gog-statics.com
-DOMAIN-SUFFIX,menu-static.gog-statics.com
-DOMAIN-SUFFIX,productcard.gog-statics.com
-DOMAIN-SUFFIX,static-login.gog-statics.com
-DOMAIN-SUFFIX,www4-static.gog-statics.com
-DOMAIN-SUFFIX,gog-cdn-fastly.gog.com
-DOMAIN-SUFFIX,gog-cdn.akamaized.net
+DOMAIN-SUFFIX,uplaypc-s-ubisoft.cdn.ubi.com
 DOMAIN-SUFFIX,xboxlive.cn
+DOMAIN-SUFFIX,gog.qtlglb.com
+DOMAIN-SUFFIX,yostar.cn
