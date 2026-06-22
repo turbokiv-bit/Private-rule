@@ -2,5 +2,5 @@ DOMAIN-SUFFIX,crl.microsoft.com
 DOMAIN-SUFFIX,mscrl.microsoft.com
 DOMAIN-SUFFIX,ocsp.microsoft.com
 DOMAIN-SUFFIX,oneocsp.microsoft.com
-DOMAIN-SUFFIX,msocsp.com
 DOMAIN-SUFFIX,www.microsoft.com
+DOMAIN-SUFFIX,msocsp.com

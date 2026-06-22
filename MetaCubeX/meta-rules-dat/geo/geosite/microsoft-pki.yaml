@@ -3,5 +3,5 @@ payload:
     - mscrl.microsoft.com
     - ocsp.microsoft.com
     - oneocsp.microsoft.com
-    - +.msocsp.com
     - www.microsoft.com
+    - +.msocsp.com
