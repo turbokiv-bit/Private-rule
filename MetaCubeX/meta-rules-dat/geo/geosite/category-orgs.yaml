@@ -24,15 +24,14 @@ payload:
     - +.who.int
     - +.wi-fi.org
     - +.wto.org
-    - +.ppy.sh
-    - +.ccstatic.org
-    - +.creativecommons.org
-    - +.creativecommons.engineering
-    - +.licensebuttons.net
     - +.emojipedia.org
     - +.worldemojiawards.com
     - +.worldemojiday.com
     - +.xn--yt8h.la
+    - +.f-dro1d.org
+    - +.f-droid.com
+    - +.f-droid.org
+    - +.fdroid.org
     - +.ieee.org
     - +.ieee.tv
     - +.tryengineering.org
@@ -87,6 +86,30 @@ payload:
     - +.signalprocessingsociety.org
     - +.technologyandsociety.org
     - +.vtsociety.org
+    - +.rolfoundation.org
+    - +.rolsociety.org
+    - +.ppy.sh
+    - +.ccstatic.org
+    - +.creativecommons.org
+    - +.creativecommons.engineering
+    - +.licensebuttons.net
+    - +.csis.org
+    - +.attestation.app
+    - +.grapheneos.app
+    - +.grapheneos.ca
+    - +.grapheneos.com
+    - +.grapheneos.dev
+    - +.grapheneos.foundation
+    - +.grapheneos.info
+    - +.grapheneos.net
+    - +.grapheneos.network
+    - +.grapheneos.online
+    - +.grapheneos.org
+    - +.grapheneos.ovh
+    - +.grapheneos.page
+    - +.grapheneos.social
+    - +.seamlessupdate.app
+    - +.vanadium.app
     - +.acousticbrainz.org
     - +.bookbrainz.org
     - +.coverartarchive.org
@@ -107,26 +130,3 @@ payload:
     - +.stateofthemap.com
     - +.stateofthemap.org
     - +.paskoocheh.com
-    - +.csis.org
-    - +.f-dro1d.org
-    - +.f-droid.com
-    - +.f-droid.org
-    - +.fdroid.org
-    - +.attestation.app
-    - +.grapheneos.app
-    - +.grapheneos.ca
-    - +.grapheneos.com
-    - +.grapheneos.dev
-    - +.grapheneos.foundation
-    - +.grapheneos.info
-    - +.grapheneos.net
-    - +.grapheneos.network
-    - +.grapheneos.online
-    - +.grapheneos.org
-    - +.grapheneos.ovh
-    - +.grapheneos.page
-    - +.grapheneos.social
-    - +.seamlessupdate.app
-    - +.vanadium.app
-    - +.rolfoundation.org
-    - +.rolsociety.org

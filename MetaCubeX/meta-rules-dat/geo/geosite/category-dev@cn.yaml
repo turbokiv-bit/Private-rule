@@ -1,4 +1,9 @@
 payload:
+    - +.jetbrains.com.cn
+    - +.cdn.jetbrains.com
+    - +.microsoftreactor.cn
+    - +.microsoftreactor.com.cn
+    - +.reactorms.com.cn
     - crashlyticsreports-pa.googleapis.com
     - firebase-settings.crashlytics.com
     - update.crashlytics.com
@@ -7,8 +12,3 @@ payload:
     - +.researchkit.com.cn
     - +.swiftui.cn
     - +.swiftui.com.cn
-    - +.microsoftreactor.cn
-    - +.microsoftreactor.com.cn
-    - +.reactorms.com.cn
-    - +.jetbrains.com.cn
-    - +.cdn.jetbrains.com

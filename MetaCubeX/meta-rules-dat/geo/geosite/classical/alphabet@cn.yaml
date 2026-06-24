@@ -111,6 +111,7 @@ payload:
     - DOMAIN,www.destinationurl.com
     - DOMAIN,www.gstatic.com
     - DOMAIN,www.pxcc.com
+    - DOMAIN-SUFFIX,ggpht.cn
     - DOMAIN,crashlyticsreports-pa.googleapis.com
     - DOMAIN,firebase-settings.crashlytics.com
     - DOMAIN,update.crashlytics.com
@@ -124,4 +125,3 @@ payload:
     - DOMAIN,crl.pki.goog
     - DOMAIN,crls.pki.goog
     - DOMAIN,ocsp.pki.goog
-    - DOMAIN-SUFFIX,ggpht.cn
