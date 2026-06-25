@@ -2,7 +2,7 @@ payload:
     - cueme-api.quark.cn
     - ai.zhaomi.cn
     - +.safeskill.cn
-    - +.hi-butterfly.cn
+    - +.doubaocdn.com
     - +.liblib.tv
     - +.rwkv.cn
     - +.rwkv.com
@@ -15,7 +15,7 @@ payload:
     - +.antaq.com
     - +.dumate.cn
     - +.miaoda.cn
-    - +.deepseek.com
+    - +.diandianlife.top
     - +.mcpworld.com
     - +.tiangong.cn
     - +.bigmodel.cn
@@ -26,14 +26,14 @@ payload:
     - +.kimi.com
     - +.moonshot.ai
     - +.moonshot.cn
-    - +.diandianlife.top
     - +.askdiandian.com
     - +.xiaomimimo.com
+    - +.xiaoaiassist.com
     - +.hailuoai.com
     - +.minimaxi.com
     - +.xingyeai.com
     - +.codebuddy.cn
-    - +.xiaoaiassist.com
+    - +.miaibox.com
     - +.liblib.art
     - +.yoma.cn
     - +.baichuan-ai.com
@@ -51,9 +51,10 @@ payload:
     - +.duiopen.com
     - +.clawhub-mirror.com
     - +.skillhub.cn
-    - +.miaibox.com
+    - +.trae.guru
     - +.qwen.ai
     - +.tapnow.top
+    - +.deepseek.com
     - +.butterfly-static.cn
     - +.butterflyai.cn
     - +.coze-dns-01.com
@@ -76,8 +77,8 @@ payload:
     - +.instreet.com
     - +.doubao-dev.com
     - +.doubao.com
-    - +.doubaocdn.com
     - +.liblib.cloud
+    - +.hi-butterfly.cn
     - +.maoxiangai.com
     - +.myparallelstory.com
     - +.oceancloudapi.com
@@ -94,10 +95,9 @@ payload:
     - +.mcprev.cn
     - +.tcwqqdy.guru
     - +.trae.cn
-    - +.trae.guru
+    - +.trae.com.cn
     - +.yuanqi.tencent.com
     - +.marscode.com.cn
-    - +.trae.com.cn
     - +.yuanbao.tencent.com
     - +.hunyuan.tencent.com
     - +.xinghuo.xfyun.cn
