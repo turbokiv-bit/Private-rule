@@ -2,7 +2,6 @@ DOMAIN-SUFFIX,az764295.vo.msecnd.net
 DOMAIN-SUFFIX,bingsettingssearch.trafficmanager.net
 DOMAIN-SUFFIX,default.exp-tas.com
 DOMAIN-SUFFIX,developer.microsoft.com
-DOMAIN-SUFFIX,download.visualstudio.microsoft.com
 DOMAIN-SUFFIX,dtlgalleryint.cloudapp.net
 DOMAIN-SUFFIX,packages.microsoft.com
 DOMAIN-SUFFIX,poshtestgallery.cloudapp.net
@@ -72,3 +71,4 @@ DOMAIN-SUFFIX,visualstudio.co.uk
 DOMAIN-SUFFIX,microsoftreactor.cn
 DOMAIN-SUFFIX,microsoftreactor.com.cn
 DOMAIN-SUFFIX,reactorms.com.cn
+DOMAIN-SUFFIX,download.visualstudio.microsoft.com

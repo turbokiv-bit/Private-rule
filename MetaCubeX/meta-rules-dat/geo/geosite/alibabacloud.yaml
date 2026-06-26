@@ -7,3 +7,7 @@ payload:
     - +.alibabacloud.com.sg
     - +.alibabacloud.com.tw
     - +.alicloud.com
+    - account-cn.alibabacloud.com
+    - api.alibabacloud.com
+    - cn.alibabacloud.com
+    - status.alibabacloud.com

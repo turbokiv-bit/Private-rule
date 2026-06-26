@@ -4,5 +4,5 @@ IP-CIDR6,2602:f92a:a47d::/48
 IP-CIDR6,2a0f:1cc5:f01::/48
 IP-CIDR6,2a0f:1cc5:f02::/47
 IP-CIDR6,2a0f:1cc5:f04::/46
-IP-CIDR6,2a0f:1cc5:f09::/48
+IP-CIDR6,2a0f:1cc5:f08::/47
 IP-CIDR6,2a0f:1cc5:fff::/48

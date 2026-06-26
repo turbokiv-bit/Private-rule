@@ -47,7 +47,6 @@ DOMAIN-SUFFIX,collaborateppe.download.prss.microsoft.com
 DOMAIN-SUFFIX,ctldl.windowsupdate.com
 DOMAIN-SUFFIX,developer.microsoft.com
 DOMAIN-SUFFIX,download.microsoft.com
-DOMAIN-SUFFIX,download.visualstudio.microsoft.com
 DOMAIN-SUFFIX,dreamspark.download.prss.microsoft.com
 DOMAIN-SUFFIX,dreamsparkuat.download.prss.microsoft.com
 DOMAIN-SUFFIX,f.c2r.ts.cdn.office.net
@@ -188,3 +187,4 @@ DOMAIN-SUFFIX,emoi-cncdn.bing.com
 DOMAIN-SUFFIX,microsoftreactor.cn
 DOMAIN-SUFFIX,microsoftreactor.com.cn
 DOMAIN-SUFFIX,reactorms.com.cn
+DOMAIN-SUFFIX,download.visualstudio.microsoft.com

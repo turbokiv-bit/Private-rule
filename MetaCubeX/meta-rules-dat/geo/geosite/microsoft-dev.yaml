@@ -3,7 +3,6 @@ payload:
     - bingsettingssearch.trafficmanager.net
     - default.exp-tas.com
     - developer.microsoft.com
-    - download.visualstudio.microsoft.com
     - dtlgalleryint.cloudapp.net
     - packages.microsoft.com
     - poshtestgallery.cloudapp.net
@@ -73,3 +72,4 @@ payload:
     - +.microsoftreactor.cn
     - +.microsoftreactor.com.cn
     - +.reactorms.com.cn
+    - download.visualstudio.microsoft.com

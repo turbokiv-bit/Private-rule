@@ -3,7 +3,6 @@ payload:
     - DOMAIN,bingsettingssearch.trafficmanager.net
     - DOMAIN,default.exp-tas.com
     - DOMAIN,developer.microsoft.com
-    - DOMAIN,download.visualstudio.microsoft.com
     - DOMAIN,dtlgalleryint.cloudapp.net
     - DOMAIN,packages.microsoft.com
     - DOMAIN,poshtestgallery.cloudapp.net
@@ -73,3 +72,4 @@ payload:
     - DOMAIN-SUFFIX,microsoftreactor.cn
     - DOMAIN-SUFFIX,microsoftreactor.com.cn
     - DOMAIN-SUFFIX,reactorms.com.cn
+    - DOMAIN,download.visualstudio.microsoft.com
