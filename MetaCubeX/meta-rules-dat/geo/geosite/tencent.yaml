@@ -69,9 +69,9 @@ payload:
     - +.tdnsdl3.cn
     - +.hongxiu.com
     - +.tdnsdl4.cn
-    - +.kugouyouth.com
+    - +.koowo.com
     - +.tdnsdl5.cn
-    - +.kugouvoice.com
+    - +.koowo.cn
     - +.tencentcloud-aiot.com
     - +.tencentcloudcr.com
     - +.aitransfy.com
@@ -340,6 +340,8 @@ payload:
     - +.m1.run
     - +.m6.run
     - +.m9.run
+    - +.kugouyouth.com
+    - +.kugouvoice.com
     - +.kugoustore.com
     - +.kugousenior.com
     - +.kugouringtone.com
@@ -348,21 +350,19 @@ payload:
     - +.kugouipv6.com
     - +.kugouaudio.com
     - +.kugou.net
-    - +.kugou.com
-    - +.kugoo.com
     - +.mting.info
     - +.tencentmusic.com
-    - +.kuwo.cn
-    - +.fanxingliveshow.com
     - +.xmcdn.com
-    - +.ximalaya.com
+    - +.kglink.cn
+    - +.kgimg.com
+    - +.fanxingliveshow.com
     - +.ultimatemusic.cn
     - +.tingmall.com
     - +.97ting.com
     - +.wting.info
     - +.qqmusic.com
     - +.lrts.me
-    - +.kglink.cn
+    - +.kugoo.com
     - +.sogoucdndl.com
     - +.yidianliulan.cn
     - +.ggowan.com
@@ -393,8 +393,8 @@ payload:
     - +.xinyan.cn
     - +.yeyousg.com
     - +.sogoucdn.com
-    - +.koowo.com
-    - +.kgimg.com
+    - +.ximalaya.com
+    - +.ktv.com
     - +.openmidas.com
     - +.qq.design
     - +.qqgamedesign.com
@@ -488,8 +488,8 @@ payload:
     - +.scsentry.cn
     - +.supercellcommunity.cn
     - +.supercellsupport.cn
-    - +.koowo.cn
-    - +.ktv.com
+    - +.kuwo.cn
+    - +.kugou.com
     - +.goto-game.net.cn
     - +.wegame.com.cn
     - +.werepository.com.cn
@@ -652,10 +652,10 @@ payload:
     - +.stat.y.qq.com
     - +.tmead.y.qq.com
     - +.tmeadcomm.y.qq.com
-    - +.adbehavior.ximalaya.com
-    - +.adse.wsa.ximalaya.com
-    - +.adse.ximalaya.com
     - +.ads.service.kugou.com
     - +.adserviceretry.kglink.cn
     - +.adserviceretry.kugou.com
+    - +.adbehavior.ximalaya.com
+    - +.adse.wsa.ximalaya.com
+    - +.adse.ximalaya.com
     - +.webnovel.com
