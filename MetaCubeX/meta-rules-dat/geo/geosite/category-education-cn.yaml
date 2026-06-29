@@ -14,25 +14,25 @@ payload:
     - +.chsi.cn
     - +.yuketang.cn
     - +.rainclassroom.com
-    - +.fenbilantian.com
-    - +.fenbilantian.cn
-    - +.fenbike.com
-    - +.fenbike.cn
-    - +.fenbi.com
-    - +.fbstatic.cn
-    - +.yuantiku.com
-    - +.yuansouti.com
+    - +.zuowen.com
+    - +.zhongkao.com
+    - +.youjiao.com
+    - +.xueersi.com
+    - +.xesimg.com
+    - +.tal.com
+    - +.speiyou.com
+    - +.gaokao.com
     - +.gfbzb.cn
     - +.gfbzb.com
-    - +.yuanfudao.com
-    - +.ybccode.com
+    - +.eduuu.com
+    - +.eduu.com
     - +.gfbzb.net
     - +.ncss.cn
-    - +.xiaoyuankousuan.com
-    - +.banmaaike.com
-    - +.shanbay.com
+    - +.aoshu.com
+    - +.100tal.com
+    - +.koopass.com
     - +.qgzb.net
-    - +.baydn.com
+    - +.koolearn.com
     - +.zbbm.net
     - +.neea.cn
     - +.21cnjy.com
@@ -68,7 +68,7 @@ payload:
     - +.sydw8.com
     - +.ictbda.cn
     - +.ictbda.com
-    - +.17zuoye.net
+    - +.koocdn.com
     - +.xir.cn
     - +.j-test.com
     - +.nattest-china.com
@@ -82,7 +82,7 @@ payload:
     - +.llsapp.com
     - +.llscdn.com
     - +.llsserver.com
-    - +.speiyou.com
+    - +.yuanfudao.com
     - +.yudou.cn
     - +.neoscholar.com
     - +.markji.com
@@ -119,7 +119,10 @@ payload:
     - +.mooc.cn
     - +.openlearning.com
     - +.pmphmooc.com
+    - +.fenbilantian.com
+    - +.17zuoye.cn
     - +.17zuoye.com
+    - +.17zuoye.net
     - +.applysquare.com
     - +.applysquare.net
     - +.hugecore.net
@@ -130,24 +133,21 @@ payload:
     - +.hjfile.cn
     - +.hujiang.com
     - +.yeshj.com
-    - +.koocdn.com
-    - +.koolearn.com
-    - +.koopass.com
     - +.schoopia.com
     - +.tongxuepie.com
-    - +.100tal.com
-    - +.aoshu.com
-    - +.eduu.com
-    - +.eduuu.com
-    - +.gaokao.com
+    - +.baydn.com
+    - +.shanbay.com
+    - +.banmaaike.com
+    - +.xiaoyuankousuan.com
+    - +.ybccode.com
     - +.magedu.com
-    - +.tal.com
-    - +.xesimg.com
-    - +.xueersi.com
-    - +.youjiao.com
-    - +.zhongkao.com
-    - +.zuowen.com
-    - +.17zuoye.cn
+    - +.yuansouti.com
+    - +.yuantiku.com
+    - +.fbstatic.cn
+    - +.fenbi.com
+    - +.fenbike.cn
+    - +.fenbike.com
+    - +.fenbilantian.cn
     - +.cbern.com.cn
     - +.zbbm.gov.cn
     - +.chinayz.com.cn
