@@ -2,7 +2,7 @@ payload:
     - DOMAIN,mozilla-ohttp.fastly-edge.com
     - DOMAIN-SUFFIX,chrome
     - DOMAIN-SUFFIX,netsurf-browser.org
-    - DOMAIN-SUFFIX,epicbrowser.com
+    - DOMAIN-SUFFIX,censorship.no
     - DOMAIN-SUFFIX,minbrowser.org
     - DOMAIN-SUFFIX,brave.com
     - DOMAIN-SUFFIX,bromite.org
@@ -24,11 +24,11 @@ payload:
     - DOMAIN-SUFFIX,vivaldi.com
     - DOMAIN-SUFFIX,waterfox.net
     - DOMAIN-SUFFIX,zen-browser.app
+    - DOMAIN-SUFFIX,epicbrowser.com
     - DOMAIN-SUFFIX,extendfirefox.com
     - DOMAIN-SUFFIX,firefox.com
     - DOMAIN-SUFFIX,firefox.hu
     - DOMAIN-SUFFIX,firefoxtweetmachine.com
     - DOMAIN-SUFFIX,firefoxusercontent.com
     - DOMAIN-SUFFIX,torproject.org
-    - DOMAIN-SUFFIX,censorship.no
     - DOMAIN-SUFFIX,browser.kagi.com
