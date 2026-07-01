@@ -1,8 +1,12 @@
 payload:
-    - +.muji.com.cn
-    - +.bestbuy.cn
-    - +.bestbuy.com.cn
-    - +.magnoliaav.com.cn
+    - +.adidas.cn
+    - +.adidas.com.cn
+    - +.adidasspecialtysports.cn
+    - +.gucci.cn
+    - +.walmart.cn
+    - +.farfetch.cn
+    - +.farfetch.com.cn
+    - +.farfetch.net.cn
     - +.adcommerce.cn
     - +.appforebay.cn
     - +.connectcommerce.cn
@@ -40,14 +44,9 @@ payload:
     - +.kijijidns.com.cn
     - +.mobileinternational.com.cn
     - +.terapeak.cn
-    - +.farfetch.cn
-    - +.farfetch.com.cn
-    - +.farfetch.net.cn
-    - +.walmart.cn
-    - +.booking.cn
-    - +.hm.com.cn
-    - +.shopee.cn
-    - +.shopeesz.com
+    - +.miniso.cn
+    - +.minisohome.cn
+    - +.minsio.cn
     - +.just-do-it.cn
     - +.nike-shox.cn
     - +.nike.cn
@@ -68,14 +67,15 @@ payload:
     - +.nikerunclub.com.cn
     - +.nikerunning.com.cn
     - +.nikestore.cn
-    - +.adidas.cn
-    - +.adidas.com.cn
-    - +.adidasspecialtysports.cn
-    - +.gucci.cn
+    - +.hm.com.cn
+    - +.muji.com.cn
+    - +.bestbuy.cn
+    - +.bestbuy.com.cn
+    - +.magnoliaav.com.cn
+    - +.booking.cn
+    - +.shopee.cn
+    - +.shopeesz.com
     - +.ikea.cn
     - +.ingka-dt.cn
     - +.ingka-internal.cn
     - +.ingka-system.cn
-    - +.miniso.cn
-    - +.minisohome.cn
-    - +.minsio.cn

@@ -1,8 +1,8 @@
 payload:
     - end-api.shallow.ink
     - end.shallow.ink
-    - +.brawlstars.cn
-    - +.appeeres.com
+    - +.realcybertron.com
+    - +.sccreator.cn
     - +.37wanimg.com
     - +.7k7k.com
     - +.9xgame.com
@@ -34,6 +34,13 @@ payload:
     - +.winegame.net
     - +.wo1wan.com
     - +.ycgame.com
+    - +.cowlevel.net
+    - +.cdncl.net
+    - +.hero.com
+    - +.herogame.com
+    - +.heroesports.com
+    - +.shyxhy.com
+    - +.yingxiong.com
     - +.mhystatic.com
     - +.mhyurl.cn
     - +.mihayo.com
@@ -112,48 +119,33 @@ payload:
     - +.gotolink.net
     - +.17roco.com
     - +.gtgres.com
-    - +.realcybertron.com
-    - +.wegame.com
-    - +.anticheatexpert.com
+    - +.scsentry.cn
+    - +.37wan.net
+    - +.ihykb.com
     - +.tcfmglobal.com
     - +.battlecare.net
     - +.wegameplus.com
     - +.codm.com
-    - +.vrzwk.top
-    - +.tiancity.com
-    - +.37wan.net
-    - +.sccreator.cn
+    - +.brawlstars.cn
+    - +.haydaypop.cn
+    - +.labycore.cn
+    - +.wegame.com
     - +.sccreators.cn
     - +.scescdn.cn
     - +.scid.cn
-    - +.scsentry.cn
+    - +.37.com
     - +.supercellcommunity.cn
     - +.supercellsupport.cn
-    - +.haydaypop.cn
-    - +.tiancitycdn.com
     - +.dobest.com
     - +.langrenclub.com
-    - +.37.com
-    - +.vrzwk.net
-    - +.vrzwk.com
     - +.sanguosha.com
     - +.xhlsgs.com
+    - +.lingxigames.com
+    - +.jiaoyimao.com
+    - +.jiaoyimao.cn
     - +.xinwuji.com
     - +.yokaverse.com
     - +.zhuoyou.com
-    - +.9game.cn
-    - +.aligames.com
-    - +.jiaoyimao.cn
-    - +.jiaoyimao.com
-    - +.lingxigames.com
-    - +.sl916.com
-    - +.cowlevel.net
-    - +.cdncl.net
-    - +.hero.com
-    - +.herogame.com
-    - +.heroesports.com
-    - +.shyxhy.com
-    - +.yingxiong.com
     - +.3304399.com
     - +.3304399.net
     - +.3839.com
@@ -191,7 +183,7 @@ payload:
     - +.71acg.com
     - +.71acg.net
     - +.abdf002.com
-    - +.labycore.cn
+    - +.appeeres.com
     - +.buke999.com
     - +.bx1k.com
     - +.edu4399.com
@@ -199,7 +191,7 @@ payload:
     - +.guoping123.com
     - +.haohaowan.net
     - +.i3839.com
-    - +.ihykb.com
+    - +.anticheatexpert.com
     - +.img4399.com
     - +.mail4399.com
     - +.maindown4399.com
@@ -231,7 +223,15 @@ payload:
     - +.xoyocdn.com
     - +.cbjq.com
     - +.testplus.cn
+    - +.tiancity.com
+    - +.tiancitycdn.com
     - +.vrzwk.cn
+    - +.vrzwk.com
+    - +.vrzwk.net
+    - +.vrzwk.top
+    - +.sl916.com
+    - +.9game.cn
+    - +.aligames.com
     - +.wegame.com.cn
     - +.werepository.com.cn
     - +.37.com.cn

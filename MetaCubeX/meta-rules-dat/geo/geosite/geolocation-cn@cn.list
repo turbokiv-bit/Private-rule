@@ -43,6 +43,11 @@ DOMAIN-SUFFIX,cloudflareperf.com
 DOMAIN-SUFFIX,cloudflareprod.com
 DOMAIN-SUFFIX,cloudflarestaging.com
 DOMAIN-SUFFIX,cloudflarestoragegw.com
+DOMAIN-SUFFIX,starbucks.com.cn
+DOMAIN-SUFFIX,4008-517-517.cn
+DOMAIN-SUFFIX,mcd.cn
+DOMAIN-SUFFIX,mcdchina.net
+DOMAIN-SUFFIX,mcdonalds.com.cn
 DOMAIN-SUFFIX,ntp.aliyun.com
 DOMAIN-SUFFIX,ntp1.aliyun.com
 DOMAIN-SUFFIX,ntp2.aliyun.com
@@ -66,8 +71,3 @@ DOMAIN-SUFFIX,cn.pool.ntp.org
 DOMAIN-SUFFIX,ntp.neu.edu.cn
 DOMAIN-SUFFIX,ntp.ntsc.ac.cn
 DOMAIN-SUFFIX,ntp.org.cn
-DOMAIN-SUFFIX,4008-517-517.cn
-DOMAIN-SUFFIX,mcd.cn
-DOMAIN-SUFFIX,mcdchina.net
-DOMAIN-SUFFIX,mcdonalds.com.cn
-DOMAIN-SUFFIX,starbucks.com.cn
