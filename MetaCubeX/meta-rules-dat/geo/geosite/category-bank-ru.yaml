@@ -2,8 +2,8 @@ payload:
     - sberpro.vedomosti.ru
     - edu.tinkoff.ru
     - education.tbank.ru
-    - +.jivochat.ng
-    - +.jivo.ru
+    - +.jivochat.es
+    - +.jivochat.com
     - +.alfabank.st
     - +.alfadirect.ru
     - +.myapelsin.ru
@@ -61,6 +61,7 @@ payload:
     - +.bank131.com
     - +.bankermak.ru
     - +.bfa.ru
+    - +.blanc.ru
     - +.bm-bank.ru
     - +.bspb.ru
     - +.commerzbank.ru
@@ -113,7 +114,7 @@ payload:
     - +.sberauto.com
     - +.sberbank-insurance.ru
     - +.sbercloud.ru
-    - +.jivochat.de
+    - +.sbercloud.tech
     - +.sberdevices.ru
     - +.sberdisk.ru
     - +.sberfactoring.ru
@@ -124,7 +125,7 @@ payload:
     - +.sberleasing.ru
     - +.sberlogistics.ru
     - +.sbermegamarket.ru
-    - +.sbermobile.ru
+    - +.alfa.me
     - +.sberpb.ru
     - +.sbertroika.ru
     - +.okko.sport
@@ -136,11 +137,11 @@ payload:
     - +.21-school.ru
     - +.kuper.ru
     - +.restnproducts.ru
-    - +.samokat.ru
+    - +.jivochat.ru
     - +.giga.chat
     - +.gitverse.ru
     - +.jivo.chat
-    - +.jivochat.es
+    - +.jivo.ru
     - +.playfamily.ru
     - +.okkoapi.tv
     - +.jivosite.ru
@@ -148,12 +149,12 @@ payload:
     - +.sberbankaktivno.ru
     - +.2gis.uz
     - +.2gis.tj
-    - +.sbercloud.tech
+    - +.jivochat.de
+    - +.sbermobile.ru
     - +.alfabank.ru
-    - +.t-bank-app.su
-    - +.jivochat.ru
+    - +.samokat.ru
     - +.jivosite.com
-    - +.jivochat.com
+    - +.jivochat.ng
     - +.payecom.ru
     - +.platiecom.ru
     - +.otello.ru
@@ -248,7 +249,7 @@ payload:
     - +.sgcheck.ru
     - +.t-access.ru
     - +.t-bank-app.ru
-    - +.alfa.me
+    - +.t-bank-app.su
     - +.t-bank.by
     - +.t-calls.ru
     - +.t-capital-funds.ru

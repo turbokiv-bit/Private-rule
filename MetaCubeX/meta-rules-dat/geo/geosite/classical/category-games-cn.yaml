@@ -1,13 +1,15 @@
 payload:
     - DOMAIN,end-api.shallow.ink
     - DOMAIN,end.shallow.ink
-    - DOMAIN-SUFFIX,realcybertron.com
-    - DOMAIN-SUFFIX,sccreator.cn
+    - DOMAIN-SUFFIX,texasholdemcup.net
+    - DOMAIN-SUFFIX,yjwujian.cn
     - DOMAIN-SUFFIX,37wanimg.com
     - DOMAIN-SUFFIX,7k7k.com
     - DOMAIN-SUFFIX,9xgame.com
     - DOMAIN-SUFFIX,arcaea.cn
     - DOMAIN-SUFFIX,astral-vector.com
+    - DOMAIN-SUFFIX,66rpg.com
+    - DOMAIN-SUFFIX,cgyouxi.com
     - DOMAIN-SUFFIX,changyou.com
     - DOMAIN-SUFFIX,cy.com
     - DOMAIN-SUFFIX,playcool.com
@@ -24,23 +26,35 @@ payload:
     - DOMAIN-SUFFIX,ledu.com
     - DOMAIN-SUFFIX,longtugame.com
     - DOMAIN-SUFFIX,morefreegame.com
+    - DOMAIN-SUFFIX,bcfmglobal.com
+    - DOMAIN-SUFFIX,tuyoo.com
     - DOMAIN-SUFFIX,phira.cn
     - DOMAIN-SUFFIX,sdo.com
     - DOMAIN-SUFFIX,shengqugames.com
     - DOMAIN-SUFFIX,zjshulong.com
     - DOMAIN-SUFFIX,tgpro.top
     - DOMAIN-SUFFIX,tgprocs.net
-    - DOMAIN-SUFFIX,tuyoo.com
     - DOMAIN-SUFFIX,winegame.net
     - DOMAIN-SUFFIX,wo1wan.com
     - DOMAIN-SUFFIX,ycgame.com
-    - DOMAIN-SUFFIX,cowlevel.net
-    - DOMAIN-SUFFIX,cdncl.net
-    - DOMAIN-SUFFIX,hero.com
-    - DOMAIN-SUFFIX,herogame.com
-    - DOMAIN-SUFFIX,heroesports.com
-    - DOMAIN-SUFFIX,shyxhy.com
-    - DOMAIN-SUFFIX,yingxiong.com
+    - DOMAIN-SUFFIX,timibase.com
+    - DOMAIN-SUFFIX,yysls.cn
+    - DOMAIN-SUFFIX,vrzwk.cn
+    - DOMAIN-SUFFIX,vrzwk.com
+    - DOMAIN-SUFFIX,vrzwk.net
+    - DOMAIN-SUFFIX,vrzwk.top
+    - DOMAIN-SUFFIX,dobest.com
+    - DOMAIN-SUFFIX,langrenclub.com
+    - DOMAIN-SUFFIX,sanguosha.com
+    - DOMAIN-SUFFIX,xhlsgs.com
+    - DOMAIN-SUFFIX,xinwuji.com
+    - DOMAIN-SUFFIX,yokaverse.com
+    - DOMAIN-SUFFIX,zhuoyou.com
+    - DOMAIN-SUFFIX,9game.cn
+    - DOMAIN-SUFFIX,aligames.com
+    - DOMAIN-SUFFIX,jiaoyimao.cn
+    - DOMAIN-SUFFIX,jiaoyimao.com
+    - DOMAIN-SUFFIX,lingxigames.com
     - DOMAIN-SUFFIX,mhystatic.com
     - DOMAIN-SUFFIX,mhyurl.cn
     - DOMAIN-SUFFIX,mihayo.com
@@ -56,6 +70,17 @@ payload:
     - DOMAIN-SUFFIX,themisweeps.com
     - DOMAIN-SUFFIX,yuanshen.com
     - DOMAIN-SUFFIX,juequling.com
+    - DOMAIN-SUFFIX,tiancity.com
+    - DOMAIN-SUFFIX,tiancitycdn.com
+    - DOMAIN-SUFFIX,bilibiligame.cn
+    - DOMAIN-SUFFIX,bilibiligame.co
+    - DOMAIN-SUFFIX,bilibiligame.net
+    - DOMAIN-SUFFIX,biligame.co
+    - DOMAIN-SUFFIX,biligame.com
+    - DOMAIN-SUFFIX,biligame.net
+    - DOMAIN-SUFFIX,sl916.com
+    - DOMAIN-SUFFIX,cowlevel.net
+    - DOMAIN-SUFFIX,cdncl.net
     - DOMAIN-SUFFIX,videoxiaoyouxi.com
     - DOMAIN-SUFFIX,nagcloudcs.com
     - DOMAIN-SUFFIX,gameloop.com
@@ -70,7 +95,7 @@ payload:
     - DOMAIN-SUFFIX,yxdmgame.com
     - DOMAIN-SUFFIX,goto-game.org
     - DOMAIN-SUFFIX,happyhlddz.com
-    - DOMAIN-SUFFIX,hdyxgame.com
+    - DOMAIN-SUFFIX,37.com
     - DOMAIN-SUFFIX,hkgcloudcs.com
     - DOMAIN-SUFFIX,ihappystudio.cn
     - DOMAIN-SUFFIX,ihappystudio.com
@@ -96,9 +121,9 @@ payload:
     - DOMAIN-SUFFIX,tencentstart.com
     - DOMAIN-SUFFIX,texasholdemcup.cn
     - DOMAIN-SUFFIX,texasholdemcup.com
-    - DOMAIN-SUFFIX,texasholdemcup.net
-    - DOMAIN-SUFFIX,timibase.com
-    - DOMAIN-SUFFIX,bcfmglobal.com
+    - DOMAIN-SUFFIX,hdyxgame.com
+    - DOMAIN-SUFFIX,37wan.net
+    - DOMAIN-SUFFIX,nalrer.cn
     - DOMAIN-SUFFIX,gameitop.com
     - DOMAIN-SUFFIX,goto-game.mobi
     - DOMAIN-SUFFIX,yximg.cn
@@ -119,9 +144,9 @@ payload:
     - DOMAIN-SUFFIX,gotolink.net
     - DOMAIN-SUFFIX,17roco.com
     - DOMAIN-SUFFIX,gtgres.com
-    - DOMAIN-SUFFIX,scsentry.cn
-    - DOMAIN-SUFFIX,37wan.net
-    - DOMAIN-SUFFIX,ihykb.com
+    - DOMAIN-SUFFIX,realcybertron.com
+    - DOMAIN-SUFFIX,wegame.com
+    - DOMAIN-SUFFIX,anticheatexpert.com
     - DOMAIN-SUFFIX,tcfmglobal.com
     - DOMAIN-SUFFIX,battlecare.net
     - DOMAIN-SUFFIX,wegameplus.com
@@ -129,27 +154,20 @@ payload:
     - DOMAIN-SUFFIX,brawlstars.cn
     - DOMAIN-SUFFIX,haydaypop.cn
     - DOMAIN-SUFFIX,labycore.cn
-    - DOMAIN-SUFFIX,wegame.com
+    - DOMAIN-SUFFIX,sccreator.cn
     - DOMAIN-SUFFIX,sccreators.cn
     - DOMAIN-SUFFIX,scescdn.cn
     - DOMAIN-SUFFIX,scid.cn
-    - DOMAIN-SUFFIX,37.com
+    - DOMAIN-SUFFIX,scsentry.cn
     - DOMAIN-SUFFIX,supercellcommunity.cn
     - DOMAIN-SUFFIX,supercellsupport.cn
-    - DOMAIN-SUFFIX,dobest.com
-    - DOMAIN-SUFFIX,langrenclub.com
-    - DOMAIN-SUFFIX,sanguosha.com
-    - DOMAIN-SUFFIX,xhlsgs.com
-    - DOMAIN-SUFFIX,lingxigames.com
-    - DOMAIN-SUFFIX,jiaoyimao.com
-    - DOMAIN-SUFFIX,jiaoyimao.cn
-    - DOMAIN-SUFFIX,xinwuji.com
-    - DOMAIN-SUFFIX,yokaverse.com
-    - DOMAIN-SUFFIX,zhuoyou.com
     - DOMAIN-SUFFIX,3304399.com
     - DOMAIN-SUFFIX,3304399.net
     - DOMAIN-SUFFIX,3839.com
     - DOMAIN-SUFFIX,3839apk.com
+    - DOMAIN-SUFFIX,testplus.cn
+    - DOMAIN-SUFFIX,cbjq.com
+    - DOMAIN-SUFFIX,xoyocdn.com
     - DOMAIN-SUFFIX,3839app.com
     - DOMAIN-SUFFIX,3839app.net
     - DOMAIN-SUFFIX,3839img.com
@@ -191,7 +209,7 @@ payload:
     - DOMAIN-SUFFIX,guoping123.com
     - DOMAIN-SUFFIX,haohaowan.net
     - DOMAIN-SUFFIX,i3839.com
-    - DOMAIN-SUFFIX,anticheatexpert.com
+    - DOMAIN-SUFFIX,ihykb.com
     - DOMAIN-SUFFIX,img4399.com
     - DOMAIN-SUFFIX,mail4399.com
     - DOMAIN-SUFFIX,maindown4399.com
@@ -209,29 +227,16 @@ payload:
     - DOMAIN-SUFFIX,yxhapi.com
     - DOMAIN-SUFFIX,yxhhdl.com
     - DOMAIN-SUFFIX,yxhimg.com
-    - DOMAIN-SUFFIX,bilibiligame.cn
-    - DOMAIN-SUFFIX,bilibiligame.co
-    - DOMAIN-SUFFIX,bilibiligame.net
-    - DOMAIN-SUFFIX,biligame.co
-    - DOMAIN-SUFFIX,biligame.com
-    - DOMAIN-SUFFIX,biligame.net
+    - DOMAIN-SUFFIX,hero.com
+    - DOMAIN-SUFFIX,herogame.com
+    - DOMAIN-SUFFIX,heroesports.com
+    - DOMAIN-SUFFIX,shyxhy.com
+    - DOMAIN-SUFFIX,yingxiong.com
     - DOMAIN-SUFFIX,seasungames.cn
     - DOMAIN-SUFFIX,seasungames.com
     - DOMAIN-SUFFIX,seasunwbl.com
     - DOMAIN-SUFFIX,xishanju.com
     - DOMAIN-SUFFIX,xoyo.com
-    - DOMAIN-SUFFIX,xoyocdn.com
-    - DOMAIN-SUFFIX,cbjq.com
-    - DOMAIN-SUFFIX,testplus.cn
-    - DOMAIN-SUFFIX,tiancity.com
-    - DOMAIN-SUFFIX,tiancitycdn.com
-    - DOMAIN-SUFFIX,vrzwk.cn
-    - DOMAIN-SUFFIX,vrzwk.com
-    - DOMAIN-SUFFIX,vrzwk.net
-    - DOMAIN-SUFFIX,vrzwk.top
-    - DOMAIN-SUFFIX,sl916.com
-    - DOMAIN-SUFFIX,9game.cn
-    - DOMAIN-SUFFIX,aligames.com
     - DOMAIN-SUFFIX,wegame.com.cn
     - DOMAIN-SUFFIX,werepository.com.cn
     - DOMAIN-SUFFIX,37.com.cn
