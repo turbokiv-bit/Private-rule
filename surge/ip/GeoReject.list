@@ -28,6 +28,3 @@ DOMAIN-SUFFIX,rtbhouse.com
 DOMAIN-SUFFIX,smadex.com
 DOMAIN-SUFFIX,tvsquared.com
 AND,((DOMAIN-KEYWORD,amemv.com,extended-matching), (PROTOCOL,UDP))
-DOMAIN-KEYWORD,httpdns,REJECT
-DOMAIN,dig.bdurl.net,REJECT
-DOMAIN,dig.snssdk.com,REJECT
