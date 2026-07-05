@@ -385,7 +385,6 @@ payload:
     - DOMAIN-SUFFIX,weir
     - DOMAIN-SUFFIX,woodside
     - DOMAIN-SUFFIX,zara
-    - DOMAIN-SUFFIX,africamagic
     - DOMAIN-SUFFIX,agakhan
     - DOMAIN-SUFFIX,akdn
     - DOMAIN-SUFFIX,bharti
@@ -411,7 +410,6 @@ payload:
     - DOMAIN-SUFFIX,sucks
     - DOMAIN-SUFFIX,tattoo
     - DOMAIN-SUFFIX,vana
-    - DOMAIN-SUFFIX,virgin
     - DOMAIN-SUFFIX,vodka
     - DOMAIN-SUFFIX,wine
     - DOMAIN-SUFFIX,wme
@@ -659,6 +657,7 @@ payload:
     - DOMAIN-SUFFIX,aol
     - DOMAIN-SUFFIX,aws
     - DOMAIN-SUFFIX,azure
+    - DOMAIN-SUFFIX,bing
     - DOMAIN-SUFFIX,chrome
     - DOMAIN-SUFFIX,cisco
     - DOMAIN-SUFFIX,dclk
@@ -776,6 +775,7 @@ payload:
     - DOMAIN-SUFFIX,shangrila
     - DOMAIN-SUFFIX,tui
     - DOMAIN-SUFFIX,viking
+    - DOMAIN-SUFFIX,virgin
     - DOMAIN-SUFFIX,able
     - DOMAIN-SUFFIX,cbre
     - DOMAIN-SUFFIX,chintai

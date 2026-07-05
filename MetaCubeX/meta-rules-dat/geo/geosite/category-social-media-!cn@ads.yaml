@@ -1,4 +1,7 @@
 payload:
+    - +.analytics.facebook.com
+    - +.facebookads.com
+    - +.pixel.facebook.com
     - +.ads-twitter.com
     - +.adv.vk.com
     - +.analytics.vk.com
@@ -17,6 +20,3 @@ payload:
     - target.vk.com
     - +.graph.instagram.com
     - +.graph-fallback.instagram.com
-    - +.analytics.facebook.com
-    - +.facebookads.com
-    - +.pixel.facebook.com

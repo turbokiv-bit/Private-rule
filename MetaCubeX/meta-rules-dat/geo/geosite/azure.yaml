@@ -3,6 +3,7 @@ payload:
     - azuremarketplace.microsoft.com
     - +.azure
     - +.aadrm.com
+    - +.azure-api.net
     - +.azure-devices-int.net
     - +.azure-devices.net
     - +.azure-mobile.net
@@ -35,6 +36,7 @@ payload:
     - +.azureserviceprofiler.com
     - +.azuresmartspaces.net
     - +.azurestackvalidation.com
+    - +.azurestaticapps.net
     - +.azurewebsites.net
     - +.botframework.com
     - +.cosmosdb.info

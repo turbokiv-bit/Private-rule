@@ -1,6 +1,7 @@
 payload:
     - DOMAIN,fbcdn-a.akamaihd.net
     - DOMAIN,developers.facebook.com
+    - DOMAIN-SUFFIX,atmeta.com
     - DOMAIN-SUFFIX,llama.com
     - DOMAIN-SUFFIX,meta.ai
     - DOMAIN-SUFFIX,meta.com
