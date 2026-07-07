@@ -796,8 +796,8 @@ payload:
     - DOMAIN-SUFFIX,apple
     - DOMAIN-SUFFIX,android
     - DOMAIN-SUFFIX,amazon
-    - DOMAIN-SUFFIX,ruptly.video
-    - DOMAIN-SUFFIX,oklink.com
+    - DOMAIN-SUFFIX,rurtnews.com
+    - DOMAIN-SUFFIX,sexvideo10.com
     - DOMAIN-SUFFIX,1337x.is
     - DOMAIN-SUFFIX,1337x.st
     - DOMAIN-SUFFIX,1337x.to
@@ -2408,7 +2408,7 @@ payload:
     - DOMAIN-SUFFIX,anchorfree.com
     - DOMAIN-SUFFIX,ancsconf.org
     - DOMAIN-SUFFIX,andfaraway.net
-    - DOMAIN-SUFFIX,jitouch.com
+    - DOMAIN-SUFFIX,12joursdecadeauxdeitunes.com
     - DOMAIN-SUFFIX,android-x86.org
     - DOMAIN-SUFFIX,android.com
     - DOMAIN-SUFFIX,androidapksfree.com
@@ -6581,7 +6581,7 @@ payload:
     - DOMAIN-SUFFIX,cotolia.com
     - DOMAIN-SUFFIX,cotweet.com
     - DOMAIN-SUFFIX,cougarsexmovies.com
-    - DOMAIN-SUFFIX,jiuse.ai
+    - DOMAIN-SUFFIX,counter.social
     - DOMAIN-SUFFIX,coupang.com
     - DOMAIN-SUFFIX,coupangcdn.com
     - DOMAIN-SUFFIX,yandex.lv
@@ -12475,7 +12475,7 @@ payload:
     - DOMAIN-SUFFIX,icq.lt
     - DOMAIN-SUFFIX,icq.mobi
     - DOMAIN-SUFFIX,icq.org
-    - DOMAIN-SUFFIX,icq.ru
+    - DOMAIN-SUFFIX,jiuse.ai
     - DOMAIN-SUFFIX,icq.sg
     - DOMAIN-SUFFIX,icq2mobile.com
     - DOMAIN-SUFFIX,icq5.com
@@ -13786,9 +13786,9 @@ payload:
     - DOMAIN-SUFFIX,jinx.com
     - DOMAIN-SUFFIX,jira-tcsbank.ru
     - DOMAIN-SUFFIX,jira.com
-    - DOMAIN-SUFFIX,12joursdecadeauxdeitunes.com
+    - DOMAIN-SUFFIX,plasticlabs.com
     - DOMAIN-SUFFIX,1337x.gd
-    - DOMAIN-SUFFIX,counter.social
+    - DOMAIN-SUFFIX,icq.ru
     - DOMAIN-SUFFIX,xbox360.com
     - DOMAIN-SUFFIX,jiuse.icu
     - DOMAIN-SUFFIX,jiuse.io
@@ -17763,7 +17763,7 @@ payload:
     - DOMAIN-SUFFIX,okko.tv
     - DOMAIN-SUFFIX,okkoapi.tv
     - DOMAIN-SUFFIX,okl.lt
-    - DOMAIN-SUFFIX,jitsi.org
+    - DOMAIN-SUFFIX,oklink.com
     - DOMAIN-SUFFIX,oknovrossiu.ru
     - DOMAIN-SUFFIX,okpool.me
     - DOMAIN-SUFFIX,oktech.ru
@@ -18226,6 +18226,8 @@ payload:
     - DOMAIN-SUFFIX,patreonusercontent.com
     - DOMAIN-SUFFIX,paulsimon-music.com
     - DOMAIN-SUFFIX,pavpal.com
+    - DOMAIN-SUFFIX,pawchive.pw
+    - DOMAIN-SUFFIX,pawchive.st
     - DOMAIN-SUFFIX,pawoo.net
     - DOMAIN-SUFFIX,paxful.com
     - DOMAIN-SUFFIX,paxlicense.org
@@ -18724,7 +18726,7 @@ payload:
     - DOMAIN-SUFFIX,plansondemand.com
     - DOMAIN-SUFFIX,plantsvszombies2.com
     - DOMAIN-SUFFIX,plasma-mobile.org
-    - DOMAIN-SUFFIX,plasticlabs.com
+    - DOMAIN-SUFFIX,jitouch.com
     - DOMAIN-SUFFIX,plastics-cadcam.com
     - DOMAIN-SUFFIX,platiecom.ru
     - DOMAIN-SUFFIX,platinumlinks.org
@@ -20261,8 +20263,8 @@ payload:
     - DOMAIN-SUFFIX,rupress.org
     - DOMAIN-SUFFIX,ruptly.agency
     - DOMAIN-SUFFIX,ruptly.tv
+    - DOMAIN-SUFFIX,ruptly.video
     - DOMAIN-SUFFIX,000webhost.com
-    - DOMAIN-SUFFIX,rurtnews.com
     - DOMAIN-SUFFIX,rusfinance.ru
     - DOMAIN-SUFFIX,rusfinancebank.ru
     - DOMAIN-SUFFIX,rushporn.online
@@ -20831,7 +20833,7 @@ payload:
     - DOMAIN-SUFFIX,sexualhentai.net
     - DOMAIN-SUFFIX,sexuria.com
     - DOMAIN-SUFFIX,sexvid.xxx
-    - DOMAIN-SUFFIX,sexvideo10.com
+    - DOMAIN-SUFFIX,jitsi.org
     - DOMAIN-SUFFIX,sexvideo12com.pro
     - DOMAIN-SUFFIX,sexvideos.host
     - DOMAIN-SUFFIX,sexvideos.tel
