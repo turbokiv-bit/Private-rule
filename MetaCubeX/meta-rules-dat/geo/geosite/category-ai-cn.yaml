@@ -1,21 +1,25 @@
 payload:
     - cueme-api.quark.cn
     - ai.zhaomi.cn
-    - +.safeskill.cn
-    - +.doubaocdn.com
+    - +.clawhub-mirror.com
+    - +.trae.guru
     - +.liblib.tv
-    - +.rwkv.cn
+    - +.liblib.art
     - +.rwkv.com
-    - +.linka2a.net
+    - +.tapnow.top
     - +.qianwen.com
-    - +.zhiexa.com
+    - +.qwen.ai
     - +.qwenlm.ai
     - +.tongyi.com
     - +.antafu.com
     - +.antaq.com
+    - +.aorizon.cn
+    - +.happyhorse.cn
+    - +.happyshrimp.cn
+    - +.sleeplesshorizon.cn
     - +.dumate.cn
     - +.miaoda.cn
-    - +.diandianlife.top
+    - +.deepseek.com
     - +.mcpworld.com
     - +.tiangong.cn
     - +.bigmodel.cn
@@ -26,15 +30,15 @@ payload:
     - +.kimi.com
     - +.moonshot.ai
     - +.moonshot.cn
+    - +.diandianlife.top
     - +.askdiandian.com
     - +.xiaomimimo.com
-    - +.xiaoaiassist.com
     - +.hailuoai.com
     - +.minimaxi.com
     - +.xingyeai.com
     - +.codebuddy.cn
+    - +.xiaoaiassist.com
     - +.miaibox.com
-    - +.liblib.art
     - +.yoma.cn
     - +.baichuan-ai.com
     - +.cueme.cn
@@ -49,12 +53,11 @@ payload:
     - +.aispeech.com
     - +.dui.ai
     - +.duiopen.com
-    - +.clawhub-mirror.com
-    - +.skillhub.cn
-    - +.trae.guru
-    - +.qwen.ai
-    - +.tapnow.top
-    - +.deepseek.com
+    - +.rwkv.cn
+    - +.liblib.cloud
+    - +.pixeldance.com
+    - +.zhiexa.com
+    - +.linka2a.net
     - +.butterfly-static.cn
     - +.butterflyai.cn
     - +.coze-dns-01.com
@@ -77,7 +80,7 @@ payload:
     - +.instreet.com
     - +.doubao-dev.com
     - +.doubao.com
-    - +.liblib.cloud
+    - +.doubaocdn.com
     - +.hi-butterfly.cn
     - +.maoxiangai.com
     - +.myparallelstory.com
@@ -85,7 +88,7 @@ payload:
     - +.obriccloud.com
     - +.obricclouddw.com
     - +.picpic-ai.cn
-    - +.pixeldance.com
+    - +.safeskill.cn
     - +.api-building.fun
     - +.doudou.com
     - +.marscode.cn
@@ -95,9 +98,10 @@ payload:
     - +.mcprev.cn
     - +.tcwqqdy.guru
     - +.trae.cn
-    - +.trae.com.cn
+    - +.skillhub.cn
     - +.yuanqi.tencent.com
     - +.marscode.com.cn
+    - +.trae.com.cn
     - +.yuanbao.tencent.com
     - +.hunyuan.tencent.com
     - +.xinghuo.xfyun.cn
