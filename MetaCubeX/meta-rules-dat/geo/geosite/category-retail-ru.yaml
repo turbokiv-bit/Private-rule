@@ -32,6 +32,8 @@ payload:
     - +.sushiwok.ru
     - +.winelab.ru
     - +.vkusvill.ru
+    - +.acmvid.com
+    - +.mvideo.ru
     - +.oskelly.co
     - +.oskelly.ru
     - +.5ka.ru
@@ -72,8 +74,6 @@ payload:
     - +.magnit.com
     - +.magnit.ru
     - +.mm.ru
-    - +.acmvid.com
-    - +.mvideo.ru
     - ads.x5.ru
     - ads.x5media.ru
     - sentry.x5.ru
