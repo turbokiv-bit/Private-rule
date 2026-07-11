@@ -2,7 +2,7 @@ payload:
     - cueme-api.quark.cn
     - ai.zhaomi.cn
     - +.clawhub-mirror.com
-    - +.mcprev.cn
+    - +.doubaocdn.com
     - +.liblib.tv
     - +.liblib.art
     - +.rwkv.com
@@ -19,7 +19,7 @@ payload:
     - +.sleeplesshorizon.cn
     - +.dumate.cn
     - +.miaoda.cn
-    - +.xiaomimimo.com
+    - +.api-building.fun
     - +.mcpworld.com
     - +.tiangong.cn
     - +.bigmodel.cn
@@ -30,16 +30,16 @@ payload:
     - +.kimi.com
     - +.moonshot.ai
     - +.moonshot.cn
-    - +.xiaoaiassist.com
-    - +.miaibox.com
-    - +.yoma.cn
+    - +.pixeldance.com
+    - +.picpic-ai.cn
+    - +.obricclouddw.com
     - +.hailuoai.com
     - +.minimaxi.com
     - +.xingyeai.com
     - +.codebuddy.cn
-    - +.trae.guru
-    - +.trae.cn
-    - +.tcwqqdy.guru
+    - +.obriccloud.com
+    - +.oceancloudapi.com
+    - +.myparallelstory.com
     - +.baichuan-ai.com
     - +.cueme.cn
     - +.n.cn
@@ -55,9 +55,24 @@ payload:
     - +.duiopen.com
     - +.rwkv.cn
     - +.liblib.cloud
-    - +.obriccloud.com
+    - +.cozeide.cn
     - +.zhiexa.com
     - +.linka2a.net
+    - +.doudou.com
+    - +.marscode.cn
+    - +.mcbaas.work
+    - +.mcdemo.show
+    - +.mchost.guru
+    - +.mcprev.cn
+    - +.tcwqqdy.guru
+    - +.trae.cn
+    - +.trae.guru
+    - +.yoma.cn
+    - +.maoxiangai.com
+    - +.hi-butterfly.cn
+    - +.miaibox.com
+    - +.xiaoaiassist.com
+    - +.xiaomimimo.com
     - +.askdiandian.com
     - +.diandianlife.top
     - +.deepseek.com
@@ -73,7 +88,7 @@ payload:
     - +.cozecdn.com
     - +.cozedeploy.com
     - +.cozefn.cn
-    - +.cozeide.cn
+    - +.safeskill.cn
     - +.cozesdk.com
     - +.cozetest.cn
     - +.cozetest2.cn
@@ -83,28 +98,13 @@ payload:
     - +.instreet.com
     - +.doubao-dev.com
     - +.doubao.com
-    - +.doubaocdn.com
-    - +.hi-butterfly.cn
-    - +.maoxiangai.com
-    - +.myparallelstory.com
-    - +.oceancloudapi.com
-    - +.safeskill.cn
-    - +.obricclouddw.com
-    - +.picpic-ai.cn
-    - +.pixeldance.com
-    - +.api-building.fun
-    - +.doudou.com
-    - +.marscode.cn
-    - +.mcbaas.work
-    - +.mcdemo.show
-    - +.mchost.guru
     - +.skillhub.cn
+    - +.trae.com.cn
+    - +.marscode.com.cn
     - +.yuanqi.tencent.com
     - +.yuanbao.tencent.com
     - +.hunyuan.tencent.com
     - +.xinghuo.xfyun.cn
-    - +.marscode.com.cn
-    - +.trae.com.cn
     - +.yiyan.baidu.com
     - +.tongyi.aliyun.com
     - +.qianwen.aliyun.com
