@@ -114,6 +114,7 @@ DOMAIN-SUFFIX,crashlyticsreports-pa.googleapis.com
 DOMAIN-SUFFIX,firebase-settings.crashlytics.com
 DOMAIN-SUFFIX,update.crashlytics.com
 DOMAIN-SUFFIX,redirector.c.play.google.com
+DOMAIN-SUFFIX,ggpht.cn
 DOMAIN-SUFFIX,pki-goog.l.google.com
 DOMAIN-SUFFIX,c.pki.goog
 DOMAIN-SUFFIX,i.pki.goog
@@ -121,4 +122,3 @@ DOMAIN-SUFFIX,o.pki.goog
 DOMAIN-SUFFIX,crl.pki.goog
 DOMAIN-SUFFIX,crls.pki.goog
 DOMAIN-SUFFIX,ocsp.pki.goog
-DOMAIN-SUFFIX,ggpht.cn
