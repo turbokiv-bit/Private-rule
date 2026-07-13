@@ -2,13 +2,6 @@ payload:
     - DOMAIN,apple.com.akadns.net
     - DOMAIN,configuration-lb.ls-apple.com.akadns.net
     - DOMAIN,push-apple.com.akadns.net
-    - DOMAIN,apple-tv-plus-press.apple.com
-    - DOMAIN,hls-amt.itunes.apple.com
-    - DOMAIN,hls.itunes.apple.com
-    - DOMAIN,np-edge.itunes.apple.com
-    - DOMAIN,play-edge.itunes.apple.com
-    - DOMAIN,tv.applemusic.com
-    - DOMAIN,uts-api.itunes.apple.com
     - DOMAIN,beatselectronicsllc.tt.omtrdc.net
     - DOMAIN,www-cdn.icloud.com.akadns.net
     - DOMAIN,notary-submissions-prod.s3-accelerate.amazonaws.com
@@ -16,9 +9,16 @@ payload:
     - DOMAIN,appleworldwidedeveloper.hb-api.omtrdc.net
     - DOMAIN,appleworldwidedeveloper.sc.omtrdc.net
     - DOMAIN,p-events-delivery.akamaized.net
+    - DOMAIN,apple-tv-plus-press.apple.com
+    - DOMAIN,hls-amt.itunes.apple.com
+    - DOMAIN,hls.itunes.apple.com
+    - DOMAIN,np-edge.itunes.apple.com
+    - DOMAIN,play-edge.itunes.apple.com
+    - DOMAIN,tv.applemusic.com
+    - DOMAIN,uts-api.itunes.apple.com
     - DOMAIN-SUFFIX,apple
-    - DOMAIN-SUFFIX,drebeatstudio.com
-    - DOMAIN-SUFFIX,dremonsterbeatsoutlets.com
+    - DOMAIN-SUFFIX,drebyby.com
+    - DOMAIN-SUFFIX,dreprobeats.com
     - DOMAIN-SUFFIX,apple.be
     - DOMAIN-SUFFIX,apple.bg
     - DOMAIN-SUFFIX,apple.bs
@@ -136,7 +136,7 @@ payload:
     - DOMAIN-SUFFIX,ids-apple.com
     - DOMAIN-SUFFIX,myappleid.com
     - DOMAIN-SUFFIX,12diasderegalosdeitunes.co
-    - DOMAIN-SUFFIX,beatsbydrdreoutlet.com
+    - DOMAIN-SUFFIX,beatsbydrdres.com
     - DOMAIN-SUFFIX,appleenews.com
     - DOMAIN-SUFFIX,applenews.berlin
     - DOMAIN-SUFFIX,applenews.hamburg
@@ -563,7 +563,7 @@ payload:
     - DOMAIN-SUFFIX,ecgapp.net
     - DOMAIN-SUFFIX,edu-research.org
     - DOMAIN-SUFFIX,icloud.fi
-    - DOMAIN-SUFFIX,beatsbydrdremall.com
+    - DOMAIN-SUFFIX,beatsbydrdreoutlet.com
     - DOMAIN-SUFFIX,emagic.de
     - DOMAIN-SUFFIX,eworld.com
     - DOMAIN-SUFFIX,faceid99.com
@@ -679,7 +679,6 @@ payload:
     - DOMAIN-SUFFIX,topbeatsdealer.com
     - DOMAIN-SUFFIX,topbeatsbydrdreoutlet.com
     - DOMAIN-SUFFIX,theuab.net
-    - DOMAIN-SUFFIX,thebeatsheadphonesale.com
     - DOMAIN-SUFFIX,100beatscheap.com
     - DOMAIN-SUFFIX,1monsterbeatsbydreus.com
     - DOMAIN-SUFFIX,2013beatsbydrdreonline.com
@@ -769,17 +768,17 @@ payload:
     - DOMAIN-SUFFIX,beatsbydrdre4sale.com
     - DOMAIN-SUFFIX,beatsbydrdrebiz.com
     - DOMAIN-SUFFIX,beatsbydrdrecustom.com
-    - DOMAIN-SUFFIX,beatsbydre-club.com
+    - DOMAIN-SUFFIX,beatsbydrdredanmark.com
+    - DOMAIN-SUFFIX,beatsbydre-headphones.com
     - DOMAIN-SUFFIX,emac.in
     - DOMAIN-SUFFIX,apple.news
-    - DOMAIN-SUFFIX,beatsbydrdres.com
     - DOMAIN-SUFFIX,beatsbydrdresale.net
     - DOMAIN-SUFFIX,beatsbydrdrestore.com
     - DOMAIN-SUFFIX,beatsbydrdreus.com
     - DOMAIN-SUFFIX,beatsbydre-beatsheadphone.com
     - DOMAIN-SUFFIX,beatsbydre-chen.com
-    - DOMAIN-SUFFIX,beatsbydrdredanmark.com
-    - DOMAIN-SUFFIX,beatsbydre-headphones.com
+    - DOMAIN-SUFFIX,beatsbydre-club.com
+    - DOMAIN-SUFFIX,beatsbydrdremall.com
     - DOMAIN-SUFFIX,beatsbydre-headphonesshop.com
     - DOMAIN-SUFFIX,beatsbydre-mall.com
     - DOMAIN-SUFFIX,beatsbydre-outlet.com
@@ -1145,10 +1144,10 @@ payload:
     - DOMAIN-SUFFIX,drebeatssite.com
     - DOMAIN-SUFFIX,drebeatssolocybermondaysale.com
     - DOMAIN-SUFFIX,drebeatsstudio2013.com
+    - DOMAIN-SUFFIX,drebeatstudio.com
     - DOMAIN-SUFFIX,apple.ae
-    - DOMAIN-SUFFIX,drebyby.com
+    - DOMAIN-SUFFIX,dremonsterbeatsoutlets.com
     - DOMAIN-SUFFIX,apple.at
-    - DOMAIN-SUFFIX,dreprobeats.com
     - DOMAIN-SUFFIX,dreprofy.com
     - DOMAIN-SUFFIX,dtsell.com
     - DOMAIN-SUFFIX,earphonescheapest.com
@@ -1366,9 +1365,9 @@ payload:
     - DOMAIN-SUFFIX,the-monster-beats.com
     - DOMAIN-SUFFIX,thebeatsbydre.com
     - DOMAIN-SUFFIX,thebeatsbydre.net
-    - DOMAIN-SUFFIX,applecomputer.co.nz
-    - DOMAIN-SUFFIX,applecentre.com.au
-    - DOMAIN-SUFFIX,applestore.net.gr
+    - DOMAIN-SUFFIX,thebeatsheadphonesale.com
+    - DOMAIN-SUFFIX,applecomputer.co.in
+    - DOMAIN-SUFFIX,applestore.com.tw
     - DOMAIN-SUFFIX,webobjects.co.uk
     - DOMAIN-SUFFIX,quicktime.com.au
     - DOMAIN-SUFFIX,mr-apple.com.tw
@@ -1385,19 +1384,19 @@ payload:
     - DOMAIN-SUFFIX,applecomputers.co.nz
     - DOMAIN-SUFFIX,applecomputer.com.tw
     - DOMAIN-SUFFIX,applecomputer.com.hk
-    - DOMAIN-SUFFIX,ibook.co.nz
-    - DOMAIN-SUFFIX,applecomputer.co.in
+    - DOMAIN-SUFFIX,applecomputer.co.nz
+    - DOMAIN-SUFFIX,apple-watch.com.ru
     - DOMAIN-SUFFIX,appleclub.com.hk
-    - DOMAIN-SUFFIX,macbookair.com.es
-    - DOMAIN-SUFFIX,applecentar.co.rs
+    - DOMAIN-SUFFIX,applecentre.com.au
+    - DOMAIN-SUFFIX,macbookair.com.au
     - DOMAIN-SUFFIX,appleaustralia.net.au
     - DOMAIN-SUFFIX,appleaustralia.com.au
     - DOMAIN-SUFFIX,1to1conference.com.au
     - DOMAIN-SUFFIX,1to1computing.com.au
     - DOMAIN-SUFFIX,macos.com.au
     - DOMAIN-SUFFIX,macbookpro.com.au
-    - DOMAIN-SUFFIX,apple-watch.com.ru
-    - DOMAIN-SUFFIX,macbookair.com.au
+    - DOMAIN-SUFFIX,macbookair.com.es
+    - DOMAIN-SUFFIX,applestore.net.gr
     - DOMAIN-SUFFIX,macbookair.co.uk
     - DOMAIN-SUFFIX,macbookair.co.kr
     - DOMAIN-SUFFIX,iphoneclaro.com.br
@@ -1420,8 +1419,9 @@ payload:
     - DOMAIN-SUFFIX,ipadair.com.es
     - DOMAIN-SUFFIX,ipadair.com.br
     - DOMAIN-SUFFIX,ipad.co.kr
+    - DOMAIN-SUFFIX,imac.co.nz
     - DOMAIN-SUFFIX,apple.com.sg
-    - DOMAIN-SUFFIX,applestore.com.tw
+    - DOMAIN-SUFFIX,applecentar.co.rs
     - DOMAIN-SUFFIX,applestore.com.sn
     - DOMAIN-SUFFIX,applestore.com.ru
     - DOMAIN-SUFFIX,applestore.com.ro
@@ -1451,7 +1451,7 @@ payload:
     - DOMAIN-SUFFIX,apple.com.tw
     - DOMAIN-SUFFIX,apple.com.tr
     - DOMAIN-SUFFIX,apple.com.sv
-    - DOMAIN-SUFFIX,imac.co.nz
+    - DOMAIN-SUFFIX,ibook.co.nz
     - DOMAIN-SUFFIX,apple.com.py
     - DOMAIN-SUFFIX,apple.com.pt
     - DOMAIN-SUFFIX,apple.com.pr
@@ -1703,6 +1703,14 @@ payload:
     - DOMAIN-SUFFIX,iadsdk.apple.com
     - DOMAIN-SUFFIX,iad.apple.com
     - DOMAIN-SUFFIX,qwapi.com
+    - DOMAIN,certs-lb.apple.com.akadns.net
+    - DOMAIN,certs.apple.com
+    - DOMAIN,crl-lb.apple.com.akadns.net
+    - DOMAIN,crl.apple.com
+    - DOMAIN,ocsp.apple.com
+    - DOMAIN,ocsp2.apple.com
+    - DOMAIN,valid.apple.com
+    - DOMAIN,valid.origin-apple.com.akadns.net
     - DOMAIN-SUFFIX,beats1.cn
     - DOMAIN-SUFFIX,beats1.com.cn
     - DOMAIN-SUFFIX,beats2.com.cn
@@ -1729,14 +1737,6 @@ payload:
     - DOMAIN,musicstatus.music.apple.com
     - DOMAIN,play.music.apple.com
     - DOMAIN,speedysub.music.apple.com
-    - DOMAIN,certs-lb.apple.com.akadns.net
-    - DOMAIN,certs.apple.com
-    - DOMAIN,crl-lb.apple.com.akadns.net
-    - DOMAIN,crl.apple.com
-    - DOMAIN,ocsp.apple.com
-    - DOMAIN,ocsp2.apple.com
-    - DOMAIN,valid.apple.com
-    - DOMAIN,valid.origin-apple.com.akadns.net
     - DOMAIN,amp-api.podcasts.apple.com
     - DOMAIN,podcasts.apple.com
     - DOMAIN-SUFFIX,apple-itunes.cn
