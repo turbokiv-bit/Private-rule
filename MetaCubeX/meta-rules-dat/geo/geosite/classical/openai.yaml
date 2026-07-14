@@ -5,12 +5,13 @@ payload:
     - DOMAIN,openaicom.imgix.net
     - DOMAIN,openaicomproductionae4b.blob.core.windows.net
     - DOMAIN,production-openaicom-storage.azureedge.net
-    - DOMAIN-SUFFIX,chat.com
+    - DOMAIN-SUFFIX,oaiusercontent.com
     - DOMAIN-SUFFIX,chatgpt.com
+    - DOMAIN-SUFFIX,chatgpt.site
     - DOMAIN-SUFFIX,crixet.com
     - DOMAIN-SUFFIX,oaistatic.com
     - DOMAIN-SUFFIX,oaistatsig.com
-    - DOMAIN-SUFFIX,oaiusercontent.com
+    - DOMAIN-SUFFIX,chat.com
     - DOMAIN-SUFFIX,openai.com
     - DOMAIN-SUFFIX,sora.com
     - DOMAIN-SUFFIX,chatgpt.livekit.cloud

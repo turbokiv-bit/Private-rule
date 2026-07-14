@@ -1,7 +1,5 @@
 payload:
-    - +.xboxlive.cn
     - +.bluearchive-cn.com
-    - uplaypc-s-ubisoft.cdn.ubi.com
     - +.legendofzelda.cn
     - +.legendofzelda.com.cn
     - +.miitomo.com.cn
@@ -33,7 +31,9 @@ payload:
     - xz.pphimalayanrt.com
     - +.steamchina.com
     - +.gstore.val.manlaxy.com
+    - uplaypc-s-ubisoft.cdn.ubi.com
+    - gog.qtlglb.com
     - +.yostar.cn
     - +.leagueoflegends.cn
     - +.lpl.com.cn
-    - gog.qtlglb.com
+    - +.xboxlive.cn

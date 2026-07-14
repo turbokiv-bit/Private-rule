@@ -3,10 +3,10 @@ payload:
     - +.engadget.com
     - +.androidauthority.com
     - +.digitaltrends.com
-    - +.typeisbeautiful.com
+    - +.ycombinator.com
     - +.macrumors.com
     - +.slashdot.org
-    - +.startupschool.org
+    - +.9to5google.com
     - +.techradar.com
     - +.techspot.com
     - +.theverge.com
@@ -14,8 +14,6 @@ payload:
     - +.appleinsider.com
     - +.androidpolice.com
     - +.technews.tw
-    - +.ycombinator.com
-    - +.9to5google.com
     - +.9to5mac.com
     - +.9to5terminal.com
     - +.9to5toys.com
@@ -23,5 +21,7 @@ payload:
     - +.electrek.co
     - +.spaceexplored.com
     - +.thetype.com
+    - +.typeisbeautiful.com
+    - +.startupschool.org
     - +.zdnet.redvideo.io
     - +.thetype.cloud

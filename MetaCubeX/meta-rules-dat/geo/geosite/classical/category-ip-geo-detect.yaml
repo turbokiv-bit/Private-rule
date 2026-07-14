@@ -6,8 +6,8 @@ payload:
     - DOMAIN,ipv4-check-perf.radar.cloudflare.com
     - DOMAIN,ipv6-check-perf.radar.cloudflare.com
     - DOMAIN,whatismyip.akamai.com
-    - DOMAIN-SUFFIX,ipleak.net
-    - DOMAIN-SUFFIX,ip6only.me
+    - DOMAIN-SUFFIX,ipinfo.io
+    - DOMAIN-SUFFIX,ipapi.co
     - DOMAIN-SUFFIX,2ip.ua
     - DOMAIN-SUFFIX,51degrees.com
     - DOMAIN-SUFFIX,abstractapi.com
@@ -48,7 +48,7 @@ payload:
     - DOMAIN-SUFFIX,ifconfig.me
     - DOMAIN-SUFFIX,ip-adress.com
     - DOMAIN-SUFFIX,ip-api.com
-    - DOMAIN-SUFFIX,2ip.io
+    - DOMAIN-SUFFIX,ip-api.io
     - DOMAIN-SUFFIX,ip-api.ru
     - DOMAIN-SUFFIX,ip-check.info
     - DOMAIN-SUFFIX,ip-score.com
@@ -60,18 +60,19 @@ payload:
     - DOMAIN-SUFFIX,ip2ruscity.com
     - DOMAIN-SUFFIX,ip4.me
     - DOMAIN-SUFFIX,ip6.me
-    - DOMAIN-SUFFIX,ipinfo.io
+    - DOMAIN-SUFFIX,ip6only.me
     - DOMAIN-SUFFIX,ip8.com
     - DOMAIN-SUFFIX,ipaddr.site
     - DOMAIN-SUFFIX,ipaddress.com
     - DOMAIN-SUFFIX,ipaddress.my
     - DOMAIN-SUFFIX,ipaddress.sh
-    - DOMAIN-SUFFIX,ipapi.co
+    - DOMAIN-SUFFIX,ipleak.net
     - DOMAIN-SUFFIX,ipapi.com
-    - DOMAIN-SUFFIX,ipapi.is
+    - DOMAIN-SUFFIX,2ip.io
     - DOMAIN-SUFFIX,ipbase.com
     - DOMAIN-SUFFIX,ipbot.com
     - DOMAIN-SUFFIX,ipcalf.com
+    - DOMAIN-SUFFIX,ipcheck.ing
     - DOMAIN-SUFFIX,ipchicken.com
     - DOMAIN-SUFFIX,ipdata.co
     - DOMAIN-SUFFIX,ipecho.net
@@ -79,9 +80,9 @@ payload:
     - DOMAIN-SUFFIX,ipfinder.io
     - DOMAIN-SUFFIX,ipgeolocation.io
     - DOMAIN-SUFFIX,ipify.org
+    - DOMAIN-SUFFIX,ipapi.is
     - DOMAIN-SUFFIX,2ip.ru
-    - DOMAIN-SUFFIX,ip-api.io
-    - DOMAIN-SUFFIX,ipligence.com
+    - DOMAIN-SUFFIX,sypexgeo.net
     - DOMAIN-SUFFIX,iplocate.io
     - DOMAIN-SUFFIX,iplocation.com
     - DOMAIN-SUFFIX,iplocation.io
@@ -120,7 +121,7 @@ payload:
     - DOMAIN-SUFFIX,showmyipaddress.com
     - DOMAIN-SUFFIX,spur.us
     - DOMAIN-SUFFIX,sxgeo.city
-    - DOMAIN-SUFFIX,sypexgeo.net
+    - DOMAIN-SUFFIX,ipligence.com
     - DOMAIN-SUFFIX,tnx.nl
     - DOMAIN-SUFFIX,tracemyip.org
     - DOMAIN-SUFFIX,trustmyip.com

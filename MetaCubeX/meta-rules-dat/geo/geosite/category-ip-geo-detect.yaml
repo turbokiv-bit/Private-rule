@@ -6,8 +6,8 @@ payload:
     - ipv4-check-perf.radar.cloudflare.com
     - ipv6-check-perf.radar.cloudflare.com
     - whatismyip.akamai.com
-    - +.ipleak.net
-    - +.ip6only.me
+    - +.ipinfo.io
+    - +.ipapi.co
     - +.2ip.ua
     - +.51degrees.com
     - +.abstractapi.com
@@ -48,7 +48,7 @@ payload:
     - +.ifconfig.me
     - +.ip-adress.com
     - +.ip-api.com
-    - +.2ip.io
+    - +.ip-api.io
     - +.ip-api.ru
     - +.ip-check.info
     - +.ip-score.com
@@ -60,18 +60,19 @@ payload:
     - +.ip2ruscity.com
     - +.ip4.me
     - +.ip6.me
-    - +.ipinfo.io
+    - +.ip6only.me
     - +.ip8.com
     - +.ipaddr.site
     - +.ipaddress.com
     - +.ipaddress.my
     - +.ipaddress.sh
-    - +.ipapi.co
+    - +.ipleak.net
     - +.ipapi.com
-    - +.ipapi.is
+    - +.2ip.io
     - +.ipbase.com
     - +.ipbot.com
     - +.ipcalf.com
+    - +.ipcheck.ing
     - +.ipchicken.com
     - +.ipdata.co
     - +.ipecho.net
@@ -79,9 +80,9 @@ payload:
     - +.ipfinder.io
     - +.ipgeolocation.io
     - +.ipify.org
+    - +.ipapi.is
     - +.2ip.ru
-    - +.ip-api.io
-    - +.ipligence.com
+    - +.sypexgeo.net
     - +.iplocate.io
     - +.iplocation.com
     - +.iplocation.io
@@ -120,7 +121,7 @@ payload:
     - +.showmyipaddress.com
     - +.spur.us
     - +.sxgeo.city
-    - +.sypexgeo.net
+    - +.ipligence.com
     - +.tnx.nl
     - +.tracemyip.org
     - +.trustmyip.com

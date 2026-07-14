@@ -2,8 +2,8 @@ payload:
     - sberpro.vedomosti.ru
     - edu.tinkoff.ru
     - education.tbank.ru
-    - +.jivochat.es
-    - +.jivochat.com
+    - +.jivosite.com
+    - +.okkoapi.tv
     - +.alfabank.st
     - +.alfadirect.ru
     - +.myapelsin.ru
@@ -84,17 +84,14 @@ payload:
     - +.rncoluminis.ru
     - +.sbibankllc.ru
     - +.seb.ru
-    - +.tinkoff-edu.ru
     - +.selkombank.ru
     - +.sinara.ru
     - +.slavbank.ru
     - +.smbcr-bank.ru
     - +.solid.ru
-    - +.prodcontest.com
-    - +.cu.ru
-    - +.centraluniversity.ru
     - +.tagbank.ru
     - +.tatsotsbank.ru
+    - +.tinkoff-edu.ru
     - +.tkbbank.ru
     - +.ubs.com
     - +.uralsib.ru
@@ -116,7 +113,7 @@ payload:
     - +.sbercloud.ru
     - +.sbercloud.tech
     - +.sberdevices.ru
-    - +.sberdisk.ru
+    - +.jivochat.ng
     - +.sberfactoring.ru
     - +.sberindex.ru
     - +.okko.tv
@@ -125,7 +122,7 @@ payload:
     - +.sberleasing.ru
     - +.sberlogistics.ru
     - +.sbermegamarket.ru
-    - +.alfa.me
+    - +.sbermobile.ru
     - +.sberpb.ru
     - +.sbertroika.ru
     - +.okko.sport
@@ -137,24 +134,24 @@ payload:
     - +.21-school.ru
     - +.kuper.ru
     - +.restnproducts.ru
-    - +.jivochat.ru
+    - +.samokat.ru
     - +.giga.chat
     - +.gitverse.ru
     - +.jivo.chat
     - +.jivo.ru
     - +.playfamily.ru
-    - +.okkoapi.tv
+    - +.jivochat.ru
     - +.jivosite.ru
     - +.sber-bank.by
     - +.sberbankaktivno.ru
     - +.2gis.uz
     - +.2gis.tj
     - +.jivochat.de
-    - +.sbermobile.ru
+    - +.jivochat.es
+    - +.sberdisk.ru
     - +.alfabank.ru
-    - +.samokat.ru
-    - +.jivosite.com
-    - +.jivochat.ng
+    - +.t-bank-app.su
+    - +.jivochat.com
     - +.payecom.ru
     - +.platiecom.ru
     - +.otello.ru
@@ -182,13 +179,15 @@ payload:
     - +.2gis.ru
     - +.2gis.kz
     - +.2gis.kg
+    - +.prodcontest.com
+    - +.cu.ru
+    - +.centraluniversity.ru
     - +.xn--h1ao.site
     - +.xn--d1abkf4ap.fun
     - +.xn--b1aechhj6bof8g5a.site
     - +.xn--90aifd0az.shop
     - +.unidraw.io
     - +.travel-tec.ru
-    - +.tpension.ru
     - +.xn----7sbhmncai5a0arm7c1e.xn--p1ai
     - +.xn----8sbkfzespdwig.xn--p1ai
     - +.xn----8sbwjbxyd.xn--p1ai
@@ -249,7 +248,7 @@ payload:
     - +.sgcheck.ru
     - +.t-access.ru
     - +.t-bank-app.ru
-    - +.t-bank-app.su
+    - +.alfa.me
     - +.t-bank.by
     - +.t-calls.ru
     - +.t-capital-funds.ru
@@ -288,6 +287,7 @@ payload:
     - +.tinsurance.ru
     - +.tinsurancefuture.ru
     - +.tmiaf.ru
+    - +.tpension.ru
     - +.jivochat.com.co
     - +.jivochat.com.br
     - +.jivochat.co.in
@@ -298,7 +298,6 @@ payload:
     - +.ssb.msk.ru
     - +.ru.ccb.com
     - +.vtb-grants.fut.ru
-    - +.alfabank.oavdo.amc
     - +.ads.sber.ru
     - +.clickstream.sberbank.ru
     - +.neon.click
