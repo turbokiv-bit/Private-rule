@@ -1,5 +1,5 @@
 payload:
-    - DOMAIN-SUFFIX,vpngate.net
+    - DOMAIN-SUFFIX,vpngate.jp
     - DOMAIN-SUFFIX,geti2p.net
     - DOMAIN-SUFFIX,browserleaks.com
     - DOMAIN-SUFFIX,bypasscensorship.org
@@ -10,7 +10,7 @@ payload:
     - DOMAIN-SUFFIX,ffprofile.com
     - DOMAIN-SUFFIX,freenetproject.org
     - DOMAIN-SUFFIX,fteproxy.org
-    - DOMAIN-SUFFIX,epicbrowser.com
+    - DOMAIN-SUFFIX,vpngate.net
     - DOMAIN-SUFFIX,getoutline.org
     - DOMAIN-SUFFIX,gfw.report
     - DOMAIN-SUFFIX,guardianproject.info
@@ -20,7 +20,7 @@ payload:
     - DOMAIN-SUFFIX,jitsi.org
     - DOMAIN-SUFFIX,lokinet.org
     - DOMAIN-SUFFIX,ntc.party
-    - DOMAIN-SUFFIX,paskoocheh.com
+    - DOMAIN-SUFFIX,applecensorship.com
     - DOMAIN-SUFFIX,ooni.org
     - DOMAIN-SUFFIX,openvpn.net
     - DOMAIN-SUFFIX,privacytools.io
@@ -44,15 +44,12 @@ payload:
     - DOMAIN-SUFFIX,wireguard.com
     - DOMAIN-SUFFIX,zeronet.io
     - DOMAIN-SUFFIX,metacubex.one
-    - DOMAIN-SUFFIX,torproject.org
+    - DOMAIN-SUFFIX,getlantern.org
+    - DOMAIN-SUFFIX,lantern.io
     - DOMAIN-SUFFIX,opengw.net
-    - DOMAIN-SUFFIX,vpngate.jp
     - DOMAIN-SUFFIX,vuvuzela.io
     - DOMAIN-SUFFIX,akasha.world
     - DOMAIN-SUFFIX,onionshare.org
-    - DOMAIN-SUFFIX,citizenlab.ca
-    - DOMAIN-SUFFIX,citizenlab.org
-    - DOMAIN-SUFFIX,applecensorship.com
     - DOMAIN-SUFFIX,freebrowser.org
     - DOMAIN-SUFFIX,freewechat.com
     - DOMAIN-SUFFIX,freeweibo.com
@@ -64,13 +61,9 @@ payload:
     - DOMAIN-SUFFIX,wikiunblocked.org
     - DOMAIN-SUFFIX,haveibeenpwned.com
     - DOMAIN-SUFFIX,pwnedpasswords.com
-    - DOMAIN-SUFFIX,getlantern.org
-    - DOMAIN-SUFFIX,lantern.io
+    - DOMAIN-SUFFIX,paskoocheh.com
     - DOMAIN-SUFFIX,softether.org
     - DOMAIN-SUFFIX,softether-download.com
-    - DOMAIN-SUFFIX,v2ray.com
-    - DOMAIN-SUFFIX,v2ray.cool
-    - DOMAIN-SUFFIX,v2fly.org
     - DOMAIN-SUFFIX,ipns.co
     - DOMAIN-SUFFIX,ipfs.tech
     - DOMAIN-SUFFIX,cloudflare-ipfs.com
@@ -85,14 +78,21 @@ payload:
     - DOMAIN-SUFFIX,4everland.io
     - DOMAIN-SUFFIX,dweb.link
     - DOMAIN-SUFFIX,censorship.no
-    - DOMAIN-SUFFIX,twister.net.co
-    - DOMAIN-SUFFIX,xtls.github.io
-    - DOMAIN-SUFFIX,trojan-gfw.github.io
-    - DOMAIN-SUFFIX,ipfs.anonymize.com
-    - DOMAIN-SUFFIX,ipfs.runfission.com
-    - DOMAIN-SUFFIX,gateway.pinata.cloud
-    - DOMAIN-SUFFIX,ipfs.eternum.io
+    - DOMAIN-SUFFIX,v2fly.org
+    - DOMAIN-SUFFIX,v2ray.cool
+    - DOMAIN-SUFFIX,v2ray.com
+    - DOMAIN-SUFFIX,torproject.org
+    - DOMAIN-SUFFIX,epicbrowser.com
+    - DOMAIN-SUFFIX,citizenlab.org
+    - DOMAIN-SUFFIX,citizenlab.ca
     - DOMAIN-SUFFIX,ipfs.best-practice.se
     - DOMAIN-SUFFIX,ipfs.lain.la
     - DOMAIN-SUFFIX,ipfs.fleek.co
+    - DOMAIN-SUFFIX,ipfs.eternum.io
+    - DOMAIN-SUFFIX,gateway.pinata.cloud
+    - DOMAIN-SUFFIX,ipfs.runfission.com
+    - DOMAIN-SUFFIX,ipfs.anonymize.com
+    - DOMAIN-SUFFIX,trojan-gfw.github.io
+    - DOMAIN-SUFFIX,xtls.github.io
+    - DOMAIN-SUFFIX,twister.net.co
     - DOMAIN-SUFFIX,ipfs.eth.aragon.network

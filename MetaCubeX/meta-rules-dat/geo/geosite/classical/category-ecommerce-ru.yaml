@@ -1,6 +1,8 @@
 payload:
-    - DOMAIN-SUFFIX,wbmotivator.ru
-    - DOMAIN-SUFFIX,rwbautomation.tech
+    - DOMAIN-SUFFIX,avito.ru
+    - DOMAIN-SUFFIX,avito.st
+    - DOMAIN-SUFFIX,flowwow-images.com
+    - DOMAIN-SUFFIX,flowwow.com
     - DOMAIN-SUFFIX,funpay.com
     - DOMAIN-SUFFIX,funpay.ru
     - DOMAIN-SUFFIX,sfunpay.com
@@ -41,7 +43,7 @@ payload:
     - DOMAIN-SUFFIX,ozonru.me
     - DOMAIN-SUFFIX,ozonsport.ru
     - DOMAIN-SUFFIX,ozon.tm
-    - DOMAIN-SUFFIX,flowwow-images.com
+    - DOMAIN-SUFFIX,ozonusercontent.com
     - DOMAIN-SUFFIX,digital-wb.ru
     - DOMAIN-SUFFIX,digitalwb.ru
     - DOMAIN-SUFFIX,etradebook.ru
@@ -53,7 +55,7 @@ payload:
     - DOMAIN-SUFFIX,russoutdoor.ru
     - DOMAIN-SUFFIX,rwb.ru
     - DOMAIN-SUFFIX,rwbautomation.ru
-    - DOMAIN-SUFFIX,wbmail.ru
+    - DOMAIN-SUFFIX,rwbautomation.tech
     - DOMAIN-SUFFIX,rwbgeo.ru
     - DOMAIN-SUFFIX,vamzakaz.ru
     - DOMAIN-SUFFIX,vsemrabota.ru
@@ -72,8 +74,8 @@ payload:
     - DOMAIN-SUFFIX,wbcontent.net
     - DOMAIN-SUFFIX,wbdubna.ru
     - DOMAIN-SUFFIX,wbkids.ru
-    - DOMAIN-SUFFIX,flowwow.com
-    - DOMAIN-SUFFIX,ozonusercontent.com
+    - DOMAIN-SUFFIX,wbmail.ru
+    - DOMAIN-SUFFIX,wbmotivator.ru
     - DOMAIN-SUFFIX,wbpay.ru
     - DOMAIN-SUFFIX,wbr.by
     - DOMAIN-SUFFIX,wbrep.ru
@@ -140,13 +142,12 @@ payload:
     - DOMAIN-SUFFIX,wolfberries.ru
     - DOMAIN-SUFFIX,xn--80acbjgmges7ca.xn--p1ai
     - DOMAIN-SUFFIX,xn--80acbjgsdq2cl.xn--p1ai
-    - DOMAIN-SUFFIX,avito.ru
-    - DOMAIN-SUFFIX,avito.st
+    - DOMAIN-SUFFIX,ozon.com.by
     - DOMAIN-SUFFIX,ozonru.co.il
     - DOMAIN-SUFFIX,ozon.com.kz
     - DOMAIN-SUFFIX,ewisdom.us.kg
-    - DOMAIN-SUFFIX,ozon.com.by
     - DOMAIN-SUFFIX,wildberries.co.il
+    - DOMAIN,stats.avito.ru
     - DOMAIN,ad.ozone.ru
     - DOMAIN,adv.ozon.ru
     - DOMAIN,agency-adv.ozon.ru
@@ -180,4 +181,3 @@ payload:
     - DOMAIN,marketplace-sentry.wb.ru
     - DOMAIN,sentry.wb.ru
     - DOMAIN,web-analytics.wildberries.ru
-    - DOMAIN,stats.avito.ru

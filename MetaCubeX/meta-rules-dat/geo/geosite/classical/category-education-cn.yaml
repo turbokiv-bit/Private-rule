@@ -3,7 +3,7 @@ payload:
     - DOMAIN,opencourse.pku.edu.cn
     - DOMAIN,study.163.com
     - DOMAIN-SUFFIX,llsserver.com
-    - DOMAIN-SUFFIX,eoffcn.com
+    - DOMAIN-SUFFIX,duifene.com
     - DOMAIN-SUFFIX,yushiyan.net
     - DOMAIN-SUFFIX,xuetangx.com
     - DOMAIN-SUFFIX,smartedu.cn
@@ -24,15 +24,15 @@ payload:
     - DOMAIN-SUFFIX,applysquare.com
     - DOMAIN-SUFFIX,gfbzb.cn
     - DOMAIN-SUFFIX,gfbzb.com
-    - DOMAIN-SUFFIX,17zuoye.net
-    - DOMAIN-SUFFIX,17zuoye.com
-    - DOMAIN-SUFFIX,gfbzb.net
-    - DOMAIN-SUFFIX,ncss.cn
-    - DOMAIN-SUFFIX,17zuoye.cn
     - DOMAIN-SUFFIX,pmphmooc.com
     - DOMAIN-SUFFIX,openlearning.com
-    - DOMAIN-SUFFIX,qgzb.net
+    - DOMAIN-SUFFIX,gfbzb.net
+    - DOMAIN-SUFFIX,ncss.cn
     - DOMAIN-SUFFIX,mooc.cn
+    - DOMAIN-SUFFIX,icourses.cn
+    - DOMAIN-SUFFIX,icourse163.org
+    - DOMAIN-SUFFIX,qgzb.net
+    - DOMAIN-SUFFIX,cnmooc.org
     - DOMAIN-SUFFIX,zbbm.net
     - DOMAIN-SUFFIX,neea.cn
     - DOMAIN-SUFFIX,21cnjy.com
@@ -47,7 +47,7 @@ payload:
     - DOMAIN-SUFFIX,bczeducation.cn
     - DOMAIN-SUFFIX,banxiaoer.com
     - DOMAIN-SUFFIX,banxiaoer.net
-    - DOMAIN-SUFFIX,edu.cn
+    - DOMAIN-SUFFIX,beie.org
     - DOMAIN-SUFFIX,biyehome.net
     - DOMAIN-SUFFIX,burningvocabulary.cn
     - DOMAIN-SUFFIX,burningvocabulary.com
@@ -55,23 +55,25 @@ payload:
     - DOMAIN-SUFFIX,cugbonline.cn
     - DOMAIN-SUFFIX,dcshfu.com
     - DOMAIN-SUFFIX,dearedu.com
-    - DOMAIN-SUFFIX,dgjy.net
+    - DOMAIN-SUFFIX,maimemo.com
     - DOMAIN-SUFFIX,dict.cn
-    - DOMAIN-SUFFIX,duifene.com
-    - DOMAIN-SUFFIX,eduei.com
     - DOMAIN-SUFFIX,magedu.com
+    - DOMAIN-SUFFIX,eduei.com
+    - DOMAIN-SUFFIX,eoffcn.com
     - DOMAIN-SUFFIX,jinrongren.net
-    - DOMAIN-SUFFIX,offcn.com
+    - DOMAIN-SUFFIX,edu.cn
     - DOMAIN-SUFFIX,zggqzp.com
     - DOMAIN-SUFFIX,zgjsks.com
     - DOMAIN-SUFFIX,zgsydw.com
+    - DOMAIN-SUFFIX,gaojidata.com
     - DOMAIN-SUFFIX,gk100.com
     - DOMAIN-SUFFIX,guojibk.com
+    - DOMAIN-SUFFIX,gzasc.com
     - DOMAIN-SUFFIX,huatu.com
     - DOMAIN-SUFFIX,sydw8.com
     - DOMAIN-SUFFIX,ictbda.cn
     - DOMAIN-SUFFIX,ictbda.com
-    - DOMAIN-SUFFIX,icourses.cn
+    - DOMAIN-SUFFIX,chinesemooc.org
     - DOMAIN-SUFFIX,xir.cn
     - DOMAIN-SUFFIX,j-test.com
     - DOMAIN-SUFFIX,nattest-china.com
@@ -84,9 +86,9 @@ payload:
     - DOMAIN-SUFFIX,liulishuo.com
     - DOMAIN-SUFFIX,llsapp.com
     - DOMAIN-SUFFIX,llscdn.com
-    - DOMAIN-SUFFIX,beie.org
+    - DOMAIN-SUFFIX,offcn.com
     - DOMAIN-SUFFIX,yudou.cn
-    - DOMAIN-SUFFIX,zuowen.com
+    - DOMAIN-SUFFIX,dgjy.net
     - DOMAIN-SUFFIX,maimemostatus.com
     - DOMAIN-SUFFIX,markji.com
     - DOMAIN-SUFFIX,neoscholar.com
@@ -115,6 +117,9 @@ payload:
     - DOMAIN-SUFFIX,zuowenjun.com
     - DOMAIN-SUFFIX,zuowenku.net
     - DOMAIN-SUFFIX,zuowenwang.net
+    - DOMAIN-SUFFIX,17zuoye.cn
+    - DOMAIN-SUFFIX,17zuoye.com
+    - DOMAIN-SUFFIX,17zuoye.net
     - DOMAIN-SUFFIX,cctalk.com
     - DOMAIN-SUFFIX,hjapi.com
     - DOMAIN-SUFFIX,hjfile.cn
@@ -133,7 +138,7 @@ payload:
     - DOMAIN-SUFFIX,xueersi.com
     - DOMAIN-SUFFIX,youjiao.com
     - DOMAIN-SUFFIX,zhongkao.com
-    - DOMAIN-SUFFIX,maimemo.com
+    - DOMAIN-SUFFIX,zuowen.com
     - DOMAIN-SUFFIX,banmaaike.com
     - DOMAIN-SUFFIX,xiaoyuankousuan.com
     - DOMAIN-SUFFIX,ybccode.com
@@ -148,19 +153,16 @@ payload:
     - DOMAIN-SUFFIX,fenbilantian.com
     - DOMAIN-SUFFIX,rainclassroom.com
     - DOMAIN-SUFFIX,yuketang.cn
-    - DOMAIN-SUFFIX,chinesemooc.org
-    - DOMAIN-SUFFIX,cnmooc.org
-    - DOMAIN-SUFFIX,icourse163.org
     - DOMAIN-SUFFIX,cbern.com.cn
     - DOMAIN-SUFFIX,qgzb.gov.cn
     - DOMAIN-SUFFIX,chinayz.com.cn
     - DOMAIN-SUFFIX,chsi.com.cn
-    - DOMAIN-SUFFIX,icve.com.cn
     - DOMAIN-SUFFIX,ncss.org.cn
     - DOMAIN-SUFFIX,gfbzb.gov.cn
+    - DOMAIN-SUFFIX,gfbzb.com.cn
     - DOMAIN-SUFFIX,zbbm.gov.cn
     - DOMAIN-SUFFIX,gatzs.com.cn
-    - DOMAIN-SUFFIX,gfbzb.com.cn
+    - DOMAIN-SUFFIX,icve.com.cn
     - DOMAIN-SUFFIX,qgzb.com.cn
     - DOMAIN-SUFFIX,chesicc.org.cn
     - DOMAIN-SUFFIX,chesicc.net.cn

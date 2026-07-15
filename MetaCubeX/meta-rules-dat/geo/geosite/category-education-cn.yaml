@@ -3,7 +3,7 @@ payload:
     - opencourse.pku.edu.cn
     - study.163.com
     - +.llsserver.com
-    - +.eoffcn.com
+    - +.duifene.com
     - +.yushiyan.net
     - +.xuetangx.com
     - +.smartedu.cn
@@ -24,15 +24,15 @@ payload:
     - +.applysquare.com
     - +.gfbzb.cn
     - +.gfbzb.com
-    - +.17zuoye.net
-    - +.17zuoye.com
-    - +.gfbzb.net
-    - +.ncss.cn
-    - +.17zuoye.cn
     - +.pmphmooc.com
     - +.openlearning.com
-    - +.qgzb.net
+    - +.gfbzb.net
+    - +.ncss.cn
     - +.mooc.cn
+    - +.icourses.cn
+    - +.icourse163.org
+    - +.qgzb.net
+    - +.cnmooc.org
     - +.zbbm.net
     - +.neea.cn
     - +.21cnjy.com
@@ -47,7 +47,7 @@ payload:
     - +.bczeducation.cn
     - +.banxiaoer.com
     - +.banxiaoer.net
-    - +.edu.cn
+    - +.beie.org
     - +.biyehome.net
     - +.burningvocabulary.cn
     - +.burningvocabulary.com
@@ -55,23 +55,25 @@ payload:
     - +.cugbonline.cn
     - +.dcshfu.com
     - +.dearedu.com
-    - +.dgjy.net
+    - +.maimemo.com
     - +.dict.cn
-    - +.duifene.com
-    - +.eduei.com
     - +.magedu.com
+    - +.eduei.com
+    - +.eoffcn.com
     - +.jinrongren.net
-    - +.offcn.com
+    - +.edu.cn
     - +.zggqzp.com
     - +.zgjsks.com
     - +.zgsydw.com
+    - +.gaojidata.com
     - +.gk100.com
     - +.guojibk.com
+    - +.gzasc.com
     - +.huatu.com
     - +.sydw8.com
     - +.ictbda.cn
     - +.ictbda.com
-    - +.icourses.cn
+    - +.chinesemooc.org
     - +.xir.cn
     - +.j-test.com
     - +.nattest-china.com
@@ -84,9 +86,9 @@ payload:
     - +.liulishuo.com
     - +.llsapp.com
     - +.llscdn.com
-    - +.beie.org
+    - +.offcn.com
     - +.yudou.cn
-    - +.zuowen.com
+    - +.dgjy.net
     - +.maimemostatus.com
     - +.markji.com
     - +.neoscholar.com
@@ -115,6 +117,9 @@ payload:
     - +.zuowenjun.com
     - +.zuowenku.net
     - +.zuowenwang.net
+    - +.17zuoye.cn
+    - +.17zuoye.com
+    - +.17zuoye.net
     - +.cctalk.com
     - +.hjapi.com
     - +.hjfile.cn
@@ -133,7 +138,7 @@ payload:
     - +.xueersi.com
     - +.youjiao.com
     - +.zhongkao.com
-    - +.maimemo.com
+    - +.zuowen.com
     - +.banmaaike.com
     - +.xiaoyuankousuan.com
     - +.ybccode.com
@@ -148,19 +153,16 @@ payload:
     - +.fenbilantian.com
     - +.rainclassroom.com
     - +.yuketang.cn
-    - +.chinesemooc.org
-    - +.cnmooc.org
-    - +.icourse163.org
     - +.cbern.com.cn
     - +.qgzb.gov.cn
     - +.chinayz.com.cn
     - +.chsi.com.cn
-    - +.icve.com.cn
     - +.ncss.org.cn
     - +.gfbzb.gov.cn
+    - +.gfbzb.com.cn
     - +.zbbm.gov.cn
     - +.gatzs.com.cn
-    - +.gfbzb.com.cn
+    - +.icve.com.cn
     - +.qgzb.com.cn
     - +.chesicc.org.cn
     - +.chesicc.net.cn

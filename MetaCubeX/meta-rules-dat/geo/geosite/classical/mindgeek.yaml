@@ -9,8 +9,6 @@ payload:
     - DOMAIN-SUFFIX,twistys.com
     - DOMAIN-SUFFIX,webcams.tv
     - DOMAIN-SUFFIX,whynotbi.com
-    - DOMAIN-SUFFIX,digitalplayground.com
-    - DOMAIN-SUFFIX,digitalplaygroundnetwork.com
     - DOMAIN-SUFFIX,mydirtyhobby.com
     - DOMAIN-SUFFIX,mdhcdn.com
     - DOMAIN-SUFFIX,gaytube.com
@@ -24,8 +22,6 @@ payload:
     - DOMAIN-SUFFIX,pornhubpremium.com
     - DOMAIN-SUFFIX,realitykings.com
     - DOMAIN-SUFFIX,rk.com
-    - DOMAIN-SUFFIX,tube8.com
-    - DOMAIN-SUFFIX,tube8.fr
     - DOMAIN-SUFFIX,extremetube.com
     - DOMAIN-SUFFIX,keezmovies.com
     - DOMAIN-SUFFIX,youporn.com
@@ -39,6 +35,10 @@ payload:
     - DOMAIN-SUFFIX,brazzers.xxx
     - DOMAIN-SUFFIX,brazzersnetwork.com
     - DOMAIN-SUFFIX,mofos.com
+    - DOMAIN-SUFFIX,digitalplayground.com
+    - DOMAIN-SUFFIX,digitalplaygroundnetwork.com
+    - DOMAIN-SUFFIX,tube8.com
+    - DOMAIN-SUFFIX,tube8.fr
     - DOMAIN-SUFFIX,nutaku.com
     - DOMAIN-SUFFIX,nutaku.net
     - DOMAIN-SUFFIX,livehdcams.com
