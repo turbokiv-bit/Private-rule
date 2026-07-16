@@ -1,5 +1,5 @@
 payload:
-    - +.vpngate.jp
+    - +.epicbrowser.com
     - +.geti2p.net
     - +.browserleaks.com
     - +.bypasscensorship.org
@@ -10,7 +10,7 @@ payload:
     - +.ffprofile.com
     - +.freenetproject.org
     - +.fteproxy.org
-    - +.vpngate.net
+    - +.haveibeenpwned.com
     - +.getoutline.org
     - +.gfw.report
     - +.guardianproject.info
@@ -20,7 +20,7 @@ payload:
     - +.jitsi.org
     - +.lokinet.org
     - +.ntc.party
-    - +.applecensorship.com
+    - +.pwnedpasswords.com
     - +.ooni.org
     - +.openvpn.net
     - +.privacytools.io
@@ -46,10 +46,13 @@ payload:
     - +.metacubex.one
     - +.getlantern.org
     - +.lantern.io
-    - +.opengw.net
+    - +.torproject.org
     - +.vuvuzela.io
     - +.akasha.world
     - +.onionshare.org
+    - +.citizenlab.ca
+    - +.citizenlab.org
+    - +.applecensorship.com
     - +.freebrowser.org
     - +.freewechat.com
     - +.freeweibo.com
@@ -59,11 +62,15 @@ payload:
     - +.greatfirevpn.com
     - +.pao-pao.net
     - +.wikiunblocked.org
-    - +.haveibeenpwned.com
-    - +.pwnedpasswords.com
     - +.paskoocheh.com
     - +.softether.org
     - +.softether-download.com
+    - +.v2ray.com
+    - +.v2ray.cool
+    - +.v2fly.org
+    - +.opengw.net
+    - +.vpngate.jp
+    - +.vpngate.net
     - +.ipns.co
     - +.ipfs.tech
     - +.cloudflare-ipfs.com
@@ -78,21 +85,14 @@ payload:
     - +.4everland.io
     - +.dweb.link
     - +.censorship.no
-    - +.v2fly.org
-    - +.v2ray.cool
-    - +.v2ray.com
-    - +.torproject.org
-    - +.epicbrowser.com
-    - +.citizenlab.org
-    - +.citizenlab.ca
+    - +.twister.net.co
+    - +.xtls.github.io
+    - +.trojan-gfw.github.io
+    - +.ipfs.anonymize.com
+    - +.ipfs.runfission.com
+    - +.gateway.pinata.cloud
+    - +.ipfs.eternum.io
     - +.ipfs.best-practice.se
     - +.ipfs.lain.la
     - +.ipfs.fleek.co
-    - +.ipfs.eternum.io
-    - +.gateway.pinata.cloud
-    - +.ipfs.runfission.com
-    - +.ipfs.anonymize.com
-    - +.trojan-gfw.github.io
-    - +.xtls.github.io
-    - +.twister.net.co
     - +.ipfs.eth.aragon.network

@@ -1,5 +1,4 @@
 payload:
-    - tesla-cdn.thron.com
     - +.solarcity.com
     - +.tesla.com
     - +.tesla.services
@@ -11,4 +10,3 @@ payload:
     - +.tesla.com.cn
     - +.teslamotors.cn
     - +.teslamotors.com.cn
-    - tesla-cdn.thron.cn
