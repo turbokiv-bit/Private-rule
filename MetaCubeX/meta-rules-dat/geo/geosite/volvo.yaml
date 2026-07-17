@@ -11,7 +11,7 @@ payload:
     - +.vfsco.ca
     - +.vfsco.ch
     - +.vfsco.cl
-    - +.vfsco.com
+    - +.volvogroup.ru
     - +.vfsco.cz
     - +.vfsco.de
     - +.vfsco.dk
@@ -21,7 +21,7 @@ payload:
     - +.vfsco.fi
     - +.vfsco.fr
     - +.vfsco.hu
-    - +.dynafleetonline.com
+    - +.vfsco.ie
     - +.vfsco.in
     - +.vfsco.it
     - +.vfsco.jp
@@ -40,14 +40,14 @@ payload:
     - +.vfsco.us
     - +.vgcareers.net
     - +.volvo-truck.nl
-    - +.volvogroup.ru
+    - +.volvo.ca
     - +.volvo.com
     - +.volvo.se
     - +.volvobrandshop.com
     - +.volvobuses.at
     - +.volvobuses.be
     - +.volvobuses.ca
-    - +.volvobuses.ch
+    - +.dynafleetonline.com
     - +.volvobuses.co
     - +.volvotruckrental.be
     - +.volvotruckcenter.se
@@ -100,12 +100,12 @@ payload:
     - +.volvogroup.nl
     - +.volvogroup.pe
     - +.volvogroup.pl
-    - +.volvo.ca
-    - +.vfsco.ie
-    - +.volvotrucks.sk
+    - +.vfsco.com
+    - +.volvobuses.ch
+    - +.volvotrucks.si
     - +.volvomerchandise.com
     - +.volvopenta.com
-    - +.volvotrucks.si
+    - +.volvotrucks.sk
     - +.volvopenta.de
     - +.volvopenta.es
     - +.volvopenta.fr
@@ -126,6 +126,7 @@ payload:
     - +.volvotrucks.by
     - +.volvotrucks.ch
     - +.volvotrucks.cl
+    - +.volvogrouptruckcenter.nl
     - +.volvotrucks.sg
     - +.volvotrucks.se
     - +.volvotrucks.ru
@@ -135,8 +136,8 @@ payload:
     - +.volvotrucks.ps
     - +.volvotrucks.pl
     - +.volvotrucks.pk
-    - +.volvotrucks.ph
     - +.volvotrucks.com
+    - +.volvotrucks.ph
     - +.volvotrucks.pe
     - +.volvotrucks.no
     - +.volvotrucks.nl
@@ -144,7 +145,6 @@ payload:
     - +.volvotrucks.my
     - +.volvotrucks.mn
     - +.volvotrucks.mk
-    - +.volvogrouptruckcenter.nl
     - +.volvotrucks.md
     - +.volvotrucks.ma
     - +.volvotrucks.cz
@@ -168,10 +168,11 @@ payload:
     - +.volvotrucks.kz
     - +.volvotrucks.lt
     - +.volvotrucks.lv
-    - +.vfsco.co.za
-    - +.volvotrucks.com.kw
-    - +.volvotrucks.co.il
+    - +.volvotrucks.co.bw
+    - +.volvotrucks.com.tw
+    - +.volvotrucks.com.tr
     - +.volvotrucks.com.pt
+    - +.volvotrucks.co.ao
     - +.volvotrucks.com.co
     - +.volvotrucks.com.br
     - +.volvotrucks.com.bn
@@ -183,11 +184,10 @@ payload:
     - +.volvotrucks.co.nz
     - +.volvotrucks.co.uk
     - +.volvotrucks.co.na
-    - +.volvotrucks.co.mz
-    - +.volvotrucks.co.bw
     - +.volvotrucks.com.ua
-    - +.volvotrucks.com.tw
-    - +.volvotrucks.com.tr
+    - +.volvotrucks.co.mz
+    - +.volvobuses.co.za
+    - +.volvotrucks.com.kw
     - +.volvopenta.com.br
     - +.volvogroup.com.br
     - +.volvobuses.com.tw
@@ -196,13 +196,13 @@ payload:
     - +.volvobuses.com.br
     - +.volvobuses.com.au
     - +.volvobuses.com.ar
-    - +.volvobuses.co.za
+    - +.volvotrucks.co.il
     - +.volvobuses.co.uk
     - +.volvobuses.co.nz
     - +.vfsco.com.tr
     - +.vfsco.com.br
     - +.vfsco.com.au
-    - +.volvotrucks.co.ao
+    - +.vfsco.co.za
     - +.vfsco.co.uk
     - +.vfsco.com.cn
     - +.volvo.cn

@@ -1,7 +1,7 @@
 payload:
     - DOMAIN-SUFFIX,yandex
     - DOMAIN-SUFFIX,yandex.lv
-    - DOMAIN-SUFFIX,yandex.aero
+    - DOMAIN-SUFFIX,yandex.kg
     - DOMAIN-SUFFIX,cabconnect.org
     - DOMAIN-SUFFIX,clck.ru
     - DOMAIN-SUFFIX,clstorage.net
@@ -26,7 +26,7 @@ payload:
     - DOMAIN-SUFFIX,ya.ru
     - DOMAIN-SUFFIX,yandex-bank.net
     - DOMAIN-SUFFIX,yandex-team.ru
-    - DOMAIN-SUFFIX,xn--d1acpjx3f.xn--p1ai
+    - DOMAIN-SUFFIX,yandex.aero
     - DOMAIN-SUFFIX,yandex.asia
     - DOMAIN-SUFFIX,yandex.az
     - DOMAIN-SUFFIX,yandex.by
@@ -40,10 +40,10 @@ payload:
     - DOMAIN-SUFFIX,yccdn.ru
     - DOMAIN-SUFFIX,yandex.fr
     - DOMAIN-SUFFIX,yandex.jobs
-    - DOMAIN-SUFFIX,yandex.kg
+    - DOMAIN-SUFFIX,xn--d1acpjx3f.xn--p1ai
     - DOMAIN-SUFFIX,yandex.kz
-    - DOMAIN-SUFFIX,yandex.tj
     - DOMAIN-SUFFIX,berizaryad.ru
+    - DOMAIN-SUFFIX,yandex.lt
     - DOMAIN-SUFFIX,support-uber.com
     - DOMAIN-SUFFIX,yandex.mobi
     - DOMAIN-SUFFIX,yandex.net
@@ -52,7 +52,7 @@ payload:
     - DOMAIN-SUFFIX,yandex.ru
     - DOMAIN-SUFFIX,yandex.st
     - DOMAIN-SUFFIX,yandex.sx
-    - DOMAIN-SUFFIX,yandex.lt
+    - DOMAIN-SUFFIX,yandex.tj
     - DOMAIN-SUFFIX,yandex.tm
     - DOMAIN-SUFFIX,yandex.tr
     - DOMAIN-SUFFIX,yandex.ua

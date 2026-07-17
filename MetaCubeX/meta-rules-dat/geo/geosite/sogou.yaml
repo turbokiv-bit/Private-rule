@@ -1,22 +1,22 @@
 payload:
     - +.sogoucdndl.com
-    - +.yidianliulan.cn
+    - +.sogouimecdn.com
     - +.ggowan.com
     - +.go2map.com
     - +.pinyin.cn
     - +.qd.ink
-    - +.binglianhuajianzhan.com
+    - +.sg.cn
     - +.sgtmos.com
-    - +.sgyeyou.com
+    - +.binglianhuajianzhan.com
     - +.sgyouxi.com
     - +.sogo.com
     - +.sogou.cn
     - +.sogou.com
-    - +.sogou.net
     - +.yuweikuijianzhan.com
     - +.ggoplay.com
-    - +.sg.cn
-    - +.sogouimecdn.com
+    - +.sogou.net
+    - +.sgyeyou.com
+    - +.sogoucdn.com
     - +.sogou-inc.com
     - +.sogou-op.org
     - +.soso.com
@@ -28,7 +28,7 @@ payload:
     - +.xiangrikuisite.com
     - +.xinyan.cn
     - +.yeyousg.com
-    - +.sogoucdn.com
+    - +.yidianliulan.cn
     - +.soso.com.cn
     - +.sogou.com.cn
     - +.inte.sogou.com

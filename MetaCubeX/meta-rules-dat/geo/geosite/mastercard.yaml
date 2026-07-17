@@ -2,10 +2,10 @@ payload:
     - nab.demdex.net
     - nationalaustraliaban.tt.omtrdc.net
     - +.mastercard.lu
-    - +.mastercard.gr
+    - +.mastercard.be
     - +.mastercard.az
     - +.mastercard.ba
-    - +.mastercard.be
+    - +.mastercard.md
     - +.mastercard.bg
     - +.mastercard.by
     - +.mastercard.ca
@@ -54,18 +54,18 @@ payload:
     - +.mastercard.eu
     - +.mastercard.fi
     - +.mastercard.fr
-    - +.mastercard.md
-    - +.mastercard.hr
+    - +.mastercard.gr
+    - +.mastercard.my
     - +.mastercard.hu
     - +.mastercard.ie
     - +.mastercard.inc
     - +.mastercard.it
-    - +.multicurrencycashpassport.com
+    - +.mastercard.jo
     - +.mastercard.ke
     - +.mastercard.kz
-    - +.mastercard.jo
+    - +.multicurrencycashpassport.com
     - +.mastercard.at
-    - +.mastercardconnect.com
+    - +.mastercard.hr
     - +.mastercard.nl
     - +.mastercard.no
     - +.mastercard.om
@@ -93,7 +93,7 @@ payload:
     - +.mastercardcenter.com
     - +.mastercardcenter.org
     - +.mastercardcenterforinclusivegrowth.org
-    - +.mastercard.my
+    - +.mastercardconnect.com
     - +.mastercardezsavings.com
     - +.mastercardidtheftalerts.com
     - +.mastercardrestaurant.com

@@ -1,9 +1,9 @@
 payload:
     - DOMAIN-SUFFIX,lenovomm.com
     - DOMAIN-SUFFIX,iprintworks.cn
-    - DOMAIN-SUFFIX,lenovo.net
+    - DOMAIN-SUFFIX,cftsupport.com
     - DOMAIN-SUFFIX,ileapcloud.com
-    - DOMAIN-SUFFIX,lx.pub
+    - DOMAIN-SUFFIX,lenovocloudos.com
     - DOMAIN-SUFFIX,lenovo.cn
     - DOMAIN-SUFFIX,lenovo.com
     - DOMAIN-SUFFIX,lenovoeservice.com
@@ -17,19 +17,19 @@ payload:
     - DOMAIN-SUFFIX,bestrhy.com
     - DOMAIN-SUFFIX,zxsales.cn
     - DOMAIN-SUFFIX,blurdev.com
-    - DOMAIN-SUFFIX,chainedbox.com
+    - DOMAIN-SUFFIX,lx.run
     - DOMAIN-SUFFIX,fm365.com
     - DOMAIN-SUFFIX,idea123.cn
     - DOMAIN-SUFFIX,thinkprinter.net
     - DOMAIN-SUFFIX,juhuiwan.com
     - DOMAIN-SUFFIX,thinkprinter.cn
-    - DOMAIN-SUFFIX,lx.run
+    - DOMAIN-SUFFIX,juhuiwan.net
     - DOMAIN-SUFFIX,lenauth.com
     - DOMAIN-SUFFIX,lenovogame.com
     - DOMAIN-SUFFIX,lenovomm.cn
-    - DOMAIN-SUFFIX,cftsupport.com
-    - DOMAIN-SUFFIX,lenovocloudos.com
-    - DOMAIN-SUFFIX,juhuiwan.net
+    - DOMAIN-SUFFIX,baiying.cn
+    - DOMAIN-SUFFIX,lenovocust.cn
+    - DOMAIN-SUFFIX,chainedbox.com
     - DOMAIN-SUFFIX,surepush.cn
     - DOMAIN-SUFFIX,zui.cn
     - DOMAIN-SUFFIX,zui.com
@@ -37,12 +37,12 @@ payload:
     - DOMAIN-SUFFIX,zuk.com
     - DOMAIN-SUFFIX,lenovoprinter.net
     - DOMAIN-SUFFIX,lenovoprinter.com
-    - DOMAIN-SUFFIX,lenovocust.cn
+    - DOMAIN-SUFFIX,lx.pub
     - DOMAIN-SUFFIX,lenovomobile.com
     - DOMAIN-SUFFIX,cunchuhulian-ln.cn
     - DOMAIN-SUFFIX,lenovonetapp.com
     - DOMAIN-SUFFIX,dayin8.com
-    - DOMAIN-SUFFIX,baiying.cn
+    - DOMAIN-SUFFIX,lenovo.net
     - DOMAIN-SUFFIX,lenovoimage.cn
     - DOMAIN-SUFFIX,lenovoimage.com
     - DOMAIN-SUFFIX,lenovocare.com.cn

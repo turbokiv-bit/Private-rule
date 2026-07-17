@@ -7,21 +7,22 @@ payload:
     - +.gcdn.co
     - +.gcore.com
     - +.gcore.pro
+    - +.delvenetworks.com
+    - +.limelight.com
+    - +.lldns.net
+    - +.llnw-trials.com
+    - +.llnw.com
+    - +.llnw.net
+    - +.llnwd.net
+    - +.llnwi.net
+    - +.quantil.com
+    - +.pagecdn.com
+    - +.pagecdn.io
+    - +.stackpath.com
+    - +.stackpath.dev
     - +.vrcdn.cloud
     - +.vrcdn.live
     - +.vrcdn.video
-    - +.cdn77.com
-    - +.cdn77.org
-    - +.imgix.com
-    - +.imgix.net
-    - +.esm.run
-    - +.jsdelivr.com
-    - +.jsdelivr.net
-    - +.pagecdn.com
-    - +.pagecdn.io
-    - +.quantil.com
-    - +.stackpath.com
-    - +.stackpath.dev
     - +.ak1.net
     - +.aka-ai.com
     - +.aka-ai.net
@@ -91,6 +92,8 @@ payload:
     - +.iamakamai.net
     - +.soasta-dswb.com
     - +.srtcdn.net
+    - +.cdn77.com
+    - +.cdn77.org
     - +.argotunnel.com
     - +.browser.run
     - +.cfargotunnel.com
@@ -153,14 +156,11 @@ payload:
     - +.fastlylabs.com
     - +.fastlylb.net
     - +.zencdn.net
-    - +.delvenetworks.com
-    - +.limelight.com
-    - +.lldns.net
-    - +.llnw-trials.com
-    - +.llnw.com
-    - +.llnw.net
-    - +.llnwd.net
-    - +.llnwi.net
+    - +.imgix.com
+    - +.imgix.net
+    - +.esm.run
+    - +.jsdelivr.com
+    - +.jsdelivr.net
     - +.akamai.co.kr
     - +.one.one.one
     - +.accdn.com.cn

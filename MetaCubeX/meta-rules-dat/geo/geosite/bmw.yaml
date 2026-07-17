@@ -2,7 +2,7 @@ payload:
     - +.mini
     - +.bmw
     - +.mini-connected.se
-    - +.mybmw.com
+    - +.bmw.tt
     - +.bmw-abudhabi.com
     - +.bmw-adventskalender.com
     - +.bmw-albania.com
@@ -91,7 +91,7 @@ payload:
     - +.bmw-m-safetycar.com
     - +.bmw-m.com
     - +.bmw-mdrivetour.com
-    - +.bmw-me.com
+    - +.bmwmperformance.com
     - +.bmw-military-sales.com
     - +.bmw-motorcycle.com
     - +.bmw-motorcycles.vn
@@ -216,7 +216,7 @@ payload:
     - +.minikelowna.com
     - +.minikelowna.ca
     - +.miniitalianjob.com
-    - +.miniinvasion.ca
+    - +.mini.kz
     - +.minihk.com
     - +.minihalifax.com
     - +.minihalifax.ca
@@ -235,7 +235,7 @@ payload:
     - +.minicooper.ca
     - +.miniccrc.ca
     - +.minicaribbean.com
-    - +.mini.lu
+    - +.minicanada.ca
     - +.minibrossard.com
     - +.minibrossard.ca
     - +.miniargentina.com
@@ -255,7 +255,7 @@ payload:
     - +.mini.nl
     - +.mini.nc
     - +.bmw.cw
-    - +.bmw.cz
+    - +.bmwmotorshowblog.com
     - +.bmw.de
     - +.bmw.dk
     - +.bmw.dz
@@ -300,7 +300,7 @@ payload:
     - +.bmw.sk
     - +.bmw.sn
     - +.bmw.tm
-    - +.bmw.tt
+    - +.bmwmotorsport.com
     - +.bmw.ua
     - +.bmw.uz
     - +.bmw.vn
@@ -363,9 +363,9 @@ payload:
     - +.mini.mq
     - +.mini.md
     - +.bmwmotorradhk.com
-    - +.alphabet.be
+    - +.bmw.cz
     - +.bayareabmw.com
-    - +.mini-stjohns.com
+    - +.bmw-me.com
     - +.bmwmuseum.net
     - +.bmwmyanmar.com
     - +.bmwofannapolis.com
@@ -419,7 +419,7 @@ payload:
     - +.minneapolisbmw.net
     - +.motorshowblog.com
     - +.mybmw.ca
-    - +.bmwmotorsport.com
+    - +.mybmw.com
     - +.newhampshirebmw.com
     - +.nmbmw.com
     - +.ocbmwdealers.com
@@ -442,11 +442,11 @@ payload:
     - +.tristatebmw.com
     - +.vancouverbmwretailers.ca
     - +.washingtondcbmw.com
-    - +.mini-connected.no
+    - +.minispecialoffers.ca
     - +.aboutyourmini.com
     - +.alfera.in
     - +.alfera.my
-    - +.midatlanticbmwmotorcycles.com
+    - +.miniinvasion.ca
     - +.4myminicard.com
     - +.alphera-finance.in
     - +.alphera.ca
@@ -475,18 +475,18 @@ payload:
     - +.premiumfs.de
     - +.alphabet.asia
     - +.alphabet.at
-    - +.bmwmotorshowblog.com
+    - +.alphabet.be
     - +.alphabet.biz
     - +.alphabet.ch
     - +.mini.dz
-    - +.minispecialoffers.ca
     - +.minispygear.com
-    - +.alphabet.com
     - +.ministcatharines.ca
+    - +.alphabet.com
     - +.ministeagathe.com
     - +.ministjohns.ca
     - +.minitakesthestates.com
     - +.minitoronto.ca
+    - +.minitroisrivieres.ca
     - +.alphabet.cz
     - +.alphabet.de
     - +.alphabet.es
@@ -499,7 +499,7 @@ payload:
     - +.alphabet.lv
     - +.alphabet.mx
     - +.alphabet.no
-    - +.minitroisrivieres.ca
+    - +.miniusa.com
     - +.alphabet.pl
     - +.alphabet.pt
     - +.alphabet.uk
@@ -513,10 +513,10 @@ payload:
     - +.spiritofecstasy.com
     - +.baltimorebmw.com
     - +.mini.jp
-    - +.minicanada.ca
+    - +.minivalueservice.com
     - +.atlantaminidealers.com
     - +.greatergothammini.com
-    - +.mini.kz
+    - +.midatlanticbmwmotorcycles.com
     - +.mini-abudhabi.com
     - +.mini-antilles.fr
     - +.mini-bahrain.com
@@ -539,7 +539,7 @@ payload:
     - +.mini-connected.lu
     - +.mini-connected.lv
     - +.mini-connected.nl
-    - +.mini.ma
+    - +.mini-connected.no
     - +.mini-connected.pl
     - +.mini-connected.pt
     - +.approvedusedbmw.com
@@ -560,7 +560,7 @@ payload:
     - +.mini-qatar.com
     - +.mini-srilanka.com
     - +.mini-stjohns.ca
-    - +.bmwmperformance.com
+    - +.mini-stjohns.com
     - +.mini-tahiti.com
     - +.mini-vietnam.com
     - +.mini-windsor.ca
@@ -595,12 +595,12 @@ payload:
     - +.minivaughanwest.com
     - +.minivaughanwest.ca
     - +.minivancouver.ca
-    - +.minivalueservice.com
+    - +.mini.lu
     - +.miniusatires.com
+    - +.mini.ma
     - +.miniusaservice.com
-    - +.miniusa.com
-    - +.bmw.com.au
-    - +.bmw.co.za
+    - +.alphabet.org.uk
+    - +.bmw.co.ao
     - +.alphabet.com.pl
     - +.alphabet.com.mx
     - +.alphabet.com.lv
@@ -614,13 +614,13 @@ payload:
     - +.alpherafinance.com.hk
     - +.alphera.com.my
     - +.alphera.com.hk
-    - +.alphera.com.es
+    - +.bmw.co.id
     - +.alphera.co.nz
     - +.alphera.co.in
     - +.alphera-finance.com.hk
     - +.alphera-finance.co.in
     - +.alfera.com.my
-    - +.bmw.co.id
+    - +.alfera.com.hk
     - +.bmwmotorrad.com.sg
     - +.bmwmotorrad.com.ph
     - +.bmwmotorrad.com.au
@@ -638,7 +638,7 @@ payload:
     - +.bmw.com.ni
     - +.bmw.com.my
     - +.bmw.com.mx
-    - +.bmw.com.mt
+    - +.bmw.co.ke
     - +.bmw.com.mo
     - +.bmw.com.mk
     - +.bmw.com.ky
@@ -653,19 +653,19 @@ payload:
     - +.bmw.com.bo
     - +.bmw.com.bn
     - +.bmw.com.bd
-    - +.bmw.co.jp
+    - +.bmw.com.au
     - +.bmw.com.ar
-    - +.bmw-motorrad.co.nz
+    - +.bmw.co.za
     - +.bmw.co.uk
     - +.bmw.co.th
     - +.bmw.co.nz
     - +.bmw.co.kr
-    - +.mini.co.id
-    - +.bmw-connecteddrive.com.au
+    - +.bmw.co.il
     - +.alphabet.com.pt
-    - +.alfera.com.hk
+    - +.bmw.co.jp
+    - +.alphera.com.es
     - +.bmw.co.cr
-    - +.bmw.co.ao
+    - +.bmw.com.mt
     - +.bmw-pma.com.sg
     - +.bmw-motorrad.com.tr
     - +.bmw-motorrad.com.py
@@ -680,7 +680,7 @@ payload:
     - +.bmw-motorrad.co.za
     - +.bmw-motorrad.co.uk
     - +.bmw-motorrad.co.th
-    - +.bmw.co.il
+    - +.bmw-motorrad.co.nz
     - +.bmw-motorrad.co.kr
     - +.bmw-motorrad.co.id
     - +.bmw-driving-center.co.kr
@@ -689,29 +689,29 @@ payload:
     - +.bmw-connecteddrive.com.hr
     - +.bmw-connecteddrive.com.cy
     - +.bmw-connecteddrive.com.br
-    - +.alphabet.org.uk
+    - +.bmw-connecteddrive.com.au
     - +.bmw-connecteddrive.co.za
     - +.bmw-connecteddrive.co.uk
     - +.bmw-connecteddrive.co.nz
-    - +.mini.com.mx
-    - +.mini.com.mt
-    - +.mini.com.pl
-    - +.mini.com.sg
-    - +.mini.com.pe
-    - +.mini.com.pa
     - +.mini.com.co
     - +.mini.com.mo
+    - +.mini.com.py
+    - +.mini.com.pl
+    - +.mini.com.ph
+    - +.mini.com.pe
+    - +.mini.com.pa
+    - +.mini.com.mx
+    - +.mini.com.mt
     - +.mini.com.br
-    - +.mini.com.mk
     - +.mini.com.hr
     - +.mini.com.gt
     - +.mini.com.gr
-    - +.mini.com.bn
-    - +.mini.com.do
-    - +.mini.com.ph
-    - +.mini.com.cy
-    - +.mini.com.py
     - +.mini.com.ec
+    - +.mini.com.do
+    - +.mini.com.mk
+    - +.mini.com.sg
+    - +.mini.com.bn
+    - +.mini.com.cy
     - +.mini.com.ar
     - +.mini.co.za
     - +.mini.co.uk
@@ -719,7 +719,7 @@ payload:
     - +.mini.co.me
     - +.mini.co.kr
     - +.mini.co.il
-    - +.bmw.co.ke
+    - +.mini.co.id
     - +.mini.co.cr
     - +.mini-connected.co.uk
     - +.mini.com.tr

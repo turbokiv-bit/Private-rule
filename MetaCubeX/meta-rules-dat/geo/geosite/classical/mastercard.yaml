@@ -2,10 +2,10 @@ payload:
     - DOMAIN,nab.demdex.net
     - DOMAIN,nationalaustraliaban.tt.omtrdc.net
     - DOMAIN-SUFFIX,mastercard.lu
-    - DOMAIN-SUFFIX,mastercard.gr
+    - DOMAIN-SUFFIX,mastercard.be
     - DOMAIN-SUFFIX,mastercard.az
     - DOMAIN-SUFFIX,mastercard.ba
-    - DOMAIN-SUFFIX,mastercard.be
+    - DOMAIN-SUFFIX,mastercard.md
     - DOMAIN-SUFFIX,mastercard.bg
     - DOMAIN-SUFFIX,mastercard.by
     - DOMAIN-SUFFIX,mastercard.ca
@@ -54,18 +54,18 @@ payload:
     - DOMAIN-SUFFIX,mastercard.eu
     - DOMAIN-SUFFIX,mastercard.fi
     - DOMAIN-SUFFIX,mastercard.fr
-    - DOMAIN-SUFFIX,mastercard.md
-    - DOMAIN-SUFFIX,mastercard.hr
+    - DOMAIN-SUFFIX,mastercard.gr
+    - DOMAIN-SUFFIX,mastercard.my
     - DOMAIN-SUFFIX,mastercard.hu
     - DOMAIN-SUFFIX,mastercard.ie
     - DOMAIN-SUFFIX,mastercard.inc
     - DOMAIN-SUFFIX,mastercard.it
-    - DOMAIN-SUFFIX,multicurrencycashpassport.com
+    - DOMAIN-SUFFIX,mastercard.jo
     - DOMAIN-SUFFIX,mastercard.ke
     - DOMAIN-SUFFIX,mastercard.kz
-    - DOMAIN-SUFFIX,mastercard.jo
+    - DOMAIN-SUFFIX,multicurrencycashpassport.com
     - DOMAIN-SUFFIX,mastercard.at
-    - DOMAIN-SUFFIX,mastercardconnect.com
+    - DOMAIN-SUFFIX,mastercard.hr
     - DOMAIN-SUFFIX,mastercard.nl
     - DOMAIN-SUFFIX,mastercard.no
     - DOMAIN-SUFFIX,mastercard.om
@@ -93,7 +93,7 @@ payload:
     - DOMAIN-SUFFIX,mastercardcenter.com
     - DOMAIN-SUFFIX,mastercardcenter.org
     - DOMAIN-SUFFIX,mastercardcenterforinclusivegrowth.org
-    - DOMAIN-SUFFIX,mastercard.my
+    - DOMAIN-SUFFIX,mastercardconnect.com
     - DOMAIN-SUFFIX,mastercardezsavings.com
     - DOMAIN-SUFFIX,mastercardidtheftalerts.com
     - DOMAIN-SUFFIX,mastercardrestaurant.com

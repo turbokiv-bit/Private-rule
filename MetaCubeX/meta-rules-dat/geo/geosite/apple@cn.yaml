@@ -214,23 +214,6 @@ payload:
     - +.beatsbydre.com
     - +.beatsbydre.com.cn
     - +.beatsep.cn
-    - amp-api.podcasts.apple.com
-    - podcasts.apple.com
-    - amp-api-edge.music.apple.com
-    - amp-api.music.apple.com
-    - js-cdn.music.apple.com
-    - music.apple.com
-    - musicstatus.music.apple.com
-    - play.music.apple.com
-    - speedysub.music.apple.com
-    - certs-lb.apple.com.akadns.net
-    - certs.apple.com
-    - crl-lb.apple.com.akadns.net
-    - crl.apple.com
-    - ocsp.apple.com
-    - ocsp2.apple.com
-    - valid.apple.com
-    - valid.origin-apple.com.akadns.net
     - +.apple-icloud.cn
     - +.appleicloud.cn
     - +.icloud-apple.cn
@@ -239,6 +222,16 @@ payload:
     - +.icloud.com.cn
     - +.icloud.net.cn
     - +.icloudapple.cn
+    - certs-lb.apple.com.akadns.net
+    - certs.apple.com
+    - crl-lb.apple.com.akadns.net
+    - crl.apple.com
+    - ocsp.apple.com
+    - ocsp2.apple.com
+    - valid.apple.com
+    - valid.origin-apple.com.akadns.net
+    - amp-api.podcasts.apple.com
+    - podcasts.apple.com
     - +.apple-itunes.cn
     - +.itunes-apple.cn
     - +.itunesapple.cn
@@ -293,3 +286,10 @@ payload:
     - +.researchkit.com.cn
     - +.swiftui.cn
     - +.swiftui.com.cn
+    - amp-api-edge.music.apple.com
+    - amp-api.music.apple.com
+    - js-cdn.music.apple.com
+    - music.apple.com
+    - musicstatus.music.apple.com
+    - play.music.apple.com
+    - speedysub.music.apple.com

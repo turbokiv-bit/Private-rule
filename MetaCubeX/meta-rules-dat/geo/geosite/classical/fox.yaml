@@ -2,8 +2,8 @@ payload:
     - DOMAIN,foxnewsplayer-a.akamaihd.net
     - DOMAIN-SUFFIX,fox
     - DOMAIN-SUFFIX,foxsoccershop.com
-    - DOMAIN-SUFFIX,fox9.com
-    - DOMAIN-SUFFIX,fox.com
+    - DOMAIN-SUFFIX,myfoxphoenix.com
+    - DOMAIN-SUFFIX,foxsports-chicago.com
     - DOMAIN-SUFFIX,fox.tv
     - DOMAIN-SUFFIX,fox10.tv
     - DOMAIN-SUFFIX,fox10news.com
@@ -39,7 +39,7 @@ payload:
     - DOMAIN-SUFFIX,fox6now.com
     - DOMAIN-SUFFIX,fox7.com
     - DOMAIN-SUFFIX,fox7austin.com
-    - DOMAIN-SUFFIX,foxsports-newyork.com
+    - DOMAIN-SUFFIX,fox9.com
     - DOMAIN-SUFFIX,foxacrossamerica.com
     - DOMAIN-SUFFIX,foxaffiliateportal.com
     - DOMAIN-SUFFIX,foxandfriends.com
@@ -95,7 +95,7 @@ payload:
     - DOMAIN-SUFFIX,foxnewsgo.org
     - DOMAIN-SUFFIX,foxnewsgo.tv
     - DOMAIN-SUFFIX,foxnewshealth.com
-    - DOMAIN-SUFFIX,foxnewslatino.com
+    - DOMAIN-SUFFIX,foxsports-world.com
     - DOMAIN-SUFFIX,foxnewsmagazine.com
     - DOMAIN-SUFFIX,foxnewsnetwork.com
     - DOMAIN-SUFFIX,foxnewsopinion.com
@@ -123,9 +123,9 @@ payload:
     - DOMAIN-SUFFIX,foxsoccerplus.net
     - DOMAIN-SUFFIX,foxsoccerplus.tv
     - DOMAIN-SUFFIX,fox-corporation.com
-    - DOMAIN-SUFFIX,foxstudiolot.com
+    - DOMAIN-SUFFIX,fox.com
     - DOMAIN-SUFFIX,fox-news.com
-    - DOMAIN-SUFFIX,tubitv.com
+    - DOMAIN-SUFFIX,foxnewslatino.com
     - DOMAIN-SUFFIX,foxsports.cl
     - DOMAIN-SUFFIX,foxsports.co
     - DOMAIN-SUFFIX,foxsports.com
@@ -133,10 +133,10 @@ payload:
     - DOMAIN-SUFFIX,foxsports.info
     - DOMAIN-SUFFIX,foxsports.net
     - DOMAIN-SUFFIX,foxsports.pe
+    - DOMAIN-SUFFIX,tubitv.com
     - DOMAIN-SUFFIX,tubi.video
     - DOMAIN-SUFFIX,tubi.tv
     - DOMAIN-SUFFIX,tubi.io
-    - DOMAIN-SUFFIX,foxsports-world.com
     - DOMAIN-SUFFIX,wogx.com
     - DOMAIN-SUFFIX,woflthenewsstation.com
     - DOMAIN-SUFFIX,wofl.tv
@@ -157,7 +157,7 @@ payload:
     - DOMAIN-SUFFIX,foxsportssupports.com
     - DOMAIN-SUFFIX,foxsportsuniversity.com
     - DOMAIN-SUFFIX,foxsportsworld.com
-    - DOMAIN-SUFFIX,foxsports-chicago.com
+    - DOMAIN-SUFFIX,foxstudiolot.com
     - DOMAIN-SUFFIX,foxsuper6.com
     - DOMAIN-SUFFIX,foxtel.com
     - DOMAIN-SUFFIX,testonfox.com
@@ -208,7 +208,7 @@ payload:
     - DOMAIN-SUFFIX,myfoxny.com
     - DOMAIN-SUFFIX,myfoxorlando.com
     - DOMAIN-SUFFIX,myfoxphilly.com
-    - DOMAIN-SUFFIX,myfoxphoenix.com
+    - DOMAIN-SUFFIX,foxsports-newyork.com
     - DOMAIN-SUFFIX,myfoxtampa.com
     - DOMAIN-SUFFIX,myfoxtampabay.com
     - DOMAIN-SUFFIX,myfoxtwincities.com
@@ -232,17 +232,17 @@ payload:
     - DOMAIN-SUFFIX,speedfantasybid.com
     - DOMAIN-SUFFIX,speedracegear.com
     - DOMAIN-SUFFIX,speedxtra.com
-    - DOMAIN-SUFFIX,foxsports.com.gt
-    - DOMAIN-SUFFIX,foxsports.com.mx
+    - DOMAIN-SUFFIX,foxsports.com.co
+    - DOMAIN-SUFFIX,foxsports.com.ar
     - DOMAIN-SUFFIX,foxsports.com.ve
     - DOMAIN-SUFFIX,foxsports.com.uy
     - DOMAIN-SUFFIX,foxsports.com.py
     - DOMAIN-SUFFIX,foxtel.com.au
-    - DOMAIN-SUFFIX,foxsports.net.br
-    - DOMAIN-SUFFIX,foxsports.com.pe
-    - DOMAIN-SUFFIX,foxsports.com.bo
-    - DOMAIN-SUFFIX,foxsports.com.co
     - DOMAIN-SUFFIX,foxsports.com.ec
-    - DOMAIN-SUFFIX,foxsports.com.ar
-    - DOMAIN-SUFFIX,foxsports.co.ve
+    - DOMAIN-SUFFIX,foxsports.com.gt
+    - DOMAIN-SUFFIX,foxsports.net.br
+    - DOMAIN-SUFFIX,foxsports.com.mx
     - DOMAIN-SUFFIX,foxsports.com.br
+    - DOMAIN-SUFFIX,foxsports.com.bo
+    - DOMAIN-SUFFIX,foxsports.com.pe
+    - DOMAIN-SUFFIX,foxsports.co.ve

@@ -41,7 +41,7 @@ payload:
     - +.flic.kr
     - +.yahoo.ae
     - +.yusercontent.com
-    - +.ymail.com
+    - +.yahoo.dk
     - +.yimg.jp
     - +.yimg.com
     - +.yho.com
@@ -57,12 +57,12 @@ payload:
     - +.myguide.hk
     - +.maktoob.com
     - +.yahoo.ws
+    - +.yahoo.de
     - +.yahoo.vg
-    - +.yahoo.tn
     - +.yahoo.as
+    - +.yahoo.tn
     - +.yahoo.tm
     - +.yahoo.tl
-    - +.yahoo.de
     - +.yahoo.tk
     - +.yahoo.tg
     - +.yahoo.st
@@ -71,10 +71,10 @@ payload:
     - +.yahoo.is
     - +.yahoo.sm
     - +.yahoo.sk
-    - +.yahoo.si
-    - +.yahoo.dk
-    - +.yahoo.sg
     - +.yahoo.dj
+    - +.yahoo.si
+    - +.yahoo.sh
+    - +.yahoo.sg
     - +.yahoo.se
     - +.yahoo.rw
     - +.yahoo.ru
@@ -101,7 +101,7 @@ payload:
     - +.yahoo.cz
     - +.yahoo.je
     - +.yahoo.it
-    - +.yahoo.sh
+    - +.ymail.com
     - +.yahoo.dm
     - +.yahoo.ee
     - +.yahoo.es
@@ -122,8 +122,8 @@ payload:
     - +.yahoo.im
     - +.yahoo.in
     - +.yahoo.com.bd
-    - +.yahoo.com.ly
-    - +.yahoo.com.bz
+    - +.yahoo.com.hk
+    - +.yahoo.com.ar
     - +.yahoo.com.vn
     - +.yahoo.com.vc
     - +.yahoo.com.uy
@@ -147,9 +147,9 @@ payload:
     - +.yahoo.com.my
     - +.yahoo.com.mx
     - +.yahoo.com.mt
+    - +.yahoo.com.ly
     - +.yahoo.com.lb
     - +.yahoo.com.kw
-    - +.yahoo.com.hk
     - +.yahoo.com.gt
     - +.yahoo.com.gi
     - +.yahoo.com.fj
@@ -158,10 +158,10 @@ payload:
     - +.yahoo.com.ec
     - +.yahoo.com.do
     - +.yahoo.com.co
+    - +.yahoo.com.bz
     - +.yahoo.com.br
     - +.yahoo.com.bo
     - +.yahoo.com.au
-    - +.yahoo.com.ar
     - +.yahoo.com.ai
     - +.yahoo.com.ag
     - +.yahoo.com.af

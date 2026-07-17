@@ -1,6 +1,6 @@
 payload:
     - DOMAIN-SUFFIX,videoxiaoyouxi.com
-    - DOMAIN-SUFFIX,nagcloudcs.com
+    - DOMAIN-SUFFIX,wegame.com
     - DOMAIN-SUFFIX,gameloop.com
     - DOMAIN-SUFFIX,gcloudcs.com
     - DOMAIN-SUFFIX,gcloudcstest.com
@@ -8,9 +8,9 @@ payload:
     - DOMAIN-SUFFIX,gclouddolphin.com
     - DOMAIN-SUFFIX,gcloudsdk.com
     - DOMAIN-SUFFIX,gcloudsvcs.com
-    - DOMAIN-SUFFIX,gdtimg.com
-    - DOMAIN-SUFFIX,goto-game.com
     - DOMAIN-SUFFIX,yxdmgame.com
+    - DOMAIN-SUFFIX,goto-game.com
+    - DOMAIN-SUFFIX,goto-game.mobi
     - DOMAIN-SUFFIX,goto-game.org
     - DOMAIN-SUFFIX,happyhlddz.com
     - DOMAIN-SUFFIX,hdyxgame.com
@@ -21,12 +21,12 @@ payload:
     - DOMAIN-SUFFIX,ludosuperstar.cn
     - DOMAIN-SUFFIX,ludoworld.net
     - DOMAIN-SUFFIX,mahjongai.net
-    - DOMAIN-SUFFIX,mahjongcup.cn
+    - DOMAIN-SUFFIX,battlecare.net
     - DOMAIN-SUFFIX,mahjongcup.com
     - DOMAIN-SUFFIX,mahjongcup.net
     - DOMAIN-SUFFIX,metalrevolution.com
     - DOMAIN-SUFFIX,midasbuy.com
-    - DOMAIN-SUFFIX,wcbygame.com
+    - DOMAIN-SUFFIX,nagcloudcs.com
     - DOMAIN-SUFFIX,proximabeta.com
     - DOMAIN-SUFFIX,pubghelper.com
     - DOMAIN-SUFFIX,pubgno1.cn
@@ -41,9 +41,9 @@ payload:
     - DOMAIN-SUFFIX,texasholdemcup.com
     - DOMAIN-SUFFIX,texasholdemcup.net
     - DOMAIN-SUFFIX,timibase.com
-    - DOMAIN-SUFFIX,bcfmglobal.com
+    - DOMAIN-SUFFIX,mahjongcup.cn
     - DOMAIN-SUFFIX,gameitop.com
-    - DOMAIN-SUFFIX,goto-game.mobi
+    - DOMAIN-SUFFIX,gdtimg.com
     - DOMAIN-SUFFIX,yximg.cn
     - DOMAIN-SUFFIX,yxwsgame.com
     - DOMAIN-SUFFIX,yzyxgame.com
@@ -63,10 +63,10 @@ payload:
     - DOMAIN-SUFFIX,17roco.com
     - DOMAIN-SUFFIX,gtgres.com
     - DOMAIN-SUFFIX,realcybertron.com
-    - DOMAIN-SUFFIX,wegame.com
+    - DOMAIN-SUFFIX,wcbygame.com
     - DOMAIN-SUFFIX,anticheatexpert.com
     - DOMAIN-SUFFIX,tcfmglobal.com
-    - DOMAIN-SUFFIX,battlecare.net
+    - DOMAIN-SUFFIX,bcfmglobal.com
     - DOMAIN-SUFFIX,wegameplus.com
     - DOMAIN-SUFFIX,codm.com
     - DOMAIN-SUFFIX,brawlstars.cn

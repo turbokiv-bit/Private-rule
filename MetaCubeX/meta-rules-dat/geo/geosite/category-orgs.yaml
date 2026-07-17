@@ -24,10 +24,6 @@ payload:
     - +.who.int
     - +.wi-fi.org
     - +.wto.org
-    - +.f-dro1d.org
-    - +.f-droid.com
-    - +.f-droid.org
-    - +.fdroid.org
     - +.attestation.app
     - +.grapheneos.app
     - +.grapheneos.ca
@@ -117,16 +113,20 @@ payload:
     - +.osmfoundation.org
     - +.stateofthemap.com
     - +.stateofthemap.org
+    - +.csis.org
+    - +.f-dro1d.org
+    - +.f-droid.com
+    - +.f-droid.org
+    - +.fdroid.org
     - +.paskoocheh.com
+    - +.ppy.sh
+    - +.rolfoundation.org
+    - +.rolsociety.org
     - +.ccstatic.org
     - +.creativecommons.org
     - +.creativecommons.engineering
     - +.licensebuttons.net
-    - +.csis.org
     - +.emojipedia.org
     - +.worldemojiawards.com
     - +.worldemojiday.com
     - +.xn--yt8h.la
-    - +.ppy.sh
-    - +.rolfoundation.org
-    - +.rolsociety.org

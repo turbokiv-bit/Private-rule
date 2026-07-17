@@ -26,7 +26,7 @@ payload:
     - DOMAIN-SUFFIX,flic.kr
     - DOMAIN-SUFFIX,yahoo.ae
     - DOMAIN-SUFFIX,yusercontent.com
-    - DOMAIN-SUFFIX,ymail.com
+    - DOMAIN-SUFFIX,yahoo.dk
     - DOMAIN-SUFFIX,yimg.jp
     - DOMAIN-SUFFIX,yimg.com
     - DOMAIN-SUFFIX,yho.com
@@ -42,12 +42,12 @@ payload:
     - DOMAIN-SUFFIX,myguide.hk
     - DOMAIN-SUFFIX,maktoob.com
     - DOMAIN-SUFFIX,yahoo.ws
+    - DOMAIN-SUFFIX,yahoo.de
     - DOMAIN-SUFFIX,yahoo.vg
-    - DOMAIN-SUFFIX,yahoo.tn
     - DOMAIN-SUFFIX,yahoo.as
+    - DOMAIN-SUFFIX,yahoo.tn
     - DOMAIN-SUFFIX,yahoo.tm
     - DOMAIN-SUFFIX,yahoo.tl
-    - DOMAIN-SUFFIX,yahoo.de
     - DOMAIN-SUFFIX,yahoo.tk
     - DOMAIN-SUFFIX,yahoo.tg
     - DOMAIN-SUFFIX,yahoo.st
@@ -56,10 +56,10 @@ payload:
     - DOMAIN-SUFFIX,yahoo.is
     - DOMAIN-SUFFIX,yahoo.sm
     - DOMAIN-SUFFIX,yahoo.sk
-    - DOMAIN-SUFFIX,yahoo.si
-    - DOMAIN-SUFFIX,yahoo.dk
-    - DOMAIN-SUFFIX,yahoo.sg
     - DOMAIN-SUFFIX,yahoo.dj
+    - DOMAIN-SUFFIX,yahoo.si
+    - DOMAIN-SUFFIX,yahoo.sh
+    - DOMAIN-SUFFIX,yahoo.sg
     - DOMAIN-SUFFIX,yahoo.se
     - DOMAIN-SUFFIX,yahoo.rw
     - DOMAIN-SUFFIX,yahoo.ru
@@ -86,7 +86,7 @@ payload:
     - DOMAIN-SUFFIX,yahoo.cz
     - DOMAIN-SUFFIX,yahoo.je
     - DOMAIN-SUFFIX,yahoo.it
-    - DOMAIN-SUFFIX,yahoo.sh
+    - DOMAIN-SUFFIX,ymail.com
     - DOMAIN-SUFFIX,yahoo.dm
     - DOMAIN-SUFFIX,yahoo.ee
     - DOMAIN-SUFFIX,yahoo.es
@@ -107,8 +107,8 @@ payload:
     - DOMAIN-SUFFIX,yahoo.im
     - DOMAIN-SUFFIX,yahoo.in
     - DOMAIN-SUFFIX,yahoo.com.bd
-    - DOMAIN-SUFFIX,yahoo.com.ly
-    - DOMAIN-SUFFIX,yahoo.com.bz
+    - DOMAIN-SUFFIX,yahoo.com.hk
+    - DOMAIN-SUFFIX,yahoo.com.ar
     - DOMAIN-SUFFIX,yahoo.com.vn
     - DOMAIN-SUFFIX,yahoo.com.vc
     - DOMAIN-SUFFIX,yahoo.com.uy
@@ -132,9 +132,9 @@ payload:
     - DOMAIN-SUFFIX,yahoo.com.my
     - DOMAIN-SUFFIX,yahoo.com.mx
     - DOMAIN-SUFFIX,yahoo.com.mt
+    - DOMAIN-SUFFIX,yahoo.com.ly
     - DOMAIN-SUFFIX,yahoo.com.lb
     - DOMAIN-SUFFIX,yahoo.com.kw
-    - DOMAIN-SUFFIX,yahoo.com.hk
     - DOMAIN-SUFFIX,yahoo.com.gt
     - DOMAIN-SUFFIX,yahoo.com.gi
     - DOMAIN-SUFFIX,yahoo.com.fj
@@ -143,10 +143,10 @@ payload:
     - DOMAIN-SUFFIX,yahoo.com.ec
     - DOMAIN-SUFFIX,yahoo.com.do
     - DOMAIN-SUFFIX,yahoo.com.co
+    - DOMAIN-SUFFIX,yahoo.com.bz
     - DOMAIN-SUFFIX,yahoo.com.br
     - DOMAIN-SUFFIX,yahoo.com.bo
     - DOMAIN-SUFFIX,yahoo.com.au
-    - DOMAIN-SUFFIX,yahoo.com.ar
     - DOMAIN-SUFFIX,yahoo.com.ai
     - DOMAIN-SUFFIX,yahoo.com.ag
     - DOMAIN-SUFFIX,yahoo.com.af

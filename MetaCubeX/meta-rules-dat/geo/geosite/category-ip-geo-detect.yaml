@@ -7,8 +7,8 @@ payload:
     - ipv6-check-perf.radar.cloudflare.com
     - whatismyip.akamai.com
     - +.ipinfo.io
-    - +.ipapi.co
-    - +.2ip.ua
+    - +.country.is
+    - +.2ip.io
     - +.51degrees.com
     - +.abstractapi.com
     - +.apiip.net
@@ -17,7 +17,7 @@ payload:
     - +.check-host.net
     - +.checkip.org
     - +.checkip.ru
-    - +.country.is
+    - +.ipleak.net
     - +.curlmyip.net
     - +.dadata.ru
     - +.db-ip.com
@@ -66,9 +66,9 @@ payload:
     - +.ipaddress.com
     - +.ipaddress.my
     - +.ipaddress.sh
-    - +.ipleak.net
+    - +.ipapi.co
     - +.ipapi.com
-    - +.2ip.io
+    - +.ipligence.com
     - +.ipbase.com
     - +.ipbot.com
     - +.ipcalf.com
@@ -80,9 +80,9 @@ payload:
     - +.ipfinder.io
     - +.ipgeolocation.io
     - +.ipify.org
-    - +.ipapi.is
+    - +.2ip.ua
     - +.2ip.ru
-    - +.sypexgeo.net
+    - +.ipapi.is
     - +.iplocate.io
     - +.iplocation.com
     - +.iplocation.io
@@ -121,7 +121,7 @@ payload:
     - +.showmyipaddress.com
     - +.spur.us
     - +.sxgeo.city
-    - +.ipligence.com
+    - +.sypexgeo.net
     - +.tnx.nl
     - +.tracemyip.org
     - +.trustmyip.com
@@ -142,18 +142,18 @@ payload:
     - +.wieistmeineip.de
     - +.wtfismyip.com
     - +.ipip.net
-    - +.ipgeo.vercel.app
+    - +.ipv4-internet.yandex.net
     - +.ip.mail.ru
     - +.ip.nic.ru
     - +.ip.pe.kr
     - +.ip.tyk.nu
-    - +.ip.hetzner.com
-    - +.ipv4-internet.yandex.net
     - +.ipv6-internet.yandex.net
+    - +.ipgeo.vercel.app
+    - +.ip.hetzner.com
     - +.my.ipinfo.app
-    - +.geoip.noc.gov.ru
-    - +.ipv4.internet.yandex.net
     - +.ipv6.internet.yandex.net
+    - +.ipv4.internet.yandex.net
+    - +.geoip.noc.gov.ru
     - +.ipify.cn
     - +.iplark.com
     - +.ipw.cn

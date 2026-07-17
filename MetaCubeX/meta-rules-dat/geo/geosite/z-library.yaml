@@ -1,6 +1,6 @@
 payload:
     - +.bookshome.info
-    - +.z-lib.org
+    - +.2lib.org
     - +.1lib.domains
     - +.1lib.education
     - +.1lib.eu
@@ -8,12 +8,12 @@ payload:
     - +.1lib.pl
     - +.1lib.sk
     - +.1lib.to
-    - +.1lib.tw
-    - +.2lib.org
+    - +.1lib.cloud
+    - +.booksc.xyz
     - +.3lib.net
     - +.art1lib.com
     - +.b-ok.africa
-    - +.booksc.org
+    - +.b-ok.asia
     - +.b-ok.cc
     - +.b-ok.global
     - +.b-ok.org
@@ -21,9 +21,9 @@ payload:
     - +.bookfi.net
     - +.booksc.eu
     - +.booksc.me
-    - +.b-ok.asia
     - +.1lib.cz
-    - +.libsolutions.net
+    - +.booksc.org
+    - +.1lib.tw
     - +.bookshome.net
     - +.bookshome.world
     - +.de1lib.org
@@ -31,7 +31,7 @@ payload:
     - +.hk1lib.org
     - +.libsolutions.app
     - +.libsolutions.domains
-    - +.1lib.cloud
+    - +.libsolutions.net
     - +.ma1lib.org
     - +.sg1lib.org
     - +.singlelogin.app
@@ -41,7 +41,7 @@ payload:
     - +.z-lib.fm
     - +.z-lib.gd
     - +.z-lib.gl
-    - +.booksc.xyz
+    - +.z-lib.org
     - +.z-library.sk
     - +.z-library.se
     - +.zlib.life

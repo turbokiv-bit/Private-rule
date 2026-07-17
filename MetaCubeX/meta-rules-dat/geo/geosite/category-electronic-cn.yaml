@@ -1,14 +1,14 @@
 payload:
     - +.jlc-drm.com
-    - +.zxhgroup.com
+    - +.jlc-ecad.com
     - +.avermedia.cn
     - +.boe.com
     - +.bouffalolab.com
-    - +.analog.com
+    - +.cxmt.com
     - +.eda.cn
     - +.elecfans.com
     - +.hqchip.com
-    - +.hqdoc.com
+    - +.jlc-erp.com
     - +.hqpcb.com
     - +.infineon.cn
     - +.listenai.com
@@ -21,7 +21,7 @@ payload:
     - +.maixhub.com
     - +.ymtc.cn
     - +.ymtc.com
-    - +.jlc-ecad.com
+    - +.zxhgroup.com
     - +.zs-jlc.com
     - +.szlcsc.com
     - +.wch.cn
@@ -35,12 +35,12 @@ payload:
     - +.jlc-cam.com
     - +.jlc-cnc.com
     - +.jlc-dfm.com
-    - +.cxmt.com
     - +.arrow.cn
-    - +.jlc-jh.com
+    - +.analog.com
+    - +.hqdoc.com
     - +.jlc-fpc.com
     - +.jlc-gw.com
-    - +.jlc-erp.com
+    - +.jlc-jh.com
     - +.jlc-layout.com
     - +.jlc-pcb.com
     - +.jlc-smt.com

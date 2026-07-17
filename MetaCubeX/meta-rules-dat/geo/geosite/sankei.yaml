@@ -1,17 +1,17 @@
 payload:
     - +.sankei-ad-info.com
-    - +.innovations-i.com
     - +.sankei-ad.net
+    - +.innovations-i.com
     - +.ironna.jp
     - +.tvnaviweb.jp
     - +.japan-forward.com
     - +.keiba.net
     - +.business-i.jp
-    - +.seiron-sankei.com
-    - +.mostly.jp
-    - +.sankei.com
-    - +.ign.jp
     - +.metropolitana.tokyo
+    - +.seiron-sankei.com
+    - +.ign.jp
+    - +.sankei.jp
+    - +.mostly.jp
     - +.sankei-call.jp
     - +.seasidestory.tokyo
     - +.sanspo.com
@@ -20,7 +20,7 @@ payload:
     - +.sankei-shougakukai.jp
     - +.sankei-tours.com
     - +.sankeibiz.jp
-    - +.sankei.jp
+    - +.sankei.com
     - +.knowswho.co.jp
     - +.sankei.co.jp
     - +.sankei-kaihatsu.co.jp

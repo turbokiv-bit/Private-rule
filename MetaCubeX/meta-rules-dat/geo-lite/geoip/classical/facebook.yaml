@@ -95,7 +95,7 @@ payload:
     - IP-CIDR,2a03:2887:ff33::/48
     - IP-CIDR,2a03:2887:ff37::/48
     - IP-CIDR,2a03:2887:ff38::/46
-    - IP-CIDR,2a03:2887:ff3f::/48
+    - IP-CIDR,2a03:2887:ff3e::/47
     - IP-CIDR,2a03:2887:ff40::/46
     - IP-CIDR,2a03:2887:ff44::/47
     - IP-CIDR,2a03:2887:ff48::/46
@@ -116,3 +116,4 @@ payload:
     - IP-CIDR,2c0f:ef78:9::/48
     - IP-CIDR,2c0f:ef78:c::/47
     - IP-CIDR,2c0f:ef78:10::/47
+    - IP-CIDR,2c0f:ef78:12::/48

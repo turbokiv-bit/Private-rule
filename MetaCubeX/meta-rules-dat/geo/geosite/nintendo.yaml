@@ -1,13 +1,13 @@
 payload:
     - +.fireemblemawakening.com
-    - +.wiipartyu.com
+    - +.nintendo.fi
     - +.ayudanintendo.com
     - +.bowsersinsidestory.com
     - +.excitebots.com
     - +.flipnotestudio.com
     - +.gloryofheracles.com
     - +.hackyourconsole.com
-    - +.100classicbooks.com
+    - +.kirbysuperstarultra.com
     - +.kirbysepicyarn.com
     - +.miitomo.com
     - +.miiverse.com
@@ -24,7 +24,7 @@ payload:
     - +.nintendo.eu
     - +.xenoblade.com
     - +.wiivc.net
-    - +.nintendo.fi
+    - +.fire-emblem-heroes.com
     - +.nintendo.fr
     - +.nintendo.it
     - +.nintendo.net
@@ -47,15 +47,15 @@ payload:
     - +.playnintendo.com
     - +.thelegendarystarfy.com
     - +.thewonderful101.com
-    - +.wariolandshakeit.com
+    - +.donkeykongcountryreturns.com
     - +.wariowarediy.com
     - +.yoshisnewisland.com
     - +.ac-pocketcamp.com
     - +.diddykongracing.com
     - +.dkr.com
-    - +.pokemonmysterydungeon.com
+    - +.wariolandshakeit.com
     - +.amiibo.com
-    - +.kirbysuperstarultra.com
+    - +.100classicbooks.com
     - +.dialga.com
     - +.giratina.com
     - +.kyurem.com
@@ -73,7 +73,7 @@ payload:
     - +.pokemonhome.com
     - +.pokemonletsgoeevee.com
     - +.pokemonletsgopikachu.com
-    - +.donkeykongcountryreturns.com
+    - +.pokemonmysterydungeon.com
     - +.pokemonpicross.com
     - +.pokemonplatinum.com
     - +.pokemonrubysapphire.com
@@ -101,7 +101,7 @@ payload:
     - +.wii-u.com
     - +.wiifit.com
     - +.wiifitu.com
-    - +.fire-emblem-heroes.com
+    - +.wiipartyu.com
     - +.wiisports.com
     - +.wiisportsresort.com
     - +.wiiugamepad.com

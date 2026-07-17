@@ -1,7 +1,7 @@
 payload:
     - +.yandex
     - +.yandex.lv
-    - +.yandex.aero
+    - +.yandex.kg
     - +.cabconnect.org
     - +.clck.ru
     - +.clstorage.net
@@ -26,7 +26,7 @@ payload:
     - +.ya.ru
     - +.yandex-bank.net
     - +.yandex-team.ru
-    - +.xn--d1acpjx3f.xn--p1ai
+    - +.yandex.aero
     - +.yandex.asia
     - +.yandex.az
     - +.yandex.by
@@ -40,10 +40,10 @@ payload:
     - +.yccdn.ru
     - +.yandex.fr
     - +.yandex.jobs
-    - +.yandex.kg
+    - +.xn--d1acpjx3f.xn--p1ai
     - +.yandex.kz
-    - +.yandex.tj
     - +.berizaryad.ru
+    - +.yandex.lt
     - +.support-uber.com
     - +.yandex.mobi
     - +.yandex.net
@@ -52,7 +52,7 @@ payload:
     - +.yandex.ru
     - +.yandex.st
     - +.yandex.sx
-    - +.yandex.lt
+    - +.yandex.tj
     - +.yandex.tm
     - +.yandex.tr
     - +.yandex.ua

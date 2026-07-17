@@ -1,7 +1,7 @@
 payload:
     - sberpro.vedomosti.ru
     - +.spasibosberbank.ru
-    - +.afisha.ru
+    - +.sberbankaktivno.ru
     - +.sber.ru
     - +.sberbank.com
     - +.sberbank.ru
@@ -26,7 +26,7 @@ payload:
     - +.sbermobile.ru
     - +.sberpb.ru
     - +.sbertroika.ru
-    - +.okko.sport
+    - +.afisha.ru
     - +.citydrive.ru
     - +.cloud.ru
     - +.cloudru.cn
@@ -40,19 +40,19 @@ payload:
     - +.gitverse.ru
     - +.jivo.chat
     - +.jivo.ru
+    - +.okko.sport
     - +.playfamily.ru
-    - +.okkoapi.tv
-    - +.jivosite.ru
     - +.sber-bank.by
-    - +.sberbankaktivno.ru
-    - +.2gis.uz
+    - +.okkoapi.tv
+    - +.jivochat.com
+    - +.2gis.ge
     - +.2gis.tj
     - +.jivochat.de
     - +.jivochat.es
     - +.jivochat.ng
     - +.jivochat.ru
     - +.jivosite.com
-    - +.jivochat.com
+    - +.jivosite.ru
     - +.payecom.ru
     - +.platiecom.ru
     - +.otello.ru
@@ -70,21 +70,21 @@ payload:
     - +.zvuk-b2b.com
     - +.zvuk.com
     - +.2gis.cz
-    - +.2gis.ae
+    - +.2gis.uz
     - +.2gis.az
     - +.2gis.by
     - +.2gis.com
     - +.2gis.tech
-    - +.2gis.am
-    - +.2gis.ge
-    - +.2gis.ru
-    - +.2gis.kz
     - +.2gis.kg
+    - +.2gis.ae
+    - +.2gis.am
+    - +.2gis.kz
+    - +.2gis.ru
     - +.jivochat.com.tr
     - +.jivochat.com.pe
     - +.2gis.com.cy
-    - +.jivochat.co.za
     - +.jivochat.co.in
+    - +.jivochat.co.za
     - +.jivochat.com.br
     - +.jivochat.com.co
     - +.ads.sber.ru
