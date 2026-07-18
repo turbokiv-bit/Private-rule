@@ -7,22 +7,6 @@ payload:
     - +.gcdn.co
     - +.gcore.com
     - +.gcore.pro
-    - +.delvenetworks.com
-    - +.limelight.com
-    - +.lldns.net
-    - +.llnw-trials.com
-    - +.llnw.com
-    - +.llnw.net
-    - +.llnwd.net
-    - +.llnwi.net
-    - +.quantil.com
-    - +.pagecdn.com
-    - +.pagecdn.io
-    - +.stackpath.com
-    - +.stackpath.dev
-    - +.vrcdn.cloud
-    - +.vrcdn.live
-    - +.vrcdn.video
     - +.ak1.net
     - +.aka-ai.com
     - +.aka-ai.net
@@ -92,8 +76,6 @@ payload:
     - +.iamakamai.net
     - +.soasta-dswb.com
     - +.srtcdn.net
-    - +.cdn77.com
-    - +.cdn77.org
     - +.argotunnel.com
     - +.browser.run
     - +.cfargotunnel.com
@@ -148,6 +130,14 @@ payload:
     - +.workers.dev
     - +.cf-ipfs.com
     - +.cloudflare-ipfs.com
+    - +.esm.run
+    - +.jsdelivr.com
+    - +.jsdelivr.net
+    - +.pagecdn.com
+    - +.pagecdn.io
+    - +.quantil.com
+    - +.cdn77.com
+    - +.cdn77.org
     - +.fastly-edge.com
     - +.fastly-terrarium.com
     - +.fastly.com
@@ -158,9 +148,19 @@ payload:
     - +.zencdn.net
     - +.imgix.com
     - +.imgix.net
-    - +.esm.run
-    - +.jsdelivr.com
-    - +.jsdelivr.net
+    - +.delvenetworks.com
+    - +.limelight.com
+    - +.lldns.net
+    - +.llnw-trials.com
+    - +.llnw.com
+    - +.llnw.net
+    - +.llnwd.net
+    - +.llnwi.net
+    - +.stackpath.com
+    - +.stackpath.dev
+    - +.vrcdn.cloud
+    - +.vrcdn.live
+    - +.vrcdn.video
     - +.akamai.co.kr
     - +.one.one.one
     - +.accdn.com.cn
