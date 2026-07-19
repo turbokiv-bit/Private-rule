@@ -36,7 +36,7 @@
         "DNSreject"
       ],
       "action": "reject"
-    },
+      },
       {
         "query_type": ["A", "AAAA"],
         "invert": true,
@@ -48,7 +48,8 @@
         "HTTPS",
         "SVCB"
       ],
-      "action": "reject"
+        "action": "predefined",
+        "rcode": "NOERROR"
     },
         {
       "type": "logical",
@@ -62,7 +63,8 @@
           "invert": true
         }
       ],
-      "action": "reject"
+        "action": "predefined",
+        "rcode": "NOERROR"
     },
       {
         "query_type": [
@@ -127,7 +129,8 @@
       },
       {
         "action": "route",
-        "server": "fakeip"
+        "server": "fakeip",
+        "rewrite_ttl": 1
       }
     ],
   "final": "Super-Max-Doq",
@@ -137,8 +140,7 @@
   "optimistic": {
     "enabled": true,
     "timeout": "30d"
-  },
-  "timeout": "10s"
+  }
 },
   "http_clients": [
     {
