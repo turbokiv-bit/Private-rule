@@ -1,0 +1,1413 @@
+{
+  "log": {
+    "level": "warn",
+    "timestamp": true
+  },
+  "dns": {
+  "servers": [
+     {
+        "tag": "isp-DNS",
+        "type": "local"
+    },
+     {
+        "tag": "Super-Max-Doq",
+        "type": "quic",
+        "server": "1qi47h.host.apad.pro",
+        "domain_resolver": {"server": "isp-DNS", "strategy": "ipv4_only"}
+      },
+     {
+        "tag": "Apadpro-Doq",
+        "type": "quic",
+        "server": "180.76.115.140",
+        "server_port": 8853,
+        "domain_resolver": {"server": "isp-DNS", "strategy": "ipv4_only"}
+      },
+    {
+      "type": "fakeip",
+      "tag": "fakeip",
+      "inet4_range": "198.18.0.0/15"
+    }
+  ],
+  "rules": [
+      {
+        "query_type": ["A", "AAAA"],
+        "invert": true,
+        "action": "predefined",
+        "rcode": "NOERROR"
+      },
+    {
+      "query_type": [
+        "HTTPS",
+        "SVCB"
+      ],
+      "action": "predefined",
+      "rcode": "NOERROR"
+    },
+      {
+        "query_type": [
+          64,
+          65
+        ],
+        "action": "predefined",
+        "rcode": "NOTIMP"
+      },
+    {
+      "rule_set": [
+        "Reject",
+        "httpDNS",
+        "DNSreject"
+      ],
+      "action": "predefined",
+      "rcode": "NOERROR"
+    },
+    {
+      "type": "logical",
+      "mode": "and",
+      "rules": [
+        {
+          "query_type": "PTR"
+        },
+        {
+          "rule_set": "Private",
+          "invert": true
+        }
+      ],
+      "action": "predefined",
+      "rcode": "NOERROR"
+    },
+    {
+      "preferred_by": "isp-DNS",
+      "action": "route",
+      "server": "isp-DNS"
+    },
+    {
+      "clash_mode": "Direct",
+      "action": "route",
+      "server": "Apadpro-Doq"
+    },
+    {
+      "clash_mode": "Global",
+      "query_type": [
+        "A"
+      ],
+      "action": "route",
+      "server": "fakeip"
+    },
+    {
+      "rule_set": [
+        "CdnOne",
+        "CdnTwo",
+        "Apple & Microsoft Domestic CdnOne",
+        "Apple & Microsoft Domestic CdnTwo",
+        "Apple & Microsoft servicesOne",
+        "Apple & Microsoft servicesTwo",
+        "Unbreak",
+        "Apple CN",
+        "Domestic domain name",
+        "Geosite-cn",
+        "GeoCHN",
+        "Private",
+        "Direct domain name",
+        "Intranet domain name"
+      ],
+      "query_type": [
+        "A"
+      ],
+      "action": "route",
+      "server": "fakeip",
+      "rewrite_ttl": 1
+    },
+      {
+        "action": "evaluate",
+        "server": "Apadpro-Doq"
+      },
+      {
+        "match_response": true,
+        "response_rcode": "NOERROR",
+        "ip_accept_any": true,
+        "invert": true,
+        "action": "respond"
+      },
+      {
+        "type": "logical",
+        "mode": "or",
+        "rules": [
+          {
+            "match_response": true,
+            "ip_is_private": true
+          },
+          {
+            "match_response": true,
+            "rule_set": [
+              "China IP",
+              "CN IP"
+          ]
+          }
+        ],
+        "action": "respond"
+      },
+      {
+        "action": "route",
+        "server": "fakeip"
+      }
+    ],
+  "final": "Super-Max-Doq",
+  "reverse_mapping": true,
+  "strategy": "ipv4_only",
+  "cache_capacity": 8192,
+  "optimistic": {
+    "enabled": true,
+    "timeout": "30d"
+  },
+  "timeout": "10s"
+},
+  "http_clients": [
+    {
+      "tag": "default",
+      "version": 2,
+      "detour": "🇺🇸 Super Max USA"
+    }
+  ],
+  "inbounds": [
+    {
+      "type": "tun",
+      "tag": "tun-in",
+      "mtu": 1500,
+      "address": "172.19.0.1/30",
+      "auto_route": true,
+      "strict_route": true,
+      "udp_timeout": "1m0s",
+      "stack": "mixed"
+    },
+    {
+      "type": "mixed",
+      "tag": "mixed-in",
+      "listen": "127.0.0.1",
+      "listen_port": 7080
+    },
+     {
+       "type": "socks",
+       "tag": "Telegram-socks",
+       "listen": "127.0.0.1",
+       "listen_port": 6153
+    }
+  ],
+  "outbounds": [
+    {
+      "type": "direct",
+      "tag": "🇨🇳 CN-Only-V4",
+       "domain_resolver":
+      {
+       "server": "Apadpro-Doq",
+       "strategy": "ipv4_only"
+    }
+    },
+    {
+      "type": "bridge",
+      "tag": "🇨🇳 CN-Bridge-L3"
+    },
+    {
+      "type": "selector",
+      "tag": "🇨🇳 Super Max CHN",
+      "outbounds": [
+        "🇨🇳 CN-Only-V4"
+      ],
+      "interrupt_exist_connections": true
+    },
+    {
+      "type": "selector",
+      "tag": "🌐 Super Max VKG",
+      "outbounds": [
+        "🇭🇰 Super Max HKG",
+        "🇺🇸 Super Max USA",
+        "🇸🇬 Super Max SGP",
+        "🇯🇵 Super Max JPG",
+        "🇹🇼 Super Max TPE",
+        "🇩🇪 Super Max GER",
+        "🇨🇳 Super Max CHN"
+      ],
+      "default": "🇺🇸 Super Max USA",
+      "interrupt_exist_connections": true
+    },
+    {
+      "type": "selector",
+      "tag": "Final",
+      "outbounds": [
+        "🌐 Super Max VKG",
+        "🇭🇰 Super Max HKG",
+        "🇺🇸 Super Max USA",
+        "🇸🇬 Super Max SGP",
+        "🇯🇵 Super Max JPG",
+        "🇹🇼 Super Max TPE",
+        "🇩🇪 Super Max GER"
+      ],
+      "default": "🌐 Super Max VKG",
+      "interrupt_exist_connections": true
+    },
+    {
+      "type": "selector",
+      "tag": "📺 Super Max Emby",
+      "outbounds": [
+        "🇭🇰 Super Max HKG",
+        "🇺🇸 Super Max USA",
+        "🇸🇬 Super Max SGP",
+        "🇯🇵 Super Max JPG",
+        "🇹🇼 Super Max TPE",
+        "🇩🇪 Super Max GER",
+        "🇨🇳 Super Max CHN"
+      ],
+      "interrupt_exist_connections": true
+    },
+    {
+      "type": "selector",
+      "tag": "🇭🇰 Super Max HKG",
+      "outbounds": [
+        "🇭🇰 HKT | IEPL",
+        "🇭🇰 HGC | IEPL",
+        "🇭🇰 Misaka | IEPL",
+        "🇭🇰 DMIT | IEPL",
+        "🇭🇰 iCable | IEPL",
+        "🇭🇰 HKT | SHDL",
+        "🇭🇰 HGC | SHDL",
+        "🇭🇰 Misaka | SHDL",
+        "🇭🇰 DMIT | SHDL",
+        "🇭🇰 iCable | SHDL",
+        "🇭🇰 HKT | Gomami",
+        "🇭🇰 HGC | Gomami",
+        "🇭🇰 Misaka | Gomami",
+        "🇭🇰 DMIT | Gomami",
+        "🇭🇰 iCable | Gomami"
+      ],
+      "interrupt_exist_connections": true
+    },
+    {
+      "type": "selector",
+      "tag": "🇺🇸 Super Max USA",
+      "outbounds": [
+        "🇺🇸 Sakura | SHDL",
+        "🇺🇸 Misaka | SHDL",
+        "🇺🇸 AT&T | SHDL",
+        "🇺🇸 HostHatch | SHDL",
+        "🇺🇸 Cox | SHDL"
+      ],
+      "interrupt_exist_connections": true
+    },
+    {
+      "type": "selector",
+      "tag": "🇸🇬 Super Max SGP",
+      "outbounds": [
+        "🇸🇬 SG.GS | IEPL",
+        "🇸🇬 Misaka | IEPL",
+        "🇸🇬 Aper | IEPL",
+        "🇸🇬 SG.GS | Gomami",
+        "🇸🇬 Misaka | Gomami",
+        "🇸🇬 Aper | Gomami"
+      ],
+      "interrupt_exist_connections": true
+    },
+    {
+      "type": "selector",
+      "tag": "🇯🇵 Super Max JPG",
+      "outbounds": [
+        "🇯🇵 DMIT | SHDL",
+        "🇯🇵 Misaka | SHDL",
+        "🇯🇵 SoftBank | SHDL",
+        "🇯🇵 Sonet | SHDL",
+        "🇯🇵 Kddi | SHDL"
+      ],
+      "interrupt_exist_connections": true
+    },
+    {
+      "type": "selector",
+      "tag": "🇹🇼 Super Max TPE",
+      "outbounds": [
+        "🇨🇳 Hinet | IEPL",
+        "🇨🇳 AKILE | IEPL",
+        "🇨🇳 Akari | IEPL",
+        "🇨🇳 Hinet | Gomami",
+        "🇨🇳 AKILE | Gomami",
+        "🇨🇳 Akari | Gomami"
+      ],
+      "interrupt_exist_connections": true
+    },
+    {
+      "type": "selector",
+      "tag": "🇩🇪 Super Max GER",
+      "outbounds": [
+        "🇩🇪 Dataforest | BJDE",
+        "🇩🇪 Putzmann | BJDE",
+        "🇩🇪 Leaseweb | BJDE"
+      ],
+      "interrupt_exist_connections": true
+    },
+    {
+      "type": "trojan",
+      "tag": "🇭🇰 HKT | IEPL",
+      "server": "gzktmfsiurtbn.makeufast.org",
+      "server_port": 27051,
+      "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
+      "tls": {
+        "enabled": true,
+        "server_name": "mcdn.bilivideo.com",
+        "insecure": true
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "🇭🇰 HGC | IEPL",
+      "server": "gzktmfsiurtbn.makeufast.org",
+      "server_port": 26003,
+      "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
+      "tls": {
+        "enabled": true,
+        "server_name": "mcdn.bilivideo.com",
+        "insecure": true
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "🇭🇰 Misaka | IEPL",
+      "server": "gzktmfsiurtbn.makeufast.org",
+      "server_port": 26006,
+      "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
+      "tls": {
+        "enabled": true,
+        "server_name": "mcdn.bilivideo.com",
+        "insecure": true
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "🇭🇰 DMIT | IEPL",
+      "server": "gzktmfsiurtbn.makeufast.org",
+      "server_port": 26021,
+      "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
+      "tls": {
+        "enabled": true,
+        "server_name": "mcdn.bilivideo.com",
+        "insecure": true
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "🇭🇰 iCable | IEPL",
+      "server": "gzktmfsiurtbn.makeufast.org",
+      "server_port": 53112,
+      "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
+      "tls": {
+        "enabled": true,
+        "server_name": "mcdn.bilivideo.com",
+        "insecure": true
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "🇭🇰 HKT | SHDL",
+      "server": "shmyndiptmga.makeufast.com",
+      "server_port": 27051,
+      "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
+      "tls": {
+        "enabled": true,
+        "server_name": "mcdn.bilivideo.com",
+        "insecure": true
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "🇭🇰 HGC | SHDL",
+      "server": "shmyndiptmga.makeufast.com",
+      "server_port": 26003,
+      "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
+      "tls": {
+        "enabled": true,
+        "server_name": "mcdn.bilivideo.com",
+        "insecure": true
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "🇭🇰 Misaka | SHDL",
+      "server": "shmyndiptmga.makeufast.com",
+      "server_port": 26006,
+      "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
+      "tls": {
+        "enabled": true,
+        "server_name": "mcdn.bilivideo.com",
+        "insecure": true
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "🇭🇰 DMIT | SHDL",
+      "server": "shmyndiptmga.makeufast.com",
+      "server_port": 26021,
+      "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
+      "tls": {
+        "enabled": true,
+        "server_name": "mcdn.bilivideo.com",
+        "insecure": true
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "🇭🇰 iCable | SHDL",
+      "server": "shmyndiptmga.makeufast.com",
+      "server_port": 53112,
+      "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
+      "tls": {
+        "enabled": true,
+        "server_name": "mcdn.bilivideo.com",
+        "insecure": true
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "🇭🇰 HKT | Gomami",
+      "server": "vednamgo.douyinverygood.com",
+      "server_port": 53011,
+      "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
+      "tls": {
+        "enabled": true,
+        "server_name": "mcdn.bilivideo.com",
+        "insecure": true
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "🇭🇰 HGC | Gomami",
+      "server": "vednamgo.douyinverygood.com",
+      "server_port": 53103,
+      "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
+      "tls": {
+        "enabled": true,
+        "server_name": "mcdn.bilivideo.com",
+        "insecure": true
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "🇭🇰 Misaka | Gomami",
+      "server": "vednamgo.douyinverygood.com",
+      "server_port": 53106,
+      "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
+      "tls": {
+        "enabled": true,
+        "server_name": "mcdn.bilivideo.com",
+        "insecure": true
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "🇭🇰 DMIT | Gomami",
+      "server": "vednamgo.douyinverygood.com",
+      "server_port": 53107,
+      "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
+      "tls": {
+        "enabled": true,
+        "server_name": "mcdn.bilivideo.com",
+        "insecure": true
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "🇭🇰 iCable | Gomami",
+      "server": "vednamgo.douyinverygood.com",
+      "server_port": 53112,
+      "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
+      "tls": {
+        "enabled": true,
+        "server_name": "mcdn.bilivideo.com",
+        "insecure": true
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "🇸🇬 SG.GS | IEPL",
+      "server": "gzktmfsiurtbn.makeufast.org",
+      "server_port": 26007,
+      "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
+      "tls": {
+        "enabled": true,
+        "server_name": "mcdn.bilivideo.com",
+        "insecure": true
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "🇸🇬 Misaka | IEPL",
+      "server": "gzktmfsiurtbn.makeufast.org",
+      "server_port": 36019,
+      "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
+      "tls": {
+        "enabled": true,
+        "server_name": "mcdn.bilivideo.com",
+        "insecure": true
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "🇸🇬 Aper | IEPL",
+      "server": "gzktmfsiurtbn.makeufast.org",
+      "server_port": 27001,
+      "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
+      "tls": {
+        "enabled": true,
+        "server_name": "mcdn.bilivideo.com",
+        "insecure": true
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "🇸🇬 SG.GS | Gomami",
+      "server": "sggogogo.douyinverygood.com",
+      "server_port": 54001,
+      "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
+      "tls": {
+        "enabled": true,
+        "server_name": "mcdn.bilivideo.com",
+        "insecure": true
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "🇸🇬 Misaka | Gomami",
+      "server": "sggogogo.douyinverygood.com",
+      "server_port": 54006,
+      "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
+      "tls": {
+        "enabled": true,
+        "server_name": "mcdn.bilivideo.com",
+        "insecure": true
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "🇸🇬 Aper | Gomami",
+      "server": "sggogogo.douyinverygood.com",
+      "server_port": 54008,
+      "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
+      "tls": {
+        "enabled": true,
+        "server_name": "mcdn.bilivideo.com",
+        "insecure": true
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "🇯🇵 DMIT | SHDL",
+      "server": "shmyndiptmga.makeufast.com",
+      "server_port": 26027,
+      "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
+      "tls": {
+        "enabled": true,
+        "server_name": "mcdn.bilivideo.com",
+        "insecure": true
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "🇯🇵 Misaka | SHDL",
+      "server": "shmyndiptmga.makeufast.com",
+      "server_port": 46026,
+      "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
+      "tls": {
+        "enabled": true,
+        "server_name": "mcdn.bilivideo.com",
+        "insecure": true
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "🇯🇵 SoftBank | SHDL",
+      "server": "shmyndiptmga.makeufast.com",
+      "server_port": 26032,
+      "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
+      "tls": {
+        "enabled": true,
+        "server_name": "mcdn.bilivideo.com",
+        "insecure": true
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "🇯🇵 Sonet | SHDL",
+      "server": "shmyndiptmga.makeufast.com",
+      "server_port": 26033,
+      "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
+      "tls": {
+        "enabled": true,
+        "server_name": "mcdn.bilivideo.com",
+        "insecure": true
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "🇯🇵 Kddi | SHDL",
+      "server": "shmyndiptmga.makeufast.com",
+      "server_port": 26090,
+      "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
+      "tls": {
+        "enabled": true,
+        "server_name": "mcdn.bilivideo.com",
+        "insecure": true
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "🇨🇳 Hinet | IEPL",
+      "server": "gzktmfsiurtbn.makeufast.org",
+      "server_port": 26037,
+      "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
+      "tls": {
+        "enabled": true,
+        "server_name": "mcdn.bilivideo.com",
+        "insecure": true
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "🇨🇳 AKILE | IEPL",
+      "server": "gzktmfsiurtbn.makeufast.org",
+      "server_port": 26038,
+      "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
+      "tls": {
+        "enabled": true,
+        "server_name": "mcdn.bilivideo.com",
+        "insecure": true
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "🇨🇳 Akari | IEPL",
+      "server": "gzktmfsiurtbn.makeufast.org",
+      "server_port": 26039,
+      "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
+      "tls": {
+        "enabled": true,
+        "server_name": "mcdn.bilivideo.com",
+        "insecure": true
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "🇨🇳 Hinet | Gomami",
+      "server": "vednamgo.douyinverygood.com",
+      "server_port": 56101,
+      "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
+      "tls": {
+        "enabled": true,
+        "server_name": "mcdn.bilivideo.com",
+        "insecure": true
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "🇨🇳 AKILE | Gomami",
+      "server": "vednamgo.douyinverygood.com",
+      "server_port": 56102,
+      "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
+      "tls": {
+        "enabled": true,
+        "server_name": "mcdn.bilivideo.com",
+        "insecure": true
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "🇨🇳 Akari | Gomami",
+      "server": "vednamgo.douyinverygood.com",
+      "server_port": 56103,
+      "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
+      "tls": {
+        "enabled": true,
+        "server_name": "mcdn.bilivideo.com",
+        "insecure": true
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "🇺🇸 Sakura | SHDL",
+      "server": "shmyndiptmga.makeufast.com",
+      "server_port": 28508,
+      "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
+      "tls": {
+        "enabled": true,
+        "server_name": "mcdn.bilivideo.com",
+        "insecure": true
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "🇺🇸 Misaka | SHDL",
+      "server": "shmyndiptmga.makeufast.com",
+      "server_port": 46041,
+      "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
+      "tls": {
+        "enabled": true,
+        "server_name": "mcdn.bilivideo.com",
+        "insecure": true
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "🇺🇸 AT&T | SHDL",
+      "server": "shmyndiptmga.makeufast.com",
+      "server_port": 26099,
+      "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
+      "tls": {
+        "enabled": true,
+        "server_name": "mcdn.bilivideo.com",
+        "insecure": true
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "🇺🇸 HostHatch | SHDL",
+      "server": "shmyndiptmga.makeufast.com",
+      "server_port": 36034,
+      "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
+      "tls": {
+        "enabled": true,
+        "server_name": "mcdn.bilivideo.com",
+        "insecure": true
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "🇺🇸 Cox | SHDL",
+      "server": "shmyndiptmga.makeufast.com",
+      "server_port": 27100,
+      "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
+      "tls": {
+        "enabled": true,
+        "server_name": "mcdn.bilivideo.com",
+        "insecure": true
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "🇩🇪 Dataforest | BJDE",
+      "server": "bjde.dhqbtyngpss.hardcorelinks.org",
+      "server_port": 36012,
+      "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
+      "tls": {
+        "enabled": true,
+        "server_name": "mcdn.bilivideo.com",
+        "insecure": true
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "🇩🇪 Putzmann | BJDE",
+      "server": "bjde.dhqbtyngpss.hardcorelinks.org",
+      "server_port": 36013,
+      "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
+      "tls": {
+        "enabled": true,
+        "server_name": "mcdn.bilivideo.com",
+        "insecure": true
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "🇩🇪 Leaseweb | BJDE",
+      "server": "bjde.dhqbtyngpss.hardcorelinks.org",
+      "server_port": 36015,
+      "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
+      "tls": {
+        "enabled": true,
+        "server_name": "mcdn.bilivideo.com",
+        "insecure": true
+      }
+    }
+  ],
+  "route": {
+    "rules": [
+      {
+        "ip_version": 6,
+        "action": "reject"
+      },
+{
+  "type": "logical",
+  "mode": "and",
+  "rules": [
+    {
+      "inbound": [
+        "Telegram-socks"
+      ]
+    },
+    {
+      "rule_set": [
+        "Telegram",
+        "Geoip-Telegram"
+      ],
+      "invert": true
+    }
+  ],
+  "action": "reject"
+},
+      {
+        "rule_set": "Reject",
+        "action": "reject"
+      },
+      {
+        "port": 53,
+        "action": "hijack-dns"
+      },
+    {
+    "ip_is_private": true,
+    "preferred_by": "🇨🇳 CN-Bridge-L3",
+    "outbound": "🇨🇳 CN-Bridge-L3",
+    "action": "route"
+    },
+     {
+      "network": "icmp",
+      "action": "resolve"
+     },
+    {
+    "network": "icmp",
+    "preferred_by": "🇨🇳 CN-Bridge-L3",
+    "outbound": "🇨🇳 CN-Bridge-L3",
+    "action": "route"
+    },
+     {
+        "network": "udp",
+        "port": 123,
+      "action": "resolve"
+     },
+      {
+        "network": "udp",
+        "port": 123,
+        "preferred_by": "🇨🇳 CN-Bridge-L3",
+        "outbound": "🇨🇳 CN-Bridge-L3",
+        "action": "route"
+      },
+          {
+            "rule_set": [
+              "Unbreak",
+              "Apple CN",
+              "Domestic domain name",
+              "Geosite-cn",
+              "GeoCHN",
+              "Private",
+              "Direct domain name",
+              "Intranet domain name"
+           ],
+      "action": "resolve"
+          },
+    {
+        "type": "logical",
+        "mode": "and",
+        "rules": [
+          {
+            "preferred_by": "🇨🇳 CN-Bridge-L3"
+          },
+          {
+            "rule_set": [
+              "Unbreak",
+              "Apple CN",
+              "Domestic domain name",
+              "Geosite-cn",
+              "GeoCHN",
+              "Private",
+              "Direct domain name",
+              "Intranet domain name",
+              "Domestic IP",
+              "China IP",
+              "CN IP"
+
+           ]
+          },
+          {
+            "inbound": [
+             "mixed-in"
+            ],
+            "invert": true
+          },
+          {
+            "port": [
+              53,
+              853
+            ],
+            "invert": true
+          },
+          {
+            "network": [
+              "udp",
+              "tcp"
+            ]
+          }
+         ],
+        "outbound": "🇨🇳 CN-Bridge-L3",
+        "action": "route"
+      },
+      {
+        "rule_set": [
+          "Geoip-Telegram"
+        ],
+        "invert": true,
+        "action": "sniff",
+        "sniffer": [
+          "http",
+          "tls",
+          "quic",
+          "dns",
+          "stun",
+          "dtls"
+        ]
+      },
+      {
+        "protocol": "dns",
+        "action": "hijack-dns"
+      },
+     {
+      "protocol": [
+      "stun",
+      "dtls"
+     ],
+      "action": "reject"
+      },
+      {
+        "network": "udp",
+        "port": 123,
+        "outbound": "🇨🇳 Super Max CHN",
+        "action": "route"
+      },
+      {
+        "network": "icmp",
+        "rule_set": [
+          "CN IP",
+          "China IP"
+        ],
+        "outbound": "🇨🇳 Super Max CHN",
+        "action": "route"
+      },
+{
+  "ip_is_private": true,
+  "outbound": "🇨🇳 Super Max CHN",
+  "action": "route"
+},
+{
+  "clash_mode": "Direct",
+  "outbound": "🇨🇳 Super Max CHN",
+  "action": "route"
+},
+{
+  "clash_mode": "Global",
+  "outbound": "🌐 Super Max VKG",
+  "action": "route"
+},
+      {
+        "rule_set": "Unbreak",
+        "outbound": "🇨🇳 Super Max CHN",
+        "action": "route"
+      },
+      {
+        "rule_set": "Github",
+        "outbound": "🇺🇸 Super Max USA",
+        "action": "route"
+      },
+      {
+        "rule_set": [
+          "Speedtest",
+          "CdnOne",
+          "CdnTwo"
+        ],
+        "outbound": "🇭🇰 Super Max HKG",
+        "action": "route"
+      },
+      {
+        "rule_set": [
+         "Youtube",
+         "Soundcloud"
+       ],
+        "outbound": "🇺🇸 Super Max USA",
+        "action": "route"
+      },
+      {
+        "rule_set": "Spotify",
+        "outbound": "🇭🇰 Super Max HKG",
+        "action": "route"
+      },
+      {
+        "rule_set": "Streaming",
+        "outbound": "🇯🇵 Super Max JPG",
+        "action": "route"
+      },
+      {
+        "rule_set": [
+          "Apple & Microsoft Domestic CdnOne",
+          "Apple & Microsoft Domestic CdnTwo",
+          "Downloadone",
+          "DownloadTwo"
+        ],
+        "outbound": "🇭🇰 Super Max HKG",
+        "action": "route"
+      },
+      {
+        "rule_set": "Apple CN",
+        "outbound": "🇨🇳 Super Max CHN",
+        "action": "route"
+      },
+      {
+        "rule_set": [
+          "Apple & Microsoft servicesOne",
+          "Apple & Microsoft servicesTwo",
+          "AIGC"
+        ],
+        "outbound": "🇺🇸 Super Max USA",
+        "action": "route"
+      },
+      {
+        "rule_set": "Meta",
+        "outbound": "🇩🇪 Super Max GER",
+        "action": "route"
+      },
+      {
+        "rule_set": "Twitter",
+        "outbound": "🇺🇸 Super Max USA",
+        "action": "route"
+      },
+      {
+        "rule_set": "Telegram",
+        "outbound": "🇸🇬 Super Max SGP",
+        "action": "route"
+      },
+      {
+        "rule_set": "GeoEmby-Aptv",
+        "outbound": "📺 Super Max Emby",
+        "action": "route"
+      },
+      {
+        "rule_set": "Geoloc",
+        "outbound": "🇩🇪 Super Max GER",
+        "action": "route"
+      },
+      {
+        "rule_set": "Google",
+        "outbound": "🇺🇸 Super Max USA",
+        "action": "route"
+      },
+      {
+        "rule_set": "GeoPrivate-Global",
+        "outbound": "🇭🇰 Super Max HKG",
+        "action": "route"
+      },
+      {
+        "rule_set": [
+          "Global",
+          "Gfw"
+        ],
+        "outbound": "🇯🇵 Super Max JPG",
+        "action": "route"
+      },
+      {
+        "rule_set": [
+          "Domestic domain name",
+          "Geosite-cn",
+          "GeoCHN",
+          "Private",
+          "Direct domain name",
+          "Intranet domain name"
+        ],
+        "outbound": "🇨🇳 Super Max CHN",
+        "action": "route"
+      },
+      {
+        "rule_set": "Geoip-Telegram",
+        "outbound": "🇸🇬 Super Max SGP",
+        "action": "route"
+      },
+      {
+        "rule_set": "Streaming IP",
+        "outbound": "🇯🇵 Super Max JPG",
+        "action": "route"
+      },
+      {
+        "rule_set": [
+          "LAN IP",
+          "Domestic IP",
+          "China IP",
+          "CN IP"
+        ],
+        "outbound": "🇨🇳 Super Max CHN",
+        "action": "route"
+      },
+      {
+        "ip_version": 4,
+        "outbound": "🌐 Super Max VKG",
+        "action": "route"
+      }
+    ],
+    "rule_set": [
+      {
+        "type": "remote",
+        "tag": "Reject",
+        "url": "https://turbokiv-bit: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@raw.githubusercontent.com/turbokiv-bit/Private-rule/refs/heads/main/Sing-box-rule/GeoReject.srs",
+        "update_interval": "24h0m0s"
+      },
+      {
+        "type": "remote",
+        "tag": "DNSreject",
+        "url": "https://cdn.jsdelivr.net/gh/senshinya/singbox_ruleset@main/rule/AdGuardSDNSFilter/AdGuardSDNSFilter.srs",
+        "update_interval": "24h0m0s"
+      },
+      {
+        "type": "remote",
+        "tag": "httpDNS",
+        "url": "https://cdn.jsdelivr.net/gh/senshinya/singbox_ruleset@main/rule/BlockHttpDNS/BlockHttpDNS.srs",
+        "update_interval": "24h0m0s"
+      },
+      {
+        "type": "remote",
+        "tag": "Unbreak",
+        "url": "https://turbokiv-bit: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@raw.githubusercontent.com/turbokiv-bit/Private-rule/refs/heads/main/Sing-box-rule/Centralmatrix3/Matrix-io/Unbreak.srs",
+        "update_interval": "24h0m0s"
+      },
+      {
+        "type": "remote",
+        "tag": "Github",
+        "url": "https://turbokiv-bit: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@raw.githubusercontent.com/turbokiv-bit/Private-rule/refs/heads/main/MetaCubeX/meta-rules-dat-sing/geo/geosite/github.srs",
+        "update_interval": "24h0m0s"
+      },
+      {
+        "type": "remote",
+        "tag": "Speedtest",
+        "url": "https://turbokiv-bit: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@raw.githubusercontent.com/turbokiv-bit/Private-rule/refs/heads/main/Sing-box-rule/Sukka/domainset/speedtest.srs",
+        "update_interval": "24h0m0s"
+      },
+      {
+        "type": "remote",
+        "tag": "CdnOne",
+        "url": "https://turbokiv-bit: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@raw.githubusercontent.com/turbokiv-bit/Private-rule/refs/heads/main/Sing-box-rule/Sukka/domainset/cdn.srs",
+        "update_interval": "24h0m0s"
+      },
+      {
+        "type": "remote",
+        "tag": "CdnTwo",
+        "url": "https://turbokiv-bit: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@raw.githubusercontent.com/turbokiv-bit/Private-rule/refs/heads/main/Sing-box-rule/Sukka/non_ip/cdn.srs",
+        "update_interval": "24h0m0s"
+      },
+      {
+        "type": "remote",
+        "tag": "Youtube",
+        "url": "https://turbokiv-bit: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@raw.githubusercontent.com/turbokiv-bit/Private-rule/refs/heads/main/MetaCubeX/meta-rules-dat-sing/geo/geosite/youtube.srs",
+        "update_interval": "24h0m0s"
+      },
+      {
+        "type": "remote",
+        "tag": "Spotify",
+        "url": "https://turbokiv-bit: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@raw.githubusercontent.com/turbokiv-bit/Private-rule/refs/heads/main/MetaCubeX/meta-rules-dat-sing/geo/geosite/spotify.srs",
+        "update_interval": "24h0m0s"
+      },
+      {
+        "type": "remote",
+        "tag": "Soundcloud",
+        "url": "https://turbokiv-bit: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@raw.githubusercontent.com/turbokiv-bit/Private-rule/refs/heads/main/MetaCubeX/meta-rules-dat-sing/geo/geosite/soundcloud.srs",
+        "update_interval": "24h0m0s"
+      },
+      {
+        "type": "remote",
+        "tag": "Streaming",
+        "url": "https://turbokiv-bit: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@raw.githubusercontent.com/turbokiv-bit/Private-rule/refs/heads/main/Sing-box-rule/Sukka/non_ip/stream.srs",
+        "update_interval": "24h0m0s"
+      },
+      {
+        "type": "remote",
+        "tag": "Apple & Microsoft Domestic CdnOne",
+        "url": "https://turbokiv-bit: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@raw.githubusercontent.com/turbokiv-bit/Private-rule/refs/heads/main/Sing-box-rule/Sukka/domainset/apple_cdn.srs",
+        "update_interval": "24h0m0s"
+      },
+      {
+        "type": "remote",
+        "tag": "Apple & Microsoft Domestic CdnTwo",
+        "url": "https://turbokiv-bit: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@raw.githubusercontent.com/turbokiv-bit/Private-rule/refs/heads/main/Sing-box-rule/Sukka/non_ip/microsoft_cdn.srs",
+        "update_interval": "24h0m0s"
+      },
+      {
+        "type": "remote",
+        "tag": "Downloadone",
+        "url": "https://turbokiv-bit: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@raw.githubusercontent.com/turbokiv-bit/Private-rule/refs/heads/main/Sing-box-rule/Sukka/domainset/download.srs",
+        "update_interval": "24h0m0s"
+      },
+      {
+        "type": "remote",
+        "tag": "DownloadTwo",
+        "url": "https://turbokiv-bit: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@raw.githubusercontent.com/turbokiv-bit/Private-rule/refs/heads/main/Sing-box-rule/Sukka/non_ip/download.srs",
+        "update_interval": "24h0m0s"
+      },
+      {
+        "type": "remote",
+        "tag": "Apple CN",
+        "url": "https://turbokiv-bit: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@raw.githubusercontent.com/turbokiv-bit/Private-rule/refs/heads/main/Sing-box-rule/Sukka/non_ip/apple_cn.srs",
+        "update_interval": "24h0m0s"
+      },
+      {
+        "type": "remote",
+        "tag": "Apple & Microsoft servicesOne",
+        "url": "https://turbokiv-bit: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@raw.githubusercontent.com/turbokiv-bit/Private-rule/refs/heads/main/Sing-box-rule/Sukka/non_ip/apple_services.srs",
+        "update_interval": "24h0m0s"
+      },
+      {
+        "type": "remote",
+        "tag": "Apple & Microsoft servicesTwo",
+        "url": "https://turbokiv-bit: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@raw.githubusercontent.com/turbokiv-bit/Private-rule/refs/heads/main/Sing-box-rule/Sukka/non_ip/microsoft.srs",
+        "update_interval": "24h0m0s"
+      },
+      {
+        "type": "remote",
+        "tag": "AIGC",
+        "url": "https://turbokiv-bit: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@raw.githubusercontent.com/turbokiv-bit/Private-rule/refs/heads/main/Sing-box-rule/Sukka/non_ip/ai.srs",
+        "update_interval": "24h0m0s"
+      },
+      {
+        "type": "remote",
+        "tag": "Meta",
+        "url": "https://turbokiv-bit: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@raw.githubusercontent.com/turbokiv-bit/Private-rule/refs/heads/main/MetaCubeX/meta-rules-dat-sing/geo/geosite/meta.srs",
+        "update_interval": "24h0m0s"
+      },
+      {
+        "type": "remote",
+        "tag": "Twitter",
+        "url": "https://turbokiv-bit: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@raw.githubusercontent.com/turbokiv-bit/Private-rule/refs/heads/main/MetaCubeX/meta-rules-dat-sing/geo/geosite/twitter.srs",
+        "update_interval": "24h0m0s"
+      },
+      {
+        "type": "remote",
+        "tag": "Telegram",
+        "url": "https://turbokiv-bit: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@raw.githubusercontent.com/turbokiv-bit/Private-rule/refs/heads/main/MetaCubeX/meta-rules-dat-sing/geo-lite/geosite/telegram.srs",
+        "update_interval": "24h0m0s"
+      },
+      {
+        "type": "remote",
+        "tag": "Geoip-Telegram",
+        "url": "https://turbokiv-bit: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@raw.githubusercontent.com/turbokiv-bit/Private-rule/refs/heads/main/Sing-box-rule/Telegram.srs",
+        "update_interval": "24h0m0s"
+      },
+      {
+        "type": "remote",
+        "tag": "GeoEmby-Aptv",
+        "url": "https://turbokiv-bit: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@raw.githubusercontent.com/turbokiv-bit/Private-rule/refs/heads/main/Sing-box-rule/GeoEmby-Aptv.srs",
+        "update_interval": "24h0m0s"
+      },
+      {
+        "type": "remote",
+        "tag": "Geoloc",
+        "url": "https://turbokiv-bit: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@raw.githubusercontent.com/turbokiv-bit/Private-rule/refs/heads/main/Sing-box-rule/ConnersHua/RuleGo/Extra/GeoLoc.srs",
+        "update_interval": "24h0m0s"
+      },
+      {
+        "type": "remote",
+        "tag": "Google",
+        "url": "https://turbokiv-bit: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@raw.githubusercontent.com/turbokiv-bit/Private-rule/refs/heads/main/Sing-box-rule/ConnersHua/RuleGo/Extra/Google/Google.srs",
+        "update_interval": "24h0m0s"
+      },
+      {
+        "type": "remote",
+        "tag": "GeoPrivate-Global",
+        "url": "https://turbokiv-bit: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@raw.githubusercontent.com/turbokiv-bit/Private-rule/refs/heads/main/Sing-box-rule/GeoPrivate-Global.srs",
+        "update_interval": "24h0m0s"
+      },
+      {
+        "type": "remote",
+        "tag": "Global",
+        "url": "https://turbokiv-bit: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@raw.githubusercontent.com/turbokiv-bit/Private-rule/refs/heads/main/Sing-box-rule/Sukka/non_ip/global.srs",
+        "update_interval": "24h0m0s"
+      },
+      {
+        "type": "remote",
+        "tag": "Gfw",
+        "url": "https://turbokiv-bit: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@raw.githubusercontent.com/turbokiv-bit/Private-rule/refs/heads/main/MetaCubeX/meta-rules-dat-sing/geo/geosite/gfw.srs",
+        "update_interval": "24h0m0s"
+      },
+      {
+        "type": "remote",
+        "tag": "Domestic domain name",
+        "url": "https://turbokiv-bit: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@raw.githubusercontent.com/turbokiv-bit/Private-rule/refs/heads/main/Sing-box-rule/Sukka/non_ip/domestic.srs",
+        "update_interval": "24h0m0s"
+      },
+      {
+        "type": "remote",
+        "tag": "Geosite-cn",
+        "url": "https://turbokiv-bit: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@raw.githubusercontent.com/turbokiv-bit/Private-rule/refs/heads/main/MetaCubeX/meta-rules-dat-sing/geo/geosite/cn.srs",
+        "update_interval": "24h0m0s"
+      },
+      {
+        "type": "remote",
+        "tag": "GeoCHN",
+        "url": "https://turbokiv-bit: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@raw.githubusercontent.com/turbokiv-bit/Private-rule/refs/heads/main/Sing-box-rule/GeoCHN.srs",
+        "update_interval": "24h0m0s"
+      },
+      {
+        "type": "remote",
+        "tag": "Private",
+        "url": "https://turbokiv-bit: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@raw.githubusercontent.com/turbokiv-bit/Private-rule/refs/heads/main/MetaCubeX/meta-rules-dat-sing/geo/geosite/private.srs",
+        "update_interval": "24h0m0s"
+      },
+      {
+        "type": "remote",
+        "tag": "Direct domain name",
+        "url": "https://turbokiv-bit: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@raw.githubusercontent.com/turbokiv-bit/Private-rule/refs/heads/main/Sing-box-rule/Sukka/non_ip/direct.srs",
+        "update_interval": "24h0m0s"
+      },
+      {
+        "type": "remote",
+        "tag": "Intranet domain name",
+        "url": "https://turbokiv-bit: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@raw.githubusercontent.com/turbokiv-bit/Private-rule/refs/heads/main/Sing-box-rule/Sukka/non_ip/lan.srs",
+        "update_interval": "24h0m0s"
+      },
+      {
+        "type": "remote",
+        "tag": "Streaming IP",
+        "url": "https://turbokiv-bit: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@raw.githubusercontent.com/turbokiv-bit/Private-rule/refs/heads/main/Sing-box-rule/Sukka/ip/stream.srs",
+        "update_interval": "24h0m0s"
+      },
+      {
+        "type": "remote",
+        "tag": "LAN IP",
+        "url": "https://turbokiv-bit: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@raw.githubusercontent.com/turbokiv-bit/Private-rule/refs/heads/main/Sing-box-rule/Sukka/ip/lan.srs",
+        "update_interval": "24h0m0s"
+      },
+      {
+        "type": "remote",
+        "tag": "Domestic IP",
+        "url": "https://turbokiv-bit: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@raw.githubusercontent.com/turbokiv-bit/Private-rule/refs/heads/main/Sing-box-rule/Sukka/ip/domestic.srs",
+        "update_interval": "24h0m0s"
+      },
+      {
+        "type": "remote",
+        "tag": "China IP",
+        "url": "https://turbokiv-bit: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@raw.githubusercontent.com/turbokiv-bit/Private-rule/refs/heads/main/Sing-box-rule/Sukka/ip/china_ip.srs",
+        "update_interval": "24h0m0s"
+      },
+      {
+        "type": "remote",
+        "tag": "CN IP",
+        "url": "https://turbokiv-bit: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@raw.githubusercontent.com/turbokiv-bit/Private-rule/refs/heads/main/MetaCubeX/meta-rules-dat-sing/geo/geoip/cn.srs",
+        "update_interval": "24h0m0s"
+      }
+    ],
+    "final": "Final",
+    "auto_detect_interface": true,
+    "default_domain_resolver": {
+      "server": "Super-Max-Doq",
+      "disable_optimistic_cache": true
+    },
+    "default_http_client": "default"
+  },
+  "experimental": {
+    "cache_file": {
+      "enabled": true,
+      "store_fakeip": true,
+      "store_dns": true
+    },
+    "clash_api": {
+      "external_controller": "127.0.0.1:9090",
+      "external_ui": "ui",
+      "external_ui_download_url": "https://github.com/Zephyruso/zashboard/releases/latest/download/dist-no-fonts.zip",
+      "access_control_allow_private_network": true,
+      "default_mode": "Rule mode",
+      "secret": "111111"
+    }
+  }
+}
