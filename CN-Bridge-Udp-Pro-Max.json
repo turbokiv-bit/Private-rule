@@ -35,8 +35,7 @@
         "httpDNS",
         "DNSreject"
       ],
-      "action": "predefined",
-      "rcode": "NOERROR"
+      "action": "reject"
     },
       {
         "query_type": ["A", "AAAA"],
@@ -49,8 +48,7 @@
         "HTTPS",
         "SVCB"
       ],
-      "action": "predefined",
-      "rcode": "NOERROR"
+      "action": "reject"
     },
         {
       "type": "logical",
@@ -64,8 +62,7 @@
           "invert": true
         }
       ],
-      "action": "predefined",
-      "rcode": "NOERROR"
+      "action": "reject"
     },
       {
         "query_type": [
