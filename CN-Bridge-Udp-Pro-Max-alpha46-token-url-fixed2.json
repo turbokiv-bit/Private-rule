@@ -77,6 +77,12 @@
       },
       {
         "rule_set": [
+          "cdn_domainset",
+          "cdn_non_ip",
+          "apple_cdn",
+          "microsoft_cdn",
+          "apple_services",
+          "microsoft",
           "Unbreak",
           "apple_cn",
           "domestic_non_ip",
