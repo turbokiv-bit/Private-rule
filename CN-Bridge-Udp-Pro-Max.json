@@ -846,31 +846,6 @@
       "action": "reject"
       },
       {
-        "network": "udp",
-        "port": 123,
-        "outbound": "🇨🇳 Super Max CHN",
-        "action": "route"
-      },
-      {
-        "network": "icmp",
-        "rule_set": [
-          "CN IP",
-          "China IP"
-        ],
-        "outbound": "🇨🇳 Super Max CHN",
-        "action": "route"
-      },
-      {
-       "ip_is_private": true,
-       "outbound": "🇨🇳 Super Max CHN",
-       "action": "route"
-      },
-      {
-        "rule_set": "Unbreak",
-        "outbound": "🇨🇳 Super Max CHN",
-        "action": "route"
-      },
-      {
         "rule_set": "Github",
         "outbound": "🇺🇸 Super Max USA",
         "action": "route"
