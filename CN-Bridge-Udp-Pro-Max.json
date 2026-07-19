@@ -76,11 +76,6 @@
       "rcode": "NOERROR"
     },
     {
-      "preferred_by": "isp-DNS",
-      "action": "route",
-      "server": "isp-DNS"
-    },
-    {
       "clash_mode": "Direct",
       "action": "route",
       "server": "Apadpro-Doq"
