@@ -907,7 +907,7 @@
         "action": "route"
       },
       {
-        "rule_set": "telegram",
+        "rule_set": "Telegram",
         "outbound": "🇸🇬 Super Max SGP",
         "action": "route"
       },
