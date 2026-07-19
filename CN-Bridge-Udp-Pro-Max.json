@@ -222,7 +222,6 @@
         "🇺🇸 Super Max USA",
         "🇸🇬 Super Max SGP",
         "🇯🇵 Super Max JPG",
-        "🇹🇼 Super Max TPE",
         "🇩🇪 Super Max GER",
         "🇨🇳 Super Max CHN"
       ],
@@ -238,7 +237,6 @@
         "🇺🇸 Super Max USA",
         "🇸🇬 Super Max SGP",
         "🇯🇵 Super Max JPG",
-        "🇹🇼 Super Max TPE",
         "🇩🇪 Super Max GER"
       ],
       "default": "🌐 Super Max VKG",
@@ -252,7 +250,6 @@
         "🇺🇸 Super Max USA",
         "🇸🇬 Super Max SGP",
         "🇯🇵 Super Max JPG",
-        "🇹🇼 Super Max TPE",
         "🇩🇪 Super Max GER",
         "🇨🇳 Super Max CHN"
       ],
@@ -314,19 +311,6 @@
         "🇯🇵 SoftBank | SHDL",
         "🇯🇵 Sonet | SHDL",
         "🇯🇵 Kddi | SHDL"
-      ],
-      "interrupt_exist_connections": true
-    },
-    {
-      "type": "selector",
-      "tag": "🇹🇼 Super Max TPE",
-      "outbounds": [
-        "🇨🇳 Hinet | IEPL",
-        "🇨🇳 AKILE | IEPL",
-        "🇨🇳 Akari | IEPL",
-        "🇨🇳 Hinet | Gomami",
-        "🇨🇳 AKILE | Gomami",
-        "🇨🇳 Akari | Gomami"
       ],
       "interrupt_exist_connections": true
     },
@@ -645,78 +629,6 @@
       "tag": "🇯🇵 Kddi | SHDL",
       "server": "shmyndiptmga.makeufast.com",
       "server_port": 26090,
-      "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
-      "tls": {
-        "enabled": true,
-        "server_name": "mcdn.bilivideo.com",
-        "insecure": true
-      }
-    },
-    {
-      "type": "trojan",
-      "tag": "🇨🇳 Hinet | IEPL",
-      "server": "gzktmfsiurtbn.makeufast.org",
-      "server_port": 26037,
-      "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
-      "tls": {
-        "enabled": true,
-        "server_name": "mcdn.bilivideo.com",
-        "insecure": true
-      }
-    },
-    {
-      "type": "trojan",
-      "tag": "🇨🇳 AKILE | IEPL",
-      "server": "gzktmfsiurtbn.makeufast.org",
-      "server_port": 26038,
-      "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
-      "tls": {
-        "enabled": true,
-        "server_name": "mcdn.bilivideo.com",
-        "insecure": true
-      }
-    },
-    {
-      "type": "trojan",
-      "tag": "🇨🇳 Akari | IEPL",
-      "server": "gzktmfsiurtbn.makeufast.org",
-      "server_port": 26039,
-      "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
-      "tls": {
-        "enabled": true,
-        "server_name": "mcdn.bilivideo.com",
-        "insecure": true
-      }
-    },
-    {
-      "type": "trojan",
-      "tag": "🇨🇳 Hinet | Gomami",
-      "server": "vednamgo.douyinverygood.com",
-      "server_port": 56101,
-      "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
-      "tls": {
-        "enabled": true,
-        "server_name": "mcdn.bilivideo.com",
-        "insecure": true
-      }
-    },
-    {
-      "type": "trojan",
-      "tag": "🇨🇳 AKILE | Gomami",
-      "server": "vednamgo.douyinverygood.com",
-      "server_port": 56102,
-      "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
-      "tls": {
-        "enabled": true,
-        "server_name": "mcdn.bilivideo.com",
-        "insecure": true
-      }
-    },
-    {
-      "type": "trojan",
-      "tag": "🇨🇳 Akari | Gomami",
-      "server": "vednamgo.douyinverygood.com",
-      "server_port": 56103,
       "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
       "tls": {
         "enabled": true,
