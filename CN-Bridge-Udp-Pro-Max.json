@@ -849,15 +849,8 @@
           "Geoip-Telegram"
         ],
         "invert": true,
-        "action": "sniff",
-        "sniffer": [
-          "http",
-          "tls",
-          "quic",
-          "dns",
-          "stun",
-          "dtls"
-        ]
+        "inbound": "tun-in",
+        "action": "sniff"
       },
      {
       "protocol": [
