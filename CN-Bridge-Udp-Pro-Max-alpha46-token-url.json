@@ -45,15 +45,6 @@
       },
       {
         "query_type": [
-          "A",
-          "AAAA"
-        ],
-        "invert": true,
-        "action": "predefined",
-        "rcode": "NOERROR"
-      },
-      {
-        "query_type": [
           "HTTPS",
           "SVCB"
         ],
@@ -77,11 +68,12 @@
       },
       {
         "query_type": [
-          64,
-          65
+          "A",
+          "AAAA"
         ],
+        "invert": true,
         "action": "predefined",
-        "rcode": "NOTIMP"
+        "rcode": "NOERROR"
       },
       {
         "rule_set": [
