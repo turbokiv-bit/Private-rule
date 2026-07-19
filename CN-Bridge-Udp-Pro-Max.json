@@ -29,6 +29,15 @@
     }
   ],
   "rules": [
+        {
+      "rule_set": [
+        "Reject",
+        "httpDNS",
+        "DNSreject"
+      ],
+      "action": "predefined",
+      "rcode": "NOERROR"
+    },
       {
         "query_type": ["A", "AAAA"],
         "invert": true,
@@ -43,24 +52,7 @@
       "action": "predefined",
       "rcode": "NOERROR"
     },
-      {
-        "query_type": [
-          64,
-          65
-        ],
-        "action": "predefined",
-        "rcode": "NOTIMP"
-      },
-    {
-      "rule_set": [
-        "Reject",
-        "httpDNS",
-        "DNSreject"
-      ],
-      "action": "predefined",
-      "rcode": "NOERROR"
-    },
-    {
+        {
       "type": "logical",
       "mode": "and",
       "rules": [
@@ -75,19 +67,14 @@
       "action": "predefined",
       "rcode": "NOERROR"
     },
-    {
-      "clash_mode": "Direct",
-      "action": "route",
-      "server": "Apadpro-Doq"
-    },
-    {
-      "clash_mode": "Global",
-      "query_type": [
-        "A"
-      ],
-      "action": "route",
-      "server": "fakeip"
-    },
+      {
+        "query_type": [
+          64,
+          65
+        ],
+        "action": "predefined",
+        "rcode": "NOTIMP"
+      },
     {
       "rule_set": [
         "CdnOne",
@@ -818,7 +805,6 @@
               "Domestic IP",
               "China IP",
               "CN IP"
-
            ]
           },
           {
@@ -874,21 +860,11 @@
         "outbound": "🇨🇳 Super Max CHN",
         "action": "route"
       },
-{
-  "ip_is_private": true,
-  "outbound": "🇨🇳 Super Max CHN",
-  "action": "route"
-},
-{
-  "clash_mode": "Direct",
-  "outbound": "🇨🇳 Super Max CHN",
-  "action": "route"
-},
-{
-  "clash_mode": "Global",
-  "outbound": "🌐 Super Max VKG",
-  "action": "route"
-},
+      {
+       "ip_is_private": true,
+       "outbound": "🇨🇳 Super Max CHN",
+       "action": "route"
+      },
       {
         "rule_set": "Unbreak",
         "outbound": "🇨🇳 Super Max CHN",
@@ -934,11 +910,6 @@
           "DownloadTwo"
         ],
         "outbound": "🇭🇰 Super Max HKG",
-        "action": "route"
-      },
-      {
-        "rule_set": "Apple CN",
-        "outbound": "🇨🇳 Super Max CHN",
         "action": "route"
       },
       {
@@ -994,18 +965,6 @@
         "action": "route"
       },
       {
-        "rule_set": [
-          "Domestic domain name",
-          "Geosite-cn",
-          "GeoCHN",
-          "Private",
-          "Direct domain name",
-          "Intranet domain name"
-        ],
-        "outbound": "🇨🇳 Super Max CHN",
-        "action": "route"
-      },
-      {
         "rule_set": "Geoip-Telegram",
         "outbound": "🇸🇬 Super Max SGP",
         "action": "route"
@@ -1013,16 +972,6 @@
       {
         "rule_set": "Streaming IP",
         "outbound": "🇯🇵 Super Max JPG",
-        "action": "route"
-      },
-      {
-        "rule_set": [
-          "LAN IP",
-          "Domestic IP",
-          "China IP",
-          "CN IP"
-        ],
-        "outbound": "🇨🇳 Super Max CHN",
         "action": "route"
       },
       {
