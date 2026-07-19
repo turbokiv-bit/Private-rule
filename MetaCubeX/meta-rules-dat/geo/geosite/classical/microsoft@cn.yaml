@@ -84,6 +84,7 @@ payload:
     - DOMAIN,vscode.download.prss.microsoft.com
     - DOMAIN,vz.download.prss.microsoft.com
     - DOMAIN,windbg.download.prss.microsoft.com
+    - DOMAIN-SUFFIX,xboxlive.cn
     - DOMAIN-SUFFIX,21vbc.com
     - DOMAIN-SUFFIX,21vbluecloud.com
     - DOMAIN-SUFFIX,21vbluecloud.net
@@ -188,4 +189,3 @@ payload:
     - DOMAIN,download.visualstudio.microsoft.com
     - DOMAIN-SUFFIX,microsoftnews.cn
     - DOMAIN-SUFFIX,msn.cn
-    - DOMAIN-SUFFIX,xboxlive.cn

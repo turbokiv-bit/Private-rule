@@ -84,6 +84,7 @@ payload:
     - vscode.download.prss.microsoft.com
     - vz.download.prss.microsoft.com
     - windbg.download.prss.microsoft.com
+    - +.xboxlive.cn
     - +.21vbc.com
     - +.21vbluecloud.com
     - +.21vbluecloud.net
@@ -188,4 +189,3 @@ payload:
     - download.visualstudio.microsoft.com
     - +.microsoftnews.cn
     - +.msn.cn
-    - +.xboxlive.cn
