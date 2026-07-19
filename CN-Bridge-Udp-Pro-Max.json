@@ -735,21 +735,22 @@
         "Telegram",
         "Geoip-Telegram"
       ],
-      "invert": true
+        "invert": true
     }
-  ],
-  "action": "reject"
-},
-      {
-        "rule_set": "Reject",
-        "action": "reject"
-      },
-    {
-    "ip_is_private": true,
-    "preferred_by": "🇨🇳 CN-Bridge-L3",
-    "outbound": "🇨🇳 CN-Bridge-L3",
-    "action": "route"
+    ],
+      "action": "reject"
     },
+    {
+     "ip_is_private": true,
+     "preferred_by": "🇨🇳 CN-Bridge-L3",
+     "outbound": "🇨🇳 CN-Bridge-L3",
+     "action": "route"
+    },
+    {
+      "ip_is_private": true,
+      "outbound": "🇨🇳 Super Max CHN",
+      "action": "route"
+     },
      {
       "network": "icmp",
       "action": "resolve"
@@ -763,7 +764,7 @@
      {
         "network": "udp",
         "port": 123,
-      "action": "resolve"
+        "action": "resolve"
      },
       {
         "network": "udp",
@@ -782,10 +783,10 @@
               "Private",
               "Direct domain name",
               "Intranet domain name"
-           ],
-      "action": "resolve"
-          },
-    {
+       ],
+             "action": "resolve"
+       },
+       {
         "type": "logical",
         "mode": "and",
         "rules": [
