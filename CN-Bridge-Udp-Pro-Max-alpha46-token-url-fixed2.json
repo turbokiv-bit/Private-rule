@@ -832,7 +832,7 @@
       },
       {
         "rule_set": [
-          "Telegram"
+          "Geoip-Telegram"
         ],
         "invert": true,
         "inbound": "tun-in",
