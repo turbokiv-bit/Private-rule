@@ -762,10 +762,6 @@
         "rule_set": "Reject",
         "action": "reject"
       },
-      {
-        "port": 53,
-        "action": "hijack-dns"
-      },
     {
     "ip_is_private": true,
     "preferred_by": "🇨🇳 CN-Bridge-L3",
@@ -867,10 +863,6 @@
           "stun",
           "dtls"
         ]
-      },
-      {
-        "protocol": "dns",
-        "action": "hijack-dns"
       },
      {
       "protocol": [
