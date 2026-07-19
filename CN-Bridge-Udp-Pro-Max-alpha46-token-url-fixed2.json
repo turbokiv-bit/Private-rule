@@ -731,8 +731,8 @@
           },
           {
             "rule_set": [
-              "telegram",
-              "Telegram"
+              "Telegram",
+              "Geoip-Telegram"
             ],
             "invert": true
           }
@@ -1007,7 +1007,6 @@
         "type": "remote",
         "tag": [
           "GeoReject",
-          "Telegram",
           "GeoEmby-Aptv",
           "GeoPrivate-Global",
           "GeoCHN"
@@ -1113,8 +1112,14 @@
       },
       {
         "type": "remote",
-        "tag": "telegram",
+        "tag": "Telegram",
         "url": "https://turbokiv-bit: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@raw.githubusercontent.com/turbokiv-bit/Private-rule/refs/heads/main/MetaCubeX/meta-rules-dat-sing/geo-lite/geosite/telegram.srs",
+        "update_interval": "24h0m0s"
+      },
+      {
+        "type": "remote",
+        "tag": "Geoip-Telegram",
+        "url": "https://turbokiv-bit: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@raw.githubusercontent.com/turbokiv-bit/Private-rule/refs/heads/main/Sing-box-rule/Telegram.srs",
         "update_interval": "24h0m0s"
       }
     ],
