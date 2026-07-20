@@ -333,6 +333,9 @@
         "🇩🇪 Dataforest | BJDE",
         "🇩🇪 Putzmann | BJDE",
         "🇩🇪 Leaseweb | BJDE",
+        "🇩🇪 Dataforest | Gomami",
+        "🇩🇪 Putzmann | Gomami",
+        "🇩🇪 Leaseweb | Gomami",
         "🇭🇰 Super Max HKG",
       ],
       "interrupt_exist_connections": true
@@ -571,6 +574,42 @@
       "type": "trojan",
       "server": "gzktmfsiurtbn.makeufast.org",
       "server_port": 26099,
+      "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
+      "tls": {
+        "enabled": true,
+        "server_name": "mcdn.bilivideo.com",
+        "insecure": true
+      }
+    },
+        {
+      "tag": "🇩🇪 Dataforest | BJDE",
+      "type": "trojan",
+      "server": "bjde.dhqbtyngpss.hardcorelinks.org",
+      "server_port": 36012,
+      "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
+      "tls": {
+        "enabled": true,
+        "server_name": "mcdn.bilivideo.com",
+        "insecure": true
+      }
+    },
+    {
+      "tag": "🇩🇪 Putzmann | BJDE",
+      "type": "trojan",
+      "server": "bjde.dhqbtyngpss.hardcorelinks.org",
+      "server_port": 36013,
+      "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
+      "tls": {
+        "enabled": true,
+        "server_name": "mcdn.bilivideo.com",
+        "insecure": true
+      }
+    },
+    {
+      "tag": "🇩🇪 Leaseweb | BJDE",
+      "type": "trojan",
+      "server": "bjde.dhqbtyngpss.hardcorelinks.org",
+      "server_port": 36015,
       "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
       "tls": {
         "enabled": true,
