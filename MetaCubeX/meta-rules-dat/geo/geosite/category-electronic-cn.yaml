@@ -1,6 +1,6 @@
 payload:
-    - +.jlc-drm.com
-    - +.jlc-ecad.com
+    - +.jlc-cam.com
+    - +.jlc-cnc.com
     - +.avermedia.cn
     - +.boe.com
     - +.bouffalolab.com
@@ -8,7 +8,7 @@ payload:
     - +.eda.cn
     - +.elecfans.com
     - +.hqchip.com
-    - +.jlc-erp.com
+    - +.jlc-dfm.com
     - +.hqpcb.com
     - +.infineon.cn
     - +.listenai.com
@@ -19,25 +19,28 @@ payload:
     - +.seeed.cc
     - +.sipeed.com
     - +.maixhub.com
-    - +.ymtc.cn
-    - +.ymtc.com
     - +.zxhgroup.com
     - +.zs-jlc.com
     - +.szlcsc.com
+    - +.szjlc.cn
+    - +.sz-jlc.com
     - +.wch.cn
     - +.wch-ic.com
+    - +.ymtc.com
+    - +.ymtc.cn
+    - +.sanweihou.com
     - +.fa-part.com
     - +.forface3d.com
     - +.jlc-3dp.cn
     - +.jlc-3dp.com
     - +.jlc-bbs.com
     - +.jlc-cad.com
-    - +.jlc-cam.com
-    - +.jlc-cnc.com
-    - +.jlc-dfm.com
     - +.arrow.cn
     - +.analog.com
     - +.hqdoc.com
+    - +.jlc-drm.com
+    - +.jlc-ecad.com
+    - +.jlc-erp.com
     - +.jlc-fpc.com
     - +.jlc-gw.com
     - +.jlc-jh.com
@@ -63,12 +66,9 @@ payload:
     - +.lceda.cn
     - +.lckfb.com
     - +.oshwhub.com
-    - +.sanweihou.com
-    - +.sz-jlc.com
-    - +.szjlc.cn
+    - +.ymtc.com.cn
     - +.ti.com.cn
     - +.seeedstudio.com.cn
     - +.seeed.com.cn
     - +.quectel.com.cn
     - +.boe.com.cn
-    - +.ymtc.com.cn
