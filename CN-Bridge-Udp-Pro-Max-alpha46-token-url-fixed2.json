@@ -96,15 +96,56 @@
         "server": "fakeip",
         "rewrite_ttl": 1
       },
-            {
+      {
+        "query_type": [
+          "A"
+        ],
         "action": "evaluate",
         "server": "Apadpro-Doq"
       },
       {
         "match_response": true,
-        "response_rcode": "NOERROR",
-        "ip_accept_any": true,
-        "invert": true,
+        "response_rcode": "NXDOMAIN",
+        "action": "respond"
+      },
+      {
+        "type": "logical",
+        "mode": "or",
+        "rules": [
+          {
+            "match_response": true,
+            "response_rcode": "SERVFAIL"
+          },
+          {
+            "match_response": true,
+            "response_rcode": "REFUSED"
+          },
+          {
+            "match_response": true,
+            "response_rcode": "FORMERR"
+          },
+          {
+            "match_response": true,
+            "response_rcode": "NOTIMP"
+          }
+        ],
+        "action": "route",
+        "server": "Super-Max-Doq"
+      },
+      {
+        "type": "logical",
+        "mode": "and",
+        "rules": [
+          {
+            "match_response": true,
+            "response_rcode": "NOERROR"
+          },
+          {
+            "match_response": true,
+            "ip_accept_any": true,
+            "invert": true
+          }
+        ],
         "action": "respond"
       },
       {
@@ -120,16 +161,19 @@
             "rule_set": [
               "china_ip",
               "cn_geoip"
-          ]
+            ]
           }
         ],
         "action": "respond"
       },
       {
+        "query_type": [
+          "A"
+        ],
         "action": "route",
         "server": "fakeip",
         "rewrite_ttl": 1
-      }
+      }   
     ],
     "final": "Super-Max-Doq",
     "reverse_mapping": true,
@@ -725,24 +769,14 @@
         "outbound": "🇨🇳 CN-Bridge-L3",
         "action": "route"
       },
-{
-  "type": "logical",
-  "mode": "and",
-  "rules": [
-    {
-      "inbound": [
-        "tun-in"
-      ]
-    },
-    {
-      "rule_set": [
-        "Geoip-Telegram"
-      ],
-      "invert": true
-    }
-  ],
-  "action": "sniff"
-},
+      {
+        "rule_set": [
+          "Geoip-Telegram"
+        ],
+        "invert": true,
+        "inbound": "tun-in",
+        "action": "sniff"
+      },
       {
         "protocol": [
           "stun",
