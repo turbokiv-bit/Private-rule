@@ -886,7 +886,7 @@
         "action": "route"
       },
       {
-        "rule_set": "Telegram",
+        "rule_set": "Geoip-Telegram",
         "outbound": "🇸🇬 Super Max SGP",
         "action": "route"
       },
