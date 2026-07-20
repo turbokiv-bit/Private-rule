@@ -173,7 +173,7 @@
         ],
         "action": "route",
         "server": "fakeip",
-        "rewrite_ttl": 300
+        "rewrite_ttl": 1
       }
     ],
     "final": "Super-Max-Doq",
