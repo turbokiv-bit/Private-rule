@@ -762,6 +762,18 @@
         "action": "route"
       },
       {
+        "network": "udp",
+        "port": 123,
+        "action": "resolve"
+      },
+      {
+        "network": "udp",
+        "port": 123,
+        "preferred_by": "🇨🇳 CN-Bridge-L3",
+        "outbound": "🇨🇳 CN-Bridge-L3",
+        "action": "route"
+      },
+      {
         "rule_set": [
           "Unbreak",
           "apple_cn",
@@ -773,18 +785,6 @@
           "lan_non_ip"
         ],
         "action": "resolve"
-      },
-      {
-        "network": "udp",
-        "port": 123,
-        "action": "resolve"
-      },
-      {
-        "network": "udp",
-        "port": 123,
-        "preferred_by": "🇨🇳 CN-Bridge-L3",
-        "outbound": "🇨🇳 CN-Bridge-L3",
-        "action": "route"
       },
       {
         "type": "logical",
