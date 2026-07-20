@@ -262,12 +262,12 @@
       "type": "selector",
       "tag": "🇺🇸 Super Max USA",
       "outbounds": [
+        "🇭🇰 Super Max HKG
         "🇺🇸 Cox | SHDL",
         "🇺🇸 Sakura | SHDL",
         "🇺🇸 Misaka | SHDL",
         "🇺🇸 AT&T | SHDL",
-        "🇺🇸 HostHatch | SHDL",
-        "🇭🇰 Super Max HKG"
+        "🇺🇸 HostHatch | SHDL"
       ],
       "interrupt_exist_connections": true
     },
