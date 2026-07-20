@@ -774,7 +774,6 @@
           "Geoip-Telegram"
         ],
         "invert": true,
-        "inbound": "Telegram-socks",
         "action": "sniff"
       },
       {
