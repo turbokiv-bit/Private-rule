@@ -118,8 +118,8 @@
           {
             "match_response": true,
             "rule_set": [
-              "China IP",
-              "CN IP"
+              "china_ip",
+              "cn_geoip"
           ]
           }
         ],
