@@ -98,15 +98,7 @@
             "match_response": true,
             "rule_set": [
               "china_ip",
-              "cn_geoip",
-              "Unbreak",
-              "apple_cn",
-              "domestic_non_ip",
-              "cn_geosite",
-              "GeoCHN",
-              "private",
-              "direct",
-              "lan_non_ip"
+              "cn_geoip"
             ]
           }
         ],
@@ -781,6 +773,19 @@
         ],
         "outbound": "🇺🇸 Super Max USA",
         "action": "route"
+      },
+      {
+        "rule_set": [
+          "Unbreak",
+          "apple_cn",
+          "domestic_non_ip",
+          "cn_geosite",
+          "GeoCHN",
+          "private",
+          "direct",
+          "lan_non_ip"
+        ],
+        "action": "resolve"
       },
       {
         "type": "logical",
