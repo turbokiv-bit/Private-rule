@@ -68,10 +68,8 @@
       },
       {
         "query_type": [
-          "A",
           "AAAA"
         ],
-        "invert": true,
         "action": "predefined",
         "rcode": "NOERROR"
       },
@@ -99,15 +97,56 @@
         "server": "fakeip",
         "rewrite_ttl": 1
       },
-      {
+            {
+        "query_type": [
+          "A"
+        ],
         "action": "evaluate",
         "server": "Apadpro-Doq"
       },
       {
         "match_response": true,
-        "response_rcode": "NOERROR",
-        "ip_accept_any": true,
-        "invert": true,
+        "response_rcode": "NXDOMAIN",
+        "action": "respond"
+      },
+      {
+        "type": "logical",
+        "mode": "or",
+        "rules": [
+          {
+            "match_response": true,
+            "response_rcode": "SERVFAIL"
+          },
+          {
+            "match_response": true,
+            "response_rcode": "REFUSED"
+          },
+          {
+            "match_response": true,
+            "response_rcode": "FORMERR"
+          },
+          {
+            "match_response": true,
+            "response_rcode": "NOTIMP"
+          }
+        ],
+        "action": "route",
+        "server": "Super-Max-Doq"
+      },
+      {
+        "type": "logical",
+        "mode": "and",
+        "rules": [
+          {
+            "match_response": true,
+            "response_rcode": "NOERROR"
+          },
+          {
+            "match_response": true,
+            "ip_accept_any": true,
+            "invert": true
+          }
+        ],
         "action": "respond"
       },
       {
@@ -129,9 +168,12 @@
         "action": "respond"
       },
       {
+        "query_type": [
+          "A"
+        ],
         "action": "route",
         "server": "fakeip",
-        "rewrite_ttl": 1
+        "rewrite_ttl": 300
       }
     ],
     "final": "Super-Max-Doq",
@@ -139,8 +181,7 @@
     "strategy": "ipv4_only",
     "cache_capacity": 8192,
     "optimistic": {
-      "enabled": true,
-      "timeout": "30d"
+      "enabled": true
     }
   },
   "http_clients": [
@@ -773,19 +814,6 @@
         "preferred_by": "🇨🇳 CN-Bridge-L3",
         "outbound": "🇨🇳 CN-Bridge-L3",
         "action": "route"
-      },
-      {
-        "rule_set": [
-          "Unbreak",
-          "apple_cn",
-          "domestic_non_ip",
-          "cn_geosite",
-          "GeoCHN",
-          "private",
-          "direct",
-          "lan_non_ip"
-        ],
-        "action": "resolve"
       },
       {
         "type": "logical",
