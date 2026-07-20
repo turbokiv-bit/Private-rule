@@ -35,7 +35,7 @@
       }
     ],
     "rules": [
-      {
+    {
         "rule_set": [
           "GeoReject",
           "BlockHttpDNS",
@@ -52,59 +52,16 @@
         "rcode": "NOERROR"
       },
       {
-        "rule_set": [
-          "cdn_domainset",
-          "cdn_non_ip",
-          "apple_cdn",
-          "microsoft_cdn",
-          "apple_services",
-          "microsoft"
-        ],
-        "query_type": [
-          "A"
-        ],
-        "action": "route",
-        "server": "fakeip",
-        "rewrite_ttl": 1
-      },
-      {
-        "query_type": [
-          "A"
-        ],
-        "action": "evaluate",
-        "server": "Apadpro-Doq"
-      },
-      {
-        "match_response": true,
-        "response_rcode": "NOERROR",
-        "ip_accept_any": true,
-        "invert": true,
-        "action": "respond"
-      },
-      {
-        "match_response": true,
-        "ip_is_private": true,
-        "action": "respond"
-      },
-      {
-        "match_response": true,
-        "rule_set": [
-          "china_ip",
-          "cn_geoip"
-        ],
-        "action": "respond"
-      },
-      {
-        "query_type": [
-          "A"
-        ],
-        "action": "route",
-        "server": "fakeip",
-        "rewrite_ttl": 1
-      },
-      {
-        "query_type": [
-          "AAAA"
+        "type": "logical",
+        "mode": "and",
+        "rules": [
+          {
+            "query_type": "PTR"
+          },
+          {
+            "rule_set": "private",
+            "invert": true
+          }
         ],
         "action": "predefined",
         "rcode": "NOERROR"
@@ -117,6 +74,64 @@
         "invert": true,
         "action": "predefined",
         "rcode": "NOERROR"
+      },
+      {
+        "rule_set": [
+          "cdn_domainset",
+          "cdn_non_ip",
+          "apple_cdn",
+          "microsoft_cdn",
+          "apple_services",
+          "microsoft",
+          "Unbreak",
+          "apple_cn",
+          "domestic_non_ip",
+          "cn_geosite",
+          "GeoCHN",
+          "private",
+          "direct",
+          "lan_non_ip"
+        ],
+        "query_type": [
+          "A"
+        ],
+        "action": "route",
+        "server": "fakeip",
+        "rewrite_ttl": 1
+      },
+      {
+        "action": "evaluate",
+        "server": "Apadpro-Doq"
+      },
+      {
+        "match_response": true,
+        "response_rcode": "NOERROR",
+        "ip_accept_any": true,
+        "invert": true,
+        "action": "respond"
+      },
+      {
+        "type": "logical",
+        "mode": "or",
+        "rules": [
+          {
+            "match_response": true,
+            "ip_is_private": true
+          },
+          {
+            "match_response": true,
+            "rule_set": [
+              "china_ip",
+              "cn_geoip"
+            ]
+          }
+        ],
+        "action": "respond"
+      },
+      {
+        "action": "route",
+        "server": "fakeip",
+        "rewrite_ttl": 1
       }
     ],
     "final": "Super-Max-Doq",
