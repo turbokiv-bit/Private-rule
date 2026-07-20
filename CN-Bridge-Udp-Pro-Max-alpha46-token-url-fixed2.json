@@ -76,30 +76,6 @@
         "rcode": "NOERROR"
       },
       {
-        "rule_set": [
-          "cdn_domainset",
-          "cdn_non_ip",
-          "apple_cdn",
-          "microsoft_cdn",
-          "apple_services",
-          "microsoft",
-          "Unbreak",
-          "apple_cn",
-          "domestic_non_ip",
-          "cn_geosite",
-          "GeoCHN",
-          "private",
-          "direct",
-          "lan_non_ip"
-        ],
-        "query_type": [
-          "A"
-        ],
-        "action": "route",
-        "server": "fakeip",
-        "rewrite_ttl": 1
-      },
-      {
         "action": "evaluate",
         "server": "Apadpro-Doq"
       },
@@ -122,7 +98,15 @@
             "match_response": true,
             "rule_set": [
               "china_ip",
-              "cn_geoip"
+              "cn_geoip",
+              "Unbreak",
+              "apple_cn",
+              "domestic_non_ip",
+              "cn_geosite",
+              "GeoCHN",
+              "private",
+              "direct",
+              "lan_non_ip"
             ]
           }
         ],
@@ -775,6 +759,30 @@
         "action": "route"
       },
       {
+        "rule_set": [
+          "cdn_domainset",
+          "cdn_non_ip"
+        ],
+        "outbound": "🇭🇰 Super Max HKG",
+        "action": "route"
+      },
+      {
+        "rule_set": [
+          "apple_cdn",
+          "microsoft_cdn"
+        ],
+        "outbound": "🇭🇰 Super Max HKG",
+        "action": "route"
+      },
+      {
+        "rule_set": [
+          "apple_services",
+          "microsoft"
+        ],
+        "outbound": "🇺🇸 Super Max USA",
+        "action": "route"
+      },
+      {
         "type": "logical",
         "mode": "and",
         "rules": [
@@ -841,9 +849,7 @@
       },
       {
         "rule_set": [
-          "speedtest",
-          "cdn_domainset",
-          "cdn_non_ip"
+          "speedtest"
         ],
         "outbound": "🇭🇰 Super Max HKG",
         "action": "route"
@@ -868,8 +874,6 @@
       },
       {
         "rule_set": [
-          "apple_cdn",
-          "microsoft_cdn",
           "download_domainset",
           "download_non_ip"
         ],
@@ -878,8 +882,6 @@
       },
       {
         "rule_set": [
-          "apple_services",
-          "microsoft",
           "ai"
         ],
         "outbound": "🇺🇸 Super Max USA",
