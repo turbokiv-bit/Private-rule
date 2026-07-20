@@ -816,6 +816,19 @@
         "action": "route"
       },
       {
+        "rule_set": [
+          "Unbreak",
+          "apple_cn",
+          "domestic_non_ip",
+          "cn_geosite",
+          "GeoCHN",
+          "private",
+          "direct",
+          "lan_non_ip"
+        ],
+        "action": "resolve"
+        },
+      {
         "type": "logical",
         "mode": "and",
         "rules": [
