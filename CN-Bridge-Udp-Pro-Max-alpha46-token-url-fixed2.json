@@ -76,29 +76,59 @@
         "rcode": "NOERROR"
       },
             {
+        "rule_set": [
+          "cdn_domainset",
+          "cdn_non_ip",
+          "apple_cdn",
+          "microsoft_cdn",
+          "apple_services",
+          "microsoft",
+          "Unbreak",
+          "apple_cn",
+          "domestic_non_ip",
+          "cn_geosite",
+          "GeoCHN",
+          "private",
+          "direct",
+          "lan_non_ip"
+        ],
         "query_type": [
           "A"
         ],
+        "action": "route",
+        "server": "fakeip",
+        "rewrite_ttl": 1
+      },
+      {
         "action": "evaluate",
         "server": "Apadpro-Doq"
       },
       {
         "match_response": true,
-        "ip_is_private": true,
+        "response_rcode": "NOERROR",
+        "ip_accept_any": true,
+        "invert": true,
         "action": "respond"
       },
       {
-        "match_response": true,
-        "rule_set": [
-          "china_ip",
-          "cn_geoip"
+        "type": "logical",
+        "mode": "or",
+        "rules": [
+          {
+            "match_response": true,
+            "ip_is_private": true
+          },
+          {
+            "match_response": true,
+            "rule_set": [
+              "china_ip",
+              "cn_geoip"
+            ]
+          }
         ],
         "action": "respond"
       },
       {
-        "query_type": [
-          "A"
-        ],
         "action": "route",
         "server": "fakeip",
         "rewrite_ttl": 1
@@ -743,6 +773,19 @@
         "preferred_by": "🇨🇳 CN-Bridge-L3",
         "outbound": "🇨🇳 CN-Bridge-L3",
         "action": "route"
+      },
+      {
+        "rule_set": [
+          "Unbreak",
+          "apple_cn",
+          "domestic_non_ip",
+          "cn_geosite",
+          "GeoCHN",
+          "private",
+          "direct",
+          "lan_non_ip"
+        ],
+        "action": "resolve"
       },
       {
         "type": "logical",
