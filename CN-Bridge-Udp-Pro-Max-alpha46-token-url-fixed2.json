@@ -801,6 +801,13 @@
       },
       {
         "rule_set": [
+          "speedtest"
+        ],
+        "outbound": "🌐 Super Max VKG",
+        "action": "route"
+      },
+      {
+        "rule_set": [
           "youtube",
           "soundcloud"
         ],
