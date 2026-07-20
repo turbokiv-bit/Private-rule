@@ -725,14 +725,24 @@
         "outbound": "🇨🇳 CN-Bridge-L3",
         "action": "route"
       },
-      {
-        "rule_set": [
-          "Geoip-Telegram"
-        ],
-        "invert": true,
-        "inbound": "tun-in",
-        "action": "sniff"
-      },
+{
+  "type": "logical",
+  "mode": "and",
+  "rules": [
+    {
+      "inbound": [
+        "tun-in"
+      ]
+    },
+    {
+      "rule_set": [
+        "Geoip-Telegram"
+      ],
+      "invert": true
+    }
+  ],
+  "action": "sniff"
+}
       {
         "protocol": [
           "stun",
