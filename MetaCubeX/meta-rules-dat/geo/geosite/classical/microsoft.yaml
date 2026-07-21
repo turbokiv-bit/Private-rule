@@ -26,8 +26,8 @@ payload:
     - DOMAIN,ocsp.microsoft.com
     - DOMAIN,oneocsp.microsoft.com
     - DOMAIN,www.microsoft.com
-    - DOMAIN,flightsimulator.azureedge.net
     - DOMAIN,prodforza.blob.core.windows.net
+    - DOMAIN,flightsimulator.azureedge.net
     - DOMAIN,azure.microsoft.com
     - DOMAIN,azuremarketplace.microsoft.com
     - DOMAIN,location.microsoft.com
@@ -306,8 +306,8 @@ payload:
     - DOMAIN-SUFFIX,yammer.com
     - DOMAIN-SUFFIX,adaptivecards.io
     - DOMAIN-SUFFIX,api-extractor.com
-    - DOMAIN-SUFFIX,githubcopilot.com
     - DOMAIN-SUFFIX,npmjs.org
+    - DOMAIN-SUFFIX,npmjs.com
     - DOMAIN-SUFFIX,apisof.net
     - DOMAIN-SUFFIX,microsoft.ch
     - DOMAIN-SUFFIX,blazor.net
@@ -360,8 +360,8 @@ payload:
     - DOMAIN-SUFFIX,vscodeedu.app
     - DOMAIN-SUFFIX,vscodeedu.com
     - DOMAIN-SUFFIX,xamarin.com
-    - DOMAIN-SUFFIX,npmjs.com
     - DOMAIN-SUFFIX,npm.community
+    - DOMAIN-SUFFIX,githubcopilot.com
     - DOMAIN-SUFFIX,thegithubshop.com
     - DOMAIN-SUFFIX,msocsp.com
     - DOMAIN-SUFFIX,microsoftnews.cc
@@ -418,8 +418,6 @@ payload:
     - DOMAIN-SUFFIX,xboxservices.com
     - DOMAIN-SUFFIX,xboxstudios.com
     - DOMAIN-SUFFIX,xbx.lv
-    - DOMAIN-SUFFIX,asobostudio.com
-    - DOMAIN-SUFFIX,flightsimulator.com
     - DOMAIN-SUFFIX,beth.games
     - DOMAIN-SUFFIX,bethesda.net
     - DOMAIN-SUFFIX,bethesdagamestudios.com
@@ -436,6 +434,8 @@ payload:
     - DOMAIN-SUFFIX,minecraftservices.com
     - DOMAIN-SUFFIX,minecraftshop.com
     - DOMAIN-SUFFIX,mojang.com
+    - DOMAIN-SUFFIX,asobostudio.com
+    - DOMAIN-SUFFIX,flightsimulator.com
     - DOMAIN-SUFFIX,microsoft.be
     - DOMAIN-SUFFIX,aadrm.com
     - DOMAIN-SUFFIX,azure-api.net

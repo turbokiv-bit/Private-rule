@@ -38,10 +38,10 @@ payload:
     - +.dcloudvod.com
     - +.dcloudvod.net
     - +.dnsv1.com
-    - +.discuz.org
+    - +.dnspod.org
     - +.dothework.cn
     - +.ectencent.cn
-    - +.discuz.net
+    - +.dnsv5.com
     - +.edgeone.cool
     - +.edgeonedy1.com
     - +.essurl.com
@@ -61,7 +61,7 @@ payload:
     - +.isd.com
     - +.ispqcloud.com
     - +.itopsdk.com
-    - +.comsenz.com
+    - +.dns.pub
     - +.my-qcloud.com
     - +.myelasticsearch.com
     - +.myqcloud.com
@@ -79,7 +79,7 @@ payload:
     - +.qcloudclass.com
     - +.qcloudcos.cn
     - +.qcloudcos.com
-    - +.dnspod.org
+    - +.dnsv3.com
     - +.qclouder.com
     - +.qcloudgme.com
     - +.qcloudimg.com
@@ -142,7 +142,7 @@ payload:
     - +.tencentbyod.com
     - +.tencentcdb.cn
     - +.tencentcdb.com
-    - +.dnsv5.com
+    - +.dnsapi.cn
     - +.tcloudhw.net
     - +.acctdns.net
     - +.dcloudsp.net
@@ -154,7 +154,7 @@ payload:
     - +.tencentcloudses.com
     - +.tencentcos.cn
     - +.tencentcos.com
-    - +.dns.pub
+    - +.doh.pub
     - +.tencentcs.cn
     - +.tencentcs.com
     - +.tencentdayu.com
@@ -174,12 +174,12 @@ payload:
     - +.tencentyun.com
     - +.tendbcluster.com
     - +.tendis.net
-    - +.dnsv3.com
+    - +.dnsv2.com
     - +.testmeet.cn
     - +.testwaf.com
     - +.tgovcloud.com
     - +.tidaas.com
-    - +.dnsapi.cn
+    - +.dnspod.mobi
     - +.timmerse.com
     - +.tlivecdn.com
     - +.tlivemcdn.com
@@ -204,7 +204,7 @@ payload:
     - +.wework-studio.com
     - +.xqymuy.com
     - +.yufuid.com
-    - +.doh.pub
+    - +.dot.pub
     - +.yufuid.net
     - +.yunjitele.com
     - +.dnse0.cn
@@ -249,13 +249,13 @@ payload:
     - +.tdnsv13.net
     - +.tdnsv14.net
     - +.tdnsv15.net
-    - +.dnsv2.com
-    - +.dnspod.mobi
-    - +.dot.pub
     - +.dnspod.com
     - +.dnspod.cn
     - +.dnsv4.com
     - +.dnspod.net
+    - +.discuz.org
+    - +.discuz.net
+    - +.comsenz.com
     - +.rumt-zh.com
     - +.tamaegis.com
     - +.ym.run
@@ -268,14 +268,14 @@ payload:
     - +.m6.run
     - +.m9.run
     - +.tencentcos.com.cn
-    - +.dnsv1.com.cn
+    - +.dnspod.com.cn
     - +.aegis.qq.com
+    - +.dnsv1.com.cn
     - +.ectencent.com.cn
-    - +.jrzk.net.cn
     - +.testjrzk.net.cn
     - +.oracle-tencent.net.cn
     - +.oracle-tencent.com.cn
-    - +.dnspod.com.cn
+    - +.jrzk.net.cn
     - +.yufuid.com.cn
     - +.timatrix.com.cn
     - +.qcloudcos.com.cn

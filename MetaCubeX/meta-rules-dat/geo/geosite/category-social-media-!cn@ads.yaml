@@ -1,7 +1,7 @@
 payload:
+    - +.ads-twitter.com
     - +.graph.instagram.com
     - +.graph-fallback.instagram.com
-    - +.ads-twitter.com
     - +.adv.vk.com
     - +.analytics.vk.com
     - +.ms.vk.com
