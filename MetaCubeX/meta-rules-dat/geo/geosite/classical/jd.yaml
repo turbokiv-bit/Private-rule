@@ -1,6 +1,6 @@
 payload:
-    - DOMAIN-SUFFIX,jcloudlb.net
-    - DOMAIN-SUFFIX,cloud-wuhan.com
+    - DOMAIN-SUFFIX,jcloudlb.com
+    - DOMAIN-SUFFIX,cloudyuxi.com
     - DOMAIN-SUFFIX,300hu.com
     - DOMAIN-SUFFIX,360buy.cn
     - DOMAIN-SUFFIX,360buy.com
@@ -10,6 +10,7 @@ payload:
     - DOMAIN-SUFFIX,7fresh.com
     - DOMAIN-SUFFIX,baitiao.com
     - DOMAIN-SUFFIX,blackdragon.com
+    - DOMAIN-SUFFIX,buyjingxi.com
     - DOMAIN-SUFFIX,caiyu.com
     - DOMAIN-SUFFIX,chicalot.cn
     - DOMAIN-SUFFIX,cloud-beijing.com
@@ -18,7 +19,7 @@ payload:
     - DOMAIN-SUFFIX,cloud-ordos.com
     - DOMAIN-SUFFIX,cloud-shenzhen.com
     - DOMAIN-SUFFIX,cloud-shiyan.com
-    - DOMAIN-SUFFIX,jcloudlb.com
+    - DOMAIN-SUFFIX,cloud-wuhan.com
     - DOMAIN-SUFFIX,cloud-xian.com
     - DOMAIN-SUFFIX,cloud-xm.com
     - DOMAIN-SUFFIX,cloud-zhaoqing.com
@@ -34,7 +35,7 @@ payload:
     - DOMAIN-SUFFIX,cloudchengde.com
     - DOMAIN-SUFFIX,cloudchengdu.com
     - DOMAIN-SUFFIX,cloudchuzhou.com
-    - DOMAIN-SUFFIX,jcloudimg.net
+    - DOMAIN-SUFFIX,cloudczs.com
     - DOMAIN-SUFFIX,clouddalian.com
     - DOMAIN-SUFFIX,clouddatong.com
     - DOMAIN-SUFFIX,clouddongying.com
@@ -84,7 +85,7 @@ payload:
     - DOMAIN-SUFFIX,cloudyinchuan.com
     - DOMAIN-SUFFIX,cloudyueyang.com
     - DOMAIN-SUFFIX,cloudyuncheng.com
-    - DOMAIN-SUFFIX,cloudyuxi.com
+    - DOMAIN-SUFFIX,jcloudlb.net
     - DOMAIN-SUFFIX,cloudzhongshan.com
     - DOMAIN-SUFFIX,cloudzhuhai.com
     - DOMAIN-SUFFIX,dao123.com
@@ -102,7 +103,7 @@ payload:
     - DOMAIN-SUFFIX,jcloudcache.com
     - DOMAIN-SUFFIX,jcloudcache.net
     - DOMAIN-SUFFIX,jcloudcs.com
-    - DOMAIN-SUFFIX,jclouddn.com
+    - DOMAIN-SUFFIX,1huizhan.com
     - DOMAIN-SUFFIX,jclouddns.com
     - DOMAIN-SUFFIX,jclouddns.net
     - DOMAIN-SUFFIX,jcloudec.com
@@ -111,10 +112,10 @@ payload:
     - DOMAIN-SUFFIX,jcloudgslb.com
     - DOMAIN-SUFFIX,jcloudgslb.net
     - DOMAIN-SUFFIX,jcloudimg.com
-    - DOMAIN-SUFFIX,cloudczs.com
+    - DOMAIN-SUFFIX,jcloudimg.net
+    - DOMAIN-SUFFIX,jclouddn.com
     - DOMAIN-SUFFIX,3.cn
-    - DOMAIN-SUFFIX,toplife.com
-    - DOMAIN-SUFFIX,jcloudlive.com
+    - DOMAIN-SUFFIX,yhd.com
     - DOMAIN-SUFFIX,jcloudlv.com
     - DOMAIN-SUFFIX,jcloudoss.com
     - DOMAIN-SUFFIX,jcloudresolve.com
@@ -175,6 +176,7 @@ payload:
     - DOMAIN-SUFFIX,jddapeigou.com
     - DOMAIN-SUFFIX,jddebug.com
     - DOMAIN-SUFFIX,jddglobal.com
+    - DOMAIN-SUFFIX,jddj.com
     - DOMAIN-SUFFIX,jdemall.com
     - DOMAIN-SUFFIX,jdfw1.com
     - DOMAIN-SUFFIX,jdgslb.com
@@ -191,6 +193,7 @@ payload:
     - DOMAIN-SUFFIX,jdx.com
     - DOMAIN-SUFFIX,jhscm.com
     - DOMAIN-SUFFIX,jingdong.com
+    - DOMAIN-SUFFIX,jingdonghealth.cn
     - DOMAIN-SUFFIX,jingdongjinrong.com
     - DOMAIN-SUFFIX,jingpinhui.com
     - DOMAIN-SUFFIX,jingxi.com
@@ -205,12 +208,12 @@ payload:
     - DOMAIN-SUFFIX,ocwms.com
     - DOMAIN-SUFFIX,paidaojia.cn
     - DOMAIN-SUFFIX,paipai.com
-    - DOMAIN-SUFFIX,yhd.com
+    - DOMAIN-SUFFIX,jcloudlive.com
     - DOMAIN-SUFFIX,prestodb-china.com
     - DOMAIN-SUFFIX,qianxun.com
     - DOMAIN-SUFFIX,qingzhouip.com
     - DOMAIN-SUFFIX,sgsic.com
-    - DOMAIN-SUFFIX,1huizhan.com
+    - DOMAIN-SUFFIX,toplife.com
     - DOMAIN-SUFFIX,vg.com
     - DOMAIN-SUFFIX,vipmro.com
     - DOMAIN-SUFFIX,vipmro.net

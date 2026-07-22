@@ -120,7 +120,7 @@ payload:
     - +.sberdisk.ru
     - +.sberfactoring.ru
     - +.sberindex.ru
-    - +.2gis.ge
+    - +.okko.tv
     - +.sberbankins.ru
     - +.sberhealth.ru
     - +.sberleasing.ru
@@ -143,13 +143,13 @@ payload:
     - +.gitverse.ru
     - +.jivo.chat
     - +.jivo.ru
-    - +.2gis.tj
-    - +.2gis.ru
+    - +.okko.sport
+    - +.playfamily.ru
     - +.sber-bank.by
-    - +.2gis.kz
+    - +.okkoapi.tv
     - +.jivochat.com
-    - +.2gis.am
-    - +.2gis.ae
+    - +.2gis.ge
+    - +.2gis.tj
     - +.xn----8sbkfzespdwig.xn--p1ai
     - +.alfabank.ru
     - +.homecredit.ru
@@ -172,10 +172,6 @@ payload:
     - +.sbertech.ru
     - +.zvuk-b2b.com
     - +.zvuk.com
-    - +.okkoapi.tv
-    - +.playfamily.ru
-    - +.okko.sport
-    - +.okko.tv
     - +.2gis.cz
     - +.2gis.uz
     - +.2gis.az
@@ -183,6 +179,10 @@ payload:
     - +.2gis.com
     - +.2gis.tech
     - +.2gis.kg
+    - +.2gis.ae
+    - +.2gis.am
+    - +.2gis.kz
+    - +.2gis.ru
     - +.prodcontest.com
     - +.cu.ru
     - +.centraluniversity.ru
@@ -292,11 +292,11 @@ payload:
     - +.tinsurancefuture.ru
     - +.tmiaf.ru
     - +.tpension.ru
-    - +.2gis.com.cy
     - +.jivochat.com.co
     - +.jivochat.com.br
     - +.jivochat.co.za
     - +.jivochat.co.in
+    - +.2gis.com.cy
     - +.jivochat.com.pe
     - +.jivochat.com.tr
     - +.ssb.msk.ru

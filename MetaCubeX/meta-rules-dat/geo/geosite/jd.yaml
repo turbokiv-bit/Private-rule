@@ -1,6 +1,6 @@
 payload:
-    - +.jcloudlb.net
-    - +.cloud-wuhan.com
+    - +.jcloudlb.com
+    - +.cloudyuxi.com
     - +.300hu.com
     - +.360buy.cn
     - +.360buy.com
@@ -10,6 +10,7 @@ payload:
     - +.7fresh.com
     - +.baitiao.com
     - +.blackdragon.com
+    - +.buyjingxi.com
     - +.caiyu.com
     - +.chicalot.cn
     - +.cloud-beijing.com
@@ -18,7 +19,7 @@ payload:
     - +.cloud-ordos.com
     - +.cloud-shenzhen.com
     - +.cloud-shiyan.com
-    - +.jcloudlb.com
+    - +.cloud-wuhan.com
     - +.cloud-xian.com
     - +.cloud-xm.com
     - +.cloud-zhaoqing.com
@@ -34,7 +35,7 @@ payload:
     - +.cloudchengde.com
     - +.cloudchengdu.com
     - +.cloudchuzhou.com
-    - +.jcloudimg.net
+    - +.cloudczs.com
     - +.clouddalian.com
     - +.clouddatong.com
     - +.clouddongying.com
@@ -84,7 +85,7 @@ payload:
     - +.cloudyinchuan.com
     - +.cloudyueyang.com
     - +.cloudyuncheng.com
-    - +.cloudyuxi.com
+    - +.jcloudlb.net
     - +.cloudzhongshan.com
     - +.cloudzhuhai.com
     - +.dao123.com
@@ -102,7 +103,7 @@ payload:
     - +.jcloudcache.com
     - +.jcloudcache.net
     - +.jcloudcs.com
-    - +.jclouddn.com
+    - +.1huizhan.com
     - +.jclouddns.com
     - +.jclouddns.net
     - +.jcloudec.com
@@ -111,10 +112,10 @@ payload:
     - +.jcloudgslb.com
     - +.jcloudgslb.net
     - +.jcloudimg.com
-    - +.cloudczs.com
+    - +.jcloudimg.net
+    - +.jclouddn.com
     - +.3.cn
-    - +.toplife.com
-    - +.jcloudlive.com
+    - +.yhd.com
     - +.jcloudlv.com
     - +.jcloudoss.com
     - +.jcloudresolve.com
@@ -175,6 +176,7 @@ payload:
     - +.jddapeigou.com
     - +.jddebug.com
     - +.jddglobal.com
+    - +.jddj.com
     - +.jdemall.com
     - +.jdfw1.com
     - +.jdgslb.com
@@ -191,6 +193,7 @@ payload:
     - +.jdx.com
     - +.jhscm.com
     - +.jingdong.com
+    - +.jingdonghealth.cn
     - +.jingdongjinrong.com
     - +.jingpinhui.com
     - +.jingxi.com
@@ -205,12 +208,12 @@ payload:
     - +.ocwms.com
     - +.paidaojia.cn
     - +.paipai.com
-    - +.yhd.com
+    - +.jcloudlive.com
     - +.prestodb-china.com
     - +.qianxun.com
     - +.qingzhouip.com
     - +.sgsic.com
-    - +.1huizhan.com
+    - +.toplife.com
     - +.vg.com
     - +.vipmro.com
     - +.vipmro.net

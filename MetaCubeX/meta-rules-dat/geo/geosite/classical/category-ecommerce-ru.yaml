@@ -1,11 +1,6 @@
 payload:
-    - DOMAIN-SUFFIX,wbmotivator.ru
-    - DOMAIN-SUFFIX,wildberries.kz
-    - DOMAIN-SUFFIX,funpay.com
-    - DOMAIN-SUFFIX,funpay.ru
-    - DOMAIN-SUFFIX,sfunpay.com
-    - DOMAIN-SUFFIX,ozon.travel
-    - DOMAIN-SUFFIX,ozon.tm
+    - DOMAIN-SUFFIX,wbstatic.ru
+    - DOMAIN-SUFFIX,wildberries.uz
     - DOMAIN-SUFFIX,ozoncard.ru
     - DOMAIN-SUFFIX,o3team.ru
     - DOMAIN-SUFFIX,o-courier.ru
@@ -34,12 +29,12 @@ payload:
     - DOMAIN-SUFFIX,ozonpartners.by
     - DOMAIN-SUFFIX,ozonpartners.ru
     - DOMAIN-SUFFIX,ozonrocet.by
-    - DOMAIN-SUFFIX,flowwow-images.com
+    - DOMAIN-SUFFIX,ozonroket.by
     - DOMAIN-SUFFIX,xn----8sbahiqzthbd0bn.xn--p1ai
     - DOMAIN-SUFFIX,ozonru.com
     - DOMAIN-SUFFIX,ozonru.eu
     - DOMAIN-SUFFIX,ozonru.me
-    - DOMAIN-SUFFIX,ozonsport.ru
+    - DOMAIN-SUFFIX,ozon.travel
     - DOMAIN-SUFFIX,ozonstatus.ru
     - DOMAIN-SUFFIX,ozonusercontent.com
     - DOMAIN-SUFFIX,digital-wb.ru
@@ -71,31 +66,31 @@ payload:
     - DOMAIN-SUFFIX,wbbasket.ru
     - DOMAIN-SUFFIX,wbcontent.net
     - DOMAIN-SUFFIX,wbdubna.ru
-    - DOMAIN-SUFFIX,wibes.com
-    - DOMAIN-SUFFIX,flowwow.com
-    - DOMAIN-SUFFIX,ozonroket.by
+    - DOMAIN-SUFFIX,wbkids.ru
+    - DOMAIN-SUFFIX,wbmail.ru
+    - DOMAIN-SUFFIX,wbmotivator.ru
     - DOMAIN-SUFFIX,wbpay.ru
     - DOMAIN-SUFFIX,wbr.by
-    - DOMAIN-SUFFIX,wbrep.ru
-    - DOMAIN-SUFFIX,wbstatic.net
-    - DOMAIN-SUFFIX,wbstatic.ru
+    - DOMAIN-SUFFIX,wildberries.eu
+    - DOMAIN-SUFFIX,ozon.tm
+    - DOMAIN-SUFFIX,ozonsport.ru
     - DOMAIN-SUFFIX,wbtek.ru
     - DOMAIN-SUFFIX,wbwh.ru
     - DOMAIN-SUFFIX,wbwh.tech
-    - DOMAIN-SUFFIX,wbkids.ru
+    - DOMAIN-SUFFIX,wibes.com
     - DOMAIN-SUFFIX,wibes.ru
     - DOMAIN-SUFFIX,wildberries.am
     - DOMAIN-SUFFIX,wildberries.by
     - DOMAIN-SUFFIX,wildberries.es
-    - DOMAIN-SUFFIX,wildberries.eu
+    - DOMAIN-SUFFIX,wbrep.ru
     - DOMAIN-SUFFIX,wildberries.ge
     - DOMAIN-SUFFIX,wildberries.kg
-    - DOMAIN-SUFFIX,wbmail.ru
+    - DOMAIN-SUFFIX,wildberries.kz
     - DOMAIN-SUFFIX,wildberries.lt
     - DOMAIN-SUFFIX,wildberries.ru
     - DOMAIN-SUFFIX,wildberries.tj
     - DOMAIN-SUFFIX,wildberries.tm
-    - DOMAIN-SUFFIX,wildberries.uz
+    - DOMAIN-SUFFIX,wbstatic.net
     - DOMAIN-SUFFIX,xn--90ab.com
     - DOMAIN-SUFFIX,velberis.ru
     - DOMAIN-SUFFIX,vildberis.ru
@@ -141,10 +136,15 @@ payload:
     - DOMAIN-SUFFIX,xn--80acbjgmges7ca.xn--p1ai
     - DOMAIN-SUFFIX,xn--80acbjgsdq2cl.xn--p1ai
     - DOMAIN-SUFFIX,avito.ru
+    - DOMAIN-SUFFIX,sfunpay.com
+    - DOMAIN-SUFFIX,funpay.ru
+    - DOMAIN-SUFFIX,funpay.com
+    - DOMAIN-SUFFIX,flowwow.com
     - DOMAIN-SUFFIX,avito.st
-    - DOMAIN-SUFFIX,ozonru.co.il
-    - DOMAIN-SUFFIX,ozon.com.kz
+    - DOMAIN-SUFFIX,flowwow-images.com
     - DOMAIN-SUFFIX,ewisdom.us.kg
+    - DOMAIN-SUFFIX,ozon.com.kz
+    - DOMAIN-SUFFIX,ozonru.co.il
     - DOMAIN-SUFFIX,ozon.com.by
     - DOMAIN-SUFFIX,wildberries.co.il
     - DOMAIN,ad.ozone.ru
