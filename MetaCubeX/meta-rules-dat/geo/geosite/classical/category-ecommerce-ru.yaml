@@ -1,6 +1,13 @@
 payload:
-    - DOMAIN-SUFFIX,wbstatic.ru
-    - DOMAIN-SUFFIX,wildberries.uz
+    - DOMAIN-SUFFIX,avito.ru
+    - DOMAIN-SUFFIX,avito.st
+    - DOMAIN-SUFFIX,flowwow-images.com
+    - DOMAIN-SUFFIX,flowwow.com
+    - DOMAIN-SUFFIX,funpay.com
+    - DOMAIN-SUFFIX,funpay.ru
+    - DOMAIN-SUFFIX,sfunpay.com
+    - DOMAIN-SUFFIX,ozon.travel
+    - DOMAIN-SUFFIX,ozon.tm
     - DOMAIN-SUFFIX,ozoncard.ru
     - DOMAIN-SUFFIX,o3team.ru
     - DOMAIN-SUFFIX,o-courier.ru
@@ -34,7 +41,7 @@ payload:
     - DOMAIN-SUFFIX,ozonru.com
     - DOMAIN-SUFFIX,ozonru.eu
     - DOMAIN-SUFFIX,ozonru.me
-    - DOMAIN-SUFFIX,ozon.travel
+    - DOMAIN-SUFFIX,ozonsport.ru
     - DOMAIN-SUFFIX,ozonstatus.ru
     - DOMAIN-SUFFIX,ozonusercontent.com
     - DOMAIN-SUFFIX,digital-wb.ru
@@ -71,9 +78,9 @@ payload:
     - DOMAIN-SUFFIX,wbmotivator.ru
     - DOMAIN-SUFFIX,wbpay.ru
     - DOMAIN-SUFFIX,wbr.by
-    - DOMAIN-SUFFIX,wildberries.eu
-    - DOMAIN-SUFFIX,ozon.tm
-    - DOMAIN-SUFFIX,ozonsport.ru
+    - DOMAIN-SUFFIX,wbrep.ru
+    - DOMAIN-SUFFIX,wbstatic.net
+    - DOMAIN-SUFFIX,wbstatic.ru
     - DOMAIN-SUFFIX,wbtek.ru
     - DOMAIN-SUFFIX,wbwh.ru
     - DOMAIN-SUFFIX,wbwh.tech
@@ -82,7 +89,7 @@ payload:
     - DOMAIN-SUFFIX,wildberries.am
     - DOMAIN-SUFFIX,wildberries.by
     - DOMAIN-SUFFIX,wildberries.es
-    - DOMAIN-SUFFIX,wbrep.ru
+    - DOMAIN-SUFFIX,wildberries.eu
     - DOMAIN-SUFFIX,wildberries.ge
     - DOMAIN-SUFFIX,wildberries.kg
     - DOMAIN-SUFFIX,wildberries.kz
@@ -90,7 +97,7 @@ payload:
     - DOMAIN-SUFFIX,wildberries.ru
     - DOMAIN-SUFFIX,wildberries.tj
     - DOMAIN-SUFFIX,wildberries.tm
-    - DOMAIN-SUFFIX,wbstatic.net
+    - DOMAIN-SUFFIX,wildberries.uz
     - DOMAIN-SUFFIX,xn--90ab.com
     - DOMAIN-SUFFIX,velberis.ru
     - DOMAIN-SUFFIX,vildberis.ru
@@ -135,18 +142,12 @@ payload:
     - DOMAIN-SUFFIX,wolfberries.ru
     - DOMAIN-SUFFIX,xn--80acbjgmges7ca.xn--p1ai
     - DOMAIN-SUFFIX,xn--80acbjgsdq2cl.xn--p1ai
-    - DOMAIN-SUFFIX,avito.ru
-    - DOMAIN-SUFFIX,sfunpay.com
-    - DOMAIN-SUFFIX,funpay.ru
-    - DOMAIN-SUFFIX,funpay.com
-    - DOMAIN-SUFFIX,flowwow.com
-    - DOMAIN-SUFFIX,avito.st
-    - DOMAIN-SUFFIX,flowwow-images.com
-    - DOMAIN-SUFFIX,ewisdom.us.kg
-    - DOMAIN-SUFFIX,ozon.com.kz
-    - DOMAIN-SUFFIX,ozonru.co.il
     - DOMAIN-SUFFIX,ozon.com.by
+    - DOMAIN-SUFFIX,ozonru.co.il
+    - DOMAIN-SUFFIX,ozon.com.kz
+    - DOMAIN-SUFFIX,ewisdom.us.kg
     - DOMAIN-SUFFIX,wildberries.co.il
+    - DOMAIN,stats.avito.ru
     - DOMAIN,ad.ozone.ru
     - DOMAIN,adv.ozon.ru
     - DOMAIN,agency-adv.ozon.ru
@@ -180,4 +181,3 @@ payload:
     - DOMAIN,marketplace-sentry.wb.ru
     - DOMAIN,sentry.wb.ru
     - DOMAIN,web-analytics.wildberries.ru
-    - DOMAIN,stats.avito.ru

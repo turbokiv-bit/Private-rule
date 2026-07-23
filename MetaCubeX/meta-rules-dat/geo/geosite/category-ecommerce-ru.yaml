@@ -1,6 +1,13 @@
 payload:
-    - +.wbstatic.ru
-    - +.wildberries.uz
+    - +.avito.ru
+    - +.avito.st
+    - +.flowwow-images.com
+    - +.flowwow.com
+    - +.funpay.com
+    - +.funpay.ru
+    - +.sfunpay.com
+    - +.ozon.travel
+    - +.ozon.tm
     - +.ozoncard.ru
     - +.o3team.ru
     - +.o-courier.ru
@@ -34,7 +41,7 @@ payload:
     - +.ozonru.com
     - +.ozonru.eu
     - +.ozonru.me
-    - +.ozon.travel
+    - +.ozonsport.ru
     - +.ozonstatus.ru
     - +.ozonusercontent.com
     - +.digital-wb.ru
@@ -71,9 +78,9 @@ payload:
     - +.wbmotivator.ru
     - +.wbpay.ru
     - +.wbr.by
-    - +.wildberries.eu
-    - +.ozon.tm
-    - +.ozonsport.ru
+    - +.wbrep.ru
+    - +.wbstatic.net
+    - +.wbstatic.ru
     - +.wbtek.ru
     - +.wbwh.ru
     - +.wbwh.tech
@@ -82,7 +89,7 @@ payload:
     - +.wildberries.am
     - +.wildberries.by
     - +.wildberries.es
-    - +.wbrep.ru
+    - +.wildberries.eu
     - +.wildberries.ge
     - +.wildberries.kg
     - +.wildberries.kz
@@ -90,7 +97,7 @@ payload:
     - +.wildberries.ru
     - +.wildberries.tj
     - +.wildberries.tm
-    - +.wbstatic.net
+    - +.wildberries.uz
     - +.xn--90ab.com
     - +.velberis.ru
     - +.vildberis.ru
@@ -135,18 +142,12 @@ payload:
     - +.wolfberries.ru
     - +.xn--80acbjgmges7ca.xn--p1ai
     - +.xn--80acbjgsdq2cl.xn--p1ai
-    - +.avito.ru
-    - +.sfunpay.com
-    - +.funpay.ru
-    - +.funpay.com
-    - +.flowwow.com
-    - +.avito.st
-    - +.flowwow-images.com
-    - +.ewisdom.us.kg
-    - +.ozon.com.kz
-    - +.ozonru.co.il
     - +.ozon.com.by
+    - +.ozonru.co.il
+    - +.ozon.com.kz
+    - +.ewisdom.us.kg
     - +.wildberries.co.il
+    - stats.avito.ru
     - ad.ozone.ru
     - adv.ozon.ru
     - agency-adv.ozon.ru
@@ -180,4 +181,3 @@ payload:
     - marketplace-sentry.wb.ru
     - sentry.wb.ru
     - web-analytics.wildberries.ru
-    - stats.avito.ru
