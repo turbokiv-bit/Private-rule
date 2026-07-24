@@ -299,6 +299,7 @@
         "🇺🇸 AT&T | IEPL",
         "🇺🇸 Alpha | IEPL",
         "🇺🇸 Jinx | IEPL",
+        "🇺🇸 Cox | IEPL",
       ],
       "interrupt_exist_connections": true
     },
@@ -321,6 +322,7 @@
         "🇯🇵 SoftBank | IEPL",
         "🇯🇵 Sonet | IEPL",
         "🇯🇵 Kddi | IEPL",
+        "🇯🇵 Misaka | IEPL",
         "🇭🇰 Super Max HKG"
       ],
       "interrupt_exist_connections": true
@@ -532,66 +534,6 @@
       }
     },
     {
-      "tag": "🇯🇵 Sakura | IEPL",
-      "type": "trojan",
-      "server": "gzktmfsiurtbn.makeufast.org",
-      "server_port": 26030,
-      "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
-      "tls": {
-        "enabled": true,
-        "server_name": "0301.339766.xyz",
-        "insecure": false
-      }
-    },
-    {
-      "tag": "🇯🇵 JinX | IEPL",
-      "type": "trojan",
-      "server": "gzktmfsiurtbn.makeufast.org",
-      "server_port": 26031,
-      "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
-      "tls": {
-        "enabled": true,
-        "server_name": "0302.339766.xyz",
-        "insecure": false
-      }
-    },
-    {
-      "tag": "🇯🇵 Akari | IEPL",
-      "type": "trojan",
-      "server": "gzktmfsiurtbn.makeufast.org",
-      "server_port": 26025,
-      "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
-      "tls": {
-        "enabled": true,
-        "server_name": "0303.339766.xyz",
-        "insecure": false
-      }
-    },
-    {
-      "tag": "🇯🇵 HostHatch | IEPL",
-      "type": "trojan",
-      "server": "gzktmfsiurtbn.makeufast.org",
-      "server_port": 26029,
-      "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
-      "tls": {
-        "enabled": true,
-        "server_name": "0304.339766.xyz",
-        "insecure": false
-      }
-    },
-    {
-      "tag": "🇯🇵 DDPS | IEPL",
-      "type": "trojan",
-      "server": "gzktmfsiurtbn.makeufast.org",
-      "server_port": 26028,
-      "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
-      "tls": {
-        "enabled": true,
-        "server_name": "0305.339766.xyz",
-        "insecure": false
-      }
-    },
-    {
       "tag": "🇯🇵 DMIT | IEPL",
       "type": "trojan",
       "server": "gzktmfsiurtbn.makeufast.org",
@@ -640,18 +582,6 @@
       }
     },
     {
-      "tag": "🇯🇵 Leaseweb | IEPL",
-      "type": "trojan",
-      "server": "gzktmfsiurtbn.makeufast.org",
-      "server_port": 26080,
-      "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
-      "tls": {
-        "enabled": true,
-        "server_name": "mcdn.bilivideo.com",
-        "insecure": true
-      }
-    },
-    {
       "tag": "🇯🇵 Kddi | IEPL",
       "type": "trojan",
       "server": "gzktmfsiurtbn.makeufast.org",
@@ -688,30 +618,6 @@
       }
     },
     {
-      "tag": "🇺🇸 Eons | IEPL",
-      "type": "trojan",
-      "server": "gzktmfsiurtbn.makeufast.org",
-      "server_port": 26033,
-      "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
-      "tls": {
-        "enabled": true,
-        "server_name": "0504.339766.xyz",
-        "insecure": false
-      }
-    },
-    {
-      "tag": "🇺🇸 Leaseweb | IEPL",
-      "type": "trojan",
-      "server": "gzktmfsiurtbn.makeufast.org",
-      "server_port": 26040,
-      "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
-      "tls": {
-        "enabled": true,
-        "server_name": "0505.339766.xyz",
-        "insecure": false
-      }
-    },
-    {
       "tag": "🇺🇸 AT&T | IEPL",
       "type": "trojan",
       "server": "gzktmfsiurtbn.makeufast.org",
@@ -720,18 +626,6 @@
       "tls": {
         "enabled": true,
         "server_name": "0505.339766.xyz",
-        "insecure": false
-      }
-    },
-    {
-      "tag": "🇺🇸 HostHatch | IEPL",
-      "type": "trojan",
-      "server": "gzktmfsiurtbn.makeufast.org",
-      "server_port": 26034,
-      "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
-      "tls": {
-        "enabled": true,
-        "server_name": "0501.339766.xyz",
         "insecure": false
       }
     },
