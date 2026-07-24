@@ -338,8 +338,7 @@
         "🇭🇰 Super Max HKG",
       ],
       "interrupt_exist_connections": true
-    },
-    
+    }, 
     {
       "tag": "🇭🇰 HKT | IEPL",
       "type": "trojan",
@@ -348,8 +347,8 @@
       "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
       "tls": {
         "enabled": true,
-        "server_name": "mcdn.bilivideo.com",
-        "insecure": true
+        "server_name": "0111.339766.xyz",
+        "insecure": false
       }
     },
     {
@@ -360,8 +359,8 @@
       "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
       "tls": {
         "enabled": true,
-        "server_name": "mcdn.bilivideo.com",
-        "insecure": true
+        "server_name": "0103.339766.xyz",
+        "insecure": false
       }
     },
     {
@@ -372,8 +371,20 @@
       "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
       "tls": {
         "enabled": true,
-        "server_name": "mcdn.bilivideo.com",
-        "insecure": true
+        "server_name": "0107.339766.xyz",
+        "insecure": false
+      }
+    },
+    {
+      "tag": "🇭🇰 JinX | IEPL",
+      "type": "trojan",
+      "server": "gzktmfsiurtbn.makeufast.org",
+      "server_port": 26002,
+      "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
+      "tls": {
+        "enabled": true,
+        "server_name": "0102.339766.xyz",
+        "insecure": false
       }
     },
     {
@@ -384,8 +395,8 @@
       "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
       "tls": {
         "enabled": true,
-        "server_name": "mcdn.bilivideo.com",
-        "insecure": true
+        "server_name": "0112.339766.xyz",
+        "insecure": false
       }
     },
     {
@@ -396,8 +407,8 @@
       "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
       "tls": {
         "enabled": true,
-        "server_name": "mcdn.bilivideo.com",
-        "insecure": true
+        "server_name": "0111.339766.xyz",
+        "insecure": false
       }
     },
     {
@@ -408,8 +419,8 @@
       "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
       "tls": {
         "enabled": true,
-        "server_name": "mcdn.bilivideo.com",
-        "insecure": true
+        "server_name": "0103.339766.xyz",
+        "insecure": false
       }
     },
     {
@@ -420,8 +431,20 @@
       "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
       "tls": {
         "enabled": true,
-        "server_name": "mcdn.bilivideo.com",
-        "insecure": true
+        "server_name": "0107.339766.xyz",
+        "insecure": false
+      }
+    },
+    {
+      "tag": "🇭🇰 Jinx | Gomami",
+      "type": "trojan",
+      "server": "vednamgo.douyinverygood.com",
+      "server_port": 53110,
+      "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
+      "tls": {
+        "enabled": true,
+        "server_name": "0102.339766.xyz",
+        "insecure": false
       }
     },
     {
@@ -432,8 +455,8 @@
       "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
       "tls": {
         "enabled": true,
-        "server_name": "mcdn.bilivideo.com",
-        "insecure": true
+        "server_name": "0112.339766.xyz",
+        "insecure": false
       }
     },
     {
@@ -444,8 +467,20 @@
       "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
       "tls": {
         "enabled": true,
-        "server_name": "mcdn.bilivideo.com",
-        "insecure": true
+        "server_name": "0201.339766.xyz",
+        "insecure": false
+      }
+    },
+    {
+      "tag": "🇸🇬 JinX | IEPL",
+      "type": "trojan",
+      "server": "gzktmfsiurtbn.makeufast.org",
+      "server_port": 26011,
+      "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
+      "tls": {
+        "enabled": true,
+        "server_name": "0204.339766.xyz",
+        "insecure": false
       }
     },
     {
@@ -456,8 +491,8 @@
       "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
       "tls": {
         "enabled": true,
-        "server_name": "mcdn.bilivideo.com",
-        "insecure": true
+        "server_name": "0208.339766.xyz",
+        "insecure": false
       }
     },
     {
@@ -468,8 +503,20 @@
       "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
       "tls": {
         "enabled": true,
-        "server_name": "mcdn.bilivideo.com",
-        "insecure": true
+        "server_name": "0201.339766.xyz",
+        "insecure": false
+      }
+    },
+    {
+      "tag": "🇸🇬 JinX | Gomami",
+      "type": "trojan",
+      "server": "sggogogo.douyinverygood.com",
+      "server_port": 54004,
+      "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
+      "tls": {
+        "enabled": true,
+        "server_name": "0204.339766.xyz",
+        "insecure": false
       }
     },
     {
@@ -480,8 +527,68 @@
       "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
       "tls": {
         "enabled": true,
-        "server_name": "mcdn.bilivideo.com",
-        "insecure": true
+        "server_name": "0208.339766.xyz",
+        "insecure": false
+      }
+    },
+    {
+      "tag": "🇯🇵 Sakura | IEPL",
+      "type": "trojan",
+      "server": "gzktmfsiurtbn.makeufast.org",
+      "server_port": 26030,
+      "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
+      "tls": {
+        "enabled": true,
+        "server_name": "0301.339766.xyz",
+        "insecure": false
+      }
+    },
+    {
+      "tag": "🇯🇵 JinX | IEPL",
+      "type": "trojan",
+      "server": "gzktmfsiurtbn.makeufast.org",
+      "server_port": 26031,
+      "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
+      "tls": {
+        "enabled": true,
+        "server_name": "0302.339766.xyz",
+        "insecure": false
+      }
+    },
+    {
+      "tag": "🇯🇵 Akari | IEPL",
+      "type": "trojan",
+      "server": "gzktmfsiurtbn.makeufast.org",
+      "server_port": 26025,
+      "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
+      "tls": {
+        "enabled": true,
+        "server_name": "0303.339766.xyz",
+        "insecure": false
+      }
+    },
+    {
+      "tag": "🇯🇵 HostHatch | IEPL",
+      "type": "trojan",
+      "server": "gzktmfsiurtbn.makeufast.org",
+      "server_port": 26029,
+      "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
+      "tls": {
+        "enabled": true,
+        "server_name": "0304.339766.xyz",
+        "insecure": false
+      }
+    },
+    {
+      "tag": "🇯🇵 DDPS | IEPL",
+      "type": "trojan",
+      "server": "gzktmfsiurtbn.makeufast.org",
+      "server_port": 26028,
+      "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
+      "tls": {
+        "enabled": true,
+        "server_name": "0305.339766.xyz",
+        "insecure": false
       }
     },
     {
@@ -492,8 +599,8 @@
       "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
       "tls": {
         "enabled": true,
-        "server_name": "mcdn.bilivideo.com",
-        "insecure": true
+        "server_name": "0306.339766.xyz",
+        "insecure": false
       }
     },
     {
@@ -504,8 +611,8 @@
       "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
       "tls": {
         "enabled": true,
-        "server_name": "mcdn.bilivideo.com",
-        "insecure": true
+        "server_name": "0307.339766.xyz",
+        "insecure": false
       }
     },
     {
@@ -533,6 +640,18 @@
       }
     },
     {
+      "tag": "🇯🇵 Leaseweb | IEPL",
+      "type": "trojan",
+      "server": "gzktmfsiurtbn.makeufast.org",
+      "server_port": 26080,
+      "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
+      "tls": {
+        "enabled": true,
+        "server_name": "mcdn.bilivideo.com",
+        "insecure": true
+      }
+    },
+    {
       "tag": "🇯🇵 Kddi | IEPL",
       "type": "trojan",
       "server": "gzktmfsiurtbn.makeufast.org",
@@ -540,8 +659,8 @@
       "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
       "tls": {
         "enabled": true,
-        "server_name": "mcdn.bilivideo.com",
-        "insecure": true
+        "server_name": "0312.339766.xyz",
+        "insecure": false
       }
     },
     {
@@ -552,8 +671,8 @@
       "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
       "tls": {
         "enabled": true,
-        "server_name": "mcdn.bilivideo.com",
-        "insecure": true
+        "server_name": "0502.339766.xyz",
+        "insecure": false
       }
     },
     {
@@ -564,8 +683,32 @@
       "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
       "tls": {
         "enabled": true,
-        "server_name": "mcdn.bilivideo.com",
-        "insecure": true
+        "server_name": "0503.339766.xyz",
+        "insecure": false
+      }
+    },
+    {
+      "tag": "🇺🇸 Eons | IEPL",
+      "type": "trojan",
+      "server": "gzktmfsiurtbn.makeufast.org",
+      "server_port": 26033,
+      "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
+      "tls": {
+        "enabled": true,
+        "server_name": "0504.339766.xyz",
+        "insecure": false
+      }
+    },
+    {
+      "tag": "🇺🇸 Leaseweb | IEPL",
+      "type": "trojan",
+      "server": "gzktmfsiurtbn.makeufast.org",
+      "server_port": 26040,
+      "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
+      "tls": {
+        "enabled": true,
+        "server_name": "0505.339766.xyz",
+        "insecure": false
       }
     },
     {
@@ -576,11 +719,35 @@
       "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
       "tls": {
         "enabled": true,
-        "server_name": "mcdn.bilivideo.com",
-        "insecure": true
+        "server_name": "0505.339766.xyz",
+        "insecure": false
       }
     },
-        {
+    {
+      "tag": "🇺🇸 HostHatch | IEPL",
+      "type": "trojan",
+      "server": "gzktmfsiurtbn.makeufast.org",
+      "server_port": 26034,
+      "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
+      "tls": {
+        "enabled": true,
+        "server_name": "0501.339766.xyz",
+        "insecure": false
+      }
+    },
+    {
+      "tag": "🇺🇸 Cox | IEPL",
+      "type": "trojan",
+      "server": "gzktmfsiurtbn.makeufast.org",
+      "server_port": 57009,
+      "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
+      "tls": {
+        "enabled": true,
+        "server_name": "0509.339766.xyz",
+        "insecure": false
+      }
+    },
+    {
       "tag": "🇩🇪 Dataforest | BJDE",
       "type": "trojan",
       "server": "bjde.dhqbtyngpss.hardcorelinks.org",
@@ -588,8 +755,8 @@
       "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
       "tls": {
         "enabled": true,
-        "server_name": "mcdn.bilivideo.com",
-        "insecure": true
+        "server_name": "0601.339766.xyz",
+        "insecure": false
       }
     },
     {
@@ -600,8 +767,8 @@
       "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
       "tls": {
         "enabled": true,
-        "server_name": "mcdn.bilivideo.com",
-        "insecure": true
+        "server_name": "0602.339766.xyz",
+        "insecure": false
       }
     },
     {
@@ -612,8 +779,8 @@
       "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
       "tls": {
         "enabled": true,
-        "server_name": "mcdn.bilivideo.com",
-        "insecure": true
+        "server_name": "0604.339766.xyz",
+        "insecure": false
       }
     },
     {
@@ -624,8 +791,8 @@
       "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
       "tls": {
         "enabled": true,
-        "server_name": "mcdn.bilivideo.com",
-        "insecure": true
+        "server_name": "0601.339766.xyz",
+        "insecure": false
       }
     },
     {
@@ -636,8 +803,8 @@
       "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
       "tls": {
         "enabled": true,
-        "server_name": "mcdn.bilivideo.com",
-        "insecure": true
+        "server_name": "0602.339766.xyz",
+        "insecure": false
       }
     },
     {
@@ -648,8 +815,8 @@
       "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
       "tls": {
         "enabled": true,
-        "server_name": "mcdn.bilivideo.com",
-        "insecure": true
+        "server_name": "0604.339766.xyz",
+        "insecure": false
       }
     },
   ],
