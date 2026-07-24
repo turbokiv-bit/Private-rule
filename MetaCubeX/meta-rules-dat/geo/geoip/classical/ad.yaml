@@ -355,5 +355,4 @@ payload:
     - IP-CIDR,2a0e:ec05:8000::/40
     - IP-CIDR,2a0e:ec05:8100::/41
     - IP-CIDR,2a0e:ec05:8180::/42
-    - IP-CIDR,2a14:2d45::/40
     - IP-CIDR,2a14:67c2:897::/48

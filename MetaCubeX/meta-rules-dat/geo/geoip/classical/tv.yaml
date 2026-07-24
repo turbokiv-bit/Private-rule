@@ -95,5 +95,4 @@ payload:
     - IP-CIDR,2a09:bac5:58d8::/45
     - IP-CIDR,2a09:bac6:58d8::/45
     - IP-CIDR,2a0b:4e07:3:7980::/60
-    - IP-CIDR,2a14:2d45:e100::/40
     - IP-CIDR,2a14:67c2:827::/48

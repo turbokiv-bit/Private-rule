@@ -1,7 +1,4 @@
 payload:
-    - +.ggpht.cn
-    - amp-api.podcasts.apple.com
-    - podcasts.apple.com
     - +.apple-itunes.cn
     - +.itunes-apple.cn
     - +.itunesapple.cn
@@ -52,16 +49,16 @@ payload:
     - itunes.apple.com
     - itunesconnect.apple.com
     - osxapps.itunes.g.aaplimg.com
-    - amp-api-edge.music.apple.com
-    - amp-api.music.apple.com
-    - js-cdn.music.apple.com
-    - music.apple.com
-    - musicstatus.music.apple.com
-    - play.music.apple.com
-    - speedysub.music.apple.com
+    - +.amazonprimevideo.cn
+    - +.amazonprimevideo.com.cn
+    - amp-api.podcasts.apple.com
+    - podcasts.apple.com
+    - +.ggpht.cn
+    - gog.qtlglb.com
+    - +.xboxlive.cn
+    - +.yostar.cn
     - +.leagueoflegends.cn
     - +.lpl.com.cn
-    - uplaypc-s-ubisoft.cdn.ubi.com
     - +.steamserver.net
     - +.steamusercontent.com
     - +.csgo.com.cn
@@ -81,7 +78,6 @@ payload:
     - xz.pphimalayanrt.com
     - +.steamchina.com
     - +.gstore.val.manlaxy.com
-    - +.xboxlive.cn
     - +.bluearchive-cn.com
     - +.legendofzelda.cn
     - +.legendofzelda.com.cn
@@ -95,7 +91,11 @@ payload:
     - +.mariokart.cn
     - +.mariokart.com.cn
     - +.supermariobros.com.cn
-    - gog.qtlglb.com
-    - +.yostar.cn
-    - +.amazonprimevideo.cn
-    - +.amazonprimevideo.com.cn
+    - uplaypc-s-ubisoft.cdn.ubi.com
+    - amp-api-edge.music.apple.com
+    - amp-api.music.apple.com
+    - js-cdn.music.apple.com
+    - music.apple.com
+    - musicstatus.music.apple.com
+    - play.music.apple.com
+    - speedysub.music.apple.com
