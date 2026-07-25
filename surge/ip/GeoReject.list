@@ -4,6 +4,7 @@ DOMAIN-SUFFIX,d.meituan.net
 DOMAIN,dnspod.meituan.httpdns.qcloud.com
 IP-CIDR,202.90.110.46/32,no-resolve
 IP-CIDR,202.90.108.13/32,no-resolve
+IP-CIDR,194.221.250.50/32,no-resolve
 DOMAIN,cdn.liftoff-creatives.io
 DOMAIN,impression-east.liftoff.io
 DOMAIN,ingest.insights.ninetailed.co
