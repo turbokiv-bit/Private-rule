@@ -31,9 +31,9 @@ payload:
     - DOMAIN-SUFFIX,ncss.cn
     - DOMAIN-SUFFIX,aoshu.com
     - DOMAIN-SUFFIX,100tal.com
-    - DOMAIN-SUFFIX,tongxuepie.com
+    - DOMAIN-SUFFIX,shanbay.com
     - DOMAIN-SUFFIX,qgzb.net
-    - DOMAIN-SUFFIX,schoopia.com
+    - DOMAIN-SUFFIX,baydn.com
     - DOMAIN-SUFFIX,zbbm.net
     - DOMAIN-SUFFIX,neea.cn
     - DOMAIN-SUFFIX,21cnjy.com
@@ -130,13 +130,8 @@ payload:
     - DOMAIN-SUFFIX,hugecore.net
     - DOMAIN-SUFFIX,shareintelli.com
     - DOMAIN-SUFFIX,mojidict.com
-    - DOMAIN-SUFFIX,cctalk.com
-    - DOMAIN-SUFFIX,hjapi.com
-    - DOMAIN-SUFFIX,hjfile.cn
-    - DOMAIN-SUFFIX,hujiang.com
-    - DOMAIN-SUFFIX,yeshj.com
-    - DOMAIN-SUFFIX,baydn.com
-    - DOMAIN-SUFFIX,shanbay.com
+    - DOMAIN-SUFFIX,schoopia.com
+    - DOMAIN-SUFFIX,tongxuepie.com
     - DOMAIN-SUFFIX,banmaaike.com
     - DOMAIN-SUFFIX,xiaoyuankousuan.com
     - DOMAIN-SUFFIX,ybccode.com
@@ -159,6 +154,11 @@ payload:
     - DOMAIN-SUFFIX,koocdn.com
     - DOMAIN-SUFFIX,applysquare.com
     - DOMAIN-SUFFIX,applysquare.net
+    - DOMAIN-SUFFIX,cctalk.com
+    - DOMAIN-SUFFIX,hjapi.com
+    - DOMAIN-SUFFIX,hjfile.cn
+    - DOMAIN-SUFFIX,hujiang.com
+    - DOMAIN-SUFFIX,yeshj.com
     - DOMAIN-SUFFIX,icve.com.cn
     - DOMAIN-SUFFIX,chsi.com.cn
     - DOMAIN-SUFFIX,modex.com.cn

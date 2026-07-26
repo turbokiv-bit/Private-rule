@@ -31,9 +31,9 @@ payload:
     - +.ncss.cn
     - +.aoshu.com
     - +.100tal.com
-    - +.tongxuepie.com
+    - +.shanbay.com
     - +.qgzb.net
-    - +.schoopia.com
+    - +.baydn.com
     - +.zbbm.net
     - +.neea.cn
     - +.21cnjy.com
@@ -130,13 +130,8 @@ payload:
     - +.hugecore.net
     - +.shareintelli.com
     - +.mojidict.com
-    - +.cctalk.com
-    - +.hjapi.com
-    - +.hjfile.cn
-    - +.hujiang.com
-    - +.yeshj.com
-    - +.baydn.com
-    - +.shanbay.com
+    - +.schoopia.com
+    - +.tongxuepie.com
     - +.banmaaike.com
     - +.xiaoyuankousuan.com
     - +.ybccode.com
@@ -159,6 +154,11 @@ payload:
     - +.koocdn.com
     - +.applysquare.com
     - +.applysquare.net
+    - +.cctalk.com
+    - +.hjapi.com
+    - +.hjfile.cn
+    - +.hujiang.com
+    - +.yeshj.com
     - +.icve.com.cn
     - +.chsi.com.cn
     - +.modex.com.cn
