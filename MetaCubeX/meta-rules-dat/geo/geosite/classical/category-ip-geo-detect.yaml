@@ -7,8 +7,8 @@ payload:
     - DOMAIN,ipv6-check-perf.radar.cloudflare.com
     - DOMAIN,whatismyip.akamai.com
     - DOMAIN-SUFFIX,ipinfo.io
-    - DOMAIN-SUFFIX,country.is
-    - DOMAIN-SUFFIX,2ip.io
+    - DOMAIN-SUFFIX,ipleak.net
+    - DOMAIN-SUFFIX,2ip.ua
     - DOMAIN-SUFFIX,51degrees.com
     - DOMAIN-SUFFIX,abstractapi.com
     - DOMAIN-SUFFIX,apiip.net
@@ -17,7 +17,7 @@ payload:
     - DOMAIN-SUFFIX,check-host.net
     - DOMAIN-SUFFIX,checkip.org
     - DOMAIN-SUFFIX,checkip.ru
-    - DOMAIN-SUFFIX,ipleak.net
+    - DOMAIN-SUFFIX,country.is
     - DOMAIN-SUFFIX,curlmyip.net
     - DOMAIN-SUFFIX,dadata.ru
     - DOMAIN-SUFFIX,db-ip.com
@@ -27,7 +27,7 @@ payload:
     - DOMAIN-SUFFIX,findip.net
     - DOMAIN-SUFFIX,flagfox.net
     - DOMAIN-SUFFIX,fraudguard.io
-    - DOMAIN-SUFFIX,fraudlogix.com
+    - DOMAIN-SUFFIX,ipligence.com
     - DOMAIN-SUFFIX,freegeoip.app
     - DOMAIN-SUFFIX,freeipapi.com
     - DOMAIN-SUFFIX,geodatatool.com
@@ -68,9 +68,9 @@ payload:
     - DOMAIN-SUFFIX,ipaddress.sh
     - DOMAIN-SUFFIX,ipapi.co
     - DOMAIN-SUFFIX,ipapi.com
-    - DOMAIN-SUFFIX,ipligence.com
+    - DOMAIN-SUFFIX,ipapi.is
     - DOMAIN-SUFFIX,ipbase.com
-    - DOMAIN-SUFFIX,ipbot.com
+    - DOMAIN-SUFFIX,2ip.io
     - DOMAIN-SUFFIX,ipcalf.com
     - DOMAIN-SUFFIX,ipcheck.ing
     - DOMAIN-SUFFIX,ipchicken.com
@@ -80,9 +80,9 @@ payload:
     - DOMAIN-SUFFIX,ipfinder.io
     - DOMAIN-SUFFIX,ipgeolocation.io
     - DOMAIN-SUFFIX,ipify.org
-    - DOMAIN-SUFFIX,2ip.ua
+    - DOMAIN-SUFFIX,ipbot.com
     - DOMAIN-SUFFIX,2ip.ru
-    - DOMAIN-SUFFIX,ipapi.is
+    - DOMAIN-SUFFIX,fraudlogix.com
     - DOMAIN-SUFFIX,iplocate.io
     - DOMAIN-SUFFIX,iplocation.com
     - DOMAIN-SUFFIX,iplocation.io
@@ -105,6 +105,7 @@ payload:
     - DOMAIN-SUFFIX,myexternalip.com
     - DOMAIN-SUFFIX,myip.com
     - DOMAIN-SUFFIX,myip.expert
+    - DOMAIN-SUFFIX,myip.link
     - DOMAIN-SUFFIX,myip.ms
     - DOMAIN-SUFFIX,myip.ru
     - DOMAIN-SUFFIX,myip.wtf

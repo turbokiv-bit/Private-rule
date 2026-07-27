@@ -10,7 +10,7 @@ payload:
     - p7-juejin.byteimg.com
     - p8-juejin.byteimg.com
     - p9-juejin.byteimg.com
-    - +.feishukacdn.com
+    - +.feishuhuiyi.cn
     - +.volcsdns.net
     - +.activity-dy.com
     - +.activity01.com
@@ -41,7 +41,7 @@ payload:
     - +.bdsagslb.com
     - +.bdsagslbtest.com
     - +.bdzjdsagslb.com
-    - +.feishumeetings.com
+    - +.feishuimg-boe.com
     - +.betadance.net
     - +.bfcdnbf.com
     - +.bfcdnrd.com
@@ -323,6 +323,14 @@ payload:
     - +.faceu.com
     - +.ulikecam.com
     - +.rsproxy.cn
+    - +.dcarapi.com
+    - +.dcarimg.com
+    - +.dcarlive.com
+    - +.dcarstatic.com
+    - +.dcarvod.com
+    - +.dcdapp.com
+    - +.dongchedi.com
+    - +.dongchediapp.com
     - +.butterfly-static.cn
     - +.butterflyai.cn
     - +.coze-dns-01.com
@@ -385,9 +393,6 @@ payload:
     - +.qznovelpic.com
     - +.qznovelstatic.com
     - +.qznovelvod.com
-    - +.juejin.cn
-    - +.juejin.im
-    - +.xitu.io
     - +.baseopendev.com
     - +.bytecloud.com
     - +.byteoc.com
@@ -420,14 +425,14 @@ payload:
     - +.feishucdn.com
     - +.feishudoc.cn
     - +.feishudoc.com
-    - +.feishuhuiyi.cn
-    - +.feishuhuiyi.com
-    - +.feishuimg-boe.com
-    - +.feishuimg-pre.com
-    - +.feishuimg.com
     - +.volcmcdn4.com
     - +.99uri.com
     - +.betaband.net
+    - +.feishuimg-pre.com
+    - +.feishuimg.com
+    - +.feishukacdn.com
+    - +.feishumeetings.cn
+    - +.feishumeetings.com
     - +.feishuoffice.cn
     - +.feishuoffice.com
     - +.feishuopenplatformrecord.com
@@ -470,32 +475,12 @@ payload:
     - +.larksuitecdn.com
     - +.larksuiteimg-boe.com
     - +.larksuiteimg-pre.com
-    - +.doudou.com
-    - +.marscode.cn
-    - +.mcbaas.work
-    - +.mcdemo.show
-    - +.xflowedge.com
-    - +.xck31.cn
-    - +.mchost.guru
-    - +.mcprev.cn
-    - +.tcwqqdy.guru
-    - +.trae.cn
-    - +.trae.guru
-    - +.yoma.cn
-    - +.writingo.net
-    - +.writingo-editor.com
-    - +.dcarapi.com
-    - +.dcarimg.com
-    - +.dcarlive.com
-    - +.dcarstatic.com
-    - +.dcarvod.com
-    - +.dcdapp.com
-    - +.dongchedi.com
-    - +.dongchediapp.com
     - +.activity-wbsj.com
     - +.aihst8.com
     - +.amemv.cn
     - +.amemv.com
+    - +.xflowedge.com
+    - +.xck31.cn
     - +.amemv.net
     - +.awemeughun.com
     - +.awemeuglang.com
@@ -558,6 +543,21 @@ payload:
     - +.wohst8.com
     - +.douyinpay.com
     - +.open-douyin.com
+    - +.writingo.net
+    - +.writingo-editor.com
+    - +.juejin.cn
+    - +.juejin.im
+    - +.xitu.io
+    - +.doudou.com
+    - +.marscode.cn
+    - +.mcbaas.work
+    - +.mcdemo.show
+    - +.mchost.guru
+    - +.mcprev.cn
+    - +.tcwqqdy.guru
+    - +.trae.cn
+    - +.trae.guru
+    - +.yoma.cn
     - +.volx.cn
     - +.volcwaf001.com
     - +.volcanoarkshare.com
@@ -811,7 +811,7 @@ payload:
     - +.volcsdns-test.com
     - +.volcsdns.cn
     - +.volcsdns.com
-    - +.feishumeetings.cn
+    - +.feishuhuiyi.com
     - +.volcsirius.com
     - +.volcsiriusbd.com
     - +.volcspaceeduc.com
@@ -828,14 +828,14 @@ payload:
     - +.byteplusapi.com.cn
     - +.byteplusapi-test.com.cn
     - +.bytepluses.com.cn
-    - +.marscode.com.cn
+    - +.qishui.com.cn
     - +.okr.com.cn
     - +.gogokid.com.cn
     - +.ve-omnishield.com.cn
-    - +.qishuimusic.com.cn
-    - +.qishui.com.cn
-    - +.ibytepluses.com.cn
     - +.trae.com.cn
+    - +.marscode.com.cn
+    - +.ibytepluses.com.cn
+    - +.qishuimusic.com.cn
     - +.byteplus-api.com.cn
     - +.byteplus-api-test.com.cn
     - +.ai-guardrail.com.cn
@@ -873,6 +873,13 @@ payload:
     - +.pglstatp-toutiao.com
     - +.sf3-ttcdn-tos.pstatp.com
     - +.shoppingads.cn
+    - +.coze.com
+    - +.marscode.com
+    - +.trae.ai
+    - +.cici.com
+    - +.ciciai.com
+    - +.ciciaicdn.com
+    - +.dola.com
     - ads3-normal-hl.zijieapi.com
     - ads3-normal.zijieapi.com
     - ads5-normal-hl.zijieapi.com
@@ -888,13 +895,6 @@ payload:
     - rtlog3-applog.fqnovel.com
     - rtlog5-applog-hl.fqnovel.com
     - rtlog5-applog.fqnovel.com
-    - +.coze.com
-    - +.marscode.com
-    - +.trae.ai
-    - +.cici.com
-    - +.ciciai.com
-    - +.ciciaicdn.com
-    - +.dola.com
     - +.bytedapm.com
     - +.byteoversea.com
     - +.muscdn.com
