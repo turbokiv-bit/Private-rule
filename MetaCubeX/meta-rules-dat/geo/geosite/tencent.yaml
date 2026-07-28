@@ -294,9 +294,9 @@ payload:
     - +.qcloudclass.com
     - +.qcloudcos.cn
     - +.qcloudcos.com
-    - +.discuz.net
-    - +.comsenz.com
-    - +.dnspod.org
+    - +.dnsv5.com
+    - +.dns.pub
+    - +.dnsv3.com
     - +.qclouder.com
     - +.qcloudgme.com
     - +.qcloudimg.com
@@ -356,7 +356,7 @@ payload:
     - +.tencent-cloud.net
     - +.tencentapps.com
     - +.tencentbyod.com
-    - +.discuz.org
+    - +.dnspod.org
     - +.tencentcdb.com
     - +.txbyod.com
     - +.acctdns.net
@@ -370,7 +370,7 @@ payload:
     - +.tencentcloudses.com
     - +.tencentcos.cn
     - +.tencentcos.com
-    - +.dnsv5.com
+    - +.dnsapi.cn
     - +.tencentcs.cn
     - +.tencentcs.com
     - +.tencentdayu.com
@@ -390,12 +390,12 @@ payload:
     - +.tencentyun.com
     - +.tendbcluster.com
     - +.tendis.net
-    - +.dns.pub
+    - +.doh.pub
     - +.testmeet.cn
     - +.testwaf.com
     - +.tgovcloud.com
     - +.tidaas.com
-    - +.dnsv3.com
+    - +.dnsv2.com
     - +.timmerse.com
     - +.tlivecdn.com
     - +.tlivemcdn.com
@@ -405,7 +405,7 @@ payload:
     - +.tourismuser.cn
     - +.tsparkling.com
     - +.tx-exhibition.com
-    - +.dnsapi.cn
+    - +.dnspod.mobi
     - +.txidc.wang
     - +.txlivecdn.com
     - +.txtyxg.com
@@ -420,7 +420,7 @@ payload:
     - +.wework-studio.com
     - +.xqymuy.com
     - +.yufuid.com
-    - +.doh.pub
+    - +.dot.pub
     - +.yufuid.net
     - +.tencentclb.com
     - +.dnse0.cn
@@ -465,13 +465,13 @@ payload:
     - +.tdnsv13.net
     - +.tdnsv14.net
     - +.tdnsv15.net
-    - +.dnsv2.com
-    - +.dnspod.mobi
-    - +.dot.pub
     - +.dnspod.com
     - +.dnspod.cn
     - +.dnsv4.com
     - +.dnspod.net
+    - +.discuz.org
+    - +.discuz.net
+    - +.comsenz.com
     - +.rumt-zh.com
     - +.tamaegis.com
     - +.ym.run
@@ -513,14 +513,14 @@ payload:
     - +.qcloudcos.com.cn
     - +.tencentcdb.com.cn
     - +.yufuid.com.cn
-    - +.dnspod.com.cn
+    - +.jrzk.net.cn
     - +.oracle-tencent.com.cn
     - +.oracle-tencent.net.cn
     - +.timatrix.com.cn
     - +.soso.com.cn
-    - +.jrzk.net.cn
     - +.ectencent.com.cn
     - +.dnsv1.com.cn
+    - +.dnspod.com.cn
     - +.qq.com.cn
     - +.rtx.com.cn
     - +.testjrzk.net.cn
