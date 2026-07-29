@@ -1,0 +1,41 @@
+on:
+  schedule:
+    # GitHub Actions uses UTC. Runs daily at 04:00 Asia/Shanghai/Hong_Kong.
+    - cron: "0 20 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-surge-rules
+  cancel-in-progress: true
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Download and convert rules
+        run: python scripts/update.py
+
+      - name: Commit changed files
+        run: |
+          if [ -z "$(git status --porcelain -- source/ rules/)" ]; then
+            echo "No rule changes."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add source/ rules/
+          git commit -m "chore: update Surge rules"
+          git push
