@@ -18,8 +18,8 @@ payload:
     - +.pagecdn.com
     - +.pagecdn.io
     - +.quantil.com
-    - +.stackpath.com
-    - +.stackpath.dev
+    - +.cdn77.com
+    - +.cdn77.org
     - +.argotunnel.com
     - +.browser.run
     - +.cfargotunnel.com
@@ -82,6 +82,10 @@ payload:
     - +.fastlylabs.com
     - +.fastlylb.net
     - +.zencdn.net
+    - +.imgix.com
+    - +.imgix.net
+    - +.stackpath.com
+    - +.stackpath.dev
     - +.vrcdn.cloud
     - +.vrcdn.live
     - +.vrcdn.video
@@ -154,10 +158,6 @@ payload:
     - +.iamakamai.net
     - +.soasta-dswb.com
     - +.srtcdn.net
-    - +.cdn77.com
-    - +.cdn77.org
-    - +.imgix.com
-    - +.imgix.net
     - +.esm.run
     - +.jsdelivr.com
     - +.jsdelivr.net

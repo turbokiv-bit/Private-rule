@@ -5,15 +5,16 @@ payload:
     - ip.comss.net
     - ipv4-check-perf.radar.cloudflare.com
     - ipv6-check-perf.radar.cloudflare.com
+    - myip.dnsomatic.com
     - whatismyip.akamai.com
-    - +.ipinfo.io
-    - +.ipleak.net
+    - +.ipligence.com
+    - +.maxmind.com
     - +.2ip.ua
     - +.51degrees.com
     - +.abstractapi.com
     - +.apiip.net
     - +.apivoid.com
-    - +.bigdatacloud.net
+    - +.2ip.io
     - +.check-host.net
     - +.checkip.org
     - +.checkip.ru
@@ -27,7 +28,7 @@ payload:
     - +.findip.net
     - +.flagfox.net
     - +.fraudguard.io
-    - +.ipligence.com
+    - +.fraudlogix.com
     - +.freegeoip.app
     - +.freeipapi.com
     - +.geodatatool.com
@@ -70,7 +71,7 @@ payload:
     - +.ipapi.com
     - +.ipapi.is
     - +.ipbase.com
-    - +.2ip.io
+    - +.ipbot.com
     - +.ipcalf.com
     - +.ipcheck.ing
     - +.ipchicken.com
@@ -80,9 +81,9 @@ payload:
     - +.ipfinder.io
     - +.ipgeolocation.io
     - +.ipify.org
-    - +.ipbot.com
+    - +.ipstack.com
     - +.2ip.ru
-    - +.fraudlogix.com
+    - +.bigdatacloud.net
     - +.iplocate.io
     - +.iplocation.com
     - +.iplocation.io
@@ -92,13 +93,14 @@ payload:
     - +.ipquery.io
     - +.ipregistry.co
     - +.iproyal.com
-    - +.ipstack.com
+    - +.ipsimple.org
+    - +.ipinfo.io
     - +.ipverify.com
     - +.ipwho.is
     - +.ipwhois.io
     - +.ipxapi.com
     - +.l2.io
-    - +.maxmind.com
+    - +.ipleak.net
     - +.mon-ip.com
     - +.monip.org
     - +.my-ip.io
@@ -113,6 +115,7 @@ payload:
     - +.myiplookup.com
     - +.mylocation.org
     - +.nodedata.io
+    - +.nossl.sh
     - +.osint.sh
     - +.proxycheck.io
     - +.realip.cc
