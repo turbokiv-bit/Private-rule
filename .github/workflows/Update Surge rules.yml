@@ -1,7 +1,7 @@
 on:
   schedule:
     # GitHub Actions uses UTC. Runs daily at 04:00 Asia/Shanghai/Hong_Kong.
-    - cron: "0 20 * * *"
+    - cron: "55 23 * * *"
   workflow_dispatch:
 
 permissions:
