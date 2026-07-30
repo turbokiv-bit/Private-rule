@@ -52,7 +52,7 @@ payload:
     - DOMAIN-SUFFIX,anquan
     - DOMAIN-SUFFIX,alipay
     - DOMAIN-SUFFIX,jsgc168.com
-    - DOMAIN-SUFFIX,gxchuen.com
+    - DOMAIN-SUFFIX,bjsdcm.net
     - DOMAIN-SUFFIX,028-xhxgt.com
     - DOMAIN-SUFFIX,0283home.com
     - DOMAIN-SUFFIX,0289kh1448.xin
@@ -4927,7 +4927,7 @@ payload:
     - DOMAIN-SUFFIX,51cto.com
     - DOMAIN-SUFFIX,51cube.com
     - DOMAIN-SUFFIX,51cxsoft.com
-    - DOMAIN-SUFFIX,51cywx.com
+    - DOMAIN-SUFFIX,jsmxgs.com
     - DOMAIN-SUFFIX,51czapp.com
     - DOMAIN-SUFFIX,51dai.com
     - DOMAIN-SUFFIX,51daifu.com
@@ -12491,7 +12491,7 @@ payload:
     - DOMAIN-SUFFIX,artebuy.com
     - DOMAIN-SUFFIX,artech-graphite.com
     - DOMAIN-SUFFIX,artemedhospital.com
-    - DOMAIN-SUFFIX,jsmodeling.com
+    - DOMAIN-SUFFIX,arterytek.com
     - DOMAIN-SUFFIX,artexamcq.com
     - DOMAIN-SUFFIX,artfinace.com
     - DOMAIN-SUFFIX,artfoxlive.com
@@ -16212,7 +16212,7 @@ payload:
     - DOMAIN-SUFFIX,bjscfl.com
     - DOMAIN-SUFFIX,bjscszh.com
     - DOMAIN-SUFFIX,bjscyxh.com
-    - DOMAIN-SUFFIX,bjsdcm.net
+    - DOMAIN-SUFFIX,jsmsg.com
     - DOMAIN-SUFFIX,bjsdeyy.com
     - DOMAIN-SUFFIX,bjsdfz.com
     - DOMAIN-SUFFIX,bjsdgroup.com
@@ -36168,7 +36168,7 @@ payload:
     - DOMAIN-SUFFIX,fymall4.com
     - DOMAIN-SUFFIX,fymall5.com
     - DOMAIN-SUFFIX,fymall6.com
-    - DOMAIN-SUFFIX,jsmrmf.com
+    - DOMAIN-SUFFIX,fymall7.com
     - DOMAIN-SUFFIX,fymall8.com
     - DOMAIN-SUFFIX,fymall9.com
     - DOMAIN-SUFFIX,fymallqa0.com
@@ -40540,7 +40540,7 @@ payload:
     - DOMAIN-SUFFIX,gxchr.com
     - DOMAIN-SUFFIX,gxchuanghua.com
     - DOMAIN-SUFFIX,gxchuanlan.com
-    - DOMAIN-SUFFIX,jsmolfa.com
+    - DOMAIN-SUFFIX,gxchuen.com
     - DOMAIN-SUFFIX,gxchunmao.com
     - DOMAIN-SUFFIX,gxchuxin.com
     - DOMAIN-SUFFIX,gxcic.net
@@ -55959,11 +55959,11 @@ payload:
     - DOMAIN-SUFFIX,jsmjys.com
     - DOMAIN-SUFFIX,jsmkyy.com
     - DOMAIN-SUFFIX,jsmo.xin
-    - DOMAIN-SUFFIX,arterytek.com
+    - DOMAIN-SUFFIX,jsmodeling.com
+    - DOMAIN-SUFFIX,jsmolfa.com
+    - DOMAIN-SUFFIX,morefood.com
     - DOMAIN-SUFFIX,027zpw.com
-    - DOMAIN-SUFFIX,fymall7.com
-    - DOMAIN-SUFFIX,jsmsg.com
-    - DOMAIN-SUFFIX,jsmxgs.com
+    - DOMAIN-SUFFIX,51cywx.com
     - DOMAIN-SUFFIX,jsmxw.com
     - DOMAIN-SUFFIX,jsna.work
     - DOMAIN-SUFFIX,jsnaier.com
@@ -66777,7 +66777,7 @@ payload:
     - DOMAIN-SUFFIX,morechinese.cc
     - DOMAIN-SUFFIX,moreck.com
     - DOMAIN-SUFFIX,moredian.com
-    - DOMAIN-SUFFIX,morefood.com
+    - DOMAIN-SUFFIX,jsmrmf.com
     - DOMAIN-SUFFIX,morefreegame.com
     - DOMAIN-SUFFIX,morefun-philippines.com
     - DOMAIN-SUFFIX,morefunstudio.com
@@ -100615,6 +100615,7 @@ payload:
     - DOMAIN-SUFFIX,xmmuye.com
     - DOMAIN-SUFFIX,xmnjdwx.com
     - DOMAIN-SUFFIX,xmocloud01.com
+    - DOMAIN-SUFFIX,xmoj.tech
     - DOMAIN-SUFFIX,xmonecode.com
     - DOMAIN-SUFFIX,xmos.tv
     - DOMAIN-SUFFIX,xmov.ai
