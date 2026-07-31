@@ -1,6 +1,6 @@
 payload:
-    - DOMAIN-SUFFIX,lf126.net
-    - DOMAIN-SUFFIX,haowu.link
+    - DOMAIN-SUFFIX,lf127.net
+    - DOMAIN-SUFFIX,188.com
     - DOMAIN-SUFFIX,126.net
     - DOMAIN-SUFFIX,127.com
     - DOMAIN-SUFFIX,127.net
@@ -13,17 +13,18 @@ payload:
     - DOMAIN-SUFFIX,163yun.com
     - DOMAIN-SUFFIX,166.com
     - DOMAIN-SUFFIX,166.net
-    - DOMAIN-SUFFIX,188.com
+    - DOMAIN-SUFFIX,lf126.net
     - DOMAIN-SUFFIX,321fenx.com
-    - DOMAIN-SUFFIX,lf127.net
+    - DOMAIN-SUFFIX,haowu.link
     - DOMAIN-SUFFIX,icourse163.org
     - DOMAIN-SUFFIX,126.link
-    - DOMAIN-SUFFIX,126.com
-    - DOMAIN-SUFFIX,netease.com
+    - DOMAIN-SUFFIX,kada.com
+    - DOMAIN-SUFFIX,netease.im
+    - DOMAIN-SUFFIX,lofter.com
     - DOMAIN-SUFFIX,nease.net
     - DOMAIN-SUFFIX,netease-inc.com
-    - DOMAIN-SUFFIX,lofter.com
-    - DOMAIN-SUFFIX,netease.im
+    - DOMAIN-SUFFIX,netease.com
+    - DOMAIN-SUFFIX,126.com
     - DOMAIN-SUFFIX,netstatic.net
     - DOMAIN-SUFFIX,qiyukf.com
     - DOMAIN-SUFFIX,qiyukf.net

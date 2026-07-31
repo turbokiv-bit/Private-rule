@@ -10,8 +10,8 @@ payload:
     - p7-juejin.byteimg.com
     - p8-juejin.byteimg.com
     - p9-juejin.byteimg.com
-    - +.bvgslb.com
-    - +.larkoffice.com
+    - +.bvglb.com
+    - +.neihancommunity.net
     - +.activity-dy.com
     - +.activity01.com
     - +.activity02.com
@@ -41,7 +41,7 @@ payload:
     - +.bdsagslb.com
     - +.bdsagslbtest.com
     - +.bdzjdsagslb.com
-    - +.byte-dns.com
+    - +.betaband.net
     - +.betadance.net
     - +.bfcdnbf.com
     - +.bfcdnrd.com
@@ -141,7 +141,7 @@ payload:
     - +.bytevcloudvod.com
     - +.bytexservice.com
     - +.cdnbuild.com
-    - +.cdnbuild.net
+    - +.99uri.cn
     - +.cdndns1.com
     - +.cdndns2.com
     - +.doubo03.com
@@ -172,7 +172,7 @@ payload:
     - +.ndcpp.com
     - +.neihancommunity.cn
     - +.neihancommunity.com
-    - +.neihancommunity.net
+    - +.bvgslb.com
     - +.neyetwatcher.com
     - +.oortgslb.com
     - +.openbcs.com
@@ -237,6 +237,7 @@ payload:
     - +.voleai.com
     - +.wtturl.cn
     - +.xsgtvacct.com
+    - +.yhgfb-cn-static.com
     - +.zijieapi.cn
     - +.zijieapi.com
     - +.zijieapi.net
@@ -366,7 +367,7 @@ payload:
     - +.idouyinpic.com
     - +.idouyinstatic.com
     - +.idouyinvod.com
-    - +.iesdouyin.com
+    - +.bvgtm.com
     - +.iesdouyin.net
     - +.ieshuodong.cn
     - +.ieshuodong.net
@@ -425,10 +426,10 @@ payload:
     - +.bpltm.com
     - +.bvfcdn2.com
     - +.bvfcdn3.com
-    - +.bvglb.com
-    - +.feishukacdn.com
+    - +.cdnbuild.net
     - +.99uri.com
-    - +.betaband.net
+    - +.iesdouyin.com
+    - +.byte-dns.com
     - +.byte-dns.net
     - +.bytefcdnrd-tob.com
     - +.bytehiservice.com
@@ -678,11 +679,11 @@ payload:
     - +.dcarlive.com
     - +.dcarimg.com
     - +.dcarapi.com
-    - +.larksuiteimg-pre.com
-    - +.larksuiteimg-boe.com
-    - +.larksuitecdn.com
-    - +.larksuiteimg.com
-    - +.larkvc.com
+    - +.getsays.cn
+    - +.getfeishu.com
+    - +.getsays.com
+    - +.feishuvc.com
+    - +.feishuvc.cn
     - +.butterfly-static.cn
     - +.butterflyai.cn
     - +.coze-dns-01.com
@@ -748,8 +749,8 @@ payload:
     - +.juejin.cn
     - +.juejin.im
     - +.xitu.io
-    - +.baseopendev.com
-    - +.bytecloud.com
+    - +.feishuhuiyi.com
+    - +.feishuapp.com
     - +.byteoc.com
     - +.bytewebservice.com
     - +.bytexns.cn
@@ -759,7 +760,39 @@ payload:
     - +.meegobeta.com
     - +.okr.cn
     - +.okr.com
+    - +.statusfeishu.cn
     - +.vscenevideo.com
+    - +.larkofficecdn.com
+    - +.larkofficepkg.com
+    - +.lark.cn
+    - +.larkcloud.com
+    - +.larkcloud.net
+    - +.larkfn.com
+    - +.larkmeetings.cn
+    - +.larkmeetings.com
+    - +.larkoffice.com
+    - +.thelarkcloud.com
+    - +.securityfs.cn
+    - +.larkofficeapp-pre.com
+    - +.larkofficeapp.com
+    - +.larkofficeboe.com
+    - +.lark-passport-qa-sg.net
+    - +.statuslarkoffice.com
+    - +.larkrooms.cn
+    - +.larkofficepre.com
+    - +.larkofficeimg.com
+    - +.larkrooms.com
+    - +.larksuite-pre.com
+    - +.larksuite.com
+    - +.larkvc.com
+    - +.larksuiteimg.com
+    - +.larksuitecdn.com
+    - +.larksuiteimg-boe.com
+    - +.larksuiteimg-pre.com
+    - +.securityfeishu.cn
+    - +.larkofficeapp-boe.com
+    - +.bytecloud.com
+    - +.getfeishu.cn
     - +.anycross.com
     - +.blmpb.com
     - +.bytedancehermestest.com
@@ -776,16 +809,16 @@ payload:
     - +.feishu.net
     - +.feishuapp-cdn.net
     - +.feishuapp.cn
-    - +.feishuapp.com
+    - +.lackvc.cn
     - +.feishucdn.com
     - +.feishudoc.cn
     - +.feishudoc.com
     - +.feishuhuiyi.cn
-    - +.feishuhuiyi.com
+    - +.baseopendev.com
     - +.feishuimg-boe.com
     - +.feishuimg-pre.com
     - +.feishuimg.com
-    - +.99uri.cn
+    - +.feishukacdn.com
     - +.feishumeetings.cn
     - +.feishumeetings.com
     - +.feishuoffice.cn
@@ -793,38 +826,6 @@ payload:
     - +.feishuopenplatformrecord.com
     - +.feishupkg.com
     - +.feishustatus.cn
-    - +.feishuvc.cn
-    - +.feishuvc.com
-    - +.getfeishu.cn
-    - +.getfeishu.com
-    - +.getsays.cn
-    - +.getsays.com
-    - +.lackvc.cn
-    - +.securityfeishu.cn
-    - +.securityfs.cn
-    - +.statusfeishu.cn
-    - +.larkofficecdn.com
-    - +.larkofficepkg.com
-    - +.lark.cn
-    - +.larkcloud.com
-    - +.larkcloud.net
-    - +.larkfn.com
-    - +.larkmeetings.cn
-    - +.larkmeetings.com
-    - +.bvgtm.com
-    - +.thelarkcloud.com
-    - +.larkofficeapp-boe.com
-    - +.larkofficeapp-pre.com
-    - +.larkofficeapp.com
-    - +.larkofficeboe.com
-    - +.lark-passport-qa-sg.net
-    - +.statuslarkoffice.com
-    - +.larkrooms.cn
-    - +.larkofficepre.com
-    - +.larkofficeimg.com
-    - +.larkrooms.com
-    - +.larksuite-pre.com
-    - +.larksuite.com
     - +.ve-omnishield.com.cn
     - +.bytepluses.com.cn
     - +.gogokid.com.cn
@@ -850,12 +851,14 @@ payload:
     - +.ad.toutiao.com
     - +.bds.snssdk.com
     - +.byteadverts.com
+    - +.csjplatform.com
     - +.ctobsnssdk.com
     - +.dig.bdurl.net
     - +.extlog.snssdk.com
     - +.i.snssdk.com
     - +.log.zijieapi.com
     - +.mcs.snssdk.com
+    - +.pangle.cn
     - +.pangolin-dsp-toutiao-b.com
     - +.pangolin-dsp-toutiao.com
     - +.pangolin-hl.snssdk.com
@@ -873,6 +876,28 @@ payload:
     - +.pglstatp-toutiao.com
     - +.sf3-ttcdn-tos.pstatp.com
     - +.shoppingads.cn
+    - +.coze.com
+    - +.marscode.com
+    - +.trae.ai
+    - +.cici.com
+    - +.ciciai.com
+    - +.ciciaicdn.com
+    - +.dola.com
+    - ads3-normal-hl.zijieapi.com
+    - ads3-normal.zijieapi.com
+    - ads5-normal-hl.zijieapi.com
+    - ads5-normal.zijieapi.com
+    - log3-applog-hl.fqnovel.com
+    - log3-applog.fqnovel.com
+    - log5-applog-hl.fqnovel.com
+    - log5-applog.fqnovel.com
+    - p3-ad-sign.byteimg.com
+    - p6-ad-sign.byteimg.com
+    - p9-ad-sign.byteimg.com
+    - rtlog3-applog-hl.fqnovel.com
+    - rtlog3-applog.fqnovel.com
+    - rtlog5-applog-hl.fqnovel.com
+    - rtlog5-applog.fqnovel.com
     - +.bytedapm.com
     - +.byteoversea.com
     - +.muscdn.com
@@ -910,25 +935,3 @@ payload:
     - roovza.launches.appsflyersdk.com
     - roovza.skadsdk.appsflyersdk.com
     - +.analytics.tiktok.com
-    - +.coze.com
-    - +.marscode.com
-    - +.trae.ai
-    - +.cici.com
-    - +.ciciai.com
-    - +.ciciaicdn.com
-    - +.dola.com
-    - ads3-normal-hl.zijieapi.com
-    - ads3-normal.zijieapi.com
-    - ads5-normal-hl.zijieapi.com
-    - ads5-normal.zijieapi.com
-    - log3-applog-hl.fqnovel.com
-    - log3-applog.fqnovel.com
-    - log5-applog-hl.fqnovel.com
-    - log5-applog.fqnovel.com
-    - p3-ad-sign.byteimg.com
-    - p6-ad-sign.byteimg.com
-    - p9-ad-sign.byteimg.com
-    - rtlog3-applog-hl.fqnovel.com
-    - rtlog3-applog.fqnovel.com
-    - rtlog5-applog-hl.fqnovel.com
-    - rtlog5-applog.fqnovel.com
