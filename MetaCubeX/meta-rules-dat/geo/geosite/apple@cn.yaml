@@ -207,6 +207,10 @@ payload:
     - www.apple.com
     - www.apple.com.edgekey.net.globalredir.akadns.net
     - xp.apple.com
+    - +.researchkit.cn
+    - +.researchkit.com.cn
+    - +.swiftui.cn
+    - +.swiftui.com.cn
     - amp-api.podcasts.apple.com
     - podcasts.apple.com
     - +.beats1.cn
@@ -216,10 +220,14 @@ payload:
     - +.beatsbydre.com
     - +.beatsbydre.com.cn
     - +.beatsep.cn
-    - +.researchkit.cn
-    - +.researchkit.com.cn
-    - +.swiftui.cn
-    - +.swiftui.com.cn
+    - +.apple-icloud.cn
+    - +.appleicloud.cn
+    - +.icloud-apple.cn
+    - +.icloud-content.com.cn
+    - +.icloud.cn
+    - +.icloud.com.cn
+    - +.icloud.net.cn
+    - +.icloudapple.cn
     - amp-api-edge.music.apple.com
     - amp-api.music.apple.com
     - js-cdn.music.apple.com
@@ -235,14 +243,6 @@ payload:
     - ocsp2.apple.com
     - valid.apple.com
     - valid.origin-apple.com.akadns.net
-    - +.apple-icloud.cn
-    - +.appleicloud.cn
-    - +.icloud-apple.cn
-    - +.icloud-content.com.cn
-    - +.icloud.cn
-    - +.icloud.com.cn
-    - +.icloud.net.cn
-    - +.icloudapple.cn
     - +.apple-itunes.cn
     - +.itunes-apple.cn
     - +.itunesapple.cn
