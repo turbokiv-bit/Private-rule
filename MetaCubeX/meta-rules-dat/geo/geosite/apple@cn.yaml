@@ -51,6 +51,9 @@ payload:
     - init.gc.apple.com
     - km.support.apple.com
     - maps.apple.com
+    - tj-pod1-smp-device.apple.com
+    - tj-pod2-smp-device.apple.com
+    - tj-pod3-smp-device.apple.com
     - www.support.apple.com
     - a1.mzstatic.com
     - a2.mzstatic.com
@@ -195,7 +198,6 @@ payload:
     - swscan-cdn.apple.com.akadns.net
     - swscan.apple.com
     - sylvan.apple.com
-    - tj-pod1-smp-device.apple.com
     - updates-http.cdn-apple.com
     - updates-http.cdn-apple.com.akadns.net
     - updates.cdn-apple.com
@@ -207,6 +209,15 @@ payload:
     - www.apple.com
     - www.apple.com.edgekey.net.globalredir.akadns.net
     - xp.apple.com
+    - amp-api.podcasts.apple.com
+    - podcasts.apple.com
+    - +.beats1.cn
+    - +.beats1.com.cn
+    - +.beats2.com.cn
+    - +.beats4.cn
+    - +.beatsbydre.com
+    - +.beatsbydre.com.cn
+    - +.beatsep.cn
     - +.apple-icloud.cn
     - +.appleicloud.cn
     - +.icloud-apple.cn
@@ -234,15 +245,6 @@ payload:
     - ocsp2.apple.com
     - valid.apple.com
     - valid.origin-apple.com.akadns.net
-    - amp-api.podcasts.apple.com
-    - podcasts.apple.com
-    - +.beats1.cn
-    - +.beats1.com.cn
-    - +.beats2.com.cn
-    - +.beats4.cn
-    - +.beatsbydre.com
-    - +.beatsbydre.com.cn
-    - +.beatsep.cn
     - +.apple-itunes.cn
     - +.itunes-apple.cn
     - +.itunesapple.cn
