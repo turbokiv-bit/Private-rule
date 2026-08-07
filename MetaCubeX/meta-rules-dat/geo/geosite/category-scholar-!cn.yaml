@@ -90,8 +90,8 @@ payload:
     - scholar.googleusercontent.com
     - scholar.l.google.com
     - +.mit
-    - +.eduhk.hk
-    - +.ieee.tv
+    - +.ieeecss.org
+    - +.booksc.me
     - +.acs.org
     - +.agu.org
     - +.aiaa.org
@@ -165,14 +165,14 @@ payload:
     - +.hindawi.com
     - +.hotcrp.com
     - +.icevirtuallibrary.com
-    - +.zlibcdn.com
-    - +.zlib.life
-    - +.z-library.se
-    - +.z-library.sk
+    - +.scopus.com
+    - +.scival.com
+    - +.reaxys.com
+    - +.mendeley.com
     - +.igi-global.com
     - +.igpublish.com
-    - +.z-lib.org
-    - +.z-lib.gl
+    - +.knovel.com
+    - +.fundinginstitutional.com
     - +.informs.org
     - +.ioinformatics.org
     - +.iop.org
@@ -184,11 +184,11 @@ payload:
     - +.jmlr.org
     - +.jneurosci.org
     - +.jove.com
-    - +.z-lib.gd
+    - +.evise.com
     - +.jstor.org
     - +.karger.com
     - +.kuke.com
-    - +.z-lib.fm
+    - +.engineeringvillage.com
     - +.lexisnexis.com
     - +.literatumonline.com
     - +.mdpi.com
@@ -196,10 +196,11 @@ payload:
     - +.morganclaypool.com
     - +.nature.com
     - +.naturemag.org
-    - +.singlelogin.site
+    - +.elsevier.io
+    - +.elsevier.com
     - +.nejm.org
     - +.neurology.org
-    - +.singlelogin.re
+    - +.elsevier-ae.com
     - +.oecd-ilibrary.org
     - +.openreview.net
     - +.optica.org
@@ -249,132 +250,8 @@ payload:
     - +.worldscientific.com
     - +.yale.edu
     - +.zenodo.org
-    - +.ac.ir
-    - +.edu.ir
-    - +.iranlms.ir
-    - +.jtt.ir
-    - +.sanjesh.org
-    - +.sharif.edu
-    - +.sharif.ir
-    - +.srttu.edu
-    - +.singlelogin.me
-    - +.cell.com
-    - +.clinicalkey.com
-    - +.els-cdn.com
-    - +.elsevier-ae.com
-    - +.elsevier.com
-    - +.elsevier.io
-    - +.engineeringvillage.com
-    - +.evise.com
-    - +.fundinginstitutional.com
-    - +.knovel.com
-    - +.mendeley.com
-    - +.reaxys.com
-    - +.scival.com
-    - +.scopus.com
-    - +.apress.com
-    - +.springer.com
-    - +.springerlink.com
-    - +.springernature.com
-    - +.wkap.nl
-    - +.xn--pssu7cv61af1tcs59bnvd.xn--j6w193g
-    - +.hkbu.hk
-    - +.cityu.hk
-    - +.xn--uis44a.xn--j6w193g
-    - +.polyu.hk
-    - +.xn--pssu7ci2j23mp9ny48b.xn--j6w193g
-    - +.cuhk.hk
-    - +.xn--mxtq18a.hk
-    - +.xn--mxtq18a.xn--j6w193g
-    - +.xn--fiqs8s1byzqyvl.hk
-    - +.xn--fiqs8s1byzqyvl.xn--j6w193g
-    - +.xn--pssu7cv61ahwcb1p2yk.hk
-    - +.xn--pssu7cv61ahwcb1p2yk.xn--j6w193g
-    - +.apa.org
-    - +.acm.org
-    - +.doi.info
-    - +.xn--wcv22d.xn--j6w193g
-    - +.hkust.hk
-    - +.xn--wcvs22d1m.xn--j6w193g
-    - +.xn--pssu7cv61af1tcs59bnvd.hk
-    - +.xn--wcvs22d.xn--j6w193g
-    - +.edu.hk
-    - +.xn--wcvs22d1m.hk
-    - +.xn--gdt08a.hk
-    - +.xn--gdt08a.xn--j6w193g
-    - +.xn--fiqs8s1bxp3anr7a.hk
-    - +.xn--fiqs8s1bxp3anr7a.xn--j6w193g
-    - +.xn--pssu7cv61ahw8aq79bztd.hk
-    - +.xn--pssu7cv61ahw8aq79bztd.xn--j6w193g
-    - +.xn--pssu7cv61af44b.xn--j6w193g
-    - +.hku.hk
-    - +.xn--pssu7cv61af44b.hk
-    - +.singlelogin.app
-    - +.sg1lib.org
-    - +.ma1lib.org
-    - +.libsolutions.net
-    - +.libsolutions.domains
-    - +.libsolutions.app
-    - +.hk1lib.org
-    - +.zlibcdn2.com
-    - +.de1lib.org
-    - +.bookshome.world
-    - +.bookshome.net
-    - +.oxfordbibliographies.com
-    - +.cambridge.org
-    - +.cambridgeschoolshakespeare.com
-    - +.cambridgedigital.net
-    - +.cambridgemaths.org
-    - +.opac-project.eu
-    - +.livinno.org
-    - +.universitypressscholarship.com
-    - +.imperialbusiness.school
-    - +.ukwhoswho.com
-    - +.sipriyearbook.org
-    - +.oxfordfirstsource.com
-    - +.oxfordscholarlyeditions.com
-    - +.blackstonespoliceservice.com
-    - +.epigeum.com
-    - +.oed.com
-    - +.omscr.com
-    - +.oup.com
-    - +.ouplaw.com
-    - +.veryshortintroductions.com
-    - +.ac.uk
-    - +.oxfordaasc.com
-    - +.oxfordartonline.com
-    - +.oxfordclinicalpsych.com
-    - +.oxforddnb.com
-    - +.anb.org
-    - +.oxfordpoliticstrove.com
-    - +.amamanualofstyle.com
-    - +.oxfordmedicine.com
-    - +.oxfordmusiconline.com
-    - +.oxfordhandbooks.com
-    - +.oxfordre.com
-    - +.oxfordreference.com
-    - +.oxfordlawtrove.com
-    - +.oxfordscholarship.com
-    - +.oxfordwesternmusic.com
-    - +.1lib.tw
-    - +.booksc.org
-    - +.1lib.cz
-    - +.booksc.me
-    - +.booksc.eu
-    - +.bookfi.net
-    - +.book4you.org
-    - +.b-ok.org
-    - +.xn--pssu7ci2j23mp9ny48b.hk
-    - +.psyccareers.com
-    - +.clarivate.com
-    - +.webofknowledge.com
-    - +.webofscience.com
-    - +.newisiknowledge.com
-    - +.isiknowledge.com
-    - +.doi.org
-    - +.xn--wcv22d.hk
     - +.ieee.org
-    - +.aacrjournals.org
+    - +.ieee.tv
     - +.tryengineering.org
     - +.ieee-ccnc.org
     - +.ieee-ecce.org
@@ -413,9 +290,9 @@ payload:
     - +.ieee-tems.org
     - +.ieee-uffc.org
     - +.ieeeaps.org
-    - +.ieeecsc.org
-    - +.ieeecss.org
-    - +.ieeedeis.org
+    - +.3lib.net
+    - +.acm.org
+    - +.oxfordlawtrove.com
     - +.ieeemagnetics.org
     - +.ieeenano.org
     - +.ieeeoes.org
@@ -430,21 +307,115 @@ payload:
     - +.sci-hub.se
     - +.sci-hub.ee
     - +.sci-hub.st
-    - +.b-ok.global
-    - +.b-ok.cc
-    - +.b-ok.asia
+    - +.els-cdn.com
+    - +.clinicalkey.com
+    - +.cell.com
+    - +.sciencedirect.com
+    - +.sciencedirectassets.com
+    - +.doi.org
+    - +.doi.info
+    - +.serialssolutions.com
+    - +.proquest.com
     - +.tandfonline.com
     - +.taylorandfrancis.com
     - +.taylorfrancis.com
-    - +.b-ok.africa
-    - +.aclweb.org
-    - +.mit.edu
-    - +.mit.net
+    - +.wkap.nl
+    - +.xn--pssu7cv61af1tcs59bnvd.xn--j6w193g
+    - +.hkbu.hk
+    - +.cityu.hk
+    - +.xn--uis44a.xn--j6w193g
+    - +.polyu.hk
+    - +.xn--pssu7ci2j23mp9ny48b.xn--j6w193g
+    - +.cuhk.hk
+    - +.xn--mxtq18a.hk
+    - +.xn--mxtq18a.xn--j6w193g
+    - +.xn--fiqs8s1byzqyvl.hk
+    - +.xn--fiqs8s1byzqyvl.xn--j6w193g
+    - +.xn--pssu7cv61ahwcb1p2yk.hk
+    - +.xn--pssu7cv61ahwcb1p2yk.xn--j6w193g
+    - +.xn--pssu7ci2j23mp9ny48b.hk
+    - +.eduhk.hk
+    - +.xn--wcv22d.hk
+    - +.xn--wcv22d.xn--j6w193g
+    - +.hkust.hk
+    - +.xn--wcvs22d1m.xn--j6w193g
+    - +.xn--pssu7cv61af1tcs59bnvd.hk
+    - +.xn--wcvs22d.xn--j6w193g
+    - +.edu.hk
+    - +.xn--wcvs22d1m.hk
+    - +.xn--gdt08a.hk
+    - +.xn--gdt08a.xn--j6w193g
+    - +.xn--fiqs8s1bxp3anr7a.hk
+    - +.xn--fiqs8s1bxp3anr7a.xn--j6w193g
+    - +.xn--pssu7cv61ahw8aq79bztd.hk
+    - +.xn--pssu7cv61ahw8aq79bztd.xn--j6w193g
+    - +.xn--pssu7cv61af44b.xn--j6w193g
+    - +.hku.hk
+    - +.xn--pssu7cv61af44b.hk
+    - +.springernature.com
+    - +.springerlink.com
+    - +.springer.com
+    - +.apress.com
     - +.mitpressjournals.org
-    - +.serialssolutions.com
-    - +.proquest.com
-    - +.sciencedirect.com
-    - +.sciencedirectassets.com
+    - +.mit.net
+    - +.mit.edu
+    - +.aclweb.org
+    - +.isiknowledge.com
+    - +.newisiknowledge.com
+    - +.webofscience.com
+    - +.ac.ir
+    - +.edu.ir
+    - +.iranlms.ir
+    - +.jtt.ir
+    - +.sanjesh.org
+    - +.sharif.edu
+    - +.sharif.ir
+    - +.srttu.edu
+    - +.webofknowledge.com
+    - +.oxfordreference.com
+    - +.oxfordfirstsource.com
+    - +.oxfordscholarlyeditions.com
+    - +.blackstonespoliceservice.com
+    - +.epigeum.com
+    - +.oed.com
+    - +.omscr.com
+    - +.oup.com
+    - +.ouplaw.com
+    - +.veryshortintroductions.com
+    - +.oxfordaasc.com
+    - +.oxfordartonline.com
+    - +.oxfordbibliographies.com
+    - +.oxfordclinicalpsych.com
+    - +.oxforddnb.com
+    - +.anb.org
+    - +.oxfordpoliticstrove.com
+    - +.amamanualofstyle.com
+    - +.oxfordmedicine.com
+    - +.oxfordmusiconline.com
+    - +.ac.uk
+    - +.oxfordhandbooks.com
+    - +.oxfordre.com
+    - +.ieeedeis.org
+    - +.oxfordscholarship.com
+    - +.oxfordwesternmusic.com
+    - +.sipriyearbook.org
+    - +.ukwhoswho.com
+    - +.universitypressscholarship.com
+    - +.imperialbusiness.school
+    - +.livinno.org
+    - +.opac-project.eu
+    - +.cambridgemaths.org
+    - +.cambridgedigital.net
+    - +.cambridge.org
+    - +.cambridgeschoolshakespeare.com
+    - +.clarivate.com
+    - +.psyccareers.com
+    - +.apa.org
+    - +.zlibcdn.com
+    - +.zlib.life
+    - +.z-library.se
+    - +.z-library.sk
+    - +.z-lib.org
     - +.bookshome.info
     - +.2lib.org
     - +.1lib.domains
@@ -456,21 +427,51 @@ payload:
     - +.1lib.to
     - +.1lib.cloud
     - +.booksc.xyz
-    - +.3lib.net
+    - +.ieeecsc.org
     - +.art1lib.com
+    - +.b-ok.africa
+    - +.b-ok.asia
+    - +.b-ok.cc
+    - +.b-ok.global
+    - +.b-ok.org
+    - +.book4you.org
+    - +.bookfi.net
+    - +.booksc.eu
+    - +.aacrjournals.org
+    - +.1lib.cz
+    - +.booksc.org
+    - +.1lib.tw
+    - +.bookshome.net
+    - +.bookshome.world
+    - +.de1lib.org
+    - +.zlibcdn2.com
+    - +.hk1lib.org
+    - +.libsolutions.app
+    - +.libsolutions.domains
+    - +.libsolutions.net
+    - +.ma1lib.org
+    - +.sg1lib.org
+    - +.singlelogin.app
+    - +.singlelogin.me
+    - +.singlelogin.re
+    - +.singlelogin.site
+    - +.z-lib.fm
+    - +.z-lib.gd
+    - +.z-lib.gl
+    - +.dln1.ncdn.ec
+    - +.academic.eb.com
+    - +.lawdata.com.tw
+    - +.dlib.eastview.com
     - +.tandf.co.uk
-    - +.ncl.edu.tw
+    - +.sci.hubg.org
     - +.sci-hub.mksa.top
     - +.sci-hub.it.nf
-    - +.dln1.ncdn.ec
-    - +.dlib.eastview.com
-    - +.sci.hubg.org
-    - +.academic.eb.com
     - +.nii.ac.jp
-    - +.lawdata.com.tw
+    - +.ncl.edu.tw
+    - +.acaric.co.jp
+    - +.amdigital.co.uk
     - +.infolinker.com.tw
     - +.hanzhen.xmulib.org
     - +.icsd.fiz-karlsruhe.de
-    - +.amdigital.co.uk
-    - +.acaric.co.jp
     - +.jstage.jst.go.jp
+    - +.ncbi.nlm.nih.gov

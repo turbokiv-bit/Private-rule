@@ -5,6 +5,8 @@ payload:
     - +.ibytedtos.com
     - +.ibyteimg.com
     - bytedance.map.fastly.net
+    - +.capcut.com
+    - +.capcutcdn-us.com
     - +.coze.com
     - +.marscode.com
     - +.trae.ai
@@ -13,7 +15,6 @@ payload:
     - +.ciciaicdn.com
     - +.dola.com
     - +.bytedapm.com
-    - +.byteoversea.com
     - +.muscdn.com
     - +.musical.ly
     - +.tik-tokapi.com

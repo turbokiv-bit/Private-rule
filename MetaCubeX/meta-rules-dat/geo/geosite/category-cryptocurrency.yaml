@@ -1,14 +1,14 @@
 payload:
-    - bybit-exchange.github.io
-    - bybit.ada.support
+    - deribit.cdn.prismic.io
+    - zftksc.cdn-settings.appsflyersdk.com
+    - zftksc.launches.appsflyersdk.com
     - onekey.zendesk.com
     - d3r7nsslvs6aaf.cloudfront.net
     - straitsx-826709081262441084-b790f87a2ae6fd417434295.freshchat.com
-    - zftksc.cdn-settings.appsflyersdk.com
-    - zftksc.launches.appsflyersdk.com
-    - deribit.cdn.prismic.io
-    - +.wyndlabs.ai
-    - +.bycsi.com
+    - bybit-exchange.github.io
+    - bybit.ada.support
+    - +.kucoin.plus
+    - +.okx-dns.com
     - +.base.org
     - +.bingx.com
     - +.bitbank.cc
@@ -24,7 +24,6 @@ payload:
     - +.blast.io
     - +.blockchain.com
     - +.blockfrost.io
-    - +.localbitcoinschain.com
     - +.cex.io
     - +.chainid.network
     - +.clearpool.finance
@@ -47,8 +46,8 @@ payload:
     - +.dogecoin.com
     - +.drpc.org
     - +.dydx.exchange
-    - +.wynd.network
-    - +.fantom.network
+    - +.fantom.foundation
+    - +.nexo.io
     - +.fiat24.com
     - +.flare.network
     - +.fundingrates.xyz
@@ -98,61 +97,44 @@ payload:
     - +.web3modal.org
     - +.wintermute.com
     - +.zapper.fi
-    - +.nexo.com
-    - +.nexo.io
+    - +.trustwallet.com
+    - +.bisq.io
+    - +.bisq.network
+    - +.bitsquare.io
+    - +.deribit.com
+    - +.devcon.org
+    - +.1inch.io
+    - +.ethereum.org
+    - +.etherscan.io
+    - +.htx.com
+    - +.hbabit.com
+    - +.hbfile.net
+    - +.huobi.com
+    - +.huobi.me
+    - +.huobi.pro
+    - +.huobi.sc
+    - +.huobiasia.vip
+    - +.huobigroup.com
+    - +.huobitoken.com
+    - +.kucoin.com
+    - +.ethereum.foundation
+    - +.aave.com
+    - +.fantom.network
     - +.okex.com
-    - +.okx-dns.com
+    - +.nexo.com
     - +.okx-dns1.com
-    - +.localbitcoins.com
+    - +.okx-dns2.com
     - +.okx.ac
     - +.okx.cab
     - +.okx.com
     - +.xlayer.tech
-    - +.lighter.xyz
     - +.redotpay.com
-    - +.lighter.exchange
-    - +.bitflyer.jp
-    - +.bitflyer.com
-    - +.zb.live
-    - +.wisecoin.com
-    - +.wiseid.com
-    - +.wisekey.com
-    - +.okx-dns2.com
-    - +.aave.com
-    - +.fantom.foundation
-    - +.bybit.com
-    - +.1inch.io
-    - +.bytick.com
-    - +.byapis.com
-    - +.bycbe.com
-    - +.bymj.io
-    - +.byabcde.com
-    - +.byapps.net
-    - +.byd3c3.com
-    - +.bybit.biz
-    - +.bybdc6.com
-    - +.bybit-global.com
-    - +.bybit.cloud
-    - +.bybitglobal.com
-    - +.devcon.org
-    - +.ethereum.foundation
-    - +.ethereum.org
-    - +.etherscan.io
-    - +.gate.io
-    - +.gatedata.org
-    - +.gateimg.com
-    - +.gateio.live
-    - +.gateio.services
-    - +.kraken.com
-    - +.kraken.onl
-    - +.onekey-asset.com
-    - +.onekey.so
-    - +.onekeycn.com
-    - +.straitsx.com
-    - +.bestchange.com
-    - +.bestchange.net
-    - +.bestchange.ru
+    - +.asproex.com
+    - +.asproexapi.com
     - +.binance.cc
+    - +.safepal.com
+    - +.isafepal.com
+    - +.localbitcoinschain.com
     - +.binance.charity
     - +.binance.cloud
     - +.binance.co
@@ -195,39 +177,57 @@ payload:
     - +.saasexch.com
     - +.saasexch.info
     - +.saasexch.io
-    - +.bisq.io
-    - +.bisq.network
-    - +.bitsquare.io
-    - +.coinonecore.com
-    - +.coinonecorp.com
-    - +.zb.io
-    - +.htx.com
-    - +.hbabit.com
-    - +.hbfile.net
-    - +.huobi.com
-    - +.huobi.me
-    - +.huobi.pro
-    - +.huobi.sc
-    - +.huobiasia.vip
-    - +.huobigroup.com
-    - +.huobitoken.com
-    - +.kucoin.com
-    - +.kucoin.plus
-    - +.asproex.com
-    - +.asproexapi.com
-    - +.deribit.com
-    - +.isafepal.com
-    - +.safepal.com
-    - +.trustwallet.com
+    - +.bitflyer.com
+    - +.bitflyer.jp
+    - +.kraken.com
+    - +.kraken.onl
+    - +.wisecoin.com
+    - +.wiseid.com
+    - +.wisekey.com
+    - +.localbitcoins.com
+    - +.lighter.xyz
+    - +.wyndlabs.ai
+    - +.wynd.network
     - +.zb.app
     - +.zb.com
+    - +.zb.io
+    - +.zb.live
+    - +.coinonecore.com
+    - +.coinonecorp.com
+    - +.lighter.exchange
+    - +.onekey-asset.com
+    - +.onekey.so
+    - +.onekeycn.com
+    - +.straitsx.com
+    - +.bestchange.com
+    - +.bestchange.net
+    - +.bestchange.ru
+    - +.bybit.com
+    - +.bycsi.com
+    - +.bytick.com
+    - +.byapis.com
+    - +.bycbe.com
+    - +.bymj.io
+    - +.byabcde.com
+    - +.byapps.net
+    - +.byd3c3.com
+    - +.bybit.biz
+    - +.bybdc6.com
+    - +.bybit-global.com
+    - +.bybit.cloud
+    - +.bybitglobal.com
+    - +.gate.io
+    - +.gatedata.org
+    - +.gateimg.com
+    - +.gateio.live
+    - +.gateio.services
     - +.coinone.co.kr
+    - +.wisekey.com.hk
+    - +.zklighter.elliot.ai
     - +.xhpjc6-cdn-settings.appsflyersdk.com
     - +.pod-15-sunco-ws.zendesk.com
     - +.redotpay.zendesk.com
-    - +.zklighter.elliot.ai
-    - +.wisekey.com.hk
     - +.btcbox.co.jp
-    - +.rp-static-apne1.s3.ap-northeast-1.amazonaws.com
     - +.okx.com.cdn.cloudflare.net
+    - +.rp-static-apne1.s3.ap-northeast-1.amazonaws.com
     - +.oklink.com

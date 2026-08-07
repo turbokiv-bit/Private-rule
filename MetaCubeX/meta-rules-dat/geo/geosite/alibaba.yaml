@@ -193,13 +193,6 @@ payload:
     - +.umtrack.com
     - +.uyunad.com
     - +.whalecloud.com
-    - +.9xsecndns.cn
-    - +.kumiao.com
-    - +.soku.com
-    - +.tudou.com
-    - +.ykimg.com
-    - +.youku.com
-    - +.youkuhonor.com
     - +.alibabadns.com
     - +.alicdn.com
     - +.alicloudapi.com
@@ -244,25 +237,25 @@ payload:
     - +.myalicdn.com
     - +.uc-engine.cn
     - +.open-uc.cn
-    - +.teambitionapis.com
-    - +.teambition.net
-    - +.teambition.com
+    - +.sqreader.com
+    - +.shuqistat.com
+    - +.shuqireader.com
+    - +.shuqiread.com
+    - +.shuqiapi.com
+    - +.shuqi.com
+    - +.newstjk.com
+    - +.ishuqi.com
+    - +.aliwx.net
+    - +.11222.cn
     - +.fengniaojipei.net
     - +.elenet.me
     - +.elemecdn.com
-    - +.elemecdn.cn
-    - +.eleme.io
-    - +.eleme.cn
-    - +.ele.to
-    - +.ele.me
-    - +.doservice.com
-    - +.ztna-dingtalk.com
     - +.alicloudccp.com
     - +.alipan.com
     - +.aliyundrive.cloud
     - +.aliyundrive.com
     - +.aliyundrive.net
-    - +.lwurl.to
+    - +.elemecdn.cn
     - +.a-map.cn
     - +.a-map.co
     - +.a-map.link
@@ -274,6 +267,32 @@ payload:
     - +.anav.com
     - +.autonavi.com
     - +.gaode.com
+    - +.ddurl.to
+    - +.dingding.xin
+    - +.dingstore.cn
+    - +.dingtalk.cn
+    - +.dingtalk.com
+    - +.dingtalk.net
+    - +.dingtalkapps.com
+    - +.dingtalkcloud.com
+    - +.laiwang.com
+    - +.lwurl.to
+    - +.ztna-dingtalk.com
+    - +.teambition.com
+    - +.teambition.net
+    - +.teambitionapis.com
+    - +.9xsecndns.cn
+    - +.kumiao.com
+    - +.soku.com
+    - +.tudou.com
+    - +.ykimg.com
+    - +.youku.com
+    - +.youkuhonor.com
+    - +.9game.cn
+    - +.aligames.com
+    - +.jiaoyimao.cn
+    - +.jiaoyimao.com
+    - +.lingxigames.com
     - +.56xiniao.com
     - +.cainiao-inc.com
     - +.cainiao.com
@@ -282,45 +301,26 @@ payload:
     - +.dianwoda.cn
     - +.dianwoda.com
     - +.guoguo-app.com
-    - +.laiwang.com
-    - +.11222.cn
-    - +.aliwx.net
-    - +.ishuqi.com
-    - +.newstjk.com
-    - +.shuqi.com
-    - +.shuqiapi.com
-    - +.shuqiread.com
-    - +.shuqireader.com
-    - +.shuqistat.com
-    - +.sqreader.com
-    - +.dingtalkcloud.com
-    - +.9game.cn
-    - +.aligames.com
-    - +.jiaoyimao.cn
-    - +.jiaoyimao.com
-    - +.lingxigames.com
-    - +.ddurl.to
-    - +.dingding.xin
-    - +.dingstore.cn
-    - +.dingtalk.cn
-    - +.dingtalk.com
-    - +.dingtalk.net
-    - +.dingtalkapps.com
-    - +.oss-cn-shenzhen.aliyuncs.com
-    - +.oss-cn-nanjing.aliyuncs.com
+    - +.eleme.io
+    - +.doservice.com
+    - +.ele.me
+    - +.ele.to
+    - +.eleme.cn
+    - +.oss-cn-shanghai.aliyuncs.com
+    - +.oss-cn-huhehaote.aliyuncs.com
     - +.oss-cn-zhangjiakou.aliyuncs.com
     - +.oss-cn-wulanchabu.aliyuncs.com
-    - +.oss-cn-heyuan.aliyuncs.com
-    - +.oss-cn-shanghai.aliyuncs.com
-    - +.oss-cn-guangzhou.aliyuncs.com
-    - +.log-global.aliyuncs.com
-    - +.aliwx.com.cn
-    - +.cainiao.com.cn
-    - +.oss-cn-huhehaote.aliyuncs.com
+    - +.oss-cn-shenzhen.aliyuncs.com
+    - +.oss-cn-hangzhou.aliyuncs.com
     - +.oss-cn-qingdao.aliyuncs.com
     - +.oss-cn-chengdu.aliyuncs.com
+    - +.aliwx.com.cn
+    - +.cainiao.com.cn
+    - +.oss-cn-heyuan.aliyuncs.com
+    - +.oss-cn-nanjing.aliyuncs.com
     - +.oss-cn-beijing.aliyuncs.com
-    - +.oss-cn-hangzhou.aliyuncs.com
+    - +.log-global.aliyuncs.com
+    - +.oss-cn-guangzhou.aliyuncs.com
     - +.cn-shanghai.aliyuncs.com
     - +.cn-hangzhou.aliyuncs.com
     - +.lydass.com.cn
@@ -385,29 +385,6 @@ payload:
     - +.utoken.umeng.com
     - +.w.cnzz.com
     - +.z.gds.cnzz.com
-    - +.youku.tv
-    - +.youkuplay.com
-    - +.ad.api.3g.youku.com
-    - +.ad.api.mobile.youku.com
-    - +.ad.mobile.youku.com
-    - +.adashx.ut.youku.com
-    - +.atm.youku.com
-    - +.e.stat.ykimg.com
-    - +.ems.youku.com
-    - +.guanggaoad.youku.com
-    - +.h-adashx.ut.youku.com
-    - +.lstat.youku.com
-    - +.mobilemsg.youku.com
-    - +.msg.youku.com
-    - +.p-log.ykimg.com
-    - +.passport-log.youku.com
-    - +.pl.youku.com
-    - +.s-adashx.ut.youku.com
-    - +.stat.youku.com
-    - +.statis.api.3g.youku.com
-    - +.v6-adashx.ut.youku.com
-    - +.yk-ssp.ad.youku.com
-    - +.ykad-data.youku.com
     - +.alibabacloud.co.in
     - +.alibabacloud.com
     - +.alibabacloud.com.au
@@ -450,6 +427,29 @@ payload:
     - +.logs.amap.com
     - +.optimus-ads.amap.com
     - +.v6-adashx.ut.amap.com
+    - +.youku.tv
+    - +.youkuplay.com
+    - +.ad.api.3g.youku.com
+    - +.ad.api.mobile.youku.com
+    - +.ad.mobile.youku.com
+    - +.adashx.ut.youku.com
+    - +.atm.youku.com
+    - +.e.stat.ykimg.com
+    - +.ems.youku.com
+    - +.guanggaoad.youku.com
+    - +.h-adashx.ut.youku.com
+    - +.lstat.youku.com
+    - +.mobilemsg.youku.com
+    - +.msg.youku.com
+    - +.p-log.ykimg.com
+    - +.passport-log.youku.com
+    - +.pl.youku.com
+    - +.s-adashx.ut.youku.com
+    - +.stat.youku.com
+    - +.statis.api.3g.youku.com
+    - +.v6-adashx.ut.youku.com
+    - +.yk-ssp.ad.youku.com
+    - +.ykad-data.youku.com
     - +.v6-adashx.ut.cainiao.com
     - +.adashx.ut.ele.me
     - +.h-adashx.ut.ele.me

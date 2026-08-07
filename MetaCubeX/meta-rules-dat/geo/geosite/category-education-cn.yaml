@@ -13,27 +13,27 @@ payload:
     - +.chesicc.com
     - +.chesicc.net
     - +.chsi.cn
-    - +.mojidict.com
-    - +.shareintelli.com
-    - +.hugecore.net
-    - +.yuketang.cn
-    - +.rainclassroom.com
-    - +.fenbilantian.com
-    - +.fenbilantian.cn
-    - +.fenbike.com
-    - +.fenbike.cn
-    - +.fenbi.com
+    - +.zuowen.com
+    - +.zhongkao.com
+    - +.youjiao.com
+    - +.xueersi.com
+    - +.xesimg.com
+    - +.tal.com
+    - +.speiyou.com
+    - +.gaokao.com
+    - +.eduuu.com
+    - +.eduu.com
     - +.gfbzb.cn
     - +.gfbzb.com
-    - +.fbstatic.cn
-    - +.yuantiku.com
+    - +.aoshu.com
+    - +.100tal.com
     - +.gfbzb.net
     - +.ncss.cn
-    - +.yuansouti.com
-    - +.yuanfudao.com
-    - +.ybccode.com
+    - +.shanbay.com
+    - +.baydn.com
+    - +.koopass.com
     - +.qgzb.net
-    - +.xiaoyuankousuan.com
+    - +.koolearn.com
     - +.zbbm.net
     - +.neea.cn
     - +.21cnjy.com
@@ -76,7 +76,7 @@ payload:
     - +.sydw8.com
     - +.ictbda.cn
     - +.ictbda.com
-    - +.banmaaike.com
+    - +.koocdn.com
     - +.xir.cn
     - +.j-test.com
     - +.nattest-china.com
@@ -101,7 +101,7 @@ payload:
     - +.qingtingai.net
     - +.quyixian.com
     - +.rongdeji.cn
-    - +.shanbay.com
+    - +.mojidict.com
     - +.saduck.top
     - +.tesoon.com
     - +.unipus.cn
@@ -128,21 +128,6 @@ payload:
     - +.qianxuecloud.com
     - +.qianxueyunke.com
     - +.zhixingyunke.com
-    - +.koocdn.com
-    - +.koolearn.com
-    - +.koopass.com
-    - +.100tal.com
-    - +.aoshu.com
-    - +.eduu.com
-    - +.eduuu.com
-    - +.gaokao.com
-    - +.speiyou.com
-    - +.tal.com
-    - +.xesimg.com
-    - +.xueersi.com
-    - +.youjiao.com
-    - +.zhongkao.com
-    - +.zuowen.com
     - +.chinesemooc.org
     - +.cnmooc.org
     - +.icourse163.org
@@ -150,12 +135,10 @@ payload:
     - +.mooc.cn
     - +.openlearning.com
     - +.pmphmooc.com
-    - +.baydn.com
+    - +.shareintelli.com
     - +.17zuoye.cn
     - +.17zuoye.com
     - +.17zuoye.net
-    - +.applysquare.com
-    - +.applysquare.net
     - +.cctalk.com
     - +.hjapi.com
     - +.hjfile.cn
@@ -163,6 +146,23 @@ payload:
     - +.yeshj.com
     - +.schoopia.com
     - +.tongxuepie.com
+    - +.banmaaike.com
+    - +.xiaoyuankousuan.com
+    - +.ybccode.com
+    - +.yuanfudao.com
+    - +.yuansouti.com
+    - +.yuantiku.com
+    - +.fbstatic.cn
+    - +.fenbi.com
+    - +.fenbike.cn
+    - +.fenbike.com
+    - +.fenbilantian.cn
+    - +.fenbilantian.com
+    - +.rainclassroom.com
+    - +.yuketang.cn
+    - +.applysquare.com
+    - +.applysquare.net
+    - +.hugecore.net
     - +.icve.com.cn
     - +.chsi.com.cn
     - +.modex.com.cn

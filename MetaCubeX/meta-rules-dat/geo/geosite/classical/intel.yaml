@@ -1,6 +1,6 @@
 payload:
     - DOMAIN-SUFFIX,intel.wf
-    - DOMAIN-SUFFIX,nextgenerationcenter.com
+    - DOMAIN-SUFFIX,intel.lc
     - DOMAIN-SUFFIX,intel.af
     - DOMAIN-SUFFIX,intel.ag
     - DOMAIN-SUFFIX,intel.ai
@@ -83,7 +83,7 @@ payload:
     - DOMAIN-SUFFIX,intel.jp
     - DOMAIN-SUFFIX,intel.ke
     - DOMAIN-SUFFIX,intel.la
-    - DOMAIN-SUFFIX,intel.lc
+    - DOMAIN-SUFFIX,intel.yt
     - DOMAIN-SUFFIX,intel.lk
     - DOMAIN-SUFFIX,intel.lt
     - DOMAIN-SUFFIX,intel.lu
@@ -95,7 +95,7 @@ payload:
     - DOMAIN-SUFFIX,intel.mk
     - DOMAIN-SUFFIX,intel.mn
     - DOMAIN-SUFFIX,intel.mp
-    - DOMAIN-SUFFIX,intel.mt
+    - DOMAIN-SUFFIX,intel.ac
     - DOMAIN-SUFFIX,intel.mu
     - DOMAIN-SUFFIX,intel.mw
     - DOMAIN-SUFFIX,intel.mx
@@ -141,11 +141,11 @@ payload:
     - DOMAIN-SUFFIX,intel.vg
     - DOMAIN-SUFFIX,intel.vn
     - DOMAIN-SUFFIX,intel.vu
-    - DOMAIN-SUFFIX,cilk.com
-    - DOMAIN-SUFFIX,vokevr.com
+    - DOMAIN-SUFFIX,intel.mt
     - DOMAIN-SUFFIX,intel.ae
+    - DOMAIN-SUFFIX,exploreintel.com
+    - DOMAIN-SUFFIX,vokevr.com
     - DOMAIN-SUFFIX,trustedanalytics.net
-    - DOMAIN-SUFFIX,intel.yt
     - DOMAIN-SUFFIX,trustedanalytics.com
     - DOMAIN-SUFFIX,thunderbolttechnology.net
     - DOMAIN-SUFFIX,altera.com
@@ -156,7 +156,7 @@ payload:
     - DOMAIN-SUFFIX,centrino.com
     - DOMAIN-SUFFIX,centrino.net
     - DOMAIN-SUFFIX,chips.com
-    - DOMAIN-SUFFIX,intel.ac
+    - DOMAIN-SUFFIX,cilk.com
     - DOMAIN-SUFFIX,cilk.net
     - DOMAIN-SUFFIX,cloudinsights.com
     - DOMAIN-SUFFIX,clusterconnection.com
@@ -170,7 +170,7 @@ payload:
     - DOMAIN-SUFFIX,easic.com
     - DOMAIN-SUFFIX,enpirion.com
     - DOMAIN-SUFFIX,exascale-tech.com
-    - DOMAIN-SUFFIX,exploreintel.com
+    - DOMAIN-SUFFIX,threadingbuildingblocks.org
     - DOMAIN-SUFFIX,gordonmoore.com
     - DOMAIN-SUFFIX,granulate.io
     - DOMAIN-SUFFIX,hackharassment.com
@@ -222,7 +222,7 @@ payload:
     - DOMAIN-SUFFIX,movidius.org
     - DOMAIN-SUFFIX,nervanasys.com
     - DOMAIN-SUFFIX,nevex.com
-    - DOMAIN-SUFFIX,threadingbuildingblocks.org
+    - DOMAIN-SUFFIX,nextgenerationcenter.com
     - DOMAIN-SUFFIX,niosii.com
     - DOMAIN-SUFFIX,niosii.net
     - DOMAIN-SUFFIX,omekinteractive.com
@@ -260,7 +260,7 @@ payload:
     - DOMAIN-SUFFIX,intel.com.au
     - DOMAIN-SUFFIX,intel.co.jp
     - DOMAIN-SUFFIX,intel.com.ve
-    - DOMAIN-SUFFIX,intel.com.tw
+    - DOMAIN-SUFFIX,intel.com.uy
     - DOMAIN-SUFFIX,intel.com.cn
     - DOMAIN-SUFFIX,intel.com.py
     - DOMAIN-SUFFIX,intel.com.pr
@@ -271,7 +271,7 @@ payload:
     - DOMAIN-SUFFIX,intel.com.jm
     - DOMAIN-SUFFIX,altera.co.jp
     - DOMAIN-SUFFIX,intel.com.hk
-    - DOMAIN-SUFFIX,intel.com.uy
+    - DOMAIN-SUFFIX,intel.com.tw
     - DOMAIN-SUFFIX,intel.com.ec
     - DOMAIN-SUFFIX,intel.com.br
     - DOMAIN-SUFFIX,intel.com.bo

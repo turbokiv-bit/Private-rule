@@ -31,6 +31,16 @@ DOMAIN-SUFFIX,developerservices2.apple.com
 DOMAIN-SUFFIX,devstreaming-cdn.apple.com
 DOMAIN-SUFFIX,devimages-cdn.apple.com
 DOMAIN-SUFFIX,developer.apple.com
+DOMAIN-SUFFIX,cdn.apple-mapkit.com
+DOMAIN-SUFFIX,cdn1.apple-mapkit.com
+DOMAIN-SUFFIX,cdn2.apple-mapkit.com
+DOMAIN-SUFFIX,cdn3.apple-mapkit.com
+DOMAIN-SUFFIX,cdn4.apple-mapkit.com
+DOMAIN-SUFFIX,cdn-cn.apple-mapkit.com
+DOMAIN-SUFFIX,cdn-cn1.apple-mapkit.com
+DOMAIN-SUFFIX,cdn-cn2.apple-mapkit.com
+DOMAIN-SUFFIX,cdn-cn3.apple-mapkit.com
+DOMAIN-SUFFIX,cdn-cn4.apple-mapkit.com
 DOMAIN-SUFFIX,researchkit.cn
 DOMAIN-SUFFIX,researchkit.com.cn
 DOMAIN-SUFFIX,swiftui.cn

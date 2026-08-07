@@ -2,8 +2,8 @@ payload:
     - foxnewsplayer-a.akamaihd.net
     - +.fox
     - +.foxsoccershop.com
-    - +.myfoxphoenix.com
-    - +.foxsports-chicago.com
+    - +.foxnebraska.com
+    - +.fox.com
     - +.fox.tv
     - +.fox10.tv
     - +.fox10news.com
@@ -77,7 +77,7 @@ payload:
     - +.foxlexington.com
     - +.foxmediacloud.com
     - +.foxnation.com
-    - +.foxnebraska.com
+    - +.fox-corporation.com
     - +.foxneo.com
     - +.foxneodigital.com
     - +.foxnetworks.info
@@ -95,7 +95,7 @@ payload:
     - +.foxnewsgo.org
     - +.foxnewsgo.tv
     - +.foxnewshealth.com
-    - +.foxsports-world.com
+    - +.foxnewslatino.com
     - +.foxnewsmagazine.com
     - +.foxnewsnetwork.com
     - +.foxnewsopinion.com
@@ -109,7 +109,7 @@ payload:
     - +.foxplus.com
     - +.foxpoker.com
     - +.foxrad.io
-    - +.foxredeem.com
+    - +.foxsports-chicago.com
     - +.foxrelease.com
     - +.foxrichmond.com
     - +.foxrobots.com
@@ -117,15 +117,15 @@ payload:
     - +.foxsmallbusinesscenter.net
     - +.foxsmallbusinesscenter.org
     - +.foxsoccer.net
-    - +.foxsoccer.tv
+    - +.foxsoccerplus.tv
     - +.foxsoccermatchpass.com
     - +.foxsoccerplus.com
     - +.foxsoccerplus.net
-    - +.foxsoccerplus.tv
-    - +.fox-corporation.com
-    - +.fox.com
+    - +.foxsoccer.tv
     - +.fox-news.com
-    - +.foxnewslatino.com
+    - +.foxredeem.com
+    - +.foxsports-newyork.com
+    - +.foxsports-world.com
     - +.foxsports.cl
     - +.foxsports.co
     - +.foxsports.com
@@ -169,8 +169,6 @@ payload:
     - +.foxweatherwatch.com
     - +.fssta.com
     - +.fxn.ws
-    - +.fxnetwork.com
-    - +.fxnetworks.com
     - +.bentobox.tv
     - +.kicu.tv
     - +.ktvu.com
@@ -208,7 +206,7 @@ payload:
     - +.myfoxny.com
     - +.myfoxorlando.com
     - +.myfoxphilly.com
-    - +.foxsports-newyork.com
+    - +.myfoxphoenix.com
     - +.myfoxtampa.com
     - +.myfoxtampabay.com
     - +.myfoxtwincities.com

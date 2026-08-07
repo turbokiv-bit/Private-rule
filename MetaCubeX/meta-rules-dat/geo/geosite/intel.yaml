@@ -1,6 +1,6 @@
 payload:
     - +.intel.wf
-    - +.nextgenerationcenter.com
+    - +.intel.lc
     - +.intel.af
     - +.intel.ag
     - +.intel.ai
@@ -83,7 +83,7 @@ payload:
     - +.intel.jp
     - +.intel.ke
     - +.intel.la
-    - +.intel.lc
+    - +.intel.yt
     - +.intel.lk
     - +.intel.lt
     - +.intel.lu
@@ -95,7 +95,7 @@ payload:
     - +.intel.mk
     - +.intel.mn
     - +.intel.mp
-    - +.intel.mt
+    - +.intel.ac
     - +.intel.mu
     - +.intel.mw
     - +.intel.mx
@@ -141,11 +141,11 @@ payload:
     - +.intel.vg
     - +.intel.vn
     - +.intel.vu
-    - +.cilk.com
-    - +.vokevr.com
+    - +.intel.mt
     - +.intel.ae
+    - +.exploreintel.com
+    - +.vokevr.com
     - +.trustedanalytics.net
-    - +.intel.yt
     - +.trustedanalytics.com
     - +.thunderbolttechnology.net
     - +.altera.com
@@ -156,7 +156,7 @@ payload:
     - +.centrino.com
     - +.centrino.net
     - +.chips.com
-    - +.intel.ac
+    - +.cilk.com
     - +.cilk.net
     - +.cloudinsights.com
     - +.clusterconnection.com
@@ -170,7 +170,7 @@ payload:
     - +.easic.com
     - +.enpirion.com
     - +.exascale-tech.com
-    - +.exploreintel.com
+    - +.threadingbuildingblocks.org
     - +.gordonmoore.com
     - +.granulate.io
     - +.hackharassment.com
@@ -222,7 +222,7 @@ payload:
     - +.movidius.org
     - +.nervanasys.com
     - +.nevex.com
-    - +.threadingbuildingblocks.org
+    - +.nextgenerationcenter.com
     - +.niosii.com
     - +.niosii.net
     - +.omekinteractive.com
@@ -260,7 +260,7 @@ payload:
     - +.intel.com.au
     - +.intel.co.jp
     - +.intel.com.ve
-    - +.intel.com.tw
+    - +.intel.com.uy
     - +.intel.com.cn
     - +.intel.com.py
     - +.intel.com.pr
@@ -271,7 +271,7 @@ payload:
     - +.intel.com.jm
     - +.altera.co.jp
     - +.intel.com.hk
-    - +.intel.com.uy
+    - +.intel.com.tw
     - +.intel.com.ec
     - +.intel.com.br
     - +.intel.com.bo

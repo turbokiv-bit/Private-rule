@@ -1,6 +1,4 @@
 payload:
-    - DOMAIN,nab.demdex.net
-    - DOMAIN,nationalaustraliaban.tt.omtrdc.net
     - DOMAIN-SUFFIX,mastercard.lu
     - DOMAIN-SUFFIX,mastercard.be
     - DOMAIN-SUFFIX,mastercard.az

@@ -1,7 +1,4 @@
 payload:
-    - copilot-proxy.githubusercontent.com
-    - copilot-workspace.githubnext.com
-    - copilotprodattachments.blob.core.windows.net
     - ai.google.dev
     - alkalicore-pa.clients6.google.com
     - alkalimakersuite-pa.clients6.google.com
@@ -13,23 +10,26 @@ payload:
     - notebooklm.googleapis.com
     - antigravity-pa.googleapis.com
     - antigravity.googleapis.com
-    - servd-anthropic-website.b-cdn.net
-    - ppl-ai-file-upload.s3.amazonaws.com
-    - pplx-res.cloudinary.com
     - openaiapi-site.azureedge.net
     - openaiassets.blob.core.windows.net
     - openaicom-api-bdcpf8c6d2e9atf6.z01.azurefd.net
     - openaicom.imgix.net
     - openaicomproductionae4b.blob.core.windows.net
     - production-openaicom-storage.azureedge.net
-    - +.perplexity.ai
-    - +.perplexity.com
+    - copilot-proxy.githubusercontent.com
+    - copilot-workspace.githubnext.com
+    - copilotprodattachments.blob.core.windows.net
+    - ppl-ai-file-upload.s3.amazonaws.com
+    - pplx-res.cloudinary.com
+    - servd-anthropic-website.b-cdn.net
+    - +.oaistatic.com
+    - +.oaistatsig.com
     - +.cohere.ai
     - +.cohere.com
     - +.copilot-stg.com
-    - +.youmind.site
+    - +.claudeusercontent.com
     - +.copilot.com
-    - +.youmind.com
+    - +.claudemcpcontent.com
     - +.deepwiki.com
     - +.deepwiki.org
     - +.clipdrop.co
@@ -45,7 +45,7 @@ payload:
     - +.diabrowser.engineering
     - +.dify.ai
     - +.duck.ai
-    - +.youmind.ai
+    - +.claudemcpclient.com
     - +.h2o.ai
     - +.kiro.dev
     - +.langchain.com
@@ -67,11 +67,12 @@ payload:
     - +.spicywriter.com
     - +.tapnow.ai
     - +.tripo3d.ai
-    - +.comfy.org
-    - +.comfyci.org
-    - +.comfyregistry.org
-    - +.oystermercury.top
-    - +.githubcopilot.com
+    - +.cursor-cdn.com
+    - +.cursor.com
+    - +.cursor.sh
+    - +.cursorapi.com
+    - +.elevenlabs.com
+    - +.elevenlabs.io
     - +.notebooklm.google
     - +.deepmind.google
     - +.antigravity-unleash.goog
@@ -84,82 +85,86 @@ payload:
     - +.labs.google
     - +.jules.google
     - +.gemini.google
-    - +.sora.com
-    - +.openai.com
-    - +.chat.com
-    - +.oaistatsig.com
-    - +.oaistatic.com
-    - +.crixet.com
-    - +.chatgpt.site
-    - +.chatgpt.com
-    - +.envato-static.com
-    - +.oaiusercontent.com
-    - +.groq.com
-    - +.elevenlabs.io
-    - +.elevenlabs.com
-    - +.cerebras.ai
+    - +.claude.com
+    - +.claude.ai
+    - +.clau.de
+    - +.anthropic.com
+    - +.youmind.site
+    - +.youmind.com
+    - +.youmind.ai
+    - +.liveperson.net
     - +.poecdn.net
     - +.poe.com
-    - +.huggingface.co
-    - +.hf.space
-    - +.grazie.ai
-    - +.jetbrains.ai
-    - +.hf.co
-    - +.liveperson.net
-    - +.lpsnmedia.net
-    - +.grok.com
-    - +.grokipedia.com
-    - +.x.ai
-    - +.cursorapi.com
-    - +.anthropic.com
-    - +.clau.de
-    - +.claude.ai
-    - +.claude.com
-    - +.claudemcpclient.com
-    - +.claudemcpcontent.com
-    - +.claudeusercontent.com
-    - +.cursor.sh
+    - +.pplx.ai
+    - +.perplexity.com
+    - +.perplexity.ai
+    - +.manuscdn.com
+    - +.manus.im
+    - +.windsurf.com
+    - +.windsurf.build
+    - +.codeiumdata.com
+    - +.groq.com
+    - +.comfy.org
+    - +.comfyci.org
+    - +.comfyregistry.org
+    - +.oystermercury.top
+    - +.envato-static.com
     - +.envato.com
     - +.envatousercontent.com
     - +.themeforest.net
-    - +.manus.im
-    - +.manuscdn.com
-    - +.coderabbit.ai
-    - +.cursor.com
-    - +.pplx.ai
+    - +.hf.co
+    - +.hf.space
+    - +.huggingface.co
+    - +.grazie.ai
+    - +.jetbrains.ai
     - +.codeium.com
-    - +.codeiumdata.com
-    - +.windsurf.build
-    - +.windsurf.com
-    - +.cursor-cdn.com
+    - +.githubcopilot.com
+    - +.lpsnmedia.net
+    - +.oaiusercontent.com
+    - +.chatgpt.com
+    - +.chatgpt.site
+    - +.crixet.com
+    - +.coderabbit.ai
+    - +.cerebras.ai
+    - +.chat.com
+    - +.openai.com
+    - +.sora.com
+    - +.x.ai
+    - +.grokipedia.com
+    - +.grok.com
+    - +.gemini.google.com
+    - +.robinfrontend-pa.googleapis.com
+    - +.host.livekit.cloud
+    - +.chatgpt.livekit.cloud
     - +.jules.google.com
-    - +.turn.livekit.cloud
-    - +.grok.x.com
     - +.copilot.cloud.microsoft
-    - +.bard.google.com
+    - +.aistudio.google.com
+    - +.copilot.microsoft.com
+    - +.stitch.withgoogle.com
     - +.geller-pa.googleapis.com
     - +.generativelanguage.googleapis.com
     - +.opal.google.com
-    - +.proactivebackend-pa.googleapis.com
+    - +.turn.livekit.cloud
+    - +.bard.google.com
+    - +.grok.x.com
     - +.aida.googleapis.com
-    - +.aicode.googleapis.com
-    - +.aisandbox-pa.googleapis.com
-    - +.labs.google.com
     - +.gemini.gstatic.com
-    - +.stitch.withgoogle.com
-    - +.aistudio.google.com
+    - +.labs.google.com
+    - +.aicode.googleapis.com
+    - +.proactivebackend-pa.googleapis.com
     - +.notebooklm.google.com
-    - +.gemini.google.com
+    - +.aisandbox-pa.googleapis.com
     - +.notebook.google.com
-    - +.robinfrontend-pa.googleapis.com
     - +.makersuite.google.com
-    - +.chatgpt.livekit.cloud
-    - +.host.livekit.cloud
-    - +.copilot.microsoft.com
     - +.gateway.ai.cloudflare.com
-    - +.coderabbit.gallery.vsassets.io
     - +.grazie.aws.intellij.net
+    - +.coderabbit.gallery.vsassets.io
     - +.openai.com.cdn.cloudflare.net
+    - browser-intake-datadoghq.com
+    - o33249.ingest.sentry.io
+    - openai.qualtrics.com
+    - copilot-telemetry-service.githubusercontent.com
+    - copilot-telemetry.githubusercontent.com
     - +.coze.com
     - +.marscode.com
     - +.trae.ai
@@ -167,8 +172,3 @@ payload:
     - +.ciciai.com
     - +.ciciaicdn.com
     - +.dola.com
-    - copilot-telemetry-service.githubusercontent.com
-    - copilot-telemetry.githubusercontent.com
-    - browser-intake-datadoghq.com
-    - o33249.ingest.sentry.io
-    - openai.qualtrics.com

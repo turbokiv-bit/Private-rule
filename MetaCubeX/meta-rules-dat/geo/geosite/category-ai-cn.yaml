@@ -2,7 +2,7 @@ payload:
     - cueme-api.quark.cn
     - ai.zhaomi.cn
     - +.clawhub-mirror.com
-    - +.picpic-ai.cn
+    - +.cozefn.cn
     - +.liblib.tv
     - +.rwkv.cn
     - +.rwkv.com
@@ -19,7 +19,7 @@ payload:
     - +.sleeplesshorizon.cn
     - +.dumate.cn
     - +.miaoda.cn
-    - +.deepseek.com
+    - +.api-building.fun
     - +.mcpworld.com
     - +.tiangong.cn
     - +.bigmodel.cn
@@ -30,16 +30,16 @@ payload:
     - +.kimi.com
     - +.moonshot.ai
     - +.moonshot.cn
-    - +.diandianlife.top
-    - +.askdiandian.com
+    - +.pixeldance.com
+    - +.picpic-ai.cn
     - +.safeskill.cn
     - +.hailuoai.com
     - +.minimaxi.com
     - +.xingyeai.com
     - +.codebuddy.cn
-    - +.xiaomimimo.com
-    - +.xiaoaiassist.com
-    - +.miaibox.com
+    - +.obricclouddw.com
+    - +.obriccloud.com
+    - +.oceancloudapi.com
     - +.baichuan-ai.com
     - +.cueme.cn
     - +.n.cn
@@ -57,11 +57,29 @@ payload:
     - +.duiopen.com
     - +.liblib.cloud
     - +.liblib.art
-    - +.yoma.cn
+    - +.myparallelstory.com
     - +.zhiexa.com
     - +.linka2a.net
     - +.yzsgo.com
     - +.shunjing.xin
+    - +.doudou.com
+    - +.marscode.cn
+    - +.mcbaas.work
+    - +.mcdemo.show
+    - +.mchost.guru
+    - +.mcprev.cn
+    - +.tcwqqdy.guru
+    - +.trae.cn
+    - +.trae.guru
+    - +.yoma.cn
+    - +.maoxiangai.com
+    - +.hi-butterfly.cn
+    - +.miaibox.com
+    - +.xiaoaiassist.com
+    - +.xiaomimimo.com
+    - +.askdiandian.com
+    - +.diandianlife.top
+    - +.deepseek.com
     - +.butterfly-static.cn
     - +.butterflyai.cn
     - +.coze-dns-01.com
@@ -73,7 +91,7 @@ payload:
     - +.cozebuild.com
     - +.cozecdn.com
     - +.cozedeploy.com
-    - +.cozefn.cn
+    - +.skillhub.cn
     - +.cozeide.cn
     - +.cozesdk.com
     - +.cozetest.cn
@@ -85,27 +103,9 @@ payload:
     - +.doubao-dev.com
     - +.doubao.com
     - +.doubaocdn.com
-    - +.hi-butterfly.cn
-    - +.maoxiangai.com
-    - +.myparallelstory.com
-    - +.oceancloudapi.com
-    - +.obriccloud.com
-    - +.obricclouddw.com
-    - +.skillhub.cn
-    - +.pixeldance.com
-    - +.api-building.fun
-    - +.doudou.com
-    - +.marscode.cn
-    - +.mcbaas.work
-    - +.mcdemo.show
-    - +.mchost.guru
-    - +.mcprev.cn
-    - +.tcwqqdy.guru
-    - +.trae.cn
-    - +.trae.guru
-    - +.xinghuo.xfyun.cn
-    - +.marscode.com.cn
     - +.trae.com.cn
+    - +.marscode.com.cn
+    - +.xinghuo.xfyun.cn
     - +.yuanqi.tencent.com
     - +.yuanbao.tencent.com
     - +.hunyuan.tencent.com

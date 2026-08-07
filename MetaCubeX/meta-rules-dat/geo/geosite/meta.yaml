@@ -5,6 +5,17 @@ payload:
     - +.llama.com
     - +.meta.ai
     - +.meta.com
+    - +.wa.me
+    - +.whatsapp-plus.info
+    - +.whatsapp-plus.me
+    - +.whatsapp-plus.net
+    - +.whatsapp.cc
+    - +.whatsapp.com
+    - +.whatsapp.info
+    - +.whatsapp.net
+    - +.whatsapp.org
+    - +.whatsapp.tv
+    - +.whatsappbrand.com
     - +.aboutfacebook.com
     - +.accessfacebookfromschool.com
     - +.acebooik.com
@@ -375,7 +386,6 @@ payload:
     - +.online-deals.net
     - +.opencreate.org
     - +.reachtheworldonfacebook.com
-    - +.rocksdb.org
     - +.shopfacebook.com
     - +.sportsfacebook.com
     - +.sportstream.com
@@ -439,6 +449,7 @@ payload:
     - +.recoiljs.org
     - +.rocksdb.com
     - +.rocksdb.net
+    - +.rocksdb.org
     - +.yogalayout.com
     - +.achat-followers-instagram.com
     - +.acheter-followers-instagram.com
@@ -535,21 +546,10 @@ payload:
     - +.powersunitedvr.com
     - +.threads.com
     - +.threads.net
-    - +.wa.me
-    - +.whatsapp-plus.info
-    - +.whatsapp-plus.me
-    - +.whatsapp-plus.net
-    - +.whatsapp.cc
-    - +.whatsapp.com
-    - +.whatsapp.info
-    - +.whatsapp.net
-    - +.whatsapp.org
-    - +.whatsapp.tv
-    - +.whatsappbrand.com
+    - +.graph.whatsapp.com
+    - +.graph.whatsapp.net
     - +.analytics.facebook.com
     - +.facebookads.com
     - +.pixel.facebook.com
     - +.graph.instagram.com
     - +.graph-fallback.instagram.com
-    - +.graph.whatsapp.com
-    - +.graph.whatsapp.net
