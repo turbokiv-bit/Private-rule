@@ -33,6 +33,22 @@ payload:
     - +.f-droid.com
     - +.f-droid.org
     - +.fdroid.org
+    - +.attestation.app
+    - +.grapheneos.app
+    - +.grapheneos.ca
+    - +.grapheneos.com
+    - +.grapheneos.dev
+    - +.grapheneos.foundation
+    - +.grapheneos.info
+    - +.grapheneos.net
+    - +.grapheneos.network
+    - +.grapheneos.online
+    - +.grapheneos.org
+    - +.grapheneos.ovh
+    - +.grapheneos.page
+    - +.grapheneos.social
+    - +.seamlessupdate.app
+    - +.vanadium.app
     - +.ieee.org
     - +.ieee.tv
     - +.tryengineering.org
@@ -95,30 +111,6 @@ payload:
     - +.messybrainz.org
     - +.metabrainz.org
     - +.musicbrainz.org
-    - +.nist.gov
-    - +.time.gov
-    - +.paskoocheh.com
-    - +.ppy.sh
-    - +.emojipedia.org
-    - +.worldemojiawards.com
-    - +.worldemojiday.com
-    - +.xn--yt8h.la
-    - +.attestation.app
-    - +.grapheneos.app
-    - +.grapheneos.ca
-    - +.grapheneos.com
-    - +.grapheneos.dev
-    - +.grapheneos.foundation
-    - +.grapheneos.info
-    - +.grapheneos.net
-    - +.grapheneos.network
-    - +.grapheneos.online
-    - +.grapheneos.org
-    - +.grapheneos.ovh
-    - +.grapheneos.page
-    - +.grapheneos.social
-    - +.seamlessupdate.app
-    - +.vanadium.app
     - +.openmaps.org
     - +.openstreetmap.com
     - +.openstreetmap.net
@@ -130,3 +122,11 @@ payload:
     - +.stateofthemap.org
     - +.rolfoundation.org
     - +.rolsociety.org
+    - +.emojipedia.org
+    - +.worldemojiawards.com
+    - +.worldemojiday.com
+    - +.xn--yt8h.la
+    - +.nist.gov
+    - +.time.gov
+    - +.paskoocheh.com
+    - +.ppy.sh

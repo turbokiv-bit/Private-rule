@@ -1,6 +1,6 @@
 payload:
-    - +.doubanio.com
-    - +.gracg.com
+    - +.meipian.cn
+    - +.meipian.me
     - +.dandan818.com
     - +.dandanvoice.com
     - +.fanfou.com
@@ -10,21 +10,13 @@ payload:
     - +.maimai.cn
     - +.taou.com
     - +.zsxq.com
-    - +.coolapk.com
-    - +.coolapkmarket.com
-    - +.coolapkmarket.net
-    - +.douban.com
-    - +.douban.fm
-    - +.tieba.com
-    - +.vzuu.com
-    - +.procg.cn
     - +.hupu.com
     - +.hupucdn.com
     - +.shihuo.cn
-    - +.laiyagushi.com
+    - +.coolapkmarket.net
     - +.ivwen.com
-    - +.meipian.cn
-    - +.meipian.me
+    - +.tieba.com
+    - +.coolapkmarket.com
     - +.jike.city
     - +.jikecdn.com
     - +.okjike.com
@@ -32,7 +24,15 @@ payload:
     - +.ruguoapp.com
     - +.zhihu.com
     - +.zhimg.com
-    - +.hoopchina.com.cn
+    - +.laiyagushi.com
+    - +.vzuu.com
+    - +.douban.com
+    - +.douban.fm
+    - +.doubanio.com
+    - +.gracg.com
+    - +.procg.cn
+    - +.coolapk.com
     - +.tieba.baidu.com
+    - +.hoopchina.com.cn
     - +.crash2.zhihu.com
     - +.zhihu-web-analytics.zhihu.com

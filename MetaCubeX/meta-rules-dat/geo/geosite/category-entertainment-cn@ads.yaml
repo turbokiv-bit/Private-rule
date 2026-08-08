@@ -1,4 +1,5 @@
 payload:
+    - +.log-upload.mihoyo.com
     - ads3-normal-hl.zijieapi.com
     - ads3-normal.zijieapi.com
     - ads5-normal-hl.zijieapi.com
@@ -19,6 +20,12 @@ payload:
     - +.ja1.gamersky.com
     - +.ja2.gamersky.com
     - +.wmbd.gamersky.com
+    - +.click.hunantv.com
+    - +.da.hunantv.com
+    - +.da.mgtv.com
+    - +.log.hunantv.com
+    - +.log.v2.hunantv.com
+    - +.res.hunantv.com
     - +.adbkwai.com
     - +.adkwai.com
     - +.adukwai.com
@@ -26,6 +33,7 @@ payload:
     - +.e.kuaishou.com
     - log-sdk.gifshow.com
     - wlog.kuaishou.com
+    - apilog-web.acfun.cn
     - +.apple.www.letv.com
     - +.ark.letv.com
     - +.dc.letv.com
@@ -43,11 +51,3 @@ payload:
     - +.adbehavior.ximalaya.com
     - +.adse.wsa.ximalaya.com
     - +.adse.ximalaya.com
-    - +.click.hunantv.com
-    - +.da.hunantv.com
-    - +.da.mgtv.com
-    - +.log.hunantv.com
-    - +.log.v2.hunantv.com
-    - +.res.hunantv.com
-    - +.log-upload.mihoyo.com
-    - apilog-web.acfun.cn
