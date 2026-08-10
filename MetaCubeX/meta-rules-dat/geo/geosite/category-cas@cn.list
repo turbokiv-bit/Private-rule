@@ -1,3 +1,10 @@
+DOMAIN-SUFFIX,alphassl.com
+DOMAIN-SUFFIX,easy-signing.com
+DOMAIN-SUFFIX,globalsign.cn
+DOMAIN-SUFFIX,globalsign.com
+DOMAIN-SUFFIX,globalsigncdn.com
+DOMAIN-SUFFIX,cdn.globalsigncdn.com.cdn.cloudflare.net
+DOMAIN-SUFFIX,crl.globalsign.net
 DOMAIN-SUFFIX,sslcom.cn
 DOMAIN-SUFFIX,www.entrust.cn
 DOMAIN-SUFFIX,oemssl.cn
@@ -22,10 +29,3 @@ DOMAIN-SUFFIX,ocsp.apple.com
 DOMAIN-SUFFIX,ocsp2.apple.com
 DOMAIN-SUFFIX,valid.apple.com
 DOMAIN-SUFFIX,valid.origin-apple.com.akadns.net
-DOMAIN-SUFFIX,alphassl.com
-DOMAIN-SUFFIX,easy-signing.com
-DOMAIN-SUFFIX,globalsign.cn
-DOMAIN-SUFFIX,globalsign.com
-DOMAIN-SUFFIX,globalsigncdn.com
-DOMAIN-SUFFIX,cdn.globalsigncdn.com.cdn.cloudflare.net
-DOMAIN-SUFFIX,crl.globalsign.net
