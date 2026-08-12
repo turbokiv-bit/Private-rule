@@ -1,5 +1,5 @@
 # 规则名称: GlobalMax
-# 规则统计: 34956
+# 规则统计: 34959
 
 DOMAIN,1password.drift.click
 DOMAIN,adobeereg.com
@@ -1419,6 +1419,7 @@ DOMAIN-SUFFIX,aiasahi.jp
 DOMAIN-SUFFIX,aib.ac.uk
 DOMAIN-SUFFIX,aibaobei.me
 DOMAIN-SUFFIX,aicoin.com
+DOMAIN-SUFFIX,aihub.top
 DOMAIN-SUFFIX,aim25.ac.uk
 DOMAIN-SUFFIX,aimei133.com
 DOMAIN-SUFFIX,aimhighergreatermerseyside.ac.uk
@@ -8927,6 +8928,7 @@ DOMAIN-SUFFIX,distribution.qcpp1.net
 DOMAIN-SUFFIX,distribution.qpdp1.net
 DOMAIN-SUFFIX,dit-inc.us
 DOMAIN-SUFFIX,divas.com.uy
+DOMAIN-SUFFIX,divdyn.com
 DOMAIN-SUFFIX,diversityuk.ac.uk
 DOMAIN-SUFFIX,diwodiwo.xyz
 DOMAIN-SUFFIX,diyarbakirescort.com
@@ -10499,6 +10501,7 @@ DOMAIN-SUFFIX,eshcru.ac.uk
 DOMAIN-SUFFIX,esher.ac.uk
 DOMAIN-SUFFIX,esi.ac.uk
 DOMAIN-SUFFIX,esim.ac.uk
+DOMAIN-SUFFIX,esim.redteago.com
 DOMAIN-SUFFIX,esiss.ac.uk
 DOMAIN-SUFFIX,eskimotube.com
 DOMAIN-SUFFIX,eslite.com
