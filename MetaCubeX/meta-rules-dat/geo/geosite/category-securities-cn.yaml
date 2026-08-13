@@ -1,8 +1,9 @@
 payload:
-    - +.hongtastock.com
-    - +.ubssdic.com
-    - +.hongdefund.com
+    - +.hlzqgs.com
+    - +.ytzq.com
+    - +.szse.cn
     - +.zlfund.cn
+    - +.chinaclear.cn
     - +.ajzq.com
     - +.avicsec.com
     - +.ccnew.com
@@ -29,7 +30,7 @@ payload:
     - +.xqfunds.com
     - +.xf-fund.com
     - +.dxzq.net
-    - +.hsfund.com
+    - +.ubssdic.com
     - +.tongtaiamc.com
     - +.swsmu.com
     - +.fcsc.cn
@@ -41,7 +42,7 @@ payload:
     - +.nffund.com
     - +.mfcteda.com
     - +.grzq.com
-    - +.bosera.com
+    - +.gsgh.cn
     - +.gszq.com
     - +.gtja.com
     - +.guodu.com
@@ -50,14 +51,14 @@ payload:
     - +.hazq.com
     - +.hczq.com
     - +.igwfmc.com
-    - +.hlzqgs.com
-    - +.gsgh.cn
     - +.sseinfo.com
-    - +.szse.cn
+    - +.bosera.com
+    - +.huayingsc.com
+    - +.hongdefund.com
     - +.htsec.com
     - +.huajingsec.com
     - +.huajinsc.cn
-    - +.huayingsc.com
+    - +.hsfund.com
     - +.hftfund.com
     - +.hxzq.cn
     - +.hffunds.cn
@@ -94,7 +95,7 @@ payload:
     - +.fadfunds.com
     - +.ctfund.com
     - +.ykzq.com
-    - +.ytzq.com
+    - +.hongtastock.com
     - +.cryuantafund.com
     - +.zszq.com
     - +.ztfsec.com
@@ -105,7 +106,7 @@ payload:
     - +.bdfund.cn
     - +.bobbns.com
     - +.cfund108.com
-    - +.gkzq.com.cn
+    - +.swsc.com.cn
     - +.ccfund.com.cn
     - +.boscam.com.cn
     - +.zts.com.cn
@@ -118,7 +119,7 @@ payload:
     - +.xyzq.com.cn
     - +.wkzq.com.cn
     - +.tebon.com.cn
-    - +.swsc.com.cn
+    - +.sse.com.cn
     - +.stocke.com.cn
     - +.fullgoal.com.cn
     - +.furamc.com.cn
@@ -137,7 +138,7 @@ payload:
     - +.guosen.com.cn
     - +.glsc.com.cn
     - +.msjyfund.com.cn
-    - +.sse.com.cn
+    - +.gkzq.com.cn
     - +.gjzq.com.cn
     - +.ghzq.com.cn
     - +.phfund.com.cn

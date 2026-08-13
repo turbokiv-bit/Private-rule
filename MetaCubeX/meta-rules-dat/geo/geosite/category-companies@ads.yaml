@@ -1,15 +1,4 @@
 payload:
-    - +.ads-api.duolingo.com
-    - +.analytics.vpc.duolingo.com
-    - +.metrics.duolingo.com
-    - ads-img.mozilla.org
-    - ads.mozilla.org
-    - incoming.telemetry.mozilla.org
-    - incoming-telemetry.thunderbird.net
-    - +.snapads.com
-    - +.ads.yahoo.com
-    - +.gemini.yahoo.com
-    - +.ysm.yahoo.com
     - +.graph.whatsapp.com
     - +.graph.whatsapp.net
     - +.analytics.facebook.com
@@ -17,65 +6,31 @@ payload:
     - +.pixel.facebook.com
     - +.graph.instagram.com
     - +.graph-fallback.instagram.com
-    - +.advertising.adobe.com
-    - +.demdex.net
-    - +.tubemogul.com
-    - +.amazon-adsystem.com
-    - +.serving-sys.com
-    - +.2mdn-cn.net
-    - +.2mdn.net
-    - +.admob-cn.com
-    - +.admob.com
-    - +.adsense.com
-    - +.adsensecustomsearchads.com
-    - +.adsenseformobileapps.com
-    - +.adservice.google.com
-    - +.adtrafficquality.google
-    - +.advertisercommunity.com
-    - +.advertiserscommunity.com
-    - +.adwords-community.com
-    - +.adwords.com
-    - +.adwordsexpress.com
-    - +.analytics-alv.google.com
-    - +.app-ads-services.com
-    - +.app-analytics-services.com
-    - +.app-analytics-services-att.com
-    - +.app-measurement-cn.com
-    - +.app-measurement.com
-    - +.doubleclick-cn.net
-    - +.doubleclick.cn
-    - +.doubleclick.com
-    - +.doubleclick.net
-    - +.fcmatch.google.com
-    - +.google-analytics-cn.com
-    - +.google-analytics.com
-    - +.googleadapis.com
-    - +.googleadapis.l.google.com
-    - +.googleads-cn.com
-    - +.googleads.com
-    - +.googleadservices-cn.com
-    - +.googleadservices.com
-    - +.googleadsserving.cn
-    - +.googleanalytics.com
-    - +.googleoptimize-cn.com
-    - +.googleoptimize.com
-    - +.googlesyndication-cn.com
-    - +.googlesyndication.com
-    - +.googletagmanager-cn.com
-    - +.googletagmanager.com
-    - +.googletagservices-cn.com
-    - +.googletagservices.com
-    - +.googletraveladservices-cn.com
-    - +.googletraveladservices.com
-    - +.googlevads-cn.com
-    - +.mail-ads.google.com
-    - +.mobileads.google.com
-    - +.marketingplatform.google.com
-    - +.pagead.l.google.com
-    - +.partnerad.l.google.com
-    - +.urchin.com
-    - analytics.google.com
-    - +.ads.youtube.com
+    - sentry.hetzner.company
+    - +.snapads.com
+    - api-eu.carrotquest.app
+    - api-eu.carrotquest.io
+    - api-ru.carrotquest.app
+    - api-ru.carrotquest.io
+    - api-secure.carrotquest.app
+    - api-secure.carrottrack.app
+    - api.carrotquest.app
+    - api.carrotquest.io
+    - api.carrottrack.app
+    - api.dashly.app
+    - api.dashlytrack.app
+    - +.e.mindbox.ru
+    - +.g.mindbox.ru
+    - +.s.mindbox.ru
+    - api-js.mindbox.ru
+    - api-ru.mindbox.cloud
+    - api-staging.mindbox.ru
+    - api.mindbox.cloud
+    - api.mindbox.ru
+    - sentry.mindbox.ru
+    - sentry.popmechanic.ru
+    - +.a.mts.ru
+    - +.obs.mts.ru
     - +.ad.mail.ru
     - +.ads.viqeo.tv
     - +.adsadvisor.io
@@ -146,29 +101,20 @@ payload:
     - analytics.vk.ru
     - stats.vk-portal.net
     - target.vk.com
+    - +.advertising.adobe.com
+    - +.demdex.net
+    - +.tubemogul.com
+    - +.samsungadhub.com
+    - +.samsungads.com
+    - ads-img.mozilla.org
+    - ads.mozilla.org
+    - incoming.telemetry.mozilla.org
+    - incoming-telemetry.thunderbird.net
     - +.advertising.apple.com
     - +.api-adservices.apple.com
     - +.iadsdk.apple.com
     - +.iad.apple.com
     - +.qwapi.com
-    - +.a.mts.ru
-    - +.obs.mts.ru
-    - +.ads.yahoo.com
-    - +.gemini.yahoo.com
-    - +.ysm.yahoo.com
-    - sentry.iptv.rt.ru
-    - +.samsungadhub.com
-    - +.samsungads.com
-    - +.e.mindbox.ru
-    - +.g.mindbox.ru
-    - +.s.mindbox.ru
-    - api-js.mindbox.ru
-    - api-ru.mindbox.cloud
-    - api-staging.mindbox.ru
-    - api.mindbox.cloud
-    - api.mindbox.ru
-    - sentry.mindbox.ru
-    - sentry.popmechanic.ru
     - +.adfox.ru
     - +.adfox.yandex.ru
     - +.admetrica.ru
@@ -211,18 +157,15 @@ payload:
     - mc.yango.com
     - pixel.yandex.com
     - report.ap.yandex-net.ru
-    - sentry.hetzner.company
-    - api-eu.carrotquest.app
-    - api-eu.carrotquest.io
-    - api-ru.carrotquest.app
-    - api-ru.carrotquest.io
-    - api-secure.carrotquest.app
-    - api-secure.carrottrack.app
-    - api.carrotquest.app
-    - api.carrotquest.io
-    - api.carrottrack.app
-    - api.dashly.app
-    - api.dashlytrack.app
+    - +.amazon-adsystem.com
+    - +.serving-sys.com
+    - sentry.iptv.rt.ru
+    - +.ads.yahoo.com
+    - +.gemini.yahoo.com
+    - +.ysm.yahoo.com
+    - +.ads.yahoo.com
+    - +.gemini.yahoo.com
+    - +.ysm.yahoo.com
     - +.clarity.ms
     - +.microsoftads.com
     - +.msads.net
@@ -233,3 +176,60 @@ payload:
     - +.collector.github.com
     - copilot-telemetry-service.githubusercontent.com
     - copilot-telemetry.githubusercontent.com
+    - +.2mdn-cn.net
+    - +.2mdn.net
+    - +.admob-cn.com
+    - +.admob.com
+    - +.adsense.com
+    - +.adsensecustomsearchads.com
+    - +.adsenseformobileapps.com
+    - +.adservice.google.com
+    - +.adtrafficquality.google
+    - +.advertisercommunity.com
+    - +.advertiserscommunity.com
+    - +.adwords-community.com
+    - +.adwords.com
+    - +.adwordsexpress.com
+    - +.analytics-alv.google.com
+    - +.app-ads-services.com
+    - +.app-analytics-services.com
+    - +.app-analytics-services-att.com
+    - +.app-measurement-cn.com
+    - +.app-measurement.com
+    - +.doubleclick-cn.net
+    - +.doubleclick.cn
+    - +.doubleclick.com
+    - +.doubleclick.net
+    - +.fcmatch.google.com
+    - +.google-analytics-cn.com
+    - +.google-analytics.com
+    - +.googleadapis.com
+    - +.googleadapis.l.google.com
+    - +.googleads-cn.com
+    - +.googleads.com
+    - +.googleadservices-cn.com
+    - +.googleadservices.com
+    - +.googleadsserving.cn
+    - +.googleanalytics.com
+    - +.googleoptimize-cn.com
+    - +.googleoptimize.com
+    - +.googlesyndication-cn.com
+    - +.googlesyndication.com
+    - +.googletagmanager-cn.com
+    - +.googletagmanager.com
+    - +.googletagservices-cn.com
+    - +.googletagservices.com
+    - +.googletraveladservices-cn.com
+    - +.googletraveladservices.com
+    - +.googlevads-cn.com
+    - +.mail-ads.google.com
+    - +.mobileads.google.com
+    - +.marketingplatform.google.com
+    - +.pagead.l.google.com
+    - +.partnerad.l.google.com
+    - +.urchin.com
+    - analytics.google.com
+    - +.ads.youtube.com
+    - +.ads-api.duolingo.com
+    - +.analytics.vpc.duolingo.com
+    - +.metrics.duolingo.com

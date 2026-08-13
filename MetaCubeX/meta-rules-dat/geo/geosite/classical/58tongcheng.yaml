@@ -1,7 +1,7 @@
 payload:
     - DOMAIN-SUFFIX,daojia.com
-    - DOMAIN-SUFFIX,fang.com
-    - DOMAIN-SUFFIX,5858.com
+    - DOMAIN-SUFFIX,diandao.org
+    - DOMAIN-SUFFIX,jxedt.com
     - DOMAIN-SUFFIX,58antenna.cn
     - DOMAIN-SUFFIX,58antenna.com
     - DOMAIN-SUFFIX,ganjistatic1.com
@@ -16,16 +16,15 @@ payload:
     - DOMAIN-SUFFIX,58xinghuo.com
     - DOMAIN-SUFFIX,58xueche.com
     - DOMAIN-SUFFIX,anjuke.com
-    - DOMAIN-SUFFIX,diandao.org
+    - DOMAIN-SUFFIX,anjukestatic.com
     - DOMAIN-SUFFIX,chinahr.com
     - DOMAIN-SUFFIX,chrstatic.com
     - DOMAIN-SUFFIX,ganji.com
     - DOMAIN-SUFFIX,58.com
-    - DOMAIN-SUFFIX,anjukestatic.com
-    - DOMAIN-SUFFIX,sofun.com
-    - DOMAIN-SUFFIX,soufunimg.com
-    - DOMAIN-SUFFIX,jxedt.com
+    - DOMAIN-SUFFIX,5858.com
     - DOMAIN-SUFFIX,jxksw.net
+    - DOMAIN-SUFFIX,kgdc.cn
+    - DOMAIN-SUFFIX,kgtest.cn
     - DOMAIN-SUFFIX,roomeet.cn
     - DOMAIN-SUFFIX,58ganji-corp.com
     - DOMAIN-SUFFIX,xinchong.com

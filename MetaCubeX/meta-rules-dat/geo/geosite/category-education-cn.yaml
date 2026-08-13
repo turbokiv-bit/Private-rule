@@ -2,40 +2,45 @@ payload:
     - moocs.unipus.cn
     - opencourse.pku.edu.cn
     - study.163.com
-    - +.maimemostatus.com
-    - +.x-cloud.cc
-    - +.yushiyan.net
+    - +.llsserver.com
+    - +.yuantiku.com
     - +.edu.cn
+    - +.xuetangx.com
     - +.smartedu.cn
     - +.eduyun.cn
+    - +.univs.cn
     - +.cedf.cn
     - +.chesicc.cn
     - +.chesicc.com
     - +.chesicc.net
     - +.chsi.cn
-    - +.shanbay.com
-    - +.baydn.com
-    - +.yeshj.com
-    - +.hujiang.com
-    - +.hjfile.cn
-    - +.hjapi.com
-    - +.cctalk.com
-    - +.mojidict.com
-    - +.shareintelli.com
-    - +.hugecore.net
-    - +.gfbzb.cn
-    - +.gfbzb.com
+    - +.applysquare.net
+    - +.applysquare.com
+    - +.17zuoye.net
+    - +.17zuoye.com
+    - +.17zuoye.cn
     - +.pmphmooc.com
     - +.openlearning.com
-    - +.gfbzb.net
-    - +.ncss.cn
     - +.mooc.cn
     - +.icourses.cn
     - +.icourse163.org
-    - +.qgzb.net
+    - +.gfbzb.cn
+    - +.gfbzb.com
     - +.cnmooc.org
+    - +.chinesemooc.org
+    - +.gfbzb.net
+    - +.ncss.cn
+    - +.fenbilantian.com
+    - +.fenbilantian.cn
+    - +.fenbike.com
+    - +.qgzb.net
+    - +.fenbike.cn
     - +.zbbm.net
     - +.neea.cn
+    - +.fenbi.com
+    - +.mypep.cn
+    - +.fbstatic.cn
+    - +.magedu.com
     - +.21cnjy.com
     - +.91yunxiao.com
     - +.aiyunxiao.com
@@ -76,7 +81,7 @@ payload:
     - +.sydw8.com
     - +.ictbda.cn
     - +.ictbda.com
-    - +.chinesemooc.org
+    - +.yuansouti.com
     - +.xir.cn
     - +.j-test.com
     - +.nattest-china.com
@@ -89,10 +94,10 @@ payload:
     - +.liulishuo.com
     - +.llsapp.com
     - +.llscdn.com
-    - +.llsserver.com
-    - +.zggx100.com
+    - +.yushiyan.net
     - +.yudou.cn
-    - +.xuetangx.com
+    - +.xiyouyingyu.com
+    - +.maimemostatus.com
     - +.markji.com
     - +.neoscholar.com
     - +.neoschool.com
@@ -101,7 +106,7 @@ payload:
     - +.qingtingai.net
     - +.quyixian.com
     - +.rongdeji.cn
-    - +.yuketang.cn
+    - +.yuanfudao.com
     - +.saduck.top
     - +.tesoon.com
     - +.unipus.cn
@@ -109,15 +114,15 @@ payload:
     - +.winyoungreading.com
     - +.wjwai.com
     - +.zysn.net
-    - +.maimemo.com
+    - +.x-cloud.cc
     - +.xiguacity.cn
-    - +.xiyouyingyu.com
+    - +.maimemo.com
     - +.xkw.com
     - +.zxxk.com
     - +.yunzhuxue.com
     - +.ystbds.com
     - +.yooc.me
-    - +.magedu.com
+    - +.zggx100.com
     - +.zhan.com
     - +.zhihuishu.com
     - +.zjzs.net
@@ -128,16 +133,10 @@ payload:
     - +.qianxuecloud.com
     - +.qianxueyunke.com
     - +.zhixingyunke.com
-    - +.17zuoye.cn
-    - +.17zuoye.com
-    - +.17zuoye.net
-    - +.applysquare.com
-    - +.applysquare.net
-    - +.koocdn.com
-    - +.koolearn.com
-    - +.koopass.com
     - +.schoopia.com
     - +.tongxuepie.com
+    - +.baydn.com
+    - +.shanbay.com
     - +.100tal.com
     - +.aoshu.com
     - +.eduu.com
@@ -150,33 +149,39 @@ payload:
     - +.youjiao.com
     - +.zhongkao.com
     - +.zuowen.com
+    - +.rainclassroom.com
+    - +.yuketang.cn
+    - +.hugecore.net
+    - +.shareintelli.com
+    - +.mojidict.com
+    - +.cctalk.com
+    - +.hjapi.com
+    - +.hjfile.cn
+    - +.hujiang.com
+    - +.yeshj.com
+    - +.koocdn.com
+    - +.koolearn.com
+    - +.koopass.com
     - +.banmaaike.com
     - +.xiaoyuankousuan.com
     - +.ybccode.com
-    - +.yuanfudao.com
-    - +.yuansouti.com
-    - +.yuantiku.com
-    - +.fbstatic.cn
-    - +.fenbi.com
-    - +.fenbike.cn
-    - +.fenbike.com
-    - +.fenbilantian.cn
-    - +.fenbilantian.com
-    - +.rainclassroom.com
-    - +.rudder.com.cn
-    - +.chsi.com.cn
-    - +.zbbm.gov.cn
-    - +.chinayz.com.cn
     - +.qgzb.com.cn
-    - +.ncss.org.cn
-    - +.gfbzb.gov.cn
-    - +.icve.com.cn
-    - +.modex.com.cn
-    - +.gfbzb.com.cn
     - +.qgzb.gov.cn
+    - +.pep.com.cn
+    - +.peeavp.com.cn
+    - +.hep.com.cn
+    - +.zbbm.gov.cn
     - +.gatzs.com.cn
+    - +.gfbzb.com.cn
+    - +.ncss.org.cn
+    - +.chsi.com.cn
+    - +.modex.com.cn
+    - +.gfbzb.gov.cn
+    - +.rudder.com.cn
+    - +.chinayz.com.cn
     - +.chesicc.org.cn
     - +.chesicc.net.cn
+    - +.icve.com.cn
     - +.chesicc.com.cn
     - +.chei.com.cn
     - +.chdi.com.cn

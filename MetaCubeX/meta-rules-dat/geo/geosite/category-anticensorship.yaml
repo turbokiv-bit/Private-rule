@@ -6,7 +6,7 @@ payload:
     - trojan-gfw.github.io
     - xtls.github.io
     - +.whonix.org
-    - +.opengw.net
+    - +.vpngate.jp
     - +.akasha.world
     - +.amnezia.org
     - +.browserleaks.com
@@ -65,10 +65,13 @@ payload:
     - +.wgtunnel.com
     - +.ahmia.fi
     - +.2dust.link
-    - +.ipns.co
+    - +.jorropo.net
     - +.wiresock.net
     - +.zeronet.io
-    - +.torproject.org
+    - +.v2ray.com
+    - +.v2ray.cool
+    - +.v2fly.org
+    - +.epicbrowser.com
     - +.applecensorship.com
     - +.freebrowser.org
     - +.freewechat.com
@@ -79,19 +82,15 @@ payload:
     - +.greatfirevpn.com
     - +.pao-pao.net
     - +.wikiunblocked.org
-    - +.softether.org
-    - +.softether-download.com
-    - +.v2ray.com
-    - +.v2ray.cool
-    - +.v2fly.org
+    - +.torproject.org
+    - +.opengw.net
     - +.wikileaks.org
-    - +.vpngate.jp
     - +.vpngate.net
     - +.docs.rw
     - +.log.rw
     - +.try.rw
+    - +.ipns.co
     - +.wireguard.com
-    - +.jorropo.net
     - +.crustwebsites.net
     - +.dweb.link
     - +.cloudflare-ipfs.com
@@ -107,12 +106,13 @@ payload:
     - +.censorship.no
     - +.citizenlab.ca
     - +.citizenlab.org
+    - +.softether-download.com
+    - +.softether.org
     - +.paskoocheh.com
     - +.lantern.io
     - +.getlantern.org
-    - +.pwnedpasswords.com
     - +.haveibeenpwned.com
-    - +.epicbrowser.com
+    - +.pwnedpasswords.com
     - +.ipfs.eternum.io
     - +.ipfs.lain.la
     - +.ipfs.fleek.co

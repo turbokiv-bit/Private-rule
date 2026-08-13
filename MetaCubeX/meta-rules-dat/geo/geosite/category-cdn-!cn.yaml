@@ -63,23 +63,6 @@ payload:
     - +.workers.dev
     - +.cf-ipfs.com
     - +.cloudflare-ipfs.com
-    - +.imgix.com
-    - +.imgix.net
-    - +.pagecdn.com
-    - +.pagecdn.io
-    - +.quantil.com
-    - +.stackpath.com
-    - +.stackpath.dev
-    - +.vrcdn.cloud
-    - +.vrcdn.live
-    - +.vrcdn.video
-    - +.fastly-edge.com
-    - +.fastly-terrarium.com
-    - +.fastly.com
-    - +.fastly.io
-    - +.fastly.net
-    - +.fastlylabs.com
-    - +.fastlylb.net
     - +.esm.run
     - +.jsdelivr.com
     - +.jsdelivr.net
@@ -91,6 +74,12 @@ payload:
     - +.llnw.net
     - +.llnwd.net
     - +.llnwi.net
+    - +.quantil.com
+    - +.stackpath.com
+    - +.stackpath.dev
+    - +.vrcdn.cloud
+    - +.vrcdn.live
+    - +.vrcdn.video
     - +.ak1.net
     - +.aka-ai.com
     - +.aka-ai.net
@@ -160,6 +149,17 @@ payload:
     - +.iamakamai.net
     - +.soasta-dswb.com
     - +.srtcdn.net
+    - +.fastly-edge.com
+    - +.fastly-terrarium.com
+    - +.fastly.com
+    - +.fastly.io
+    - +.fastly.net
+    - +.fastlylabs.com
+    - +.fastlylb.net
+    - +.imgix.com
+    - +.imgix.net
+    - +.pagecdn.com
+    - +.pagecdn.io
     - +.cdn77.com
     - +.cdn77.org
     - +.one.one.one
