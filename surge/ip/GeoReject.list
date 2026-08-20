@@ -27,4 +27,5 @@ DOMAIN-SUFFIX,redsoapp.com
 DOMAIN-SUFFIX,rtbhouse.com
 DOMAIN-SUFFIX,smadex.com
 DOMAIN-SUFFIX,tvsquared.com
+DOMAIN-SUFFIX,wasu.tv
 AND,((DOMAIN-KEYWORD,amemv.com,extended-matching), (PROTOCOL,UDP))
