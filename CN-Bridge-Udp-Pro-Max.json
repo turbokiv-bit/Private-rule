@@ -245,16 +245,13 @@
         "🇭🇰 Misaka | IEPL",
         "🇭🇰 DMIT | IEPL",
         "🇭🇰 iCable | IEPL",
-        "🇭🇰 HKT | SHDL",
-        "🇭🇰 HGC | SHDL",
-        "🇭🇰 Misaka | SHDL",
-        "🇭🇰 DMIT | SHDL",
-        "🇭🇰 iCable | SHDL",
         "🇭🇰 HKT | Gomami",
         "🇭🇰 HGC | Gomami",
         "🇭🇰 Misaka | Gomami",
         "🇭🇰 DMIT | Gomami",
-        "🇭🇰 iCable | Gomami"
+        "🇭🇰 iCable | Gomami",
+        "🇭🇰 DMIT | Number",
+        "🇭🇰 HKT | Number"
       ],
       "interrupt_exist_connections": true
     },
@@ -262,11 +259,14 @@
       "type": "selector",
       "tag": "🇺🇸 Super Max USA",
       "outbounds": [
-        "🇺🇸 Sakura | SHDL",
-        "🇺🇸 Misaka | SHDL",
-        "🇺🇸 AT&T | SHDL",
-        "🇺🇸 HostHatch | SHDL",
-        "🇺🇸 Cox | SHDL"
+        "🇺🇸 Misaka | Gomami",
+        "🇺🇸 Misaka | IEPL",
+        "🇺🇸 Cox | IEPL",
+        "🇺🇸 AT&T | IEPL",
+        "🇺🇸 Jinx | IEPL",
+        "🇺🇸 Sakura | IEPL",
+        "🇺🇸 Eons | Number",
+        "🇺🇸 Datacamp | Number"
       ],
       "interrupt_exist_connections": true
     },
@@ -274,12 +274,11 @@
       "type": "selector",
       "tag": "🇸🇬 Super Max SGP",
       "outbounds": [
-        "🇸🇬 SG.GS | IEPL",
         "🇸🇬 Misaka | IEPL",
         "🇸🇬 Aper | IEPL",
-        "🇸🇬 SG.GS | Gomami",
         "🇸🇬 Misaka | Gomami",
-        "🇸🇬 Aper | Gomami"
+        "🇸🇬 Aper | Gomami",
+        "🇸🇬 Aper | Number"
       ],
       "interrupt_exist_connections": true
     },
@@ -287,11 +286,12 @@
       "type": "selector",
       "tag": "🇯🇵 Super Max JPG",
       "outbounds": [
-        "🇯🇵 DMIT | SHDL",
-        "🇯🇵 Misaka | SHDL",
-        "🇯🇵 SoftBank | SHDL",
-        "🇯🇵 Sonet | SHDL",
-        "🇯🇵 Kddi | SHDL"
+        "🇯🇵 Misaka | Gomami",
+        "🇯🇵 DMIT | Gomami",
+        "🇯🇵 DMIT | IEPL",
+        "🇯🇵 JinX | Gomami",
+        "🇯🇵 JinX | IEPL",
+        "🇯🇵 JinX | Number"
       ],
       "interrupt_exist_connections": true
     },
@@ -299,40 +299,40 @@
       "type": "selector",
       "tag": "🇩🇪 Super Max GER",
       "outbounds": [
-        "🇩🇪 Dataforest | BJDE",
-        "🇩🇪 Putzmann | BJDE",
-        "🇩🇪 Leaseweb | BJDE"
+        "🇩🇪 Leaseweb | Number",
+        "🇩🇪 Leaseweb | Gomami"
       ],
       "interrupt_exist_connections": true
     },
+
     {
-      "type": "trojan",
       "tag": "🇭🇰 HKT | IEPL",
-      "server": "gzktmfsiurtbn.makeufast.org",
+      "type": "trojan",
+      "server": "f06c57db4f55d13ac2.makeufast.org",
       "server_port": 27051,
       "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
       "tls": {
         "enabled": true,
-        "server_name": "mcdn.bilivideo.com",
-        "insecure": true
+        "server_name": "0111.339766.xyz",
+        "insecure": false
       }
     },
     {
-      "type": "trojan",
       "tag": "🇭🇰 HGC | IEPL",
-      "server": "gzktmfsiurtbn.makeufast.org",
+      "type": "trojan",
+      "server": "f06c57db4f55d13ac2.makeufast.org",
       "server_port": 26003,
       "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
       "tls": {
         "enabled": true,
-        "server_name": "mcdn.bilivideo.com",
-        "insecure": true
+        "server_name": "0103.339766.xyz",
+        "insecure": false
       }
     },
     {
-      "type": "trojan",
       "tag": "🇭🇰 Misaka | IEPL",
-      "server": "gzktmfsiurtbn.makeufast.org",
+      "type": "trojan",
+      "server": "f06c57db4f55d13ac2.makeufast.org",
       "server_port": 26006,
       "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
       "tls": {
@@ -342,116 +342,56 @@
       }
     },
     {
-      "type": "trojan",
       "tag": "🇭🇰 DMIT | IEPL",
-      "server": "gzktmfsiurtbn.makeufast.org",
+      "type": "trojan",
+      "server": "f06c57db4f55d13ac2.makeufast.org",
       "server_port": 26021,
       "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
       "tls": {
         "enabled": true,
-        "server_name": "mcdn.bilivideo.com",
-        "insecure": true
+        "server_name": "0107.339766.xyz",
+        "insecure": false
       }
     },
     {
-      "type": "trojan",
       "tag": "🇭🇰 iCable | IEPL",
-      "server": "gzktmfsiurtbn.makeufast.org",
+      "type": "trojan",
+      "server": "f06c57db4f55d13ac2.makeufast.org",
       "server_port": 53112,
       "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
       "tls": {
         "enabled": true,
-        "server_name": "mcdn.bilivideo.com",
-        "insecure": true
+        "server_name": "0112.339766.xyz",
+        "insecure": false
       }
     },
     {
-      "type": "trojan",
-      "tag": "🇭🇰 HKT | SHDL",
-      "server": "shmyndiptmga.makeufast.com",
-      "server_port": 27051,
-      "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
-      "tls": {
-        "enabled": true,
-        "server_name": "mcdn.bilivideo.com",
-        "insecure": true
-      }
-    },
-    {
-      "type": "trojan",
-      "tag": "🇭🇰 HGC | SHDL",
-      "server": "shmyndiptmga.makeufast.com",
-      "server_port": 26003,
-      "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
-      "tls": {
-        "enabled": true,
-        "server_name": "mcdn.bilivideo.com",
-        "insecure": true
-      }
-    },
-    {
-      "type": "trojan",
-      "tag": "🇭🇰 Misaka | SHDL",
-      "server": "shmyndiptmga.makeufast.com",
-      "server_port": 26006,
-      "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
-      "tls": {
-        "enabled": true,
-        "server_name": "mcdn.bilivideo.com",
-        "insecure": true
-      }
-    },
-    {
-      "type": "trojan",
-      "tag": "🇭🇰 DMIT | SHDL",
-      "server": "shmyndiptmga.makeufast.com",
-      "server_port": 26021,
-      "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
-      "tls": {
-        "enabled": true,
-        "server_name": "mcdn.bilivideo.com",
-        "insecure": true
-      }
-    },
-    {
-      "type": "trojan",
-      "tag": "🇭🇰 iCable | SHDL",
-      "server": "shmyndiptmga.makeufast.com",
-      "server_port": 53112,
-      "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
-      "tls": {
-        "enabled": true,
-        "server_name": "mcdn.bilivideo.com",
-        "insecure": true
-      }
-    },
-    {
-      "type": "trojan",
       "tag": "🇭🇰 HKT | Gomami",
+      "type": "trojan",
       "server": "vednamgo.douyinverygood.com",
       "server_port": 53011,
       "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
       "tls": {
         "enabled": true,
-        "server_name": "mcdn.bilivideo.com",
-        "insecure": true
+        "server_name": "0111.339766.xyz",
+        "insecure": false
       }
     },
     {
-      "type": "trojan",
       "tag": "🇭🇰 HGC | Gomami",
+      "type": "trojan",
       "server": "vednamgo.douyinverygood.com",
       "server_port": 53103,
       "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
       "tls": {
         "enabled": true,
-        "server_name": "mcdn.bilivideo.com",
-        "insecure": true
+        "server_name": "0103.339766.xyz",
+        "insecure": false
       }
     },
     {
-      "type": "trojan",
       "tag": "🇭🇰 Misaka | Gomami",
+      "type": "trojan",
       "server": "vednamgo.douyinverygood.com",
       "server_port": 53106,
       "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
@@ -462,45 +402,57 @@
       }
     },
     {
-      "type": "trojan",
       "tag": "🇭🇰 DMIT | Gomami",
+      "type": "trojan",
       "server": "vednamgo.douyinverygood.com",
       "server_port": 53107,
       "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
       "tls": {
         "enabled": true,
-        "server_name": "mcdn.bilivideo.com",
-        "insecure": true
+        "server_name": "0107.339766.xyz",
+        "insecure": false
       }
     },
     {
-      "type": "trojan",
       "tag": "🇭🇰 iCable | Gomami",
+      "type": "trojan",
       "server": "vednamgo.douyinverygood.com",
       "server_port": 53112,
       "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
       "tls": {
         "enabled": true,
-        "server_name": "mcdn.bilivideo.com",
-        "insecure": true
+        "server_name": "0112.339766.xyz",
+        "insecure": false
       }
     },
     {
+      "tag": "🇭🇰 HKT | Number",
       "type": "trojan",
-      "tag": "🇸🇬 SG.GS | IEPL",
-      "server": "gzktmfsiurtbn.makeufast.org",
-      "server_port": 26007,
+      "server": "begin.0708.xhsniceapp.com",
+      "server_port": 53011,
       "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
       "tls": {
         "enabled": true,
-        "server_name": "mcdn.bilivideo.com",
-        "insecure": true
+        "server_name": "0111.339766.xyz",
+        "insecure": false
       }
     },
     {
+      "tag": "🇭🇰 DMIT | Number",
       "type": "trojan",
+      "server": "begin.0708.xhsniceapp.com",
+      "server_port": 53107,
+      "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
+      "tls": {
+        "enabled": true,
+        "server_name": "0107.339766.xyz",
+        "insecure": false
+      }
+    },
+    {
       "tag": "🇸🇬 Misaka | IEPL",
-      "server": "gzktmfsiurtbn.makeufast.org",
+      "type": "trojan",
+      "server": "f06c57db4f55d13ac2.makeufast.org",
       "server_port": 36019,
       "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
       "tls": {
@@ -510,32 +462,20 @@
       }
     },
     {
-      "type": "trojan",
       "tag": "🇸🇬 Aper | IEPL",
-      "server": "gzktmfsiurtbn.makeufast.org",
+      "type": "trojan",
+      "server": "f06c57db4f55d13ac2.makeufast.org",
       "server_port": 27001,
       "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
       "tls": {
         "enabled": true,
-        "server_name": "mcdn.bilivideo.com",
-        "insecure": true
+        "server_name": "0208.339766.xyz",
+        "insecure": false
       }
     },
     {
-      "type": "trojan",
-      "tag": "🇸🇬 SG.GS | Gomami",
-      "server": "sggogogo.douyinverygood.com",
-      "server_port": 54001,
-      "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
-      "tls": {
-        "enabled": true,
-        "server_name": "mcdn.bilivideo.com",
-        "insecure": true
-      }
-    },
-    {
-      "type": "trojan",
       "tag": "🇸🇬 Misaka | Gomami",
+      "type": "trojan",
       "server": "sggogogo.douyinverygood.com",
       "server_port": 54006,
       "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
@@ -546,34 +486,130 @@
       }
     },
     {
-      "type": "trojan",
       "tag": "🇸🇬 Aper | Gomami",
+      "type": "trojan",
       "server": "sggogogo.douyinverygood.com",
       "server_port": 54008,
       "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
       "tls": {
         "enabled": true,
-        "server_name": "mcdn.bilivideo.com",
-        "insecure": true
+        "server_name": "0208.339766.xyz",
+        "insecure": false
       }
     },
     {
+      "tag": "🇸🇬 Aper | Number",
       "type": "trojan",
-      "tag": "🇯🇵 DMIT | SHDL",
-      "server": "shmyndiptmga.makeufast.com",
+      "server": "begin.0708.xhsniceapp.com",
+      "server_port": 54008,
+      "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
+      "tls": {
+        "enabled": true,
+        "server_name": "0208.339766.xyz",
+        "insecure": false
+      }
+    },
+    {
+      "tag": "🇯🇵 JinX | IEPL",
+      "type": "trojan",
+      "server": "f06c57db4f55d13ac2.makeufast.org",
+      "server_port": 26031,
+      "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
+      "tls": {
+        "enabled": true,
+        "server_name": "0302.339766.xyz",
+        "insecure": false
+      }
+    },
+    {
+      "tag": "🇯🇵 DMIT | IEPL",
+      "type": "trojan",
+      "server": "f06c57db4f55d13ac2.makeufast.org",
       "server_port": 26027,
       "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
       "tls": {
         "enabled": true,
-        "server_name": "mcdn.bilivideo.com",
-        "insecure": true
+        "server_name": "0306.339766.xyz",
+        "insecure": false
       }
     },
     {
+      "tag": "🇯🇵 JinX | Gomami",
       "type": "trojan",
-      "tag": "🇯🇵 Misaka | SHDL",
-      "server": "shmyndiptmga.makeufast.com",
-      "server_port": 46026,
+      "server": "jasbgmssjp.douyinverygood.com",
+      "server_port": 55102,
+      "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
+      "tls": {
+        "enabled": true,
+        "server_name": "0302.339766.xyz",
+        "insecure": false
+      }
+    },
+    {
+      "tag": "🇯🇵 DMIT | Gomami",
+      "type": "trojan",
+      "server": "jasbgmssjp.douyinverygood.com",
+      "server_port": 55006,
+      "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
+      "tls": {
+        "enabled": true,
+        "server_name": "0306.339766.xyz",
+        "insecure": false
+      }
+    },
+    {
+      "tag": "🇯🇵 Misaka | Gomami",
+      "type": "trojan",
+      "server": "jasbgmssjp.douyinverygood.com",
+      "server_port": 55007,
+      "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
+      "tls": {
+        "enabled": true,
+        "server_name": "0307.339766.xyz",
+        "insecure": false
+      }
+    },
+    {
+      "tag": "🇯🇵 JinX | Number",
+      "type": "trojan",
+      "server": "begin.0708.xhsniceapp.com",
+      "server_port": 55102,
+      "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
+      "tls": {
+        "enabled": true,
+        "server_name": "0302.339766.xyz",
+        "insecure": false
+      }
+    },
+    {
+      "tag": "🇺🇸 Sakura | IEPL",
+      "type": "trojan",
+      "server": "f06c57db4f55d13ac2.makeufast.org",
+      "server_port": 26034,
+      "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
+      "tls": {
+        "enabled": true,
+        "server_name": "0508.339766.xyz",
+        "insecure": false
+      }
+    },
+    {
+      "tag": "🇺🇸 Jinx | IEPL",
+      "type": "trojan",
+      "server": "f06c57db4f55d13ac2.makeufast.org",
+      "server_port": 26035,
+      "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
+      "tls": {
+        "enabled": true,
+        "server_name": "0502.339766.xyz",
+        "insecure": false
+      }
+    },
+    {
+      "tag": "🇺🇸 Misaka | IEPL",
+      "type": "trojan",
+      "server": "f06c57db4f55d13ac2.makeufast.org",
+      "server_port": 26041,
       "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
       "tls": {
         "enabled": true,
@@ -582,82 +618,34 @@
       }
     },
     {
+      "tag": "🇺🇸 AT&T | IEPL",
       "type": "trojan",
-      "tag": "🇯🇵 SoftBank | SHDL",
-      "server": "shmyndiptmga.makeufast.com",
-      "server_port": 26032,
-      "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
-      "tls": {
-        "enabled": true,
-        "server_name": "mcdn.bilivideo.com",
-        "insecure": true
-      }
-    },
-    {
-      "type": "trojan",
-      "tag": "🇯🇵 Sonet | SHDL",
-      "server": "shmyndiptmga.makeufast.com",
-      "server_port": 26033,
-      "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
-      "tls": {
-        "enabled": true,
-        "server_name": "mcdn.bilivideo.com",
-        "insecure": true
-      }
-    },
-    {
-      "type": "trojan",
-      "tag": "🇯🇵 Kddi | SHDL",
-      "server": "shmyndiptmga.makeufast.com",
-      "server_port": 26090,
-      "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
-      "tls": {
-        "enabled": true,
-        "server_name": "mcdn.bilivideo.com",
-        "insecure": true
-      }
-    },
-    {
-      "type": "trojan",
-      "tag": "🇺🇸 Sakura | SHDL",
-      "server": "shmyndiptmga.makeufast.com",
-      "server_port": 28508,
-      "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
-      "tls": {
-        "enabled": true,
-        "server_name": "mcdn.bilivideo.com",
-        "insecure": true
-      }
-    },
-    {
-      "type": "trojan",
-      "tag": "🇺🇸 Misaka | SHDL",
-      "server": "shmyndiptmga.makeufast.com",
-      "server_port": 46041,
-      "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
-      "tls": {
-        "enabled": true,
-        "server_name": "mcdn.bilivideo.com",
-        "insecure": true
-      }
-    },
-    {
-      "type": "trojan",
-      "tag": "🇺🇸 AT&T | SHDL",
-      "server": "shmyndiptmga.makeufast.com",
+      "server": "f06c57db4f55d13ac2.makeufast.org",
       "server_port": 26099,
       "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
       "tls": {
         "enabled": true,
-        "server_name": "mcdn.bilivideo.com",
-        "insecure": true
+        "server_name": "0505.339766.xyz",
+        "insecure": false
       }
     },
     {
+      "tag": "🇺🇸 Cox | IEPL",
       "type": "trojan",
-      "tag": "🇺🇸 HostHatch | SHDL",
-      "server": "shmyndiptmga.makeufast.com",
-      "server_port": 36034,
+      "server": "f06c57db4f55d13ac2.makeufast.org",
+      "server_port": 57009,
+      "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
+      "tls": {
+        "enabled": true,
+        "server_name": "0509.339766.xyz",
+        "insecure": false
+      }
+    },
+    {
+      "tag": "🇺🇸 Misaka | Gomami",
+      "type": "trojan",
+      "server": "vednamgo.douyinverygood.com",
+      "server_port": 57006,
       "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
       "tls": {
         "enabled": true,
@@ -666,51 +654,51 @@
       }
     },
     {
+      "tag": "🇺🇸 Datacamp | Number",
       "type": "trojan",
-      "tag": "🇺🇸 Cox | SHDL",
-      "server": "shmyndiptmga.makeufast.com",
-      "server_port": 27100,
+      "server": "begin.0708.xhsniceapp.com",
+      "server_port": 57002,
       "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
       "tls": {
         "enabled": true,
-        "server_name": "mcdn.bilivideo.com",
-        "insecure": true
+        "server_name": "0502.339766.xyz",
+        "insecure": false
       }
     },
     {
+      "tag": "🇺🇸 Eons | Number",
       "type": "trojan",
-      "tag": "🇩🇪 Dataforest | BJDE",
-      "server": "bjde.dhqbtyngpss.hardcorelinks.org",
-      "server_port": 36012,
+      "server": "begin.0708.xhsniceapp.com",
+      "server_port": 57004,
       "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
       "tls": {
         "enabled": true,
-        "server_name": "mcdn.bilivideo.com",
-        "insecure": true
+        "server_name": "0504.339766.xyz",
+        "insecure": false
       }
     },
     {
+      "tag": "🇩🇪 Leaseweb | Gomami",
       "type": "trojan",
-      "tag": "🇩🇪 Putzmann | BJDE",
-      "server": "bjde.dhqbtyngpss.hardcorelinks.org",
-      "server_port": 36013,
+      "server": "vednamgo.douyinverygood.com",
+      "server_port": 26015,
       "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
       "tls": {
         "enabled": true,
-        "server_name": "mcdn.bilivideo.com",
-        "insecure": true
+        "server_name": "0604.339766.xyz",
+        "insecure": false
       }
     },
     {
+      "tag": "🇩🇪 Leaseweb | Number",
       "type": "trojan",
-      "tag": "🇩🇪 Leaseweb | BJDE",
-      "server": "bjde.dhqbtyngpss.hardcorelinks.org",
-      "server_port": 36015,
+      "server": "begin.0708.xhsniceapp.com",
+      "server_port": 58003,
       "password": "3e821607-9009-4e2c-ae1c-e6a6ef1c4572",
       "tls": {
         "enabled": true,
-        "server_name": "mcdn.bilivideo.com",
-        "insecure": true
+        "server_name": "0604.339766.xyz",
+        "insecure": false
       }
     }
   ],
