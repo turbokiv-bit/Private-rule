@@ -12,7 +12,7 @@
       {
         "tag": "Super-Max-Doq",
         "type": "https",
-        "server": "1qi47h.host.apad.pro/dns-query",
+        "server": "1qi47h.host.apad.pro",
         "domain_resolver": {
           "server": "isp-DNS",
           "strategy": "ipv4_only"
@@ -21,7 +21,7 @@
       {
         "tag": "Apadpro-Doq",
         "type": "https",
-        "server": "180.76.115.140/8PZaJw6Dfa69tqWR",
+        "server": "180.76.115.140",
         "domain_resolver": {
           "server": "isp-DNS",
           "strategy": "ipv4_only"
