@@ -29,3 +29,7 @@ DOMAIN-SUFFIX,smadex.com
 DOMAIN-SUFFIX,tvsquared.com
 DOMAIN-SUFFIX,wasu.tv
 AND,((DOMAIN-KEYWORD,amemv.com,extended-matching), (PROTOCOL,UDP))
+DOMAIN-KEYWORD,dig.zjurl
+DOMAIN-KEYWORD,dig.bdurl
+AND,((DOMAIN-KEYWORD,zijieapi),(DOMAIN-KEYWORD,ads))
+DOMAIN-KEYWORD,snssdk.com
