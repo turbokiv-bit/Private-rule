@@ -5,8 +5,8 @@ DOMAIN-SUFFIX,officecdn-microsoft-com.akamaized.net
 DOMAIN-SUFFIX,statics-marketingsites-eas-ms-com.akamaized.net
 DOMAIN-SUFFIX,statics-marketingsites-eus-ms-com.akamaized.net
 DOMAIN-SUFFIX,statics-marketingsites-wcus-ms-com.akamaized.net
-DOMAIN-SUFFIX,prodforza.blob.core.windows.net
 DOMAIN-SUFFIX,flightsimulator.azureedge.net
+DOMAIN-SUFFIX,prodforza.blob.core.windows.net
 DOMAIN-SUFFIX,azure.microsoft.com
 DOMAIN-SUFFIX,azuremarketplace.microsoft.com
 DOMAIN-SUFFIX,location.microsoft.com
@@ -344,6 +344,8 @@ DOMAIN-SUFFIX,xboxplayanywhere.com
 DOMAIN-SUFFIX,xboxservices.com
 DOMAIN-SUFFIX,xboxstudios.com
 DOMAIN-SUFFIX,xbx.lv
+DOMAIN-SUFFIX,asobostudio.com
+DOMAIN-SUFFIX,flightsimulator.com
 DOMAIN-SUFFIX,beth.games
 DOMAIN-SUFFIX,bethesda.net
 DOMAIN-SUFFIX,bethesdagamestudios.com
@@ -360,8 +362,6 @@ DOMAIN-SUFFIX,minecraft.net
 DOMAIN-SUFFIX,minecraftservices.com
 DOMAIN-SUFFIX,minecraftshop.com
 DOMAIN-SUFFIX,mojang.com
-DOMAIN-SUFFIX,asobostudio.com
-DOMAIN-SUFFIX,flightsimulator.com
 DOMAIN-SUFFIX,microsoft.be
 DOMAIN-SUFFIX,aadrm.com
 DOMAIN-SUFFIX,azure-api.net
