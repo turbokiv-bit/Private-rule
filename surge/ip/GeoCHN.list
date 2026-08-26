@@ -23,3 +23,4 @@ DOMAIN-SUFFIX,s2.bfllvip.com
 IP-CIDR,38.76.202.248/32,no-resolve
 DOMAIN,webimg.maibaapp.com
 DOMAIN-SUFFIX,*.xns.one
+DOMAIN,api-huacloud.com
