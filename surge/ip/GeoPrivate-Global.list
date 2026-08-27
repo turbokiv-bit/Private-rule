@@ -601,8 +601,6 @@ DOMAIN-SUFFIX,xinanpay.com
 DOMAIN-SUFFIX,tigisoftware.com
 DOMAIN-SUFFIX,scripting.fun
 DOMAIN-SUFFIX,zhiaon.top
-
-# ==================== 媒体/资讯/其他 ====================
 DOMAIN,next-episode.net
 DOMAIN,go4.pw
 DOMAIN,moviespheregold.com
@@ -631,3 +629,8 @@ DOMAIN-SUFFIX,finalto.xyz
 DOMAIN-SUFFIX,gtk.pw
 DOMAIN-SUFFIX,com.day
 DOMAIN-SUFFIX,gz360.tv
+DOMAIN-SUFFIX,api-flowercloud.com
+DOMAIN-SUFFIX,flowercloud.net
+DOMAIN-SUFFIX,help.huacloud.dev
+DOMAIN-SUFFIX,geo.wp-statistics.com
+DOMAIN-SUFFIX,filetransfersingapore.cellrebel.com
