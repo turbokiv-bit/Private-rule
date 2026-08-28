@@ -18,7 +18,7 @@
      {
         "tag": "Apadpro-DOQ",
         "type": "https",
-        "server": "8PZaJw6Dfa69tqWR",
+        "server": "180.76.115.140",
         "domain_resolver": {"server": "isp-DNS", "strategy": "ipv4_only"}
       },
       {
