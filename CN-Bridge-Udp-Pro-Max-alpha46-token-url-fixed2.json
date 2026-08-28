@@ -18,6 +18,7 @@
      {
         "tag": "Apadpro-DOQ",
         "type": "https",
+        "server_port":80,
         "server": "180.76.115.140/8PZaJw6Dfa69tqWR",
         "domain_resolver": {"server": "isp-DNS", "strategy": "ipv4_only"}
       },
@@ -91,7 +92,7 @@
       },
       {
         "action": "evaluate",
-        "server": "Super-Max-DOQ"
+        "server": "Apadpro-DOQ"
       },
       {
         "match_response": true,
