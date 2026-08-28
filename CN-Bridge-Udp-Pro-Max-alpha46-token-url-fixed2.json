@@ -10,7 +10,7 @@
         "type": "local"
       },
       {
-        "tag": "Super-Max-Doq",
+        "tag": "Super-Max-DOH",
         "type": "https",
         "server": "1qi47h.host.apad.pro",
         "domain_resolver": {
@@ -19,7 +19,7 @@
         }
       },
       {
-        "tag": "Apadpro-Doq",
+        "tag": "Apadpro-DOH",
         "type": "https",
         "server": "180.76.115.140",
         "domain_resolver": {
@@ -100,7 +100,7 @@
           "A"
         ],
         "action": "evaluate",
-        "server": "Apadpro-Doq"
+        "server": "Apadpro-DOH"
       },
       {
         "match_response": true,
@@ -129,7 +129,7 @@
           }
         ],
         "action": "route",
-        "server": "Super-Max-Doq"
+        "server": "Super-Max-DOH"
       },
       {
         "type": "logical",
@@ -174,7 +174,7 @@
         "rewrite_ttl": 1
       }   
     ],
-    "final": "Super-Max-Doq",
+    "final": "Super-Max-DOH",
     "reverse_mapping": true,
     "strategy": "ipv4_only",
     "cache_capacity": 8192,
@@ -218,7 +218,7 @@
       "type": "direct",
       "tag": "🇨🇳 CN-Only-V4",
       "domain_resolver": {
-        "server": "Apadpro-Doq",
+        "server": "Apadpro-DOH",
         "strategy": "ipv4_only"
       }
     },
@@ -1041,7 +1041,7 @@
     "final": "Final",
     "auto_detect_interface": true,
     "default_domain_resolver": {
-      "server": "Super-Max-Doq",
+      "server": "Super-Max-DOH",
       "disable_optimistic_cache": true
     },
     "default_http_client": "default"
