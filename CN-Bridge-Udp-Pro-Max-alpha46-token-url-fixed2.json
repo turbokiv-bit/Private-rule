@@ -279,12 +279,12 @@
       "type": "selector",
       "tag": "🇭🇰 Super Max HKG",
       "outbounds": [
-        "🇭🇰 HKT 🏠 | Gomami",
-        "🇭🇰 HGC 🏠 | Gomami",
         "🇭🇰 Misaka | Gomami",
         "🇭🇰 DMIT | Gomami",
-        "🇭🇰 iCable | Gomami",
-        "🇭🇰 HKGLab | SZCT 1",
+        "🇭🇰 HKT 🏠| Gomami",
+        "🇭🇰 HGC 🏠| Gomami",
+        "🇭🇰 HGC 🏠| Gomami",
+        "🇭🇰 HKGLab | SZCT 1"
       ],
       "interrupt_exist_connections": true
     },
