@@ -90,55 +90,14 @@
         "rewrite_ttl": 1
       },
       {
-        "query_type": [
-          "A"
-        ],
         "action": "evaluate",
         "server": "Apadpro-DOQ"
       },
       {
         "match_response": true,
-        "response_rcode": "NXDOMAIN",
-        "action": "respond"
-      },
-      {
-        "type": "logical",
-        "mode": "or",
-        "rules": [
-          {
-            "match_response": true,
-            "response_rcode": "SERVFAIL"
-          },
-          {
-            "match_response": true,
-            "response_rcode": "REFUSED"
-          },
-          {
-            "match_response": true,
-            "response_rcode": "FORMERR"
-          },
-          {
-            "match_response": true,
-            "response_rcode": "NOTIMP"
-          }
-        ],
-        "action": "route",
-        "server": "Super-Max-DOQ"
-      },
-      {
-        "type": "logical",
-        "mode": "and",
-        "rules": [
-          {
-            "match_response": true,
-            "response_rcode": "NOERROR"
-          },
-          {
-            "match_response": true,
-            "ip_accept_any": true,
-            "invert": true
-          }
-        ],
+        "response_rcode": "NOERROR",
+        "ip_accept_any": true,
+        "invert": true,
         "action": "respond"
       },
       {
@@ -152,21 +111,18 @@
           {
             "match_response": true,
             "rule_set": [
-              "china_ip",
-              "cn_geoip"
-            ]
+              "China IP",
+              "CN IP"
+          ]
           }
         ],
         "action": "respond"
       },
       {
-        "query_type": [
-          "A"
-        ],
         "action": "route",
         "server": "fakeip",
         "rewrite_ttl": 1
-      }   
+      }
     ],
     "final": "Super-Max-DOQ",
     "reverse_mapping": true,
