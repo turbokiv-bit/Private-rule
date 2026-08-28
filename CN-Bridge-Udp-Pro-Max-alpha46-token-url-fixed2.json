@@ -9,23 +9,17 @@
         "tag": "isp-DNS",
         "type": "local"
       },
-      {
-        "tag": "Super-Max-DOH",
+           {
+        "tag": "Super-Max-DOQ",
         "type": "https",
         "server": "1qi47h.host.apad.pro",
-        "domain_resolver": {
-          "server": "isp-DNS",
-          "strategy": "ipv4_only"
-        }
+        "domain_resolver": {"server": "isp-DNS", "strategy": "ipv4_only"}
       },
-      {
-        "tag": "Apadpro-DOH",
+     {
+        "tag": "Apadpro-DOQ",
         "type": "https",
         "server": "180.76.115.140",
-        "domain_resolver": {
-          "server": "isp-DNS",
-          "strategy": "ipv4_only"
-        }
+        "domain_resolver": {"server": "isp-DNS", "strategy": "ipv4_only"}
       },
       {
         "type": "fakeip",
@@ -100,7 +94,7 @@
           "A"
         ],
         "action": "evaluate",
-        "server": "Apadpro-DOH"
+        "server": "Apadpro-DOQ"
       },
       {
         "match_response": true,
@@ -129,7 +123,7 @@
           }
         ],
         "action": "route",
-        "server": "Super-Max-DOH"
+        "server": "Super-Max-DOQ"
       },
       {
         "type": "logical",
@@ -174,7 +168,7 @@
         "rewrite_ttl": 1
       }   
     ],
-    "final": "Super-Max-DOH",
+    "final": "Super-Max-DOQ",
     "reverse_mapping": true,
     "strategy": "ipv4_only",
     "cache_capacity": 8192,
@@ -218,7 +212,7 @@
       "type": "direct",
       "tag": "🇨🇳 CN-Only-V4",
       "domain_resolver": {
-        "server": "Apadpro-DOH",
+        "server": "Apadpro-DOQ",
         "strategy": "ipv4_only"
       }
     },
@@ -1041,7 +1035,7 @@
     "final": "Final",
     "auto_detect_interface": true,
     "default_domain_resolver": {
-      "server": "Super-Max-DOH",
+      "server": "Super-Max-DOQ",
       "disable_optimistic_cache": true
     },
     "default_http_client": "default"
