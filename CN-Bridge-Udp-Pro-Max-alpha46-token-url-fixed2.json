@@ -18,6 +18,7 @@
      {
         "tag": "Apadpro-DOQ",
         "type": "quic",
+        "server_port": 8853,
         "server": "180.76.115.140",
         "domain_resolver": {"server": "isp-DNS", "strategy": "ipv4_only"}
       },
