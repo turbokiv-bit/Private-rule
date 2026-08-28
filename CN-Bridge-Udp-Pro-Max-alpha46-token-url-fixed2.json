@@ -11,15 +11,14 @@
       },
            {
         "tag": "Super-Max-DOQ",
-        "type": "quic",
-        "server": "1qi47h.host.apad.pro",
+        "type": "https",
+        "server": "1qi47h.host.apad.pro/dns-query",
         "domain_resolver": {"server": "isp-DNS", "strategy": "ipv4_only"}
       },
      {
         "tag": "Apadpro-DOQ",
-        "type": "quic",
-        "server_port": 8853,
-        "server": "180.76.115.140",
+        "type": "https",
+        "server": "180.76.115.140/8PZaJw6Dfa69tqWR",
         "domain_resolver": {"server": "isp-DNS", "strategy": "ipv4_only"}
       },
       {
