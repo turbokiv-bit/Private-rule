@@ -16,7 +16,7 @@
         "domain_resolver": {"server": "isp-DNS", "strategy": "ipv4_only"}
       },
      {
-        "tag": "Apadpro-DOQ",
+        "tag": "Apadpro-DOH",
         "type": "https",
         "server": "180.76.115.140",
         "domain_resolver": {"server": "isp-DNS", "strategy": "ipv4_only"}
@@ -91,7 +91,7 @@
       },
       {
         "action": "evaluate",
-        "server": "Super-Max-DOH"
+        "server": "Apadpro-DOH"
       },
       {
         "match_response": true,
@@ -168,7 +168,7 @@
       "type": "direct",
       "tag": "🇨🇳 CN-Only-V4",
       "domain_resolver": {
-        "server": "Super-Max-DOH",
+        "server": "Apadpro-DOH",
         "strategy": "ipv4_only"
       }
     },
