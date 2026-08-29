@@ -18,7 +18,7 @@
      {
         "tag": "Apadpro-DOH",
         "type": "https",
-        "server": "180.76.115.140/8PZaJw6Dfa69tqWR"
+        "server": "180.76.115.140"
       },
       {
         "type": "fakeip",
