@@ -10,7 +10,7 @@
         "tag": "hosts_fix",
         "predefined": {
           "1qi47h.host.apad.pro": "101.133.140.73",
-          "hk.pro.xns.one": "217.217.33.20"
+          "180.76.115.140": "180.76.115.140"
         }
       },
       {
@@ -24,8 +24,8 @@
         "type": "https",
         "tag": "EasyMos-DOH",
         "domain_resolver": "hosts_fix",
-        "server": "hk.pro.xns.one",
-        "path": "@surge977/dns-query"
+        "server": "180.76.115.140",
+        "path": "/8PZaJw6Dfa69tqWR"
       },
             {
         "type": "local",
