@@ -98,40 +98,61 @@
         "server": "fakeip",
         "rewrite_ttl": 1
       },
-      {
-        "action": "evaluate",
-        "server": "EasyMos-DOH"
-      },
-      {
-        "match_response": true,
-        "response_rcode": "NOERROR",
-        "ip_accept_any": true,
-        "invert": true,
-        "action": "respond"
-      },
-      {
-        "type": "logical",
-        "mode": "or",
-        "rules": [
-          {
-            "match_response": true,
-            "ip_is_private": true
-          },
-          {
-            "match_response": true,
-            "rule_set": [
-              "china_ip",
-              "cn_geoip"
-          ]
-          }
-        ],
-        "action": "respond"
-      },
-      {
-        "action": "route",
-        "server": "fakeip",
-        "rewrite_ttl": 1
-      }
+{
+  "query_type": [
+    "A"
+  ],
+  "action": "evaluate",
+  "server": "EasyMos-DOH",
+  "tag": "apad"
+},
+{
+  "query_type": [
+    "A"
+  ],
+  "action": "evaluate",
+  "server": "Super-Max-DOH",
+  "tag": "super"
+},
+{
+  "match_response": "apad",
+  "ip_is_private": true,
+  "action": "respond",
+  "race": true
+},
+{
+  "match_response": "apad",
+  "rule_set": [
+    "china_ip",
+    "cn_geoip"
+  ],
+  "action": "respond",
+  "race": true
+},
+{
+  "match_response": "super",
+  "ip_is_private": true,
+  "action": "respond",
+  "race": true
+},
+{
+  "match_response": "super",
+  "rule_set": [
+    "china_ip",
+    "cn_geoip"
+  ],
+  "action": "respond",
+  "race": true
+},
+{
+  "query_type": [
+    "A"
+  ],
+  "action": "route",
+  "server": "fakeip",
+  "rewrite_ttl": 1,
+  "speculative": true
+}
     ],
     "final": "Super-Max-DOH",
     "reverse_mapping": true,
