@@ -27,14 +27,11 @@
         "server": "180.76.115.140",
         "path": "/8PZaJw6Dfa69tqWR"
       },
-            {
-        "type": "local",
-        "tag": "local",
-        "neighbor_domain": [
-          ".",
-          ".lan"
-        ]
-      }
+    {
+      "preferred_by": "isp-DNS",
+      "action": "route",
+      "server": "isp-DNS"
+    }
     ],
     "rules": [
     {
