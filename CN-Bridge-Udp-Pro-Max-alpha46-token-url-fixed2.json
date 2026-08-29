@@ -36,18 +36,7 @@
       ]
     }
   ],
-    ],
     "rules": [
-          {
-      "preferred_by": "hosts_fix",
-      "action": "route",
-      "server": "hosts_fix"
-    },
-    {
-      "preferred_by": "local",
-      "action": "route",
-      "server": "local"
-    },
     {
         "rule_set": [
           "GeoReject",
@@ -85,6 +74,16 @@
         "action": "predefined",
         "rcode": "NOERROR"
       },
+   {
+      "preferred_by": "hosts_fix",
+      "action": "route",
+      "server": "hosts_fix"
+    },
+    {
+      "preferred_by": "local",
+      "action": "route",
+      "server": "local"
+    },
       {
         "rule_set": [
           "cdn_domainset",
