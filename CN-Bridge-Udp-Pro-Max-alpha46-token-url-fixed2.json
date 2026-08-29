@@ -822,11 +822,12 @@
         "outbound": "🇨🇳 Super Max CHN",
         "action": "route"
       },
-        {
+      {
         "ip_version": 4,
         "outbound": "🌐 Super Max VKG",
         "action": "route"
-      },
+      }
+    ],
     "rule_set": [
       {
         "type": "remote",
