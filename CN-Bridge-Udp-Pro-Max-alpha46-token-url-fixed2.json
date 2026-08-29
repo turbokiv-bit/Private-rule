@@ -25,7 +25,7 @@
         "tag": "EasyMos-DOH",
         "domain_resolver": "hosts_fix",
         "server": "hk.pro.xns.one",
-        "path": "@surge977"
+        "path": "@surge977/dns-query"
       },
             {
         "type": "local",
