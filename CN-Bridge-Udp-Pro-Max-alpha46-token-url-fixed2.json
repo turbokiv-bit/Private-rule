@@ -30,6 +30,7 @@
     "rules": [
     {
         "rule_set": [
+          "GeoReject",
           "BlockHttpDNS",
           "AdGuardSDNSFilter"
         ],
