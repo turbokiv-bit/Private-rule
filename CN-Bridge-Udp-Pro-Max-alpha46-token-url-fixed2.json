@@ -6,19 +6,34 @@
   "dns": {
     "servers": [
       {
-        "tag": "isp-DNS",
-        "type": "local"
-      },
-           {
-        "tag": "Super-Max-DOH",
-        "type": "https",
-        "server": "1qi47h.host.apad.pro",
-        "domain_resolver": {"server": "isp-DNS", "strategy": "ipv4_only"}
+        "type": "hosts",
+        "tag": "hosts_fix",
+        "predefined": {
+          "1qi47h.host.apad.pro": "101.133.140.73",
+          "180.76.115.140": "180.76.115.140"
+        }
       },
       {
-        "type": "fakeip",
-        "tag": "fakeip",
-        "inet4_range": "198.18.0.0/15"
+        "type": "https",
+        "tag": "Super-Max-DOH",
+        "domain_resolver": "hosts_fix",
+        "server": "1qi47h.host.apad.pro",
+        "path": "/dns-query"
+      },
+      {
+        "type": "https",
+        "tag": "EasyMos-DOH",
+        "domain_resolver": "hosts_fix",
+        "server": "180.76.115.140",
+        "path": "/8PZaJw6Dfa69tqWR"
+      },
+            {
+        "type": "local",
+        "tag": "local",
+        "neighbor_domain": [
+          ".",
+          ".lan"
+        ]
       }
     ],
     "rules": [
@@ -85,7 +100,7 @@
       },
       {
         "action": "evaluate",
-        "server": "Super-Max-DOH"
+        "server": "EasyMos-DOH"
       },
       {
         "match_response": true,
@@ -162,7 +177,7 @@
       "type": "direct",
       "tag": "🇨🇳 CN-Only-V4",
       "domain_resolver": {
-        "server": "Super-Max-DOH",
+        "server": "EasyMos-DOH",
         "strategy": "ipv4_only"
       }
     },
