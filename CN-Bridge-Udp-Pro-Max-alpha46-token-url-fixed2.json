@@ -18,8 +18,7 @@
      {
         "tag": "Apadpro-DOH",
         "type": "https",
-        "server": "180.76.115.140",
-        "domain_resolver": {"server": "isp-DNS", "strategy": "ipv4_only"}
+        "server": "180.76.115.140/8PZaJw6Dfa69tqWR"
       },
       {
         "type": "fakeip",
