@@ -812,8 +812,21 @@
         "rule_set": "stream_ip",
         "outbound": "🇯🇵 Super Max JPG",
         "action": "route"
-      }
-    ],
+      },
+      {
+        "rule_set": [
+              "domestic_ip",
+              "china_ip",
+              "cn_geoip"
+        ],
+        "outbound": "🇨🇳 Super Max CHN",
+        "action": "route"
+      },
+        {
+        "ip_version": 4,
+        "outbound": "🌐 Super Max VKG",
+        "action": "route"
+      },
     "rule_set": [
       {
         "type": "remote",
