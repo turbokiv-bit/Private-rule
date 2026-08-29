@@ -28,12 +28,26 @@
         "path": "/8PZaJw6Dfa69tqWR"
       },
     {
-      "preferred_by": "isp-DNS",
-      "action": "route",
-      "server": "isp-DNS"
+      "type": "local",
+      "tag": "local",
+      "neighbor_domain": [
+        ".",
+        ".lan"
+      ]
     }
+  ],
     ],
     "rules": [
+          {
+      "preferred_by": "hosts_fix",
+      "action": "route",
+      "server": "hosts_fix"
+    },
+    {
+      "preferred_by": "local",
+      "action": "route",
+      "server": "local"
+    },
     {
         "rule_set": [
           "GeoReject",
