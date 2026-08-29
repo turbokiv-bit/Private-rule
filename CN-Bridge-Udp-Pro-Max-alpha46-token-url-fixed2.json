@@ -15,11 +15,6 @@
         "server": "1qi47h.host.apad.pro",
         "domain_resolver": {"server": "isp-DNS", "strategy": "ipv4_only"}
       },
-     {
-        "tag": "Apadpro-DOH",
-        "type": "https",
-        "server": "180.76.115.140"
-      },
       {
         "type": "fakeip",
         "tag": "fakeip",
@@ -90,7 +85,7 @@
       },
       {
         "action": "evaluate",
-        "server": "Apadpro-DOH"
+        "server": "Super-Max-DOH"
       },
       {
         "match_response": true,
@@ -167,7 +162,7 @@
       "type": "direct",
       "tag": "🇨🇳 CN-Only-V4",
       "domain_resolver": {
-        "server": "Apadpro-DOH",
+        "server": "Super-Max-DOH",
         "strategy": "ipv4_only"
       }
     },
