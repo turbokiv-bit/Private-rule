@@ -53,7 +53,8 @@ jobs:
       - name: Replace core framework
         run: |
           APP="sfi/data/var/jb/Applications/sing-box.app"
-          FW_SRC=$(find Libbox.xcframework -name Library -path '*ios-arm64*' | head -1)
+          ls -R Libbox.xcframework | head -30
+          FW_SRC=$(find Libbox.xcframework -type f -path '*ios-arm64*' \( -name Libbox -o -name Library \) | grep -v simulator | head -1)
           echo "Framework binary: $FW_SRC"
           cp "$FW_SRC" "$APP/Frameworks/Library.framework/Library"
           # 同步替换各扩展内可能内嵌的副本
