@@ -30,10 +30,15 @@ jobs:
           git remote add michongs https://github.com/MiChongs/sing-box.git
           git fetch --depth 1 michongs xiaobaf14g-testing
 
-          # 1. 仅提取 smart 出站相关的源码实现，严禁使用 merge 或 cherry-pick
+          # 1. 提取 smart 出站相关的源码实现及依赖的内部包
           git checkout michongs/xiaobaf14g-testing -- protocol/group/smart.go option/smart.go 2>/dev/null || true
           git checkout michongs/xiaobaf14g-testing -- protocol/group/smart/ 2>/dev/null || true
           git checkout michongs/xiaobaf14g-testing -- option/group_smart.go 2>/dev/null || true
+          
+          # 新增：检出 smart 依赖的内部包，解决 no matching versions for query "latest" 报错
+          git checkout michongs/xiaobaf14g-testing -- common/smart/ 2>/dev/null || true
+          git checkout michongs/xiaobaf14g-testing -- common/assetdl/ 2>/dev/null || true
+          git checkout michongs/xiaobaf14g-testing -- experimental/smart/ 2>/dev/null || true
 
           # 2. 使用 awk 注入 TypeSmart 常量定义
           if ! grep -q "TypeSmart" constant/proxy.go; then
