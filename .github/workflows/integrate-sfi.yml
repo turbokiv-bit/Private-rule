@@ -40,10 +40,12 @@ jobs:
       - name: Relink static archive into dylib if needed
         run: |
           SLICE="Libbox.xcframework/ios-arm64/Libbox.framework"
-          head -c 8 "$SLICE/Libbox" | xxd | head -1
-          if head -c 8 "$SLICE/Libbox" | grep -q '!<arch>' || head -c 4 "$SLICE/Libbox" | grep -q $'\xca\xfe\xba\xbe'; then
-            echo "Static archive detected, relinking..."
-            mv "$SLICE/Libbox" "$SLICE/Libbox.a"
+          file "$SLICE/Libbox"
+          if file "$SLICE/Libbox" | grep -q 'dynamically linked'; then
+            echo "Already a dylib, skip."
+          else
+            echo "Not a dylib, relinking..."
+            xcrun lipo -thin arm64 "$SLICE/Libbox" -output "$SLICE/Libbox.a"
             SDK=$(xcrun --sdk iphoneos --show-sdk-path)
             xcrun clang -dynamiclib -arch arm64 -isysroot "$SDK" \
               -miphoneos-version-min=15.0 \
@@ -55,8 +57,6 @@ jobs:
               -framework CoreFoundation -lresolv
             rm "$SLICE/Libbox.a"
             file "$SLICE/Libbox"
-          else
-            echo "Already a dylib, skip."
           fi
 
       - name: Reassemble SFI deb
