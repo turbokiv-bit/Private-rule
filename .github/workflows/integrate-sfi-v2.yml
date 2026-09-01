@@ -10,7 +10,8 @@ jobs:
       - name: Setup Go
         uses: actions/setup-go@v5
         with:
-          go-version: '1.25.5'
+          # 建议使用 .x 匹配最新小版本，避免指定不存在的具体版本号导致下载失败
+          go-version: '1.25.x' 
 
       - name: Install tools
         run: |
@@ -29,16 +30,18 @@ jobs:
       - name: Build Libbox.xcframework from reF1nd core
         working-directory: core
         run: |
-          go get -tool golang.org/x/mobile/cmd/gobind
+          # 1. 已移除具有破坏性的 `go get -tool` 命令
+          # 2. `-target` 已修正为 `ios`，以生成合法的 .xcframework 目录结构[span_0](start_span)[span_0](end_span)
           gomobile bind -v -trimpath -ldflags "-s -w" \
-            -target ios/arm64 -iosversion 15.0 \
+            -target ios -iosversion 15.0 \
             -o "$GITHUB_WORKSPACE/sfi/Libbox.xcframework" \
             -tags "with_gvisor,with_quic,with_wireguard,with_utls,with_naive_outbound,with_clash_api,with_usbip,with_openvpn,with_openconnect,with_tailscale,with_low_memory,with_dhcp,ts_omit_logtail,ts_omit_ssh,ts_omit_drive,ts_omit_taildrop,ts_omit_webclient,ts_omit_doctor,ts_omit_capture,ts_omit_kube,ts_omit_aws,ts_omit_synology,ts_omit_bird" \
             ./experimental/libbox
 
       - name: Build app & package jailbreak deb (official script)
         working-directory: sfi
-        run: /opt/homebrew/bin/bash Jailbreak/package.sh
+        # 3. 移除硬编码的 Homebrew 绝对路径，直接调用 bash[span_1](start_span)[span_1](end_span)
+        run: bash Jailbreak/package.sh
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
