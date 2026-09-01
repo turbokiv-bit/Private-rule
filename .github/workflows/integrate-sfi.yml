@@ -62,15 +62,17 @@ jobs:
             cp "$FW_SRC" "$f"
           done
 
-      - name: Re-sign with ldid
+      - name: Re-sign with ldid (best-effort)
         run: |
           APP="sfi/data/var/jb/Applications/sing-box.app"
-          ldid -S "$APP/Frameworks/Library.framework/Library"
-          find "$APP" -type f \( -name '*.dylib' \) -exec ldid -S {} \;
-          find "$APP/PlugIns" -name '*.appex' -maxdepth 1 | while read e; do
-            ldid -S "$e/$(plutil -extract CFBundleExecutable raw "$e/Info.plist")"
+          sign() { ldid -S "$1" 2>&1 && echo "signed: $1" || echo "WARN: ldid failed on $1 (可在设备上补签)"; }
+          sign "$APP/Frameworks/Library.framework/Library"
+          find "$APP" -type f -name '*.dylib' | while read f; do sign "$f"; done
+          find "$APP/PlugIns" -maxdepth 1 -name '*.appex' | while read e; do
+            sign "$e/$(plutil -extract CFBundleExecutable raw "$e/Info.plist")"
           done
-          ldid -S "$APP/sing-box"
+          sign "$APP/sing-box"
+          true
 
       - name: Bump package version & repack deb
         run: |
