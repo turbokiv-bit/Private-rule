@@ -201,7 +201,7 @@ write(p, s)
 p = 'experimental/cachefile/cache.go'
 s = read(p)
 if 'func (c *CacheFile) SmartDB' not in s:
-    smartdb = '''func (c *CacheFile) SmartDB() *bbolt.DB {
+    smartdb = '''func (c *CacheFile) SmartDB() any {
 	return c.DB
 }
 
@@ -210,6 +210,6 @@ if 'func (c *CacheFile) SmartDB' not in s:
     s = s.replace('func (c *CacheFile) Dependencies() []string {',
                   smartdb + 'func (c *CacheFile) Dependencies() []string {', 1)
 write(p, s)
-assert 'func (c *CacheFile) SmartDB' in read(p)
+assert 'func (c *CacheFile) SmartDB() any' in read(p)
 
 print("PATCH COMPLETE")
