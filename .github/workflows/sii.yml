@@ -1,3 +1,4 @@
+
 name: Build SFI with selectively merged outbounds
 
 on:
@@ -17,21 +18,25 @@ jobs:
         run: |
           brew install dpkg ldid xcbeautify bash git
 
-      - name: Clone sing-box-for-apple (Native Core)
+      - name: Clone sing-box-for-apple (iOS Client)
         run: |
-          # 包含子模块，直接使用官方较新的原生 core 以适配 iOS UI API
           git clone --depth 1 --recurse-submodules -b dev https://github.com/SagerNet/sing-box-for-apple.git sfi
+
+      - name: Clone official sing-box (Native Core)
+        run: |
+          # 拉取官方带有新 API 的 Go 核心，防止 Swift 编译报错
+          git clone --depth 1 -b dev-next https://github.com/SagerNet/sing-box.git official-core
 
       - name: Clone xiaobaf14g-testing (Smart Core)
         run: git clone --depth 1 -b xiaobaf14g-testing https://github.com/MiChongs/sing-box.git smart-core
 
-      - name: Clone reF1nd core
-        run: git clone --depth 1 -b reF1nd-stable https://github.com/reF1nd/sing-box.git ref1nd-core
-
-      - name: Merge smart outbound into native core
+      - name: Prepare and merge smart outbound into native core
         run: |
-          echo "=== Copying smart files into sfi/core ==="
+          # 1. 建立 sfi/core 目录
+          cp -r official-core sfi/core
           
+          # 2. 注入 smart 协议文件
+          echo "=== Copying smart files into sfi/core ==="
           if [ -d "smart-core/outbound/smart" ]; then
             mkdir -p sfi/core/outbound
             cp -r smart-core/outbound/smart sfi/core/outbound/ 2>/dev/null || true
@@ -51,16 +56,11 @@ jobs:
             mkdir -p sfi/core/protocol
             cp -r smart-core/protocol/smart sfi/core/protocol/ 2>/dev/null || true
           fi
-          
-          echo "=== Merging reF1nd specific features ==="
-          # 在这里手动添加需要从 reF1nd 移植的特定协议文件夹（按需取消注释并修改）
-          # cp -r ref1nd-core/outbound/vless sfi/core/outbound/ 2>/dev/null || true
 
       - name: Fix and register smart outbound
         working-directory: sfi/core
         run: |
           echo "=== Injecting smart constant ==="
-          # 为了不破坏原生核心的新 API，不直接覆盖 constant/outbound.go，而是追加常量
           if ! grep -q "OutboundTypeSmart" constant/outbound.go; then
             echo -e '\nconst OutboundTypeSmart = "smart"' >> constant/outbound.go
             echo "Injected OutboundTypeSmart into constant/outbound.go"
@@ -89,7 +89,6 @@ jobs:
           echo "// Use local packages" >> go.mod
           echo "replace github.com/sagernet/sing-box/outbound/smart => ./outbound/smart" >> go.mod
           
-          # 清理并同步依赖
           go clean -modcache || true
           go mod tidy -e || true
 
