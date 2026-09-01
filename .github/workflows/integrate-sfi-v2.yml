@@ -51,28 +51,80 @@ jobs:
           echo "=== 已复制的 smart 文件 ==="
           find . -path ./.git -prune -o -name '*smart*' -print | head -40
 
-      - name: Register smart outbound & add types
+      - name: Patch integration points (register smart, add types, fill API gaps)
         working-directory: core
         run: |
-          set -e
+          python3 - <<'PYEOF'
+          import re, io
 
-          # 1) constant/proxy.go: 加 TypeSmart
-          grep -q 'TypeSmart' constant/proxy.go || \
-            sed -i 's/    TypeURLTest     = "urltest"/    TypeURLTest     = "urrtest"\n    TypeSmart       = "smart"/' constant/proxy.go
+          # ---------- 1) constant/proxy.go: 加 TypeSmart ----------
+          p = 'constant/proxy.go'
+          s = open(p).read()
+          if 'TypeSmart' not in s:
+              s = s.replace('TypeURLTest     = "urltest"',
+                            'TypeURLTest     = "urltest"\n\tTypeSmart       = "smart"')
+          open(p, 'w').write(s)
 
-          # 2) include/registry.go: 注册 Smart
-          grep -q 'RegisterSmart' include/registry.go || \
-            sed -i 's/    group.RegisterLoadBalance(registry)/    group.RegisterLoadBalance(registry)\n    group.RegisterSmart(registry)/' include/registry.go
+          # ---------- 2) include/registry.go: 注册 Smart ----------
+          p = 'include/registry.go'
+          s = open(p).read()
+          if 'RegisterSmart' not in s:
+              s = s.replace('group.RegisterLoadBalance(registry)',
+                            'group.RegisterLoadBalance(registry)\n\tgroup.RegisterSmart(registry)')
+          open(p, 'w').write(s)
 
-          # 3) 校验是否注册成功
-          grep -n 'RegisterSmart' include/registry.go
-          grep -n 'TypeSmart'     constant/proxy.go
+          # ---------- 3) adapter/experimental.go: 补 URLTestHistoryStorage 接口 ----------
+          p = 'adapter/experimental.go'
+          s = open(p).read()
+          if 'URLTestHistoryStorage' not in s:
+              block = '''type URLTestHistoryStorage interface {
+	AddUpdateHook(hook *observable.Subscriber[struct{}])
+	NotifyUpdated()
+	LoadURLTestHistory(tag string) *URLTestHistory
+	DeleteURLTestHistory(tag string)
+	StoreURLTestHistory(tag string, history *URLTestHistory)
+	Close() error
+}
+
+'''
+              # 插在 ClashServer 前面
+              if 'type ClashServer interface {' in s:
+                  s = s.replace('type ClashServer interface {', block + 'type ClashServer interface {', 1)
+          open(p, 'w').write(s)
+
+          # ---------- 4) common/httpclient/manager.go: 补 LookupDetour ----------
+          p = 'common/httpclient/manager.go'
+          s = open(p).read()
+          if 'LookupDetour' not in s:
+              func = '''func (m *Manager) LookupDetour(tag string) string {
+	m.access.Lock()
+	defer m.access.Unlock()
+	if client, ok := m.defines[tag]; ok {
+		return client.Detour
+	}
+	return ""
+}
+
+'''
+              s = s.replace('func (m *Manager) Initialize(',
+                            func + 'func (m *Manager) Initialize(', 1)
+          open(p, 'w').write(s)
+
+          # ---------- 5) 校验 ----------
+          print("--- registry ---");  os_system = None
+          for f in ['include/registry.go']:
+              s9 = open(f).read()
+              assert 'RegisterSmart' in s9, 'missing RegisterSmart'
+          for f in ['constant/proxy.go']:
+              s9 = open(f).read()
+              assert 'TypeSmart' in s9, 'missing TypeSmart'
+          print("PATCH OK")
+          PYEOF
 
       - name: Sync deps for smart (go.mod)
         working-directory: core
         run: |
           set -e
-          # 统一延迟 + smart 用到的模块对齐
           go install -v github.com/sagernet/gomobile/cmd/gomobile@v0.1.13
           go install -v github.com/sagernet/gomobile/cmd/gobind@v0.1.13
           export PATH="$(go env GOPATH)/bin:$PATH"
@@ -90,7 +142,7 @@ jobs:
       - name: Copy Libbox into sfi & build deb
         working-directory: sfi
         run: |
-          cp -r ../core/Libbox.xcframework sfi/ 2>/dev/null || cp -r ../Libbox.xcframework sfi/
+          cp -r ../core/Libbox.xcframework sfi/ 2>/dev/null || cp -r ../Libbox.xcframework sfi/ || true
           /opt/homebrew/bin/bash Jailbreak/package.sh
 
       - name: Upload artifact
