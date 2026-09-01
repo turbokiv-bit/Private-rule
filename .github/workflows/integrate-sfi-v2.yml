@@ -31,7 +31,6 @@ jobs:
           go run ./cmd/internal/build_libbox -target apple -platform ios/arm64
           mv Libbox.xcframework "$GITHUB_WORKSPACE/sfi/"
           ls "$GITHUB_WORKSPACE/sfi/Libbox.xcframework"
-            ./experimental/libbox
 
       - name: Build app & package jailbreak deb (official script)
         working-directory: sfi
