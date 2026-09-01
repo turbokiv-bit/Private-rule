@@ -69,21 +69,40 @@ jobs:
           const OutboundTypeSmart = "smart"
           EOF
           fi
+          
+          # 确保 option 包中有 OutboundTypeSmart 的定义
+          if ! grep -q "OutboundTypeSmart" option/outbound_smart.go; then
+            echo "Updating option/outbound_smart.go"
+            cat > option/outbound_smart.go << 'EOF'
+          package option
+          
+          type OutboundSmartOptions struct {
+              OutboundOptions
+              Tag          string   `json:"tag,omitempty"`
+              Outbounds    []string `json:"outbounds,omitempty"`
+              Mode         string   `json:"mode,omitempty"`
+              Timeout      int      `json:"timeout,omitempty"`
+              AliveTimeout int      `json:"alive_timeout,omitempty"`
+          }
+          
+          const OutboundTypeSmart = "smart"
+          EOF
+          fi
 
-      - name: Fix go.mod for local smart package
+      - name: Fix go.mod for local packages
         working-directory: sfi/core
         run: |
-          # 关键修复：告诉 Go 使用本地包而不是远程
-          # 方法1: 在 go.mod 中添加 replace 指令
-          if ! grep -q "replace github.com/sagernet/sing-box/outbound/smart" go.mod; then
-            echo "replace github.com/sagernet/sing-box/outbound/smart => ./outbound/smart" >> go.mod
-          fi
-          
-          # 或者使用更通用的方法：排除所有 smart 包的远程版本
-          echo "// Using local smart package" >> go.mod
+          # 在 go.mod 末尾添加 replace 指令
+          echo "" >> go.mod
+          echo "// Use local packages" >> go.mod
+          echo "replace github.com/sagernet/sing-box/outbound/smart => ./outbound/smart" >> go.mod
           
           # 显示修改后的 go.mod
-          cat go.mod | head -30
+          echo "=== go.mod content ==="
+          cat go.mod
+          
+          # 创建空的 go.sum 如果不存在
+          touch go.sum
 
       - name: Build Libbox.xcframework
         working-directory: sfi/core
@@ -92,11 +111,13 @@ jobs:
           go install -v github.com/sagernet/gomobile/cmd/gobind@v0.1.13
           export PATH="$(go env GOPATH)/bin:$PATH"
           
-          # 使用 -mod=mod 忽略 go.sum 的完整性检查
-          go mod tidy -mod=mod
-          go mod download
+          # 先尝试直接编译，让 go 自动处理依赖
+          go mod tidy -e
           
-          # 编译
+          # 使用 go build 检查是否有编译错误
+          go build ./...
+          
+          # 编译 Libbox
           go run ./cmd/internal/build_libbox -target apple -platform ios/arm64
 
       - name: Build app & package jailbreak deb
