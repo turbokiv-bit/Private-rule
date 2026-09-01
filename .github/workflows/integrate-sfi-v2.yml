@@ -10,15 +10,11 @@ jobs:
       - name: Setup Go
         uses: actions/setup-go@v5
         with:
-          go-version: '1.22.x'
+          go-version: '1.25.5'
 
       - name: Install tools
         run: |
           brew install dpkg ldid xcbeautify bash
-          go install golang.org/x/mobile/cmd/gomobile@latest
-          go install golang.org/x/mobile/cmd/gobind@latest
-          echo "$(go env GOPATH)/bin" >> $GITHUB_PATH
-          gomobile init
 
       - name: Clone sing-box-for-apple (with submodules)
         run: git clone --depth 1 --recurse-submodules -b dev https://github.com/SagerNet/sing-box-for-apple.git sfi
@@ -26,13 +22,15 @@ jobs:
       - name: Clone reF1nd sing-box core
         run: git clone --depth 1 -b reF1nd-testing-next https://github.com/reF1nd/sing-box.git core
 
-      - name: Build Libbox.xcframework from reF1nd core
+      - name: Build Libbox.xcframework (official build_libbox)
         working-directory: core
         run: |
-          gomobile bind -v -trimpath -ldflags "-s -w" \
-            -target ios/arm64 -iosversion 15.0 \
-            -o "$GITHUB_WORKSPACE/sfi/Libbox.xcframework" \
-            -tags "with_cronet,with_gvisor,with_quic,with_wireguard,with_utls,with_naive_outbound,with_clash_api,with_usbip,with_openvpn,with_openconnect,with_tailscale,with_low_memory,with_dhcp,ts_omit_logtail,ts_omit_ssh,ts_omit_drive,ts_omit_taildrop,ts_omit_webclient,ts_omit_doctor,ts_omit_capture,ts_omit_kube,ts_omit_aws,ts_omit_synology,ts_omit_bird" \
+          go install -v github.com/sagernet/gomobile/cmd/gomobile@v0.1.13
+          go install -v github.com/sagernet/gomobile/cmd/gobind@v0.1.13
+          export PATH="$(go env GOPATH)/bin:$PATH"
+          go run ./cmd/internal/build_libbox -target apple -platform ios/arm64
+          mv Libbox.xcframework "$GITHUB_WORKSPACE/sfi/"
+          ls "$GITHUB_WORKSPACE/sfi/Libbox.xcframework"
             ./experimental/libbox
 
       - name: Build app & package jailbreak deb (official script)
