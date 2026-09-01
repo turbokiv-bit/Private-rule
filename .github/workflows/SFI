@@ -1,0 +1,62 @@
+name: Build SFI (reF1nd core + Smart outbound)
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.25.5'
+
+      - name: Install tools
+        run: |
+          brew install dpkg ldid xcbeautify bash
+
+      - name: Clone sing-box-for-apple (with submodules)
+        run: git clone --depth 1 --recurse-submodules -b dev https://github.com/SagerNet/sing-box-for-apple.git sfi
+
+      - name: Clone reF1nd sing-box core
+        run: git clone -b reF1nd-stable https://github.com/reF1nd/sing-box.git core
+
+      - name: Merge Smart outbound from MiChongs
+        working-directory: core
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git remote add michongs https://github.com/MiChongs/sing-box.git
+          git fetch michongs xiaobaf14g-testing
+          
+          # 尝试直接合并分支（允许合并不相关历史）
+          git merge michongs/xiaobaf14g-testing --no-edit || {
+            echo "Direct merge conflict, applying patch fallback..."
+            git merge --abort
+            # 提取 smart 相关提交并 cherry-pick（或应用改动）
+            git cherry-pick michongs/xiaobaf14g-testing~5..michongs/xiaobaf14g-testing || true
+          }
+          
+          # 整理 go 依赖以确保新增包正常引入
+          go mod tidy
+
+      - name: Build Libbox.xcframework (official build_libbox)
+        working-directory: core
+        run: |
+          go install -v github.com/sagernet/gomobile/cmd/gomobile@v0.1.13
+          go install -v github.com/sagernet/gomobile/cmd/gobind@v0.1.13
+          export PATH="$(go env GOPATH)/bin:$PATH"
+          go run ./cmd/internal/build_libbox -target apple -platform ios/arm64
+          mv Libbox.xcframework "$GITHUB_WORKSPACE/sfi/"
+          ls "$GITHUB_WORKSPACE/sfi/Libbox.xcframework"
+
+      - name: Build app & package jailbreak deb (official script)
+        working-directory: sfi
+        run: /opt/homebrew/bin/bash Jailbreak/package.sh
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: SFI-reF1nd-Smart-deb
+          path: sfi/build/jailbreak/*.deb
