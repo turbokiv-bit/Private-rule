@@ -20,7 +20,7 @@ jobs:
         run: brew install dpkg ldid xcbeautify bash git
 
       - name: Clone sing-box-for-apple (with submodules)
-        run: git clone --depth 1 --recurse-submodules -b dev https://github.com/SagerNet/sing-box-for-apple.git sfi
+        run: git clone --depth 1 --recurse-submodules -b stable https://github.com/SagerNet/sing-box-for-apple.git sfi
 
       - name: Clone reF1nd-stable core
         run: git clone --depth 1 -b reF1nd-stable https://github.com/reF1nd/sing-box.git core
