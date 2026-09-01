@@ -56,7 +56,8 @@ jobs:
       - name: Copy Libbox into sfi & build deb
         working-directory: sfi
         run: |
-          cp -r ../core/Libbox.xcframework sfi/ || true
+          cp -r ../core/Libbox.xcframework .
+          ls -d Libbox.xcframework && echo "copied OK"
           /opt/homebrew/bin/bash Jailbreak/package.sh
 
       - name: Upload artifact
