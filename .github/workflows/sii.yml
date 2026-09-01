@@ -55,11 +55,9 @@ jobs:
         run: |
           # 创建 constant/outbound.go
           mkdir -p constant
-          cat > constant/outbound.go << 'EOF'
-          package constant
-          
-          const OutboundTypeSmart = "smart"
-          EOF
+          echo 'package constant' > constant/outbound.go
+          echo '' >> constant/outbound.go
+          echo 'const OutboundTypeSmart = "smart"' >> constant/outbound.go
           
           # 创建 outbound 注册
           mkdir -p outbound
@@ -79,42 +77,75 @@ jobs:
           LIBBOX_DIR=$(find . -type d -name "libbox" | head -1)
           if [ -d "$LIBBOX_DIR" ]; then
             cat > $LIBBOX_DIR/smart_outbound.go << 'EOF'
-            package libbox
-            
-            import (
-                "github.com/sagernet/sing-box/adapter"
-                "github.com/sagernet/sing-box/outbound/smart"
-                "github.com/sagernet/sing/common/json"
-                "github.com/sagernet/sing/common/logger"
-            )
-            
-            // SmartOutbound 导出智能出站到 Swift
-            type SmartOutbound struct {
-                *smart.Outbound
-            }
-            
-            // NewSmartOutbound 创建智能出站实例
-            func NewSmartOutbound(logger logger.ContextLogger, tag string, optionsJson string) (adapter.Outbound, error) {
-                var options map[string]interface{}
-                if err := json.Unmarshal([]byte(optionsJson), &options); err != nil {
-                    return nil, err
-                }
-                return smart.NewOutbound(nil, logger, tag, options)
-            }
-            EOF
+          package libbox
+          
+          import (
+              "github.com/sagernet/sing-box/adapter"
+              "github.com/sagernet/sing-box/outbound/smart"
+              "github.com/sagernet/sing/common/json"
+              "github.com/sagernet/sing/common/logger"
+          )
+          
+          // SmartOutbound 导出智能出站到 Swift
+          type SmartOutbound struct {
+              *smart.Outbound
+          }
+          
+          // NewSmartOutbound 创建智能出站实例
+          func NewSmartOutbound(logger logger.ContextLogger, tag string, optionsJson string) (adapter.Outbound, error) {
+              var options map[string]interface{}
+              if err := json.Unmarshal([]byte(optionsJson), &options); err != nil {
+                  return nil, err
+              }
+              return smart.NewOutbound(nil, logger, tag, options)
+          }
+          EOF
             echo "✅ 已创建 $LIBBOX_DIR/smart_outbound.go"
+          else
+            echo "⚠️ 未找到 libbox 目录，创建 libbox 目录"
+            mkdir -p libbox
+            cat > libbox/smart_outbound.go << 'EOF'
+          package libbox
+          
+          import (
+              "github.com/sagernet/sing-box/adapter"
+              "github.com/sagernet/sing-box/outbound/smart"
+              "github.com/sagernet/sing/common/json"
+              "github.com/sagernet/sing/common/logger"
+          )
+          
+          // SmartOutbound 导出智能出站到 Swift
+          type SmartOutbound struct {
+              *smart.Outbound
+          }
+          
+          // NewSmartOutbound 创建智能出站实例
+          func NewSmartOutbound(logger logger.ContextLogger, tag string, optionsJson string) (adapter.Outbound, error) {
+              var options map[string]interface{}
+              if err := json.Unmarshal([]byte(optionsJson), &options); err != nil {
+                  return nil, err
+              }
+              return smart.NewOutbound(nil, logger, tag, options)
+          }
+          EOF
+            echo "✅ 已创建 libbox/smart_outbound.go"
           fi
           
           # 显示创建的文件
           echo "=== 创建的文件 ==="
           find . -name "*smart*.go" -type f 2>/dev/null
 
-      - name: Fix go.mod
+      - name: Fix go.mod dependencies
         working-directory: sfi/core
         run: |
+          echo "=== 当前 go.mod ==="
+          cat go.mod | head -30
+          
+          echo "=== 执行 go mod tidy ==="
           go mod tidy -e || true
-          echo "=== go.mod 前20行 ==="
-          head -20 go.mod
+          
+          echo "=== 验证 smart 包 ==="
+          go list ./outbound/smart 2>/dev/null || echo "⚠️ 包未在 go.mod 中注册，继续构建..."
 
       - name: Build Libbox.xcframework
         working-directory: sfi/core
@@ -128,18 +159,26 @@ jobs:
           go clean -cache || true
           go mod tidy -e || true
           
-          # 验证智能包是否可访问
-          echo "=== 验证 smart 包 ==="
-          go list ./outbound/smart || echo "⚠️ 包未找到，继续构建..."
+          # 验证 go.mod 是否包含必要的依赖
+          echo "=== 检查依赖 ==="
+          go list -m all | grep -E "sing-box|sing" | head -10
           
           # 构建 Libbox
           echo "正在构建 Libbox.xcframework..."
           go run ./cmd/internal/build_libbox -target apple -platform ios/arm64
           
-          # 检查结果
+          # 检查构建结果
           if [ -d "Libbox.xcframework" ]; then
             echo "✅ Libbox.xcframework 构建成功！"
             ls -la Libbox.xcframework/
+            
+            # 检查导出的 Swift 头文件是否包含智能出站
+            echo "=== 检查 Swift 头文件 ==="
+            HEADER=$(find Libbox.xcframework -name "*.h" | head -1)
+            if [ -n "$HEADER" ]; then
+              echo "头文件: $HEADER"
+              grep -i "smart\|autoredirect" "$HEADER" || echo "⚠️ 未找到 smart 相关类型"
+            fi
           else
             echo "❌ Libbox.xcframework 未生成！"
             exit 1
@@ -156,15 +195,19 @@ jobs:
             echo "❌ 找不到 Libbox.xcframework！"
             exit 1
           fi
+          echo "=== sfi/Libbox.xcframework 内容 ==="
           ls -la sfi/Libbox.xcframework/ 2>/dev/null || echo "未找到"
 
       - name: Build app & package jailbreak deb
         working-directory: sfi
         timeout-minutes: 30
-        run: /opt/homebrew/bin/bash Jailbreak/package.sh
+        run: |
+          echo "开始构建 iOS 应用和 DEB 包..."
+          /opt/homebrew/bin/bash Jailbreak/package.sh
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: SFI-ref1nd-smart-deb
           path: sfi/build/jailbreak/*.deb
+          if-no-files-found: warn
