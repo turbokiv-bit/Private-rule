@@ -7,6 +7,7 @@ jobs:
   build:
     runs-on: macos-latest
     timeout-minutes: 120
+    
     steps:
       - name: Setup Go
         uses: actions/setup-go@v5
@@ -17,66 +18,41 @@ jobs:
         run: |
           brew install dpkg ldid xcbeautify bash git
 
-      # 使用 dev 分支（公开，可访问）
-      - name: Clone sing-box-for-apple (dev)
+      - name: Clone sing-box-for-apple
         run: git clone --depth 1 --recurse-submodules -b dev https://github.com/SagerNet/sing-box-for-apple.git sfi
 
-      # 使用 dev 分支的 core（与 Library 匹配）
-      - name: Clone sing-box core (dev)
-        run: git clone --depth 1 -b dev https://github.com/SagerNet/sing-box.git core
+      - name: Clone reF1nd core
+        run: git clone --depth 1 -b reF1nd-stable https://github.com/reF1nd/sing-box.git core
 
-      # 从 xiaobaf14g-testing 获取 smart 代码
       - name: Clone xiaobaf14g-testing and copy smart outbound
         run: |
           git clone --depth 1 -b xiaobaf14g-testing https://github.com/MiChongs/sing-box.git smart-core
           
-          # 复制 smart 相关文件到 core
-          if [ -d "smart-core/outbound/smart" ]; then
-            mkdir -p core/outbound
-            cp -r smart-core/outbound/smart core/outbound/ 2>/dev/null || true
-            echo "Copied from smart-core/outbound/smart"
-          fi
-          if [ -d "smart-core/component/outbound/smart" ]; then
-            mkdir -p core/component/outbound
-            cp -r smart-core/component/outbound/smart core/component/outbound/ 2>/dev/null || true
-            echo "Copied from smart-core/component/outbound/smart"
-          fi
-          if [ -f "smart-core/constant/outbound.go" ]; then
-            mkdir -p core/constant
-            cp smart-core/constant/outbound.go core/constant/ 2>/dev/null || true
-            echo "Copied constant/outbound.go"
-          fi
-          if [ -f "smart-core/option/outbound_smart.go" ]; then
-            mkdir -p core/option
-            cp smart-core/option/outbound_smart.go core/option/ 2>/dev/null || true
-            echo "Copied option/outbound_smart.go"
-          fi
-          if [ -d "smart-core/protocol/smart" ]; then
-            mkdir -p core/protocol
-            cp -r smart-core/protocol/smart core/protocol/ 2>/dev/null || true
-            echo "Copied from smart-core/protocol/smart"
-          fi
+          # 复制 smart 相关文件
+          mkdir -p core/outbound
+          cp -r smart-core/outbound/smart core/outbound/ 2>/dev/null || true
+          mkdir -p core/component/outbound
+          cp -r smart-core/component/outbound/smart core/component/outbound/ 2>/dev/null || true
+          cp smart-core/constant/outbound.go core/constant/ 2>/dev/null || true
+          cp smart-core/option/outbound_smart.go core/option/ 2>/dev/null || true
+          mkdir -p core/protocol
+          cp -r smart-core/protocol/smart core/protocol/ 2>/dev/null || true
           
           rm -rf smart-core
           
-          echo "=== core directory structure after copy ==="
+          echo "=== core 目录中的 smart 文件 ==="
           find core -type f -name "*smart*" 2>/dev/null | head -20
 
       - name: Replace sfi core with modified core
         run: |
           rm -rf sfi/core
           cp -r core sfi/
-          echo "=== sfi/core smart files ==="
+          echo "=== sfi/core 中的 smart 文件 ==="
           find sfi/core -type f -name "*smart*" 2>/dev/null | head -20
 
-      - name: Fix and register smart outbound
+      - name: 注册智能出站到 libbox
         working-directory: sfi/core
         run: |
-          # 检查 smart 文件的位置
-          echo "=== Finding smart files ==="
-          find . -name "*smart*" -type f 2>/dev/null | head -20
-          find . -name "*smart*" -type d 2>/dev/null | head -10
-          
           # 创建 constant/outbound.go
           mkdir -p constant
           cat > constant/outbound.go << 'EOF'
@@ -85,66 +61,60 @@ jobs:
           const OutboundTypeSmart = "smart"
           EOF
           
-          # 如果 smart 目录不存在，创建它
-          if [ ! -d "outbound/smart" ] && [ ! -d "component/outbound/smart" ]; then
-            echo "Creating basic smart outbound"
-            mkdir -p outbound/smart
-            cat > outbound/smart/outbound.go << 'EOF'
-          package smart
-          
-          import (
-              "context"
-              "github.com/sagernet/sing-box/adapter"
-              "github.com/sagernet/sing/common/logger"
-          )
-          
-          type Outbound struct {
-              adapter.Outbound
-              logger logger.Logger
-          }
-          
-          func NewOutbound(ctx context.Context, logger logger.Logger, tag string, options map[string]interface{}) (*Outbound, error) {
-              return &Outbound{logger: logger}, nil
-          }
-          
-          func (o *Outbound) Tag() string {
-              return "smart"
-          }
-          
-          func (o *Outbound) Type() string {
-              return "smart"
-          }
-          EOF
-          fi
-          
-          # 创建注册文件
+          # 创建 outbound 注册
+          mkdir -p outbound
           cat > outbound/register_smart.go << 'EOF'
           package outbound
           
           import (
-              "github.com/sagernet/sing-box/outbound/smart"
-              "github.com/sagernet/sing-box/constant"
+              _ "github.com/sagernet/sing-box/outbound/smart"
           )
           
           func init() {
-              registerOutbound(constant.OutboundTypeSmart, func() Outbound {
-                  return &smart.Outbound{}
-              })
+              // 智能出站通过包 init 自动注册
           }
           EOF
           
-          echo "=== Files created ==="
-          cat constant/outbound.go
+          # 在 libbox 中导出给 Swift
+          LIBBOX_DIR=$(find . -type d -name "libbox" | head -1)
+          if [ -d "$LIBBOX_DIR" ]; then
+            cat > $LIBBOX_DIR/smart_outbound.go << 'EOF'
+            package libbox
+            
+            import (
+                "github.com/sagernet/sing-box/adapter"
+                "github.com/sagernet/sing-box/outbound/smart"
+                "github.com/sagernet/sing/common/json"
+                "github.com/sagernet/sing/common/logger"
+            )
+            
+            // SmartOutbound 导出智能出站到 Swift
+            type SmartOutbound struct {
+                *smart.Outbound
+            }
+            
+            // NewSmartOutbound 创建智能出站实例
+            func NewSmartOutbound(logger logger.ContextLogger, tag string, optionsJson string) (adapter.Outbound, error) {
+                var options map[string]interface{}
+                if err := json.Unmarshal([]byte(optionsJson), &options); err != nil {
+                    return nil, err
+                }
+                return smart.NewOutbound(nil, logger, tag, options)
+            }
+            EOF
+            echo "✅ 已创建 $LIBBOX_DIR/smart_outbound.go"
+          fi
+          
+          # 显示创建的文件
+          echo "=== 创建的文件 ==="
+          find . -name "*smart*.go" -type f 2>/dev/null
 
-      - name: Fix go.mod for local smart package
+      - name: Fix go.mod
         working-directory: sfi/core
         run: |
-          echo "" >> go.mod
-          echo "// Use local packages" >> go.mod
-          echo "replace github.com/sagernet/sing-box/outbound/smart => ./outbound/smart" >> go.mod
-          
-          echo "=== go.mod (last 10 lines) ==="
-          tail -10 go.mod
+          go mod tidy -e || true
+          echo "=== go.mod 前20行 ==="
+          head -20 go.mod
 
       - name: Build Libbox.xcframework
         working-directory: sfi/core
@@ -154,17 +124,24 @@ jobs:
           go install -v github.com/sagernet/gomobile/cmd/gobind@v0.1.13
           export PATH="$(go env GOPATH)/bin:$PATH"
           
+          # 清理缓存
           go clean -cache || true
           go mod tidy -e || true
           
-          echo "Building Libbox.xcframework..."
-          go run -p 2 ./cmd/internal/build_libbox -target apple -platform ios/arm64
+          # 验证智能包是否可访问
+          echo "=== 验证 smart 包 ==="
+          go list ./outbound/smart || echo "⚠️ 包未找到，继续构建..."
           
+          # 构建 Libbox
+          echo "正在构建 Libbox.xcframework..."
+          go run ./cmd/internal/build_libbox -target apple -platform ios/arm64
+          
+          # 检查结果
           if [ -d "Libbox.xcframework" ]; then
-            echo "✅ Libbox.xcframework built successfully!"
+            echo "✅ Libbox.xcframework 构建成功！"
             ls -la Libbox.xcframework/
           else
-            echo "❌ Libbox.xcframework not found!"
+            echo "❌ Libbox.xcframework 未生成！"
             exit 1
           fi
 
@@ -172,14 +149,14 @@ jobs:
         run: |
           if [ -d "sfi/core/Libbox.xcframework" ]; then
             cp -r sfi/core/Libbox.xcframework sfi/
-            echo "✅ Copied Libbox.xcframework to sfi/"
+            echo "✅ 已复制 Libbox.xcframework 到 sfi/"
           elif [ -d "sfi/Libbox.xcframework" ]; then
-            echo "✅ Libbox.xcframework already in sfi/"
+            echo "✅ Libbox.xcframework 已在 sfi/ 中"
           else
-            echo "❌ Libbox.xcframework not found!"
+            echo "❌ 找不到 Libbox.xcframework！"
             exit 1
           fi
-          ls -la sfi/Libbox.xcframework/ 2>/dev/null || echo "Not found"
+          ls -la sfi/Libbox.xcframework/ 2>/dev/null || echo "未找到"
 
       - name: Build app & package jailbreak deb
         working-directory: sfi
@@ -189,5 +166,5 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: SFI-dev-smart-deb
+          name: SFI-ref1nd-smart-deb
           path: sfi/build/jailbreak/*.deb
