@@ -26,57 +26,38 @@ jobs:
         run: |
           git clone --depth 1 -b xiaobaf14g-testing https://github.com/MiChongs/sing-box.git smart-core
           
-          # 查看 smart-core 的目录结构
-          echo "=== smart-core directory structure ==="
-          find smart-core -type f -name "*smart*" 2>/dev/null | head -20
-          
           # 复制 smart 相关文件
           if [ -d "smart-core/outbound/smart" ]; then
             mkdir -p core/outbound
             cp -r smart-core/outbound/smart core/outbound/ 2>/dev/null || true
-            echo "Copied from smart-core/outbound/smart"
           fi
           if [ -d "smart-core/component/outbound/smart" ]; then
             mkdir -p core/component/outbound
             cp -r smart-core/component/outbound/smart core/component/outbound/ 2>/dev/null || true
-            echo "Copied from smart-core/component/outbound/smart"
           fi
           if [ -f "smart-core/constant/outbound.go" ]; then
             mkdir -p core/constant
             cp smart-core/constant/outbound.go core/constant/ 2>/dev/null || true
-            echo "Copied constant/outbound.go"
           fi
           if [ -f "smart-core/option/outbound_smart.go" ]; then
             mkdir -p core/option
             cp smart-core/option/outbound_smart.go core/option/ 2>/dev/null || true
-            echo "Copied option/outbound_smart.go"
           fi
           if [ -d "smart-core/protocol/smart" ]; then
             mkdir -p core/protocol
             cp -r smart-core/protocol/smart core/protocol/ 2>/dev/null || true
-            echo "Copied from smart-core/protocol/smart"
           fi
           
           rm -rf smart-core
-          
-          echo "=== core directory structure after copy ==="
-          find core -type f -name "*smart*" 2>/dev/null | head -20
 
       - name: Replace sfi core with modified core
         run: |
           rm -rf sfi/core
           cp -r core sfi/
-          echo "=== sfi/core smart files ==="
-          find sfi/core -type f -name "*smart*" 2>/dev/null | head -20
 
       - name: Fix and register smart outbound
         working-directory: sfi/core
         run: |
-          # 检查 smart 文件的位置
-          echo "=== Finding smart files ==="
-          find . -name "*smart*" -type f 2>/dev/null | head -20
-          find . -name "*smart*" -type d 2>/dev/null | head -10
-          
           # 创建 constant/outbound.go
           mkdir -p constant
           cat > constant/outbound.go << 'EOF'
@@ -87,7 +68,6 @@ jobs:
           
           # 如果 smart 目录不存在，创建它
           if [ ! -d "outbound/smart" ] && [ ! -d "component/outbound/smart" ]; then
-            echo "Creating basic smart outbound"
             mkdir -p outbound/smart
             cat > outbound/smart/outbound.go << 'EOF'
           package smart
@@ -134,7 +114,6 @@ jobs:
           EOF
           
           echo "=== Files created ==="
-          ls -la outbound/smart/ 2>/dev/null || echo "smart dir not found"
           cat constant/outbound.go
 
       - name: Build Libbox.xcframework
@@ -144,8 +123,39 @@ jobs:
           go install -v github.com/sagernet/gomobile/cmd/gobind@v0.1.13
           export PATH="$(go env GOPATH)/bin:$PATH"
           
-          go mod tidy -e || true
-          go run ./cmd/internal/build_libbox -target apple -platform ios/arm64
+          # 清理并重新下载依赖
+          go clean -modcache || true
+          go mod download
+          
+          # 尝试编译
+          echo "Building Libbox.xcframework..."
+          go run ./cmd/internal/build_libbox -target apple -platform ios/arm64 || {
+            echo "First build attempt failed, trying with -mod=mod..."
+            go run -mod=mod ./cmd/internal/build_libbox -target apple -platform ios/arm64
+          }
+          
+          # 检查是否生成成功
+          if [ -d "Libbox.xcframework" ]; then
+            echo "✅ Libbox.xcframework built successfully!"
+            ls -la Libbox.xcframework/
+          else
+            echo "❌ Libbox.xcframework not found!"
+            exit 1
+          fi
+
+      - name: Copy Libbox.xcframework to sfi
+        run: |
+          # 确保 Libbox.xcframework 在正确的位置
+          if [ -d "sfi/core/Libbox.xcframework" ]; then
+            cp -r sfi/core/Libbox.xcframework sfi/
+            echo "✅ Copied Libbox.xcframework to sfi/"
+          elif [ -d "sfi/Libbox.xcframework" ]; then
+            echo "✅ Libbox.xcframework already in sfi/"
+          else
+            echo "❌ Libbox.xcframework not found!"
+            exit 1
+          fi
+          ls -la sfi/Libbox.xcframework/ 2>/dev/null || echo "Not found"
 
       - name: Build app & package jailbreak deb
         working-directory: sfi
