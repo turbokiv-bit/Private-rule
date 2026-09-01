@@ -76,13 +76,14 @@ jobs:
 
       - name: Bump package version & repack deb
         run: |
-          mkdir ctl && tar -xf sfi/control.tar.* -C ctl
-          sed -i '' 's/^Version:.*/Version: 1.14.0+ref1nd/' ctl/control
-          (cd ctl && tar -cJf ../sfi/control.tar.xz .)
-          (cd sfi/data && tar -cJf ../data.tar.xz .)
-          cd sfi && rm -f ../SFI-1.14.0-ref1nd-iphoneos-arm64.deb
-          ar rc ../SFI-1.14.0-ref1nd-iphoneos-arm64.deb debian-binary control.tar.xz data.tar.xz
-          cd .. && ls -lh SFI-1.14.0-ref1nd-iphoneos-arm64.deb
+          mkdir -p pkg/DEBIAN
+          tar -xf sfi/control.tar.* -C pkg/DEBIAN
+          sed -i '' 's/^Version:.*/Version: 1.14.0+ref1nd/' pkg/DEBIAN/control
+          chmod 755 pkg/DEBIAN
+          find pkg/DEBIAN -type f ! -name control -exec chmod 755 {} \;
+          (cd sfi/data && tar -cf - .) | (cd pkg && tar -xf -)
+          dpkg-deb -b pkg SFI-1.14.0-ref1nd-iphoneos-arm64.deb
+          ls -lh SFI-1.14.0-ref1nd-iphoneos-arm64.deb
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
