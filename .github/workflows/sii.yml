@@ -1,5 +1,4 @@
-
-name: Build SFI with selectively merged outbounds
+name: Build SFI with merged smart outbound
 
 on:
   workflow_dispatch:
@@ -18,55 +17,105 @@ jobs:
         run: |
           brew install dpkg ldid xcbeautify bash git
 
-      - name: Clone sing-box-for-apple (iOS Client)
-        run: |
-          git clone --depth 1 --recurse-submodules -b dev https://github.com/SagerNet/sing-box-for-apple.git sfi
+      # 修改点 1：将 -b dev 改为 -b main，以匹配 stable 核心的 API
+      - name: Clone sing-box-for-apple
+        run: git clone --depth 1 --recurse-submodules -b main https://github.com/SagerNet/sing-box-for-apple.git sfi
 
-      - name: Clone official sing-box (Native Core)
-        run: |
-          # 拉取官方带有新 API 的 Go 核心，防止 Swift 编译报错
-          git clone --depth 1 -b dev-next https://github.com/SagerNet/sing-box.git official-core
+      - name: Clone reF1nd core
+        run: git clone --depth 1 -b reF1nd-stable https://github.com/reF1nd/sing-box.git core
 
-      - name: Clone xiaobaf14g-testing (Smart Core)
-        run: git clone --depth 1 -b xiaobaf14g-testing https://github.com/MiChongs/sing-box.git smart-core
-
-      - name: Prepare and merge smart outbound into native core
+      - name: Clone xiaobaf14g-testing and copy smart outbound
         run: |
-          # 1. 建立 sfi/core 目录
-          cp -r official-core sfi/core
+          git clone --depth 1 -b xiaobaf14g-testing https://github.com/MiChongs/sing-box.git smart-core
           
-          # 2. 注入 smart 协议文件
-          echo "=== Copying smart files into sfi/core ==="
+          # 复制 smart 相关文件
           if [ -d "smart-core/outbound/smart" ]; then
-            mkdir -p sfi/core/outbound
-            cp -r smart-core/outbound/smart sfi/core/outbound/ 2>/dev/null || true
+            mkdir -p core/outbound
+            cp -r smart-core/outbound/smart core/outbound/ 2>/dev/null || true
+            echo "Copied from smart-core/outbound/smart"
           fi
-          
           if [ -d "smart-core/component/outbound/smart" ]; then
-            mkdir -p sfi/core/component/outbound
-            cp -r smart-core/component/outbound/smart sfi/core/component/outbound/ 2>/dev/null || true
+            mkdir -p core/component/outbound
+            cp -r smart-core/component/outbound/smart core/component/outbound/ 2>/dev/null || true
+            echo "Copied from smart-core/component/outbound/smart"
           fi
-          
+          if [ -f "smart-core/constant/outbound.go" ]; then
+            mkdir -p core/constant
+            cp smart-core/constant/outbound.go core/constant/ 2>/dev/null || true
+            echo "Copied constant/outbound.go"
+          fi
           if [ -f "smart-core/option/outbound_smart.go" ]; then
-            mkdir -p sfi/core/option
-            cp smart-core/option/outbound_smart.go sfi/core/option/ 2>/dev/null || true
+            mkdir -p core/option
+            cp smart-core/option/outbound_smart.go core/option/ 2>/dev/null || true
+            echo "Copied option/outbound_smart.go"
+          fi
+          if [ -d "smart-core/protocol/smart" ]; then
+            mkdir -p core/protocol
+            cp -r smart-core/protocol/smart core/protocol/ 2>/dev/null || true
+            echo "Copied from smart-core/protocol/smart"
           fi
           
-          if [ -d "smart-core/protocol/smart" ]; then
-            mkdir -p sfi/core/protocol
-            cp -r smart-core/protocol/smart sfi/core/protocol/ 2>/dev/null || true
-          fi
+          rm -rf smart-core
+          
+          echo "=== core directory structure after copy ==="
+          find core -type f -name "*smart*" 2>/dev/null | head -20
+
+      - name: Replace sfi core with modified core
+        run: |
+          rm -rf sfi/core
+          cp -r core sfi/
+          echo "=== sfi/core smart files ==="
+          find sfi/core -type f -name "*smart*" 2>/dev/null | head -20
 
       - name: Fix and register smart outbound
         working-directory: sfi/core
         run: |
-          echo "=== Injecting smart constant ==="
-          if ! grep -q "OutboundTypeSmart" constant/outbound.go; then
-            echo -e '\nconst OutboundTypeSmart = "smart"' >> constant/outbound.go
-            echo "Injected OutboundTypeSmart into constant/outbound.go"
+          # 检查 smart 文件的位置
+          echo "=== Finding smart files ==="
+          find . -name "*smart*" -type f 2>/dev/null | head -20
+          find . -name "*smart*" -type d 2>/dev/null | head -10
+          
+          # 创建 constant/outbound.go
+          mkdir -p constant
+          cat > constant/outbound.go << 'EOF'
+          package constant
+          
+          const OutboundTypeSmart = "smart"
+          EOF
+          
+          # 如果 smart 目录不存在，创建它
+          if [ ! -d "outbound/smart" ] && [ ! -d "component/outbound/smart" ]; then
+            echo "Creating basic smart outbound"
+            mkdir -p outbound/smart
+            cat > outbound/smart/outbound.go << 'EOF'
+          package smart
+          
+          import (
+              "context"
+              "github.com/sagernet/sing-box/adapter"
+              "github.com/sagernet/sing/common/logger"
+          )
+          
+          type Outbound struct {
+              adapter.Outbound
+              logger logger.Logger
+          }
+          
+          func NewOutbound(ctx context.Context, logger logger.Logger, tag string, options map[string]interface{}) (*Outbound, error) {
+              return &Outbound{logger: logger}, nil
+          }
+          
+          func (o *Outbound) Tag() string {
+              return "smart"
+          }
+          
+          func (o *Outbound) Type() string {
+              return "smart"
+          }
+          EOF
           fi
           
-          echo "=== Creating register_smart.go ==="
+          # 创建注册文件
           cat > outbound/register_smart.go << 'EOF'
           package outbound
           
@@ -81,6 +130,9 @@ jobs:
               })
           }
           EOF
+          
+          echo "=== Files created ==="
+          cat constant/outbound.go
 
       - name: Fix go.mod for local smart package
         working-directory: sfi/core
@@ -89,8 +141,8 @@ jobs:
           echo "// Use local packages" >> go.mod
           echo "replace github.com/sagernet/sing-box/outbound/smart => ./outbound/smart" >> go.mod
           
-          go clean -modcache || true
-          go mod tidy -e || true
+          echo "=== go.mod (last 10 lines) ==="
+          tail -10 go.mod
 
       - name: Build Libbox.xcframework
         working-directory: sfi/core
@@ -101,22 +153,29 @@ jobs:
           export PATH="$(go env GOPATH)/bin:$PATH"
           
           go clean -cache || true
+          go mod tidy -e || true
           
           echo "Building Libbox.xcframework..."
           go run -p 2 ./cmd/internal/build_libbox -target apple -platform ios/arm64
           
           if [ -d "Libbox.xcframework" ]; then
             echo "✅ Libbox.xcframework built successfully!"
+            ls -la Libbox.xcframework/
           else
             echo "❌ Libbox.xcframework not found!"
             exit 1
           fi
 
-      - name: Copy Libbox.xcframework to sfi (if needed)
+      - name: Copy Libbox.xcframework to sfi
         run: |
-          if [ -d "sfi/core/Libbox.xcframework" ] && [ ! -d "sfi/Libbox.xcframework" ]; then
+          if [ -d "sfi/core/Libbox.xcframework" ]; then
             cp -r sfi/core/Libbox.xcframework sfi/
             echo "✅ Copied Libbox.xcframework to sfi/"
+          elif [ -d "sfi/Libbox.xcframework" ]; then
+            echo "✅ Libbox.xcframework already in sfi/"
+          else
+            echo "❌ Libbox.xcframework not found!"
+            exit 1
           fi
 
       - name: Build app & package jailbreak deb
@@ -127,5 +186,5 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: SFI-merged-smart-deb
+          name: SFI-ref1nd-smart-deb
           path: sfi/build/jailbreak/*.deb
