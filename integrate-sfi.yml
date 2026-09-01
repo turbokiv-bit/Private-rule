@@ -1,0 +1,92 @@
+name: Build SFI with reF1nd core
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout this repo (contains SFI deb)
+        uses: actions/checkout@v4
+
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.25.5'
+
+      - name: Install tools
+        run: |
+          brew install dpkg ldid gomobile 2>/dev/null || brew install dpkg ldid
+          go install golang.org/x/mobile/cmd/gomobile@latest
+          go install golang.org/x/mobile/cmd/gobind@latest
+          echo "$(go env GOPATH)/bin" >> $GITHUB_PATH
+          gomobile init
+
+      - name: Clone reF1nd sing-box branch
+        run: |
+          git clone --depth 1 -b reF1nd-testing-next https://github.com/reF1nd/sing-box.git core
+
+      - name: Build Libbox framework (gomobile, iOS arm64)
+        working-directory: core
+        run: |
+          go get -tool golang.org/x/mobile/cmd/gobind
+          gomobile bind -v -trimpath -ldflags "-s -w" \
+            -target ios -iosversion 15.0 \
+            -o "$GITHUB_WORKSPACE/Libbox.xcframework" \
+            -tags with_gvisor \
+            ./experimental/libbox
+
+      - name: Reassemble SFI deb
+        run: |
+          ls -la
+          cat $(ls SFI*part-* | sort) > SFI-1.14.0-iphoneos-arm64.deb
+          ls -lh SFI-1.14.0-iphoneos-arm64.deb
+
+      - name: Extract SFI deb
+        run: |
+          ls *.deb
+          mkdir -p sfi && cd sfi
+          ar x ../SFI-1.14.0-iphoneos-arm64.deb
+          mkdir data && tar -xf data.tar.* -C data
+
+      - name: Replace core framework
+        run: |
+          APP="sfi/data/var/jb/Applications/sing-box.app"
+          ls -R Libbox.xcframework | head -30
+          FW_SRC=$(find Libbox.xcframework -type f -path '*ios-arm64*' \( -name Libbox -o -name Library \) | grep -v simulator | head -1)
+          echo "Framework binary: $FW_SRC"
+          cp "$FW_SRC" "$APP/Frameworks/Library.framework/Library"
+          # 同步替换各扩展内可能内嵌的副本
+          find "$APP" -path '*Library.framework/Library' | while read f; do
+            cp "$FW_SRC" "$f"
+          done
+
+      - name: Re-sign with ldid (best-effort)
+        run: |
+          APP="sfi/data/var/jb/Applications/sing-box.app"
+          sign() { ldid -S "$1" 2>&1 && echo "signed: $1" || echo "WARN: ldid failed on $1 (可在设备上补签)"; }
+          sign "$APP/Frameworks/Library.framework/Library"
+          find "$APP" -type f -name '*.dylib' | while read f; do sign "$f"; done
+          find "$APP/PlugIns" -maxdepth 1 -name '*.appex' | while read e; do
+            sign "$e/$(plutil -extract CFBundleExecutable raw "$e/Info.plist")"
+          done
+          sign "$APP/sing-box"
+          true
+
+      - name: Bump package version & repack deb
+        run: |
+          mkdir -p pkg/DEBIAN
+          tar -xf sfi/control.tar.* -C pkg/DEBIAN
+          sed -i '' 's/^Version:.*/Version: 1.14.0+ref1nd/' pkg/DEBIAN/control
+          chmod 755 pkg/DEBIAN
+          find pkg/DEBIAN -type f ! -name control -exec chmod 755 {} \;
+          (cd sfi/data && tar -cf - .) | (cd pkg && tar -xf -)
+          dpkg-deb -b pkg SFI-1.14.0-ref1nd-iphoneos-arm64.deb
+          ls -lh SFI-1.14.0-ref1nd-iphoneos-arm64.deb
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: SFI-ref1nd-deb
+          path: SFI-1.14.0-ref1nd-iphoneos-arm64.deb
