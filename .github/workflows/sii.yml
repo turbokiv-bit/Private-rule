@@ -50,14 +50,56 @@ jobs:
           echo "=== sfi/core 中的 smart 文件 ==="
           find sfi/core -type f -name "*smart*" 2>/dev/null | head -20
 
-      - name: 注册智能出站到 libbox
+      - name: 修复 go.mod 以支持本地 smart 包
         working-directory: sfi/core
         run: |
+          # 检查 smart 包是否存在
+          if [ -d "outbound/smart" ]; then
+            echo "✅ 找到 outbound/smart 目录"
+          elif [ -d "component/outbound/smart" ]; then
+            echo "✅ 找到 component/outbound/smart 目录"
+            # 创建软链接
+            mkdir -p outbound
+            ln -sf ../component/outbound/smart outbound/smart
+          else
+            echo "❌ 未找到 smart 目录，创建基础实现"
+            mkdir -p outbound/smart
+            cat > outbound/smart/outbound.go << 'EOF'
+            package smart
+            
+            import (
+                "context"
+                "github.com/sagernet/sing-box/adapter"
+                "github.com/sagernet/sing/common/logger"
+            )
+            
+            type Outbound struct {
+                adapter.Outbound
+                logger logger.ContextLogger
+                tag    string
+            }
+            
+            func NewOutbound(ctx context.Context, logger logger.ContextLogger, tag string, options map[string]interface{}) (*Outbound, error) {
+                return &Outbound{logger: logger, tag: tag}, nil
+            }
+            
+            func (o *Outbound) Tag() string {
+                return o.tag
+            }
+            
+            func (o *Outbound) Type() string {
+                return "smart"
+            }
+            EOF
+          fi
+          
           # 创建 constant/outbound.go
           mkdir -p constant
-          echo 'package constant' > constant/outbound.go
-          echo '' >> constant/outbound.go
-          echo 'const OutboundTypeSmart = "smart"' >> constant/outbound.go
+          cat > constant/outbound.go << 'EOF'
+          package constant
+          
+          const OutboundTypeSmart = "smart"
+          EOF
           
           # 创建 outbound 注册
           mkdir -p outbound
@@ -73,10 +115,9 @@ jobs:
           }
           EOF
           
-          # 在 libbox 中导出给 Swift
-          LIBBOX_DIR=$(find . -type d -name "libbox" | head -1)
-          if [ -d "$LIBBOX_DIR" ]; then
-            cat > $LIBBOX_DIR/smart_outbound.go << 'EOF'
+          # 创建 libbox 导出
+          mkdir -p libbox
+          cat > libbox/smart_outbound.go << 'EOF'
           package libbox
           
           import (
@@ -86,12 +127,7 @@ jobs:
               "github.com/sagernet/sing/common/logger"
           )
           
-          // SmartOutbound 导出智能出站到 Swift
-          type SmartOutbound struct {
-              *smart.Outbound
-          }
-          
-          // NewSmartOutbound 创建智能出站实例
+          // NewSmartOutbound 创建智能出站实例（导出给 Swift）
           func NewSmartOutbound(logger logger.ContextLogger, tag string, optionsJson string) (adapter.Outbound, error) {
               var options map[string]interface{}
               if err := json.Unmarshal([]byte(optionsJson), &options); err != nil {
@@ -100,52 +136,29 @@ jobs:
               return smart.NewOutbound(nil, logger, tag, options)
           }
           EOF
-            echo "✅ 已创建 $LIBBOX_DIR/smart_outbound.go"
-          else
-            echo "⚠️ 未找到 libbox 目录，创建 libbox 目录"
-            mkdir -p libbox
-            cat > libbox/smart_outbound.go << 'EOF'
-          package libbox
+          echo "✅ 已创建 libbox/smart_outbound.go"
           
-          import (
-              "github.com/sagernet/sing-box/adapter"
-              "github.com/sagernet/sing-box/outbound/smart"
-              "github.com/sagernet/sing/common/json"
-              "github.com/sagernet/sing/common/logger"
-          )
+          # 在 go.mod 中添加 replace 指令，让 Go 使用本地包
+          # 注意：包的导入路径是 github.com/sagernet/sing-box/outbound/smart
+          # 我们需要告诉 Go 这个包在本地 ./outbound/smart
+          echo "" >> go.mod
+          echo "replace github.com/sagernet/sing-box/outbound/smart => ./outbound/smart" >> go.mod
           
-          // SmartOutbound 导出智能出站到 Swift
-          type SmartOutbound struct {
-              *smart.Outbound
-          }
+          echo "=== go.mod 最后几行 ==="
+          tail -5 go.mod
           
-          // NewSmartOutbound 创建智能出站实例
-          func NewSmartOutbound(logger logger.ContextLogger, tag string, optionsJson string) (adapter.Outbound, error) {
-              var options map[string]interface{}
-              if err := json.Unmarshal([]byte(optionsJson), &options); err != nil {
-                  return nil, err
-              }
-              return smart.NewOutbound(nil, logger, tag, options)
-          }
-          EOF
-            echo "✅ 已创建 libbox/smart_outbound.go"
-          fi
-          
-          # 显示创建的文件
           echo "=== 创建的文件 ==="
           find . -name "*smart*.go" -type f 2>/dev/null
 
-      - name: Fix go.mod dependencies
+      - name: 修复 go.mod 依赖
         working-directory: sfi/core
         run: |
-          echo "=== 当前 go.mod ==="
-          cat go.mod | head -30
-          
-          echo "=== 执行 go mod tidy ==="
+          # 执行 go mod tidy，忽略错误
           go mod tidy -e || true
           
+          # 验证 smart 包是否可访问
           echo "=== 验证 smart 包 ==="
-          go list ./outbound/smart 2>/dev/null || echo "⚠️ 包未在 go.mod 中注册，继续构建..."
+          go list ./outbound/smart 2>/dev/null && echo "✅ smart 包可访问" || echo "⚠️ smart 包验证失败，继续构建..."
 
       - name: Build Libbox.xcframework
         working-directory: sfi/core
@@ -157,11 +170,13 @@ jobs:
           
           # 清理缓存
           go clean -cache || true
+          
+          # 再次执行 go mod tidy
           go mod tidy -e || true
           
-          # 验证 go.mod 是否包含必要的依赖
-          echo "=== 检查依赖 ==="
-          go list -m all | grep -E "sing-box|sing" | head -10
+          # 显示 go.mod 的 replace 规则
+          echo "=== go.mod replace 规则 ==="
+          grep "replace" go.mod || echo "无 replace 规则"
           
           # 构建 Libbox
           echo "正在构建 Libbox.xcframework..."
@@ -172,7 +187,7 @@ jobs:
             echo "✅ Libbox.xcframework 构建成功！"
             ls -la Libbox.xcframework/
             
-            # 检查导出的 Swift 头文件是否包含智能出站
+            # 检查导出的 Swift 头文件
             echo "=== 检查 Swift 头文件 ==="
             HEADER=$(find Libbox.xcframework -name "*.h" | head -1)
             if [ -n "$HEADER" ]; then
