@@ -1,0 +1,83 @@
+name: Build SFI with reF1nd core + smart outbound (Fixed)
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.25.5'
+
+      - name: Install tools
+        run: |
+          brew install dpkg ldid xcbeautify bash git
+
+      - name: Clone sing-box-for-apple
+        run: git clone --depth 1 --recurse-submodules -b dev https://github.com/SagerNet/sing-box-for-apple.git sfi
+
+      - name: Clone reF1nd core
+        run: git clone --depth 1 -b reF1nd-stable https://github.com/reF1nd/sing-box.git core
+
+      - name: Clone xiaobaf14g-testing and copy smart outbound
+        run: |
+          git clone --depth 1 -b xiaobaf14g-testing https://github.com/MiChongs/sing-box.git smart-core
+          # 复制所有 smart 相关文件
+          cp -r smart-core/component/outbound/smart core/component/outbound/ 2>/dev/null || true
+          cp smart-core/constant/outbound.go core/constant/ 2>/dev/null || true
+          cp smart-core/option/outbound_smart.go core/option/ 2>/dev/null || true
+          cp -r smart-core/protocol/smart core/protocol/ 2>/dev/null || true
+          # 复制注册文件（关键！）
+          cp smart-core/outbound/register.go core/outbound/ 2>/dev/null || true
+          # 清理
+          rm -rf smart-core
+
+      - name: Ensure smart outbound registration
+        working-directory: core
+        run: |
+          # 检查 register.go 是否包含 smart 注册
+          if grep -q "smart" outbound/register.go; then
+            echo "Smart registration found in register.go"
+          else
+            echo "WARNING: Smart registration NOT found, patching..."
+            # 在 register.go 中插入 smart 导入和注册
+            sed -i '' '/import (/a\
+              _ "github.com/sagernet/sing-box/outbound/smart"
+            ' outbound/register.go
+            # 或者在 init() 中添加注册
+            echo 'func init() { registerOutbound("smart", func() Outbound { return &smart.Outbound{} }) }' >> outbound/register.go
+          fi
+          # 也检查一下 option 包是否正确
+          find . -name "*.go" -exec grep -l "OutboundSmart" {} \;
+
+      - name: Fix go.mod and build dependencies
+        working-directory: core
+        run: |
+          go mod tidy
+          # 确保 LightGBM 依赖被包含
+          go get github.com/d4l3k/go-lightgbm@latest || echo "LightGBM dependency may not be needed"
+
+      - name: Build Libbox.xcframework
+        working-directory: core
+        run: |
+          go install -v github.com/sagernet/gomobile/cmd/gomobile@v0.1.13
+          go install -v github.com/sagernet/gomobile/cmd/gobind@v0.1.13
+          export PATH="$(go env GOPATH)/bin:$PATH"
+          # 显式构建包含 smart 的包
+          go build -v ./...
+          go run ./cmd/internal/build_libbox -target apple -platform ios/arm64
+          mv Libbox.xcframework "$GITHUB_WORKSPACE/sfi/"
+          ls "$GITHUB_WORKSPACE/sfi/Libbox.xcframework"
+
+      - name: Build app & package jailbreak deb
+        working-directory: sfi
+        run: /opt/homebrew/bin/bash Jailbreak/package.sh
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: SFI-ref1nd-smart-fixed-deb
+          path: sfi/build/jailbreak/*.deb
