@@ -26,124 +26,98 @@ jobs:
         run: |
           git clone --depth 1 -b xiaobaf14g-testing https://github.com/MiChongs/sing-box.git smart-core
           
-          # 查看 smart-core 的目录结构，找到 smart 相关文件的确切位置
+          # 查看 smart-core 的目录结构
           echo "=== smart-core directory structure ==="
-          find smart-core -type f -name "*smart*" | head -20
-          find smart-core -type d -name "*smart*" | head -10
+          find smart-core -type f -name "*smart*" 2>/dev/null | head -20
           
-          # 复制 smart 相关文件到 core
-          # 尝试不同的可能路径
+          # 复制 smart 相关文件
           if [ -d "smart-core/outbound/smart" ]; then
+            mkdir -p core/outbound
             cp -r smart-core/outbound/smart core/outbound/ 2>/dev/null || true
+            echo "Copied from smart-core/outbound/smart"
           fi
           if [ -d "smart-core/component/outbound/smart" ]; then
+            mkdir -p core/component/outbound
             cp -r smart-core/component/outbound/smart core/component/outbound/ 2>/dev/null || true
+            echo "Copied from smart-core/component/outbound/smart"
           fi
           if [ -f "smart-core/constant/outbound.go" ]; then
+            mkdir -p core/constant
             cp smart-core/constant/outbound.go core/constant/ 2>/dev/null || true
+            echo "Copied constant/outbound.go"
           fi
           if [ -f "smart-core/option/outbound_smart.go" ]; then
+            mkdir -p core/option
             cp smart-core/option/outbound_smart.go core/option/ 2>/dev/null || true
+            echo "Copied option/outbound_smart.go"
           fi
           if [ -d "smart-core/protocol/smart" ]; then
+            mkdir -p core/protocol
             cp -r smart-core/protocol/smart core/protocol/ 2>/dev/null || true
+            echo "Copied from smart-core/protocol/smart"
           fi
           
-          # 清理
           rm -rf smart-core
           
-          # 显示复制后的 core 结构
           echo "=== core directory structure after copy ==="
-          find core -type f -name "*smart*" | head -20
+          find core -type f -name "*smart*" 2>/dev/null | head -20
 
       - name: Replace sfi core with modified core
         run: |
           rm -rf sfi/core
           cp -r core sfi/
-          echo "=== sfi/core structure ==="
-          find sfi/core -type f -name "*smart*" | head -20
+          echo "=== sfi/core smart files ==="
+          find sfi/core -type f -name "*smart*" 2>/dev/null | head -20
 
       - name: Fix and register smart outbound
         working-directory: sfi/core
         run: |
           # 检查 smart 文件的位置
           echo "=== Finding smart files ==="
-          find . -name "*smart*" -type f | head -20
-          find . -name "*smart*" -type d | head -10
+          find . -name "*smart*" -type f 2>/dev/null | head -20
+          find . -name "*smart*" -type d 2>/dev/null | head -10
           
-          # 确定 smart outbound 的实际位置
-          SMART_DIR=""
-          if [ -d "outbound/smart" ]; then
-            SMART_DIR="outbound/smart"
-            echo "Found smart at outbound/smart"
-          elif [ -d "component/outbound/smart" ]; then
-            SMART_DIR="component/outbound/smart"
-            echo "Found smart at component/outbound/smart"
-          else
-            echo "WARNING: Smart outbound directory not found, creating from scratch"
-            # 如果找不到，创建一个基本的 smart outbound
+          # 创建 constant/outbound.go
+          mkdir -p constant
+          cat > constant/outbound.go << 'EOF'
+          package constant
+          
+          const OutboundTypeSmart = "smart"
+          EOF
+          
+          # 如果 smart 目录不存在，创建它
+          if [ ! -d "outbound/smart" ] && [ ! -d "component/outbound/smart" ]; then
+            echo "Creating basic smart outbound"
             mkdir -p outbound/smart
             cat > outbound/smart/outbound.go << 'EOF'
-            package smart
-            
-            import (
+          package smart
+          
+          import (
               "context"
               "github.com/sagernet/sing-box/adapter"
-              "github.com/sagernet/sing-box/common/urltest"
-              "github.com/sagernet/sing/common"
               "github.com/sagernet/sing/common/logger"
-            )
-            
-            type Outbound struct {
+          )
+          
+          type Outbound struct {
               adapter.Outbound
               logger logger.Logger
-              selector adapter.OutboundSelector
-            }
-            
-            func NewOutbound(ctx context.Context, logger logger.Logger, tag string, options map[string]interface{}) (*Outbound, error) {
-              return &Outbound{
-                logger: logger,
-              }, nil
-            }
-            
-            func (o *Outbound) DialContext(ctx context.Context, metadata adapter.InboundContext) (adapter.Conn, error) {
-              return o.Outbound.DialContext(ctx, metadata)
-            }
-            
-            func (o *Outbound) ListenPacket(ctx context.Context, metadata adapter.InboundContext) (adapter.PacketConn, error) {
-              return o.Outbound.ListenPacket(ctx, metadata)
-            }
-            
-            func (o *Outbound) Tag() string {
-              return "smart"
-            }
-            
-            func (o *Outbound) Type() string {
-              return "smart"
-            }
-            EOF
-            SMART_DIR="outbound/smart"
-          fi
+          }
           
-          # 确保 constant/outbound.go 存在并包含 OutboundTypeSmart
-          mkdir -p constant
-          if [ ! -f "constant/outbound.go" ]; then
-            echo "Creating constant/outbound.go"
-            cat > constant/outbound.go << 'EOF'
-            package constant
-            
-            const OutboundTypeSmart = "smart"
-            EOF
-          else
-            if ! grep -q "OutboundTypeSmart" constant/outbound.go; then
-              echo "Adding OutboundTypeSmart to constant/outbound.go"
-              echo "" >> constant/outbound.go
-              echo "const OutboundTypeSmart = \"smart\"" >> constant/outbound.go
-            fi
+          func NewOutbound(ctx context.Context, logger logger.Logger, tag string, options map[string]interface{}) (*Outbound, error) {
+              return &Outbound{logger: logger}, nil
+          }
+          
+          func (o *Outbound) Tag() string {
+              return "smart"
+          }
+          
+          func (o *Outbound) Type() string {
+              return "smart"
+          }
+          EOF
           fi
           
           # 创建注册文件
-          mkdir -p outbound
           cat > outbound/register_smart.go << 'EOF'
           package outbound
           
@@ -170,7 +144,6 @@ jobs:
           go install -v github.com/sagernet/gomobile/cmd/gobind@v0.1.13
           export PATH="$(go env GOPATH)/bin:$PATH"
           
-          # 尝试编译
           go mod tidy -e || true
           go run ./cmd/internal/build_libbox -target apple -platform ios/arm64
 
