@@ -1,4 +1,4 @@
-name: Build SFI with reF1nd core + smart outbound (Fixed)
+name: Build SFI with merged smart outbound
 
 on:
   workflow_dispatch:
@@ -25,52 +25,76 @@ jobs:
       - name: Clone xiaobaf14g-testing and copy smart outbound
         run: |
           git clone --depth 1 -b xiaobaf14g-testing https://github.com/MiChongs/sing-box.git smart-core
-          # 复制所有 smart 相关文件
+          
+          # 复制 smart 相关文件到 core
           cp -r smart-core/component/outbound/smart core/component/outbound/ 2>/dev/null || true
           cp smart-core/constant/outbound.go core/constant/ 2>/dev/null || true
           cp smart-core/option/outbound_smart.go core/option/ 2>/dev/null || true
           cp -r smart-core/protocol/smart core/protocol/ 2>/dev/null || true
-          # 复制注册文件（关键！）
-          cp smart-core/outbound/register.go core/outbound/ 2>/dev/null || true
+          
+          # 关键修复：确保 outbound 包中有 smart 的注册
+          # 在 core/outbound/ 目录下创建 register.go 如果不存在
+          mkdir -p core/outbound
+          cat > core/outbound/register_smart.go << 'EOF'
+          package outbound
+          
+          import (
+              "github.com/sagernet/sing-box/outbound/smart"
+              "github.com/sagernet/sing-box/option"
+          )
+          
+          func init() {
+              registerOutbound(option.OutboundTypeSmart, func() Outbound {
+                  return &smart.Outbound{}
+              })
+          }
+          EOF
+          
           # 清理
           rm -rf smart-core
 
-      - name: Ensure smart outbound registration
+      - name: Ensure smart type constant exists
         working-directory: core
         run: |
-          # 检查 register.go 是否包含 smart 注册
-          if grep -q "smart" outbound/register.go; then
-            echo "Smart registration found in register.go"
-          else
-            echo "WARNING: Smart registration NOT found, patching..."
-            # 在 register.go 中插入 smart 导入和注册
-            sed -i '' '/import (/a\
-              _ "github.com/sagernet/sing-box/outbound/smart"
-            ' outbound/register.go
-            # 或者在 init() 中添加注册
-            echo 'func init() { registerOutbound("smart", func() Outbound { return &smart.Outbound{} }) }' >> outbound/register.go
+          # 检查 constant/outbound.go 是否有 Smart 类型
+          if ! grep -q "OutboundTypeSmart" constant/outbound.go; then
+            echo "Adding OutboundTypeSmart to constant/outbound.go"
+            # 在文件末尾添加常量定义
+            cat >> constant/outbound.go << 'EOF'
+          
+          const OutboundTypeSmart = "smart"
+          EOF
           fi
-          # 也检查一下 option 包是否正确
-          find . -name "*.go" -exec grep -l "OutboundSmart" {} \;
 
-      - name: Fix go.mod and build dependencies
-        working-directory: core
+      - name: Replace sfi core with modified core
         run: |
-          go mod tidy
-          # 确保 LightGBM 依赖被包含
-          go get github.com/d4l3k/go-lightgbm@latest || echo "LightGBM dependency may not be needed"
+          rm -rf sfi/core
+          cp -r core sfi/
+          ls -la sfi/core/
+
+      - name: Verify smart registration
+        working-directory: sfi/core
+        run: |
+          # 查找所有包含 smart 注册的文件
+          find . -name "*.go" -exec grep -l "smart" {} \; | head -10
+          # 检查 outbound 目录
+          ls -la outbound/ 2>/dev/null || echo "No outbound directory"
+          # 检查是否有任何注册代码
+          grep -r "registerOutbound" --include="*.go" . | head -5
 
       - name: Build Libbox.xcframework
-        working-directory: core
+        working-directory: sfi/core
         run: |
           go install -v github.com/sagernet/gomobile/cmd/gomobile@v0.1.13
           go install -v github.com/sagernet/gomobile/cmd/gobind@v0.1.13
           export PATH="$(go env GOPATH)/bin:$PATH"
-          # 显式构建包含 smart 的包
-          go build -v ./...
+          
+          # 先确保依赖完整
+          go mod tidy
+          go mod download
+          
+          # 编译
           go run ./cmd/internal/build_libbox -target apple -platform ios/arm64
-          mv Libbox.xcframework "$GITHUB_WORKSPACE/sfi/"
-          ls "$GITHUB_WORKSPACE/sfi/Libbox.xcframework"
 
       - name: Build app & package jailbreak deb
         working-directory: sfi
@@ -79,5 +103,5 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: SFI-ref1nd-smart-fixed-deb
+          name: SFI-ref1nd-smart-deb
           path: sfi/build/jailbreak/*.deb
