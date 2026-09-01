@@ -197,4 +197,19 @@ if 'Register[adapter.GeoXService]' not in s:
     s = s.replace(cache_block, cache_block + '\n' + service_block, 1)
 write(p, s)
 
+# ---------- 9) cachefile: add SmartDB() so smart groups get persistent store ----------
+p = 'experimental/cachefile/cache.go'
+s = read(p)
+if 'func (c *CacheFile) SmartDB' not in s:
+    smartdb = '''func (c *CacheFile) SmartDB() *bbolt.DB {
+	return c.DB
+}
+
+'''
+    # 插在 Dependencies 方法前
+    s = s.replace('func (c *CacheFile) Dependencies() []string {',
+                  smartdb + 'func (c *CacheFile) Dependencies() []string {', 1)
+write(p, s)
+assert 'func (c *CacheFile) SmartDB' in read(p)
+
 print("PATCH COMPLETE")
