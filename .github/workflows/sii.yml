@@ -6,6 +6,7 @@ on:
 jobs:
   build:
     runs-on: macos-latest
+    timeout-minutes: 120  # 增加总超时时间到2小时
     steps:
       - name: Setup Go
         uses: actions/setup-go@v5
@@ -146,17 +147,21 @@ jobs:
 
       - name: Build Libbox.xcframework
         working-directory: sfi/core
+        timeout-minutes: 90  # 给编译步骤单独的90分钟超时
         run: |
           go install -v github.com/sagernet/gomobile/cmd/gomobile@v0.1.13
           go install -v github.com/sagernet/gomobile/cmd/gobind@v0.1.13
           export PATH="$(go env GOPATH)/bin:$PATH"
           
+          # 清理缓存以减少内存压力
+          go clean -cache || true
+          
           # 使用 -e 参数忽略 tidy 错误，继续执行
           go mod tidy -e || true
           
-          # 编译 Libbox
+          # 编译 Libbox，使用 -p 参数限制并行编译数
           echo "Building Libbox.xcframework..."
-          go run ./cmd/internal/build_libbox -target apple -platform ios/arm64
+          go run -p 2 ./cmd/internal/build_libbox -target apple -platform ios/arm64
           
           # 检查是否生成成功
           if [ -d "Libbox.xcframework" ]; then
@@ -183,6 +188,7 @@ jobs:
 
       - name: Build app & package jailbreak deb
         working-directory: sfi
+        timeout-minutes: 30
         run: /opt/homebrew/bin/bash Jailbreak/package.sh
 
       - name: Upload artifact
