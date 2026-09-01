@@ -35,33 +35,25 @@ jobs:
           git checkout michongs/xiaobaf14g-testing -- protocol/group/smart/ 2>/dev/null || true
           git checkout michongs/xiaobaf14g-testing -- option/group_smart.go 2>/dev/null || true
 
-          # 2. 注入 TypeSmart 常量定义
+          # 2. 使用 awk 注入 TypeSmart 常量定义
           if ! grep -q "TypeSmart" constant/proxy.go; then
-            sed -i '' 's/TypeURLTest = "urltest"/TypeURLTest = "urltest"\
-	TypeSmart   = "smart"/' constant/proxy.go || \
-            sed -i 's/TypeURLTest = "urltest"/TypeURLTest = "urltest"\n\tTypeSmart   = "smart"/' constant/proxy.go
+            awk '/TypeURLTest = "urltest"/{print; print "\tTypeSmart   = \"smart\""; next}1' constant/proxy.go > temp.go && mv temp.go constant/proxy.go
           fi
 
-          # 3. 注入 smart 出站注册逻辑
-          if ! grep -q "group.RegisterSmart" include/registry.go 2>/dev/null; then
-            if grep -q "group.RegisterURLTest" include/registry.go; then
-              sed -i '' 's/group.RegisterURLTest(registry)/group.RegisterURLTest(registry)\
-	group.RegisterSmart(registry)/' include/registry.go || \
-              sed -i 's/group.RegisterURLTest(registry)/group.RegisterURLTest(registry)\n\tgroup.RegisterSmart(registry)/' include/registry.go
-            fi
+          # 3. 使用 awk 注入 smart 出站注册逻辑
+          if grep -q "group.RegisterURLTest" include/registry.go && ! grep -q "group.RegisterSmart" include/registry.go; then
+            awk '/group.RegisterURLTest\(registry\)/{print; print "\tgroup.RegisterSmart(registry)"; next}1' include/registry.go > temp.go && mv temp.go include/registry.go
           fi
 
-          # 4. 注入 option/outbound.go 中的配置解析结构
-          if ! grep -q "Smart" option/outbound.go; then
-            sed -i '' 's/URLTest \*URLTestOutboundOptions `json:"urltest,omitempty"`/URLTest \*URLTestOutboundOptions `json:"urltest,omitempty"`\
-	Smart   \*SmartOutboundOptions   `json:"smart,omitempty"`/' option/outbound.go || \
-            sed -i 's/URLTest \*URLTestOutboundOptions `json:"urltest,omitempty"`/URLTest \*URLTestOutboundOptions `json:"urltest,omitempty"`\n\tSmart   \*SmartOutboundOptions   `json:"smart,omitempty"`/' option/outbound.go
+          # 4. 使用 awk 注入 option/outbound.go 中的配置解析结构
+          if ! grep -q "Smart   \*SmartOutboundOptions" option/outbound.go; then
+            awk '/URLTest \*URLTestOutboundOptions/{print; print "\tSmart   *SmartOutboundOptions   `json:\"smart,omitempty\"`"; next}1' option/outbound.go > temp.go && mv temp.go option/outbound.go
           fi
 
           # 5. 清理并同步新增依赖
           go mod tidy
 
-      - name: Build Libbox.xcframework (official build_libbox)
+      - name: Build Libbox.xcframework
         working-directory: core
         run: |
           go install -v github.com/sagernet/gomobile/cmd/gomobile@v0.1.13
@@ -71,7 +63,7 @@ jobs:
           mv Libbox.xcframework "$GITHUB_WORKSPACE/sfi/"
           ls "$GITHUB_WORKSPACE/sfi/Libbox.xcframework"
 
-      - name: Build app & package jailbreak deb (official script)
+      - name: Build app & package jailbreak deb
         working-directory: sfi
         run: /opt/homebrew/bin/bash Jailbreak/package.sh
 
