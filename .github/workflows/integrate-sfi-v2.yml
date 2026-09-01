@@ -20,7 +20,7 @@ jobs:
         run: git clone --depth 1 --recurse-submodules -b dev https://github.com/SagerNet/sing-box-for-apple.git sfi
 
       - name: Clone reF1nd sing-box core
-        run: git clone --depth 1 -b reF1nd-stable https://github.com/reF1nd/sing-box/tree/reF1nd-stable core
+        run: git clone --depth 1 -b reF1nd-stable  https://github.com/reF1nd/sing-box.git core
 
       - name: Build Libbox.xcframework (official build_libbox)
         working-directory: core
