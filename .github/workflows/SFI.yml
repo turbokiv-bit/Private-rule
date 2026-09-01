@@ -30,7 +30,7 @@ jobs:
           git remote add michongs https://github.com/MiChongs/sing-box.git
           git fetch --depth 1 michongs xiaobaf14g-testing
 
-          # 1. 仅提取 smart 出站相关的源码实现
+          # 1. 仅提取 smart 出站相关的源码实现，严禁使用 merge 或 cherry-pick
           git checkout michongs/xiaobaf14g-testing -- protocol/group/smart.go option/smart.go 2>/dev/null || true
           git checkout michongs/xiaobaf14g-testing -- protocol/group/smart/ 2>/dev/null || true
           git checkout michongs/xiaobaf14g-testing -- option/group_smart.go 2>/dev/null || true
@@ -53,7 +53,7 @@ jobs:
           # 5. 清理并同步新增依赖
           go mod tidy
 
-      - name: Build Libbox.xcframework
+      - name: Build Libbox.xcframework (official build_libbox)
         working-directory: core
         run: |
           go install -v github.com/sagernet/gomobile/cmd/gomobile@v0.1.13
@@ -63,7 +63,7 @@ jobs:
           mv Libbox.xcframework "$GITHUB_WORKSPACE/sfi/"
           ls "$GITHUB_WORKSPACE/sfi/Libbox.xcframework"
 
-      - name: Build app & package jailbreak deb
+      - name: Build app & package jailbreak deb (official script)
         working-directory: sfi
         run: /opt/homebrew/bin/bash Jailbreak/package.sh
 
