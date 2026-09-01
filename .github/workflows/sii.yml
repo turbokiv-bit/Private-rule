@@ -17,17 +17,20 @@ jobs:
         run: |
           brew install dpkg ldid xcbeautify bash git
 
-      - name: Clone sing-box-for-apple (reF1nd-stable)
-        run: git clone --depth 1 --recurse-submodules -b reF1nd-stable https://github.com/reF1nd/sing-box-for-apple.git sfi
+      # 使用 dev 分支（公开，可访问）
+      - name: Clone sing-box-for-apple (dev)
+        run: git clone --depth 1 --recurse-submodules -b dev https://github.com/SagerNet/sing-box-for-apple.git sfi
 
-      - name: Clone reF1nd core
-        run: git clone --depth 1 -b reF1nd-stable https://github.com/reF1nd/sing-box.git core
+      # 使用 dev 分支的 core（与 Library 匹配）
+      - name: Clone sing-box core (dev)
+        run: git clone --depth 1 -b dev https://github.com/SagerNet/sing-box.git core
 
+      # 从 xiaobaf14g-testing 获取 smart 代码
       - name: Clone xiaobaf14g-testing and copy smart outbound
         run: |
           git clone --depth 1 -b xiaobaf14g-testing https://github.com/MiChongs/sing-box.git smart-core
           
-          # 复制 smart 相关文件
+          # 复制 smart 相关文件到 core
           if [ -d "smart-core/outbound/smart" ]; then
             mkdir -p core/outbound
             cp -r smart-core/outbound/smart core/outbound/ 2>/dev/null || true
@@ -186,5 +189,5 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: SFI-ref1nd-smart-deb
+          name: SFI-dev-smart-deb
           path: sfi/build/jailbreak/*.deb
