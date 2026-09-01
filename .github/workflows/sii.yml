@@ -17,7 +17,6 @@ jobs:
         run: |
           brew install dpkg ldid xcbeautify bash git
 
-      # 修改点 1：将 -b dev 改为 -b main，以匹配 stable 核心的 API
       - name: Clone sing-box-for-apple
         run: git clone --depth 1 --recurse-submodules -b main https://github.com/SagerNet/sing-box-for-apple.git sfi
 
@@ -137,10 +136,12 @@ jobs:
       - name: Fix go.mod for local smart package
         working-directory: sfi/core
         run: |
+          # 在 go.mod 末尾添加 replace 指令，告诉 Go 使用本地包
           echo "" >> go.mod
           echo "// Use local packages" >> go.mod
           echo "replace github.com/sagernet/sing-box/outbound/smart => ./outbound/smart" >> go.mod
           
+          # 显示修改后的 go.mod 末尾几行
           echo "=== go.mod (last 10 lines) ==="
           tail -10 go.mod
 
@@ -152,12 +153,17 @@ jobs:
           go install -v github.com/sagernet/gomobile/cmd/gobind@v0.1.13
           export PATH="$(go env GOPATH)/bin:$PATH"
           
+          # 清理缓存以减少内存压力
           go clean -cache || true
+          
+          # 使用 -e 参数忽略 tidy 错误，继续执行
           go mod tidy -e || true
           
+          # 编译 Libbox，使用 -p 参数限制并行编译数
           echo "Building Libbox.xcframework..."
           go run -p 2 ./cmd/internal/build_libbox -target apple -platform ios/arm64
           
+          # 检查是否生成成功
           if [ -d "Libbox.xcframework" ]; then
             echo "✅ Libbox.xcframework built successfully!"
             ls -la Libbox.xcframework/
@@ -168,6 +174,7 @@ jobs:
 
       - name: Copy Libbox.xcframework to sfi
         run: |
+          # 确保 Libbox.xcframework 在正确的位置
           if [ -d "sfi/core/Libbox.xcframework" ]; then
             cp -r sfi/core/Libbox.xcframework sfi/
             echo "✅ Copied Libbox.xcframework to sfi/"
@@ -177,6 +184,13 @@ jobs:
             echo "❌ Libbox.xcframework not found!"
             exit 1
           fi
+          ls -la sfi/Libbox.xcframework/ 2>/dev/null || echo "Not found"
+
+      - name: Patch missing updateNetworkPath in Swift
+        working-directory: sfi
+        run: |
+          # 查找所有 Swift 文件并注释掉不支持的方法调用
+          find . -type f -name "*.swift" -exec sed -i '' 's/listener.updateNetworkPath(describeNetworkPath(path))/\/\/ listener.updateNetworkPath(describeNetworkPath(path))/g' {} +
 
       - name: Build app & package jailbreak deb
         working-directory: sfi
