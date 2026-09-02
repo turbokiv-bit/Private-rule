@@ -212,4 +212,59 @@ if 'func (c *CacheFile) SmartDB' not in s:
 write(p, s)
 assert 'func (c *CacheFile) SmartDB() any' in read(p)
 
-print("PATCH COMPLETE")
+# ---------- 10) country.mmdb: only load when use_lightgbm is on ----------
+# country.mmdb only feeds ML features (17/26). When ML is off it is
+# downloaded+loaded for nothing. Guard it so it only loads when ML used.
+p = 'protocol/group/smart.go'
+s = read(p)
+marker = '\t// Optional country mmdb'
+anchor = '\t// Pull shared infrastructure'
+if 'useLightGBMGatedCountry' not in s:
+    i_start = s.index(marker)
+    i_end = s.index(anchor, i_start)
+    new_block = '''	// Optional country mmdb — feeds ModelInput.DestGeoIP (LightGBM features
+	// 17 and 26). Only loaded when use_lightgbm is enabled; otherwise it
+	// would be downloaded+loaded for nothing (every MB/CPU matters on iOS).
+	if s.useLightGBM {
+		mmdbPath := ""
+		if geoSvc := service.FromContext[adapter.GeoXService](s.ctx); geoSvc != nil {
+			mmdbPath = geoSvc.MMDBPath()
+		}
+		if mmdbPath == "" {
+			mmdbPath = filemanager.BasePath(s.ctx, "country.mmdb")
+			const defaultMMDBURL = "https://github.com/P3TERX/GeoLite.mmdb/releases/latest/download/GeoLite2-Country.mmdb"
+			if _, statErr := os.Stat(mmdbPath); os.IsNotExist(statErr) {
+				dl, dlErr := assetdl.New(assetdl.Options{
+					Context:  s.ctx,
+					Logger:   s.logger,
+					Name:     "smart/country",
+					URL:      defaultMMDBURL,
+					Interval: 24 * time.Hour,
+					Path:     mmdbPath,
+				})
+				if dlErr == nil {
+					if fetchErr := dl.FetchOnce(s.ctx); fetchErr != nil {
+						s.logger.Debug("smart: country mmdb auto-download failed: ", fetchErr)
+						mmdbPath = ""
+					}
+				} else {
+					mmdbPath = ""
+				}
+			}
+		}
+		if mmdbPath != "" {
+			if db, err := getSharedMMDB(mmdbPath); err == nil {
+				s.countryDB = db
+				s.logger.Info("smart: country mmdb loaded from ", mmdbPath)
+			} else {
+				s.logger.Debug("smart: country mmdb not yet available: ", err)
+			}
+		}
+	}
+	// useLightGBMGatedCountry
+
+'''
+    s = s[:i_start] + new_block + s[i_end:]
+    write(p, s)
+assert 'useLightGBMGatedCountry' in read(p)
+print("country.mmdb now gated by use_lightgbm")
