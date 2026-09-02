@@ -1,4 +1,6 @@
 DOMAIN-SUFFIX,www.entrust.cn
+DOMAIN-SUFFIX,dcocsp.cn
+DOMAIN-SUFFIX,digicert.cn
 DOMAIN-SUFFIX,alphassl.com
 DOMAIN-SUFFIX,easy-signing.com
 DOMAIN-SUFFIX,globalsign.cn
@@ -6,13 +8,6 @@ DOMAIN-SUFFIX,globalsign.com
 DOMAIN-SUFFIX,globalsigncdn.com
 DOMAIN-SUFFIX,cdn.globalsigncdn.com.cdn.cloudflare.net
 DOMAIN-SUFFIX,crl.globalsign.net
-DOMAIN-SUFFIX,pki-goog.l.google.com
-DOMAIN-SUFFIX,c.pki.goog
-DOMAIN-SUFFIX,i.pki.goog
-DOMAIN-SUFFIX,o.pki.goog
-DOMAIN-SUFFIX,crl.pki.goog
-DOMAIN-SUFFIX,crls.pki.goog
-DOMAIN-SUFFIX,ocsp.pki.goog
 DOMAIN-SUFFIX,certs-lb.apple.com.akadns.net
 DOMAIN-SUFFIX,certs.apple.com
 DOMAIN-SUFFIX,crl-lb.apple.com.akadns.net
@@ -21,8 +16,13 @@ DOMAIN-SUFFIX,ocsp.apple.com
 DOMAIN-SUFFIX,ocsp2.apple.com
 DOMAIN-SUFFIX,valid.apple.com
 DOMAIN-SUFFIX,valid.origin-apple.com.akadns.net
-DOMAIN-SUFFIX,dcocsp.cn
-DOMAIN-SUFFIX,digicert.cn
+DOMAIN-SUFFIX,pki-goog.l.google.com
+DOMAIN-SUFFIX,c.pki.goog
+DOMAIN-SUFFIX,i.pki.goog
+DOMAIN-SUFFIX,o.pki.goog
+DOMAIN-SUFFIX,crl.pki.goog
+DOMAIN-SUFFIX,crls.pki.goog
+DOMAIN-SUFFIX,ocsp.pki.goog
 DOMAIN-SUFFIX,oemssl.cn
 DOMAIN-SUFFIX,oemssl.cn.cdn.cloudflare.net
 DOMAIN-SUFFIX,sectigochina.com
