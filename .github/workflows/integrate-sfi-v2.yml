@@ -22,15 +22,19 @@ jobs:
       - name: Clone reF1nd sing-box core
         run: git clone --depth 1 -b reF1nd-testing https://github.com/reF1nd/sing-box.git core
 
-      - name: Apply bridge network-change fix
+      - name: Apply bridge & libbox interface fixes
         run: |
           cd core
-          # 从你的仓库直接下载补丁（不依赖 checkout，因为上面用 git clone 而非 checkout）
+          # 1) bridge 切网 Session 重建修复
           curl -sSL "https://raw.githubusercontent.com/turbokiv-bit/Private-rule/main/bridge-fix.patch" -o /tmp/bridge-fix.patch
-          echo "补丁大小: $(wc -c < /tmp/bridge-fix.patch) bytes"
-          cat /tmp/bridge-fix.patch | head -5
+          echo "bridge-fix.patch 大小: $(wc -c < /tmp/bridge-fix.patch) bytes"
           git apply --verbose /tmp/bridge-fix.patch
           echo "✅ bridge-fix.patch 应用成功"
+          # 2) debug.go 补 GoroutineDump（SFI dev 前端需要的桥接符号）
+          curl -sSL "https://raw.githubusercontent.com/turbokiv-bit/Private-rule/main/debug-fix.patch" -o /tmp/debug-fix.patch
+          echo "debug-fix.patch 大小: $(wc -c < /tmp/debug-fix.patch) bytes"
+          git apply --verbose /tmp/debug-fix.patch
+          echo "✅ debug-fix.patch 应用成功"
 
       - name: Build Libbox.xcframework (official build_libbox)
         working-directory: core
