@@ -67,7 +67,11 @@ jobs:
         run: |
           set -e
 
-          rm -rf Sing-box-rule
+          # 仅清理本 workflow 自己生成的顶层 .srs 文件,
+          # 不要再 rm -rf 整个 Sing-box-rule 目录,
+          # 否则会误删 convert-*-ruleset-to-srs 等其他 workflow 写入的子目录
+          # （Sing-box-rule/ConnersHua、/Centralmatrix3、/Sukka 等）。
+          find Sing-box-rule -maxdepth 1 -name "*.srs" -delete
           rm -rf .sing-box-rule-json
           rm -f .sing-box-rule-manifest.json
 
