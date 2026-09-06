@@ -1,6 +1,6 @@
 --- a/protocol/bridge/backend.go
 +++ b/protocol/bridge/backend.go
-@@ -48,6 +48,15 @@
+@@ -48,9 +48,22 @@
  	session       adapter.BridgeSession
  	currentEgress string
  
@@ -15,8 +15,16 @@
 +
  	closeOnce sync.Once
  	closed    chan struct{}
- 	readDone  chan struct{}
-@@ -140,6 +149,16 @@
+-	readDone  chan struct{}
++	// stopReload is closed to ask batchReadLoop to exit before a bridge
++	// session reload (network change) tears down the current tun. It is
++	// re-created (a fresh channel) whenever a new read loop is started.
++	stopReload chan struct{}
++	readDone   chan struct{}
+ }
+ 
+ func (b *backendBase) init(ctx context.Context, logger logger.ContextLogger, networkManager adapter.NetworkManager, tag string, options option.BridgeOutboundOptions) error {
+@@ -140,6 +153,16 @@
  	err := b.session.SetEgress(egress)
  	if err != nil {
  		b.logger.Debug(E.Cause(err, "apply bridge egress ", egress))
@@ -36,7 +44,15 @@
 
 --- a/protocol/bridge/backend_darwin.go
 +++ b/protocol/bridge/backend_darwin.go
-@@ -179,6 +179,54 @@
+@@ -171,6 +171,7 @@
+ 	}
+ 	b.batchTUN = tunInterface.(tun.DarwinTUN)
+ 	b.closed = make(chan struct{})
++	b.stopReload = make(chan struct{})
+ 	b.readDone = make(chan struct{})
+ 	b.registerMonitors(b.syncSessionEgress)
+ 	b.syncSessionEgress()
+@@ -179,6 +180,62 @@
  	return nil
  }
  
@@ -62,6 +78,14 @@
 +	if b.unregister != nil {
 +		b.unregister()
 +		b.unregister = nil
++	}
++	// Ask the current read loop to stop before we tear down the tun FD.
++	// Closing the stopReload channel (not b.closed, which is the final
++	// Close() signal and must not be double-closed) lets batchReadLoop
++	// exit deterministically once BatchRead returns.
++	if b.stopReload != nil {
++		close(b.stopReload)
++		b.stopReload = nil
 +	}
 +	if b.pfDevice != nil && b.anchorName != "" {
 +		_ = b.pfDevice.LoadAnchor(b.anchorName, nil)
@@ -91,6 +115,18 @@
  func (b *backendDarwin) egressLabel() string {
  	if b.boundInterface != "" {
  		return b.boundInterface
+@@ -256,6 +313,11 @@
+ 		if err != nil {
+ 			select {
+ 			case <-b.closed:
++				return
++			case <-b.stopReload:
++				// Session reload requested (network change): exit so the
++				// reload can safely recreate the tun without a second
++				// goroutine still reading this batchTUN.
+ 				return
+ 			default:
+ 			}
 
 --- a/protocol/bridge/outbound.go
 +++ b/protocol/bridge/outbound.go
