@@ -16,61 +16,25 @@ index 00000000..c0a7e637
 +	Restart() error
 +}
 diff --git a/experimental/libbox/command_server.go b/experimental/libbox/command_server.go
-index ff8b6077..9a272b44 100644
+index ff8b6077..5217cf03 100644
 --- a/experimental/libbox/command_server.go
 +++ b/experimental/libbox/command_server.go
-@@ -33,20 +33,17 @@ type CommandServer struct {
- 	ctx               context.Context
- 	managedService    *daemon.ManagedService
- 	handler           CommandServerHandler
-+	// currentConfig holds the most recent full config text used to start or
-+	// reload the box service (best-effort snapshot for diagnostics / reload).
-+	currentConfig     string
- 	platformInterface PlatformInterface
- 	platformWrapper   *platformInterfaceWrapper
- 	powerManager      *powerreport.Manager
--	oomRecorder       *oomkiller.Recorder
- 	grpcServer        *grpc.Server
+@@ -41,6 +41,8 @@ type CommandServer struct {
  	listener          net.Listener
  	endPauseTimer     *time.Timer
--	sleepAt           time.Time
+ 	sleepAt           time.Time
++	// currentConfig holds the most recent config text (best-effort).
++	currentConfig     string
  }
  
--// iOS wakes the extension for every push and background task; in collected power reports
--// most sleeps last under two minutes and none exceeded ten.
--const closeIdleConnectionsAfterSleep = 2 * time.Minute
--
- type CommandServerHandler interface {
- 	ServiceStop() error
- 	ServiceReload() error
-@@ -89,14 +86,12 @@ func NewCommandServer(handler CommandServerHandler, platformInterface PlatformIn
- 		// GroupID:          sGroupID,
- 		// SystemProxyEnabled: false,
- 	})
--	oomRecorder := oomkiller.NewRecorder(OOMRecorderOptions(server.StartedService))
--	service.MustRegister[*oomkiller.Recorder](ctx, oomRecorder)
--	oomRecorder.Start()
--	server.oomRecorder = oomRecorder
-+	reporter := &oomReporter{startedService: server.StartedService}
-+	service.MustRegister[oomkiller.OOMReporter](ctx, reporter)
- 	server.managedService = daemon.NewManagedService(daemon.ManagedServiceOptions{
- 		Handler:     (*platformHandler)(server),
- 		Debug:       sDebug,
--		OOMRecorder: oomRecorder,
-+		OOMReporter: reporter,
- 	})
- 	if sPowerReportEnabled {
- 		err := powerManager.Start(PowerReportOptions(server.StartedService))
-@@ -104,9 +99,24 @@ func NewCommandServer(handler CommandServerHandler, platformInterface PlatformIn
+ // iOS wakes the extension for every push and background task; in collected power reports
+@@ -104,9 +106,21 @@ func NewCommandServer(handler CommandServerHandler, platformInterface PlatformIn
  			log.StdLogger().Error(E.Cause(err, "start power report recorder"))
  		}
  	}
 +	// Inject the box-restart capability so a running outbound (e.g. the
 +	// bridge) can request a full configuration reload when its platform
-+	// session went stale after a network change. Reloading the whole box
-+	// service rebuilds every outbound (including the bridge) through the
-+	// existing, exercised daemon path — far more robust than trying to
-+	// recreate the platform bridge session in situ.
++	// session went stale after a network change.
 +	service.MustRegister[adapter.BoxRestartFunc](ctx, (*boxRestarter)(server))
  	return server, nil
  }
@@ -86,66 +50,14 @@ index ff8b6077..9a272b44 100644
  func unaryAuthInterceptor(ctx context.Context, req any, info *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (any, error) {
  	if sCommandServerSecret == "" {
  		return handler(ctx, req)
-@@ -203,7 +213,6 @@ func (s *CommandServer) Close() {
- 	}
- 	common.Close(s.listener)
- 	s.StartedService.Close()
--	s.oomRecorder.Close()
- 	s.powerManager.Close()
+@@ -214,6 +228,7 @@ type OverrideOptions struct {
  }
  
-@@ -218,6 +227,7 @@ func (s *CommandServer) StartOrReloadService(configContent string, options *Over
+ func (s *CommandServer) StartOrReloadService(configContent string, options *OverrideOptions) error {
++	s.currentConfig = configContent
+ 	saveConfigSnapshot(configContent)
  	if s.powerManager.Recorder() != nil {
  		copyConfigSnapshot(filepath.Join(sWorkingPath, powerreport.DraftDirectoryName))
- 	}
-+	s.currentConfig = configContent
- 	err := s.StartedService.StartOrReloadService(s.ctx, configContent, &daemon.OverrideOptions{
- 		AutoRedirect:   options.AutoRedirect,
- 		IncludePackage: iteratorToArray(options.IncludePackage),
-@@ -258,10 +268,9 @@ func (s *CommandServer) NeedFindProcess() bool {
- }
- 
- func (s *CommandServer) Pause() {
--	s.sleepAt = time.Now().Round(0)
- 	recorder := s.powerManager.Recorder()
- 	if recorder != nil {
--		recorder.RecordDeviceSleep()
-+		recorder.RecordPlatformEvent("ne-sleep")
- 	}
- 	instance := s.StartedService.Instance()
- 	if instance == nil || instance.PauseManager() == nil {
-@@ -269,10 +278,6 @@ func (s *CommandServer) Pause() {
- 	}
- 	instance.PauseManager().DevicePause()
- 	if C.IsIos {
--		// iOS calls wake within seconds of sleep while the device stays locked, so wake is
--		// ignored and the pause ends one minute after the last sleep instead. Go timers on
--		// darwin run on CLOCK_UPTIME_RAW, which does not advance while the device sleeps,
--		// so the minute counts awake time only and never expires inside a sleep.
- 		if s.endPauseTimer == nil {
- 			s.endPauseTimer = time.AfterFunc(time.Minute, instance.PauseManager().DeviceWake)
- 		} else {
-@@ -282,18 +287,14 @@ func (s *CommandServer) Pause() {
- }
- 
- func (s *CommandServer) Wake() {
--	wakeAt := time.Now().Round(0)
- 	recorder := s.powerManager.Recorder()
- 	if recorder != nil {
--		recorder.RecordDeviceWake()
-+		recorder.RecordPlatformEvent("ne-wake")
- 	}
- 	instance := s.StartedService.Instance()
--	if instance == nil || instance.Box() == nil || instance.PauseManager() == nil {
-+	if instance == nil || instance.PauseManager() == nil {
- 		return
- 	}
--	if !s.sleepAt.IsZero() && wakeAt.Sub(s.sleepAt) >= closeIdleConnectionsAfterSleep {
--		instance.Box().CloseIdleConnections()
--	}
- 	if !C.IsIos {
- 		instance.PauseManager().DeviceWake()
- 	}
 diff --git a/protocol/bridge/backend.go b/protocol/bridge/backend.go
 index 0c33c753..e96161aa 100644
 --- a/protocol/bridge/backend.go
