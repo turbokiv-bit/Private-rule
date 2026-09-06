@@ -1,0 +1,307 @@
+diff --git a/adapter/box_restart.go b/adapter/box_restart.go
+new file mode 100644
+index 00000000..c0a7e637
+--- /dev/null
++++ b/adapter/box_restart.go
+@@ -0,0 +1,11 @@
++package adapter
++
++// BoxRestartFunc is injected by the iOS/libbox layer into the service
++// registry so a bridge outbound can request a full configuration reload
++// (which rebuilds every outbound, including the stale bridge session) when
++// the platform bridge session can no longer be re-applied after a network
++// change. Calling it tears down and recreates the entire box service, so it
++// must be invoked asynchronously and is expected to be idempotent-safe.
++type BoxRestartFunc interface {
++	Restart() error
++}
+diff --git a/experimental/libbox/command_server.go b/experimental/libbox/command_server.go
+index ff8b6077..9a272b44 100644
+--- a/experimental/libbox/command_server.go
++++ b/experimental/libbox/command_server.go
+@@ -33,20 +33,17 @@ type CommandServer struct {
+ 	ctx               context.Context
+ 	managedService    *daemon.ManagedService
+ 	handler           CommandServerHandler
++	// currentConfig holds the most recent full config text used to start or
++	// reload the box service (best-effort snapshot for diagnostics / reload).
++	currentConfig     string
+ 	platformInterface PlatformInterface
+ 	platformWrapper   *platformInterfaceWrapper
+ 	powerManager      *powerreport.Manager
+-	oomRecorder       *oomkiller.Recorder
+ 	grpcServer        *grpc.Server
+ 	listener          net.Listener
+ 	endPauseTimer     *time.Timer
+-	sleepAt           time.Time
+ }
+ 
+-// iOS wakes the extension for every push and background task; in collected power reports
+-// most sleeps last under two minutes and none exceeded ten.
+-const closeIdleConnectionsAfterSleep = 2 * time.Minute
+-
+ type CommandServerHandler interface {
+ 	ServiceStop() error
+ 	ServiceReload() error
+@@ -89,14 +86,12 @@ func NewCommandServer(handler CommandServerHandler, platformInterface PlatformIn
+ 		// GroupID:          sGroupID,
+ 		// SystemProxyEnabled: false,
+ 	})
+-	oomRecorder := oomkiller.NewRecorder(OOMRecorderOptions(server.StartedService))
+-	service.MustRegister[*oomkiller.Recorder](ctx, oomRecorder)
+-	oomRecorder.Start()
+-	server.oomRecorder = oomRecorder
++	reporter := &oomReporter{startedService: server.StartedService}
++	service.MustRegister[oomkiller.OOMReporter](ctx, reporter)
+ 	server.managedService = daemon.NewManagedService(daemon.ManagedServiceOptions{
+ 		Handler:     (*platformHandler)(server),
+ 		Debug:       sDebug,
+-		OOMRecorder: oomRecorder,
++		OOMReporter: reporter,
+ 	})
+ 	if sPowerReportEnabled {
+ 		err := powerManager.Start(PowerReportOptions(server.StartedService))
+@@ -104,9 +99,24 @@ func NewCommandServer(handler CommandServerHandler, platformInterface PlatformIn
+ 			log.StdLogger().Error(E.Cause(err, "start power report recorder"))
+ 		}
+ 	}
++	// Inject the box-restart capability so a running outbound (e.g. the
++	// bridge) can request a full configuration reload when its platform
++	// session went stale after a network change. Reloading the whole box
++	// service rebuilds every outbound (including the bridge) through the
++	// existing, exercised daemon path — far more robust than trying to
++	// recreate the platform bridge session in situ.
++	service.MustRegister[adapter.BoxRestartFunc](ctx, (*boxRestarter)(server))
+ 	return server, nil
+ }
+ 
++// boxRestarter adapts CommandServer to adapter.BoxRestartFunc.
++type boxRestarter CommandServer
++
++func (b *boxRestarter) Restart() error {
++	log.StdLogger().Warn("box-restart requested (bridge session stale), reloading service")
++	return (*CommandServer)(b).handler.ServiceReload()
++}
++
+ func unaryAuthInterceptor(ctx context.Context, req any, info *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (any, error) {
+ 	if sCommandServerSecret == "" {
+ 		return handler(ctx, req)
+@@ -203,7 +213,6 @@ func (s *CommandServer) Close() {
+ 	}
+ 	common.Close(s.listener)
+ 	s.StartedService.Close()
+-	s.oomRecorder.Close()
+ 	s.powerManager.Close()
+ }
+ 
+@@ -218,6 +227,7 @@ func (s *CommandServer) StartOrReloadService(configContent string, options *Over
+ 	if s.powerManager.Recorder() != nil {
+ 		copyConfigSnapshot(filepath.Join(sWorkingPath, powerreport.DraftDirectoryName))
+ 	}
++	s.currentConfig = configContent
+ 	err := s.StartedService.StartOrReloadService(s.ctx, configContent, &daemon.OverrideOptions{
+ 		AutoRedirect:   options.AutoRedirect,
+ 		IncludePackage: iteratorToArray(options.IncludePackage),
+@@ -258,10 +268,9 @@ func (s *CommandServer) NeedFindProcess() bool {
+ }
+ 
+ func (s *CommandServer) Pause() {
+-	s.sleepAt = time.Now().Round(0)
+ 	recorder := s.powerManager.Recorder()
+ 	if recorder != nil {
+-		recorder.RecordDeviceSleep()
++		recorder.RecordPlatformEvent("ne-sleep")
+ 	}
+ 	instance := s.StartedService.Instance()
+ 	if instance == nil || instance.PauseManager() == nil {
+@@ -269,10 +278,6 @@ func (s *CommandServer) Pause() {
+ 	}
+ 	instance.PauseManager().DevicePause()
+ 	if C.IsIos {
+-		// iOS calls wake within seconds of sleep while the device stays locked, so wake is
+-		// ignored and the pause ends one minute after the last sleep instead. Go timers on
+-		// darwin run on CLOCK_UPTIME_RAW, which does not advance while the device sleeps,
+-		// so the minute counts awake time only and never expires inside a sleep.
+ 		if s.endPauseTimer == nil {
+ 			s.endPauseTimer = time.AfterFunc(time.Minute, instance.PauseManager().DeviceWake)
+ 		} else {
+@@ -282,18 +287,14 @@ func (s *CommandServer) Pause() {
+ }
+ 
+ func (s *CommandServer) Wake() {
+-	wakeAt := time.Now().Round(0)
+ 	recorder := s.powerManager.Recorder()
+ 	if recorder != nil {
+-		recorder.RecordDeviceWake()
++		recorder.RecordPlatformEvent("ne-wake")
+ 	}
+ 	instance := s.StartedService.Instance()
+-	if instance == nil || instance.Box() == nil || instance.PauseManager() == nil {
++	if instance == nil || instance.PauseManager() == nil {
+ 		return
+ 	}
+-	if !s.sleepAt.IsZero() && wakeAt.Sub(s.sleepAt) >= closeIdleConnectionsAfterSleep {
+-		instance.Box().CloseIdleConnections()
+-	}
+ 	if !C.IsIos {
+ 		instance.PauseManager().DeviceWake()
+ 	}
+diff --git a/protocol/bridge/backend.go b/protocol/bridge/backend.go
+index 0c33c753..e96161aa 100644
+--- a/protocol/bridge/backend.go
++++ b/protocol/bridge/backend.go
+@@ -48,9 +48,22 @@ type backendBase struct {
+ 	session       adapter.BridgeSession
+ 	currentEgress string
+ 
++	// lifecycleMu serialises network-driven reload (restart) against
++	// concurrent Write/Port/Attach access so a torn-down session is never
++	// used mid-restart.
++	lifecycleMu sync.Mutex
++	// rebuild, when set (by the owning Outbound), performs a full bridge
++	// session recreation after the current egress could not be re-applied
++	// on a network change (e.g. the platform session went stale).
++	rebuild func()
++
+ 	closeOnce sync.Once
+ 	closed    chan struct{}
+-	readDone  chan struct{}
++	// stopReload is closed to ask batchReadLoop to exit before a bridge
++	// session reload (network change) tears down the current tun. It is
++	// re-created (a fresh channel) whenever a new read loop is started.
++	stopReload chan struct{}
++	readDone   chan struct{}
+ }
+ 
+ func (b *backendBase) init(ctx context.Context, logger logger.ContextLogger, networkManager adapter.NetworkManager, tag string, options option.BridgeOutboundOptions) error {
+@@ -140,6 +153,16 @@ func (b *backendBase) syncSessionEgress() {
+ 	err := b.session.SetEgress(egress)
+ 	if err != nil {
+ 		b.logger.Debug(E.Cause(err, "apply bridge egress ", egress))
++		// Egress could not be re-applied on the new interface — the
++		// current platform bridge session has gone stale (e.g. the
++		// underlying network interface it was bound to disappeared).
++		// Ask the owning Outbound to recreate the whole bridge session
++		// on the new default interface. Done asynchronously so we never
++		// tear down the session from inside the network-monitor callback.
++		if b.rebuild != nil {
++			b.logger.Warn("bridge session stale after network change, rebuilding")
++			go b.rebuild()
++		}
+ 		return
+ 	}
+ 	b.currentEgress = egress
+diff --git a/protocol/bridge/backend_darwin.go b/protocol/bridge/backend_darwin.go
+index 99580bbd..f9ee9d8e 100644
+--- a/protocol/bridge/backend_darwin.go
++++ b/protocol/bridge/backend_darwin.go
+@@ -171,6 +171,7 @@ func (b *backendDarwin) startPlatform() error {
+ 	}
+ 	b.batchTUN = tunInterface.(tun.DarwinTUN)
+ 	b.closed = make(chan struct{})
++	b.stopReload = make(chan struct{})
+ 	b.readDone = make(chan struct{})
+ 	b.registerMonitors(b.syncSessionEgress)
+ 	b.syncSessionEgress()
+@@ -179,6 +180,62 @@ func (b *backendDarwin) startPlatform() error {
+ 	return nil
+ }
+ 
++// restart recreates the platform bridge session after a network change left
++// the old egress unusable ("bridge session not found"). It is invoked through
++// backendBase.rebuild (owned by the Outbound) under lifecycleMu, never from
++// inside a network-monitor callback. It tears down the stale session / tun /
++// PF anchor / read loop and re-runs startPlatform so a fresh BridgeSession is
++// created on the current default interface, then re-syncs egress.
++func (b *backendDarwin) restart() {
++	b.egressAccess.Lock()
++	defer b.egressAccess.Unlock()
++
++	if b.closed != nil {
++		select {
++		case <-b.closed:
++			return // already fully closed
++		default:
++		}
++	}
++
++	b.logger.Warn("bridge: recreating platform bridge session")
++	if b.unregister != nil {
++		b.unregister()
++		b.unregister = nil
++	}
++	// Ask the current read loop to stop before we tear down the tun FD.
++	// Closing the stopReload channel (not b.closed, which is the final
++	// Close() signal and must not be double-closed) lets batchReadLoop
++	// exit deterministically once BatchRead returns.
++	if b.stopReload != nil {
++		close(b.stopReload)
++		b.stopReload = nil
++	}
++	if b.pfDevice != nil && b.anchorName != "" {
++		_ = b.pfDevice.LoadAnchor(b.anchorName, nil)
++	}
++	if b.tunInterface != nil {
++		_ = b.tunInterface.Close()
++		b.tunInterface = nil
++	}
++	if b.readDone != nil {
++		<-b.readDone
++	}
++	if b.session != nil {
++		_ = b.session.Close()
++		b.session = nil
++	}
++	b.batchTUN = nil
++	b.currentRules = nil
++	b.currentEgress = ""
++	// closed/readDone channels get re-created inside startPlatform.
++
++	if err := b.startPlatform(); err != nil {
++		b.logger.Error(E.Cause(err, "bridge: failed to recreate session"))
++		return
++	}
++}
++
+ func (b *backendDarwin) egressLabel() string {
+ 	if b.boundInterface != "" {
+ 		return b.boundInterface
+@@ -257,6 +314,11 @@ func (b *backendDarwin) batchReadLoop() {
+ 			select {
+ 			case <-b.closed:
+ 				return
++			case <-b.stopReload:
++				// Session reload requested (network change): exit so the
++				// reload can safely recreate the tun without a second
++				// goroutine still reading this batchTUN.
++				return
+ 			default:
+ 			}
+ 			if E.IsClosed(err) || errors.Is(err, syscall.EBADF) {
+diff --git a/protocol/bridge/outbound.go b/protocol/bridge/outbound.go
+index 43441460..cdb83305 100644
+--- a/protocol/bridge/outbound.go
++++ b/protocol/bridge/outbound.go
+@@ -53,6 +53,22 @@ func NewOutbound(ctx context.Context, router adapter.Router, logger log.ContextL
+ 	if err != nil {
+ 		return nil, err
+ 	}
++	// Wire the network-driven bridge-session reload hook. When the egress
++	// can no longer be re-applied after an interface change (platform
++	// session went stale), backendBase triggers rebuild asynchronously.
++	// Recreating the platform bridge session in situ is unreliable on iOS
++	// (the darwin BatchRead pump cannot be deterministically shut down), so
++	// instead we request a full box reload: the exercise daemon path
++	// rebuilds every outbound (including the bridge on the new interface).
++	restarter, hadBackend := outboundBackend.(*backendDarwin)
++	if hadBackend {
++		boxRestarter := service.FromContext[adapter.BoxRestartFunc](ctx)
++		restarter.rebuild = func() {
++			if boxRestarter != nil {
++				_ = boxRestarter.Restart()
++			}
++		}
++	}
+ 	return &Outbound{
+ 		Adapter:              outbound.NewAdapter(C.TypeBridge, tag, []string{N.NetworkTCP, N.NetworkUDP, N.NetworkICMP}, nil),
+ 		logger:               logger,
