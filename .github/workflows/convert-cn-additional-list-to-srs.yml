@@ -86,7 +86,6 @@ jobs:
 
           python3 - <<PY
           import json
-          import re
           from pathlib import Path
 
           source = Path("$SOURCE")
@@ -104,9 +103,6 @@ jobs:
                   continue
               if " #" in line:
                   line = line.split(" #", 1)[0].strip()
-              # 保留多行条目 (以 ,\ 结尾) 直接跳过, 本规则集不含
-              if line.endswith(",\\"):
-                  continue
               parts = [p.strip() for p in line.split(",") if p.strip()]
               if len(parts) < 2:
                   continue
