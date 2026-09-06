@@ -25,11 +25,11 @@ jobs:
       - name: Apply bridge & libbox interface fixes
         run: |
           cd core
-          # 1) bridge 切网 Session 重建修复
-          curl -sSL "https://raw.githubusercontent.com/turbokiv-bit/Private-rule/main/bridge-fix.patch" -o /tmp/bridge-fix.patch
-          echo "bridge-fix.patch 大小: $(wc -c < /tmp/bridge-fix.patch) bytes"
-          git apply --verbose /tmp/bridge-fix.patch
-          echo "✅ bridge-fix.patch 应用成功"
+          # 1) bridge 切网整体重载修复（adapter + libbox + protocol/bridge）
+          curl -sSL "https://raw.githubusercontent.com/turbokiv-bit/Private-rule/main/restart-fix.patch" -o /tmp/restart-fix.patch
+          echo "restart-fix.patch 大小: $(wc -c < /tmp/restart-fix.patch) bytes"
+          git apply --verbose /tmp/restart-fix.patch
+          echo "✅ restart-fix.patch 应用成功"
           # 2) debug.go 补 GoroutineDump（SFI dev 前端需要的桥接符号）
           curl -sSL "https://raw.githubusercontent.com/turbokiv-bit/Private-rule/main/debug-fix.patch" -o /tmp/debug-fix.patch
           echo "debug-fix.patch 大小: $(wc -c < /tmp/debug-fix.patch) bytes"
