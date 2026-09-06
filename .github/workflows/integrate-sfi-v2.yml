@@ -20,13 +20,18 @@ jobs:
         run: git clone --depth 1 --recurse-submodules -b dev https://github.com/SagerNet/sing-box-for-apple.git sfi
 
       - name: Clone reF1nd sing-box core
-        run: git clone --depth 1 -b reF1nd-testing  https://github.com/reF1nd/sing-box.git core
+        run: git clone --depth 1 -b reF1nd-testing https://github.com/reF1nd/sing-box.git core
 
       - name: Apply bridge network-change fix
         run: |
-          cp bridge-fix.patch core/ 2>/dev/null || true
-          cd core && git apply bridge-fix.patch
-          
+          cd core
+          # 从你的仓库直接下载补丁（不依赖 checkout，因为上面用 git clone 而非 checkout）
+          curl -sSL "https://raw.githubusercontent.com/turbokiv-bit/Private-rule/main/bridge-fix.patch" -o /tmp/bridge-fix.patch
+          echo "补丁大小: $(wc -c < /tmp/bridge-fix.patch) bytes"
+          cat /tmp/bridge-fix.patch | head -5
+          git apply --verbose /tmp/bridge-fix.patch
+          echo "✅ bridge-fix.patch 应用成功"
+
       - name: Build Libbox.xcframework (official build_libbox)
         working-directory: core
         run: |
