@@ -1,0 +1,182 @@
+name: Convert cn-additional-list Surge to sing-box SRS
+
+on:
+  push:
+    paths:
+      - 'rules/cn-additional-list-surge.list'
+  schedule:
+    # 每天北京时间 06:00 自动运行
+    # GitHub Actions 使用 UTC 时间
+    # 北京时间 06:00 = UTC 22:00
+    - cron: "0 22 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  convert-cn-additional-list-to-srs:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout your repository
+        uses: actions/checkout@v4
+
+      - name: Install sing-box
+        run: |
+          set -e
+
+          SING_BOX_URL="$(python3 - <<'PY'
+          import json
+          import re
+          import urllib.request
+
+          api = "https://api.github.com/repos/SagerNet/sing-box/releases/latest"
+
+          with urllib.request.urlopen(api) as response:
+              data = json.load(response)
+
+          for asset in data.get("assets", []):
+              name = asset.get("name", "")
+              url = asset.get("browser_download_url", "")
+
+              if re.search(r"linux-amd64.*\.tar\.gz$", name):
+                  print(url)
+                  break
+          PY
+          )"
+
+          if [ -z "$SING_BOX_URL" ]; then
+            echo "Cannot find sing-box linux-amd64 tar.gz asset."
+            exit 1
+          fi
+
+          echo "Downloading sing-box from: $SING_BOX_URL"
+
+          curl -L --fail --retry 3 --retry-delay 5 "$SING_BOX_URL" -o sing-box.tar.gz
+
+          rm -rf sing-box-bin
+          mkdir -p sing-box-bin
+
+          tar -xzf sing-box.tar.gz -C sing-box-bin --strip-components=1
+
+          chmod +x sing-box-bin/sing-box
+
+          ./sing-box-bin/sing-box version
+
+      - name: Convert Surge list to sing-box source JSON
+        run: |
+          set -e
+
+          SOURCE=rules/cn-additional-list-surge.list
+          OUTPUT=Sing-box-rule/cn-additional.list.srs
+          TEMP_JSON=.sing-box-rule-cn-additional.json
+
+          # 仅清理本 workflow 自己生成的目标文件,
+          # 不要在 Sing-box-rule 下做 rm -rf, 避免误删其他 workflow 的子目录。
+          rm -f "$OUTPUT"
+          rm -f "$TEMP_JSON"
+
+          if [ ! -f "$SOURCE" ]; then
+            echo "Source file not found: $SOURCE"
+            exit 1
+          fi
+
+          mkdir -p "$(dirname "$OUTPUT")"
+
+          python3 - <<PY
+          import json
+          import re
+          from pathlib import Path
+
+          source = Path("$SOURCE")
+          out_json = Path("$TEMP_JSON")
+          out_srs = Path("$OUTPUT")
+
+          text = source.read_text(encoding="utf-8")
+
+          suffixes = []
+          seen = set()
+
+          for raw in text.splitlines():
+              line = raw.strip().lstrip("\ufeff")
+              if not line or line.startswith("#"):
+                  continue
+              if " #" in line:
+                  line = line.split(" #", 1)[0].strip()
+              # 保留多行条目 (以 ,\ 结尾) 直接跳过, 本规则集不含
+              if line.endswith(",\\"):
+                  continue
+              parts = [p.strip() for p in line.split(",") if p.strip()]
+              if len(parts) < 2:
+                  continue
+              rule_type = parts[0].upper()
+              value = parts[1].strip().lstrip(".")
+              if rule_type == "DOMAIN-SUFFIX":
+                  if value and value not in seen:
+                      seen.add(value)
+                      suffixes.append(value)
+              elif rule_type == "DOMAIN":
+                  if value and value not in seen:
+                      seen.add(value)
+                      suffixes.append(value)
+              elif rule_type == "DOMAIN-KEYWORD":
+                  pass  # 本规则集不需要关键字
+              elif rule_type in {"IP-CIDR", "IP-CIDR6"}:
+                  pass  # 本规则集为纯域名, 忽略 IP 规则
+
+          if not suffixes:
+              raise SystemExit("No DOMAIN rules found in source file.")
+
+          source_obj = {
+              "version": 3,
+              "rules": [
+                  {"domain_suffix": suffixes}
+              ]
+          }
+
+          out_json.write_text(
+              json.dumps(source_obj, ensure_ascii=False) + "\n",
+              encoding="utf-8"
+          )
+          out_srs.parent.mkdir(parents=True, exist_ok=True)
+
+          print(f"Parsed domain_suffix rules: {len(suffixes)}")
+          print(f"Source JSON: {out_json}")
+          print(f"Target SRS:  {out_srs}")
+          PY
+
+      - name: Compile sing-box SRS file
+        run: |
+          set -e
+
+          TEMP_JSON=.sing-box-rule-cn-additional.json
+          OUTPUT=Sing-box-rule/cn-additional.list.srs
+
+          if [ ! -f "$TEMP_JSON" ]; then
+            echo "Source JSON not found: $TEMP_JSON"
+            exit 1
+          fi
+
+          ./sing-box-bin/sing-box rule-set compile --output "$OUTPUT" "$TEMP_JSON"
+
+          echo "Generated SRS file:"
+          ls -l "$OUTPUT"
+          du -h "$OUTPUT"
+
+      - name: Commit and push if changed
+        run: |
+          git status --short -- Sing-box-rule/cn-additional.list.srs
+
+          git add Sing-box-rule/cn-additional.list.srs
+
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git commit -m "chore: convert cn-additional-list-surge to sing-box SRS"
+          git push
