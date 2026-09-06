@@ -110,10 +110,6 @@ DOMAIN-SUFFIX,www-googletagmanager.l.google.com
 DOMAIN-SUFFIX,www.destinationurl.com
 DOMAIN-SUFFIX,www.gstatic.com
 DOMAIN-SUFFIX,www.pxcc.com
-DOMAIN-SUFFIX,redirector.c.play.google.com
-DOMAIN-SUFFIX,crashlyticsreports-pa.googleapis.com
-DOMAIN-SUFFIX,firebase-settings.crashlytics.com
-DOMAIN-SUFFIX,update.crashlytics.com
 DOMAIN-SUFFIX,pki-goog.l.google.com
 DOMAIN-SUFFIX,c.pki.goog
 DOMAIN-SUFFIX,i.pki.goog
@@ -122,3 +118,7 @@ DOMAIN-SUFFIX,crl.pki.goog
 DOMAIN-SUFFIX,crls.pki.goog
 DOMAIN-SUFFIX,ocsp.pki.goog
 DOMAIN-SUFFIX,ggpht.cn
+DOMAIN-SUFFIX,crashlyticsreports-pa.googleapis.com
+DOMAIN-SUFFIX,firebase-settings.crashlytics.com
+DOMAIN-SUFFIX,update.crashlytics.com
+DOMAIN-SUFFIX,redirector.c.play.google.com
