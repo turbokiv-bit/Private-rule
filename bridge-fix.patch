@@ -1,0 +1,110 @@
+--- a/protocol/bridge/backend.go
++++ b/protocol/bridge/backend.go
+@@ -48,6 +48,15 @@
+ 	session       adapter.BridgeSession
+ 	currentEgress string
+ 
++	// lifecycleMu serialises network-driven reload (restart) against
++	// concurrent Write/Port/Attach access so a torn-down session is never
++	// used mid-restart.
++	lifecycleMu sync.Mutex
++	// rebuild, when set (by the owning Outbound), performs a full bridge
++	// session recreation after the current egress could not be re-applied
++	// on a network change (e.g. the platform session went stale).
++	rebuild func()
++
+ 	closeOnce sync.Once
+ 	closed    chan struct{}
+ 	readDone  chan struct{}
+@@ -140,6 +149,16 @@
+ 	err := b.session.SetEgress(egress)
+ 	if err != nil {
+ 		b.logger.Debug(E.Cause(err, "apply bridge egress ", egress))
++		// Egress could not be re-applied on the new interface — the
++		// current platform bridge session has gone stale (e.g. the
++		// underlying network interface it was bound to disappeared).
++		// Ask the owning Outbound to recreate the whole bridge session
++		// on the new default interface. Done asynchronously so we never
++		// tear down the session from inside the network-monitor callback.
++		if b.rebuild != nil {
++			b.logger.Warn("bridge session stale after network change, rebuilding")
++			go b.rebuild()
++		}
+ 		return
+ 	}
+ 	b.currentEgress = egress
+
+--- a/protocol/bridge/backend_darwin.go
++++ b/protocol/bridge/backend_darwin.go
+@@ -179,6 +179,54 @@
+ 	return nil
+ }
+ 
++// restart recreates the platform bridge session after a network change left
++// the old egress unusable ("bridge session not found"). It is invoked through
++// backendBase.rebuild (owned by the Outbound) under lifecycleMu, never from
++// inside a network-monitor callback. It tears down the stale session / tun /
++// PF anchor / read loop and re-runs startPlatform so a fresh BridgeSession is
++// created on the current default interface, then re-syncs egress.
++func (b *backendDarwin) restart() {
++	b.egressAccess.Lock()
++	defer b.egressAccess.Unlock()
++
++	if b.closed != nil {
++		select {
++		case <-b.closed:
++			return // already fully closed
++		default:
++		}
++	}
++
++	b.logger.Warn("bridge: recreating platform bridge session")
++	if b.unregister != nil {
++		b.unregister()
++		b.unregister = nil
++	}
++	if b.pfDevice != nil && b.anchorName != "" {
++		_ = b.pfDevice.LoadAnchor(b.anchorName, nil)
++	}
++	if b.tunInterface != nil {
++		_ = b.tunInterface.Close()
++		b.tunInterface = nil
++	}
++	if b.readDone != nil {
++		<-b.readDone
++	}
++	if b.session != nil {
++		_ = b.session.Close()
++		b.session = nil
++	}
++	b.batchTUN = nil
++	b.currentRules = nil
++	b.currentEgress = ""
++	// closed/readDone channels get re-created inside startPlatform.
++
++	if err := b.startPlatform(); err != nil {
++		b.logger.Error(E.Cause(err, "bridge: failed to recreate session"))
++		return
++	}
++}
++
+ func (b *backendDarwin) egressLabel() string {
+ 	if b.boundInterface != "" {
+ 		return b.boundInterface
+
+--- a/protocol/bridge/outbound.go
++++ b/protocol/bridge/outbound.go
+@@ -53,6 +53,13 @@
+ 	if err != nil {
+ 		return nil, err
+ 	}
++	// Wire the network-driven bridge-session rebuild hook. When the egress
++	// can no longer be re-applied after an interface change (platform
++	// session went stale), backendBase triggers rebuild asynchronously and
++	// we recreate the whole session on the new default interface.
++	if restarter, ok := outboundBackend.(*backendDarwin); ok {
++		restarter.rebuild = restarter.restart
++	}
+ 	return &Outbound{
+ 		Adapter:              outbound.NewAdapter(C.TypeBridge, tag, []string{N.NetworkTCP, N.NetworkUDP, N.NetworkICMP}, nil),
+ 		logger:               logger,
