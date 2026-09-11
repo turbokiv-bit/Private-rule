@@ -2,7 +2,7 @@
   "version": 2,
   "rules": [
     {
-      "ip_cidr": "2a12:bec4:1eb0::/44"
+      "ip_cidr": "2a12:bec4:1ea0::/43"
     }
   ]
 }
