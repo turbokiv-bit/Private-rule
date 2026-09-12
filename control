@@ -1,0 +1,9 @@
+Package: com.sjjauth.bypass
+Name: 抖音优化去授权
+Version: 1.0
+Architecture: iphoneos-arm64
+Description: Hook 授权指纹，解锁抖音优化交流版全部功能
+Maintainer: you
+Author: you
+Section: Tweaks
+Depends: mobilesubstrate | ellekit
