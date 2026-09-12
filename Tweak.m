@@ -1,57 +1,55 @@
 // 抖音优化交流版 去授权 Hook (ellekit)
-// 注入 com.ss.iphone.ugc.Aweme (siwenjiajia.dylib)
+// 注入 com.ss.iphone.ugc.Aweme
+// 策略：运行时遍历所有 ObjC 类，找到 SVIP/解锁相关的 getter，hook 返回"已解锁"
+// 无需预知类名，覆盖所有功能的 SVIP/解锁判定。
 #import <substrate.h>
 #import <Foundation/Foundation.h>
-#import <dlfcn.h>
-#import <mach-o/dyld.h>
+#import <objc/runtime.h>
 
-#define HOOK_FP          1
-#define VERBOSE_LOG      1
+// 要 hook 并强制返回 YES 的解锁类方法名（getter，返回 BOOL）
+static const char* unlockSelectors[] = {
+    "isAliasSVIPUnlocked",
+    "isPearModelPickerUnlocked",
+    "isSVIPUnlocked",
+    "isVipUnlocked",
+    "sjj_isUnlocked",
+    "sjjStatusUnlocked",
+    NULL
+};
 
-static NSString* const kBuiltinFPStr = @"b6d1e95f66985a848f1ae0a965c53cf697c64af309e503fdddab5330b37650d3";
+// 记录 orig IMP (用全局 map 简单实现: 每个 selector 一份 orig)
+static IMP s_origIMP[16] = {0};
 
-static uintptr_t libraryBase(void) {
-    uint32_t n = _dyld_image_count();
-    for (uint32_t i = 0; i < n; i++) {
-        const char* name = _dyld_get_image_name(i);
-        if (name && strstr(name, "siwenjiajia.dylib")) {
-            return (uintptr_t)_dyld_get_image_header(i);
-        }
-    }
-    return 0;
+// 通用"恒返回 YES"的替代实现
+static BOOL returnYES(id self, SEL _cmd) {
+    return YES;
 }
-
-#if HOOK_FP
-static void* (*orig_computeFP)(void*, void**) = NULL;
-static void* hooked_computeFP(void* a0, void** a1) {
-    void* r = orig_computeFP(a0, a1);
-    uintptr_t base = libraryBase();
-    if (base) {
-        // 全局指纹槽 0x91de58，运行时 = base + 0x91de58
-        uintptr_t slotAddr = base + 0x91de58;
-        // 直接写内存：把 slot 处的 8 字节覆盖为 fp 字符串对象指针
-        // 先转成裸 void*（POD），再用 memcpy 写槽，规避 ARC 限制
-        uintptr_t target = (uintptr_t)(__bridge void*)kBuiltinFPStr;
-        memcpy((void*)slotAddr, &target, sizeof(target));
-        if (VERBOSE_LOG) NSLog(@"[SJJ-bypass] FP override -> %@", kBuiltinFPStr);
-    }
-    return r;
-}
-#endif
 
 __attribute__((constructor))
 static void ctor(void) {
     @autoreleasepool {
-        uintptr_t base = libraryBase();
-        if (!base) {
-            NSLog(@"[SJJ-bypass] siwenjiajia.dylib not found");
-            return;
+        int nc = objc_getClassList(NULL, 0);
+        if (nc <= 0) return;
+        Class* cls = (Class*)malloc(sizeof(Class) * (unsigned)nc);
+        int got = objc_getClassList(cls, nc);
+
+        int slot = 0;
+        for (int i = 0; i < got; i++) {
+            Class c = cls[i];
+            for (int k = 0; unlockSelectors[k] != NULL; k++) {
+                SEL sel = sel_registerName(unlockSelectors[k]);
+                Method m = class_getInstanceMethod(c, sel);
+                if (!m) m = class_getClassMethod(c, sel);
+                if (m && slot < 16) {
+                    // 记录原 IMP 并 hook
+                    s_origIMP[slot] = method_getImplementation(m);
+                    MSHookMessageEx(c, sel, (IMP)returnYES, &s_origIMP[slot]);
+                    NSLog(@"[SJJ-unlock] hooked %s on class %s", unlockSelectors[k], class_getName(c));
+                    slot++;
+                }
+            }
         }
-        NSLog(@"[SJJ-bypass] dylib base = %p", (void*)base);
-#if HOOK_FP
-        void* f = (void*)(base + 0x19213c);
-        MSHookFunction(f, (void*)hooked_computeFP, (void**)&orig_computeFP);
-        if (VERBOSE_LOG) NSLog(@"[SJJ-bypass] hooked 0x19213c @ %p", f);
-#endif
+        free(cls);
+        NSLog(@"[SJJ-unlock] done, hooked %d methods", slot);
     }
 }
