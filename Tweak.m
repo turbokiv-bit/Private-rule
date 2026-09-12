@@ -1,6 +1,6 @@
 // 抖音优化交流版 去授权 Hook (ellekit) - rootless
 // 注入 com.ss.iphone.ugc.Aweme
-// 用 MSInitialize 入口(Substrate 标准初始化, 比裸 constructor 可靠)
+// 注入 com.ss.iphone.ugc.Aweme (rootless)
 // hook 后台线程扫描; 日志双落盘 /tmp + /var/mobile/Documents
 #import <substrate.h>
 #import <Foundation/Foundation.h>
@@ -62,9 +62,10 @@ static void doHookScan(void) {
     wlogf("[SJJ-unlock] DONE total=%d", hooked);
 }
 
-// Substrate 标准初始化入口（%ctor 底层）
-// MSInitialize(name) 展开为 __attribute__((constructor)) static void name()，下面必须紧跟函数体
-MSInitialize(SjjInit) {
+// 标准初始化入口。MSInitialize 宏在不同 substrate 版本展开不同，这里用最朴素通用的 constructor。
+// 注意：扫描已移到后台线程，不会阻塞启动(避免 0x8BADF00D 看门狗杀)。
+__attribute__((constructor))
+static void SjjInit(void) {
     FILE* f = fopen(LOG1, "w"); if (f) fclose(f);
     f = fopen(LOG2, "w"); if (f) fclose(f);
     wlog("[SJJ-unlock] init");
