@@ -30,7 +30,8 @@ static void* hooked_computeFP(void* a0, void** a1) {
         // 全局指纹槽 0x91de58，运行时 = base + 0x91de58
         uintptr_t slotAddr = base + 0x91de58;
         // 直接写内存：把 slot 处的 8 字节覆盖为 fp 字符串对象指针
-        NSString* target = kBuiltinFPStr;
+        // 先转成裸 void*（POD），再用 memcpy 写槽，规避 ARC 限制
+        uintptr_t target = (uintptr_t)(__bridge void*)kBuiltinFPStr;
         memcpy((void*)slotAddr, &target, sizeof(target));
         if (VERBOSE_LOG) NSLog(@"[SJJ-bypass] FP override -> %@", kBuiltinFPStr);
     }
