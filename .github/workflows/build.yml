@@ -16,22 +16,27 @@ jobs:
           export THEOS=~/theos
           git clone --recursive https://github.com/theos/theos.git $THEOS --depth 1
 
-      - name: Install iPhoneOS SDK (arm64e)
+      - name: Install ldid
         run: |
-          export THEOS=~/theos
-          mkdir -p $THEOS/sdks
-          # 从 theos/sdks 拉 iPhoneOS16.5 (含 arm64e)
-          curl -fL -o sdk.tar.xz https://github.com/theos/sdks/raw/master/iPhoneOS16.5.sdk.tar.xz \
-            || curl -fL -o sdk.tar.xz https://github.com/xybp888/iOS-SDKs/releases/download/iOS-16.5/iPhoneOS16.5.sdk.tar.xz \
-            || echo "SDK download failed"
-          tar -xJf sdk.tar.xz -C $THEOS/sdks || echo "untar failed"
-          echo "== installed SDKs =="
-          ls -la $THEOS/sdks/
+          # 通过 Homebrew 装 ldid (Procursus 维护)
+          brew install ldid proursus 2>/dev/null || brew install ldid 2>/dev/null || true
+          # 若 brew 源没有，直接从 ldid 官方 GitHub 下载预编译二进制放到 PATH
+          if ! command -v ldid >/dev/null 2>&1; then
+            mkdir -p ~/bin
+            curl -fL -o ~/bin/ldid https://github.com/ProcursusTeam/ldid/releases/download/v2.1.5-procursus7/ldid_macosx_x86_64 \
+              || curl -fL -o ~/bin/ldid https://github.com/ProcursusTeam/ldid/releases/latest/download/ldid_macosx_x86_64 \
+              || echo "ldid download from release failed"
+            chmod +x ~/bin/ldid
+            echo "$HOME/bin" >> $GITHUB_PATH
+          fi
+          echo "== ldid =="
+          which ldid || ls -la ~/bin/ldid
 
       - name: Build (arm64e)
         run: |
           export THEOS=~/theos
           export PATH=$THEOS/bin:$PATH
+          echo "$HOME/bin" >> $GITHUB_PATH
           make clean || true
           make package FINALPACKAGE=1
 
