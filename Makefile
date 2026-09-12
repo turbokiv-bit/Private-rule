@@ -1,11 +1,13 @@
-# Theos Makefile (ellekit/substrate tweak)
+# Theos Makefile (rootless ellekit/substrate tweak)
 # 编译：make clean package FINALPACKAGE=1
-# ARCHS 固定 arm64e
 
 TARGET := iphone:clang:latest:14.0
 ARCHS := arm64e
 
 INSTALL_TARGET_PROCESSES := Aweme
+
+# rootless 打包：安装路径自动变成 /var/jb/Library/MobileSubstrate/DynamicLibraries
+export THEOS_PACKAGE_SCHEME = rootless
 
 include $(THEOS)/makefiles/common.mk
 
