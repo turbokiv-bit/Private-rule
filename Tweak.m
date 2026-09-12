@@ -1,7 +1,7 @@
-// 抖音优化交流版 去授权 Hook (ellekit)
+// 抖音优化交流版 去授权 Hook (ellekit) - rootless
 // 注入 com.ss.iphone.ugc.Aweme
-// 运行时遍历所有 ObjC 类，找到 SVIP/解锁 getter，hook 返回 YES
-// 结果落盘 /var/mobile/Documents/sjjunlock.log，Filza 直接打开看
+// 运行时遍历 ObjC 类，hook SVIP/解锁 getter 返回 YES。
+// 遍历放后台线程，避免阻塞启动导致 watchdog 杀(0x8BADF00D)。
 #import <substrate.h>
 #import <Foundation/Foundation.h>
 #import <objc/runtime.h>
@@ -28,40 +28,46 @@ static const char* unlockSelectors[] = {
     NULL
 };
 
-static IMP s_origIMP[64] = {0};
 static BOOL returnYES(id self, SEL _cmd) { return YES; }
+
+static void doHookScan(void) {
+    int nc = objc_getClassList(NULL, 0);
+    if (nc <= 0) { wlog("[SJJ-unlock] no classes"); return; }
+    Class* cls = (Class*)malloc(sizeof(Class) * (unsigned)nc);
+    int got = objc_getClassList(cls, nc);
+    wlogf("[SJJ-unlock] scanning %d classes", got);
+
+    // 预注册 selector，避免循环内反复 register
+    SEL sels[8]; int nsel = 0;
+    for (int k = 0; unlockSelectors[k] && nsel < 8; k++)
+        sels[nsel++] = sel_registerName(unlockSelectors[k]);
+
+    int hooked = 0;
+    for (int i = 0; i < got; i++) {
+        for (int k = 0; k < nsel; k++) {
+            Method m = class_getInstanceMethod(cls[i], sels[k]);
+            if (!m) m = class_getClassMethod(cls[i], sels[k]);
+            if (m) {
+                static IMP orig[64];
+                if (hooked >= 64) { free(cls); wlogf("[SJJ-unlock] capped at %d", hooked); return; }
+                orig[hooked] = method_getImplementation(m);
+                MSHookMessageEx(cls[i], sels[k], (IMP)returnYES, &orig[hooked]);
+                wlogf("[SJJ-unlock] hooked %s on %s", unlockSelectors[k], class_getName(cls[i]));
+                hooked++;
+            }
+        }
+    }
+    free(cls);
+    wlogf("[SJJ-unlock] DONE total=%d", hooked);
+}
 
 __attribute__((constructor))
 static void ctor(void) {
-    @autoreleasepool {
-        // 清空日志
-        fclose(fopen(LOGFILE, "w"));
-        wlog("[SJJ-unlock] start");
-
-        int nc = objc_getClassList(NULL, 0);
-        wlogf("[SJJ-unlock] total classes: %d", nc);
-        if (nc <= 0) return;
-        Class* cls = (Class*)malloc(sizeof(Class) * (unsigned)nc);
-        int got = objc_getClassList(cls, nc);
-
-        int slot = 0;
-        for (int selIdx = 0; unlockSelectors[selIdx] != NULL; selIdx++) {
-            const char* sname = unlockSelectors[selIdx];
-            SEL sel = sel_registerName(sname);
-            // 先记录所有匹配的类名
-            for (int i = 0; i < got; i++) {
-                Method m = class_getInstanceMethod(cls[i], sel);
-                if (!m) m = class_getClassMethod(cls[i], sel);
-                if (m && slot < 64) {
-                    s_origIMP[slot] = method_getImplementation(m);
-                    MSHookMessageEx(cls[i], sel, (IMP)returnYES, &s_origIMP[slot]);
-                    wlogf("[SJJ-unlock] hooked %s on %s (slot %d)", sname, class_getName(cls[i]), slot);
-                    slot++;
-                }
-            }
-            wlogf("[SJJ-unlock] selector %s scan done", sname);
-        }
-        free(cls);
-        wlogf("[SJJ-unlock] DONE, total hooked = %d", slot);
-    }
+    // 清空日志
+    fclose(fopen(LOGFILE, "w"));
+    wlog("[SJJ-unlock] start");
+    // 后台线程扫描, 不阻塞启动
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        @autoreleasepool { doHookScan(); }
+    });
 }
