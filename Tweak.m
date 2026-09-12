@@ -63,8 +63,8 @@ static void doHookScan(void) {
 }
 
 // Substrate 标准初始化入口（%ctor 底层）
-static void SjjInit(void) {
-    // 清空日志
+// MSInitialize(name) 展开为 __attribute__((constructor)) static void name()，下面必须紧跟函数体
+MSInitialize(SjjInit) {
     FILE* f = fopen(LOG1, "w"); if (f) fclose(f);
     f = fopen(LOG2, "w"); if (f) fclose(f);
     wlog("[SJJ-unlock] init");
@@ -72,4 +72,3 @@ static void SjjInit(void) {
         @autoreleasepool { doHookScan(); }
     });
 }
-MSInitialize(SjjInit)
