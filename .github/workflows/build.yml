@@ -10,6 +10,7 @@ jobs:
   #   1) fat      : arm64 + arm64e  (rootful)
   #   2) arm64e   : 只编 arm64e      (rootful)
   #   3) arm64e   : rootless 目录结构 (Dopamine / palera1n 新版等)
+  # 每个 step 先 `rm -rf packages`, 避免上一次的 deb 残留导致 cp 报错
   # ---------------------------------------------------------------
   build:
     runs-on: macos-latest
@@ -37,43 +38,60 @@ jobs:
           sudo chmod +x /usr/local/bin/ldid
           echo "--- ldid ---"; ldid -v 2>&1 | head -2 || true
 
+      # ---------------- fat: arm64 + arm64e (rootful) ----------------
       - name: Build fat (arm64 + arm64e, rootful)
         run: |
           set -e
           export THEOS=$HOME/theos
+          mkdir -p out
+          rm -rf packages
           make clean || true
           make package ARCHS="arm64 arm64e" FINALPACKAGE=1
-          mkdir -p out
-          cp packages/*.deb out/DuoRingReadout_fat_arm64_arm64e.deb
+          cp -f packages/*.deb out/DuoRingReadout_fat_arm64_arm64e.deb
+          ls -la out/
 
+      # ---------------- arm64e only (rootful) ----------------
       - name: Build arm64e only (rootful)
         run: |
           set -e
           export THEOS=$HOME/theos
+          mkdir -p out
+          rm -rf packages
           make clean || true
           make package ARCHS="arm64e" FINALPACKAGE=1
-          cp packages/*.deb out/DuoRingReadout_arm64e.deb
+          cp -f packages/*.deb out/DuoRingReadout_arm64e.deb
+          ls -la out/
 
+      # ---------------- arm64e + rootless (失败也不影响前面两个包) ----------------
       - name: Build arm64e rootless
+        continue-on-error: true
         run: |
           set -e
           export THEOS=$HOME/theos
+          mkdir -p out
+          rm -rf packages
           make clean || true
           make package ARCHS="arm64e" THEOS_PACKAGE_SCHEME=rootless FINALPACKAGE=1
-          cp packages/*.deb out/DuoRingReadout_arm64e_rootless.deb
+          cp -f packages/*.deb out/DuoRingReadout_arm64e_rootless.deb
+          ls -la out/
 
       - name: Verify arch slices
+        continue-on-error: true
         run: |
           for d in out/*.deb; do
             echo "===== $d"
-            rm -rf /tmp/x && mkdir -p /tmp/x && (cd /tmp/x && ar x "$GITHUB_WORKSPACE/$d" && tar xf data.tar.* 2>/dev/null || true)
+            rm -rf /tmp/x && mkdir -p /tmp/x
+            (cd /tmp/x && ar x "$GITHUB_WORKSPACE/$d" && tar xf data.tar.* 2>/dev/null || true)
             dyl=$(find /tmp/x -name "*.dylib" 2>/dev/null | head -1)
             if [ -n "$dyl" ]; then lipo -info "$dyl" || file "$dyl"; else echo "(dylib not found in deb)"; fi
           done
           ls -la out/
 
+      # 即使某个 step 失败也要把已经编好的包传上来
       - name: Upload all debs
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: DuoRingReadout-debs
           path: out/*.deb
+          if-no-files-found: warn
