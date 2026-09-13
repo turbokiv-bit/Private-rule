@@ -267,7 +267,15 @@ static UIColor* idiResolved(UIColor* c, UIView* v) {
 static UIColor* idiBatteryColor(UIView* v, IDIStatusState* st, int pct) {
     BOOL charging = NO;
     if ([v respondsToSelector:@selector(isCharging)]) {
-        @try { charging = [v isCharging]; } @catch (__unused NSException* e) { charging = NO; }
+        static UIColor* idiBatteryColor(id v, IDIStatusState* st, int pct) {
+    BOOL charging = NO;
+    if ([v respondsToSelector:@selector(isCharging)]) {
+        @try {
+            BOOL (*msg)(id, SEL) = (BOOL (*)(id, SEL))objc_msgSend;
+            charging = msg(v, @selector(isCharging));
+        } @catch (__unused NSException* e) { charging = NO; }
+    }
+    ...
     }
     if (st.lowPowerMode) return UIColor.systemYellowColor;
     if (charging)        return UIColor.systemGreenColor;
