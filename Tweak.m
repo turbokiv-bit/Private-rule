@@ -683,6 +683,7 @@ static void   drlCollectSignalRatios(UIView* v, NSMutableArray* out, int depth);
 
 static __weak UIView* gOverlay = nil;
 static __weak UIView* gBatterySlot = nil;
+static __weak UIView* gGlyphView = nil;      // 系统 WiFi 图标视图(用来判断主卡环里要不要自己画扇形)
 
 static void drlDrawFan(CGContextRef ctx, CGPoint c, CGFloat size, UIColor* color) {
     CGContextSaveGState(ctx);
@@ -775,7 +776,9 @@ static double drlSecondarySignalFraction(void) {
 
 static void drlCollectSignalRatios(UIView* v, NSMutableArray* out, int depth) {
     if (!v || depth > 8 || out.count >= 4) return;
-    if ([v respondsToSelector:NSSelectorFromString(@"numberOfActiveBars")]) {
+    NSString* cn = NSStringFromClass([v class]);
+    BOOL isWifi = ([cn containsString:@"Wifi"] || [cn containsString:@"WiFi"]);
+    if (!isWifi && [v respondsToSelector:NSSelectorFromString(@"numberOfActiveBars")]) {
         long long bars = [(id)v numberOfActiveBars];
         long long total = 4;
         if ([v respondsToSelector:NSSelectorFromString(@"numberOfBars")]) {
@@ -819,11 +822,19 @@ static void drlRenderRings(UIView* ov) {
     UIColor* mainFill = (pct <= 20) ? [UIColor systemRedColor] : fg;
     double subP = drlSecondarySignalFraction();
 
-    // 副卡环: 正常状态(有信号进度, 无数字)
+    // 主卡环里已经有系统 WiFi 图标 -> 不再自己画扇形
+    BOOL glyphInMain = NO;
+    UIView* gv = gGlyphView;
+    if (gv && gv.window && !gv.hidden && gv.alpha > 0.01) {
+        CGRect gr = [gv convertRect:gv.bounds toView:ov];
+        CGRect mainRect = CGRectMake(cxMain - DRL_RING_D / 2.0, cy - DRL_RING_D / 2.0, DRL_RING_D, DRL_RING_D);
+        if (CGRectIntersectsRect(gr, mainRect)) glyphInMain = YES;
+    }
+    // 副卡环: 正常状态(信号进度, 无数字)
     drlDrawRingAt(ctx, b, CGPointMake(cxSub, cy), DRL_RING_D, subP, track, fg, fg, YES, nil);
     // 主卡环: 实时电量(进度 + 数字)
     NSString* txt = [NSString stringWithFormat:@"%d", pct];
-    drlDrawRingAt(ctx, b, CGPointMake(cxMain, cy), DRL_RING_D, mainP, track, mainFill, fg, YES, txt);
+    drlDrawRingAt(ctx, b, CGPointMake(cxMain, cy), DRL_RING_D, mainP, track, mainFill, fg, !glyphInMain, txt);
 
 #if DRL_DIAG
     static int s_rr = 0;
@@ -904,7 +915,11 @@ static void drlDrawReadout(UIView* v, CGRect rect) {
     if (!ctx) return;
 
     if (gPrefs.selfRender) {
-        @try { CGContextClearRect(ctx, rect); } @catch (NSException* e) { }
+        // 不透明图层 clear 之后是黑的, 所以只擦非不透明视图
+        if (!v.opaque) {
+            @try { CGContextClearRect(ctx, rect); } @catch (NSException* e) { }
+        }
+        if ([NSStringFromClass([v class]) containsString:@"Wifi"]) gGlyphView = v;   // 记住 WiFi 图标视图
         if ([v respondsToSelector:NSSelectorFromString(@"chargePercent")]) {
             gBatterySlot = v;
             drlOverlayRefresh();
@@ -1276,7 +1291,7 @@ static void drlInstallHooks(void) {
 // "我们的 original = 插件的实现", 顺序才正确。
 __attribute__((constructor)) static void drlInit(void) {
     // ---- 诊断: 证明补丁本身有没有被加载 ----
-    drlLog(@"=== DuoRingReadout LOADED v2.0 pid=%d ===", getpid());
+    drlLog(@"=== DuoRingReadout LOADED v2.1 pid=%d ===", getpid());
     uint32_t imgN = _dyld_image_count();
     drlLog(@"images=%u; 相关镜像:", imgN);
     for (uint32_t i = 0; i < imgN; i++) {
