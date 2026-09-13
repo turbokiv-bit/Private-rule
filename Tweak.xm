@@ -5,8 +5,6 @@ static NSInteger g_primarySignal = 0;
 static NSInteger g_secondarySignal = -1;
 
 %hook _UIStatusBar
-
-// 1. 抓取系统底层数据
 - (void)updateWithData:(id)data {
     %orig;
     @try {
@@ -28,94 +26,95 @@ static NSInteger g_secondarySignal = -1;
                 g_secondarySignal = -1;
             }
         }
-        
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self duoSim_scanAndHijack];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"DuoSimForceUpdate" object:nil];
         });
     } @catch (NSException *e) {}
+}
+%end
+
+@interface _UIStatusBarCellularSignalView : UIView
+@property (nonatomic, retain) UIView *duoSimContainer;
+- (void)forceRenderDualRings;
+@end
+
+%hook _UIStatusBarCellularSignalView
+%property (nonatomic, retain) UIView *duoSimContainer;
+
+- (CGSize)intrinsicContentSize {
+    CGSize orig = %orig;
+    // 仅在桌面/App内强行拉宽，放过控制中心
+    if (![NSStringFromClass([self.window class]) containsString:@"ControlCenter"] &&
+        ![NSStringFromClass([self.window class]) containsString:@"CCUI"]) {
+        CGFloat minWidth = orig.height * 2.2;
+        if (orig.width < minWidth) {
+            return CGSizeMake(minWidth, orig.height);
+        }
+    }
+    return orig;
 }
 
 - (void)layoutSubviews {
     %orig;
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self duoSim_scanAndHijack];
-    });
+    [self forceRenderDualRings];
 }
 
-// 2. 雷达追踪：扫描并劫持原插件的自定义视图
+- (instancetype)initWithFrame:(CGRect)frame {
+    self = %orig;
+    if (self) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(forceRenderDualRings) name:@"DuoSimForceUpdate" object:nil];
+    }
+    return self;
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    %orig;
+}
+
 %new
-- (void)duoSim_scanAndHijack {
+- (void)forceRenderDualRings {
     if (![NSThread isMainThread]) return;
-    [self scanForCustomView:self];
-}
-
-%new
-- (void)scanForCustomView:(UIView *)view {
-    NSString *className = NSStringFromClass([view class]);
-    
-    // 模糊匹配：拦截原作者(CA / CallAssist)插入的视图，或者系统原生信号视图
-    if ([className containsString:@"CAIphone"] || [className hasPrefix:@"CAStatus"] || [className isEqualToString:@"_UIStatusBarCellularSignalView"]) {
-        [self renderDualRingOnView:view];
-        // 如果是系统原生视图，强行解除宽度限制
-        if ([className isEqualToString:@"_UIStatusBarCellularSignalView"]) {
-             CGFloat minWidth = view.bounds.size.height * 2.2;
-             if (view.bounds.size.width < minWidth) {
-                 view.bounds = CGRectMake(0, 0, minWidth, view.bounds.size.height);
-             }
-        }
-        return;
-    }
-    
-    for (UIView *subview in view.subviews) {
-        [self scanForCustomView:subview];
-    }
-}
-
-// 3. 强行覆写 UI
-%new
-- (void)renderDualRingOnView:(UIView *)targetView {
     @try {
-        CGFloat viewWidth = targetView.bounds.size.width;
-        CGFloat viewHeight = targetView.bounds.size.height;
-        if (viewWidth <= 0 || viewHeight <= 0) return;
-        
-        // 隐藏原视图自带的图层（比如原插件的单卡圆环）
-        for (CALayer *layer in targetView.layer.sublayers) {
-            if ([layer.name isEqualToString:@"DuoSimPatchLayer"]) continue;
-            layer.opacity = 0.0; 
+        // 【关键隔离】如果当前处于控制中心，直接阻断代码运行，保留 iOS 原生信号
+        NSString *windowName = NSStringFromClass([self.window class]);
+        if ([windowName containsString:@"ControlCenter"] || [windowName containsString:@"CCUI"]) {
+            return; 
         }
-        
-        // 创建我们自己的独立画布
-        CAShapeLayer *patchCanvas = nil;
-        for (CALayer *layer in targetView.layer.sublayers) {
-            if ([layer.name isEqualToString:@"DuoSimPatchLayer"]) {
-                patchCanvas = (CAShapeLayer *)layer;
-                break;
+
+        CGFloat viewWidth = self.bounds.size.width;
+        CGFloat viewHeight = self.bounds.size.height;
+        if (viewWidth < 20 || viewHeight <= 0) return;
+
+        // 初始化绝对置顶的独立容器
+        if (!self.duoSimContainer) {
+            self.duoSimContainer = [[UIView alloc] initWithFrame:self.bounds];
+            self.duoSimContainer.backgroundColor = [UIColor clearColor];
+            [self addSubview:self.duoSimContainer];
+        }
+        self.duoSimContainer.frame = self.bounds;
+        [self bringSubviewToFront:self.duoSimContainer];
+        [self.duoSimContainer.layer.sublayers makeObjectsPerformSelector:@selector(removeFromSuperlayer)];
+
+        // 屏蔽该视图下除容器外的所有图层（即隐藏原插件的单卡圆环）
+        for (CALayer *layer in self.layer.sublayers) {
+            if (layer != self.duoSimContainer.layer) {
+                layer.opacity = 0.0; 
             }
         }
-        
-        if (!patchCanvas) {
-            patchCanvas = [CAShapeLayer layer];
-            patchCanvas.name = @"DuoSimPatchLayer";
-            patchCanvas.frame = targetView.bounds;
-            [targetView.layer addSublayer:patchCanvas];
-        }
-        
-        // 清空旧画布重绘
-        patchCanvas.sublayers = nil;
-        
+
         CGFloat ringRadius = viewHeight * 0.4;
         CGPoint primaryCenter = CGPointMake(viewWidth * 0.25, viewHeight / 2);
         CGPoint secondaryCenter = CGPointMake(viewWidth * 0.75, viewHeight / 2);
-        
-        // 绘制主卡电量
+
+        // 绘制主卡 (左)
         CAShapeLayer *pRing = [CAShapeLayer layer];
         pRing.fillColor = [UIColor clearColor].CGColor;
         pRing.lineCap = kCALineCapRound;
         pRing.lineWidth = 2.0;
         CGFloat pAngle = (g_primarySignal / 4.0) * (M_PI * 2);
         pRing.path = [UIBezierPath bezierPathWithArcCenter:primaryCenter radius:ringRadius startAngle:-M_PI_2 endAngle:pAngle - M_PI_2 clockwise:YES].CGPath;
-        
+
         CATextLayer *pText = [CATextLayer layer];
         pText.string = [NSString stringWithFormat:@"%ld", (long)g_batteryLevel];
         pText.fontSize = 9;
@@ -127,10 +126,10 @@ static NSInteger g_secondarySignal = -1;
         pRing.strokeColor = lowBatt ? [UIColor systemRedColor].CGColor : [UIColor labelColor].CGColor;
         pText.foregroundColor = lowBatt ? [UIColor systemRedColor].CGColor : [UIColor labelColor].CGColor;
         
-        [patchCanvas addSublayer:pRing];
-        [patchCanvas addSublayer:pText];
-        
-        // 绘制副卡信号
+        [self.duoSimContainer.layer addSublayer:pRing];
+        [self.duoSimContainer.layer addSublayer:pText];
+
+        // 绘制副卡 (右)
         if (g_secondarySignal >= 0) {
             CAShapeLayer *sRing = [CAShapeLayer layer];
             sRing.fillColor = [UIColor clearColor].CGColor;
@@ -138,20 +137,20 @@ static NSInteger g_secondarySignal = -1;
             sRing.lineWidth = 2.0;
             CGFloat sAngle = (g_secondarySignal / 4.0) * (M_PI * 2);
             sRing.path = [UIBezierPath bezierPathWithArcCenter:secondaryCenter radius:ringRadius startAngle:-M_PI_2 endAngle:sAngle - M_PI_2 clockwise:YES].CGPath;
-            
+
             CATextLayer *sText = [CATextLayer layer];
             sText.string = [NSString stringWithFormat:@"%ld", (long)(g_secondarySignal * 25)];
             sText.fontSize = 9;
             sText.alignmentMode = kCAAlignmentCenter;
             sText.frame = CGRectMake(secondaryCenter.x - ringRadius, secondaryCenter.y - 6, ringRadius * 2, 12);
             sText.contentsScale = [UIScreen mainScreen].scale;
-            
+
             BOOL lowSig = g_secondarySignal < 2;
             sRing.strokeColor = lowSig ? [UIColor systemRedColor].CGColor : [UIColor systemGrayColor].CGColor;
             sText.foregroundColor = lowSig ? [UIColor systemRedColor].CGColor : [UIColor labelColor].CGColor;
-            
-            [patchCanvas addSublayer:sRing];
-            [patchCanvas addSublayer:sText];
+
+            [self.duoSimContainer.layer addSublayer:sRing];
+            [self.duoSimContainer.layer addSublayer:sText];
         }
     } @catch (NSException *e) {}
 }
