@@ -49,6 +49,7 @@ typedef NS_ENUM(NSInteger, DRLContent) {
 typedef struct {
     BOOL       enabled;
     BOOL       drawMissing;   // 插件没画环的位置, 我们自己补一个环
+    BOOL       splitDual;     // 双卡合成环: 擦掉合并环, 给每张卡各画一个
     BOOL       fade;
     NSString*  colorMode;    // auto(默认) / body / tint
     double     sizeFactor;
@@ -126,6 +127,7 @@ static void drlEnsureDefaults(void) {
     CFPreferencesSetAppValue(CFSTR("configVersion"),  (__bridge CFNumberRef)@2.0, app);
     CFPreferencesSetAppValue(CFSTR("enabled"),         kCFBooleanTrue, app);
     CFPreferencesSetAppValue(CFSTR("drawMissingRings"), kCFBooleanTrue, app);
+    CFPreferencesSetAppValue(CFSTR("splitDualRings"),   kCFBooleanTrue, app);
     CFPreferencesSetAppValue(CFSTR("fade"),            kCFBooleanTrue, app);
     CFPreferencesSetAppValue(CFSTR("sizeFactor"),      (__bridge CFNumberRef)@3.0, app);
     CFPreferencesSetAppValue(CFSTR("numberPrimary"),   CFSTR("battery"), app);  // 主卡环 -> 电量
@@ -141,6 +143,7 @@ static DRLPrefs drlPrefs(void) {
     DRLPrefs p;
     p.enabled    = drlPrefBool(@"enabled", YES);
     p.drawMissing = drlPrefBool(@"drawMissingRings", YES);
+    p.splitDual  = drlPrefBool(@"splitDualRings", YES);
     p.fade       = drlPrefBool(@"fade", YES);
     p.colorMode  = drlPrefString(@"numberColor") ?: @"auto";
     p.sizeFactor = drlPrefDouble(@"sizeFactor", 3.0);
@@ -480,24 +483,53 @@ static BOOL drlPercentForView(UIView* v, int* outPercent) {
     return YES;
 }
 
+static UIColor* drlSolid(UIColor* c) {          // 半透明的颜色(轨道色)当数字色会看不清, 强制不透明
+    if (!c) return nil;
+    CGFloat a = CGColorGetAlpha(c.CGColor);
+    if (a <= 0.05) return nil;
+    return (a >= 0.95) ? c : [c colorWithAlphaComponent:1.0];
+}
+
+static UIColor* drlStyleObjectColor(UIView* v) {   // 插件关联对象上的 activeColor/bodyColor
+    uintptr_t base = drlPluginBase();
+    if (!base) return nil;
+    const uintptr_t keys[5] = {0x10640, 0x10648, 0x10650, 0x10658, 0x10660};
+    for (int i = 0; i < 5; i++) {
+        id obj = objc_getAssociatedObject(v, (void*)(base + keys[i]));
+        if (!obj || ![obj isKindOfClass:[NSObject class]]) continue;
+        if ([obj isKindOfClass:[NSNumber class]]) continue;
+        for (NSString* sel in @[@"activeColor", @"bodyColor", @"inactiveColor"]) {
+            SEL s2 = NSSelectorFromString(sel);
+            if (![obj respondsToSelector:s2]) continue;
+            UIColor* c = ((UIColor* (*)(id, SEL))objc_msgSend)(obj, s2);
+            UIColor* r = drlSolid(c);
+            if (r) return r;
+        }
+    }
+    return nil;
+}
+
 static UIColor* drlPickColor(UIView* v) {
     NSString* mode = gPrefs.colorMode ?: @"auto";
     if ([mode isEqualToString:@"black"]) return [UIColor blackColor];
     if ([mode isEqualToString:@"white"]) return [UIColor whiteColor];
 
-    UIColor* c = nil;
     if ([mode isEqualToString:@"body"]) {
-        if ([v respondsToSelector:NSSelectorFromString(@"bodyColor")]) c = [(id)v bodyColor];
+        if ([v respondsToSelector:NSSelectorFromString(@"bodyColor")])
+            { UIColor* c = drlSolid([(id)v bodyColor]); if (c) return c; }
     } else if ([mode isEqualToString:@"tint"]) {
-        c = v.tintColor;
-    } else {   // auto: 系统给这个项目用的"激活色"(信号/电量条的颜色), 拿不到再用 body/tint
-        if ([v respondsToSelector:NSSelectorFromString(@"activeColor")]) c = [(id)v activeColor];
-        if ((!c || CGColorGetAlpha(c.CGColor) < 0.05) &&
-            [v respondsToSelector:NSSelectorFromString(@"bodyColor")]) c = [(id)v bodyColor];
-        if (!c || CGColorGetAlpha(c.CGColor) < 0.05) c = v.tintColor;
+        UIColor* c = drlSolid(v.tintColor); if (c) return c;
+    } else {
+        // auto: (a) 插件自己的样式对象 -> (b) 视图 tintColor -> (c) 视图 active/body
+        UIColor* c = drlStyleObjectColor(v);
+        if (c) return c;
+        c = drlSolid(v.tintColor);
+        if (c) return c;
+        if ([v respondsToSelector:NSSelectorFromString(@"activeColor")])
+            { c = drlSolid([(id)v activeColor]); if (c) return c; }
+        if ([v respondsToSelector:NSSelectorFromString(@"bodyColor")])
+            { c = drlSolid([(id)v bodyColor]); if (c) return c; }
     }
-    if (c && CGColorGetAlpha(c.CGColor) > 0.05) return c;
-
     BOOL dark = NO;
     if (@available(iOS 12.0, *)) dark = (v.traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark);
     return dark ? [UIColor whiteColor] : [UIColor blackColor];
@@ -610,6 +642,7 @@ static void drlDrawReadout(UIView* v, CGRect rect) {
     // 状态栏里有些是"内部小视图"(例如 9pt/4pt 的信号子视图), 环太小画了也看不见,
     // 只画真正当作圆环显示的那种(插件环直径 = min(w,h), 实际约 14~16pt)
     if (MIN(rect.size.width, rect.size.height) < 11.0) return;
+    if (v.hidden || v.alpha <= 0.05) return;          // 状态栏里很多项目是隐藏的, 别浪费力气
 
     CGContextRef ctx = UIGraphicsGetCurrentContext();
     if (!ctx) return;
@@ -664,6 +697,40 @@ static void drlDrawReadout(UIView* v, CGRect rect) {
 
     if (needRedraw) [v setNeedsDisplay];
     if (!text || st.alpha <= 0.02) return;
+
+    // ---------- 容器类视图(双卡合成环): 拆成"每张卡一个环" ----------
+    BOOL isBatteryV0 = [v respondsToSelector:NSSelectorFromString(@"chargePercent")];
+    BOOL isBarsV0    = [v respondsToSelector:NSSelectorFromString(@"numberOfActiveBars")];
+    BOOL isSignalV0  = isBatteryV0 || isBarsV0;
+    if (!isSignalV0 && gPrefs.splitDual && MIN(rect.size.width, rect.size.height) >= 11.0 &&
+        !v.hidden && v.alpha > 0.05) {
+        NSMutableArray* subs = [NSMutableArray array];
+        for (UIView* s1 in v.subviews) {
+            BOOL sig = [s1 respondsToSelector:NSSelectorFromString(@"numberOfActiveBars")] ||
+                       [s1 respondsToSelector:NSSelectorFromString(@"chargePercent")];
+            if (sig && !s1.hidden) [subs addObject:s1];
+        }
+        if (subs.count >= 1) {
+            if (drlPluginDrewRing(v)) CGContextClearRect(ctx, rect);   // 擦掉插件那个合并环
+            for (NSUInteger i = 0; i < subs.count; i++) {
+                UIView* sv = subs[i];
+                CGRect r = [sv convertRect:sv.bounds toView:v];
+                if (MIN(r.size.width, r.size.height) < 6.0) continue;
+                BOOL svBat  = [sv respondsToSelector:NSSelectorFromString(@"chargePercent")];
+                BOOL svBars = [sv respondsToSelector:NSSelectorFromString(@"numberOfActiveBars")];
+                double rp = drlRingProgress(sv, svBat, svBars);
+                drlDrawOwnRing(v, r, ctx, rp, svBars);
+#if DRL_DIAG
+                static int s_splitLogs = 0;
+                if (s_splitLogs < 20) {
+                    s_splitLogs++;
+                    drlLog(@"SPLIT-RING %@ sub[%lu] %@ r=%@ prog=%.2f", NSStringFromClass([v class]),
+                           (unsigned long)i, NSStringFromClass([sv class]), NSStringFromCGRect(r), rp);
+                }
+#endif
+            }
+        }
+    }
 
     // ---------- 插件没画环的槽位: 我们补一个 ----------
     BOOL isBatteryV = [v respondsToSelector:NSSelectorFromString(@"chargePercent")];
