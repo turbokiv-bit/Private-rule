@@ -59,7 +59,9 @@ typedef struct {
 
 static DRLPrefs gPrefs;
 static BOOL     gSeenDual = NO;            // 见过双卡合成环吗
-static BOOL     gPrimarySeen = NO, gSecondarySeen = NO;  // 见过主卡/副卡各自的环吗
+static BOOL     gPrimarySeen = NO, gSecondarySeen = NO, gSingleSeen = NO, gBatterySeen = NO;
+static BOOL     gNumberShown = NO;         // 屏幕上已经有环在显示数字了吗
+
 static double   gStartTime = 0;            // 进程内起始时间(避免启动瞬间抖动)
 static void drlLog(NSString* fmt, ...);   // forward
 static double drlNow(void);               // forward
@@ -342,29 +344,29 @@ static DRLRole drlRoleOfView(UIView* v) {
     return DRLRoleSingle;
 }
 
-static DRLContent drlContentForRole(DRLRole r) {
-    // 电量环的 auto: 别处(主卡环/单卡环)已经在显示电量, 它就不显示
-    if (r == DRLRoleBattery && gPrefs.cBattery == DRLContentAuto) {
-        BOOL shownElsewhere = (gPrefs.cPrimary == DRLContentBattery ||
-                               gPrefs.cSingle  == DRLContentBattery);
-        return shownElsewhere ? DRLContentOff : DRLContentBattery;
+// 决定"这个环显示什么" —— 自适应:
+//   1) 明确配置了的(非 off)优先;
+//   2) 电量环的 auto: 主卡环/单卡环已经在显示电量 -> 它不显示; 否则它显示(等 1.5s 确认);
+//   3) 兜底: 3 秒后屏幕上还没有任何数字 -> 信号环顶上显示实时电量。
+static DRLContent drlEffectiveContent(DRLRole role, BOOL isBatteryView, BOOL isBarsView) {
+    DRLContent c = DRLContentOff;
+    switch (role) {
+        case DRLRoleBattery:   c = gPrefs.cBattery;   break;
+        case DRLRolePrimary:   c = gPrefs.cPrimary;   break;
+        case DRLRoleSecondary: c = gPrefs.cSecondary; break;
+        case DRLRoleSingle:    c = gPrefs.cSingle;    break;
+        case DRLRoleDual:      c = gPrefs.cDual;      break;
     }
-    if (r == DRLRoleDual) {
-        // 兜底: 万一插件只给"双卡合成环"画了环、没给主/副卡分别画,
-        // 就把主卡那份数字放到这个环上, 免得电量数字彻底不出现。
-        if (gPrefs.cDual == DRLContentOff && !gPrimarySeen && !gSecondarySeen &&
-            gStartTime > 0 && (drlNow() - gStartTime) > 3.0) {
-            return gPrefs.cPrimary;
-        }
-        return gPrefs.cDual;
+    if (c != DRLContentOff) return c;
+
+    double up = (gStartTime > 0.0) ? (drlNow() - gStartTime) : 0.0;
+
+    if (role == DRLRoleBattery && gPrefs.cBattery == DRLContentAuto) {
+        if (gPrefs.cPrimary == DRLContentBattery && gPrimarySeen) return DRLContentOff;
+        if (gPrefs.cSingle  == DRLContentBattery && gSingleSeen)  return DRLContentOff;
+        return (up > 1.5) ? DRLContentBattery : DRLContentOff;   // 没有别的环顶上 -> 电量环显示
     }
-    switch (r) {
-        case DRLRoleBattery:   return gPrefs.cBattery;
-        case DRLRolePrimary:   return gPrefs.cPrimary;
-        case DRLRoleSecondary: return gPrefs.cSecondary;
-        case DRLRoleSingle:    return gPrefs.cSingle;
-        case DRLRoleDual:      return gPrefs.cDual;
-    }
+    if (up > 3.0 && !gNumberShown && isBarsView) return DRLContentBattery;  // 兜底
     return DRLContentOff;
 }
 
@@ -380,8 +382,15 @@ static const void* kDRLCapturedKey = &kDRLCapturedKey;   // NSNumber: 最近一�
 
 // 算出这个环该显示的数字(0~100); 返回 NO = 这个环不显示数字
 static BOOL drlPercentForView(UIView* v, int* outPercent) {
+    BOOL batteryView = [v respondsToSelector:NSSelectorFromString(@"chargePercent")];
+    BOOL barsView    = [v respondsToSelector:NSSelectorFromString(@"numberOfActiveBars")];
+    if (!batteryView && !barsView) return NO;          // 只处理"电量/信号"这两类环
     DRLRole role = drlRoleOfView(v);
-    DRLContent c = drlContentForRole(role);
+    if (batteryView)                            gBatterySeen = YES;
+    else if (role == DRLRolePrimary)            gPrimarySeen = YES;
+    else if (role == DRLRoleSecondary)          gSecondarySeen = YES;
+    else if (role == DRLRoleSingle)             gSingleSeen  = YES;
+    DRLContent c = drlEffectiveContent(role, batteryView, barsView);
     if (c == DRLContentOff) return NO;
 
     if (c == DRLContentBattery) {
@@ -457,7 +466,7 @@ static DRLState* drlStateForView(UIView* v) {
     DRLState* s = objc_getAssociatedObject(v, kDRLStateKey);
     if (!s) {
         s = [DRLState new];
-        s.alpha = 0.0;
+        s.alpha = -1.0;              // -1 = 还没画过
         s.targetAlpha = 0.0;
         s.appearStart = drlNow() - 10.0;
         s.rollStart   = drlNow() - 10.0;
@@ -492,7 +501,7 @@ static void drlDrawReadout(UIView* v, CGRect rect) {
         s_drawLogs++;
         DRLRole _r = drlRoleOfView(v);
         drlLog(@"     -> role=%ld content=%ld has=%d pct=%d", (long)_r,
-               (long)drlContentForRole(_r), has, pct);
+               (long)drlEffectiveContent(_r, NO, NO), has, pct);
     }
 #endif
     NSString* text = has ? [NSString stringWithFormat:@"%d", pct] : nil;
@@ -501,6 +510,11 @@ static void drlDrawReadout(UIView* v, CGRect rect) {
     DRLState* st = drlStateForView(v);
     double now = drlNow();
     BOOL needRedraw = NO;
+    if (st.alpha < 0.0) {                    // 第一次绘制: 直接定到目标透明度
+        st.alpha = text ? 1.0 : 0.0;
+        st.targetAlpha = st.alpha;
+        st.appearStart = now - 10.0;
+    }
 
     if (![st.text isEqualToString:(text ?: @"")]) {
         if (st.text.length > 0 && text.length > 0) {     // 数值变了 -> 上滚淡换
@@ -562,6 +576,7 @@ static void drlDrawReadout(UIView* v, CGRect rect) {
         CGContextRestoreGState(ctx);
     }
 
+    gNumberShown = YES;                                  // 屏幕上有数字了
     CGFloat cx = g.cx, cyTop = g.cy - g.r;               // 数字圆心落在圆环走线上
 
     void (^drawOne)(NSString*, CGFloat, CGFloat) = ^(NSString* s, CGFloat dy, CGFloat a) {
@@ -590,15 +605,17 @@ static NSArray<NSString*>* drlRingClasses(void) {
               @"_UIStaticBatteryView" ];
 }
 
-#define DRL_MAX 16
+#define DRL_MAX 256
 static IMP      gOrigDrawRect[DRL_MAX];
 static IMP      gOrigCharge[DRL_MAX];
 static IMP      gOrigBars[DRL_MAX];
 static Class    gClasses[DRL_MAX];
 
 static IMP drlOrigFor(id self, IMP* tbl) {
-    for (int i = 0; i < DRL_MAX; i++) {
-        if (gClasses[i] && [self isKindOfClass:gClasses[i]]) return tbl[i];
+    Class c = object_getClass(self);
+    for (int i = 0; i < DRL_MAX; i++) if (gClasses[i] == c) return tbl[i];       // 精确匹配
+    for (Class sup = class_getSuperclass(c); sup; sup = class_getSuperclass(sup)) {
+        for (int i = 0; i < DRL_MAX; i++) if (gClasses[i] == sup) return tbl[i]; // 最近的祖先
     }
     return NULL;
 }
@@ -626,6 +643,48 @@ static void drlSetBarsHook(id self, SEL _cmd, long long v) {
     IMP orig = drlOrigFor(self, gOrigBars);
     if (orig) ((void (*)(id, SEL, long long))orig)(self, _cmd, v);
     [(UIView*)self setNeedsDisplay];
+}
+
+// 广覆盖: 把所有 "自己实现了 drawRect:" 的 StatusBar 类都挂上。
+// 这样即使 iOS 版本改了类名(插件靠类名挂的 hook 我们能覆盖到), 也不会漏。
+// 真正画不画由 drlPercentForView 里的"能力判定"决定(必须有 chargePercent 或 numberOfActiveBars),
+// 所以不会误伤别的视图。
+static int drlHookAllStatusBarClasses(void) {
+    int hooked = 0;
+    unsigned int count = 0;
+    Class* classes = objc_copyClassList(&count);
+    if (!classes) return 0;
+    for (unsigned int i = 0; i < count; i++) {
+        Class cls = classes[i];
+        const char* nm = class_getName(cls);
+        if (!nm || !strstr(nm, "StatusBar")) continue;
+        Method m = class_getInstanceMethod(cls, @selector(drawRect:));
+        if (!m) continue;
+        // 只处理"自己实现"了 drawRect: 的类, 避免把继承来的实现重复挂
+        BOOL own = NO;
+        unsigned int mc = 0;
+        Method* ms = class_copyMethodList(cls, &mc);
+        if (ms) {
+            for (unsigned int j = 0; j < mc; j++) {
+                if (method_getName(ms[j]) == @selector(drawRect:)) { own = YES; break; }
+            }
+            free(ms);
+        }
+        if (!own) continue;
+        if (method_getImplementation(m) == (IMP)drlDrawRectHook) continue;
+        int slot = -1;
+        for (int k = 0; k < DRL_MAX; k++) if (gClasses[k] == cls) { slot = k; break; }
+        if (slot < 0) for (int k = 0; k < DRL_MAX; k++) if (!gClasses[k]) { slot = k; break; }
+        if (slot < 0) break;
+        IMP old = NULL;
+        MSHookMessageEx(cls, @selector(drawRect:), (IMP)drlDrawRectHook, &old);
+        gClasses[slot] = cls;
+        gOrigDrawRect[slot] = old;
+        hooked++;
+        drlLog(@"broad-hooked %s", nm);
+    }
+    free(classes);
+    return hooked;
 }
 
 static void drlInstallHooks(void) {
@@ -667,6 +726,8 @@ static void drlInstallHooks(void) {
         drlLog(@"hooked %@  drawRect:(orig=%p) setChargePercent:(orig=%p) setBars:(orig=%p)",
                names[i], old, oldC, oldB);
     }
+    int broad = drlHookAllStatusBarClasses();
+    drlLog(@"broad hook: %d StatusBar classes", broad);
     drlLog(@"install done, %d class(es); primary=%ld secondary=%ld single=%ld dual=%ld battery=%ld size=%.2f",
            n, (long)gPrefs.cPrimary, (long)gPrefs.cSecondary, (long)gPrefs.cSingle,
            (long)gPrefs.cDual, (long)gPrefs.cBattery, gPrefs.sizeFactor);
