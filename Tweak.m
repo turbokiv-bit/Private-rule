@@ -15,6 +15,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import <objc/runtime.h>
+#import <objc/message.h>   // objc_msgSend (新 SDK 里 runtime.h 不再包含)
 #import <QuartzCore/QuartzCore.h>
 #import <dlfcn.h>
 #import <mach-o/dyld.h>
@@ -369,15 +370,16 @@ static BOOL drlPercentForView(UIView* v, int* outPercent) {
     return YES;
 }
 
-static UIColor* drlNumberColor(UIView* v, CGContextRef ctx) {
+static UIColor* drlNumberColor(UIView* v) {
     UIColor* c = nil;
     if ([v respondsToSelector:NSSelectorFromString(@"bodyColor")]) c = [(id)v bodyColor];
     if ((!c || CGColorGetAlpha(c.CGColor) < 0.05) && v.tintColor) c = v.tintColor;
     if (!c || CGColorGetAlpha(c.CGColor) < 0.05) {
-        CGColorRef sc = CGContextGetStrokeColor(ctx);   // 退路: 用圆环当前描边色
-        if (sc) c = [UIColor colorWithCGColor:sc];
+        // 退路: 按状态栏明暗取黑/白 (状态栏视图的 traitCollection 跟随前台 App 的样式)
+        BOOL dark = NO;
+        if (@available(iOS 12.0, *)) dark = (v.traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark);
+        c = dark ? [UIColor whiteColor] : [UIColor blackColor];
     }
-    if (!c) c = [UIColor whiteColor];
     return c;
 }
 
@@ -462,7 +464,7 @@ static void drlDrawReadout(UIView* v, CGRect rect) {
     if (g.r <= 2.0) return;
 
     UIFont* font = [UIFont systemFontOfSize:g.lw * gPrefs.sizeFactor weight:UIFontWeightBold];
-    UIColor* baseColor = drlNumberColor(v, ctx);
+    UIColor* baseColor = drlNumberColor(v);
 
     NSDictionary* (^attrsFor)(CGFloat) = ^NSDictionary* (CGFloat a) {
         UIColor* c = (a >= 0.999) ? baseColor
