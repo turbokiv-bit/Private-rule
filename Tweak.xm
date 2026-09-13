@@ -1,30 +1,26 @@
 #import <UIKit/UIKit.h>
 
-// 1. 定义全局静态变量存储双卡和电量状态（绝对内存安全，避免遍历视图树导致崩溃）
 static NSInteger g_batteryLevel = 100;
 static NSInteger g_primarySignal = 0;
 static NSInteger g_secondarySignal = -1;
 
-// 2. 劫持系统状态栏数据流（仅抓取数据，不执行任何 UI 刷新操作）
+// 1. 劫持系统状态栏数据流（仅抓取数据）
 %hook _UIStatusBar
 - (void)updateWithData:(id)data {
     %orig;
     @try {
-        // 使用 KVC 动态读取属性，防止跨 iOS 版本的头文件不兼容问题引发崩溃
         if ([data respondsToSelector:NSSelectorFromString(@"mainBatteryEntry")]) {
             id batteryEntry = [data valueForKey:@"mainBatteryEntry"];
             if (batteryEntry) {
                 g_batteryLevel = [[batteryEntry valueForKey:@"capacity"] integerValue];
             }
         }
-        
         if ([data respondsToSelector:NSSelectorFromString(@"cellularEntry")]) {
             id cellEntry = [data valueForKey:@"cellularEntry"];
             if (cellEntry && [[cellEntry valueForKey:@"statusAvailable"] boolValue]) {
                 g_primarySignal = [[cellEntry valueForKey:@"displayValue"] integerValue];
             }
         }
-        
         if ([data respondsToSelector:NSSelectorFromString(@"secondaryCellularEntry")]) {
             id secEntry = [data valueForKey:@"secondaryCellularEntry"];
             if (secEntry && [[secEntry valueForKey:@"statusAvailable"] boolValue]) {
@@ -33,24 +29,20 @@ static NSInteger g_secondarySignal = -1;
                 g_secondarySignal = -1;
             }
         }
-        
-        // 发送异步通知，让 UI 在主线程安全自行刷新
         dispatch_async(dispatch_get_main_queue(), ^{
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"DuoSimSafeUpdateUI" object:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"DuoSimStandaloneUpdate" object:nil];
         });
-    } @catch (NSException *e) {
-        // 捕获所有潜在异常，死守安全底线
-    }
+    } @catch (NSException *e) {}
 }
 %end
 
-// 3. 安全独立的 UI 绘制模块
+// 2. 核心 UI 渲染：自带宽度拉伸与双环绘制
 @interface _UIStatusBarCellularSignalView : UIView
 @property (nonatomic, retain) CAShapeLayer *primaryRingLayer;
 @property (nonatomic, retain) CAShapeLayer *secondaryRingLayer;
 @property (nonatomic, retain) UILabel *primaryTextLabel;
 @property (nonatomic, retain) UILabel *secondaryTextLabel;
-- (void)duoSim_renderUI;
+- (void)standalone_renderUI;
 @end
 
 %hook _UIStatusBarCellularSignalView
@@ -60,11 +52,20 @@ static NSInteger g_secondarySignal = -1;
 %property (nonatomic, retain) UILabel *primaryTextLabel;
 %property (nonatomic, retain) UILabel *secondaryTextLabel;
 
-// 监听系统初始化，注册更新通知
+// 【关键新增】强制拉宽系统原生的信号区域，腾出双圆环的空间
+- (CGSize)intrinsicContentSize {
+    CGSize orig = %orig;
+    CGFloat minWidth = orig.height * 2.2; // 强制宽度至少为高度的 2.2 倍
+    if (orig.width < minWidth) {
+        return CGSizeMake(minWidth, orig.height);
+    }
+    return orig;
+}
+
 - (instancetype)initWithFrame:(CGRect)frame {
     self = %orig;
     if (self) {
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(duoSim_renderUI) name:@"DuoSimSafeUpdateUI" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(standalone_renderUI) name:@"DuoSimStandaloneUpdate" object:nil];
     }
     return self;
 }
@@ -72,7 +73,7 @@ static NSInteger g_secondarySignal = -1;
 - (instancetype)initWithCoder:(NSCoder *)coder {
     self = %orig;
     if (self) {
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(duoSim_renderUI) name:@"DuoSimSafeUpdateUI" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(standalone_renderUI) name:@"DuoSimStandaloneUpdate" object:nil];
     }
     return self;
 }
@@ -84,48 +85,43 @@ static NSInteger g_secondarySignal = -1;
 
 - (void)layoutSubviews {
     %orig;
-    [self duoSim_renderUI];
+    [self standalone_renderUI];
 }
 
-// 核心渲染器
 %new
-- (void)duoSim_renderUI {
-    // 强制 UI 绘制主线程执行
+- (void)standalone_renderUI {
     if (![NSThread isMainThread]) return;
-
     @try {
-        // 拷贝子图层数组再遍历，防止原插件或系统动画正在修改时引发越界崩溃
+        // 屏蔽 iOS 原生阶梯信号柱
         NSArray *sublayers = [self.layer.sublayers copy];
         for (CALayer *layer in sublayers) {
             if (layer != self.primaryRingLayer && layer != self.secondaryRingLayer && 
                 layer != self.primaryTextLabel.layer && layer != self.secondaryTextLabel.layer) {
-                // 使用透明度屏蔽而非彻底 hidden，降低与单卡原插件的渲染冲突
                 layer.opacity = 0.0; 
             }
         }
         
         CGFloat viewWidth = self.bounds.size.width;
         CGFloat viewHeight = self.bounds.size.height;
-        // 防御性判断：如果视图未完全加载，跳过绘制
         if (viewWidth <= 0 || viewHeight <= 0) return;
         
-        CGFloat ringRadius = viewHeight * 0.4; 
-        CGPoint primaryCenter = CGPointMake(viewWidth * 0.3, viewHeight / 2);
-        CGPoint secondaryCenter = CGPointMake(viewWidth * 0.7, viewHeight / 2);
+        CGFloat ringRadius = viewHeight * 0.4;
+        // 动态计算左右圆环的中心点
+        CGPoint primaryCenter = CGPointMake(viewWidth * 0.25, viewHeight / 2);
+        CGPoint secondaryCenter = CGPointMake(viewWidth * 0.75, viewHeight / 2);
         
-        // --- 绘制主卡 (左) ---
+        // --- 绘制左侧主卡（电量） ---
         if (!self.primaryRingLayer) {
             self.primaryRingLayer = [CAShapeLayer layer];
             self.primaryRingLayer.fillColor = [UIColor clearColor].CGColor;
             self.primaryRingLayer.lineCap = kCALineCapRound;
-            self.primaryRingLayer.lineWidth = 2.5;
+            self.primaryRingLayer.lineWidth = 2.0; // 稍微调细一点，更精致
             [self.layer addSublayer:self.primaryRingLayer];
         }
-        
         if (!self.primaryTextLabel) {
             self.primaryTextLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, ringRadius * 2, ringRadius * 2)];
-            self.primaryTextLabel.center = CGPointMake(primaryCenter.x, primaryCenter.y - 2);
-            self.primaryTextLabel.font = [UIFont systemFontOfSize:11 weight:UIFontWeightBold];
+            self.primaryTextLabel.center = CGPointMake(primaryCenter.x, primaryCenter.y);
+            self.primaryTextLabel.font = [UIFont systemFontOfSize:9 weight:UIFontWeightBold];
             self.primaryTextLabel.textAlignment = NSTextAlignmentCenter;
             [self addSubview:self.primaryTextLabel];
         }
@@ -133,31 +129,28 @@ static NSInteger g_secondarySignal = -1;
         CGFloat primaryAngle = (g_primarySignal / 4.0) * (M_PI * 2);
         UIBezierPath *primaryPath = [UIBezierPath bezierPathWithArcCenter:primaryCenter radius:ringRadius startAngle:-M_PI_2 endAngle:primaryAngle - M_PI_2 clockwise:YES];
         self.primaryRingLayer.path = primaryPath.CGPath;
-        
         self.primaryTextLabel.text = [NSString stringWithFormat:@"%ld", (long)g_batteryLevel];
         
         BOOL isLowBattery = (g_batteryLevel <= 20);
         self.primaryRingLayer.strokeColor = isLowBattery ? [UIColor systemRedColor].CGColor : [UIColor labelColor].CGColor;
         self.primaryTextLabel.textColor = isLowBattery ? [UIColor systemRedColor] : [UIColor labelColor];
 
-        // --- 绘制副卡 (右) ---
+        // --- 绘制右侧副卡（信号百分比） ---
         if (g_secondarySignal >= 0) {
             if (!self.secondaryRingLayer) {
                 self.secondaryRingLayer = [CAShapeLayer layer];
                 self.secondaryRingLayer.fillColor = [UIColor clearColor].CGColor;
                 self.secondaryRingLayer.lineCap = kCALineCapRound;
-                self.secondaryRingLayer.lineWidth = 2.5;
+                self.secondaryRingLayer.lineWidth = 2.0;
                 [self.layer addSublayer:self.secondaryRingLayer];
             }
-            
             if (!self.secondaryTextLabel) {
                 self.secondaryTextLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, ringRadius * 2, ringRadius * 2)];
-                self.secondaryTextLabel.center = CGPointMake(secondaryCenter.x, secondaryCenter.y - 2);
-                self.secondaryTextLabel.font = [UIFont systemFontOfSize:11 weight:UIFontWeightBold];
+                self.secondaryTextLabel.center = CGPointMake(secondaryCenter.x, secondaryCenter.y);
+                self.secondaryTextLabel.font = [UIFont systemFontOfSize:9 weight:UIFontWeightBold];
                 self.secondaryTextLabel.textAlignment = NSTextAlignmentCenter;
                 [self addSubview:self.secondaryTextLabel];
             }
-            
             self.secondaryRingLayer.hidden = NO;
             self.secondaryTextLabel.hidden = NO;
             
