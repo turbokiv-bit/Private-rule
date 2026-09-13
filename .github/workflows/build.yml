@@ -1,36 +1,42 @@
-name: Build Tweak
+name: build-tweak
 
 on:
   push:
-    branches:
-      - main
   workflow_dispatch:
 
 jobs:
   build:
     runs-on: macos-latest
-    env:
-      THEOS: ${{ github.workspace }}/theos
-    
     steps:
-      - name: 检出代码
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: 安装基础依赖
-        run: brew install ldid xz
-
-      - name: Setup Theos & iOS SDK
+      - name: Setup Theos
         run: |
-          git clone --recursive https://github.com/theos/theos.git $THEOS
-          rm -rf $THEOS/sdks
-          git clone https://github.com/theos/sdks.git $THEOS/sdks
+          export THEOS=~/theos
+          git clone --recursive https://github.com/theos/theos.git $THEOS --depth 1
 
+      - name: Install iPhoneOS SDK (arm64e)
+        run: |
+          export THEOS=~/theos
+          mkdir -p $THEOS/sdks
+          # 从 theos/sdks 拉 iPhoneOS16.5 (含 arm64e)
+          curl -fL -o sdk.tar.xz https://github.com/theos/sdks/raw/master/iPhoneOS16.5.sdk.tar.xz \
+            || curl -fL -o sdk.tar.xz https://github.com/xybp888/iOS-SDKs/releases/download/iOS-16.5/iPhoneOS16.5.sdk.tar.xz \
+            || echo "SDK download failed"
+          tar -xJf sdk.tar.xz -C $THEOS/sdks || echo "untar failed"
+          echo "== installed SDKs =="
+          ls -la $THEOS/sdks/
 
-      - name: 编译构建 deb 插件
-        run: make package FINALPACKAGE=1
+      - name: Build (arm64e)
+        run: |
+          export THEOS=~/theos
+          export PATH=$THEOS/bin:$PATH
+          make clean || true
+          make package FINALPACKAGE=1
 
-      - name: 上传输出文件
+      - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: DuoSimPatch-DEB
+          name: SJJAuthBypass-deb
           path: packages/*.deb
