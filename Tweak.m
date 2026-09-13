@@ -48,6 +48,7 @@ typedef NS_ENUM(NSInteger, DRLContent) {
 
 typedef struct {
     BOOL       enabled;
+    BOOL       drawMissing;   // 插件没画环的位置, 我们自己补一个环
     BOOL       fade;
     NSString*  colorMode;    // auto(默认) / body / tint
     double     sizeFactor;
@@ -124,6 +125,7 @@ static void drlEnsureDefaults(void) {
     CFStringRef app = CFSTR("com.callassist.duoringreadout");
     CFPreferencesSetAppValue(CFSTR("configVersion"),  (__bridge CFNumberRef)@2.0, app);
     CFPreferencesSetAppValue(CFSTR("enabled"),         kCFBooleanTrue, app);
+    CFPreferencesSetAppValue(CFSTR("drawMissingRings"), kCFBooleanTrue, app);
     CFPreferencesSetAppValue(CFSTR("fade"),            kCFBooleanTrue, app);
     CFPreferencesSetAppValue(CFSTR("sizeFactor"),      (__bridge CFNumberRef)@3.0, app);
     CFPreferencesSetAppValue(CFSTR("numberPrimary"),   CFSTR("battery"), app);  // 主卡环 -> 电量
@@ -138,6 +140,7 @@ static void drlEnsureDefaults(void) {
 static DRLPrefs drlPrefs(void) {
     DRLPrefs p;
     p.enabled    = drlPrefBool(@"enabled", YES);
+    p.drawMissing = drlPrefBool(@"drawMissingRings", YES);
     p.fade       = drlPrefBool(@"fade", YES);
     p.colorMode  = drlPrefString(@"numberColor") ?: @"auto";
     p.sizeFactor = drlPrefDouble(@"sizeFactor", 3.0);
@@ -190,6 +193,30 @@ static BOOL drlPluginLoaded(void) {
     }
     if (!cached) drlLog(@"CAiPhoneDuoStatus not loaded - readout disabled");
     return cached ? YES : NO;
+}
+
+// ---- 插件镜像 base / "插件到底给这个视图画环了吗" ----
+// 插件会给"要画环"的视图关联一个 NSNumber(YES), key = base+0x10648 (反汇编 0x835c 里读的就是它)
+static uintptr_t gPluginBase = 0;
+static uintptr_t drlPluginBase(void) {
+    if (gPluginBase) return gPluginBase;
+    uint32_t n = _dyld_image_count();
+    for (uint32_t i = 0; i < n; i++) {
+        const char* nm = _dyld_get_image_name(i);
+        if (nm && strstr(nm, "CAiPhoneDuoStatus")) {
+            gPluginBase = (uintptr_t)_dyld_get_image_header(i);
+            break;
+        }
+    }
+    return gPluginBase;
+}
+
+static BOOL drlPluginDrewRing(UIView* v) {
+    uintptr_t base = drlPluginBase();
+    if (!base) return YES;                       // 拿不到 base 就保守认为它画了
+    id n = objc_getAssociatedObject(v, (void*)(base + 0x10648));
+    if ([n isKindOfClass:[NSNumber class]]) return [n boolValue];
+    return NO;                                   // 没有标记 -> 插件没画
 }
 
 // ============================== 实时电量 ==============================
@@ -395,6 +422,8 @@ static DRLContent gLastContent = DRLContentOff;
 - (long long)numberOfActiveBars;  // *_CellularSignalView
 - (long long)numberOfBars;
 - (UIColor*)bodyColor;
+- (UIColor*)activeColor;
+- (UIColor*)inactiveColor;
 @end
 
 // 算出这个环该显示的数字(0~100); 返回 NO = 这个环不显示数字
@@ -451,20 +480,88 @@ static BOOL drlPercentForView(UIView* v, int* outPercent) {
     return YES;
 }
 
-static UIColor* drlNumberColor(UIView* v) {
+static UIColor* drlPickColor(UIView* v) {
     NSString* mode = gPrefs.colorMode ?: @"auto";
+    if ([mode isEqualToString:@"black"]) return [UIColor blackColor];
+    if ([mode isEqualToString:@"white"]) return [UIColor whiteColor];
 
-    if ([mode isEqualToString:@"body"] && [v respondsToSelector:NSSelectorFromString(@"bodyColor")]) {
-        UIColor* c = [(id)v bodyColor];
-        if (c && CGColorGetAlpha(c.CGColor) > 0.05) return c;
+    UIColor* c = nil;
+    if ([mode isEqualToString:@"body"]) {
+        if ([v respondsToSelector:NSSelectorFromString(@"bodyColor")]) c = [(id)v bodyColor];
+    } else if ([mode isEqualToString:@"tint"]) {
+        c = v.tintColor;
+    } else {   // auto: 系统给这个项目用的"激活色"(信号/电量条的颜色), 拿不到再用 body/tint
+        if ([v respondsToSelector:NSSelectorFromString(@"activeColor")]) c = [(id)v activeColor];
+        if ((!c || CGColorGetAlpha(c.CGColor) < 0.05) &&
+            [v respondsToSelector:NSSelectorFromString(@"bodyColor")]) c = [(id)v bodyColor];
+        if (!c || CGColorGetAlpha(c.CGColor) < 0.05) c = v.tintColor;
     }
-    if ([mode isEqualToString:@"tint"] && v.tintColor && CGColorGetAlpha(v.tintColor.CGColor) > 0.05) {
-        return v.tintColor;
-    }
-    // auto(默认): 跟状态栏明暗走(亮底黑字/暗底白字) —— 和视频里一致
+    if (c && CGColorGetAlpha(c.CGColor) > 0.05) return c;
+
     BOOL dark = NO;
     if (@available(iOS 12.0, *)) dark = (v.traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark);
     return dark ? [UIColor whiteColor] : [UIColor blackColor];
+}
+
+static UIColor* drlNumberColor(UIView* v) { return drlPickColor(v); }
+
+// ============================== 自己补环 ==============================
+// 插件在 iOS 26 上只给一部分项目画了环; 对"插件没画"的槽位我们自己补一个同款环
+// (轨道 = bodyColor×0.28, 进度 = activeColor, 4 个点 = 信号格), 这样主卡/副卡能各有一个环。
+static double drlRingProgress(UIView* v, BOOL batteryView, BOOL barsView) {
+    if (batteryView) {
+        NSNumber* cap = objc_getAssociatedObject(v, &kDRLCapturedKey);
+        double p = cap ? cap.doubleValue : [(id)v chargePercent];
+        if (p > 1.0) p /= 100.0;
+        return MAX(0.0, MIN(1.0, p));
+    }
+    if (barsView) {
+        long long bars = 0, total = 4;
+        NSNumber* cap = objc_getAssociatedObject(v, &kDRLCapturedKey);
+        if (cap) bars = cap.longLongValue;
+        else     bars = [(id)v numberOfActiveBars];
+        if ([v respondsToSelector:NSSelectorFromString(@"numberOfBars")]) {
+            long long t = [(id)v numberOfBars];
+            if (t > 0 && t <= 8) total = t;
+        }
+        if (bars < 0) bars = 0;
+        return (total > 0) ? MAX(0.0, MIN(1.0, (double)bars / (double)total)) : 0.0;
+    }
+    return 0.0;
+}
+
+static void drlDrawOwnRing(UIView* v, CGRect rect, CGContextRef ctx, double progress, BOOL withDots) {
+    DRLGeom g = drlGeom(rect);
+    if (g.r <= 1.5) return;
+    UIColor* body = nil;
+    if ([v respondsToSelector:NSSelectorFromString(@"bodyColor")]) body = [(id)v bodyColor];
+    if (!body || CGColorGetAlpha(body.CGColor) < 0.05) body = drlPickColor(v);
+    UIColor* fill = drlPickColor(v);
+
+    const double start = 163.8 * M_PI / 180.0;
+    const double sweep = 212.4 * M_PI / 180.0;
+
+    CGContextSaveGState(ctx);
+    CGContextSetLineWidth(ctx, g.lw);
+    CGContextSetLineCap(ctx, kCGLineCapRound);
+    CGContextSetStrokeColorWithColor(ctx, [body colorWithAlphaComponent:0.28].CGColor);
+    CGContextAddArc(ctx, g.cx, g.cy, g.r, start, start + sweep, 0);
+    CGContextStrokePath(ctx);
+    if (progress > 0.001) {
+        CGContextSetStrokeColorWithColor(ctx, fill.CGColor);
+        CGContextAddArc(ctx, g.cx, g.cy, g.r, start, start + sweep * progress, 0);
+        CGContextStrokePath(ctx);
+    }
+    if (withDots) {
+        CGContextSetFillColorWithColor(ctx, fill.CGColor);
+        double d = g.lw * 0.55;
+        for (int i = 0; i < 4; i++) {
+            double a = (90.0 + ((double)i - 1.5) * 26.0) * M_PI / 180.0;
+            CGPoint pt = CGPointMake(g.cx + g.r * cos(a), g.cy + g.r * sin(a));
+            CGContextFillEllipseInRect(ctx, CGRectMake(pt.x - d / 2, pt.y - d / 2, d, d));
+        }
+    }
+    CGContextRestoreGState(ctx);
 }
 
 // ============================== 动画状态 ==============================
@@ -568,6 +665,24 @@ static void drlDrawReadout(UIView* v, CGRect rect) {
     if (needRedraw) [v setNeedsDisplay];
     if (!text || st.alpha <= 0.02) return;
 
+    // ---------- 插件没画环的槽位: 我们补一个 ----------
+    BOOL isBatteryV = [v respondsToSelector:NSSelectorFromString(@"chargePercent")];
+    BOOL isBarsV    = [v respondsToSelector:NSSelectorFromString(@"numberOfActiveBars")];
+    BOOL pluginDrew = drlPluginDrewRing(v);
+    if (!pluginDrew && gPrefs.drawMissing && MIN(rect.size.width, rect.size.height) >= 11.0) {
+        double rp = drlRingProgress(v, isBatteryV, isBarsV);
+        drlDrawOwnRing(v, rect, ctx, rp, isBarsV);
+#if DRL_DIAG
+        static int s_selfRings = 0;
+        if (s_selfRings < 40) {
+            s_selfRings++;
+            drlLog(@"SELF-RING %@ rect=%@ win=%@ prog=%.2f dots=%d",
+                   NSStringFromClass([v class]), NSStringFromCGRect(rect),
+                   NSStringFromCGRect([v convertRect:v.bounds toView:nil]), rp, isBarsV);
+        }
+#endif
+    }
+
     // ---------- 几何/字体 ----------
     DRLGeom g = drlGeom(rect);
     if (g.r <= 2.0) return;
@@ -604,8 +719,11 @@ static void drlDrawReadout(UIView* v, CGRect rect) {
     static int s_drawOk = 0;
     if (s_drawOk < 60) {
         s_drawOk++;
-        drlLog(@"DRAW %@ text=%@ alpha=%.2f lw=%.2f r=%.2f center=(%.1f,%.1f)",
-               NSStringFromClass([v class]), text, st.alpha, g.lw, g.r, g.cx, g.cy);
+        UIColor* _c = drlPickColor(v);
+        drlLog(@"DRAW %@ text=%@ alpha=%.2f lw=%.2f r=%.2f center=(%.1f,%.1f) win=%@ color=(%.2f,%.2f,%.2f,%.2f)",
+               NSStringFromClass([v class]), text, st.alpha, g.lw, g.r, g.cx, g.cy,
+               NSStringFromCGRect([v convertRect:v.bounds toView:nil]),
+               (double)_c.red, (double)_c.green, (double)_c.blue, (double)_c.alpha);
     }
 #endif
     CGFloat cx = g.cx, cyTop = g.cy - g.r;               // 数字圆心落在圆环走线上
