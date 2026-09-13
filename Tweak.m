@@ -19,8 +19,6 @@
 #import <QuartzCore/QuartzCore.h>
 #import <dlfcn.h>
 #import <mach-o/dyld.h>
-#import <IOKit/ps/IOPowerSources.h>
-#import <IOKit/ps/IOPSKeys.h>
 
 // ============================== 配置 ==============================
 #define DRL_LOG 1
@@ -163,29 +161,57 @@ static BOOL drlPluginLoaded(void) {
 // ============================== 实时电量 ==============================
 // 直接读系统电源信息(和状态栏电量同源), 不依赖插件/视图是否把值写回。
 // 事件驱动: IOPS 电源变化通知 + 30s 兜底, 变化时让圆环重绘 -> 数字实时刷新。
+//
+// 注意: IOKit 的 ps 符号在 iOS SDK 的 tbd 里不一定导出(直接调用会链接失败),
+// 所以统一用 dlsym 动态取; 取不到就退到 UIDevice.batteryLevel。
 static NSHashTable* gLiveViews = nil;        // 需要刷新的视图(弱引用)
 static int gLastLivePercent = -1;
 
+typedef CFTypeRef       (*drl_fn_IOPSInfo)(void);
+typedef CFArrayRef      (*drl_fn_IOPSList)(CFTypeRef);
+typedef CFDictionaryRef (*drl_fn_IOPSDesc)(CFTypeRef, CFTypeRef);
+typedef CFRunLoopSourceRef (*drl_fn_IOPSNotifySrc)(void (*)(void*), void*);
+
+static void* drlSym(const char* name) {
+    static void* h = (void*)-1;
+    if (h == (void*)-1) {
+        h = dlopen("/System/Library/Frameworks/IOKit.framework/IOKit", RTLD_LAZY);
+        if (!h) h = dlopen("/System/Library/PrivateFrameworks/IOKit.framework/IOKit", RTLD_LAZY);
+        if (!h) h = NULL;
+    }
+    if (h) {
+        void* p = dlsym(h, name);
+        if (p) return p;
+    }
+    return dlsym(RTLD_DEFAULT, name);       // 进程里已加载的情况
+}
+
 static int drlLiveBatteryPercent(void) {
     int pct = -1;
-    CFTypeRef info = IOPSCopyPowerSourcesInfo();
-    if (info) {
-        CFArrayRef list = IOPSCopyPowerSourcesList(info);
-        if (list) {
-            for (CFIndex i = 0; i < CFArrayGetCount(list) && pct < 0; i++) {
-                CFTypeRef ps = CFArrayGetValueAtIndex(list, i);
-                CFDictionaryRef desc = IOPSGetPowerSourceDescription(info, ps);
-                if (!desc) continue;
-                CFNumberRef cap = (CFNumberRef)CFDictionaryGetValue(desc, CFSTR(kIOPSCurrentCapacityKey));
-                CFNumberRef mx  = (CFNumberRef)CFDictionaryGetValue(desc, CFSTR(kIOPSMaxCapacityKey));
-                int c = -1, m = 100;
-                if (cap) CFNumberGetValue(cap, kCFNumberIntType, &c);
-                if (mx)  CFNumberGetValue(mx,  kCFNumberIntType, &m);
-                if (c >= 0 && m > 0) pct = (int)lround((double)c * 100.0 / (double)m);
+    drl_fn_IOPSInfo infoFn = (drl_fn_IOPSInfo)drlSym("IOPSCopyPowerSourcesInfo");
+    drl_fn_IOPSList listFn = (drl_fn_IOPSList)drlSym("IOPSCopyPowerSourcesList");
+    drl_fn_IOPSDesc descFn = (drl_fn_IOPSDesc)drlSym("IOPSGetPowerSourceDescription");
+    if (infoFn && listFn && descFn) {
+        CFTypeRef info = infoFn();
+        if (info) {
+            CFArrayRef list = listFn(info);
+            if (list) {
+                for (CFIndex i = 0; i < CFArrayGetCount(list) && pct < 0; i++) {
+                    CFTypeRef ps = CFArrayGetValueAtIndex(list, i);
+                    CFDictionaryRef desc = descFn(info, ps);
+                    if (!desc) continue;
+                    // kIOPSCurrentCapacityKey = "Current Capacity", kIOPSMaxCapacityKey = "Max Capacity"
+                    CFNumberRef cap = (CFNumberRef)CFDictionaryGetValue(desc, CFSTR("Current Capacity"));
+                    CFNumberRef mx  = (CFNumberRef)CFDictionaryGetValue(desc, CFSTR("Max Capacity"));
+                    int c = -1, m = 100;
+                    if (cap) CFNumberGetValue(cap, kCFNumberIntType, &c);
+                    if (mx)  CFNumberGetValue(mx,  kCFNumberIntType, &m);
+                    if (c >= 0 && m > 0) pct = (int)lround((double)c * 100.0 / (double)m);
+                }
+                CFRelease(list);
             }
-            CFRelease(list);
+            CFRelease(info);
         }
-        CFRelease(info);
     }
     if (pct < 0) {   // 退路: UIDevice
         UIDevice* d = [UIDevice currentDevice];
@@ -212,10 +238,14 @@ static void drlPowerSourceChanged(void* ctx) { drlRefreshLiveViews(); }
 static void drlInstallLiveBattery(void) {
     if (!gLiveViews) gLiveViews = [NSHashTable weakObjectsHashTable];
     gLastLivePercent = drlLiveBatteryPercent();
-    CFRunLoopSourceRef src = IOPSNotificationCreateRunLoopSource(drlPowerSourceChanged, NULL);
-    if (src) {
-        CFRunLoopAddSource(CFRunLoopGetCurrent(), src, kCFRunLoopDefaultMode);
-        CFRelease(src);
+    drl_fn_IOPSNotifySrc notifyFn =
+        (drl_fn_IOPSNotifySrc)drlSym("IOPSNotificationCreateRunLoopSource");
+    if (notifyFn) {
+        CFRunLoopSourceRef src = notifyFn(drlPowerSourceChanged, NULL);
+        if (src) {
+            CFRunLoopAddSource(CFRunLoopGetCurrent(), src, kCFRunLoopDefaultMode);
+            CFRelease(src);
+        }
     }
     [NSTimer scheduledTimerWithTimeInterval:30.0 repeats:YES block:^(NSTimer* t) {
         drlRefreshLiveViews();
