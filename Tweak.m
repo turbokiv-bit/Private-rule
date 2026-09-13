@@ -794,6 +794,18 @@ static void drlCollectSignalRatios(UIView* v, NSMutableArray* out, int depth) {
 }
 
 // ---- 真正画: 副卡环(左) + 主卡环(右, 带实时电量数字) ----
+static UIColor* drlStatusBarColor(void) {
+    // 状态栏当前是"亮字"还是"暗字"—— 和系统画时间/图标用的颜色一致
+    NSString* mode = gPrefs.colorMode ?: @"auto";
+    if ([mode isEqualToString:@"black"]) return [UIColor blackColor];
+    if ([mode isEqualToString:@"white"]) return [UIColor whiteColor];
+    @try {
+        UIStatusBarStyle st = [UIApplication sharedApplication].statusBarStyle;
+        if (st == UIStatusBarStyleLightContent) return [UIColor whiteColor];
+    } @catch (NSException* e) { }
+    return [UIColor blackColor];
+}
+
 static void drlRenderRings(UIView* ov) {
     CGContextRef ctx = UIGraphicsGetCurrentContext();
     if (!ctx) return;
@@ -801,9 +813,9 @@ static void drlRenderRings(UIView* ov) {
     CGRect b = ov.bounds;
 
     UIView* slot = gBatterySlot;
-    UIColor* fg;
     if (slot && drlInControlCenter(slot)) slot = nil;
-    fg = slot ? drlPickColor(slot) : [UIColor whiteColor];
+    UIColor* fg = drlStatusBarColor();
+    if (slot && [(gPrefs.colorMode ?: @"auto") isEqualToString:@"body"]) fg = drlPickColor(slot);
     UIColor* track = [fg colorWithAlphaComponent:0.28];
 
     // 定位: 用电池项目在屏幕上的实际位置; 拿不到就默认右上角
@@ -840,8 +852,11 @@ static void drlRenderRings(UIView* ov) {
     static int s_rr = 0;
     if (s_rr < 8) {
         s_rr++;
-        drlLog(@"RENDER rings slot=%@ main=(%.1f,%.1f) pct=%d subP=%.2f fg=(%.2f,%.2f,%.2f)",
-               NSStringFromCGRect(slotRect), cxMain, cy, pct, subP, 0.0, 0.0, 0.0);
+        CGFloat fr = 0, fgn = 0, fb = 0, fa = 0;
+        [fg getRed:&fr green:&fgn blue:&fb alpha:&fa];
+        drlLog(@"RENDER rings host=%@ slot=%@ main=(%.1f,%.1f) pct=%d subP=%.2f fg=(%.2f,%.2f,%.2f)",
+               NSStringFromClass([ov.superview class]), NSStringFromCGRect(slotRect),
+               cxMain, cy, pct, subP, (double)fr, (double)fgn, (double)fb);
     }
 #endif
 }
@@ -867,13 +882,23 @@ static void drlOverlayRefresh(void) {
 
 static void drlInstallOverlay(void) {
     if (!gPrefs.selfRender) return;
-    if (gOverlay && gOverlay.superview) return;                 // 已挂
+    // 优先挂到"状态栏项目所在的窗口"(最稳, 不会被 legibility 视图的显隐影响)
     UIView* host = nil;
-    for (UIWindow* w in UIApplication.sharedApplication.windows) {
-        host = drlFindForegroundView(w, 0);
-        if (host) break;
+    UIView* slot = gBatterySlot;
+    if (slot && slot.window) host = slot.window;
+    if (!host) {
+        for (UIWindow* w in UIApplication.sharedApplication.windows) {
+            host = drlFindForegroundView(w, 0);
+            if (host) break;
+        }
     }
     if (!host) return;
+    if (gOverlay && gOverlay.superview == host) {                // 已经挂在正确的宿主上
+        gOverlay.frame = host.bounds;
+        gOverlay.layer.zPosition = 9999;
+        return;
+    }
+    [gOverlay removeFromSuperview];
     DRLOverlayView* ov = [[DRLOverlayView alloc] initWithFrame:host.bounds];
     ov.backgroundColor = [UIColor clearColor];
     ov.opaque = NO;
@@ -1291,7 +1316,7 @@ static void drlInstallHooks(void) {
 // "我们的 original = 插件的实现", 顺序才正确。
 __attribute__((constructor)) static void drlInit(void) {
     // ---- 诊断: 证明补丁本身有没有被加载 ----
-    drlLog(@"=== DuoRingReadout LOADED v2.1 pid=%d ===", getpid());
+    drlLog(@"=== DuoRingReadout LOADED v2.2 pid=%d ===", getpid());
     uint32_t imgN = _dyld_image_count();
     drlLog(@"images=%u; 相关镜像:", imgN);
     for (uint32_t i = 0; i < imgN; i++) {
