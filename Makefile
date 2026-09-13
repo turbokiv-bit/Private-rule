@@ -1,9 +1,10 @@
 # Theos Makefile (ellekit/substrate tweak)
 # 编译：make clean package FINALPACKAGE=1
-# ARCHS 固定 arm64e
+# roothide 设备是 arm64 而非 arm64e; 默认编 arm64 更兼容 roothide. arm64e 设备改回此。
 
 TARGET := iphone:clang:latest:14.0
-ARCHS := arm64e
+# roothide 设备是 arm64 而非 arm64e. 默认编 arm64 更兼容 roothide; arm64e 设备改回此。
+ARCHS := arm64
 
 INSTALL_TARGET_PROCESSES := Aweme
 
