@@ -52,6 +52,7 @@ typedef struct {
     BOOL       splitDual;     // 双卡合成环: 擦掉合并环, 给每张卡各画一个
     BOOL       fade;
     NSString*  colorMode;    // auto(默认) / body / tint
+    BOOL       outline;      // 数字加一层反色描边(任何背景都看得见)
     double     sizeFactor;
     DRLContent cPrimary;     // 主卡环
     DRLContent cSecondary;   // 副卡环
@@ -120,16 +121,17 @@ static void drlEnsureDefaults(void) {
     BOOL exists = [[NSFileManager defaultManager] fileExistsAtPath:path];
     if (exists) {
         double v = drlPrefDouble(@"configVersion", 0.0);
-        if (v >= 2.0) return;              // 已是新版配置
-        drlLog(@"upgrading prefs v%.0f -> v2", v);
+        if (v >= 3.0) return;              // 已是新版配置
+        drlLog(@"upgrading prefs v%.0f -> v3", v);
     }
     CFStringRef app = CFSTR("com.callassist.duoringreadout");
-    CFPreferencesSetAppValue(CFSTR("configVersion"),  (__bridge CFNumberRef)@2.0, app);
+    CFPreferencesSetAppValue(CFSTR("configVersion"),  (__bridge CFNumberRef)@3.0, app);
     CFPreferencesSetAppValue(CFSTR("enabled"),         kCFBooleanTrue, app);
     CFPreferencesSetAppValue(CFSTR("drawMissingRings"), kCFBooleanTrue, app);
     CFPreferencesSetAppValue(CFSTR("splitDualRings"),   kCFBooleanTrue, app);
     CFPreferencesSetAppValue(CFSTR("fade"),            kCFBooleanTrue, app);
     CFPreferencesSetAppValue(CFSTR("sizeFactor"),      (__bridge CFNumberRef)@3.0, app);
+    CFPreferencesSetAppValue(CFSTR("outline"),         kCFBooleanTrue, app);
     CFPreferencesSetAppValue(CFSTR("numberPrimary"),   CFSTR("battery"), app);  // 主卡环 -> 电量
     CFPreferencesSetAppValue(CFSTR("numberSecondary"), CFSTR("off"),     app);  // 副卡环 -> 不显示数字
     CFPreferencesSetAppValue(CFSTR("numberSingle"),    CFSTR("battery"), app);  // 单卡环 -> 电量
@@ -146,6 +148,7 @@ static DRLPrefs drlPrefs(void) {
     p.splitDual  = drlPrefBool(@"splitDualRings", YES);
     p.fade       = drlPrefBool(@"fade", YES);
     p.colorMode  = drlPrefString(@"numberColor") ?: @"auto";
+    p.outline    = drlPrefBool(@"outline", YES);
     p.sizeFactor = drlPrefDouble(@"sizeFactor", 3.0);
     if (p.sizeFactor < 0.8) p.sizeFactor = 0.8;
     if (p.sizeFactor > 5.0) p.sizeFactor = 5.0;
@@ -490,6 +493,17 @@ static UIColor* drlSolid(UIColor* c) {          // 半透明的颜色(轨道色)
     return (a >= 0.95) ? c : [c colorWithAlphaComponent:1.0];
 }
 
+// tintColor 没被设置时是系统默认蓝, 那不是状态栏前景色, 要跳过
+static BOOL drlIsDefaultTint(UIColor* c) {
+    if (!c) return YES;
+    CGFloat r = 0, g = 0, b = 0, a = 0;
+    if (![c getRed:&r green:&g blue:&b alpha:&a]) return NO;
+    UIColor* blue = [UIColor systemBlueColor];
+    CGFloat br = 0, bg = 0, bb = 0, ba = 0;
+    [blue getRed:&br green:&bg blue:&bb alpha:&ba];
+    return (fabs(r - br) < 0.06 && fabs(g - bg) < 0.06 && fabs(b - bb) < 0.06);
+}
+
 static UIColor* drlStyleObjectColor(UIView* v) {   // 插件关联对象上的 activeColor/bodyColor
     uintptr_t base = drlPluginBase();
     if (!base) return nil;
@@ -520,11 +534,13 @@ static UIColor* drlPickColor(UIView* v) {
     } else if ([mode isEqualToString:@"tint"]) {
         UIColor* c = drlSolid(v.tintColor); if (c) return c;
     } else {
-        // auto: (a) 插件自己的样式对象 -> (b) 视图 tintColor -> (c) 视图 active/body
+        // auto: (a) 插件自己的样式对象(黑/白, 最准) -> (b) 真正设置过的 tintColor -> (c) active/body
         UIColor* c = drlStyleObjectColor(v);
         if (c) return c;
-        c = drlSolid(v.tintColor);
-        if (c) return c;
+        if (!drlIsDefaultTint(v.tintColor)) {
+            c = drlSolid(v.tintColor);
+            if (c) return c;
+        }
         if ([v respondsToSelector:NSSelectorFromString(@"activeColor")])
             { c = drlSolid([(id)v activeColor]); if (c) return c; }
         if ([v respondsToSelector:NSSelectorFromString(@"bodyColor")])
@@ -710,6 +726,15 @@ static void drlDrawReadout(UIView* v, CGRect rect) {
                        [s1 respondsToSelector:NSSelectorFromString(@"chargePercent")];
             if (sig && !s1.hidden) [subs addObject:s1];
         }
+#if DRL_DIAG
+        static int s_contLogs = 0;
+        if (s_contLogs < 12) {
+            s_contLogs++;
+            drlLog(@"CONTAINER %@ rect=%@ subviews=%lu pluginDrew=%d split=%d",
+                   NSStringFromClass([v class]), NSStringFromCGRect(rect),
+                   (unsigned long)v.subviews.count, drlPluginDrewRing(v), gPrefs.splitDual);
+        }
+#endif
         if (subs.count >= 1) {
             if (drlPluginDrewRing(v)) CGContextClearRect(ctx, rect);   // 擦掉插件那个合并环
             for (NSUInteger i = 0; i < subs.count; i++) {
@@ -757,9 +782,23 @@ static void drlDrawReadout(UIView* v, CGRect rect) {
     UIFont* font = [UIFont systemFontOfSize:g.lw * gPrefs.sizeFactor weight:UIFontWeightBold];
     UIColor* baseColor = drlNumberColor(v);
 
+    // 反色(按亮度判断) + 描边 -> 亮底暗底都能看清
+    UIColor* strokeColor = nil;
+    if (gPrefs.outline) {
+        CGFloat r = 0.5, g = 0.5, b = 0.5, a = 1;
+        [baseColor getRed:&r green:&g blue:&b alpha:&a];
+        double lum = 0.299 * r + 0.587 * g + 0.114 * b;
+        strokeColor = (lum > 0.5) ? [UIColor blackColor] : [UIColor whiteColor];
+    }
     NSDictionary* (^attrsFor)(CGFloat) = ^NSDictionary* (CGFloat a) {
         UIColor* c = (a >= 0.999) ? baseColor
                     : [baseColor colorWithAlphaComponent:(CGFloat)(CGColorGetAlpha(baseColor.CGColor) * a)];
+        if (strokeColor) {
+            return @{ NSFontAttributeName: font,
+                      NSForegroundColorAttributeName: c,
+                      NSStrokeColorAttributeName: strokeColor,
+                      NSStrokeWidthAttributeName: @(-2.5) };
+        }
         return @{ NSFontAttributeName: font, NSForegroundColorAttributeName: c };
     };
 
@@ -976,7 +1015,7 @@ static void drlInstallHooks(void) {
 // "我们的 original = 插件的实现", 顺序才正确。
 __attribute__((constructor)) static void drlInit(void) {
     // ---- 诊断: 证明补丁本身有没有被加载 ----
-    drlLog(@"=== DuoRingReadout LOADED pid=%d ===", getpid());
+    drlLog(@"=== DuoRingReadout LOADED v1.6 pid=%d ===", getpid());
     uint32_t imgN = _dyld_image_count();
     drlLog(@"images=%u; 相关镜像:", imgN);
     for (uint32_t i = 0; i < imgN; i++) {
