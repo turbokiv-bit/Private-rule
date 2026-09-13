@@ -10,25 +10,58 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install Theos
-        run: |
-          export THEOS=$HOME/theos
-          git clone --recursive https://github.com/theos/theos.git $THEOS
-          git clone --depth 1 https://github.com/theos/sdks.git $THEOS/sdks
-          echo "THEOS=$THEOS" >> $GITHUB_ENV
-
-      - name: Build (rootless + rootful + roothide)
+      - name: Install Theos + SDKs
         run: |
           set -e
-          make clean package FINALPACKAGE=1 ARCHS="arm64 arm64e" THEOS_PACKAGE_SCHEME=rootless || true
-          for f in packages/*.deb; do mv "$f" "${f%.deb}-rootless.deb"; done
-          make clean package FINALPACKAGE=1 ARCHS="arm64 arm64e" || true
-          for f in packages/*.deb; do case "$f" in *rootless*) ;; *) mv "$f" "${f%.deb}-rootful.deb";; esac; done
-          make clean package FINALPACKAGE=1 ARCHS="arm64 arm64e" THEOS_PACKAGE_SCHEME=roothide || true
-          for f in packages/*.deb; do case "$f" in *rootless*|*rootful*) ;; *) mv "$f" "${f%.deb}-roothide.deb";; esac; done
-          ls -la packages/
+          export THEOS=$HOME/theos
+          if [ ! -d "$THEOS/makefiles" ]; then
+            git clone --recursive --depth 1 https://github.com/theos/theos.git "$THEOS"
+          fi
+          echo "THEOS=$THEOS" >> $GITHUB_ENV
+          # 关键修复: 不能直接 clone 到 $THEOS/sdks (theos 里已经有这个目录), 先 clone 到临时目录再拷 *.sdk 进去
+          rm -rf /tmp/theos-sdks
+          git clone --depth 1 https://github.com/theos/sdks.git /tmp/theos-sdks
+          mkdir -p "$THEOS/sdks"
+          cp -R /tmp/theos-sdks/*.sdk "$THEOS/sdks/" 2>/dev/null || true
+          echo "== SDKs =="; ls "$THEOS/sdks"
+
+      - name: Install ldid (best effort)
+        run: |
+          if ! command -v ldid >/dev/null 2>&1; then
+            brew install ldid || true
+          fi
+          command -v ldid && ldid -v | head -1 || true
+
+      - name: Build deb (rootless / rootful / roothide)
+        run: |
+          set -eu
+          export PATH="$THEOS/bin:$PATH"
+          if [ -f Makefile ]; then DIR=.; else DIR=$(dirname "$(find . -name Makefile -not -path './.git/*' -print -quit)"); fi
+          echo "project dir = ${DIR:-.}"
+          cd "${DIR:-.}"
+          mkdir -p dist
+          ok=0
+          for spec in rootless rootful roothide; do
+            echo "===== building: $spec ====="
+            make clean >/dev/null 2>&1 || true
+            rm -rf packages
+            if [ "$spec" = "rootful" ]; then
+              env -u THEOS_PACKAGE_SCHEME make package FINALPACKAGE=1 ARCHS="arm64 arm64e" || true
+            else
+              THEOS_PACKAGE_SCHEME=$spec make package FINALPACKAGE=1 ARCHS="arm64 arm64e" || true
+            fi
+            for f in packages/*.deb; do
+              [ -e "$f" ] || continue
+              cp "$f" "dist/IDIRingReadout-$spec.deb"
+              ok=1
+              echo "produced: dist/IDIRingReadout-$spec.deb"
+            done
+          done
+          ls -la dist
+          [ "$ok" = "1" ] || { echo "::error::没有产出任何 deb, 请看上面 make 的输出"; exit 1; }
 
       - uses: actions/upload-artifact@v4
         with:
           name: IDIRingReadout-deb
-          path: packages/*.deb
+          path: dist/*.deb
+          if-no-files-found: error
