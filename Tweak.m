@@ -114,11 +114,17 @@ static NSString* drlPrefString(NSString* key) {
 // 首次运行写入默认配置(用 Filza 改这个 plist 即可)
 static void drlEnsureDefaults(void) {
     NSString* path = @"/var/mobile/Library/Preferences/com.callassist.duoringreadout.plist";
-    if ([[NSFileManager defaultManager] fileExistsAtPath:path]) return;
+    BOOL exists = [[NSFileManager defaultManager] fileExistsAtPath:path];
+    if (exists) {
+        double v = drlPrefDouble(@"configVersion", 0.0);
+        if (v >= 2.0) return;              // 已是新版配置
+        drlLog(@"upgrading prefs v%.0f -> v2", v);
+    }
     CFStringRef app = CFSTR("com.callassist.duoringreadout");
+    CFPreferencesSetAppValue(CFSTR("configVersion"),  (__bridge CFNumberRef)@2.0, app);
     CFPreferencesSetAppValue(CFSTR("enabled"),         kCFBooleanTrue, app);
     CFPreferencesSetAppValue(CFSTR("fade"),            kCFBooleanTrue, app);
-    CFPreferencesSetAppValue(CFSTR("sizeFactor"),      (__bridge CFNumberRef)@1.9, app);
+    CFPreferencesSetAppValue(CFSTR("sizeFactor"),      (__bridge CFNumberRef)@3.0, app);
     CFPreferencesSetAppValue(CFSTR("numberPrimary"),   CFSTR("battery"), app);  // 主卡环 -> 电量
     CFPreferencesSetAppValue(CFSTR("numberSecondary"), CFSTR("off"),     app);  // 副卡环 -> 不显示数字
     CFPreferencesSetAppValue(CFSTR("numberSingle"),    CFSTR("battery"), app);  // 单卡环 -> 电量
@@ -132,9 +138,9 @@ static DRLPrefs drlPrefs(void) {
     DRLPrefs p;
     p.enabled    = drlPrefBool(@"enabled", YES);
     p.fade       = drlPrefBool(@"fade", YES);
-    p.sizeFactor = drlPrefDouble(@"sizeFactor", 1.9);
+    p.sizeFactor = drlPrefDouble(@"sizeFactor", 3.0);
     if (p.sizeFactor < 0.8) p.sizeFactor = 0.8;
-    if (p.sizeFactor > 3.0) p.sizeFactor = 3.0;
+    if (p.sizeFactor > 5.0) p.sizeFactor = 5.0;
     p.cPrimary   = drlContentFromString(drlPrefString(@"numberPrimary"),   DRLContentBattery);
     p.cSecondary = drlContentFromString(drlPrefString(@"numberSecondary"), DRLContentOff);   // 副卡默认"正常状态"(无数字)
     p.cSingle    = drlContentFromString(drlPrefString(@"numberSingle"),    DRLContentBattery);
@@ -489,6 +495,9 @@ static void drlDrawReadout(UIView* v, CGRect rect) {
     if (!gPrefs.enabled) return;
     if (!drlPluginLoaded()) return;
     if (rect.size.width < 8.0 || rect.size.height < 8.0) return;
+    // 状态栏里有些是"内部小视图"(例如 9pt/4pt 的信号子视图), 环太小画了也看不见,
+    // 只画真正当作圆环显示的那种(插件环直径 = min(w,h), 实际约 14~16pt)
+    if (MIN(rect.size.width, rect.size.height) < 11.0) return;
 
     CGContextRef ctx = UIGraphicsGetCurrentContext();
     if (!ctx) return;
@@ -577,6 +586,14 @@ static void drlDrawReadout(UIView* v, CGRect rect) {
     }
 
     gNumberShown = YES;                                  // 屏幕上有数字了
+#if DRL_DIAG
+    static int s_drawOk = 0;
+    if (s_drawOk < 60) {
+        s_drawOk++;
+        drlLog(@"DRAW %@ text=%@ alpha=%.2f lw=%.2f r=%.2f center=(%.1f,%.1f)",
+               NSStringFromClass([v class]), text, st.alpha, g.lw, g.r, g.cx, g.cy);
+    }
+#endif
     CGFloat cx = g.cx, cyTop = g.cy - g.r;               // 数字圆心落在圆环走线上
 
     void (^drawOne)(NSString*, CGFloat, CGFloat) = ^(NSString* s, CGFloat dy, CGFloat a) {
