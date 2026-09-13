@@ -1,0 +1,34 @@
+name: Build Tweak
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-latest
+    env:
+      THEOS: ${{ github.workspace }}/theos
+    
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+
+      - name: 安装基础依赖
+        run: brew install ldid xz
+
+      - name: 部署 Theos 环境与 iOS SDK
+        run: |
+          git clone --recursive https://github.com/theos/theos.git $THEOS
+          git clone https://github.com/theos/sdks.git $THEOS/sdks
+
+      - name: 编译构建 deb 插件
+        run: make package FINALPACKAGE=1
+
+      - name: 上传输出文件
+        uses: actions/upload-artifact@v4
+        with:
+          name: DuoSimPatch-DEB
+          path: packages/*.deb
