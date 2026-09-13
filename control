@@ -1,0 +1,9 @@
+Package: com.yourname.duosimpatch
+Name: DuoSimPatch
+Depends: mobilesubstrate
+Version: 1.0.0
+Architecture: iphoneos-arm
+Description: Dual SIM and Battery Ring Patch
+Maintainer: Your Name
+Author: Your Name
+Section: Tweaks
