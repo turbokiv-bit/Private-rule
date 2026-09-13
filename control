@@ -1,0 +1,10 @@
+Package: iya.banana.idiringreadout
+Name: IDIRingReadout
+Version: 1.0
+Architecture: iphoneos-arm
+Description: iPhoneDuoIcon 主副卡圆环: 主卡环显示实时电量百分比, 副卡环只保留正常圆环(无数字)。需要先安装 iPhoneDuoIcon (iya.banana.iphoneduoicon)。
+Depends: ellekit | mobilesubstrate, firmware (>= 15.0)
+Section: Tweaks
+Maintainer: Minis
+Author: Minis
+Tag: purpose::extension
