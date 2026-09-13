@@ -1,0 +1,9 @@
+Package: com.callassist.duoringreadout
+Name: DuoRingReadout 圆环数字
+Version: 1.0
+Architecture: iphoneos-arm
+Description: 给 CAiPhoneDuoStatus 的圆环加上数字读数(电量%/信号%), 数字落在 12 点方向缺口处, 带淡入淡出。不改动插件本体。
+Depends: ellekit | mobilesubstrate
+Section: Tweaks
+Maintainer: you
+Author: you

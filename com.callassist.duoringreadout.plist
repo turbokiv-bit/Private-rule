@@ -1,0 +1,17 @@
+{
+    enabled     = 1;          // 总开关
+    fade        = 1;          // 出现/消失淡入淡出(0.28s) + 数字变化上滚淡换(0.2s)
+    sizeFactor  = 1.9;        // 字号 = 圆环线宽 × 该系数 (0.8~3.0)
+
+    // 每个"插件画的圆环"显示什么: "off" / "signal"(该环信号%) / "battery"(实时电量%)
+    numberPrimary   = "battery";   // 主卡环   -> 实时电量
+    numberSecondary = "off";       // 副卡环   -> 正常状态(不显示数字)
+    numberSingle    = "battery";   // 单卡机型 -> 实时电量
+    numberDual      = "off";       // 双卡合成环 -> 不显示
+    numberBattery   = "auto";      // 电量环: auto = 别处已显示电量时它就不显示
+
+    // 额外圆环: 给插件没画环的视图补一个"正常状态"的环(和插件同款几何, 无数字/无填充)
+    // 想关掉就把数组设为空: extraRings = ();
+    // 想给别的视图补环, 把类名换掉即可, 例如 WiFi: "STUIStatusBarWifiSignalView"
+    extraRings = ( "STUIStatusBarCellularNetworkTypeView", "_UIStatusBarCellularNetworkTypeView" );
+}
