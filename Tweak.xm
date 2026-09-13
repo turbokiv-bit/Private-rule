@@ -1,5 +1,10 @@
 #import <UIKit/UIKit.h>
 
+@interface _UIStatusBar : UIView
+- (void)triggerDualSimAndBatteryDrawInView:(UIView *)view primary:(NSInteger)primary secondary:(NSInteger)secondary battery:(NSInteger)battery;
+@end
+
+
 // 1. 声明系统数据模型 (新增电池数据接口)
 @interface _UIStatusBarDataCellularEntry : NSObject
 @property (assign,nonatomic) NSInteger displayValue; // 信号格数 (0-4)
