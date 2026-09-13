@@ -16,19 +16,23 @@ jobs:
           export THEOS=~/theos
           git clone --recursive https://github.com/theos/theos.git $THEOS --depth 1
 
-      - name: Install iPhoneOS SDK (arm64e)
+      - name: Install ldid (for code signing)
         run: |
-          export THEOS=~/theos
-          mkdir -p $THEOS/sdks
-          # 从 theos/sdks 拉 iPhoneOS16.5 (含 arm64e)
-          curl -fL -o sdk.tar.xz https://github.com/theos/sdks/raw/master/iPhoneOS16.5.sdk.tar.xz \
-            || curl -fL -o sdk.tar.xz https://github.com/xybp888/iOS-SDKs/releases/download/iOS-16.5/iPhoneOS16.5.sdk.tar.xz \
-            || echo "SDK download failed"
-          tar -xJf sdk.tar.xz -C $THEOS/sdks || echo "untar failed"
-          echo "== installed SDKs =="
-          ls -la $THEOS/sdks/
+          set -e
+          cd "$HOME"
+          if command -v ldid >/dev/null 2>&1; then
+            echo "ldid already present"
+          else
+            # Procursus 官方预编译 ldid (macOS arm64) — 已确认 URL
+            curl -fL -o ldid_bin https://github.com/ProcursusTeam/ldid/releases/download/v2.1.5-procursus7/ldid_macosx_arm64
+            sudo cp ldid_bin /usr/local/bin/ldid
+            sudo chmod +x /usr/local/bin/ldid
+            echo "installed ldid (Procursus)"
+          fi
+          echo "--- verify ---"
+          which ldid && ldid 2>&1 | head -1 || echo "ldid still missing"
 
-      - name: Build (arm64e)
+      - name: Build (arm64, uses Xcode built-in SDK)
         run: |
           export THEOS=~/theos
           export PATH=$THEOS/bin:$PATH
