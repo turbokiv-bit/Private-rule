@@ -50,6 +50,7 @@ typedef struct {
     BOOL       enabled;
     BOOL       drawMissing;   // 插件没画环的位置, 我们自己补一个环
     BOOL       splitDual;     // 双卡合成环: 擦掉合并环, 给每张卡各画一个
+    BOOL       selfRender;    // B 方案: 自己接管状态栏右侧, 自绘两个环
     BOOL       fade;
     NSString*  colorMode;    // auto(默认) / body / tint
     BOOL       outline;      // 数字加一层反色描边(任何背景都看得见)
@@ -70,6 +71,7 @@ static double   gStartTime = 0;            // 进程内起始时间(避免启动
 static void drlLog(NSString* fmt, ...);   // forward
 static double drlNow(void);               // forward
 static void drlInstallExtraRings(void);    // forward (额外圆环)
+static void drlOverlayRefresh(void);       // forward (自绘覆盖视图)
 
 static DRLContent drlContentFromString(NSString* s, DRLContent def) {
     if (![s isKindOfClass:[NSString class]]) return def;
@@ -129,6 +131,7 @@ static void drlEnsureDefaults(void) {
     CFPreferencesSetAppValue(CFSTR("enabled"),         kCFBooleanTrue, app);
     CFPreferencesSetAppValue(CFSTR("drawMissingRings"), kCFBooleanTrue, app);
     CFPreferencesSetAppValue(CFSTR("splitDualRings"),   kCFBooleanTrue, app);
+    CFPreferencesSetAppValue(CFSTR("selfRender"),       kCFBooleanTrue, app);
     CFPreferencesSetAppValue(CFSTR("fade"),            kCFBooleanTrue, app);
     CFPreferencesSetAppValue(CFSTR("sizeFactor"),      (__bridge CFNumberRef)@3.0, app);
     CFPreferencesSetAppValue(CFSTR("outline"),         kCFBooleanTrue, app);
@@ -146,6 +149,7 @@ static DRLPrefs drlPrefs(void) {
     p.enabled    = drlPrefBool(@"enabled", YES);
     p.drawMissing = drlPrefBool(@"drawMissingRings", YES);
     p.splitDual  = drlPrefBool(@"splitDualRings", YES);
+    p.selfRender = drlPrefBool(@"selfRender", YES);
     p.fade       = drlPrefBool(@"fade", YES);
     p.colorMode  = drlPrefString(@"numberColor") ?: @"auto";
     p.outline    = drlPrefBool(@"outline", YES);
@@ -330,8 +334,9 @@ static void drlInstallLiveBattery(void) {
             CFRelease(src);
         }
     }
-    [NSTimer scheduledTimerWithTimeInterval:30.0 repeats:YES block:^(NSTimer* t) {
+    [NSTimer scheduledTimerWithTimeInterval:15.0 repeats:YES block:^(NSTimer* t) {
         drlRefreshLiveViews();
+        drlOverlayRefresh();
     }];
     drlLog(@"live battery source installed, now %d%%", gLastLivePercent);
 }
@@ -657,6 +662,218 @@ static DRLState* drlStateForView(UIView* v) {
     return s;
 }
 
+// ============================== 完全自绘(B 方案) ==============================
+// 接管状态栏右侧: 擦掉插件画的环/点, 在状态栏前景视图上加一层透明覆盖视图,
+// 自己画 [副卡环][主卡环(实时电量数字)] —— 轨道 + 进度 + 扇形图标 + 4 个点。
+#define DRL_RING_D   24.0      // 环直径(pt)
+#define DRL_RING_GAP 4.0       // 两环间距
+
+static void   drlRenderRings(UIView* ov);
+static void   drlInstallOverlay(void);
+static void   drlCollectSignalRatios(UIView* v, NSMutableArray* out, int depth);
+
+@interface DRLOverlayView : UIView
+@end
+
+@implementation DRLOverlayView
+- (void)drawRect:(CGRect)rect { drlRenderRings(self); }
+- (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent*)event { return NO; }
+- (UIView*)hitTest:(CGPoint)point withEvent:(UIEvent*)event { return nil; }
+@end
+
+static __weak UIView* gOverlay = nil;
+static __weak UIView* gBatterySlot = nil;
+
+static void drlDrawFan(CGContextRef ctx, CGPoint c, CGFloat size, UIColor* color) {
+    CGContextSaveGState(ctx);
+    CGContextSetStrokeColorWithColor(ctx, color.CGColor);
+    CGContextSetFillColorWithColor(ctx, color.CGColor);
+    CGContextSetLineCap(ctx, kCGLineCapRound);
+    CGFloat cy = c.y + size * 0.18;
+    for (int i = 0; i < 3; i++) {
+        CGFloat rr = size * (1.0 - i * 0.34);
+        CGContextSetLineWidth(ctx, MAX(1.0, size * 0.22));
+        CGContextAddArc(ctx, c.x, cy, rr, M_PI * 1.22, M_PI * 1.78, 0);
+        CGContextStrokePath(ctx);
+    }
+    CGFloat d = MAX(1.6, size * 0.24);
+    CGContextFillEllipseInRect(ctx, CGRectMake(c.x - d / 2.0, cy + size * 0.62 - d / 2.0, d, d));
+    CGContextRestoreGState(ctx);
+}
+
+// 画一个环; clip = 允许绘制的范围(覆盖视图的 bounds)
+static void drlDrawRingAt(CGContextRef ctx, CGRect clip, CGPoint c, CGFloat D, double progress,
+                          UIColor* track, UIColor* fill, UIColor* fg,
+                          BOOL fan, NSString* text) {
+    if (D < 8.0) return;
+    CGFloat lw = MAX(kLineWidthRatio * D, 1.0);
+    CGFloat r  = D * 0.5 - kRadiusInset * lw;
+    if (r <= 2.0) return;
+    const double start = 163.8 * M_PI / 180.0;
+    const double sweep = 212.4 * M_PI / 180.0;
+
+    CGContextSaveGState(ctx);
+    CGContextSetLineWidth(ctx, lw);
+    CGContextSetLineCap(ctx, kCGLineCapRound);
+    CGContextSetStrokeColorWithColor(ctx, track.CGColor);
+    CGContextAddArc(ctx, c.x, c.y, r, start, start + sweep, 0);
+    CGContextStrokePath(ctx);
+    if (progress > 0.001) {
+        CGContextSetStrokeColorWithColor(ctx, fill.CGColor);
+        CGContextAddArc(ctx, c.x, c.y, r, start, start + sweep * progress, 0);
+        CGContextStrokePath(ctx);
+    }
+    CGContextSetFillColorWithColor(ctx, fg.CGColor);     // 4 个信号点
+    CGFloat dd = MAX(1.6, lw * 0.55);
+    for (int i = 0; i < 4; i++) {
+        double a = (90.0 + ((double)i - 1.5) * 26.0) * M_PI / 180.0;
+        CGPoint p = CGPointMake(c.x + r * cos(a), c.y + r * sin(a));
+        CGContextFillEllipseInRect(ctx, CGRectMake(p.x - dd / 2.0, p.y - dd / 2.0, dd, dd));
+    }
+    if (fan) drlDrawFan(ctx, CGPointMake(c.x, c.y - D * 0.04), D * 0.30, fg);
+
+    if (text.length) {
+        UIFont* font = [UIFont systemFontOfSize:lw * 2.6 weight:UIFontWeightBold];
+        CGFloat rr = 0, gg = 0, bb = 0, aa = 0;
+        [fg getRed:&rr green:&gg blue:&bb alpha:&aa];
+        double lum = 0.299 * rr + 0.587 * gg + 0.114 * bb;
+        UIColor* stroke = (lum > 0.5) ? [UIColor blackColor] : [UIColor whiteColor];
+        NSDictionary* attrs = @{ NSFontAttributeName: font,
+                                 NSForegroundColorAttributeName: fg,
+                                 NSStrokeColorAttributeName: stroke,
+                                 NSStrokeWidthAttributeName: @(-2.5) };
+        CGSize ts = [text sizeWithAttributes:attrs];
+
+        double halfGap = (ts.width / 2.0 + lw * 0.30) / r;   // 顶部挖缺口
+        if (halfGap > 1.2) halfGap = 1.2;
+        CGContextSetBlendMode(ctx, kCGBlendModeClear);
+        CGContextSetLineWidth(ctx, lw * 2.0);
+        CGContextAddArc(ctx, c.x, c.y, r, kTopAngle - halfGap, kTopAngle + halfGap, 0);
+        CGContextStrokePath(ctx);
+        CGContextSetBlendMode(ctx, kCGBlendModeNormal);
+
+        CGRect trc = CGRectMake(c.x - ts.width / 2.0, c.y - r - ts.height / 2.0, ts.width, ts.height);
+        trc.origin.x = MAX(clip.origin.x, MIN(trc.origin.x, CGRectGetMaxX(clip) - ts.width));
+        trc.origin.y = MAX(clip.origin.y, MIN(trc.origin.y, CGRectGetMaxY(clip) - ts.height));
+        [text drawInRect:trc withAttributes:attrs];
+    }
+    CGContextRestoreGState(ctx);
+}
+
+// 副卡的信号比例(找不到就返回 0.5 = 正常状态的一半)
+static double drlSecondarySignalFraction(void) {
+    NSMutableArray* ratios = [NSMutableArray array];
+    for (UIWindow* w in UIApplication.sharedApplication.windows) {
+        if (w.hidden) continue;
+        drlCollectSignalRatios(w, ratios, 0);
+        if (ratios.count >= 2) break;
+    }
+    if (ratios.count == 0) return 0.5;
+    if (ratios.count == 1) return [ratios[0] doubleValue];
+    return [ratios[1] doubleValue];
+}
+
+static void drlCollectSignalRatios(UIView* v, NSMutableArray* out, int depth) {
+    if (!v || depth > 8 || out.count >= 4) return;
+    if ([v respondsToSelector:NSSelectorFromString(@"numberOfActiveBars")]) {
+        long long bars = [(id)v numberOfActiveBars];
+        long long total = 4;
+        if ([v respondsToSelector:NSSelectorFromString(@"numberOfBars")]) {
+            long long t = [(id)v numberOfBars];
+            if (t > 0 && t <= 8) total = t;
+        }
+        if (total > 0) {
+            double f = (double)bars / (double)total;
+            [out addObject:@(MAX(0.0, MIN(1.0, f)))];
+        }
+    }
+    for (UIView* s in v.subviews) drlCollectSignalRatios(s, out, depth + 1);
+}
+
+// ---- 真正画: 副卡环(左) + 主卡环(右, 带实时电量数字) ----
+static void drlRenderRings(UIView* ov) {
+    CGContextRef ctx = UIGraphicsGetCurrentContext();
+    if (!ctx) return;
+    if (!gPrefs.enabled || !gPrefs.selfRender) return;
+    CGRect b = ov.bounds;
+
+    UIView* slot = gBatterySlot;
+    UIColor* fg;
+    if (slot && drlInControlCenter(slot)) slot = nil;
+    fg = slot ? drlPickColor(slot) : [UIColor whiteColor];
+    UIColor* track = [fg colorWithAlphaComponent:0.28];
+
+    // 定位: 用电池项目在屏幕上的实际位置; 拿不到就默认右上角
+    CGRect slotRect = CGRectMake(b.size.width - 62.0, b.size.height * 0.30, DRL_RING_D, DRL_RING_D);
+    if (slot && slot.window) {
+        CGRect r0 = [slot convertRect:slot.bounds toView:ov];
+        if (r0.size.width > 4.0 && r0.size.height > 4.0 && r0.origin.y >= -20.0) slotRect = r0;
+    }
+    CGFloat cy = CGRectGetMidY(slotRect);
+    CGFloat cxMain = CGRectGetMidX(slotRect);
+    CGFloat cxSub  = cxMain - DRL_RING_D - DRL_RING_GAP;
+
+    int pct = (gLastLivePercent >= 0) ? gLastLivePercent : drlLiveBatteryPercent();
+    if (pct < 0) pct = 0;
+    double mainP = MAX(0.0, MIN(1.0, (double)pct / 100.0));
+    UIColor* mainFill = (pct <= 20) ? [UIColor systemRedColor] : fg;
+    double subP = drlSecondarySignalFraction();
+
+    // 副卡环: 正常状态(有信号进度, 无数字)
+    drlDrawRingAt(ctx, b, CGPointMake(cxSub, cy), DRL_RING_D, subP, track, fg, fg, YES, nil);
+    // 主卡环: 实时电量(进度 + 数字)
+    NSString* txt = [NSString stringWithFormat:@"%d", pct];
+    drlDrawRingAt(ctx, b, CGPointMake(cxMain, cy), DRL_RING_D, mainP, track, mainFill, fg, YES, txt);
+
+#if DRL_DIAG
+    static int s_rr = 0;
+    if (s_rr < 8) {
+        s_rr++;
+        drlLog(@"RENDER rings slot=%@ main=(%.1f,%.1f) pct=%d subP=%.2f fg=(%.2f,%.2f,%.2f)",
+               NSStringFromCGRect(slotRect), cxMain, cy, pct, subP, 0.0, 0.0, 0.0);
+    }
+#endif
+}
+
+// ---- 在前景视图上挂覆盖视图 ----
+static UIView* drlFindForegroundView(UIView* v, int depth) {
+    if (!v || depth > 6) return nil;
+    NSString* cn = NSStringFromClass([v class]);
+    if ([cn containsString:@"StatusBarForegroundView"] || [cn containsString:@"StatusBar"]) {
+        if (CGRectGetWidth(v.bounds) > 100.0 && CGRectGetHeight(v.bounds) > 10.0) return v;
+    }
+    for (UIView* s in v.subviews) {
+        UIView* r = drlFindForegroundView(s, depth + 1);
+        if (r) return r;
+    }
+    return nil;
+}
+
+static void drlOverlayRefresh(void) {
+    drlInstallOverlay();
+    if (gOverlay) [gOverlay setNeedsDisplay];
+}
+
+static void drlInstallOverlay(void) {
+    if (!gPrefs.selfRender) return;
+    if (gOverlay && gOverlay.superview) return;                 // 已挂
+    UIView* host = nil;
+    for (UIWindow* w in UIApplication.sharedApplication.windows) {
+        host = drlFindForegroundView(w, 0);
+        if (host) break;
+    }
+    if (!host) return;
+    DRLOverlayView* ov = [[DRLOverlayView alloc] initWithFrame:host.bounds];
+    ov.backgroundColor = [UIColor clearColor];
+    ov.opaque = NO;
+    ov.userInteractionEnabled = NO;
+    ov.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    ov.layer.zPosition = 9999;
+    [host addSubview:ov];
+    gOverlay = ov;
+    drlLog(@"overlay installed on %@ bounds=%@", NSStringFromClass([host class]), NSStringFromCGRect(host.bounds));
+}
+
 // ============================== 绘制 ==============================
 static void drlDrawReadout(UIView* v, CGRect rect) {
 #if DRL_DIAG
@@ -681,10 +898,19 @@ static void drlDrawReadout(UIView* v, CGRect rect) {
     // 状态栏里有些是"内部小视图"(例如 9pt/4pt 的信号子视图), 环太小画了也看不见,
     // 只画真正当作圆环显示的那种(插件环直径 = min(w,h), 实际约 14~16pt)
     if (MIN(rect.size.width, rect.size.height) < 11.0) return;
-    if (v.hidden || v.alpha <= 0.05) return;          // 状态栏里很多项目是隐藏的, 别浪费力气
+    // 注意: hidden/alpha 的检查放在下面"容器诊断"日志之后
 
     CGContextRef ctx = UIGraphicsGetCurrentContext();
     if (!ctx) return;
+
+    if (gPrefs.selfRender) {
+        @try { CGContextClearRect(ctx, rect); } @catch (NSException* e) { }
+        if ([v respondsToSelector:NSSelectorFromString(@"chargePercent")]) {
+            gBatterySlot = v;
+            drlOverlayRefresh();
+        }
+        return;
+    }
 
     int pct = 0;
     BOOL has = drlPercentForView(v, &pct);
@@ -736,6 +962,10 @@ static void drlDrawReadout(UIView* v, CGRect rect) {
 
     if (needRedraw) [v setNeedsDisplay];
     if (!text || st.alpha <= 0.02) return;
+
+    if (v.hidden || v.alpha <= 0.05) {                 // 隐藏的项目不画(但上面已记录诊断)
+        return;
+    }
 
     // ---------- 容器类视图(双卡合成环): 拆成"每张卡一个环" ----------
     BOOL isBatteryV0 = [v respondsToSelector:NSSelectorFromString(@"chargePercent")];
@@ -862,8 +1092,12 @@ static void drlDrawReadout(UIView* v, CGRect rect) {
     void (^drawOne)(NSString*, CGFloat, CGFloat) = ^(NSString* s, CGFloat dy, CGFloat a) {
         if (!s || a <= 0.02) return;
         CGSize sz = [s sizeWithAttributes:attrsFor(1.0)];
-        [s drawInRect:CGRectMake(cx - sz.width / 2.0, cyTop - sz.height / 2.0 + dy, sz.width, sz.height)
-       withAttributes:attrsFor(a)];
+        CGFloat x = cx - sz.width / 2.0;
+        CGFloat y = cyTop - sz.height / 2.0 + dy;
+        // 夹在视图范围内, 否则上边缘会把数字切掉
+        x = MAX(0.0, MIN(x, rect.size.width  - sz.width));
+        y = MAX(0.0, MIN(y, rect.size.height - sz.height));
+        [s drawInRect:CGRectMake(x, y, sz.width, sz.height) withAttributes:attrsFor(a)];
     };
 
     if (st.prevText && tr < 1.0) {                       // 上滚: 旧的往上走淡出, 新的从下面上来淡入
@@ -874,9 +1108,12 @@ static void drlDrawReadout(UIView* v, CGRect rect) {
     }
 }
 
+
 // ============================== Hook ==============================
 static NSArray<NSString*>* drlRingClasses(void) {
-    return @[ @"STUIStatusBarCellularSignalView",
+    return @[ @"STUIStatusBarWifiSignalView",
+              @"_UIStatusBarWifiSignalView",
+              @"STUIStatusBarCellularSignalView",
               @"_UIStatusBarCellularSignalView",
               @"STUIStatusBarDualCellularSignalView",
               @"_UIStatusBarDualCellularSignalView",
@@ -1027,6 +1264,7 @@ static void drlInstallHooks(void) {
         drlLog(@"hooked %@  drawRect:(orig=%p) setChargePercent:(orig=%p) setBars:(orig=%p)",
                names[i], old, oldC, oldB);
     }
+    drlInstallOverlay();
     int broad = drlHookAllStatusBarClasses();
     drlLog(@"broad hook: %d StatusBar classes", broad);
     drlLog(@"install done, %d class(es); primary=%ld secondary=%ld single=%ld dual=%ld battery=%ld size=%.2f",
@@ -1038,7 +1276,7 @@ static void drlInstallHooks(void) {
 // "我们的 original = 插件的实现", 顺序才正确。
 __attribute__((constructor)) static void drlInit(void) {
     // ---- 诊断: 证明补丁本身有没有被加载 ----
-    drlLog(@"=== DuoRingReadout LOADED v1.7 pid=%d ===", getpid());
+    drlLog(@"=== DuoRingReadout LOADED v2.0 pid=%d ===", getpid());
     uint32_t imgN = _dyld_image_count();
     drlLog(@"images=%u; 相关镜像:", imgN);
     for (uint32_t i = 0; i < imgN; i++) {
