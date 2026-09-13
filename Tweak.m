@@ -49,6 +49,7 @@ typedef NS_ENUM(NSInteger, DRLContent) {
 typedef struct {
     BOOL       enabled;
     BOOL       fade;
+    NSString*  colorMode;    // auto(默认) / body / tint
     double     sizeFactor;
     DRLContent cPrimary;     // 主卡环
     DRLContent cSecondary;   // 副卡环
@@ -138,6 +139,7 @@ static DRLPrefs drlPrefs(void) {
     DRLPrefs p;
     p.enabled    = drlPrefBool(@"enabled", YES);
     p.fade       = drlPrefBool(@"fade", YES);
+    p.colorMode  = drlPrefString(@"numberColor") ?: @"auto";
     p.sizeFactor = drlPrefDouble(@"sizeFactor", 3.0);
     if (p.sizeFactor < 0.8) p.sizeFactor = 0.8;
     if (p.sizeFactor > 5.0) p.sizeFactor = 5.0;
@@ -363,21 +365,30 @@ static DRLContent drlEffectiveContent(DRLRole role, BOOL isBatteryView, BOOL isB
         case DRLRoleSingle:    c = gPrefs.cSingle;    break;
         case DRLRoleDual:      c = gPrefs.cDual;      break;
     }
-    if (c != DRLContentOff) return c;
-
     double up = (gStartTime > 0.0) ? (drlNow() - gStartTime) : 0.0;
 
-    if (role == DRLRoleBattery && gPrefs.cBattery == DRLContentAuto) {
-        if (gPrefs.cPrimary == DRLContentBattery && gPrimarySeen) return DRLContentOff;
-        if (gPrefs.cSingle  == DRLContentBattery && gSingleSeen)  return DRLContentOff;
-        return (up > 1.5) ? DRLContentBattery : DRLContentOff;   // 没有别的环顶上 -> 电量环显示
+    // auto 只对"电量环"有意义
+    if (c == DRLContentAuto) {
+        if (role != DRLRoleBattery) {
+            c = DRLContentOff;
+        } else if (gPrefs.cPrimary == DRLContentBattery && gPrimarySeen) {
+            c = DRLContentOff;
+        } else if (gPrefs.cSingle == DRLContentBattery && gSingleSeen) {
+            c = DRLContentOff;
+        } else {
+            c = (up > 1.5) ? DRLContentBattery : DRLContentOff;
+        }
     }
-    if (up > 3.0 && !gNumberShown && isBarsView) return DRLContentBattery;  // 兜底
+    if (c != DRLContentOff) return c;
+    // 兜底: 3 秒后屏幕上还没有任何数字 -> 信号环顶上显示实时电量
+    if (up > 3.0 && !gNumberShown && isBarsView) return DRLContentBattery;
     return DRLContentOff;
 }
 
 // ============================== 取值 ==============================
 static const void* kDRLCapturedKey = &kDRLCapturedKey;   // NSNumber: 最近一次 setter 的值
+static DRLRole    gLastRole = DRLRoleSingle;             // 仅供日志
+static DRLContent gLastContent = DRLContentOff;
 
 @interface NSObject (DRLPrivate)
 - (double)chargePercent;          // *_BatteryView / *_StaticBatteryView
@@ -397,6 +408,7 @@ static BOOL drlPercentForView(UIView* v, int* outPercent) {
     else if (role == DRLRoleSecondary)          gSecondarySeen = YES;
     else if (role == DRLRoleSingle)             gSingleSeen  = YES;
     DRLContent c = drlEffectiveContent(role, batteryView, barsView);
+    gLastRole = role; gLastContent = c;
     if (c == DRLContentOff) return NO;
 
     if (c == DRLContentBattery) {
@@ -440,16 +452,19 @@ static BOOL drlPercentForView(UIView* v, int* outPercent) {
 }
 
 static UIColor* drlNumberColor(UIView* v) {
-    UIColor* c = nil;
-    if ([v respondsToSelector:NSSelectorFromString(@"bodyColor")]) c = [(id)v bodyColor];
-    if ((!c || CGColorGetAlpha(c.CGColor) < 0.05) && v.tintColor) c = v.tintColor;
-    if (!c || CGColorGetAlpha(c.CGColor) < 0.05) {
-        // 退路: 按状态栏明暗取黑/白 (状态栏视图的 traitCollection 跟随前台 App 的样式)
-        BOOL dark = NO;
-        if (@available(iOS 12.0, *)) dark = (v.traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark);
-        c = dark ? [UIColor whiteColor] : [UIColor blackColor];
+    NSString* mode = gPrefs.colorMode ?: @"auto";
+
+    if ([mode isEqualToString:@"body"] && [v respondsToSelector:NSSelectorFromString(@"bodyColor")]) {
+        UIColor* c = [(id)v bodyColor];
+        if (c && CGColorGetAlpha(c.CGColor) > 0.05) return c;
     }
-    return c;
+    if ([mode isEqualToString:@"tint"] && v.tintColor && CGColorGetAlpha(v.tintColor.CGColor) > 0.05) {
+        return v.tintColor;
+    }
+    // auto(默认): 跟状态栏明暗走(亮底黑字/暗底白字) —— 和视频里一致
+    BOOL dark = NO;
+    if (@available(iOS 12.0, *)) dark = (v.traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark);
+    return dark ? [UIColor whiteColor] : [UIColor blackColor];
 }
 
 // ============================== 动画状态 ==============================
@@ -508,9 +523,8 @@ static void drlDrawReadout(UIView* v, CGRect rect) {
     static int s_drawLogs = 0;
     if (s_drawLogs < 100) {
         s_drawLogs++;
-        DRLRole _r = drlRoleOfView(v);
-        drlLog(@"     -> role=%ld content=%ld has=%d pct=%d", (long)_r,
-               (long)drlEffectiveContent(_r, NO, NO), has, pct);
+        drlLog(@"     -> role=%ld content=%ld has=%d pct=%d",
+               (long)gLastRole, (long)gLastContent, has, pct);
     }
 #endif
     NSString* text = has ? [NSString stringWithFormat:@"%d", pct] : nil;
@@ -704,6 +718,27 @@ static int drlHookAllStatusBarClasses(void) {
     return hooked;
 }
 
+// ---- 诊断: 把状态栏里相关视图的 frame 打出来(判断主卡/副卡各在哪) ----
+static void drlDumpView(UIView* v, int depth, int* budget) {
+    if (!v || depth > 4 || *budget <= 0) return;
+    (*budget)--;
+    NSString* pad = [@"" stringByPaddingToLength:(NSUInteger)(depth * 2) withString:@" " startingAtIndex:0];
+    drlLog(@"%@%@ frame=%@ hidden=%d alpha=%.1f",
+           pad, NSStringFromClass([v class]), NSStringFromCGRect(v.frame), v.hidden, v.alpha);
+    for (UIView* sub in v.subviews) drlDumpView(sub, depth + 1, budget);
+}
+
+static void drlDumpStatusBar(void) {
+    int budget = 70;
+    for (UIWindow* w in UIApplication.sharedApplication.windows) {
+        CGFloat lvl = w.windowLevel;
+        if (lvl < UIWindowLevelStatusBar - 1.0 || lvl > UIWindowLevelStatusBar + 1.0) continue;
+        drlLog(@"--- statusbar window %@ level=%.0f ---", NSStringFromClass([w class]), (double)lvl);
+        drlDumpView(w, 0, &budget);
+    }
+    drlLog(@"--- dump end (budget left %d) ---", budget);
+}
+
 static void drlInstallHooks(void) {
     if (gStartTime <= 0.0) gStartTime = drlNow();
     drlEnsureDefaults();
@@ -770,6 +805,10 @@ __attribute__((constructor)) static void drlInit(void) {
                    dispatch_get_main_queue(), ^{
         drlInstallHooks();
     });
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.5 * NSEC_PER_SEC)),
+                   dispatch_get_main_queue(), ^{
+        drlDumpStatusBar();
+    });
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5.0 * NSEC_PER_SEC)),
                    dispatch_get_main_queue(), ^{
         NSArray<NSString*>* names = drlRingClasses();
@@ -801,6 +840,9 @@ static UIColor* drlTrackColor(UIView* v) {
 }
 
 static void drlUpdateExtraRing(UIView* v) {
+    // 只处理"状态栏窗口"里的视图, 避免控制中心/App 里同类视图也被套环
+    CGFloat lvl = v.window.windowLevel;
+    if (!(lvl >= UIWindowLevelStatusBar - 0.5 && lvl <= UIWindowLevelStatusBar + 0.5)) return;
     CGRect b = v.bounds;
     if (b.size.width < 6.0 || b.size.height < 6.0) return;
     CGFloat minDim = MIN(b.size.width, b.size.height);
@@ -842,7 +884,7 @@ static NSArray<NSString*>* drlExtraRingClasses(void) {
         CFRelease(v);
     }
     if (arr) return arr;
-    return @[ @"STUIStatusBarCellularNetworkTypeView", @"_UIStatusBarCellularNetworkTypeView" ];
+    return @[];      // 默认关闭: 之前它连控制中心里的同类视图也会套环
 }
 
 static IMP gOrigLayout[DRL_MAX];
