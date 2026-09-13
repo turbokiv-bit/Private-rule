@@ -18,10 +18,18 @@
 #import <objc/message.h>   // objc_msgSend (新 SDK 里 runtime.h 不再包含)
 #import <QuartzCore/QuartzCore.h>
 #import <dlfcn.h>
+#include <stdio.h>
+#include <string.h>
+#include <unistd.h>
+#include <sys/stat.h>
 #import <mach-o/dyld.h>
 
 // ============================== 配置 ==============================
-#define DRL_LOG 1
+#define DRL_LOG  1
+// 诊断: 所有日志同时写进文件(Filza 可直接看/发出来)。排查完可以设成 0。
+#define DRL_DIAG 1
+#define DRL_LOG_FILE   "/var/mobile/Media/DuoReadout.log"
+#define DRL_LOG_FILE2  "/var/mobile/Library/Caches/DuoReadout.log"
 static NSString* const kPrefDomain = @"com.callassist.duoringreadout";
 
 // 插件圆环的几何常量 (从 CAiPhoneDuoStatus 1.5.10 反汇编得到, 勿随意改)
@@ -133,12 +141,28 @@ static DRLPrefs drlPrefs(void) {
     return p;
 }
 
+static void drlLogToFiles(NSString* line) {
+#if DRL_DIAG
+    const char* paths[2] = { DRL_LOG_FILE, DRL_LOG_FILE2 };
+    for (int i = 0; i < 2; i++) {
+        struct stat st;
+        if (stat(paths[i], &st) == 0 && st.st_size > 256 * 1024) unlink(paths[i]);  // 简单轮转
+        FILE* f = fopen(paths[i], "a");
+        if (!f) continue;
+        const char* c = line.UTF8String;
+        if (c) fwrite(c, 1, strlen(c), f);
+        fclose(f);
+    }
+#endif
+}
+
 static void drlLog(NSString* fmt, ...) {
 #if DRL_LOG
     va_list ap; va_start(ap, fmt);
     NSString* s = [[NSString alloc] initWithFormat:fmt arguments:ap];
     va_end(ap);
     NSLog(@"[DuoReadout] %@", s);
+    drlLogToFiles([NSString stringWithFormat:@"[DuoReadout] %@\n", s]);
 #endif
 }
 
@@ -444,6 +468,15 @@ static DRLState* drlStateForView(UIView* v) {
 
 // ============================== 绘制 ==============================
 static void drlDrawReadout(UIView* v, CGRect rect) {
+#if DRL_DIAG
+    static int s_enterLogs = 0;
+    if (s_enterLogs < 100) {
+        s_enterLogs++;
+        drlLog(@"ENTER draw %@ rect=%@ enabled=%d plugin=%d",
+               NSStringFromClass([v class]), NSStringFromCGRect(rect),
+               gPrefs.enabled, drlPluginLoaded());
+    }
+#endif
     if (!gPrefs.enabled) return;
     if (!drlPluginLoaded()) return;
     if (rect.size.width < 8.0 || rect.size.height < 8.0) return;
@@ -453,6 +486,15 @@ static void drlDrawReadout(UIView* v, CGRect rect) {
 
     int pct = 0;
     BOOL has = drlPercentForView(v, &pct);
+#if DRL_DIAG
+    static int s_drawLogs = 0;
+    if (s_drawLogs < 100) {
+        s_drawLogs++;
+        DRLRole _r = drlRoleOfView(v);
+        drlLog(@"     -> role=%ld content=%ld has=%d pct=%d", (long)_r,
+               (long)drlContentForRole(_r), has, pct);
+    }
+#endif
     NSString* text = has ? [NSString stringWithFormat:@"%d", pct] : nil;
 
     // ---------- 状态机 ----------
@@ -633,6 +675,19 @@ static void drlInstallHooks(void) {
 // 插件在进程启动早期就 hook 了同样的方法; 我们延迟安装以确保
 // "我们的 original = 插件的实现", 顺序才正确。
 __attribute__((constructor)) static void drlInit(void) {
+    // ---- 诊断: 证明补丁本身有没有被加载 ----
+    drlLog(@"=== DuoRingReadout LOADED pid=%d ===", getpid());
+    uint32_t imgN = _dyld_image_count();
+    drlLog(@"images=%u; 相关镜像:", imgN);
+    for (uint32_t i = 0; i < imgN; i++) {
+        const char* nm = _dyld_get_image_name(i);
+        if (!nm) continue;
+        if (strstr(nm, "Duo") || strstr(nm, "CAiPhone") || strstr(nm, "caiphoneduostatus") ||
+            strstr(nm, "DynamicLibraries") || strstr(nm, "TrollFools") || strstr(nm, "DuoRing"))
+            drlLog(@"   img[%u] %s", i, nm);
+    }
+    drlLog(@"plugin(CAiPhoneDuoStatus) loaded? %@", drlPluginLoaded() ? @"YES" : @"NO");
+
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)),
                    dispatch_get_main_queue(), ^{
         drlInstallHooks();
