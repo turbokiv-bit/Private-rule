@@ -19,10 +19,12 @@ jobs:
       - name: 安装基础依赖
         run: brew install ldid xz
 
-      - name: 部署 Theos 环境与 iOS SDK
+      - name: Setup Theos & iOS SDK
         run: |
           git clone --recursive https://github.com/theos/theos.git $THEOS
+          rm -rf $THEOS/sdks
           git clone https://github.com/theos/sdks.git $THEOS/sdks
+
 
       - name: 编译构建 deb 插件
         run: make package FINALPACKAGE=1
