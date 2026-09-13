@@ -1,7 +1,7 @@
 payload:
     - +.ir
     - +.xn--mgba3a4f16a
-    - +.adivery.com
+    - +.arman-ati.com
     - +.loxblog.com
     - +.niniweblog.com
     - +.rozblog.com
@@ -21,6 +21,37 @@ payload:
     - +.mahex.com
     - +.podro.com
     - +.tipaxco.com
+    - +.bale.ai
+    - +.eitaa.com
+    - +.gap.im
+    - +.gaplication.com
+    - +.niniban.com
+    - +.ninisite.com
+    - +.virasty.com
+    - +.abrha.net
+    - +.afranet.com
+    - +.arvancloud.com
+    - +.arzex.io
+    - +.cafebazaar.org
+    - +.datisnetwork.com
+    - +.farsroid.com
+    - +.ipnumberia.com
+    - +.iranmobile.org
+    - +.iranserver.com
+    - +.mihanwebhost.com
+    - +.p30download.com
+    - +.parsonline.com
+    - +.parspack.com
+    - +.pazhnetwork.com
+    - +.picofile.com
+    - +.pishgaman.net
+    - +.sarmayex.com
+    - +.sarzamindownload.com
+    - +.skyroom.online
+    - +.smshooshmand.com
+    - +.softgozar.com
+    - +.yasdl.com
+    - +.zhaket.com
     - +.agri-bank.com
     - +.ansarbank.com
     - +.blubank.com
@@ -29,7 +60,6 @@ payload:
     - +.sb24.com
     - +.mellatbroker.com
     - +.talarebourse.com
-    - +.arman-ati.com
     - +.maskanbourse.com
     - +.abanbroker.com
     - +.bahmanbroker.com
@@ -63,6 +93,19 @@ payload:
     - +.tabdeal.org
     - +.tetherland.com
     - +.agrieng.org
+    - +.blogfa.com
+    - +.blogsky.com
+    - +.sanjesh.org
+    - +.sharif.edu
+    - +.srttu.edu
+    - +.faradars.org
+    - +.maktabkhooneh.org
+    - +.newdars.com
+    - +.toplearn.com
+    - +.melotar.com
+    - +.iranlms.org
+    - +.webinarplus.online
+    - +.quera.org
     - +.mellatinsurance.com
     - +.bimehasia.com
     - +.dana-insurance.com
@@ -71,52 +114,8 @@ payload:
     - +.bimeonline.com
     - +.novininsurance.com
     - +.sinainsurance.com
-    - +.digi-kala.com
-    - +.janebi.com
-    - +.sheypoor.com
-    - +.torob.com
-    - +.digikala.com
-    - +.digikalabusiness.com
-    - +.digikalajet.com
-    - +.digistyle.com
-    - +.divar.cloud
-    - +.divarcdn.com
-    - +.cdnsnapptrip.com
-    - +.snapp-box.com
-    - +.snapp.cab
-    - +.snapp.doctor
-    - +.snapp.express
-    - +.snapp.ninja
-    - +.snapp.site
-    - +.snapp.supply
-    - +.snapp.taxi
-    - +.kaprila.com
-    - +.snappcloud.io
-    - +.snappfood.dev
-    - +.snapproom.com
     - +.snapptrip.com
-    - +.blogfa.com
-    - +.blogsky.com
-    - +.snapp.tech
-    - +.najva.com
-    - +.sabavision.com
-    - +.yektanet.com
-    - +.faradars.org
-    - +.maktabkhooneh.org
-    - +.newdars.com
-    - +.toplearn.com
-    - +.melotar.com
-    - +.iranlms.org
-    - +.webinarplus.online
-    - +.cinematicket.org
-    - +.melodify.app
-    - +.melodify.pw
-    - +.telewebion.com
-    - +.aparat.com
-    - +.aparatkids.com
-    - +.aparatsport.com
-    - +.filimo.com
-    - +.filimo.school
+    - +.snapproom.com
     - +.asriran.com
     - +.eghtesadnews.com
     - +.fararu.com
@@ -140,8 +139,20 @@ payload:
     - +.khorasannews.com
     - +.resalat-news.com
     - +.tehrantimes.com
-    - +.tapsi.cab
-    - +.tap33.me
+    - +.adivery.com
+    - +.kaprila.com
+    - +.najva.com
+    - +.sabavision.com
+    - +.yektanet.com
+    - +.cinematicket.org
+    - +.melodify.app
+    - +.melodify.pw
+    - +.telewebion.com
+    - +.aparat.com
+    - +.aparatkids.com
+    - +.aparatsport.com
+    - +.filimo.com
+    - +.filimo.school
     - +.vandar.app
     - +.behpardakht.com
     - +.bitbarg.me
@@ -151,41 +162,30 @@ payload:
     - +.asanpardakht.com
     - +.vandar.io
     - +.weswap.digital
-    - +.tap30.services
-    - +.sanjesh.org
-    - +.sharif.edu
-    - +.srttu.edu
-    - +.mrbilit.com
-    - +.abrha.net
-    - +.afranet.com
-    - +.arvancloud.com
-    - +.arzex.io
-    - +.cafebazaar.org
-    - +.datisnetwork.com
-    - +.farsroid.com
-    - +.ipnumberia.com
-    - +.iranmobile.org
-    - +.iranserver.com
-    - +.mihanwebhost.com
-    - +.p30download.com
-    - +.parsonline.com
-    - +.parspack.com
-    - +.pazhnetwork.com
-    - +.picofile.com
-    - +.pishgaman.net
-    - +.sarmayex.com
-    - +.sarzamindownload.com
-    - +.skyroom.online
-    - +.smshooshmand.com
-    - +.softgozar.com
-    - +.yasdl.com
-    - +.zhaket.com
-    - +.quera.org
-    - +.bale.ai
-    - +.eitaa.com
-    - +.gap.im
-    - +.gaplication.com
-    - +.niniban.com
-    - +.ninisite.com
-    - +.virasty.com
+    - +.digi-kala.com
+    - +.janebi.com
+    - +.sheypoor.com
+    - +.torob.com
+    - +.digikala.com
+    - +.digikalabusiness.com
+    - +.digikalajet.com
+    - +.digistyle.com
+    - +.divar.cloud
+    - +.divarcdn.com
     - +.flightio.com
+    - +.mrbilit.com
+    - +.tap30.services
+    - +.tap33.me
+    - +.tapsi.cab
+    - +.cdnsnapptrip.com
+    - +.snapp-box.com
+    - +.snapp.cab
+    - +.snapp.doctor
+    - +.snapp.express
+    - +.snapp.ninja
+    - +.snapp.site
+    - +.snapp.supply
+    - +.snapp.taxi
+    - +.snapp.tech
+    - +.snappcloud.io
+    - +.snappfood.dev

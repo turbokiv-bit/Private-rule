@@ -1,6 +1,6 @@
 payload:
-    - +.gpall.cn
-    - +.sf-express.com
+    - +.tianxiajiameng.com
+    - +.56xiniao.com
     - +.guoocang.com
     - +.qianyierp.com
     - +.800best.com
@@ -29,16 +29,6 @@ payload:
     - +.xinyuanfin.com
     - +.youyierp.com
     - +.youyitms.com
-    - +.sffix.cn
-    - +.56xiniao.com
-    - +.cainiao-inc.com
-    - +.cainiao.com
-    - +.cainiaoyizhan.com
-    - +.danniao.com
-    - +.dianwoda.cn
-    - +.dianwoda.com
-    - +.guoguo-app.com
-    - +.sfcar.hk
     - +.upfos.cn
     - +.upfos.com
     - +.jtexpress.com
@@ -58,15 +48,20 @@ payload:
     - +.jetlogistic.com
     - +.jtg2g.com
     - +.jtexpress.top
-    - +.sfbuy.com
-    - +.sf-international.com
-    - +.sfgy.org
+    - +.ckd.im
+    - +.kd100.com
+    - +.kuaidi100.com
+    - +.kuaidilab.com
     - +.sto-express.cn
     - +.sto-express.com
     - +.sto.cn
     - +.stointl.com
     - +.stosolution.com
-    - +.feng1.com
+    - +.udalogistic.cn
+    - +.udalogistic.com
+    - +.yundaltl.com
+    - +.yundalog.com
+    - +.yunda56.com
     - +.yt0.cc
     - +.yto-jsd.com
     - +.kjwugx.com
@@ -77,14 +72,14 @@ payload:
     - +.yuantongyizhan.com
     - +.nellit.info
     - +.nellit.net
-    - +.bestincapi.com
-    - +.kuaidi.com
-    - +.udalogistic.com
+    - +.gpall.cn
+    - +.yuantongyizhan.cn
+    - +.nellit.xyz
     - +.sxgou.cn
     - +.tianxiajiameng.cn
-    - +.tianxiajiameng.com
-    - +.gpall.net
-    - +.yto-lgs.com
+    - +.bestincapi.com
+    - +.yundasys.com
+    - +.yundaex.com
     - +.ytokj.com
     - +.yto-lgs.net
     - +.ytoluohan.xin
@@ -100,25 +95,16 @@ payload:
     - +.ytoholding.com
     - +.ytokj.net
     - +.ytokj.cn
-    - +.sf-saas.com
-    - +.ibobscs.com
-    - +.yuantongyizhan.cn
-    - +.sf-cityrush.com
-    - +.sf-airlines.com
-    - +.rongechain.com
-    - +.sf.cn
-    - +.sf-financial.com
-    - +.kuaidilab.com
-    - +.kuaidi100.com
-    - +.ydsys.cn
     - +.yundaex.cn
-    - +.yundaex.com
-    - +.yundasys.com
-    - +.yunda56.com
-    - +.yundalog.com
-    - +.yundaltl.com
-    - +.nellit.xyz
-    - +.udalogistic.cn
+    - +.ydsys.cn
+    - +.gpall.net
+    - +.sffix.cn
+    - +.sfcar.hk
+    - +.sfbuy.com
+    - +.sf-international.com
+    - +.sfgy.org
+    - +.feng1.com
+    - +.sf-saas.com
     - +.ztoapp.com
     - +.izto.com
     - +.tuxi.com
@@ -130,14 +116,28 @@ payload:
     - +.ztoglobal.com
     - +.ztogroup.com
     - +.ztoyh.com
-    - +.kd100.com
-    - +.ckd.im
+    - +.ibobscs.com
+    - +.yto-lgs.com
+    - +.kuaidi.com
+    - +.cainiao-inc.com
+    - +.cainiao.com
+    - +.cainiaoyizhan.com
+    - +.danniao.com
+    - +.dianwoda.cn
+    - +.dianwoda.com
+    - +.guoguo-app.com
+    - +.sf-express.com
     - +.deppon.com
     - +.dpma.cc
-    - +.fcboxmall.com
+    - +.sf-cityrush.com
     - +.fcbox.com
+    - +.fcboxmall.com
+    - +.sf-financial.com
+    - +.sf.cn
+    - +.rongechain.com
+    - +.sf-airlines.com
     - +.ytojg.com.cn
-    - +.mlzt.com.cn
+    - +.cainiao.com.cn
     - +.izto.com.cn
     - +.nellit.com.cn
     - +.nellit.org.cn
@@ -149,11 +149,11 @@ payload:
     - +.nellit.net.cn
     - +.ytokj.net.cn
     - +.ytokj.com.cn
+    - +.mlzt.com.cn
+    - +.sf-tech.com.cn
     - +.sto-express.com.cn
     - +.bxexpress.com.cn
     - +.jnt-express.com.cn
     - +.jtexpress.com.cn
-    - +.cainiao.com.cn
     - +.800best.com.cn
-    - +.sf-tech.com.cn
     - +.v6-adashx.ut.cainiao.com
