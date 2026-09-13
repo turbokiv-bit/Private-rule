@@ -1,12 +1,19 @@
-ARCHS = arm64 arm64e
-TARGET = iphone:clang:latest:13.0
-INSTALL_TARGET_PROCESSES = SpringBoard
+# Theos Makefile (ellekit/substrate tweak)
+# 编译：make clean package FINALPACKAGE=1
+# ARCHS 固定 arm64e
+
+TARGET := iphone:clang:latest:14.0
+ARCHS := arm64e
+
+INSTALL_TARGET_PROCESSES := Aweme
 
 include $(THEOS)/makefiles/common.mk
 
-TWEAK_NAME = DuoSimPatch
+TWEAK_NAME = SJJAuthBypass
 
-DuoSimPatch_FILES = Tweak.xm
-DuoSimPatch_CFLAGS = -fobjc-arc
+SJJAuthBypass_FILES = Tweak.m
+SJJAuthBypass_CFLAGS = -fobjc-arc -I$(THEOS)/include
+SJJAuthBypass_LDFLAGS = -lsubstrate
+SJJAuthBypass_FRAMEWORKS = Foundation
 
 include $(THEOS_MAKE_PATH)/tweak.mk
