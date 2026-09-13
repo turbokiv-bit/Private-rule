@@ -1,46 +1,79 @@
-name: build-tweak
+name: build-duoringreadout
 
 on:
   push:
   workflow_dispatch:
 
 jobs:
+  # ---------------------------------------------------------------
+  # 一次跑出三种包:
+  #   1) fat      : arm64 + arm64e  (rootful)
+  #   2) arm64e   : 只编 arm64e      (rootful)
+  #   3) arm64e   : rootless 目录结构 (Dopamine / palera1n 新版等)
+  # ---------------------------------------------------------------
   build:
     runs-on: macos-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Theos
-        run: |
-          export THEOS=~/theos
-          git clone --recursive https://github.com/theos/theos.git $THEOS --depth 1
-
-      - name: Install ldid (for code signing)
+      - name: Setup Theos + iOS SDK
         run: |
           set -e
-          cd "$HOME"
-          if command -v ldid >/dev/null 2>&1; then
-            echo "ldid already present"
-          else
-            # Procursus 官方预编译 ldid (macOS arm64) — 已确认 URL
-            curl -fL -o ldid_bin https://github.com/ProcursusTeam/ldid/releases/download/v2.1.5-procursus7/ldid_macosx_arm64
-            sudo cp ldid_bin /usr/local/bin/ldid
-            sudo chmod +x /usr/local/bin/ldid
-            echo "installed ldid (Procursus)"
-          fi
-          echo "--- verify ---"
-          which ldid && ldid 2>&1 | head -1 || echo "ldid still missing"
+          export THEOS=$HOME/theos
+          git clone --recursive https://github.com/theos/theos.git $THEOS --depth 1
+          # arm64e 编译依赖 theos/sdks 里打好补丁的 SDK
+          git clone --depth 1 https://github.com/theos/sdks.git $THEOS/sdks || true
+          echo "THEOS=$THEOS" >> $GITHUB_ENV
+          echo "$THEOS/bin" >> $GITHUB_PATH
+          echo "--- sdks ---"; ls $THEOS/sdks || true
 
-      - name: Build (arm64, uses Xcode built-in SDK)
+      - name: Install ldid
         run: |
-          export THEOS=~/theos
-          export PATH=$THEOS/bin:$PATH
-          make clean || true
-          make package FINALPACKAGE=1
+          set -e
+          if command -v ldid >/dev/null 2>&1; then echo "ldid ok"; exit 0; fi
+          curl -fL -o ldid_bin https://github.com/ProcursusTeam/ldid/releases/download/v2.1.5-procursus7/ldid_macosx_arm64
+          sudo cp ldid_bin /usr/local/bin/ldid
+          sudo chmod +x /usr/local/bin/ldid
+          echo "--- ldid ---"; ldid -v 2>&1 | head -2 || true
 
-      - name: Upload artifact
+      - name: Build fat (arm64 + arm64e, rootful)
+        run: |
+          set -e
+          export THEOS=$HOME/theos
+          make clean || true
+          make package ARCHS="arm64 arm64e" FINALPACKAGE=1
+          mkdir -p out
+          cp packages/*.deb out/DuoRingReadout_fat_arm64_arm64e.deb
+
+      - name: Build arm64e only (rootful)
+        run: |
+          set -e
+          export THEOS=$HOME/theos
+          make clean || true
+          make package ARCHS="arm64e" FINALPACKAGE=1
+          cp packages/*.deb out/DuoRingReadout_arm64e.deb
+
+      - name: Build arm64e rootless
+        run: |
+          set -e
+          export THEOS=$HOME/theos
+          make clean || true
+          make package ARCHS="arm64e" THEOS_PACKAGE_SCHEME=rootless FINALPACKAGE=1
+          cp packages/*.deb out/DuoRingReadout_arm64e_rootless.deb
+
+      - name: Verify arch slices
+        run: |
+          for d in out/*.deb; do
+            echo "===== $d"
+            rm -rf /tmp/x && mkdir -p /tmp/x && (cd /tmp/x && ar x "$GITHUB_WORKSPACE/$d" && tar xf data.tar.* 2>/dev/null || true)
+            dyl=$(find /tmp/x -name "*.dylib" 2>/dev/null | head -1)
+            if [ -n "$dyl" ]; then lipo -info "$dyl" || file "$dyl"; else echo "(dylib not found in deb)"; fi
+          done
+          ls -la out/
+
+      - name: Upload all debs
         uses: actions/upload-artifact@v4
         with:
-          name: SJJAuthBypass-deb
-          path: packages/*.deb
+          name: DuoRingReadout-debs
+          path: out/*.deb
