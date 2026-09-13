@@ -720,10 +720,12 @@ static void drlDrawReadout(UIView* v, CGRect rect) {
     if (s_drawOk < 60) {
         s_drawOk++;
         UIColor* _c = drlPickColor(v);
+        CGFloat _r = -1, _g = -1, _b = -1, _a = -1;
+        [_c getRed:&_r green:&_g blue:&_b alpha:&_a];      // 公开 API
         drlLog(@"DRAW %@ text=%@ alpha=%.2f lw=%.2f r=%.2f center=(%.1f,%.1f) win=%@ color=(%.2f,%.2f,%.2f,%.2f)",
                NSStringFromClass([v class]), text, st.alpha, g.lw, g.r, g.cx, g.cy,
                NSStringFromCGRect([v convertRect:v.bounds toView:nil]),
-               (double)_c.red, (double)_c.green, (double)_c.blue, (double)_c.alpha);
+               (double)_r, (double)_g, (double)_b, (double)_a);
     }
 #endif
     CGFloat cx = g.cx, cyTop = g.cy - g.r;               // 数字圆心落在圆环走线上
