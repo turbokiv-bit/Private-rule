@@ -14,15 +14,18 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Setup Theos + SDK + ldid
+      - name: Setup Theos (roothide fork) + SDK + ldid
         run: |
           set -eux
           export THEOS=$HOME/theos
-          git clone --recursive --depth 1 https://github.com/theos/theos.git "$THEOS"
+          # 关键：用 roothide/theos fork（上游 theos 没有 roothide package scheme）
+          git clone --recursive --depth 1 --shallow-submodules https://github.com/roothide/theos.git "$THEOS"
+          # SDK 用上游 theos/sdks（含 iPhoneOS16.5.sdk）
           git clone --depth 1 https://github.com/theos/sdks.git /tmp/sdks
           mkdir -p "$THEOS/sdks"
           cp -R /tmp/sdks/*.sdk "$THEOS/sdks/" || true
-          ls "$THEOS/sdks" | head -20
+          echo "--- SDKs ---"; ls "$THEOS/sdks"
+          echo "--- roothide scheme module ---"; ls "$THEOS/vendor/mod/roothide" || true
           echo "THEOS=$THEOS" >> "$GITHUB_ENV"
           echo "$THEOS/bin" >> "$GITHUB_PATH"
           brew install ldid || true
