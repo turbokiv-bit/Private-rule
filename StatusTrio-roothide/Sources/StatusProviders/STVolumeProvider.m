@@ -4,6 +4,7 @@
 
 #import "STVolumeProvider.h"
 #import <objc/runtime.h>
+#import <objc/message.h>
 
 @implementation STVolumeProvider
 
