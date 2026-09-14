@@ -4,6 +4,7 @@
 #import "STStatusIconRenderer.h"
 #import "STStatusIconGeometry.h"
 #import <CoreText/CoreText.h>
+#include <math.h>
 
 @implementation STStatusIconRenderer
 
