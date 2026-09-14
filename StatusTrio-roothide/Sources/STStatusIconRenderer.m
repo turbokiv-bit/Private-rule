@@ -89,7 +89,9 @@
         && (battery.isCharging || battery.isConnectedToPower);
     BOOL showsPercentage = !showsChargingBolt; // 有闪电就不画数字
     BOOL hasTopGap = showsChargingBolt || showsPercentage;
-    CGFloat topGapWidth = showsChargingBolt ? 50.0f : 64.0f;
+    CGFloat topGapWidth = showsChargingBolt
+        ? [STStatusIconGeometry batteryChargingBoltTopGapWidth]
+        : [STStatusIconGeometry batteryValueTopGapWidth];
 
     // 轨道（半透明前景）
     CGColorRef trackColor = [fg colorWithAlphaComponent:0.22].CGColor;

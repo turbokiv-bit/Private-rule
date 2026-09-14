@@ -31,6 +31,10 @@ NS_ASSUME_NONNULL_BEGIN
 + (CGPoint)batteryValueBaselineFontSize:(CGFloat)fontSize;
 + (CGFloat)batteryValueBaseFontSize;
 
+// 顶部缺口宽度（数字态 / 充电闪电态）
++ (CGFloat)batteryValueTopGapWidth;
++ (CGFloat)batteryChargingBoltTopGapWidth;
+
 @end
 
 NS_ASSUME_NONNULL_END

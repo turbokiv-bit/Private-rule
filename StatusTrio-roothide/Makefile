@@ -21,7 +21,7 @@ statusTrio_FILES = Sources/Tweak.x \
     Sources/StatusProviders/STWiFiProvider.m \
     Sources/StatusProviders/STVolumeProvider.m
 
-statusTrio_CFLAGS = -fobjc-arc -ISources
+statusTrio_CFLAGS = -fobjc-arc -ISources -Wno-error
 statusTrio_FRAMEWORKS = UIKit QuartzCore CoreGraphics CoreText Foundation
 statusTrio_IPHONEOS_DEPLOYMENT_TARGET = 15.0
 

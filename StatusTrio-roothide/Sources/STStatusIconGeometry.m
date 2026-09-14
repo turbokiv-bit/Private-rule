@@ -12,7 +12,6 @@ static const CGFloat kSweep = 242.6198262143777f * M_PI / 180.0f;
 static const CGFloat kTopGapValue = 64.0f;
 static const CGFloat kTopGapBolt = 50.0f;
 static const CGFloat kBaseFontSize = 20.0f;
-static const CGFloat kBoltCalibration = 220.0f / 180.0f;
 
 // WiFi
 static const CGPoint kWifiOuterCenter = {59.5, 78.3};
@@ -36,9 +35,10 @@ static const CGFloat kVolumeDotRadius = 5.5f;
 
 #pragma mark - 辅助弧
 + (CGPathRef)arcWithCenter:(CGPoint)center radius:(CGFloat)radius start:(CGFloat)start end:(CGFloat)end {
+    // 直接返回可变路径（调用方负责 release），不做多余 copy，避免内存泄漏
     CGMutablePathRef path = CGPathCreateMutable();
     CGPathAddArc(path, NULL, center.x, center.y, radius, start, end, false);
-    return CGPathCreateCopy(path);
+    return path;
 }
 
 + (CGPathRef)batteryArcWithProgress:(CGFloat)progress hasTopGap:(BOOL)hasTopGap topGapWidth:(CGFloat)topGapWidth {
@@ -182,6 +182,15 @@ static const CGFloat kVolumeDotRadius = 5.5f;
 
 + (CGFloat)batteryValueBaseFontSize {
     return kBaseFontSize;
+}
+
+// 顶部缺口宽度：放数字 / 放闪电时不同（供渲染器调用，避免硬编码）
++ (CGFloat)batteryValueTopGapWidth {
+    return kTopGapValue;
+}
+
++ (CGFloat)batteryChargingBoltTopGapWidth {
+    return kTopGapBolt;
 }
 
 @end
