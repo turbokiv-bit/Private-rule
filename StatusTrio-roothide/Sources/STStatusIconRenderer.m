@@ -1,5 +1,5 @@
 // STStatusIconRenderer.m — 从 StatusTrio StatusIconRenderer.swift 移植
-// 用 CGContext 绘制合成图标，输出 UIImage。绘制逻辑 1:1 借鉴。
+// 用 CGContext + CoreText 绘制合成图标，输出 UIImage。绘制逻辑 1:1 借鉴。
 
 #import "STStatusIconRenderer.h"
 #import "STStatusIconGeometry.h"
@@ -44,7 +44,8 @@
 + (UIColor *)colorForRole:(STBatteryColorRole)role foreground:(UIColor *)foreground darkPalette:(BOOL)dark {
     switch (role) {
         case STBatteryColorRoleForeground: return foreground;
-        case STBatteryColorRoleCritical: return [UIColor colorWithRed:1.0 green:59.0/255.0 blue:48.0/255.0 alpha:1.0];
+        case STBatteryColorRoleCritical:
+            return [UIColor colorWithRed:1.0 green:59.0/255.0 blue:48.0/255.0 alpha:1.0];
         case STBatteryColorRoleCharging:
             return dark ? [UIColor colorWithRed:31.0/255 green:143.0/255 blue:61.0/255 alpha:1]
                         : [UIColor colorWithRed:52.0/255 green:199.0/255 blue:89.0/255 alpha:1];
@@ -58,14 +59,11 @@
 + (BOOL)usesDarkPaletteForeground:(UIColor *)fg {
     CGFloat r=0,g=0,b=0,a=0;
     if (![fg getRed:&r green:&g blue:&b alpha:&a]) return NO;
-    // 亮度低 => 暗色状态栏
     CGFloat brightness = 0.299*r + 0.587*g + 0.114*b;
     return brightness < 0.5;
 }
 
 #pragma mark - 基础绘制 helper
-
-static CGFloat STSlice(CGFloat v) { return (CGFloat)v; }
 
 + (void)strokePath:(CGPathRef)path lineWidth:(CGFloat)lw color:(CGColorRef)color inContext:(CGContextRef)ctx {
     CGContextSetLineWidth(ctx, lw);
@@ -83,91 +81,113 @@ static CGFloat STSlice(CGFloat v) { return (CGFloat)v; }
 #pragma mark - 绘制三个部分
 
 + (void)drawBattery:(STBatteryStatus)battery
-            showBolt:(BOOL)showBolt showPercent:(BOOL)showPercent
-          foreground:(UIColor *)fg critical:(UIColor *)critical
-           fontScale:(CGFloat)fontScale inContext:(CGContextRef)ctx {
+          foreground:(UIColor *)fg
+           textScale:(CGFloat)textScale
+           inContext:(CGContextRef)ctx {
     BOOL showsChargingBolt = battery.isPresent
-        && (battery.isCharging || battery.isConnectedToPower)
-        && showBolt;
-    BOOL hasTopGap = showsChargingBolt || showPercent;
+        && (battery.isCharging || battery.isConnectedToPower);
+    BOOL showsPercentage = !showsChargingBolt; // 有闪电就不画数字
+    BOOL hasTopGap = showsChargingBolt || showsPercentage;
     CGFloat topGapWidth = showsChargingBolt ? 50.0f : 64.0f;
 
     // 轨道（半透明前景）
     CGColorRef trackColor = [fg colorWithAlphaComponent:0.22].CGColor;
     CGPathRef track = [STStatusIconGeometry batteryTrackWithTopGap:hasTopGap topGapWidth:topGapWidth];
     [self strokePath:track lineWidth:8 color:trackColor inContext:ctx];
+    CGPathRelease(track);
 
     // 填充弧
     STBatteryColorRole role = [self batteryColorRoleForStatus:battery criticalThreshold:20];
-    UIColor *roleColor = [self colorForRole:role foreground:fg
-                                darkPalette:[self usesDarkPaletteForeground:fg]];
+    UIColor *roleColor = [self colorForRole:role
+                                  foreground:fg
+                                 darkPalette:[self usesDarkPaletteForeground:fg]];
     CGPathRef fill = [STStatusIconGeometry batteryFillProgress:[self batteryProgress:battery]
-                                                        hasTopGap:hasTopGap topGapWidth:topGapWidth];
+                                                        hasTopGap:hasTopGap
+                                                     topGapWidth:topGapWidth];
     [self strokePath:fill lineWidth:8 color:roleColor.CGColor inContext:ctx];
+    CGPathRelease(fill);
 
     if (showsChargingBolt) {
-        CGPathRef bolt = [STStatusIconGeometry batteryChargingBoltWithScale:fontScale];
+        CGPathRef bolt = [STStatusIconGeometry batteryChargingBoltWithScale:1.0];
         [self fillPath:bolt color:fg.CGColor inContext:ctx];
+        CGPathRelease(bolt);
+    } else if (showsPercentage) {
+        [self drawBatteryPercentage:battery.isPresent ? battery.rawPercentage : 100
+                              color:fg
+                          textScale:textScale
+                          inContext:ctx];
     }
-    CGPathRelease(track);
-    CGPathRelease(fill);
 }
 
 + (void)drawBatteryPercentage:(NSInteger)percentage
                         color:(UIColor *)color
-                     fontScale:(CGFloat)fontScale
-                     baseline:(CGPoint)baseline
-                     inContext:(CGContextRef)ctx {
-    CGFloat fontSize = [STStatusIconGeometry batteryValueBaseFontSize] * fontScale;
-    UIFont *font = [UIFont boldSystemFontOfSize:fontSize];
+                    textScale:(CGFloat)textScale
+                    inContext:(CGContextRef)ctx {
+    CGFloat fontSize = [STStatusIconGeometry batteryValueBaseFontSize] * textScale;
+    if (fontSize < 4) fontSize = 4;
 
-    NSMutableParagraphStyle *ps = [NSMutableParagraphStyle new];
-    ps.alignment = NSTextAlignmentCenter;
-    NSAttributedString *str = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%ld",(long)percentage]
-                                                              attributes:@{
-        NSFontAttributeName: font,
-        NSForegroundColorAttributeName: color,
-    }];
-    CGSize size = [str size];
-    CGRect rect = CGRectMake(baseline.x - size.width/2, baseline.y - size.height/2 + [font capHeight]*0.5,
-                             size.width, size.height);
-    [str drawInRect:rect];
+    // 圆润粗体字体（iOS 上用 SF Rounded Bold，回退系统粗体）
+    UIFont *uiFont = [UIFont systemFontOfSize:fontSize weight:UIFontWeightBold];
+    UIFontDescriptor *desc = [uiFont.fontDescriptor fontDescriptorWithDesign:UIFontDescriptorSystemDesignRounded];
+    UIFont *rounded = desc ? [UIFont fontWithDescriptor:desc size:fontSize] : uiFont;
+    CTFontRef font = CTFontCreateWithName((__bridge CFStringRef)rounded.fontName, fontSize, NULL);
+
+    NSDictionary *attrs = @{
+        (__bridge id)kCTFontAttributeName: (__bridge id)font,
+        (__bridge id)kCTForegroundColorAttributeName: (__bridge id)color.CGColor,
+        (__bridge id)kCTKernAttributeName: @(-fontSize * 0.04f),
+    };
+    NSAttributedString *as = [[NSAttributedString alloc]
+        initWithString:[NSString stringWithFormat:@"%ld", (long)percentage]
+            attributes:attrs];
+    CTLineRef line = CTLineCreateWithAttributedString((__bridge CFAttributedStringRef)as);
+
+    CGFloat ascent = 0, descent = 0, leading = 0;
+    CGFloat width = (CGFloat)CTLineGetTypographicBounds(line, &ascent, &descent, &leading);
+    CGPoint baseline = [STStatusIconGeometry batteryValueBaselineFontSize:fontSize];
+
+    // 我们的 CTM 做了 y 翻转（canvas y 向上），文字需反向 flip 才正立 —— 与原版一致
+    CGContextSaveGState(ctx);
+    CGContextSetTextMatrix(ctx, CGAffineTransformMakeScale(1, -1));
+    CGContextSetTextPosition(ctx, baseline.x - width / 2.0f, baseline.y);
+    CTLineDraw(line, ctx);
+    CGContextRestoreGState(ctx);
+
+    CFRelease(line);
+    CFRelease(font);
 }
 
 + (void)drawWiFi:(STWiFiStatus)wifi foreground:(UIColor *)fg inContext:(CGContextRef)ctx {
     NSInteger bars = wifi.bars;
     UIColor *muted = [fg colorWithAlphaComponent:0.30];
-    switch (wifi.state) {
-        case STWiFiStateConnected: {
-            CFArrayRef arcs = [STStatusIconGeometry wifiArcsLevel:bars];
-            for (CFIndex i = 0; i < CFArrayGetCount(arcs); i++) {
-                CGPathRef p = (CGPathRef)CFArrayGetValueAtIndex(arcs, i);
-                [self strokePath:p lineWidth:7 color:fg.CGColor inContext:ctx];
-            }
-            CGPathRef dot = [STStatusIconGeometry wifiDot];
-            [self fillPath:dot color:fg.CGColor inContext:ctx];
-            CFRelease(arcs);
-            break;
+    if (wifi.state == STWiFiStateConnected) {
+        CFArrayRef arcs = [STStatusIconGeometry wifiArcsLevel:bars];
+        for (CFIndex i = 0; i < CFArrayGetCount(arcs); i++) {
+            CGPathRef p = (CGPathRef)CFArrayGetValueAtIndex(arcs, i);
+            [self strokePath:p lineWidth:7 color:fg.CGColor inContext:ctx];
         }
-        case STWiFiStateNotAssociated:
-        case STWiFiStateOff:
-        case STWiFiStateUnavailable:
-        default: {
-            // 灰弧
-            CFArrayRef arcs = [STStatusIconGeometry wifiArcsLevel:3];
-            for (CFIndex i = 0; i < CFArrayGetCount(arcs); i++) {
-                CGPathRef p = (CGPathRef)CFArrayGetValueAtIndex(arcs, i);
-                [self strokePath:p lineWidth:7 color:muted.CGColor inContext:ctx];
-            }
-            CGPathRef dot = [STStatusIconGeometry wifiDot];
-            [self fillPath:dot color:muted.CGColor inContext:ctx];
-            CFRelease(arcs);
-            if (wifi.state == STWiFiStateOff || wifi.state == STWiFiStateUnavailable) {
-                CGPathRef slash = [STStatusIconGeometry wifiOffSlash];
-                [self strokePath:slash lineWidth:6 color:muted.CGColor inContext:ctx];
-            }
-            break;
-        }
+        CFRelease(arcs);
+        CGPathRef dot = [STStatusIconGeometry wifiDot];
+        [self fillPath:dot color:fg.CGColor inContext:ctx];
+        CGPathRelease(dot);
+        return;
+    }
+
+    // 非连接态：灰弧 + 点（可加斜杠）
+    CFArrayRef arcs = [STStatusIconGeometry wifiArcsLevel:3];
+    for (CFIndex i = 0; i < CFArrayGetCount(arcs); i++) {
+        CGPathRef p = (CGPathRef)CFArrayGetValueAtIndex(arcs, i);
+        [self strokePath:p lineWidth:7 color:muted.CGColor inContext:ctx];
+    }
+    CFRelease(arcs);
+    CGPathRef dot = [STStatusIconGeometry wifiDot];
+    [self fillPath:dot color:muted.CGColor inContext:ctx];
+    CGPathRelease(dot);
+
+    if (wifi.state == STWiFiStateOff || wifi.state == STWiFiStateUnavailable) {
+        CGPathRef slash = [STStatusIconGeometry wifiOffSlash];
+        [self strokePath:slash lineWidth:6 color:muted.CGColor inContext:ctx];
+        CGPathRelease(slash);
     }
 }
 
@@ -192,9 +212,9 @@ static CGFloat STSlice(CGFloat v) { return (CGFloat)v; }
 + (UIImage *)renderSnapshot:(STStatusSnapshot)snapshot
                        size:(CGFloat)size
                       scale:(CGFloat)scale
-                  foreground:(UIColor *)foreground
-                       showVolume:(BOOL)showVolume {
-    CGFloat pixelDim = (size * scale);
+                 foreground:(UIColor *)foreground
+                 showVolume:(BOOL)showVolume {
+    CGFloat pixelDim = size * scale;
     if (!isfinite(pixelDim) || pixelDim <= 0) return nil;
 
     CGColorSpaceRef cs = CGColorSpaceCreateDeviceRGB();
@@ -204,28 +224,21 @@ static CGFloat STSlice(CGFloat v) { return (CGFloat)v; }
     CGColorSpaceRelease(cs);
     if (!ctx) return nil;
 
-    // 放大到像素
-    CGContextScaleCTM(ctx, scale, scale);
     CGContextSetLineCap(ctx, kCGLineCapRound);
     CGContextSetLineJoin(ctx, kCGLineJoinRound);
 
+    // 从像素坐标缩放到逻辑点
+    CGContextScaleCTM(ctx, scale, scale);
+
     CGRect canvas = [STStatusIconGeometry canvas];
     CGFloat canvasScale = size / canvas.size.width;
-    // 坐标翻转：UIKit 坐标系 (y 向下) => CoreGraphics 画布保持上方向
-    // StatusTrio 用 translate+scaleY(-1) 做翻转；这里直接用 UIKit 坐标即可，
-    // 但与 StatusTrio 对齐：保持 canvas 120x120 逻辑坐标。
+
+    // 与 StatusTrio 一致的翻转：canvas 坐标（y 向上）映射到 UIKit（y 向下）
     CGContextSaveGState(ctx);
     CGContextTranslateCTM(ctx, 0, size);
     CGContextScaleCTM(ctx, canvasScale, -canvasScale);
 
-    // 是否使用状态色（默认开，类似 Standard options）
-    BOOL dark = [self usesDarkPaletteForeground:foreground];
-    UIColor *critical = [UIColor colorWithRed:1.0 green:59.0/255 blue:48.0/255 alpha:1.0];
-
-    [self drawBattery:snapshot.battery
-             showBolt:YES showPercent:YES
-            foreground:foreground critical:critical
-             fontScale:canvasScale*0.09 inContext:ctx];
+    [self drawBattery:snapshot.battery foreground:foreground textScale:1.0 inContext:ctx];
     [self drawWiFi:snapshot.wifi foreground:foreground inContext:ctx];
     if (showVolume) {
         [self drawVolume:snapshot.volume foreground:foreground inContext:ctx];
