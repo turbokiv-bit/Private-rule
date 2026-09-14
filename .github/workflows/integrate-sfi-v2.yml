@@ -20,21 +20,7 @@ jobs:
         run: git clone --depth 1 --recurse-submodules -b dev https://github.com/SagerNet/sing-box-for-apple.git sfi
 
       - name: Clone reF1nd sing-box core
-        run: git clone --depth 1 -b reF1nd-testing https://github.com/reF1nd/sing-box.git core
-
-      - name: Apply bridge & libbox interface fixes
-        run: |
-          cd core
-          # 1) bridge 切网整体重载修复（adapter + libbox + protocol/bridge）
-          curl -sSL "https://raw.githubusercontent.com/turbokiv-bit/Private-rule/main/restart-fix.patch" -o /tmp/restart-fix.patch
-          echo "restart-fix.patch 大小: $(wc -c < /tmp/restart-fix.patch) bytes"
-          git apply --verbose /tmp/restart-fix.patch
-          echo "✅ restart-fix.patch 应用成功"
-          # 2) debug.go 补 GoroutineDump（SFI dev 前端需要的桥接符号）
-          curl -sSL "https://raw.githubusercontent.com/turbokiv-bit/Private-rule/main/debug-fix.patch" -o /tmp/debug-fix.patch
-          echo "debug-fix.patch 大小: $(wc -c < /tmp/debug-fix.patch) bytes"
-          git apply --verbose /tmp/debug-fix.patch
-          echo "✅ debug-fix.patch 应用成功"
+        run: git clone --depth 1 -b reF1nd-testing  https://github.com/reF1nd/sing-box.git core
 
       - name: Build Libbox.xcframework (official build_libbox)
         working-directory: core
