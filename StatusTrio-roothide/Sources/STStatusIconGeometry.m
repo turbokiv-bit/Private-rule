@@ -2,6 +2,7 @@
 // 几何常量与路径完全保留，仅把 Swift 换成 ObjC。
 
 #import "STStatusIconGeometry.h"
+#include <math.h>
 
 static const CGFloat kRadius = 51.5;
 static const CGPoint kCenter = {59.5, 61.48715261785473};
