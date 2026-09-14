@@ -2,7 +2,7 @@
 // 用公开的 UIDevice API 读取电量与充电状态，稳定无私有依赖。
 
 #import "STBatteryProvider.h"
-#import <UIKit/UIDevice.h>
+#import <UIKit/UIKit.h>
 #include <math.h>
 
 @implementation STBatteryProvider

@@ -1,10 +1,9 @@
 // STStatusIconRenderer.h — 借鉴自 StatusTrio StatusIconRenderer.swift
 // 把合成图标画成一张 UIImage，挂到状态栏视图上。
 
-#import <UIKit/UIImage.h>
+#import <UIKit/UIKit.h>
 #import "STStatusSnapshot.h"
 #import <CoreGraphics/CoreGraphics.h>
-#import <UIKit/UIColor.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
