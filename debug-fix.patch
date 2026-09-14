@@ -1,0 +1,32 @@
+--- a/experimental/libbox/debug.go
++++ b/experimental/libbox/debug.go
+@@ -1,6 +1,7 @@
+ package libbox
+ 
+ import (
++	"runtime"
+ 	"time"
+ 	"unsafe"
+ )
+@@ -10,3 +11,21 @@
+ 		*(*int)(unsafe.Pointer(uintptr(0))) = 0
+ 	})
+ }
++
++func TriggerGoHang(seconds int32) {
++	time.Sleep(time.Duration(seconds) * time.Second)
++}
++
++// GoroutineDump returns a stack dump of all Goroutines. It is exported to the
++// front-end as LibboxGoroutineDump (SFI's debug view). Added to reF1nd-testing
++// to satisfy the front-end (latest sing-box-for-apple) interface.
++func GoroutineDump() string {
++	buffer := make([]byte, 64*1024)
++	for {
++		n := runtime.Stack(buffer, true)
++		if n < len(buffer) {
++			return string(buffer[:n])
++		}
++		buffer = make([]byte, 2*len(buffer))
++	}
++}
