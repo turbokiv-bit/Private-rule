@@ -11,6 +11,7 @@
 // 类名: SBWiFiManager / WiFiManager。这里用 objc runtime 动态 get。
 
 #import <objc/runtime.h>
+#import <objc/message.h>
 
 @implementation STWiFiProvider
 
