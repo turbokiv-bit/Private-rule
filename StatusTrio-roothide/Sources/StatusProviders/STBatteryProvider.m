@@ -3,6 +3,7 @@
 
 #import "STBatteryProvider.h"
 #import <UIKit/UIDevice.h>
+#include <math.h>
 
 @implementation STBatteryProvider
 
