@@ -1,0 +1,52 @@
+# 必须在仓库根目录 .github/workflows/ 下才会被 GitHub Actions 识别
+name: build-status-trio
+
+on:
+  push:
+    paths:
+      - 'StatusTrio-roothide/**'
+      - '.github/workflows/status-trio-build.yml'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-14
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Theos + SDK + ldid
+        run: |
+          set -eux
+          export THEOS=$HOME/theos
+          git clone --recursive --depth 1 https://github.com/theos/theos.git "$THEOS"
+          git clone --depth 1 https://github.com/theos/sdks.git /tmp/sdks
+          mkdir -p "$THEOS/sdks"
+          cp -R /tmp/sdks/*.sdk "$THEOS/sdks/" || true
+          ls "$THEOS/sdks" | head -20
+          echo "THEOS=$THEOS" >> "$GITHUB_ENV"
+          echo "$THEOS/bin" >> "$GITHUB_PATH"
+          brew install ldid || true
+
+      - name: Build roothide tweak
+        working-directory: StatusTrio-roothide
+        run: |
+          set -eux
+          export THEOS_PACKAGE_SCHEME=roothide
+          export ARCHS="arm64 arm64e"
+          export TARGET=iphone:clang:latest:16.0
+          make clean || true
+          make package FINALPACKAGE=1 DEBUG=0 THEOS_PACKAGE_SCHEME=roothide ARCHS="arm64 arm64e"
+
+      - name: Collect deb
+        run: |
+          set -eux
+          mkdir -p dist
+          find StatusTrio-roothide/packages -name '*.deb' -exec cp {} dist/ \; || true
+          ls -la dist/ || true
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: statusTrio-deb
+          path: dist/*.deb
+          if-no-files-found: warn
