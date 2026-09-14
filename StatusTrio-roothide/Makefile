@@ -10,22 +10,19 @@ include $(THEOS)/makefiles/common.mk
 
 TWEAK_NAME = statusTrio
 
-statusTrio_FILES = Tweak.x \
-    STStatusSnapshot.m \
-    STStatusIconGeometry.m \
-    STStatusIconRenderer.m \
-    StatusProviders/STBatteryProvider.m \
-    StatusProviders/STWiFiProvider.m \
-    StatusProviders/STVolumeProvider.m \
-    STStatusIconView.m \
-    STStatusBarHooks.x
+# 注意：Theos 的 _FILES 路径相对 Makefile 所在目录，源文件在 Sources/ 下
+statusTrio_FILES = Sources/Tweak.x \
+    Sources/STStatusBarHooks.x \
+    Sources/STStatusSnapshot.m \
+    Sources/STStatusIconGeometry.m \
+    Sources/STStatusIconRenderer.m \
+    Sources/STStatusIconView.m \
+    Sources/StatusProviders/STBatteryProvider.m \
+    Sources/StatusProviders/STWiFiProvider.m \
+    Sources/StatusProviders/STVolumeProvider.m
 
-statusTrio_CFLAGS = -fobjc-arc -std=c11
-statusTrio_LDFLAGS =
+statusTrio_CFLAGS = -fobjc-arc -ISources
 statusTrio_FRAMEWORKS = UIKit QuartzCore CoreGraphics CoreText Foundation
 statusTrio_IPHONEOS_DEPLOYMENT_TARGET = 15.0
-
-# roothide：tweak 安装到 /var/jb/Library/MobileSubstrate/DynamicLibraries
-statusTrio_INSTALL_PATH = /Library/MobileSubstrate/DynamicLibraries
 
 include $(THEOS_MAKE_PATH)/tweak.mk
