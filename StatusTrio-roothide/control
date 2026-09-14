@@ -1,0 +1,10 @@
+Package: com.lingyired.statustrio
+Name: StatusTrio (图标三合一)
+Version: 0.1.0
+Architecture: iphoneos-arm64e
+Description: 借鉴自 macOS StatusTrio 的 iOS 状态栏三合一图标（电池+WiFi+音量）。悬于灵动岛左侧。
+Maintainer: RootHide
+Author: RootHide
+Section: Tweaks
+Depends: mobilesubstrate (>= 0.9.5000) | ellekit | cellekit
+Conflict:
