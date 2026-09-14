@@ -1,78 +1,94 @@
 // STStatusBarHooks.x — 状态栏注入钩子（Theos Logos 语法）
 // 借鉴 StatusTrio 的 StatusBarController：把合成图标挂到状态栏。
 //
-// 注入目标进程：SpringBoard。
-// 挂载点：_UIStatusBar（iOS 13+ 状态栏根视图）。
-// 本文件负责「找到状态栏并插入 STStatusIconView」，采集与绘制在别的文件。
+// 注入目标进程：SpringBoard
+// 挂载点：_UIStatusBar / UIStatusBar_Modern（iOS 13+ 状态栏根视图，二者择一存在）
 
 #import <UIKit/UIKit.h>
 #import "STStatusIconView.h"
 
 #define ST_LOG(fmt, ...) NSLog(@"[StatusTrio] " fmt, ##__VA_ARGS__)
 
-// 仅 SpringBoard 进程生效的守卫
-static BOOL STIsSpringBoard(void) {
-    NSString *name = NSBundle.mainBundle.bundleIdentifier;
-    return [name isEqualToString:@"com.apple.springboard"];
-}
+// 关键：显式声明私有类继承 UIView。
+// 否则编译器只看到前向声明，拿不到 window 属性，也无法把 self 当 UIView* 用。
+@interface _UIStatusBar : UIView
+@end
+@interface UIStatusBar_Modern : UIView
+@end
 
-// 把图标视图塞进状态栏（放在灵动岛左侧 / 状态栏左侧时间附近）
 static STStatusIconView *_iconView = nil;
 
-static void STInstallIconIntoView(UIView *statusBar) {
-    if (!STIsSpringBoard()) return;
-    if (_iconView) return;
-
-    _iconView = [[STStatusIconView alloc] init];
-    // 初始尺寸：状态栏一个图标的点宽 ~20
-    _iconView.frame = CGRectMake(0, 0, 20, 20);
-    [statusBar addSubview:_iconView];
-
-    // 尝试布局到安全区内（灵动岛机型状态栏左侧）
-    _iconView.translatesAutoresizingMaskIntoConstraints = NO;
-    NSLayoutConstraint *lead = [NSLayoutConstraint constraintWithItem:_iconView
-                                                             attribute:NSLayoutAttributeLeading
-                                                             relatedBy:NSLayoutRelationEqual
-                                                                toItem:statusBar
-                                                             attribute:NSLayoutAttributeLeading
-                                                            multiplier:1.0 constant:6];
-    NSLayoutConstraint *cy = [NSLayoutConstraint constraintWithItem:_iconView
-                                                             attribute:NSLayoutAttributeCenterY
-                                                             relatedBy:NSLayoutRelationEqual
-                                                                toItem:statusBar
-                                                             attribute:NSLayoutAttributeCenterY
-                                                            multiplier:1.0 constant:0];
-    NSLayoutConstraint *w = [NSLayoutConstraint constraintWithItem:_iconView
-                                                             attribute:NSLayoutAttributeWidth
-                                                             relatedBy:NSLayoutRelationEqual
-                                                                toItem:nil
-                                                             attribute:NSLayoutAttributeNotAnAttribute
-                                                            multiplier:1.0 constant:22];
-    NSLayoutConstraint *h = [NSLayoutConstraint constraintWithItem:_iconView
-                                                             attribute:NSLayoutAttributeHeight
-                                                             relatedBy:NSLayoutRelationEqual
-                                                                toItem:nil
-                                                             attribute:NSLayoutAttributeNotAnAttribute
-                                                            multiplier:1.0 constant:22];
-    [statusBar addConstraints:@[lead, cy, w, h]];
-
-    [_iconView startTicking];
-    ST_LOG(@"installed icon view into %@", NSStringFromClass([statusBar class]));
+static BOOL STIsSpringBoard(void) {
+    static BOOL isSB = NO;
+    static dispatch_once_t once;
+    dispatch_once(&once, ^{
+        isSB = [NSBundle.mainBundle.bundleIdentifier isEqualToString:@"com.apple.springboard"];
+    });
+    return isSB;
 }
 
-// Hook _UIStatusBar 的 didMoveToWindow / layoutSubviews，待其出现后注入
+// 手动摆位（不使用 Auto Layout，避免与状态栏内部布局产生约束冲突）
+static void STLayoutIconInBar(UIView *bar) {
+    if (!_iconView || _iconView.superview != bar) return;
+    CGRect b = bar.bounds;
+    if (b.size.width <= 1 || b.size.height <= 1) return;
+
+    CGFloat side = 20.0;
+    // 相对状态栏中心左移 78pt：iPhone 14 Pro 上正好落在灵动岛左侧、时间右侧
+    CGFloat x = CGRectGetMidX(b) - 78.0 - side / 2.0;
+    if (x < 2.0) x = 2.0;
+    CGFloat y = (b.size.height - side) / 2.0;
+    _iconView.frame = CGRectMake(x, y, side, side);
+}
+
+static void STInstallIconIfNeeded(UIView *bar) {
+    if (!STIsSpringBoard()) return;
+    if (_iconView && _iconView.superview == bar) return;
+
+    if (!_iconView) {
+        _iconView = [[STStatusIconView alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
+        // 不参与父视图的 Auto Layout：这样父视图不会重置我们的 frame
+        _iconView.translatesAutoresizingMaskIntoConstraints = NO;
+    }
+    if (_iconView.superview) {
+        [_iconView removeFromSuperview];
+    }
+    [bar addSubview:_iconView];
+    _iconView.layer.zPosition = 1000;
+
+    STLayoutIconInBar(bar);
+    [_iconView startTicking];
+
+    ST_LOG(@"installed icon into %@ (frame=%@)", NSStringFromClass([bar class]),
+           NSStringFromCGRect(_iconView.frame));
+}
+
 %hook _UIStatusBar
 
 - (void)didMoveToWindow {
     %orig;
-    if (self.window) {
-        STInstallIconIntoView(self);
-    }
+    if (self.window) STInstallIconIfNeeded(self);
 }
 
 - (void)layoutSubviews {
     %orig;
-    STInstallIconIntoView(self);
+    STInstallIconIfNeeded(self);
+    STLayoutIconInBar(self);
+}
+
+%end
+
+%hook UIStatusBar_Modern
+
+- (void)didMoveToWindow {
+    %orig;
+    if (self.window) STInstallIconIfNeeded(self);
+}
+
+- (void)layoutSubviews {
+    %orig;
+    STInstallIconIfNeeded(self);
+    STLayoutIconInBar(self);
 }
 
 %end
