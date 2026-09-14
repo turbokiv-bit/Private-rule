@@ -22,6 +22,7 @@ static dispatch_once_t gLoadOnce;
 static void STLoadIOPS(void) {
     dispatch_once(&gLoadOnce, ^{
         void *h = dlopen("/System/Library/Frameworks/IOKit.framework/IOKit", RTLD_LAZY | RTLD_LOCAL);
+        if (!h) h = dlopen("/usr/lib/libIOKit.dylib", RTLD_LAZY | RTLD_LOCAL);
         if (!h) return;
         pCopyInfo = (STIOPSCopyPowerSourcesInfoFn)dlsym(h, "IOPSCopyPowerSourcesInfo");
         pCopyList = (STIOPSCopyPowerSourcesListFn)dlsym(h, "IOPSCopyPowerSourcesList");

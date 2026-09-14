@@ -16,18 +16,15 @@
 @implementation STWiFiProvider
 
 static id _wifiManager(void) {
-    // 尝试多个已知类名，SpringBoard 进程内才存在
-    NSArray *names = @[@"SBWiFiManager", @"WiFiManager", @"WFClient"];
+    // 只走 sharedInstance，绝不 [cls new]：
+    // 对 SpringBoard 的单例类凭空创建实例有副作用风险。
+    NSArray *names = @[@"SBWiFiManager", @"WiFiManager"];
     for (NSString *n in names) {
         Class cls = NSClassFromString(n);
-        if (cls) {
-            id shared = nil;
-            SEL sharedSel = NSSelectorFromString(@"sharedInstance");
-            if ([cls respondsToSelector:sharedSel]) {
-                shared = ((id(*)(id,SEL))objc_msgSend)(cls, sharedSel);
-            } else {
-                shared = [cls new];
-            }
+        if (!cls) continue;
+        SEL sharedSel = NSSelectorFromString(@"sharedInstance");
+        if ([cls respondsToSelector:sharedSel]) {
+            id shared = ((id(*)(id,SEL))objc_msgSend)(cls, sharedSel);
             if (shared) return shared;
         }
     }
