@@ -1,5 +1,4 @@
 payload:
-    - DOMAIN-REGEX,^.+-mihayo\.akamaized\.net$
     - DOMAIN-SUFFIX,a2z.org.cn
     - DOMAIN-SUFFIX,amazonaws.cn
     - DOMAIN-SUFFIX,amazonaws.com.cn
@@ -28,6 +27,7 @@ payload:
     - DOMAIN-SUFFIX,amzndns-cn.net
     - DOMAIN-REGEX,.+\.awsdns-cn-[0-9][0-9]\.(biz|com|net|top)$
     - DOMAIN-REGEX,.+\.awsdns-cn-[0-9][a-e0-9]\.cn$
+    - DOMAIN-REGEX,^.+-mihayo\.akamaized\.net$
     - DOMAIN-SUFFIX,4008-517-517.cn
     - DOMAIN-SUFFIX,mcd.cn
     - DOMAIN-SUFFIX,mcdchina.net

@@ -10,8 +10,8 @@ DOMAIN-SUFFIX,mscrl.microsoft.com
 DOMAIN-SUFFIX,ocsp.microsoft.com
 DOMAIN-SUFFIX,oneocsp.microsoft.com
 DOMAIN-SUFFIX,www.microsoft.com
-DOMAIN-SUFFIX,prodforza.blob.core.windows.net
 DOMAIN-SUFFIX,flightsimulator.azureedge.net
+DOMAIN-SUFFIX,prodforza.blob.core.windows.net
 DOMAIN-SUFFIX,azure.microsoft.com
 DOMAIN-SUFFIX,azuremarketplace.microsoft.com
 DOMAIN-SUFFIX,location.microsoft.com
@@ -362,10 +362,6 @@ DOMAIN-SUFFIX,xboxplayanywhere.com
 DOMAIN-SUFFIX,xboxservices.com
 DOMAIN-SUFFIX,xboxstudios.com
 DOMAIN-SUFFIX,xbx.lv
-DOMAIN-SUFFIX,forza.net
-DOMAIN-SUFFIX,forzamotorsport.net
-DOMAIN-SUFFIX,forzaracingchampionship.com
-DOMAIN-SUFFIX,forzarc.com
 DOMAIN-SUFFIX,callersbane.com
 DOMAIN-SUFFIX,minecraft-services.net
 DOMAIN-SUFFIX,minecraft.net
@@ -380,6 +376,10 @@ DOMAIN-SUFFIX,bethesdagamestudios.com
 DOMAIN-SUFFIX,bethsoft.com
 DOMAIN-SUFFIX,doom.com
 DOMAIN-SUFFIX,elderscrolls.com
+DOMAIN-SUFFIX,forza.net
+DOMAIN-SUFFIX,forzamotorsport.net
+DOMAIN-SUFFIX,forzaracingchampionship.com
+DOMAIN-SUFFIX,forzarc.com
 DOMAIN-SUFFIX,microsoft.be
 DOMAIN-SUFFIX,aadrm.com
 DOMAIN-SUFFIX,azure-api.net
