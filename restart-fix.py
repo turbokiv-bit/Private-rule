@@ -264,6 +264,46 @@ must_replace(
 )
 
 # --------------------------------------------------------------------------
+# 6. provider node tag separator: "/" -> " " (display: "🏎️ HKG·X" not "🏎️/HKG·X")
+# --------------------------------------------------------------------------
+PROVIDER_SEP_FILES = [
+    (
+        'adapter/provider/adapter.go',
+        [
+            ('a.providerTag, "/",', 'a.providerTag, " ",'),
+            ('a.providerTag, "/endpoint-",', 'a.providerTag, " endpoint-",'),
+        ],
+    ),
+    (
+        'provider/parser/parser.go',
+        [
+            ('providerTag + "/" + options.Detour', 'providerTag + " " + options.Detour'),
+        ],
+    ),
+]
+
+for path, pairs in PROVIDER_SEP_FILES:
+    if not os.path.exists(path):
+        fail('missing file: ' + path)
+        continue
+    text = read(path)
+    changed = 0
+    already = 0
+    for old, new in pairs:
+        if new in text:
+            already += text.count(new)
+            continue
+        n = text.count(old)
+        if n:
+            text = text.replace(old, new)
+            changed += n
+    if changed:
+        write(path, text)
+        ok('provider tag separator in %s (%d replacement(s))' % (os.path.basename(path), changed))
+    else:
+        skip('provider tag separator in %s (already applied)' % os.path.basename(path))
+
+# --------------------------------------------------------------------------
 print('== summary ==')
 bad = [m for st, m in STEPS if st == 'FAIL']
 for st, m in STEPS:
