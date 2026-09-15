@@ -425,6 +425,65 @@ must_replace(
 )
 
 # --------------------------------------------------------------------------
+# 8. loadbalance: same interval:0 / idle_timeout:0 semantics as urltest.
+# --------------------------------------------------------------------------
+p = 'protocol/group/loadbalance.go'
+require(p)
+
+must_replace(
+    p,
+    '\tstrategyFn      strategyFn\n}',
+    '\tstrategyFn      strategyFn\n\n'
+    '\t// periodicDisabled is set when interval == 0: no periodic\n'
+    '\t// health-check ticker is started. Fail-over still works — a failed\n'
+    '\t// dial triggers CheckOutbounds, which drops the dead node\'s history\n'
+    '\t// so it is skipped on the next pick.\n'
+    '\tperiodicDisabled bool\n}',
+    'loadbalance.go periodicDisabled field',
+)
+
+must_replace(
+    p,
+    '\tif interval == 0 {\n\t\tinterval = C.DefaultURLTestInterval\n\t}\n'
+    '\tif idleTimeout == 0 {\n\t\tidleTimeout = C.DefaultURLTestIdleTimeout\n\t}\n'
+    '\tif interval > idleTimeout {\n'
+    '\t\treturn nil, E.New("interval must be less or equal than idle_timeout")\n\t}',
+    '\t// interval == 0 disables the periodic health-check ticker entirely;\n'
+    '\t// idle_timeout == 0 is honoured as "idle immediately". Non-zero values\n'
+    '\t// keep the upstream behaviour. Fail-over via a failed dial still works.\n'
+    '\tperiodicDisabled := interval == 0\n'
+    '\tif idleTimeout != 0 && !periodicDisabled {\n'
+    '\t\tif interval == 0 {\n\t\t\tinterval = C.DefaultURLTestInterval\n\t\t}\n'
+    '\t\tif interval > idleTimeout {\n'
+    '\t\t\treturn nil, E.New("interval must be less or equal than idle_timeout")\n\t\t}\n\t}',
+    'loadbalance.go interval==0 handling',
+)
+
+must_replace(
+    p,
+    '\t\tpause:          service.FromContext[pause.Manager](ctx),\n'
+    '\t\tinterruptGroup: interrupt.NewGroup(),\n\t}',
+    '\t\tpause:          service.FromContext[pause.Manager](ctx),\n'
+    '\t\tinterruptGroup: interrupt.NewGroup(),\n\n'
+    '\t\tperiodicDisabled: periodicDisabled,\n\t}',
+    'loadbalance.go store periodicDisabled',
+)
+
+must_replace(
+    p,
+    '\tif g.ticker != nil {\n\t\tg.lastActive.Store(time.Now())\n\t\treturn\n\t}\n'
+    '\tg.ticker = time.NewTicker(g.interval)',
+    '\tif g.ticker != nil {\n\t\tg.lastActive.Store(time.Now())\n\t\treturn\n\t}\n'
+    '\tif g.periodicDisabled || g.interval <= 0 {\n'
+    '\t\t// interval == 0: no periodic health check. Keep the group active\n'
+    '\t\t// without starting a probe ticker.\n'
+    '\t\tg.lastActive.Store(time.Now())\n'
+    '\t\treturn\n\t}\n'
+    '\tg.ticker = time.NewTicker(g.interval)',
+    'loadbalance.go Touch honours periodicDisabled',
+)
+
+# --------------------------------------------------------------------------
 print('== summary ==')
 bad = [m for st, m in STEPS if st == 'FAIL']
 for st, m in STEPS:
