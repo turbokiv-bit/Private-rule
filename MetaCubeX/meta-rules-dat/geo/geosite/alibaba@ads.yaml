@@ -23,8 +23,6 @@ payload:
     - +.tns.simba.taobao.com
     - +.track.lc.quark.cn
     - +.v6-adashx.ut.taobao.com
-    - +.ads.uc.cn
-    - +.adslot.uc.cn
     - +.acjs.aliyun.com
     - +.adash-emas.cn-hangzhou.aliyuncs.com
     - +.adash.man.aliyuncs.com
@@ -35,6 +33,9 @@ payload:
     - +.nbsdk-baichuan.alicdn.com
     - +.tce.alicdn.com
     - +.v6-adashx.ut.cainiao.com
+    - +.adashx.ut.ele.me
+    - +.h-adashx.ut.ele.me
+    - +.v6-adashx.ut.ele.me
     - +.aaid.umeng.com
     - +.alog.umeng.com
     - +.alog.umengcloud.com
@@ -83,6 +84,5 @@ payload:
     - +.logs.amap.com
     - +.optimus-ads.amap.com
     - +.v6-adashx.ut.amap.com
-    - +.adashx.ut.ele.me
-    - +.h-adashx.ut.ele.me
-    - +.v6-adashx.ut.ele.me
+    - +.ads.uc.cn
+    - +.adslot.uc.cn

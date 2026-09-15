@@ -9,7 +9,6 @@ DOMAIN-SUFFIX,ladsp.com
 DOMAIN-SUFFIX,microad.co.jp
 DOMAIN-SUFFIX,microad.jp
 DOMAIN-SUFFIX,socdm.com
-DOMAIN-SUFFIX,stats.avito.ru
 DOMAIN-SUFFIX,ad.ozone.ru
 DOMAIN-SUFFIX,adv.ozon.ru
 DOMAIN-SUFFIX,agency-adv.ozon.ru
@@ -43,3 +42,4 @@ DOMAIN-SUFFIX,marketing-info.wildberries.ru
 DOMAIN-SUFFIX,marketplace-sentry.wb.ru
 DOMAIN-SUFFIX,sentry.wb.ru
 DOMAIN-SUFFIX,web-analytics.wildberries.ru
+DOMAIN-SUFFIX,stats.avito.ru

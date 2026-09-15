@@ -23,8 +23,6 @@ payload:
     - DOMAIN-SUFFIX,tns.simba.taobao.com
     - DOMAIN-SUFFIX,track.lc.quark.cn
     - DOMAIN-SUFFIX,v6-adashx.ut.taobao.com
-    - DOMAIN-SUFFIX,ads.uc.cn
-    - DOMAIN-SUFFIX,adslot.uc.cn
     - DOMAIN-SUFFIX,acjs.aliyun.com
     - DOMAIN-SUFFIX,adash-emas.cn-hangzhou.aliyuncs.com
     - DOMAIN-SUFFIX,adash.man.aliyuncs.com
@@ -35,6 +33,9 @@ payload:
     - DOMAIN-SUFFIX,nbsdk-baichuan.alicdn.com
     - DOMAIN-SUFFIX,tce.alicdn.com
     - DOMAIN-SUFFIX,v6-adashx.ut.cainiao.com
+    - DOMAIN-SUFFIX,adashx.ut.ele.me
+    - DOMAIN-SUFFIX,h-adashx.ut.ele.me
+    - DOMAIN-SUFFIX,v6-adashx.ut.ele.me
     - DOMAIN-SUFFIX,aaid.umeng.com
     - DOMAIN-SUFFIX,alog.umeng.com
     - DOMAIN-SUFFIX,alog.umengcloud.com
@@ -83,6 +84,5 @@ payload:
     - DOMAIN-SUFFIX,logs.amap.com
     - DOMAIN-SUFFIX,optimus-ads.amap.com
     - DOMAIN-SUFFIX,v6-adashx.ut.amap.com
-    - DOMAIN-SUFFIX,adashx.ut.ele.me
-    - DOMAIN-SUFFIX,h-adashx.ut.ele.me
-    - DOMAIN-SUFFIX,v6-adashx.ut.ele.me
+    - DOMAIN-SUFFIX,ads.uc.cn
+    - DOMAIN-SUFFIX,adslot.uc.cn
