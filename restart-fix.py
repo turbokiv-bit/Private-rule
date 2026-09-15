@@ -304,6 +304,127 @@ for path, pairs in PROVIDER_SEP_FILES:
         skip('provider tag separator in %s (already applied)' % os.path.basename(path))
 
 # --------------------------------------------------------------------------
+# 7. urltest: interval: 0  =>  no periodic health-check ticker,
+#    but fail-over on a dead node still works (dial error clears the cached
+#    selection so the next dial re-selects a healthy node).
+# --------------------------------------------------------------------------
+p = 'protocol/group/urltest.go'
+require(p)
+
+must_replace(
+    p,
+    '\tfallback URLTestFallback\n}',
+    '\tfallback URLTestFallback\n\n'
+    '\t// periodicDisabled is set when interval == 0: the periodic\n'
+    '\t// health-check ticker is not created, so there are no recurring\n'
+    '\t// probes. Fail-over still works — a failed dial drops that node\'s\n'
+    '\t// history and clears the cached selection, so the next dial picks a\n'
+    '\t// healthy node.\n'
+    '\tperiodicDisabled bool\n}',
+    'urltest.go periodicDisabled field',
+)
+
+must_replace(
+    p,
+    '\tif interval == 0 {\n\t\tinterval = C.DefaultURLTestInterval\n\t}\n'
+    '\tif tolerance == 0 {\n\t\ttolerance = 50\n\t}\n'
+    '\tif idleTimeout == 0 {\n\t\tidleTimeout = C.DefaultURLTestIdleTimeout\n\t}\n'
+    '\tif interval > idleTimeout {\n'
+    '\t\treturn nil, E.New("interval must be less or equal than idle_timeout")\n\t}',
+    '\t// interval == 0 disables the periodic health-check ticker entirely\n'
+    '\t// (no recurring probes). idle_timeout == 0 is honoured as well: the\n'
+    '\t// group counts as idle immediately, so no probe is scheduled on\n'
+    '\t// provider updates either. Non-zero values keep upstream behaviour.\n'
+    '\tperiodicDisabled := interval == 0\n'
+    '\tif tolerance == 0 {\n\t\ttolerance = 50\n\t}\n'
+    '\tif idleTimeout != 0 && !periodicDisabled {\n'
+    '\t\tif interval == 0 {\n\t\t\tinterval = C.DefaultURLTestInterval\n\t\t}\n'
+    '\t\tif interval > idleTimeout {\n'
+    '\t\t\treturn nil, E.New("interval must be less or equal than idle_timeout")\n\t\t}\n\t}',
+    'urltest.go interval==0 handling',
+)
+
+must_replace(
+    p,
+    '\t\tinterruptGroup:               interrupt.NewGroup(),\n'
+    '\t\tinterruptExternalConnections: interruptExternalConnections,\n\t}',
+    '\t\tinterruptGroup:               interrupt.NewGroup(),\n'
+    '\t\tinterruptExternalConnections: interruptExternalConnections,\n'
+    '\t\tperiodicDisabled:             periodicDisabled,\n\t}',
+    'urltest.go store periodicDisabled',
+)
+
+must_replace(
+    p,
+    '\tif g.ticker != nil {\n\t\tg.lastActive.Store(time.Now())\n\t\treturn\n\t}\n'
+    '\tticker := time.NewTicker(g.interval)',
+    '\tif g.ticker != nil {\n\t\tg.lastActive.Store(time.Now())\n\t\treturn\n\t}\n'
+    '\tif g.periodicDisabled || g.interval <= 0 {\n'
+    '\t\t// interval == 0: no periodic health check. Keep the group active\n'
+    '\t\t// without starting a probe ticker.\n'
+    '\t\tg.lastActive.Store(time.Now())\n'
+    '\t\treturn\n\t}\n'
+    '\tticker := time.NewTicker(g.interval)',
+    'urltest.go Touch honours periodicDisabled',
+)
+
+# helper: clear cached selection on dial failure
+must_replace(
+    p,
+    'func (g *URLTestGroup) Select(network string) (adapter.Outbound, bool) {',
+    '// ResetSelection clears the cached per-network selection so the next dial\n'
+    '// re-runs Select. Called after a dial failure so fail-over still happens\n'
+    '// when periodic health checks are disabled (interval == 0).\n'
+    'func (g *URLTestGroup) ResetSelection(network string) {\n'
+    '\tswitch N.NetworkName(network) {\n'
+    '\tcase N.NetworkTCP:\n'
+    '\t\tg.selectedOutboundTCP.Store(nil)\n'
+    '\tcase N.NetworkUDP:\n'
+    '\t\tg.selectedOutboundUDP.Store(nil)\n'
+    '\t}\n}\n\n'
+    'func (g *URLTestGroup) Select(network string) (adapter.Outbound, bool) {',
+    'urltest.go ResetSelection()',
+)
+
+must_replace(
+    p,
+    '\tconn, err := outbound.DialContext(ctx, network, destination)\n'
+    '\tif err == nil {\n'
+    '\t\treturn s.group.interruptGroup.NewConn(conn, interrupt.IsExternalConnectionFromContext(ctx), interrupt.IsResourceDownloadFromContext(ctx)), nil\n\t}\n'
+    '\ts.logger.ErrorContext(ctx, err)\n'
+    '\ts.group.history.DeleteURLTestHistory(outbound.Tag())\n'
+    '\treturn nil, err\n}',
+    '\tconn, err := outbound.DialContext(ctx, network, destination)\n'
+    '\tif err == nil {\n'
+    '\t\treturn s.group.interruptGroup.NewConn(conn, interrupt.IsExternalConnectionFromContext(ctx), interrupt.IsResourceDownloadFromContext(ctx)), nil\n\t}\n'
+    '\ts.logger.ErrorContext(ctx, err)\n'
+    '\ts.group.history.DeleteURLTestHistory(outbound.Tag())\n'
+    '\t// Drop the cached selection so the next dial re-selects (fail-over).\n'
+    '\ts.group.ResetSelection(network)\n'
+    '\treturn nil, err\n}',
+    'urltest.go DialContext fail-over',
+)
+
+must_replace(
+    p,
+    '\tconn, err := outbound.ListenPacket(ctx, destination)\n'
+    '\tif err == nil {\n'
+    '\t\treturn s.group.interruptGroup.NewPacketConn(conn, interrupt.IsExternalConnectionFromContext(ctx), interrupt.IsResourceDownloadFromContext(ctx)), nil\n\t}\n'
+    '\ts.logger.ErrorContext(ctx, err)\n'
+    '\ts.group.history.DeleteURLTestHistory(outbound.Tag())\n'
+    '\treturn nil, err\n}',
+    '\tconn, err := outbound.ListenPacket(ctx, destination)\n'
+    '\tif err == nil {\n'
+    '\t\treturn s.group.interruptGroup.NewPacketConn(conn, interrupt.IsExternalConnectionFromContext(ctx), interrupt.IsResourceDownloadFromContext(ctx)), nil\n\t}\n'
+    '\ts.logger.ErrorContext(ctx, err)\n'
+    '\ts.group.history.DeleteURLTestHistory(outbound.Tag())\n'
+    '\t// Drop the cached selection so the next packet dial re-selects.\n'
+    '\ts.group.ResetSelection(N.NetworkUDP)\n'
+    '\treturn nil, err\n}',
+    'urltest.go ListenPacket fail-over',
+)
+
+# --------------------------------------------------------------------------
 print('== summary ==')
 bad = [m for st, m in STEPS if st == 'FAIL']
 for st, m in STEPS:
