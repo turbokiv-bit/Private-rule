@@ -22,19 +22,24 @@ jobs:
       - name: Clone reF1nd sing-box core
         run: git clone --depth 1 -b reF1nd-testing https://github.com/reF1nd/sing-box.git core
 
-      - name: Apply core patches (restart-fix + lazy-recover)
+      - name: Apply core patches (restart-fix + lazy-recover + diag)
         run: |
           cd core
           curl -sSL "https://raw.githubusercontent.com/turbokiv-bit/Private-rule/main/restart-fix.py" -o /tmp/restart-fix.py
           curl -sSL "https://raw.githubusercontent.com/turbokiv-bit/Private-rule/main/lazy_recover_patch.py" -o /tmp/lazy_recover_patch.py
+          curl -sSL "https://raw.githubusercontent.com/turbokiv-bit/Private-rule/main/lazy_recover_diag.py" -o /tmp/lazy_recover_diag.py
           echo "restart-fix.py 大小: $(wc -c < /tmp/restart-fix.py) bytes"
           echo "lazy_recover_patch.py 大小: $(wc -c < /tmp/lazy_recover_patch.py) bytes"
+          echo "lazy_recover_diag.py 大小: $(wc -c < /tmp/lazy_recover_diag.py) bytes"
 
           echo "--- applying restart-fix.py ---"
           python3 /tmp/restart-fix.py || { echo "❌ restart-fix 失败"; exit 1; }
 
           echo "--- applying lazy_recover_patch.py ---"
           python3 /tmp/lazy_recover_patch.py || { echo "❌ lazy_recover 失败"; exit 1; }
+
+          echo "--- applying lazy_recover_diag.py (diagnostic logging) ---"
+          python3 /tmp/lazy_recover_diag.py || { echo "❌ lazy_recover_diag 失败"; exit 1; }
 
           echo "--- gofmt check (空输出=通过) ---"
           gofmt -l protocol/group/urltest.go
