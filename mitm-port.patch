@@ -161,7 +161,7 @@ index 00000000..3967ed92
 +	Body    []byte
 +}
 diff --git a/box.go b/box.go
-index 4ae48b01..be13b3a5 100644
+index 4ae48b01..2b18001a 100644
 --- a/box.go
 +++ b/box.go
 @@ -32,6 +32,7 @@ import (
@@ -180,7 +180,15 @@ index 4ae48b01..be13b3a5 100644
  	referenceManager    *route.ReferenceManager
  	httpClientService   adapter.LifecycleService
  	internalService     []adapter.LifecycleService
-@@ -256,7 +258,7 @@ func New(options Options) (*Box, error) {
+@@ -211,6 +213,7 @@ func New(options Options) (*Box, error) {
+ 	routeOptions := common.PtrValueOrDefault(options.Route)
+ 	certificateOptions := common.PtrValueOrDefault(options.Certificate)
+ 	if C.IsAndroid || certificateOptions.Store != "" && certificateOptions.Store != C.CertificateStoreSystem ||
++		certificateOptions.TLSDecryption != nil && certificateOptions.TLSDecryption.Enabled ||
+ 		len(certificateOptions.Certificate) > 0 ||
+ 		len(certificateOptions.CertificatePath) > 0 ||
+ 		len(certificateOptions.CertificateDirectoryPath) > 0 {
+@@ -256,7 +259,7 @@ func New(options Options) (*Box, error) {
  		return nil, E.Cause(err, "prepare eBPF self-bypass")
  	}
  	service.MustRegister[adapter.NetworkManager](ctx, networkManager)
@@ -189,7 +197,7 @@ index 4ae48b01..be13b3a5 100644
  	service.MustRegister[adapter.ConnectionManager](ctx, connectionManager)
  	// Must register after ConnectionManager: the Apple HTTP engine's proxy bridge reads it from the context when Manager.Start resolves the default client.
  	httpClientManager := httpclient.NewManager(ctx, logFactory.NewLogger("httpclient"), options.HTTPClients, routeOptions.DefaultHTTPClient)
-@@ -530,6 +532,16 @@ func New(options Options) (*Box, error) {
+@@ -530,6 +533,16 @@ func New(options Options) (*Box, error) {
  		timeService.TimeService = ntpService
  		internalServices = append(internalServices, adapter.NewLifecycleService(ntpService, "ntp service"))
  	}
@@ -206,7 +214,7 @@ index 4ae48b01..be13b3a5 100644
  	return &Box{
  		ctx:                 ctx,
  		network:             networkManager,
-@@ -543,6 +555,7 @@ func New(options Options) (*Box, error) {
+@@ -543,6 +556,7 @@ func New(options Options) (*Box, error) {
  		dnsRouter:           dnsRouter,
  		connection:          connectionManager,
  		router:              router,
@@ -214,7 +222,7 @@ index 4ae48b01..be13b3a5 100644
  		referenceManager:    referenceManager,
  		httpClientService:   httpClientService,
  		createdAt:           createdAt,
-@@ -610,7 +623,7 @@ func (s *Box) preStart() error {
+@@ -610,7 +624,7 @@ func (s *Box) preStart() error {
  	if err != nil {
  		return err
  	}
