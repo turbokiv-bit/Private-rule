@@ -2408,6 +2408,20 @@ index 65e9f348..18b60f6b 100644
  	ctx = adapter.WithContext(ctx, &metadata)
  	var (
  		remoteConn net.Conn
+diff --git a/route/route.go b/route/route.go
+index e9b17162..f705774c 100644
+--- a/route/route.go
++++ b/route/route.go
+@@ -720,6 +720,9 @@ match:
+ 				metadata.TLSFragment = true
+ 				metadata.TLSFragmentFallbackDelay = routeOptions.TLSFragmentFallbackDelay
+ 			}
++			if routeOptions.MITM != nil && routeOptions.MITM.Enabled {
++				metadata.MITM = routeOptions.MITM
++			}
+ 			if routeOptions.TLSRecordFragment {
+ 				metadata.TLSRecordFragment = true
+ 			}
 diff --git a/script/jsc/array.go b/script/jsc/array.go
 new file mode 100644
 index 00000000..a113e02c
@@ -2893,96 +2907,6 @@ index 00000000..7879f84c
 +
 +//go:linkname runtimeGetDatePrototype github.com/dop251/goja.(*Runtime).getDatePrototype
 +func runtimeGetDatePrototype(r *goja.Runtime) *goja.Object
-diff --git a/script/jstest/assert.js b/script/jstest/assert.js
-new file mode 100644
-index 00000000..b00076dd
---- /dev/null
-+++ b/script/jstest/assert.js
-@@ -0,0 +1,83 @@
-+'use strict';
-+
-+const assert = {
-+    _isSameValue(a, b) {
-+        if (a === b) {
-+            // Handle +/-0 vs. -/+0
-+            return a !== 0 || 1 / a === 1 / b;
-+        }
-+
-+        // Handle NaN vs. NaN
-+        return a !== a && b !== b;
-+    },
-+
-+    _toString(value) {
-+        try {
-+            if (value === 0 && 1 / value === -Infinity) {
-+                return '-0';
-+            }
-+
-+            return String(value);
-+        } catch (err) {
-+            if (err.name === 'TypeError') {
-+                return Object.prototype.toString.call(value);
-+            }
-+
-+            throw err;
-+        }
-+    },
-+
-+    sameValue(actual, expected, message) {
-+        if (assert._isSameValue(actual, expected)) {
-+            return;
-+        }
-+        if (message === undefined) {
-+            message = '';
-+        } else {
-+            message += ' ';
-+        }
-+
-+        message += 'Expected SameValue(«' + assert._toString(actual) + '», «' + assert._toString(expected) + '») to be true';
-+
-+        throw new Error(message);
-+    },
-+
-+    throws(f, ctor, message) {
-+        if (message === undefined) {
-+            message = '';
-+        } else {
-+            message += ' ';
-+        }
-+        try {
-+            f();
-+        } catch (e) {
-+            if (e.constructor !== ctor) {
-+                throw new Error(message + "Wrong exception type was thrown: " + e.constructor.name);
-+            }
-+            return;
-+        }
-+        throw new Error(message + "No exception was thrown");
-+    },
-+
-+    throwsNodeError(f, ctor, code, message) {
-+        if (message === undefined) {
-+            message = '';
-+        } else {
-+            message += ' ';
-+        }
-+        try {
-+            f();
-+        } catch (e) {
-+            if (e.constructor !== ctor) {
-+                throw new Error(message + "Wrong exception type was thrown: " + e.constructor.name);
-+            }
-+            if (e.code !== code) {
-+                throw new Error(message + "Wrong exception code was thrown: " + e.code);
-+            }
-+            return;
-+        }
-+        throw new Error(message + "No exception was thrown");
-+    }
-+}
-+
-+module.exports = assert;
-\ No newline at end of file
 diff --git a/script/jstest/test.go b/script/jstest/test.go
 new file mode 100644
 index 00000000..e287f8c2
