@@ -484,46 +484,6 @@ must_replace(
 )
 
 # --------------------------------------------------------------------------
-# 9. Backport the SFI-dev-facing libbox bridge symbols from reF1nd-testing
-#    into reF1nd-stable (7 files). reF1nd-stable syncs newer upstream but its
-#    libbox predates symbols the sing-box-for-apple "dev" front-end requires
-#    (GoroutineDump, processPaths, AutoRedirectSession/Handler, etc.).
-#    Overwriting these files with the testing versions keeps the stable body
-#    while making the front-end bindings compile. Idempotent + always fetches
-#    fresh from the reF1nd-testing branch.
-# --------------------------------------------------------------------------
-import urllib.request
-
-LIBBOX_BACKPORT_FILES = [
-    'debug.go',
-    'command_server.go',
-    'platform.go',
-    'service.go',
-    'connection_owner_darwin.go',
-    'power_report.go',
-    'config.go',
-]
-
-BACKPORT_BASE = 'https://raw.githubusercontent.com/reF1nd/sing-box/reF1nd-testing/experimental/libbox/'
-
-for name in LIBBOX_BACKPORT_FILES:
-    dst = 'experimental/libbox/' + name
-    if not os.path.exists(dst):
-        fail('missing file: ' + dst)
-        continue
-    try:
-        req = urllib.request.Request(BACKPORT_BASE + name, headers={'User-Agent': 'restart-fix'})
-        content = urllib.request.urlopen(req, timeout=30).read().decode('utf-8')
-    except Exception as e:
-        fail('download ' + name + ' — ' + str(e))
-        continue
-    if read(dst) == content:
-        skip(name + ' (already backported)')
-        continue
-    write(dst, content)
-    ok(name + ' backported (libbox bridge symbols)')
-
-# --------------------------------------------------------------------------
 print('== summary ==')
 bad = [m for st, m in STEPS if st == 'FAIL']
 for st, m in STEPS:
