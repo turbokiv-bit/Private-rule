@@ -292,6 +292,29 @@ index 34871a6b..fb3722b9 100644
  func (s *Store) update() error {
  	currentPool, err := s.newBasePool()
  	if err != nil {
+diff --git a/common/sniff/http.go b/common/sniff/http.go
+index 9d3127c2..964252d2 100644
+--- a/common/sniff/http.go
++++ b/common/sniff/http.go
+@@ -24,5 +24,6 @@ func HTTPHost(_ context.Context, metadata *adapter.InboundContext, reader io.Rea
+ 	}
+ 	metadata.Protocol = C.ProtocolHTTP
+ 	metadata.SniffHost = M.ParseSocksaddr(request.Host).AddrString()
++	metadata.HTTPRequest = request
+ 	return nil
+ }
+diff --git a/common/sniff/tls.go b/common/sniff/tls.go
+index 4e1db94b..c75a9826 100644
+--- a/common/sniff/tls.go
++++ b/common/sniff/tls.go
+@@ -23,6 +23,7 @@ func TLSClientHello(ctx context.Context, metadata *adapter.InboundContext, reade
+ 	if clientHello != nil {
+ 		metadata.Protocol = C.ProtocolTLS
+ 		metadata.SniffHost = clientHello.ServerName
++		metadata.ClientHello = clientHello
+ 		return nil
+ 	}
+ 	if errors.Is(err, io.ErrUnexpectedEOF) {
 diff --git a/constant/script.go b/constant/script.go
 new file mode 100644
 index 00000000..45574038
@@ -2220,6 +2243,18 @@ index 8533c680..b9c544fe 100644
  	HTTPClients          []HTTPClient          `json:"http_clients,omitempty"`
  	NetworkNamespaces    []NetworkNamespace    `json:"network_namespaces,omitempty"`
  	Endpoints            []Endpoint            `json:"endpoints,omitempty"`
+diff --git a/option/rule_action.go b/option/rule_action.go
+index 3302e446..c7930b73 100644
+--- a/option/rule_action.go
++++ b/option/rule_action.go
+@@ -196,6 +196,7 @@ type RawRouteOptionsActionOptions struct {
+ 	TLSRecordFragment        bool               `json:"tls_record_fragment,omitempty"`
+ 	TLSSpoof                 string             `json:"tls_spoof,omitempty"`
+ 	TLSSpoofMethod           string             `json:"tls_spoof_method,omitempty" enum:"wrong-sequence,wrong-checksum,wrong-ack,wrong-md5,wrong-timestamp"`
++	MITM                     *MITMRouteOptions  `json:"mitm,omitempty"`
+ }
+ 
+ type RouteOptionsActionOptions RawRouteOptionsActionOptions
 diff --git a/option/script.go b/option/script.go
 new file mode 100644
 index 00000000..90a3b586
@@ -2423,10 +2458,18 @@ index e9b17162..f705774c 100644
  				metadata.TLSRecordFragment = true
  			}
 diff --git a/route/rule/rule_action.go b/route/rule/rule_action.go
-index 11d8988b..9874459f 100644
+index 11d8988b..3ffe66c2 100644
 --- a/route/rule/rule_action.go
 +++ b/route/rule/rule_action.go
-@@ -241,6 +241,7 @@ type RuleActionRouteOptions struct {
+@@ -42,6 +42,7 @@ func newRuleActionRouteOptions(options option.RawRouteOptionsActionOptions) (Rul
+ 		TLSRecordFragment:         options.TLSRecordFragment,
+ 		TLSSpoof:                  spoof,
+ 		TLSSpoofMethod:            spoofMethod,
++		MITM:                      options.MITM,
+ 	}, nil
+ }
+ 
+@@ -241,6 +242,7 @@ type RuleActionRouteOptions struct {
  	TLSRecordFragment         bool
  	TLSSpoof                  string
  	TLSSpoofMethod            tlsspoof.Method
