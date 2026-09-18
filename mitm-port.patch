@@ -57,6 +57,30 @@ index aaa9361e..baf37e6b 100644
  }
  
  type InboundContextExtended struct {
+diff --git a/adapter/lifecycle.go b/adapter/lifecycle.go
+index 8fd8830b..74e582d1 100644
+--- a/adapter/lifecycle.go
++++ b/adapter/lifecycle.go
+@@ -77,6 +77,9 @@ func getServiceName(service any) string {
+ 
+ func Start(ctx context.Context, logger log.ContextLogger, stage StartStage, services ...Lifecycle) error {
+ 	for _, service := range services {
++		if service == nil {
++			continue // skip nil service (e.g. optional MITM engine when disabled)
++		}
+ 		err := ctx.Err()
+ 		if err != nil {
+ 			return err
+@@ -94,6 +97,9 @@ func Start(ctx context.Context, logger log.ContextLogger, stage StartStage, serv
+ 
+ func StartNamed(ctx context.Context, logger log.ContextLogger, stage StartStage, services []LifecycleService) error {
+ 	for _, service := range services {
++		if service == nil {
++			continue // skip nil service
++		}
+ 		err := ctx.Err()
+ 		if err != nil {
+ 			return err
 diff --git a/adapter/mitm.go b/adapter/mitm.go
 new file mode 100644
 index 00000000..450468a9
