@@ -24,21 +24,6 @@ payload:
     - +.who.int
     - +.wi-fi.org
     - +.wto.org
-    - +.ccstatic.org
-    - +.creativecommons.org
-    - +.creativecommons.engineering
-    - +.licensebuttons.net
-    - +.csis.org
-    - +.emojipedia.org
-    - +.worldemojiawards.com
-    - +.worldemojiday.com
-    - +.xn--yt8h.la
-    - +.f-dro1d.org
-    - +.f-droid.com
-    - +.f-droid.org
-    - +.fdroid.org
-    - +.nist.gov
-    - +.time.gov
     - +.openmaps.org
     - +.openstreetmap.com
     - +.openstreetmap.net
@@ -48,6 +33,14 @@ payload:
     - +.osmfoundation.org
     - +.stateofthemap.com
     - +.stateofthemap.org
+    - +.paskoocheh.com
+    - +.rolfoundation.org
+    - +.rolsociety.org
+    - +.csis.org
+    - +.emojipedia.org
+    - +.worldemojiawards.com
+    - +.worldemojiday.com
+    - +.xn--yt8h.la
     - +.attestation.app
     - +.grapheneos.app
     - +.grapheneos.ca
@@ -126,7 +119,14 @@ payload:
     - +.messybrainz.org
     - +.metabrainz.org
     - +.musicbrainz.org
-    - +.paskoocheh.com
     - +.ppy.sh
-    - +.rolfoundation.org
-    - +.rolsociety.org
+    - +.ccstatic.org
+    - +.creativecommons.org
+    - +.creativecommons.engineering
+    - +.licensebuttons.net
+    - +.f-dro1d.org
+    - +.f-droid.com
+    - +.f-droid.org
+    - +.fdroid.org
+    - +.nist.gov
+    - +.time.gov
