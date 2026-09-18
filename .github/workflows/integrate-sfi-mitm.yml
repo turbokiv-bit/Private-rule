@@ -32,7 +32,7 @@ jobs:
       - name: Apply core patches (MITM + restart-fix + lazy-recover)
         working-directory: core
         run: |
-          cd core
+          echo "当前目录: $(pwd) (应为 .../core)"
           # 1) 拉取所有补丁脚本/patch（上传到你的 Private-rule repo）
           BASE="https://raw.githubusercontent.com/turbokiv-bit/Private-rule/main"
           curl -sSL "$BASE/restart-fix.py" -o /tmp/restart-fix.py
