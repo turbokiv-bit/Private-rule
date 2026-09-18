@@ -2422,6 +2422,18 @@ index e9b17162..f705774c 100644
  			if routeOptions.TLSRecordFragment {
  				metadata.TLSRecordFragment = true
  			}
+diff --git a/route/rule/rule_action.go b/route/rule/rule_action.go
+index 11d8988b..9874459f 100644
+--- a/route/rule/rule_action.go
++++ b/route/rule/rule_action.go
+@@ -241,6 +241,7 @@ type RuleActionRouteOptions struct {
+ 	TLSRecordFragment         bool
+ 	TLSSpoof                  string
+ 	TLSSpoofMethod            tlsspoof.Method
++	MITM                      *option.MITMRouteOptions
+ }
+ 
+ func (r *RuleActionRouteOptions) Type() string {
 diff --git a/script/jsc/array.go b/script/jsc/array.go
 new file mode 100644
 index 00000000..a113e02c
