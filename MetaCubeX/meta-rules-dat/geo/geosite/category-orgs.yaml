@@ -24,17 +24,6 @@ payload:
     - +.who.int
     - +.wi-fi.org
     - +.wto.org
-    - +.openmaps.org
-    - +.openstreetmap.com
-    - +.openstreetmap.net
-    - +.openstreetmap.org
-    - +.openstreetmaps.org
-    - +.osm.org
-    - +.osmfoundation.org
-    - +.stateofthemap.com
-    - +.stateofthemap.org
-    - +.rolfoundation.org
-    - +.rolsociety.org
     - +.ccstatic.org
     - +.creativecommons.org
     - +.creativecommons.engineering
@@ -44,10 +33,6 @@ payload:
     - +.worldemojiawards.com
     - +.worldemojiday.com
     - +.xn--yt8h.la
-    - +.f-dro1d.org
-    - +.f-droid.com
-    - +.f-droid.org
-    - +.fdroid.org
     - +.ieee.org
     - +.ieee.tv
     - +.tryengineering.org
@@ -104,8 +89,13 @@ payload:
     - +.vtsociety.org
     - +.nist.gov
     - +.time.gov
-    - +.paskoocheh.com
     - +.ppy.sh
+    - +.rolfoundation.org
+    - +.rolsociety.org
+    - +.f-dro1d.org
+    - +.f-droid.com
+    - +.f-droid.org
+    - +.fdroid.org
     - +.attestation.app
     - +.grapheneos.app
     - +.grapheneos.ca
@@ -130,3 +120,13 @@ payload:
     - +.messybrainz.org
     - +.metabrainz.org
     - +.musicbrainz.org
+    - +.openmaps.org
+    - +.openstreetmap.com
+    - +.openstreetmap.net
+    - +.openstreetmap.org
+    - +.openstreetmaps.org
+    - +.osm.org
+    - +.osmfoundation.org
+    - +.stateofthemap.com
+    - +.stateofthemap.org
+    - +.paskoocheh.com
