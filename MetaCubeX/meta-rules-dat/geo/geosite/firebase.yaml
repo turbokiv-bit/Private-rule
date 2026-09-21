@@ -1,7 +1,8 @@
 payload:
-    - firebase.google.com
     - firebase.googleapis.com
     - firebaseappcheck.googleapis.com
+    - firebaseappdistribution.googleapis.com
+    - firebaseapptesters.googleapis.com
     - firebasedynamiclinks-ipv4.googleapis.com
     - firebasedynamiclinks-ipv6.googleapis.com
     - firebasedynamiclinks.googleapis.com
@@ -13,9 +14,11 @@ payload:
     - firebaseremoteconfig.googleapis.com
     - +.crashlytics.com
     - +.firebase.com
+    - +.firebase.dev
     - +.firebase.io
     - +.firebaseapp.com
     - +.firebaseio.com
+    - +.firebase.google.com
     - crashlyticsreports-pa.googleapis.com
     - firebase-settings.crashlytics.com
     - update.crashlytics.com
