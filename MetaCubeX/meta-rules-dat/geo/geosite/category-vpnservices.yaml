@@ -22,6 +22,30 @@ payload:
     - +.ssrpass.pw
     - +.stc-server.com
     - +.hutao.cloud
+    - +.nordcdn.com
+    - +.nordvpn.com
+    - +.squirrelvpn.com
+    - +.squirrelgroup.net
+    - +.cylink.pro
+    - +.cylink0122.icu
+    - +.928.plus
+    - +.zind.cloud
+    - +.paofu.cloud
+    - +.paofuyun.me
+    - +.airport-gov-cn.com
+    - +.cnix-gov-cn.com
+    - +.xn--d4ty0ojsqzfd.com
+    - +.duyaoss.com
+    - +.duyaossr.com
+    - +.hitun.io
+    - +.xn--90wwvt03e.com
+    - +.nexitally.com
+    - +.nexitallysafe.com
+    - +.nexitcore.com
+    - +.shadowsocks.com
+    - +.shadowsocks.nl
+    - +.surflite.co
+    - +.surflite.net
     - +.vilavpn.com
     - +.vilavpn.xyz
     - +.vilavpn1.xyz
@@ -33,28 +57,10 @@ payload:
     - +.vilavpn7.xyz
     - +.boslife.biz
     - +.boslife.net
-    - +.cylink.pro
-    - +.cylink0122.icu
     - +.dlercloud.com
     - +.dlercloud.org
     - +.dlercloud.me
     - +.dleris.best
-    - +.squirrelvpn.com
-    - +.squirrelgroup.net
-    - +.airport-gov-cn.com
-    - +.cnix-gov-cn.com
-    - +.xn--d4ty0ojsqzfd.com
-    - +.928.plus
-    - +.zind.cloud
-    - +.duyaoss.com
-    - +.duyaossr.com
-    - +.paofu.cloud
-    - +.paofuyun.me
-    - +.hitun.io
-    - +.xn--90wwvt03e.com
-    - +.nexitally.com
-    - +.nexitallysafe.com
-    - +.nexitcore.com
     - +.justmysocks.net
     - +.justmysocks1.net
     - +.justmysocks2.net
@@ -62,9 +68,3 @@ payload:
     - +.n3ro.lol
     - +.n3ro.net
     - +.n3ro.wtf
-    - +.nordcdn.com
-    - +.nordvpn.com
-    - +.shadowsocks.com
-    - +.shadowsocks.nl
-    - +.surflite.co
-    - +.surflite.net
