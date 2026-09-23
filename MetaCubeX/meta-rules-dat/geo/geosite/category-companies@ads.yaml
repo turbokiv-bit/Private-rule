@@ -1,96 +1,6 @@
 payload:
-    - +.ads.yahoo.com
-    - +.gemini.yahoo.com
-    - +.ysm.yahoo.com
-    - +.adfox.ru
-    - +.adfox.yandex.ru
-    - +.admetrica.ru
-    - +.ads.yandex
-    - +.ads.yandex.ru
-    - +.adv.yandex.com
-    - +.adv.yandex.ru
-    - +.an.yandex.ru
-    - +.appmetrica.yandex.com
-    - +.appmetrica.yandex.net
-    - +.appmetrica.yandex.ru
-    - +.appmetrica.yango.com
-    - +.bs.yandex.ru
-    - +.clck.yandex.ru
-    - +.counter.yandex.ru
-    - +.mc.yandex.ru
-    - +.metrika.yandex.com
-    - +.metrika.yandex.net
-    - +.metrika.yandex.ru
-    - +.webvisor.com
-    - +.webvisor.org
-    - +.yabs.yandex.ru
-    - +.yads.tech
-    - +.yandex-metrica.ru
-    - +.yandexmetrica.com
-    - +.yango-ads.com
-    - adfstat.yandex.ru
-    - ads.yandex.com
-    - ads.yango.com
-    - adsdk.yandex.ru
-    - amc.yandex.ru
-    - analytics.mobile.yandex.net
-    - clck.yandex.com
-    - clck.yandex.net
-    - clck.yango.com
-    - informer.yandex.ru
-    - log.strm.yandex.ru
-    - mc.yandex.com
-    - mc.yandex.net
-    - mc.yango.com
-    - pixel.yandex.com
-    - report.ap.yandex-net.ru
-    - +.ads-api.duolingo.com
-    - +.analytics.vpc.duolingo.com
-    - +.metrics.duolingo.com
-    - sentry.iptv.rt.ru
-    - +.clarity.ms
-    - +.microsoftads.com
-    - +.msads.net
-    - +.nelreports.net
-    - +.browser.events.data.msn.cn
-    - +.browser.events.data.msn.com
-    - +.bingads.com
-    - +.collector.github.com
-    - copilot-telemetry-service.githubusercontent.com
-    - copilot-telemetry.githubusercontent.com
-    - +.e.mindbox.ru
-    - +.g.mindbox.ru
-    - +.s.mindbox.ru
-    - api-js.mindbox.ru
-    - api-ru.mindbox.cloud
-    - api-staging.mindbox.ru
-    - api.mindbox.cloud
-    - api.mindbox.ru
-    - sentry.mindbox.ru
-    - sentry.popmechanic.ru
-    - +.advertising.adobe.com
-    - +.demdex.net
-    - +.tubemogul.com
-    - ads-img.mozilla.org
-    - ads.mozilla.org
-    - incoming.telemetry.mozilla.org
-    - incoming-telemetry.thunderbird.net
-    - +.a.mts.ru
-    - +.obs.mts.ru
     - +.amazon-adsystem.com
     - +.serving-sys.com
-    - +.graph.whatsapp.com
-    - +.graph.whatsapp.net
-    - +.analytics.facebook.com
-    - +.facebookads.com
-    - +.pixel.facebook.com
-    - +.graph.instagram.com
-    - +.graph-fallback.instagram.com
-    - +.advertising.apple.com
-    - +.api-adservices.apple.com
-    - +.iadsdk.apple.com
-    - +.iad.apple.com
-    - +.qwapi.com
     - +.ad.mail.ru
     - +.ads.viqeo.tv
     - +.adsadvisor.io
@@ -161,6 +71,64 @@ payload:
     - analytics.vk.ru
     - stats.vk-portal.net
     - target.vk.com
+    - +.adfox.ru
+    - +.adfox.yandex.ru
+    - +.admetrica.ru
+    - +.ads.yandex
+    - +.ads.yandex.ru
+    - +.adv.yandex.com
+    - +.adv.yandex.ru
+    - +.an.yandex.ru
+    - +.appmetrica.yandex.com
+    - +.appmetrica.yandex.net
+    - +.appmetrica.yandex.ru
+    - +.appmetrica.yango.com
+    - +.bs.yandex.ru
+    - +.clck.yandex.ru
+    - +.counter.yandex.ru
+    - +.mc.yandex.ru
+    - +.metrika.yandex.com
+    - +.metrika.yandex.net
+    - +.metrika.yandex.ru
+    - +.webvisor.com
+    - +.webvisor.org
+    - +.yabs.yandex.ru
+    - +.yads.tech
+    - +.yandex-metrica.ru
+    - +.yandexmetrica.com
+    - +.yango-ads.com
+    - adfstat.yandex.ru
+    - ads.yandex.com
+    - ads.yango.com
+    - adsdk.yandex.ru
+    - amc.yandex.ru
+    - analytics.mobile.yandex.net
+    - clck.yandex.com
+    - clck.yandex.net
+    - clck.yango.com
+    - informer.yandex.ru
+    - log.strm.yandex.ru
+    - mc.yandex.com
+    - mc.yandex.net
+    - mc.yango.com
+    - pixel.yandex.com
+    - report.ap.yandex-net.ru
+    - ads-img.mozilla.org
+    - ads.mozilla.org
+    - incoming.telemetry.mozilla.org
+    - incoming-telemetry.thunderbird.net
+    - +.samsungadhub.com
+    - +.samsungads.com
+    - +.e.mindbox.ru
+    - +.g.mindbox.ru
+    - +.s.mindbox.ru
+    - api-js.mindbox.ru
+    - api-ru.mindbox.cloud
+    - api-staging.mindbox.ru
+    - api.mindbox.cloud
+    - api.mindbox.ru
+    - sentry.mindbox.ru
+    - sentry.popmechanic.ru
     - api-eu.carrotquest.app
     - api-eu.carrotquest.io
     - api-ru.carrotquest.app
@@ -172,10 +140,16 @@ payload:
     - api.carrottrack.app
     - api.dashly.app
     - api.dashlytrack.app
-    - +.samsungadhub.com
-    - +.samsungads.com
-    - sentry.hetzner.company
-    - +.snapads.com
+    - +.clarity.ms
+    - +.microsoftads.com
+    - +.msads.net
+    - +.nelreports.net
+    - +.bingads.com
+    - +.collector.github.com
+    - copilot-telemetry-service.githubusercontent.com
+    - copilot-telemetry.githubusercontent.com
+    - +.browser.events.data.msn.cn
+    - +.browser.events.data.msn.com
     - +.2mdn-cn.net
     - +.2mdn.net
     - +.admob-cn.com
@@ -230,3 +204,29 @@ payload:
     - +.urchin.com
     - analytics.google.com
     - +.ads.youtube.com
+    - +.a.mts.ru
+    - +.obs.mts.ru
+    - +.ads.yahoo.com
+    - +.gemini.yahoo.com
+    - +.ysm.yahoo.com
+    - +.analytics.facebook.com
+    - +.facebookads.com
+    - +.pixel.facebook.com
+    - +.graph.instagram.com
+    - +.graph-fallback.instagram.com
+    - +.graph.whatsapp.com
+    - +.graph.whatsapp.net
+    - sentry.iptv.rt.ru
+    - +.snapads.com
+    - sentry.hetzner.company
+    - +.ads-api.duolingo.com
+    - +.analytics.vpc.duolingo.com
+    - +.metrics.duolingo.com
+    - +.advertising.apple.com
+    - +.api-adservices.apple.com
+    - +.iadsdk.apple.com
+    - +.iad.apple.com
+    - +.qwapi.com
+    - +.advertising.adobe.com
+    - +.demdex.net
+    - +.tubemogul.com
