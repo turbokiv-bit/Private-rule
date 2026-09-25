@@ -1,54 +1,43 @@
 #!/usr/bin/env python3
 """
-SFI jailbreak app build fix: raise the SFI app deployment target to iOS 16.0.
+SFI jailbreak app build fix: raise ONLY the SFI app target's deployment target to iOS 16.0.
 
 WHY
 ===
 The SFI dev branch (1.15.0-alpha.8) declares IPHONEOS_DEPLOYMENT_TARGET = 15.0 for the
-SFI app target, but MainView.swift now uses a SwiftUI .toolbar result-builder conditional
-(`if environments.remoteServer != nil ... { ... }` with a nested `if #available(iOS 26.0,*)`)
-that requires ToolbarContentBuilder.buildIf, which is only available on iOS 16+.
+SFI app target, but SFI/MainView.swift uses a SwiftUI .toolbar result-builder conditional
+that requires ToolbarContentBuilder.buildIf (iOS 16+). Under Xcode 26.6 that is a hard
+compile error (`'buildIf' is only available in iOS 16.0 or newer`).
 
-Under the CI's Xcode 26.6 those availability checks are hard compile errors
-(`'buildIf' is only available in iOS 16.0 or newer`), so `CompileSwift normal arm64
-(target 'SFI')` fails and the job exits 65 before any .deb is produced.
+A GLOBAL IPHONEOS_DEPLOYMENT_TARGET=16.0 override would break other targets that need
+a HIGHER minimum (e.g. WidgetExtension needs iOS 18.0 for its Control Widget APIs).
+So we must raise ONLY the SFI app target, leaving every other target at its own value.
 
-FIX
+HOW
 ===
-Append the build-setting override IPHONEOS_DEPLOYMENT_TARGET=16.0 to the xcodebuild
-invocation inside Jailbreak/package.sh (the `build()` function that builds scheme SFI).
-This is a pure build-time override: no source files change, and the generated app is
-right for jailbroken iOS 16+ devices. The daemon (JailbreakDaemon) is a plain CLI
-without SwiftUI, so it is unaffected.
+Edit sing-box.xcodeproj/project.pbxproj: within the SFI target's Debug and Release build
+configuration blocks only, change IPHONEOS_DEPLOYMENT_TARGET = 15.0 -> 16.0.
 
-The override line is placed AFTER the
-`if [[ -n "${XCODEBUILD_CLONED_SOURCE_PACKAGES_DIR_PATH:-}" ]] ... fi` guard
-(just before the `echo "Building ..."` line), so it always runs last and is never
-overwritten by that guard's array assignment (`XCODEBUILD_FLAGS=(...)`).
+The SFI target's config ids are stable and unique (3AEC20FF Debug, 3AEC2100 Release),
+looked up from the target's buildConfigurationList (3AEC20FE).
 
 Run from the cloned repo root (the `sfi` directory):
     python3 <this-script>.py
-Idempotent.
+Idempotent (no-op if 15.0 already replaced, or if already 16.0 for the SFI target).
 """
 
 import io
 import os
+import re
 import sys
 
-# Content inserted right before the "Building ..." echo, i.e. AFTER the
-# `if [[ -n "${XCODEBUILD_CLONED_SOURCE_PACKAGES_DIR_PATH:-}" ]] ... fi` block,
-# so it always appends and is never overwritten by that block's array assignment.
-SNIPPET = (
-    "# >>> SFI CI build fix: iOS 16 deployment target so SwiftUI prebuilt-module\n"
-    "# ... buildIfToolbarContent availability checks pass on Xcode 26.x <<<\n"
-    "XCODEBUILD_FLAGS+=(IPHONEOS_DEPLOYMENT_TARGET=16.0)\n"
-)
+PBX = "sing-box.xcodeproj/project.pbxproj"
 
-# The exact marker we anchor on (and re-emit verbatim) so the file stays untouched elsewhere.
-ANCHOR = 'echo "Building $PRODUCT_NAME (JAILBREAK, $BASE_PACKAGE_IDENTIFIER)"'
-
-# Enough of the injected content to detect a prior apply (idempotency).
-DETECT = "XCODEBUILD_FLAGS+=(IPHONEOS_DEPLOYMENT_TARGET=16.0)"
+# SFI target buildConfigurationList (from project.pbxproj).
+SFI_CONFIG_LIST = "3AEC20FE2A459AB500A63465"
+# Expected config ids under that list (Debug, Release) -> ids of their build config blocks.
+# Resolved from the XCConfigurationList block.
+CONFIG_NAME_TO_VERIFY = ("Debug", "Release")
 
 
 def step_ok(label):
@@ -61,27 +50,55 @@ def fail(label, detail):
 
 
 def main():
-    p = "Jailbreak/package.sh"
-    if not os.path.exists(p):
-        fail("find package.sh", f"{p} not found (run from repo root?)")
+    if not os.path.exists(PBX):
+        fail("find project", f"{PBX} not found (run from repo root?)")
 
-    s = io.open(p, encoding="utf-8").read()
+    lines = io.open(PBX, encoding="utf-8").read().splitlines()
 
-    # Idempotency: already applied -> no-op success.
-    if DETECT in s:
-        step_ok("package.sh already has the IPHONEOS_DEPLOYMENT_TARGET=16.0 override")
-        return
+    # 1) find the build config IDs for the SFI target's Debug/Release
+    config_ids = {}
+    for i, l in enumerate(lines):
+        if SFI_CONFIG_LIST in l and "= {" in l:
+            blk = lines[i:i + 12]
+            for m in re.finditer(r"([0-9A-F]{24}) /\* (Debug|Release) \*/", "\n".join(blk)):
+                config_ids.setdefault(m.group(2), []).append(m.group(1))
+            break
+    dbg = config_ids.get("Debug", [])[:1]
+    rel = config_ids.get("Release", [])[:1]
+    ids = (dbg + rel)
+    if not ids:
+        fail("resolve config ids", f"could not find Debug/Release configs under {SFI_CONFIG_LIST}")
+    step_ok(f"SFI target config ids: Debug={dbg[0] if dbg else '-'}, Release={rel[0] if rel else '-'}")
 
-    if ANCHOR not in s:
-        fail("find flag init", f"'{ANCHOR}' not found in {p}")
+    # 2) Within each of those config blocks only, bump 15.0 -> 16.0
+    target_lines = []
+    for cid in ids:
+        start = next((j for j, l in enumerate(lines) if l.strip().startswith(cid)), None)
+        if start is None:
+            continue
+        depth = 0
+        for j in range(start, len(lines)):
+            depth += lines[j].count("{") - lines[j].count("}")
+            if depth <= 0 and lines[j].strip().startswith("};"):
+                end = j + 1
+                break
+        target_lines.append((start, end, cid))
 
-    # Insert the override right before the "Building ..." echo, i.e. AFTER the
-    # clonedSourcePackagesDirPath if/else guard, so it always executes last and is
-    # never overwritten by that block's array assignment.
-    new = s.replace(ANCHOR, SNIPPET + ANCHOR, 1)
-    io.open(p, "w", encoding="utf-8").write(new)
-    step_ok("package.sh override added (after the XCODEBUILD_FLAGS if/else guard)")
-    step_ok("package.sh written")
+    changed = 0
+    for start, end, cid in target_lines:
+        for j in range(start, end):
+            stripped = lines[j].lstrip()
+            if stripped.startswith("IPHONEOS_DEPLOYMENT_TARGET") and "15.0" in stripped:
+                lines[j] = lines[j].replace("15.0", "16.0")
+                changed += 1
+                step_ok(f"config {cid}: IPHONEOS_DEPLOYMENT_TARGET 15.0 -> 16.0")
+
+    if changed == 0:
+        # Could be already fixed, or targets not exactly 15.0. Report either way.
+        step_ok("no SFI 15.0 deployment targets to change (already 16+ or not found)")
+
+    io.open(PBX, "w", encoding="utf-8").write("\n".join(lines))
+    step_ok(f"pbxproj written ({changed} change(s))")
 
 
 if __name__ == "__main__":
