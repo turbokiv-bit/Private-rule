@@ -472,14 +472,14 @@ must_replace(
 must_replace(
     p,
     '\tif g.ticker != nil {\n\t\tg.lastActive.Store(time.Now())\n\t\treturn\n\t}\n'
-    '\tg.ticker = time.NewTicker(g.interval)',
+    '\tticker := time.NewTicker(g.interval)',
     '\tif g.ticker != nil {\n\t\tg.lastActive.Store(time.Now())\n\t\treturn\n\t}\n'
     '\tif g.periodicDisabled || g.interval <= 0 {\n'
     '\t\t// interval == 0: no periodic health check. Keep the group active\n'
     '\t\t// without starting a probe ticker.\n'
     '\t\tg.lastActive.Store(time.Now())\n'
     '\t\treturn\n\t}\n'
-    '\tg.ticker = time.NewTicker(g.interval)',
+    '\tticker := time.NewTicker(g.interval)',
     'loadbalance.go Touch honours periodicDisabled',
 )
 
