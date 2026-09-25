@@ -170,7 +170,7 @@ must(
     '\t\treturn false\n'
     '\t}\n'
     '\tif s.group.history == nil { return false }\n'
-    '\treturn s.group.history.LoadURLTestHistory(RealTag(s.group.outbound, outbound)) != nil\n'
+    '\treturn s.group.history.LoadURLTestHistory(RealTag(outbound, N.NetworkTCP)) != nil\n'
     '}\n'
     '\n'
     'type URLTestFallback struct {\n',
