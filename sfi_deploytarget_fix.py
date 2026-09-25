@@ -21,6 +21,11 @@ This is a pure build-time override: no source files change, and the generated ap
 right for jailbroken iOS 16+ devices. The daemon (JailbreakDaemon) is a plain CLI
 without SwiftUI, so it is unaffected.
 
+The override line is placed AFTER the
+`if [[ -n "${XCODEBUILD_CLONED_SOURCE_PACKAGES_DIR_PATH:-}" ]] ... fi` guard
+(just before the `echo "Building ..."` line), so it always runs last and is never
+overwritten by that guard's array assignment (`XCODEBUILD_FLAGS=(...)`).
+
 Run from the cloned repo root (the `sfi` directory):
     python3 <this-script>.py
 Idempotent.
@@ -28,16 +33,22 @@ Idempotent.
 
 import io
 import os
-import re
 import sys
 
-MARKER_START = "XCODEBUILD_FLAGS=()"
-MARKER_ANCHOR = "\tXCODEBUILD_FLAGS=(-clonedSourcePackagesDirPath \"$XCODEBUILD_CLONED_SOURCE_PACKAGES_DIR_PATH\")"
-OVERRIDE_LINE = "\tXCODEBUILD_FLAGS+=(IPHONEOS_DEPLOYMENT_TARGET=16.0)"
+# Content inserted right before the "Building ..." echo, i.e. AFTER the
+# `if [[ -n "${XCODEBUILD_CLONED_SOURCE_PACKAGES_DIR_PATH:-}" ]] ... fi` block,
+# so it always appends and is never overwritten by that block's array assignment.
+SNIPPET = (
+    "# >>> SFI CI build fix: iOS 16 deployment target so SwiftUI prebuilt-module\n"
+    "# ... buildIfToolbarContent availability checks pass on Xcode 26.x <<<\n"
+    "XCODEBUILD_FLAGS+=(IPHONEOS_DEPLOYMENT_TARGET=16.0)\n"
+)
 
-HEADER = """# >>> SFI CI build fix: iOS 16 deployment target so SwiftUI prebuilt-module
-# ... buildIfToolbarContent availability checks pass on Xcode 26.x <<<
-{X}""".format(X=OVERRIDE_LINE)
+# The exact marker we anchor on (and re-emit verbatim) so the file stays untouched elsewhere.
+ANCHOR = 'echo "Building $PRODUCT_NAME (JAILBREAK, $BASE_PACKAGE_IDENTIFIER)"'
+
+# Enough of the injected content to detect a prior apply (idempotency).
+DETECT = "XCODEBUILD_FLAGS+=(IPHONEOS_DEPLOYMENT_TARGET=16.0)"
 
 
 def step_ok(label):
@@ -56,25 +67,20 @@ def main():
 
     s = io.open(p, encoding="utf-8").read()
 
-    # Idempotency: if we already injected, no-op success.
-    if OVERRIDE_LINE in s:
-        step_ok("package.sh already has IPHONEOS_DEPLOYMENT_TARGET=16.0 override")
+    # Idempotency: already applied -> no-op success.
+    if DETECT in s:
+        step_ok("package.sh already has the IPHONEOS_DEPLOYMENT_TARGET=16.0 override")
         return
 
-    # Insert the override right after the XCODEBUILD_FLAGS=() init, alongside the
-    # clonedSourcePackagesDirPath mutation. Applies to every xcodebuild in this script
-    # (SFI app build + JailbreakDaemon build). For the daemon it is harmless.
-    if MARKER_START not in s:
-        fail("find flag init", f"'{MARKER_START}' not found in {p}")
-    if MARKER_ANCHOR in s:
-        new = s.replace(MARKER_ANCHOR, MARKER_ANCHOR + "\n" + HEADER, 1)
-        step_ok("package.sh override added (after clonedSourcePackagesDirPath init)")
-    else:
-        # fallback: insert right after the XCODEBUILD_FLAGS=() line itself
-        new = s.replace(MARKER_START, MARKER_START + "\n" + HEADER, 1)
-        step_ok("package.sh override added (after XCODEBUILD_FLAGS=() init)")
+    if ANCHOR not in s:
+        fail("find flag init", f"'{ANCHOR}' not found in {p}")
 
+    # Insert the override right before the "Building ..." echo, i.e. AFTER the
+    # clonedSourcePackagesDirPath if/else guard, so it always executes last and is
+    # never overwritten by that block's array assignment.
+    new = s.replace(ANCHOR, SNIPPET + ANCHOR, 1)
     io.open(p, "w", encoding="utf-8").write(new)
+    step_ok("package.sh override added (after the XCODEBUILD_FLAGS if/else guard)")
     step_ok("package.sh written")
 
 
