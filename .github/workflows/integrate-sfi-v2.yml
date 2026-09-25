@@ -55,15 +55,15 @@ jobs:
           mv Libbox.xcframework "$GITHUB_WORKSPACE/sfi/"
           ls "$GITHUB_WORKSPACE/sfi/Libbox.xcframework"
 
-      - name: Build app & package jailbreak deb (official script)
-        working-directory: sfi
-        run: /opt/homebrew/bin/bash Jailbreak/package.sh
-
       - name: Fix SFI deployment target (iOS 16) before jailbreak build
         working-directory: sfi
         run: |
           curl -sSL "https://raw.githubusercontent.com/turbokiv-bit/Private-rule/main/sfi_deploytarget_fix.py" -o /tmp/sfi_deploytarget_fix.py
           python3 /tmp/sfi_deploytarget_fix.py
+
+      - name: Build app & package jailbreak deb (official script)
+        working-directory: sfi
+        run: /opt/homebrew/bin/bash Jailbreak/package.sh
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
