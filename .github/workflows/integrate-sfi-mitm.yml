@@ -1,4 +1,4 @@
-name: Build SFI (from source) with reF1nd core + MITM
+name: Build SFI (from source) with reF1nd + MITM core
 
 on:
   workflow_dispatch:
@@ -22,42 +22,32 @@ jobs:
       - name: Clone reF1nd sing-box core
         run: git clone --depth 1 -b reF1nd-testing https://github.com/reF1nd/sing-box.git core
 
-      - name: Fetch upstream dev-test-mitm branch (for MITM source)
-        working-directory: core
+      - name: Apply core patches (restart-fix + lazy-recover + MITM)
         run: |
-          git remote add upstream https://github.com/SagerNet/sing-box.git
-          git fetch --depth 1 upstream dev-test-mitm
-          git rev-parse upstream/dev-test-mitm
-
-      - name: Apply core patches (MITM + restart-fix + lazy-recover)
-        working-directory: core
-        run: |
-          echo "当前目录: $(pwd) (应为 .../core)"
-          # 1) 拉取所有补丁脚本/patch（上传到你的 Private-rule repo）
+          cd core
           BASE="https://raw.githubusercontent.com/turbokiv-bit/Private-rule/main"
           curl -sSL "$BASE/restart-fix.py" -o /tmp/restart-fix.py
-          curl -sSL "$BASE/lazy_recover_patch_fix-v2.py" -o /tmp/lazy_recover_patch_fix-v2.py
-          curl -sSL "$BASE/mitm-port.patch" -o /tmp/mitm-port.patch
+          curl -sSL "$BASE/lazy_recover_patch.py" -o /tmp/lazy_recover_patch.py
+          curl -sSL "$BASE/mitm-ref1nd.patch" -o /tmp/mitm-ref1nd.patch
+          echo "restart-fix.py 大小: $(wc -c < /tmp/restart-fix.py) bytes"
+          echo "lazy_recover_patch.py 大小: $(wc -c < /tmp/lazy_recover_patch.py) bytes"
 
-          echo "--- 应用 MITM patch ---"
-          git apply --check /tmp/mitm-port.patch || { echo "❌ MITM patch check 失败"; exit 1; }
-          git apply /tmp/mitm-port.patch || { echo "❌ MITM patch 应用失败"; exit 1; }
-          echo "✅ MITM 已移植 (含 goja script 引擎依赖)"
-
-          echo "--- 应用 restart-fix.py ---"
+          echo "--- applying restart-fix.py ---"
           python3 /tmp/restart-fix.py || { echo "❌ restart-fix 失败"; exit 1; }
 
-          echo "--- 应用 lazy_recover (fix-v2) ---"
-          python3 /tmp/lazy_recover_patch_fix-v2.py || { echo "❌ lazy_recover 失败"; exit 1; }
+          echo "--- applying lazy_recover_patch.py ---"
+          python3 /tmp/lazy_recover_patch.py || { echo "❌ lazy_recover 失败"; exit 1; }
 
-          echo "--- gofmt check ---"
-          gofmt -l protocol/group/urltest.go mitm/ script/ | grep . && echo "⚠️ 有未格式化" || echo "gofmt OK"
+          echo "--- applying mitm-ref1nd.patch ---"
+          git apply /tmp/mitm-ref1nd.patch || { echo "❌ MITM 补丁失败"; exit 1; }
 
-          echo "--- 关键包编译检查 (darwin/arm64) ---"
-          go get github.com/dop251/goja@v0.0.0-20250125213203-5ef83b82af17 2>/dev/null
-          GOOS=darwin GOARCH=arm64 go build ./mitm/ ./script/ ./adapter/ ./option/ ./common/certificate/ ./experimental/cachefile/ ./route/ || { echo "❌ MITM 相关包编译失败"; exit 1; }
-          GOOS=darwin GOARCH=arm64 go build ./protocol/group/ ./protocol/bridge/ || { echo "❌ 补丁相关包编译失败"; exit 1; }
-          echo "✅ 全部关键包 darwin 编译通过"
+          echo "--- gofmt check (空输出=通过) ---"
+          gofmt -l protocol/group/urltest.go
+
+          echo "--- build check: protocol/group package ---"
+          go build ./protocol/group/ || { echo "❌ protocol/group 编译失败"; exit 1; }
+
+          echo "✅ 补丁全部应用成功，group 包编译通过"
 
       - name: Build Libbox.xcframework (official build_libbox)
         working-directory: core
@@ -69,6 +59,22 @@ jobs:
           mv Libbox.xcframework "$GITHUB_WORKSPACE/sfi/"
           ls "$GITHUB_WORKSPACE/sfi/Libbox.xcframework"
 
+          # 可选：校验收进的内核确实带 MITM 标记
+          echo "--- MITM markers check ---"
+          for m in tls_decryption surge_url_rewrite surge_header_rewrite surge_body_rewrite "Surge HTTP API is not supported by sing-box"; do
+            if strings "$GITHUB_WORKSPACE/sfi/Libbox.xcframework/ios-arm64/Libbox.framework/Libbox" | grep -Fq "$m"; then
+              echo "ok: $m"
+            else
+              echo "warning: marker missing: $m"
+            fi
+          done
+
+      - name: Fix SFI deployment target (iOS 16) before jailbreak build
+        working-directory: sfi
+        run: |
+          curl -sSL "https://raw.githubusercontent.com/turbokiv-bit/Private-rule/main/sfi_deploytarget_fix.py" -o /tmp/sfi_deploytarget_fix.py
+          python3 /tmp/sfi_deploytarget_fix.py
+
       - name: Build app & package jailbreak deb (official script)
         working-directory: sfi
         run: /opt/homebrew/bin/bash Jailbreak/package.sh
@@ -76,5 +82,5 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: SFI-ref1nd-mitm-source-deb
+          name: SFI-ref1nd-MITM-deb
           path: sfi/build/jailbreak/*.deb
