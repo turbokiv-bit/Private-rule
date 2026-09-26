@@ -1,0 +1,3919 @@
+diff --git a/ApplicationLibrary/Views/Profile/MITMSettingsView.swift b/ApplicationLibrary/Views/Profile/MITMSettingsView.swift
+new file mode 100644
+index 0000000..8190118
+--- /dev/null
++++ b/ApplicationLibrary/Views/Profile/MITMSettingsView.swift
+@@ -0,0 +1,1298 @@
++#if os(iOS) || os(macOS)
++    import Foundation
++    import Libbox
++    import Library
++    import SwiftUI
++    import UniformTypeIdentifiers
++
++    private struct MITMTextEntry: Identifiable, Hashable {
++        let id: UUID
++        var value: String
++
++        init(_ value: String = "") {
++            id = UUID()
++            self.value = value
++        }
++    }
++
++    private struct MITMScriptBinding: Identifiable {
++        let id = UUID()
++        var raw: [String: Any]
++        var tag: String
++        var event: Event
++        var patterns: [MITMTextEntry]
++        var timeout: String
++        var requiresBody: Bool
++        var maxSize: String
++        var binaryBodyMode: Bool
++        var fullHeaderMode: Bool
++        var arguments: [MITMTextEntry]
++
++        enum Event: String, CaseIterable, Identifiable {
++            case request
++            case response
++            case both
++
++            var id: Self { self }
++
++            var title: String {
++                switch self {
++                case .request: return String(localized: "Request")
++                case .response: return String(localized: "Response")
++                case .both: return String(localized: "Both")
++                }
++            }
++        }
++
++        init(_ object: [String: Any] = [:]) {
++            raw = object
++            tag = object["tag"] as? String ?? ""
++            let types = Self.stringArray(object["type"])
++            if types.contains("http-request"), types.contains("http-response") {
++                event = .both
++            } else if types.contains("http-response") {
++                event = .response
++            } else {
++                event = .request
++            }
++            patterns = Self.stringArray(object["pattern"]).map(MITMTextEntry.init)
++            timeout = object["timeout"] as? String ?? ""
++            requiresBody = Self.bool(object["requires_body"])
++            maxSize = Self.numberString(object["max_size"])
++            binaryBodyMode = Self.bool(object["binary_body_mode"])
++            fullHeaderMode = Self.bool(object["full_header_mode"])
++            arguments = Self.stringArray(object["arguments"]).map(MITMTextEntry.init)
++        }
++
++        func object() -> [String: Any] {
++            var object = raw
++            object["tag"] = tag
++            switch event {
++            case .request: object["type"] = ["http-request"]
++            case .response: object["type"] = ["http-response"]
++            case .both: object["type"] = ["http-request", "http-response"]
++            }
++            object["pattern"] = Self.values(patterns)
++            Self.assign(&object, key: "timeout", value: timeout)
++            object["requires_body"] = requiresBody
++            if let maxSizeValue = Int64(maxSize), maxSizeValue > 0 {
++                object["max_size"] = maxSizeValue
++            } else {
++                object.removeValue(forKey: "max_size")
++            }
++            object["binary_body_mode"] = binaryBodyMode
++            object["full_header_mode"] = fullHeaderMode
++            let argumentValues = Self.values(arguments)
++            if argumentValues.isEmpty {
++                object.removeValue(forKey: "arguments")
++            } else {
++                object["arguments"] = argumentValues
++            }
++            return object
++        }
++
++        private static func stringArray(_ value: Any?) -> [String] {
++            MITMJSON.stringArray(value)
++        }
++
++        private static func bool(_ value: Any?) -> Bool {
++            MITMJSON.bool(value)
++        }
++
++        private static func numberString(_ value: Any?) -> String {
++            MITMJSON.numberString(value)
++        }
++
++        private static func values(_ entries: [MITMTextEntry]) -> [String] {
++            MITMJSON.values(entries)
++        }
++
++        private static func assign(_ object: inout [String: Any], key: String, value: String) {
++            MITMJSON.assign(&object, key: key, value: value)
++        }
++    }
++
++    private struct MITMRule: Identifiable {
++        let id = UUID()
++        var originalIndex: Int?
++        var raw: [String: Any]
++        var mitmRaw: [String: Any]
++        var enabled: Bool
++        var printTraffic: Bool
++        var domains: [MITMTextEntry]
++        var domainSuffixes: [MITMTextEntry]
++        var urlRewrites: [MITMTextEntry]
++        var headerRewrites: [MITMTextEntry]
++        var bodyRewrites: [MITMTextEntry]
++        var mapLocal: [MITMTextEntry]
++        var scripts: [MITMScriptBinding]
++
++        init(object: [String: Any] = [:], originalIndex: Int? = nil) {
++            self.originalIndex = originalIndex
++            raw = object
++            let mitm = object["mitm"] as? [String: Any] ?? [:]
++            mitmRaw = mitm
++            enabled = MITMJSON.bool(mitm["enabled"], defaultValue: true)
++            printTraffic = MITMJSON.bool(mitm["print"])
++            domains = MITMJSON.stringArray(object["domain"]).map(MITMTextEntry.init)
++            domainSuffixes = MITMJSON.stringArray(object["domain_suffix"]).map(MITMTextEntry.init)
++            urlRewrites = MITMJSON.stringArray(mitm["surge_url_rewrite"]).map(MITMTextEntry.init)
++            headerRewrites = MITMJSON.stringArray(mitm["surge_header_rewrite"]).map(MITMTextEntry.init)
++            bodyRewrites = MITMJSON.stringArray(mitm["surge_body_rewrite"]).map(MITMTextEntry.init)
++            mapLocal = MITMJSON.stringArray(mitm["surge_map_local"]).map(MITMTextEntry.init)
++            scripts = (mitm["surge_script"] as? [[String: Any]] ?? []).map(MITMScriptBinding.init)
++        }
++
++        var displayName: String {
++            let matchers = MITMJSON.values(domains) + MITMJSON.values(domainSuffixes).map { ".\($0)" }
++            return matchers.first ?? String(localized: "All Domains")
++        }
++
++        func object() -> [String: Any] {
++            var object = raw
++            if object["action"] == nil {
++                object["action"] = "route-options"
++            }
++            MITMJSON.assign(&object, key: "domain", values: domains)
++            MITMJSON.assign(&object, key: "domain_suffix", values: domainSuffixes)
++
++            var mitm = mitmRaw
++            mitm["enabled"] = enabled
++            mitm["print"] = printTraffic
++            MITMJSON.assign(&mitm, key: "surge_url_rewrite", values: urlRewrites)
++            MITMJSON.assign(&mitm, key: "surge_header_rewrite", values: headerRewrites)
++            MITMJSON.assign(&mitm, key: "surge_body_rewrite", values: bodyRewrites)
++            MITMJSON.assign(&mitm, key: "surge_map_local", values: mapLocal)
++            if scripts.isEmpty {
++                mitm.removeValue(forKey: "surge_script")
++            } else {
++                mitm["surge_script"] = scripts.map { $0.object() }
++            }
++            object["mitm"] = mitm
++            return object
++        }
++    }
++
++    private struct MITMScriptDefinition: Identifiable {
++        let id = UUID()
++        var originalIndex: Int?
++        var raw: [String: Any]
++        var tag: String
++        var source: Source
++        var location: String
++        var downloadDetour: String
++        var updateInterval: String
++
++        enum Source: String, CaseIterable, Identifiable {
++            case local
++            case remote
++
++            var id: Self { self }
++            var title: String { rawValue.capitalized }
++        }
++
++        init(object: [String: Any] = [:], originalIndex: Int? = nil) {
++            self.originalIndex = originalIndex
++            raw = object
++            tag = object["tag"] as? String ?? ""
++            source = Source(rawValue: object["source"] as? String ?? "local") ?? .local
++            if source == .remote {
++                location = object["url"] as? String ?? ""
++            } else {
++                location = object["path"] as? String ?? ""
++            }
++            downloadDetour = object["download_detour"] as? String ?? ""
++            updateInterval = object["update_interval"] as? String ?? ""
++        }
++
++        func object() -> [String: Any] {
++            var object = raw
++            object["type"] = "surge"
++            object["tag"] = tag
++            object["source"] = source.rawValue
++            if source == .remote {
++                object["url"] = location
++                object.removeValue(forKey: "path")
++                MITMJSON.assign(&object, key: "download_detour", value: downloadDetour)
++                MITMJSON.assign(&object, key: "update_interval", value: updateInterval)
++            } else {
++                object["path"] = location
++                object.removeValue(forKey: "url")
++                object.removeValue(forKey: "download_detour")
++                object.removeValue(forKey: "update_interval")
++            }
++            return object
++        }
++    }
++
++    private struct MITMModule: Identifiable {
++        var id: String
++        var raw: [String: Any]
++        var name: String
++        var moduleDescription: String
++        var enabled: Bool
++        var url: String
++        var localPath: String
++        var downloadDetour: String
++        var updateInterval: String
++        var generatedScripts: [[String: Any]]
++        var generatedRules: [[String: Any]]
++
++        init(object: [String: Any] = [:]) {
++            raw = object
++            id = object["id"] as? String ?? UUID().uuidString
++            name = object["name"] as? String ?? ""
++            moduleDescription = object["description"] as? String ?? ""
++            enabled = MITMJSON.bool(object["enabled"], defaultValue: true)
++            url = object["url"] as? String ?? ""
++            localPath = object["local_path"] as? String ?? ""
++            downloadDetour = object["download_detour"] as? String ?? ""
++            updateInterval = object["update_interval"] as? String ?? "1d"
++            generatedScripts = object["scripts"] as? [[String: Any]] ?? []
++            generatedRules = object["rules"] as? [[String: Any]] ?? []
++        }
++
++        init(
++            payload: SurgeModulePayload,
++            url: String,
++            localPath: String,
++            downloadDetour: String,
++            updateInterval: String,
++            id: String = UUID().uuidString,
++            enabled: Bool = true,
++            raw: [String: Any] = [:]
++        ) {
++            self.id = id
++            self.raw = raw
++            name = payload.name
++            moduleDescription = payload.moduleDescription
++            self.enabled = enabled
++            self.url = url
++            self.localPath = localPath
++            self.downloadDetour = downloadDetour
++            self.updateInterval = updateInterval
++            generatedScripts = payload.scripts
++            generatedRules = payload.rules
++        }
++
++        var displayName: String {
++            name.isEmpty ? String(localized: "Untitled Module") : name
++        }
++
++        func scriptObjects() -> [[String: Any]] {
++            generatedScripts.map { script in
++                var script = script
++                MITMJSON.assign(&script, key: "download_detour", value: downloadDetour)
++                MITMJSON.assign(&script, key: "update_interval", value: updateInterval)
++                return script
++            }
++        }
++
++        func object() -> [String: Any] {
++            var object = raw
++            object["type"] = "surge"
++            object["id"] = id
++            object["name"] = name
++            MITMJSON.assign(&object, key: "description", value: moduleDescription)
++            object["enabled"] = enabled
++            object["url"] = url
++            MITMJSON.assign(&object, key: "local_path", value: localPath)
++            MITMJSON.assign(&object, key: "download_detour", value: downloadDetour)
++            MITMJSON.assign(&object, key: "update_interval", value: updateInterval)
++            object["scripts"] = scriptObjects()
++            object["rules"] = generatedRules
++            return object
++        }
++    }
++
++    private enum MITMJSON {
++        static func bool(_ value: Any?, defaultValue: Bool = false) -> Bool {
++            (value as? NSNumber)?.boolValue ?? value as? Bool ?? defaultValue
++        }
++
++        static func stringArray(_ value: Any?) -> [String] {
++            if let string = value as? String {
++                return [string]
++            }
++            return value as? [String] ?? []
++        }
++
++        static func numberString(_ value: Any?) -> String {
++            if let number = value as? NSNumber {
++                return number.stringValue
++            }
++            return value as? String ?? ""
++        }
++
++        static func values(_ entries: [MITMTextEntry]) -> [String] {
++            entries.map(\.value).map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }.filter { !$0.isEmpty }
++        }
++
++        static func assign(_ object: inout [String: Any], key: String, value: String) {
++            let normalized = value.trimmingCharacters(in: .whitespacesAndNewlines)
++            if normalized.isEmpty {
++                object.removeValue(forKey: key)
++            } else {
++                object[key] = normalized
++            }
++        }
++
++        static func assign(_ object: inout [String: Any], key: String, values: [MITMTextEntry]) {
++            let normalized = self.values(values)
++            if normalized.isEmpty {
++                object.removeValue(forKey: key)
++            } else {
++                object[key] = normalized
++            }
++        }
++
++        static func canonicalKey(_ object: [String: Any]) -> String? {
++            guard JSONSerialization.isValidJSONObject(object),
++                  let data = try? JSONSerialization.data(withJSONObject: object, options: [.sortedKeys])
++            else { return nil }
++            return String(data: data, encoding: .utf8)
++        }
++    }
++
++    @MainActor
++    private final class MITMSettingsModel: ObservableObject {
++        @Published var isLoading = true
++        @Published var isSaving = false
++        @Published var enabled = false
++        @Published var http2Enabled = true
++        @Published var certificateName = "sing-box MITM Root CA"
++        @Published var keyPair = ""
++        @Published var keyPairPassword = ""
++        @Published var rules: [MITMRule] = []
++        @Published var scripts: [MITMScriptDefinition] = []
++        @Published var modules: [MITMModule] = []
++        @Published var availableOutbounds: [String] = []
++
++        private var root: [String: Any] = [:]
++        private var originalRouteRules: [[String: Any]] = []
++        private var originalScripts: [[String: Any]] = []
++        private var originalModuleArtifacts = MITMModuleArtifactIndex()
++        private var originalModuleLocalPaths: Set<String> = []
++        private var profile: Profile?
++
++        var hasCertificate: Bool { !keyPair.isEmpty && !keyPairPassword.isEmpty }
++
++        func load(profileID: Int64) async throws {
++            guard let profile = try await ProfileManager.get(profileID) else {
++                throw NSError(domain: "MITMSettings", code: 1, userInfo: [NSLocalizedDescriptionKey: String(localized: "Profile missing")])
++            }
++            var error: NSError?
++            let content = try profile.read()
++            guard let formatted = LibboxFormatConfig(content, &error) else {
++                throw error ?? NSError(domain: "MITMSettings", code: 2, userInfo: [NSLocalizedDescriptionKey: String(localized: "Invalid profile")])
++            }
++            if let error {
++                throw error
++            }
++            guard let data = formatted.value.data(using: .utf8),
++                  let root = try JSONSerialization.jsonObject(with: data) as? [String: Any]
++            else {
++                throw NSError(domain: "MITMSettings", code: 3, userInfo: [NSLocalizedDescriptionKey: String(localized: "Invalid profile")])
++            }
++            self.profile = profile
++            apply(root)
++            isLoading = false
++        }
++
++        private func apply(_ root: [String: Any]) {
++            self.root = root
++            let globalMITM = root["mitm"] as? [String: Any] ?? [:]
++            enabled = MITMJSON.bool(globalMITM["enabled"])
++            http2Enabled = MITMJSON.bool(globalMITM["http2_enabled"], defaultValue: true)
++
++            let certificate = root["certificate"] as? [String: Any] ?? [:]
++            let tlsDecryption = certificate["tls_decryption"] as? [String: Any] ?? [:]
++            keyPair = tlsDecryption["key_pair_p12"] as? String ?? ""
++            keyPairPassword = tlsDecryption["key_pair_p12_password"] as? String ?? ""
++
++            availableOutbounds = (root["outbounds"] as? [[String: Any]] ?? [])
++                .compactMap { $0["tag"] as? String }
++                .filter { !$0.isEmpty }
++            let loadedModules = (root["mitm_modules"] as? [[String: Any]] ?? []).map(MITMModule.init)
++            originalModuleArtifacts = MITMModuleArtifactIndex(
++                root: root,
++                modules: loadedModules.map { $0.object() }
++            )
++            originalModuleLocalPaths = Set(loadedModules.map(\.localPath).filter { !$0.isEmpty })
++            modules = loadedModules.map { module in
++                var module = module
++                module.downloadDetour = normalizedModuleDetour(module.downloadDetour)
++                return module
++            }
++
++            let route = root["route"] as? [String: Any] ?? [:]
++            originalRouteRules = route["rules"] as? [[String: Any]] ?? []
++            rules = originalRouteRules.enumerated().compactMap { index, object in
++                guard object["mitm"] is [String: Any],
++                      !originalModuleArtifacts.owns(rule: object)
++                else { return nil }
++                return MITMRule(object: object, originalIndex: index)
++            }
++
++            originalScripts = root["scripts"] as? [[String: Any]] ?? []
++            scripts = originalScripts.enumerated().compactMap { index, object in
++                guard !originalModuleArtifacts.owns(script: object) else { return nil }
++                return MITMScriptDefinition(object: object, originalIndex: index)
++            }
++        }
++
++        func importModule(
++            url: String,
++            downloadDetour: String,
++            updateInterval: String
++        ) async throws {
++            guard let sourceURL = URL(string: url), let scheme = sourceURL.scheme?.lowercased(), ["http", "https"].contains(scheme) else {
++                throw NSError(domain: "MITMSettings", code: 8, userInfo: [NSLocalizedDescriptionKey: String(localized: "Invalid module URL")])
++            }
++            let downloadDetour = normalizedModuleDetour(downloadDetour)
++            let content = try await HTTPClient.getStringAsync(sourceURL.absoluteString)
++            let payload = try SurgeModuleParser.parse(
++                content,
++                sourceURL: sourceURL,
++                downloadDetour: downloadDetour,
++                updateInterval: updateInterval
++            )
++            if let index = modules.firstIndex(where: { $0.url == sourceURL.absoluteString }) {
++                let existing = modules[index]
++                let localPath = try cacheModule(content, id: existing.id)
++                modules[index] = MITMModule(
++                    payload: payload,
++                    url: sourceURL.absoluteString,
++                    localPath: localPath,
++                    downloadDetour: downloadDetour,
++                    updateInterval: updateInterval,
++                    id: existing.id,
++                    enabled: existing.enabled,
++                    raw: existing.raw
++                )
++            } else {
++                let id = UUID().uuidString
++                let localPath = try cacheModule(content, id: id)
++                modules.append(MITMModule(
++                    payload: payload,
++                    url: sourceURL.absoluteString,
++                    localPath: localPath,
++                    downloadDetour: downloadDetour,
++                    updateInterval: updateInterval,
++                    id: id
++                ))
++            }
++            enabled = true
++        }
++
++        func refreshModule(id: String) async throws {
++            guard let index = modules.firstIndex(where: { $0.id == id }) else { return }
++            let existing = modules[index]
++            guard let sourceURL = URL(string: existing.url) else {
++                throw NSError(domain: "MITMSettings", code: 8, userInfo: [NSLocalizedDescriptionKey: String(localized: "Invalid module URL")])
++            }
++            let downloadDetour = normalizedModuleDetour(existing.downloadDetour)
++            let content = try await HTTPClient.getStringAsync(sourceURL.absoluteString)
++            let payload = try SurgeModuleParser.parse(
++                content,
++                sourceURL: sourceURL,
++                downloadDetour: downloadDetour,
++                updateInterval: existing.updateInterval
++            )
++            let localPath = try cacheModule(content, id: existing.id)
++            modules[index] = MITMModule(
++                payload: payload,
++                url: existing.url,
++                localPath: localPath,
++                downloadDetour: downloadDetour,
++                updateInterval: existing.updateInterval,
++                id: existing.id,
++                enabled: existing.enabled,
++                raw: existing.raw
++            )
++        }
++
++        private func cacheModule(_ content: String, id: String) throws -> String {
++            guard let profile else { return "" }
++            let safeID = id.replacingOccurrences(of: "/", with: "-")
++            let relativePath = "configs/modules/profile_\(profile.mustID)/\(safeID).sgmodule"
++            let destination = FilePath.sharedDirectory.appendingPathComponent(relativePath)
++            try FileManager.default.createDirectory(at: destination.deletingLastPathComponent(), withIntermediateDirectories: true)
++            try content.write(to: destination, atomically: true, encoding: .utf8)
++            return relativePath
++        }
++
++        private func removeCachedModules(_ paths: Set<String>) {
++            let modulesRoot = FilePath.sharedDirectory.appendingPathComponent("configs/modules", isDirectory: true).standardizedFileURL
++            for path in paths where !path.isEmpty {
++                let target = FilePath.sharedDirectory.appendingPathComponent(path).standardizedFileURL
++                guard target.path.hasPrefix(modulesRoot.path + "/") else { continue }
++                try? FileManager.default.removeItem(at: target)
++            }
++        }
++
++        private func normalizedModuleDetour(_ value: String) -> String {
++            let value = value.trimmingCharacters(in: .whitespacesAndNewlines)
++            guard !value.isEmpty, availableOutbounds.contains(value) else { return "" }
++            return value
++        }
++
++        func generateCertificate() throws {
++            var error: NSError?
++            guard let certificate = LibboxGenerateMITMCertificate(certificateName, &error) else {
++                throw error ?? NSError(domain: "MITMSettings", code: 4)
++            }
++            if let error { throw error }
++            keyPair = certificate.keyPair
++            keyPairPassword = certificate.password
++            enabled = true
++        }
++
++        func importCertificate(from url: URL) throws {
++            let accessed = url.startAccessingSecurityScopedResource()
++            defer {
++                if accessed { url.stopAccessingSecurityScopedResource() }
++            }
++            keyPair = try Data(contentsOf: url).base64EncodedString()
++        }
++
++        func exportCertificate() throws -> URL {
++            var error: NSError?
++            guard let exported = LibboxExportMITMCertificate(keyPair, keyPairPassword, &error) else {
++                throw error ?? NSError(domain: "MITMSettings", code: 5)
++            }
++            if let error { throw error }
++            guard let data = Data(base64Encoded: exported.value) else {
++                throw NSError(domain: "MITMSettings", code: 6, userInfo: [NSLocalizedDescriptionKey: String(localized: "Invalid certificate")])
++            }
++            let fileName = certificateName.replacingOccurrences(of: "/", with: "-") + ".cer"
++            let url = FileManager.default.temporaryDirectory.appendingPathComponent(fileName)
++            try data.write(to: url, options: .atomic)
++            return url
++        }
++
++        func save() async throws {
++            guard let profile, !isSaving else { return }
++            isSaving = true
++            defer { isSaving = false }
++
++            for rule in rules where rule.enabled {
++                guard !MITMJSON.values(rule.domains).isEmpty || !MITMJSON.values(rule.domainSuffixes).isEmpty else {
++                    throw NSError(
++                        domain: "MITMSettings",
++                        code: 9,
++                        userInfo: [NSLocalizedDescriptionKey: String(localized: "Every enabled MITM rule must match at least one domain.")]
++                    )
++                }
++                for binding in rule.scripts {
++                    guard !binding.tag.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty,
++                          !MITMJSON.values(binding.patterns).isEmpty
++                    else {
++                        throw NSError(
++                            domain: "MITMSettings",
++                            code: 10,
++                            userInfo: [NSLocalizedDescriptionKey: String(localized: "Every script binding needs a tag and at least one URL pattern.")]
++                        )
++                    }
++                }
++            }
++
++            var root = root
++            for index in modules.indices {
++                modules[index].downloadDetour = normalizedModuleDetour(modules[index].downloadDetour)
++            }
++            var globalMITM = root["mitm"] as? [String: Any] ?? [:]
++            globalMITM["enabled"] = enabled
++            globalMITM["http2_enabled"] = http2Enabled
++            root["mitm"] = globalMITM
++
++            var certificate = root["certificate"] as? [String: Any] ?? [:]
++            var tlsDecryption = certificate["tls_decryption"] as? [String: Any] ?? [:]
++            tlsDecryption["enabled"] = hasCertificate
++            if hasCertificate {
++                tlsDecryption["key_pair_p12"] = keyPair
++                tlsDecryption["key_pair_p12_password"] = keyPairPassword
++            } else {
++                tlsDecryption.removeValue(forKey: "key_pair_p12")
++                tlsDecryption.removeValue(forKey: "key_pair_p12_password")
++            }
++            certificate["tls_decryption"] = tlsDecryption
++            root["certificate"] = certificate
++
++            // route/reject/hijack-dns actions terminate sing-box rule matching.
++            // Keep every MITM route-options rule directly after sniff so a
++            // later ordinary routing rule cannot make it unreachable.
++            var routeRules = originalRouteRules.filter {
++                !originalModuleArtifacts.owns(rule: $0) && !($0["mitm"] is [String: Any])
++            }
++            let manualRules = rules.map { $0.object() }
++            let moduleRules = MITMModuleArtifactIndex.deduplicatedRules(
++                modules.filter(\.enabled).flatMap(\.generatedRules),
++                in: root
++            )
++            let activeMITMRules = MITMModuleArtifactIndex.deduplicatedRules(
++                moduleRules + manualRules,
++                in: root
++            )
++            let moduleRuleInsertionIndex = routeRules.firstIndex(where: { ($0["action"] as? String) == "sniff" }).map { $0 + 1 } ?? 0
++            routeRules.insert(contentsOf: activeMITMRules, at: moduleRuleInsertionIndex)
++            var route = root["route"] as? [String: Any] ?? [:]
++            route["rules"] = routeRules
++            root["route"] = route
++
++            var scriptsByIndex: [Int: MITMScriptDefinition] = [:]
++            var newScripts: [MITMScriptDefinition] = []
++            for script in scripts {
++                if let index = script.originalIndex {
++                    scriptsByIndex[index] = script
++                } else {
++                    newScripts.append(script)
++                }
++            }
++            var scriptObjects: [[String: Any]] = []
++            for (index, object) in originalScripts.enumerated() {
++                if originalModuleArtifacts.owns(script: object) {
++                    continue
++                }
++                if let replacement = scriptsByIndex[index] {
++                    scriptObjects.append(replacement.object())
++                }
++            }
++            scriptObjects.append(contentsOf: newScripts.map { $0.object() })
++            let moduleScripts = MITMModuleArtifactIndex.deduplicatedScripts(
++                modules.filter(\.enabled).reversed().flatMap { $0.scriptObjects() }
++            )
++            scriptObjects.append(contentsOf: moduleScripts)
++            if scriptObjects.isEmpty {
++                root.removeValue(forKey: "scripts")
++            } else {
++                root["scripts"] = scriptObjects
++            }
++
++            if modules.isEmpty {
++                root.removeValue(forKey: "mitm_modules")
++            } else {
++                root["mitm_modules"] = modules.map { $0.object() }
++            }
++
++            if hasCertificate {
++                var experimental = root["experimental"] as? [String: Any] ?? [:]
++                var clashAPI = experimental["clash_api"] as? [String: Any] ?? [:]
++                if (clashAPI["external_controller"] as? String ?? "").isEmpty {
++                    clashAPI["external_controller"] = "127.0.0.1:9090"
++                }
++                experimental["clash_api"] = clashAPI
++                root["experimental"] = experimental
++            }
++
++            let data = try JSONSerialization.data(withJSONObject: root, options: [.prettyPrinted, .sortedKeys])
++            guard var content = String(data: data, encoding: .utf8) else {
++                throw NSError(domain: "MITMSettings", code: 7)
++            }
++            content += "\n"
++            if let normalized = Profile.normalizedMITMRuntimeContent(content) {
++                content = normalized
++            }
++            var error: NSError?
++            LibboxCheckConfig(content, &error)
++            if let error { throw error }
++            try profile.write(content)
++            try await profile.onProfileUpdated()
++            let activeModuleLocalPaths = Set(modules.map(\.localPath).filter { !$0.isEmpty })
++            removeCachedModules(originalModuleLocalPaths.subtracting(activeModuleLocalPaths))
++            apply(root)
++        }
++    }
++
++    @MainActor
++    public struct MITMSettingsView: View {
++        private let profileID: Int64
++        private let readOnly: Bool
++
++        @Environment(\.openURL) private var openURL
++        @StateObject private var model = MITMSettingsModel()
++        @State private var alert: AlertState?
++        @State private var certificateImporterPresented = false
++        @State private var moduleImporterPresented = false
++
++        public init(profileID: Int64, readOnly: Bool) {
++            self.profileID = profileID
++            self.readOnly = readOnly
++        }
++
++        public var body: some View {
++            Group {
++                if model.isLoading {
++                    ProgressView().onAppear {
++                        Task { await load() }
++                    }
++                } else {
++                    form
++                }
++            }
++            .navigationTitle("MITM")
++            #if os(iOS)
++                .navigationBarTitleDisplayMode(.inline)
++            #endif
++                .toolbar {
++                    ToolbarItem(placement: editPlacement) {
++                        if !readOnly, model.modules.count > 1 {
++                            EditButton()
++                        }
++                    }
++                    ToolbarItem(placement: savePlacement) {
++                        if !readOnly {
++                            Button("Save") {
++                                Task { await save() }
++                            }
++                            .disabled(model.isSaving)
++                        }
++                    }
++                }
++                .alert($alert)
++                .fileImporter(
++                    isPresented: $certificateImporterPresented,
++                    allowedContentTypes: [.data],
++                    allowsMultipleSelection: false,
++                    onCompletion: importCertificate
++                )
++                .sheet(isPresented: $moduleImporterPresented) {
++                    MITMModuleImportView(availableOutbounds: model.availableOutbounds) { url, downloadDetour, updateInterval in
++                        try await model.importModule(
++                            url: url,
++                            downloadDetour: downloadDetour,
++                            updateInterval: updateInterval
++                        )
++                    }
++                    .presentationDetentsIfAvailable()
++                }
++        }
++
++        private var form: some View {
++            FormView {
++                Section("Core") {
++                    Toggle("Enable MITM", isOn: $model.enabled)
++                    Toggle("HTTP/2", isOn: $model.http2Enabled)
++                }
++
++                certificateSection
++
++                Section("Modules") {
++                    ForEach($model.modules) { $module in
++                        FormNavigationLink {
++                            MITMModuleView(
++                                module: $module,
++                                readOnly: readOnly,
++                                availableOutbounds: model.availableOutbounds,
++                                refresh: { try await model.refreshModule(id: module.id) }
++                            )
++                        } label: {
++                            Label(module.displayName, systemImage: module.enabled ? "shippingbox.fill" : "shippingbox")
++                        }
++                    }
++                    .onDelete { model.modules.remove(atOffsets: $0) }
++                    .onMove { source, destination in
++                        model.modules.move(fromOffsets: source, toOffset: destination)
++                    }
++                    if !readOnly {
++                        FormButton {
++                            moduleImporterPresented = true
++                        } label: {
++                            Label("Add Module", systemImage: "plus")
++                        }
++                    }
++                }
++
++                Section("Rules") {
++                    ForEach($model.rules) { $rule in
++                        FormNavigationLink {
++                            MITMRuleView(rule: $rule, availableScripts: model.scripts.map(\.tag).filter { !$0.isEmpty })
++                        } label: {
++                            Label(rule.displayName, systemImage: rule.enabled ? "shield.lefthalf.filled" : "shield.slash")
++                        }
++                    }
++                    .onDelete { model.rules.remove(atOffsets: $0) }
++                    if !readOnly {
++                        FormButton {
++                            model.rules.append(MITMRule())
++                        } label: {
++                            Label("Add Rule", systemImage: "plus")
++                        }
++                    }
++                }
++
++                Section("Scripts") {
++                    ForEach($model.scripts) { $script in
++                        FormNavigationLink {
++                            MITMScriptDefinitionView(script: $script)
++                        } label: {
++                            Label(script.tag.isEmpty ? String(localized: "Untitled Script") : script.tag, systemImage: "scroll")
++                        }
++                    }
++                    .onDelete { model.scripts.remove(atOffsets: $0) }
++                    if !readOnly {
++                        FormButton {
++                            model.scripts.append(MITMScriptDefinition())
++                        } label: {
++                            Label("Add Script", systemImage: "plus")
++                        }
++                    }
++                }
++
++                Section("Diagnostics") {
++                    FormNavigationLink {
++                        LogView()
++                    } label: {
++                        Label("View Logs", systemImage: "doc.text.magnifyingglass")
++                    }
++                }
++            }
++            .disabled(readOnly || model.isSaving)
++        }
++
++        @ViewBuilder
++        private var certificateSection: some View {
++            Section("Certificate Authority") {
++                FormItem(String(localized: "Name")) {
++                    TextField("Name", text: $model.certificateName)
++                        .multilineTextAlignment(.trailing)
++                }
++                FormItem(String(localized: "Password")) {
++                    SecureField("P12 Password", text: $model.keyPairPassword)
++                        .multilineTextAlignment(.trailing)
++                }
++                FormTextItem("Status", model.hasCertificate ? String(localized: "Configured") : String(localized: "Not Configured"))
++
++                if !readOnly {
++                    FormButton {
++                        generateCertificate()
++                    } label: {
++                        Label("Generate CA", systemImage: "key.fill")
++                    }
++                    FormButton {
++                        certificateImporterPresented = true
++                    } label: {
++                        Label("Import P12", systemImage: "square.and.arrow.down")
++                    }
++                }
++                if model.hasCertificate {
++                    ShareButtonCompat($alert) {
++                        Label("Export Certificate", systemImage: "square.and.arrow.up")
++                    } itemURL: {
++                        try model.exportCertificate()
++                    }
++                    FormButton {
++                        Task { await installCertificate() }
++                    } label: {
++                        Label("Install Certificate", systemImage: "checkmark.shield")
++                    }
++                    if !readOnly {
++                        FormButton(role: .destructive) {
++                            model.keyPair = ""
++                            model.keyPairPassword = ""
++                        } label: {
++                            Label("Remove CA", systemImage: "trash")
++                        }
++                        .foregroundColor(.red)
++                    }
++                }
++            }
++        }
++
++        private var savePlacement: ToolbarItemPlacement {
++            #if os(iOS)
++                return .navigationBarTrailing
++            #else
++                return .primaryAction
++            #endif
++        }
++
++        private var editPlacement: ToolbarItemPlacement {
++            #if os(iOS)
++                return .navigationBarLeading
++            #else
++                return .automatic
++            #endif
++        }
++
++        private func load() async {
++            do {
++                try await model.load(profileID: profileID)
++            } catch {
++                model.isLoading = false
++                alert = AlertState(action: "MITM", error: error)
++            }
++        }
++
++        private func save() async {
++            do {
++                try await model.save()
++            } catch {
++                alert = AlertState(action: "MITM", error: error)
++            }
++        }
++
++        private func generateCertificate() {
++            do {
++                try model.generateCertificate()
++            } catch {
++                alert = AlertState(action: "MITM", error: error)
++            }
++        }
++
++        private func importCertificate(_ result: Result<[URL], Error>) {
++            do {
++                guard let url = try result.get().first else { return }
++                try model.importCertificate(from: url)
++            } catch {
++                alert = AlertState(action: "MITM", error: error)
++            }
++        }
++
++        private func installCertificate() async {
++            do {
++                if !readOnly {
++                    try await model.save()
++                }
++                openURL(URL(string: "http://127.0.0.1:9090/mitm/mobileconfig")!)
++            } catch {
++                alert = AlertState(action: "MITM", error: error)
++            }
++        }
++    }
++
++    @MainActor
++    private struct MITMModuleImportView: View {
++        let availableOutbounds: [String]
++        let importModule: (String, String, String) async throws -> Void
++
++        @Environment(\.dismiss) private var dismiss
++        @State private var url = ""
++        @State private var downloadDetour = ""
++        @State private var updateInterval = "1d"
++        @State private var isImporting = false
++        @State private var alert: AlertState?
++
++        var body: some View {
++            NavigationStackCompat {
++                FormView {
++                    Section("Module") {
++                        FormItem(String(localized: "URL")) {
++                            TextField("https://example.com/module.sgmodule", text: $url)
++                                .multilineTextAlignment(.trailing)
++                                #if os(iOS)
++                                .keyboardType(.URL)
++                                .textInputAutocapitalization(.none)
++                                #endif
++                        }
++                        Picker("Download Detour", selection: $downloadDetour) {
++                            Text("Default").tag("")
++                            ForEach(availableOutbounds, id: \.self) { Text($0).tag($0) }
++                        }
++                        FormItem(String(localized: "Update Interval")) {
++                            TextField("1d", text: $updateInterval).multilineTextAlignment(.trailing)
++                        }
++                    }
++                }
++                .navigationTitle("Add Module")
++                #if os(iOS)
++                    .navigationBarTitleDisplayMode(.inline)
++                #endif
++                    .toolbar {
++                        ToolbarItem(placement: .cancellationAction) {
++                            Button("Cancel") { dismiss() }
++                        }
++                        ToolbarItem(placement: .confirmationAction) {
++                            if isImporting {
++                                ProgressView()
++                            } else {
++                                Button("Import") {
++                                    isImporting = true
++                                    Task {
++                                        do {
++                                            try await importModule(url, downloadDetour, updateInterval)
++                                            dismiss()
++                                        } catch {
++                                            isImporting = false
++                                            alert = AlertState(action: "import module", error: error)
++                                        }
++                                    }
++                                }
++                                .disabled(url.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
++                            }
++                        }
++                    }
++                    .disabled(isImporting)
++                    .alert($alert)
++            }
++        }
++    }
++
++    @MainActor
++    private struct MITMModuleView: View {
++        @Binding var module: MITMModule
++        let readOnly: Bool
++        let availableOutbounds: [String]
++        let refresh: () async throws -> Void
++
++        @State private var isRefreshing = false
++        @State private var alert: AlertState?
++
++        var body: some View {
++            FormView {
++                Section("Module") {
++                    Toggle("Enabled", isOn: $module.enabled)
++                    FormTextItem("Name", module.displayName)
++                    if !module.moduleDescription.isEmpty {
++                        FormTextItem("Description", module.moduleDescription)
++                    }
++                    FormTextItem("Rules", String(module.generatedRules.count))
++                    FormTextItem("Scripts", String(module.generatedScripts.count))
++                }
++                Section("Source") {
++                    FormItem(String(localized: "URL")) {
++                        TextField("https://", text: $module.url)
++                            .multilineTextAlignment(.trailing)
++                            #if os(iOS)
++                            .keyboardType(.URL)
++                            .textInputAutocapitalization(.none)
++                            #endif
++                    }
++                    Picker("Download Detour", selection: $module.downloadDetour) {
++                        Text("Default").tag("")
++                        ForEach(availableOutbounds, id: \.self) { Text($0).tag($0) }
++                    }
++                    FormItem(String(localized: "Update Interval")) {
++                        TextField("1d", text: $module.updateInterval).multilineTextAlignment(.trailing)
++                    }
++                    if !readOnly {
++                        FormButton {
++                            isRefreshing = true
++                            Task {
++                                do {
++                                    try await refresh()
++                                } catch {
++                                    alert = AlertState(action: "update module", error: error)
++                                }
++                                isRefreshing = false
++                            }
++                        } label: {
++                            if isRefreshing {
++                                ProgressView()
++                            } else {
++                                Label("Update Module", systemImage: "arrow.clockwise")
++                            }
++                        }
++                    }
++                }
++            }
++            .navigationTitle(module.displayName)
++            #if os(iOS)
++                .navigationBarTitleDisplayMode(.inline)
++            #endif
++                .disabled(readOnly || isRefreshing)
++                .alert($alert)
++        }
++    }
++
++    private struct MITMRuleView: View {
++        @Binding var rule: MITMRule
++        let availableScripts: [String]
++
++        var body: some View {
++            FormView {
++                Section("Core") {
++                    Toggle("Enabled", isOn: $rule.enabled)
++                    Toggle("Print Traffic", isOn: $rule.printTraffic)
++                }
++                Section("Domain Matching") {
++                    FormNavigationLink {
++                        MITMLineListView(title: String(localized: "Exact Domains"), placeholder: "example.com", entries: $rule.domains)
++                    } label: {
++                        MITMCountLabel(title: String(localized: "Exact Domains"), systemImage: "equal", count: rule.domains.count)
++                    }
++                    FormNavigationLink {
++                        MITMLineListView(title: String(localized: "Domain Suffixes"), placeholder: "example.com", entries: $rule.domainSuffixes)
++                    } label: {
++                        MITMCountLabel(title: String(localized: "Domain Suffixes"), systemImage: "text.append", count: rule.domainSuffixes.count)
++                    }
++                }
++                Section("Rewrite") {
++                    rewriteLink("URL Rewrite", icon: "arrow.triangle.swap", entries: $rule.urlRewrites)
++                    rewriteLink("Header Rewrite", icon: "list.bullet.rectangle", entries: $rule.headerRewrites)
++                    rewriteLink("Body Rewrite", icon: "text.redaction", entries: $rule.bodyRewrites)
++                    rewriteLink("Map Local", icon: "doc.badge.gearshape", entries: $rule.mapLocal)
++                }
++                Section("Scripts") {
++                    ForEach($rule.scripts) { $script in
++                        FormNavigationLink {
++                            MITMScriptBindingView(script: $script, availableScripts: availableScripts)
++                        } label: {
++                            Label(script.tag.isEmpty ? String(localized: "Untitled Binding") : script.tag, systemImage: "link")
++                        }
++                    }
++                    .onDelete { rule.scripts.remove(atOffsets: $0) }
++                    FormButton {
++                        rule.scripts.append(MITMScriptBinding())
++                    } label: {
++                        Label("Add Script Binding", systemImage: "plus")
++                    }
++                }
++            }
++            .navigationTitle("MITM Rule")
++            #if os(iOS)
++                .navigationBarTitleDisplayMode(.inline)
++            #endif
++        }
++
++        private func rewriteLink(_ title: String, icon: String, entries: Binding<[MITMTextEntry]>) -> some View {
++            FormNavigationLink {
++                MITMLineListView(title: title, placeholder: String(localized: "Surge rule line"), entries: entries)
++            } label: {
++                MITMCountLabel(title: title, systemImage: icon, count: entries.wrappedValue.count)
++            }
++        }
++    }
++
++    private struct MITMScriptBindingView: View {
++        @Binding var script: MITMScriptBinding
++        let availableScripts: [String]
++
++        var body: some View {
++            FormView {
++                Section("Script") {
++                    if availableScripts.isEmpty {
++                        FormItem(String(localized: "Tag")) {
++                            TextField("Tag", text: $script.tag).multilineTextAlignment(.trailing)
++                        }
++                    } else {
++                        Picker("Tag", selection: $script.tag) {
++                            Text("Select").tag("")
++                            ForEach(availableScripts, id: \.self) { Text($0).tag($0) }
++                        }
++                    }
++                    Picker("Event", selection: $script.event) {
++                        ForEach(MITMScriptBinding.Event.allCases) { Text($0.title).tag($0) }
++                    }
++                    FormItem(String(localized: "Timeout")) {
++                        TextField("10s", text: $script.timeout).multilineTextAlignment(.trailing)
++                    }
++                    Toggle("Requires Body", isOn: $script.requiresBody)
++                    Toggle("Binary Body", isOn: $script.binaryBodyMode)
++                    Toggle("Full Header Mode", isOn: $script.fullHeaderMode)
++                    FormItem(String(localized: "Maximum Size")) {
++                        TextField("131072", text: $script.maxSize)
++                            .multilineTextAlignment(.trailing)
++                            #if os(iOS)
++                                .keyboardType(.numberPad)
++                            #endif
++                    }
++                }
++                Section("Matching") {
++                    FormNavigationLink {
++                        MITMLineListView(title: String(localized: "URL Patterns"), placeholder: "^https://example\\.com/", entries: $script.patterns)
++                    } label: {
++                        MITMCountLabel(title: String(localized: "URL Patterns"), systemImage: "text.magnifyingglass", count: script.patterns.count)
++                    }
++                    FormNavigationLink {
++                        MITMLineListView(title: String(localized: "Arguments"), placeholder: String(localized: "Argument"), entries: $script.arguments)
++                    } label: {
++                        MITMCountLabel(title: String(localized: "Arguments"), systemImage: "list.bullet", count: script.arguments.count)
++                    }
++                }
++            }
++            .navigationTitle("Script Binding")
++            #if os(iOS)
++                .navigationBarTitleDisplayMode(.inline)
++            #endif
++        }
++    }
++
++    private struct MITMScriptDefinitionView: View {
++        @Binding var script: MITMScriptDefinition
++
++        var body: some View {
++            FormView {
++                Section("Script") {
++                    FormItem(String(localized: "Tag")) {
++                        TextField("Tag", text: $script.tag).multilineTextAlignment(.trailing)
++                    }
++                    Picker("Source", selection: $script.source) {
++                        ForEach(MITMScriptDefinition.Source.allCases) { Text($0.title).tag($0) }
++                    }
++                    FormItem(script.source == .remote ? String(localized: "URL") : String(localized: "Path")) {
++                        TextField(script.source == .remote ? "https://" : "script.js", text: $script.location)
++                            .multilineTextAlignment(.trailing)
++                            #if os(iOS)
++                                .keyboardType(script.source == .remote ? .URL : .asciiCapable)
++                                .textInputAutocapitalization(.none)
++                            #endif
++                    }
++                    if script.source == .remote {
++                        FormItem(String(localized: "Download Detour")) {
++                            TextField("direct", text: $script.downloadDetour).multilineTextAlignment(.trailing)
++                        }
++                        FormItem(String(localized: "Update Interval")) {
++                            TextField("1d", text: $script.updateInterval).multilineTextAlignment(.trailing)
++                        }
++                    }
++                }
++            }
++            .navigationTitle("Script")
++            #if os(iOS)
++                .navigationBarTitleDisplayMode(.inline)
++            #endif
++        }
++    }
++
++    private struct MITMLineListView: View {
++        let title: String
++        let placeholder: String
++        @Binding var entries: [MITMTextEntry]
++
++        var body: some View {
++            FormView {
++                Section {
++                    ForEach($entries) { $entry in
++                        HStack {
++                            TextField(placeholder, text: $entry.value)
++                                #if os(iOS)
++                                    .keyboardType(.asciiCapable)
++                                    .textInputAutocapitalization(.none)
++                                #endif
++                            Button(role: .destructive) {
++                                entries.removeAll { $0.id == entry.id }
++                            } label: {
++                                Image(systemName: "trash")
++                            }
++                            .buttonStyle(.borderless)
++                        }
++                    }
++                    FormButton {
++                        entries.append(MITMTextEntry())
++                    } label: {
++                        Label("Add", systemImage: "plus")
++                    }
++                }
++            }
++            .navigationTitle(title)
++            #if os(iOS)
++                .navigationBarTitleDisplayMode(.inline)
++            #endif
++        }
++    }
++
++    private struct MITMCountLabel: View {
++        let title: String
++        let systemImage: String
++        let count: Int
++
++        var body: some View {
++            HStack {
++                Label(title, systemImage: systemImage)
++                Spacer()
++                Text(String(count)).foregroundStyle(.secondary)
++            }
++        }
++    }
++#endif
+diff --git a/ApplicationLibrary/Views/Profile/ProfileActionToolbar.swift b/ApplicationLibrary/Views/Profile/ProfileActionToolbar.swift
+index a2aea89..f95f797 100644
+--- a/ApplicationLibrary/Views/Profile/ProfileActionToolbar.swift
++++ b/ApplicationLibrary/Views/Profile/ProfileActionToolbar.swift
+@@ -28,6 +28,14 @@ public struct ProfileActionToolbar: View {
+     #if os(iOS) || os(tvOS)
+         private var iosBody: some View {
+             Section("Action") {
++                #if os(iOS)
++                    FormNavigationLink {
++                        MITMSettingsView(profileID: profile.id!, readOnly: false)
++                    } label: {
++                        Label("MITM Settings", systemImage: "shield.lefthalf.filled")
++                            .foregroundColor(.accentColor)
++                    }
++                #endif
+                 if profile.type != .remote {
+                     FormNavigationLink {
+                         EditProfileContentView(EditProfileContentView.Context(profileID: profile.id!, readOnly: false))
+diff --git a/ApplicationLibrary/Views/Profile/SurgeModuleParser.swift b/ApplicationLibrary/Views/Profile/SurgeModuleParser.swift
+new file mode 100644
+index 0000000..0347c9b
+--- /dev/null
++++ b/ApplicationLibrary/Views/Profile/SurgeModuleParser.swift
+@@ -0,0 +1,751 @@
++#if os(iOS) || os(macOS)
++    import Foundation
++
++    struct SurgeModulePayload {
++        var name: String
++        var moduleDescription: String
++        var scripts: [[String: Any]]
++        var rules: [[String: Any]]
++    }
++
++    enum SurgeModuleParserError: LocalizedError {
++        case missingName
++        case missingHostname
++        case invalidScript(String)
++        case unsupportedRewrite(String)
++        case unsupportedFeature(String)
++        case unsupportedPlatform(String)
++
++        var errorDescription: String? {
++            switch self {
++            case .missingName:
++                return "The module has no name."
++            case .missingHostname:
++                return "The module uses MITM features but has no [MITM] hostname entry."
++            case let .invalidScript(line):
++                return "Invalid script entry: \(line)"
++            case let .unsupportedRewrite(line):
++                return "Unsupported Loon rewrite: \(line)"
++            case let .unsupportedFeature(line):
++                return "Unsupported Surge module feature: \(line)"
++            case let .unsupportedPlatform(platform):
++                return "This Surge module is only available on \(platform)."
++            }
++        }
++    }
++
++    enum SurgeModuleParser {
++        static func parse(
++            _ content: String,
++            sourceURL: URL,
++            downloadDetour: String,
++            updateInterval: String
++        ) throws -> SurgeModulePayload {
++            var name = ""
++            var description = ""
++            var section = ""
++            var sections: [String: [String]] = [:]
++
++            // Surge parameter tables substitute declared defaults before the
++            // module is parsed. Custom values can be added to the UI later;
++            // using defaults already makes parameterized public modules work.
++            var argumentDefaults: [String: String] = [:]
++            var requiredPlatform = ""
++            for rawLine in content.components(separatedBy: .newlines) {
++                let line = rawLine.trimmingCharacters(in: .whitespacesAndNewlines)
++                if let platform = metadataValue(line, key: "system") {
++                    requiredPlatform = platform.lowercased()
++                }
++                guard let arguments = metadataValue(line, key: "arguments") else { continue }
++                for declaration in splitTopLevel(arguments, separator: ",") {
++                    let pair = splitOnce(declaration, separator: ":")
++                    let key = pair[0].trimmingCharacters(in: .whitespacesAndNewlines)
++                    guard !key.isEmpty else { continue }
++                    argumentDefaults[key] = pair.count == 2 ? unquote(pair[1].trimmingCharacters(in: .whitespacesAndNewlines)) : ""
++                }
++            }
++            if !requiredPlatform.isEmpty, !currentPlatformAliases.contains(requiredPlatform) {
++                throw SurgeModuleParserError.unsupportedPlatform(requiredPlatform)
++            }
++            var expandedContent = content
++            for (key, value) in argumentDefaults {
++                expandedContent = expandedContent.replacingOccurrences(of: "{{{\(key)}}}", with: value)
++            }
++
++            for rawLine in expandedContent.components(separatedBy: .newlines) {
++                guard let conditionalLine = platformConditionalLine(rawLine) else { continue }
++                let line = conditionalLine.trimmingCharacters(in: .whitespacesAndNewlines)
++                if let value = metadataValue(line, key: "name") {
++                    name = value
++                    continue
++                }
++                if let value = metadataValue(line, key: "desc") {
++                    description = value.replacingOccurrences(of: #"\n"#, with: "\n")
++                    continue
++                }
++                if line.hasPrefix("["), line.hasSuffix("]") {
++                    section = String(line.dropFirst().dropLast()).lowercased()
++                    continue
++                }
++                if line.isEmpty || line.hasPrefix("#") || line.hasPrefix(";") || section.isEmpty {
++                    continue
++                }
++                sections[section, default: []].append(line)
++            }
++
++            if name.isEmpty {
++                name = sourceURL.deletingPathExtension().lastPathComponent
++            }
++            guard !name.isEmpty else { throw SurgeModuleParserError.missingName }
++
++            let moduleInterval = updateInterval.trimmingCharacters(in: .whitespacesAndNewlines)
++            let moduleDetour = downloadDetour.trimmingCharacters(in: .whitespacesAndNewlines)
++            var scriptDefinitions: [[String: Any]] = []
++            var scriptBindings: [[String: Any]] = []
++
++            for line in sections["script", default: []] {
++                let parsed = parseScriptLine(line)
++                let tag = parsed.tag
++                guard !tag.isEmpty else { throw SurgeModuleParserError.invalidScript(line) }
++                let options = parsed.options
++                guard let scriptPath = options["script-path"], !scriptPath.isEmpty else {
++                    throw SurgeModuleParserError.invalidScript(line)
++                }
++                let resolvedURL = URL(string: scriptPath, relativeTo: sourceURL)?.absoluteURL.absoluteString ?? scriptPath
++                var definition: [String: Any] = [
++                    "type": "surge",
++                    "tag": tag,
++                    "source": "remote",
++                    "url": resolvedURL,
++                ]
++                if !moduleDetour.isEmpty {
++                    definition["download_detour"] = moduleDetour
++                }
++                let scriptInterval = normalizedInterval(options["script-update-interval"], fallback: moduleInterval)
++                if !scriptInterval.isEmpty {
++                    definition["update_interval"] = scriptInterval
++                }
++                let event = options["type"]?.lowercased() ?? "generic"
++                if event == "cron", let expression = options["cronexp"], !expression.isEmpty {
++                    var cron: [String: Any] = ["expression": expression]
++                    if let timeout = options["timeout"], !timeout.isEmpty {
++                        cron["timeout"] = normalizedInterval(timeout, fallback: "")
++                    }
++                    if let argument = options["argument"], !argument.isEmpty {
++                        cron["arguments"] = [argument]
++                    }
++                    definition["cron"] = cron
++                }
++                scriptDefinitions.append(definition)
++
++                guard event == "http-request" || event == "http-response" else { continue }
++                var binding: [String: Any] = [
++                    "tag": tag,
++                    "type": [event],
++                ]
++                if let pattern = options["pattern"], !pattern.isEmpty {
++                    binding["pattern"] = [normalizeRegex(pattern)]
++                }
++                if boolValue(options["requires-body"]) {
++                    binding["requires_body"] = true
++                }
++                if boolValue(options["binary-body-mode"]) {
++                    binding["binary_body_mode"] = true
++                }
++                if boolValue(options["full-header-mode"]) {
++                    binding["full_header_mode"] = true
++                }
++                if let maxSize = Int64(options["max-size"] ?? "") {
++                    binding["max_size"] = maxSize == 0 ? 10 * 1024 * 1024 : maxSize
++                }
++                if let timeout = options["timeout"], !timeout.isEmpty {
++                    binding["timeout"] = normalizedInterval(timeout, fallback: "")
++                }
++                if let argument = options["argument"], !argument.isEmpty {
++                    binding["arguments"] = [argument]
++                }
++                scriptBindings.append(binding)
++            }
++
++            var moduleRules: [[String: Any]] = []
++            var forceHTTPHostnames: [String] = []
++            for line in sections["general", default: []] {
++                let pair = splitOnce(line, separator: "=")
++                guard pair.count == 2,
++                      pair[0].trimmingCharacters(in: .whitespacesAndNewlines).lowercased() == "force-http-engine-hosts"
++                else { continue }
++                forceHTTPHostnames.append(contentsOf: splitTopLevel(pair[1], separator: ",").map {
++                    $0.replacingOccurrences(of: "%APPEND%", with: "", options: .caseInsensitive)
++                        .trimmingCharacters(in: .whitespacesAndNewlines)
++                }.filter { !$0.isEmpty })
++            }
++            if !forceHTTPHostnames.isEmpty {
++                moduleRules.append([
++                    "type": "logical",
++                    "mode": "and",
++                    "rules": [hostnameMatchRule(forceHTTPHostnames), ["protocol": "quic"]],
++                    "action": "reject",
++                ])
++            }
++            var urlRegexRewrites: [String] = []
++            for line in sections["rule", default: []] {
++                if let urlRewrite = parseURLRegexRule(line) {
++                    urlRegexRewrites.append(urlRewrite)
++                } else if let rule = parseRule(line) {
++                    moduleRules.append(rule)
++                }
++            }
++            var headerRewrites = sections["header rewrite", default: []].map(normalizeHeaderRewrite)
++            var urlRewrites = sections["url rewrite", default: []].map(normalizeRewrite) + urlRegexRewrites
++            let bodyRewrites = sections["body rewrite", default: []].map(normalizeRegex)
++            var mapLocal = sections["map local", default: []].map(normalizeMapLocal)
++            for line in sections["rewrite", default: []] {
++                let conversion = try parseLoonRewrite(line)
++                urlRewrites.append(contentsOf: conversion.url)
++                headerRewrites.append(contentsOf: conversion.header)
++                mapLocal.append(contentsOf: conversion.mapLocal)
++            }
++
++            var hostnames: [String] = []
++            for line in sections["mitm", default: []] {
++                let pair = splitOnce(line, separator: "=")
++                guard pair.count == 2, pair[0].trimmingCharacters(in: .whitespacesAndNewlines).lowercased() == "hostname" else {
++                    continue
++                }
++                hostnames.append(contentsOf: splitTopLevel(pair[1], separator: ",").map {
++                    $0.replacingOccurrences(of: "%APPEND%", with: "", options: .caseInsensitive)
++                        .trimmingCharacters(in: .whitespacesAndNewlines)
++                }.filter { !$0.isEmpty })
++            }
++
++            let usesMITM = !headerRewrites.isEmpty || !urlRewrites.isEmpty || !bodyRewrites.isEmpty || !mapLocal.isEmpty || !scriptBindings.isEmpty
++            if usesMITM || !hostnames.isEmpty {
++                guard !hostnames.isEmpty else { throw SurgeModuleParserError.missingHostname }
++                var mitm: [String: Any] = ["enabled": true]
++                assign(&mitm, key: "surge_header_rewrite", values: headerRewrites)
++                assign(&mitm, key: "surge_url_rewrite", values: urlRewrites)
++                assign(&mitm, key: "surge_body_rewrite", values: bodyRewrites)
++                assign(&mitm, key: "surge_map_local", values: mapLocal)
++                if !scriptBindings.isEmpty {
++                    mitm["surge_script"] = scriptBindings
++                }
++                moduleRules.append(mitmRule(hostnames: hostnames, options: mitm))
++            }
++
++            return SurgeModulePayload(
++                name: name,
++                moduleDescription: description,
++                scripts: deduplicated(scriptDefinitions, key: "tag"),
++                rules: moduleRules
++            )
++        }
++
++        private static func isRuleFlag(_ field: String) -> Bool {
++            switch field.trimmingCharacters(in: .whitespacesAndNewlines).lowercased() {
++            case "no-resolve", "pre-matching", "extended-matching":
++                return true
++            default:
++                return false
++            }
++        }
++
++        private static func parseRule(_ line: String) -> [String: Any]? {
++            let fields = splitTopLevel(line, separator: ",")
++            guard fields.count >= 3 else { return nil }
++            var actionIndex = fields.count - 1
++            while actionIndex > 0, isRuleFlag(fields[actionIndex]) {
++                actionIndex -= 1
++            }
++            guard actionIndex >= 1,
++                  let action = routeAction(fields[actionIndex])
++            else { return nil }
++            let expression = fields[..<actionIndex].joined(separator: ",")
++            guard var rule = parseExpression(expression) else { return nil }
++            rule.merge(action) { _, new in new }
++            return rule
++        }
++
++        private static func parseScriptLine(_ line: String) -> (tag: String, options: [String: String]) {
++            let leadingType = line.split(whereSeparator: { $0.isWhitespace }).first?.lowercased() ?? ""
++            if ["http-request", "http-response", "rule", "dns", "event", "cron", "generic"].contains(leadingType) {
++                return parseLegacyScriptLine(line)
++            }
++            if let delimiter = line.firstIndex(of: "=") {
++                let tag = String(line[..<delimiter]).trimmingCharacters(in: .whitespacesAndNewlines)
++                let value = String(line[line.index(after: delimiter)...])
++                var options: [String: String] = [:]
++                for field in splitTopLevel(value, separator: ",") {
++                    let optionPair = splitOnce(field, separator: "=")
++                    if optionPair.count == 2 {
++                        options[optionPair[0].trimmingCharacters(in: .whitespacesAndNewlines).lowercased()] =
++                            unquote(optionPair[1].trimmingCharacters(in: .whitespacesAndNewlines))
++                    }
++                }
++                options["type"] = options["type"] ?? "generic"
++                return (tag, options)
++            }
++            let tokens = splitTopLevel(line, separator: " ").filter { !$0.isEmpty }
++            guard tokens.count >= 3, !tokens[0].contains("=") else { return ("", [:]) }
++            let type = tokens[0].lowercased()
++            var options: [String: String] = [
++                "type": type,
++            ]
++            switch type {
++            case "http-request", "http-response": options["pattern"] = unquote(tokens[1])
++            case "cron": options["cronexp"] = unquote(tokens[1])
++            case "event": options["event-name"] = unquote(tokens[1])
++            default: break
++            }
++            let optionText = tokens.dropFirst(2).joined(separator: " ")
++            for token in splitTopLevel(optionText, separator: ",") {
++                let optionPair = splitOnce(token, separator: "=")
++                guard optionPair.count == 2 else { continue }
++                options[optionPair[0].trimmingCharacters(in: .whitespacesAndNewlines).lowercased()] =
++                    unquote(optionPair[1].trimmingCharacters(in: .whitespacesAndNewlines))
++            }
++            let tag = options["tag"] ?? options["name"] ?? scriptName(from: options["script-path"])
++            return (tag, options)
++        }
++
++        private static func parseLegacyScriptLine(_ line: String) -> (tag: String, options: [String: String]) {
++            let tokens = splitTopLevel(line, separator: " ").filter { !$0.isEmpty }
++            guard tokens.count >= 3 else { return ("", [:]) }
++            let type = tokens[0].lowercased()
++            var options: [String: String] = ["type": type]
++            switch type {
++            case "http-request", "http-response": options["pattern"] = unquote(tokens[1])
++            case "cron": options["cronexp"] = unquote(tokens[1])
++            case "event": options["event-name"] = unquote(tokens[1])
++            default: break
++            }
++            let optionText = tokens.dropFirst(2).joined(separator: " ")
++            for token in splitTopLevel(optionText, separator: ",") {
++                let optionPair = splitOnce(token, separator: "=")
++                guard optionPair.count == 2 else { continue }
++                options[optionPair[0].trimmingCharacters(in: .whitespacesAndNewlines).lowercased()] =
++                    unquote(optionPair[1].trimmingCharacters(in: .whitespacesAndNewlines))
++            }
++            let tag = options["tag"] ?? options["name"] ?? scriptName(from: options["script-path"])
++            return (tag, options)
++        }
++
++        private static func parseURLRegexRule(_ line: String) -> String? {
++            var fields = splitTopLevel(line, separator: ",")
++            guard fields.count >= 3, fields[0].trimmingCharacters(in: .whitespacesAndNewlines).uppercased() == "URL-REGEX" else { return nil }
++            while fields.count > 2, isRuleFlag(fields[fields.count - 1]) {
++                fields.removeLast()
++            }
++            guard fields.count >= 3,
++                  fields[fields.count - 1].trimmingCharacters(in: .whitespacesAndNewlines).uppercased().hasPrefix("REJECT")
++            else { return nil }
++            return normalizeRegex(fields[1]) + " _ reject"
++        }
++
++        private static func parseExpression(_ value: String) -> [String: Any]? {
++            let expression = unwrap(value)
++            let fields = splitTopLevel(expression, separator: ",")
++            guard let first = fields.first?.trimmingCharacters(in: .whitespacesAndNewlines).uppercased() else { return nil }
++            if first == "AND" || first == "OR" {
++                let children = parseChildren(Array(fields.dropFirst()))
++                guard !children.isEmpty else { return nil }
++                return ["type": "logical", "mode": first.lowercased(), "rules": children]
++            }
++            if first == "NOT" {
++                let children = parseChildren(Array(fields.dropFirst()))
++                guard children.count == 1 else { return nil }
++                var child = children[0]
++                child["invert"] = !(child["invert"] as? Bool ?? false)
++                return child
++            }
++            return matcherFields(fields)
++        }
++
++        private static func parseChildren(_ values: [String]) -> [[String: Any]] {
++            var values = values
++            if values.count == 1 {
++                var container = values[0].trimmingCharacters(in: .whitespacesAndNewlines)
++                if hasOuterParentheses(container) {
++                    container = String(container.dropFirst().dropLast()).trimmingCharacters(in: .whitespacesAndNewlines)
++                }
++                values = splitTopLevel(container, separator: ",")
++            }
++            return values.compactMap(parseExpression)
++        }
++
++        private static func unwrap(_ value: String) -> String {
++            var value = value.trimmingCharacters(in: .whitespacesAndNewlines)
++            while hasOuterParentheses(value) {
++                value = String(value.dropFirst().dropLast()).trimmingCharacters(in: .whitespacesAndNewlines)
++            }
++            return value
++        }
++
++        private static func hasOuterParentheses(_ value: String) -> Bool {
++            guard value.first == "(", value.last == ")" else { return false }
++            var depth = 0
++            var quote: Character?
++            var escaped = false
++            for (index, character) in value.enumerated() {
++                if escaped { escaped = false; continue }
++                if character == "\\" { escaped = true; continue }
++                if character == "\"" || character == "'" {
++                    if quote == character { quote = nil } else if quote == nil { quote = character }
++                    continue
++                }
++                guard quote == nil else { continue }
++                if character == "(" { depth += 1 }
++                if character == ")" { depth -= 1 }
++                if depth == 0 && index != value.count - 1 { return false }
++            }
++            return depth == 0
++        }
++
++        private static func normalizeRewrite(_ line: String) -> String {
++            let fields = splitTopLevel(line, separator: " ").filter { !$0.isEmpty }.map(unquote)
++            guard fields.count >= 2 else { return normalizeRegex(line) }
++            let pattern = normalizeRegex(fields[0])
++            if fields[1].lowercased() == "reject" {
++                return pattern + " _ reject"
++            }
++            let action = fields.count >= 3 ? fields[2].lowercased() : "header"
++            switch action {
++            case "header", "301", "302", "307", "308", "reject":
++                return ([pattern, fields[1], action]).joined(separator: " ")
++            default:
++                return ([pattern, fields[1], "header"]).joined(separator: " ")
++            }
++        }
++
++        private static func normalizeHeaderRewrite(_ line: String) -> String {
++            let normalized = normalizeRegex(line)
++            let first = splitTopLevel(normalized, separator: " ").first?.lowercased()
++            if first == "http-request" || first == "http-response" { return normalized }
++            return "http-request " + normalized
++        }
++
++        private static func normalizeMapLocal(_ line: String) -> String {
++            let normalized = normalizeRegex(line)
++            let fields = splitTopLevel(normalized, separator: " ").filter { !$0.isEmpty }
++            guard !fields.isEmpty else { return normalized }
++            if fields.dropFirst().contains(where: { $0.lowercased().hasPrefix("data-type=") }) {
++                return normalized
++            }
++            return ([fields[0], "data-type=file"] + fields.dropFirst()).joined(separator: " ")
++        }
++
++        private struct LoonRewriteConversion {
++            var url: [String] = []
++            var header: [String] = []
++            var mapLocal: [String] = []
++        }
++
++        private static func parseLoonRewrite(_ line: String) throws -> LoonRewriteConversion {
++            let fields = splitTopLevel(line, separator: " ").filter { !$0.isEmpty }
++            guard fields.count >= 2 else { throw SurgeModuleParserError.unsupportedRewrite(line) }
++            let pattern = normalizeRegex(fields[0])
++            let action = fields[1].lowercased()
++            var result = LoonRewriteConversion()
++            switch action {
++            case "reject":
++                result.url = [pattern + " _ reject"]
++            case "reject-dict":
++                result.mapLocal = [pattern + " data-type=text data={} status-code=200 header=Content-Type:application/json"]
++            case "reject-array":
++                result.mapLocal = [pattern + " data-type=text data=[] status-code=200 header=Content-Type:application/json"]
++            case "reject-200":
++                result.mapLocal = [pattern + " data-type=text data= status-code=200"]
++            case "mock-response-body":
++                var options = Array(fields.dropFirst(2))
++                let base64 = options.contains { $0.lowercased() == "mock-data-is-base64=true" }
++                options.removeAll { $0.lowercased() == "mock-data-is-base64=true" }
++                if base64 {
++                    options = options.map { $0.lowercased() == "data-type=text" ? "data-type=base64" : $0 }
++                }
++                if !options.contains(where: { $0.lowercased().hasPrefix("status-code=") }) {
++                    options.append("status-code=200")
++                }
++                result.mapLocal = [([pattern] + options).joined(separator: " ")]
++            case "response-header-add", "request-header-add":
++                guard fields.count >= 4 else { throw SurgeModuleParserError.unsupportedRewrite(line) }
++                let event = action.hasPrefix("response") ? "http-response" : "http-request"
++                result.header = ["\(event) \(pattern) header-add \(fields[2]) \(fields.dropFirst(3).joined(separator: " "))"]
++            case "response-header-del", "request-header-del":
++                guard fields.count >= 3 else { throw SurgeModuleParserError.unsupportedRewrite(line) }
++                let event = action.hasPrefix("response") ? "http-response" : "http-request"
++                result.header = ["\(event) \(pattern) header-del \(fields[2])"]
++            default:
++                throw SurgeModuleParserError.unsupportedRewrite(line)
++            }
++            return result
++        }
++
++        private static func matcherFields(_ fields: [String]) -> [String: Any]? {
++            guard fields.count >= 2 else { return nil }
++            let type = fields[0].trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
++            let target = fields[1].trimmingCharacters(in: .whitespacesAndNewlines)
++            switch type {
++            case "DOMAIN": return ["domain": target]
++            case "DOMAIN-SUFFIX": return ["domain_suffix": target]
++            case "DOMAIN-KEYWORD": return ["domain_keyword": target]
++            case "DOMAIN-WILDCARD": return ["domain_regex": globRegex(target)]
++            case "IP-CIDR", "IP-CIDR6": return ["ip_cidr": target]
++            case "SRC-IP": return ["source_ip_cidr": target]
++            case "GEOIP": return ["geoip": target.lowercased()]
++            case "PROTOCOL": return ["protocol": target.lowercased()]
++            case "NETWORK": return ["network": target.lowercased()]
++            case "PROCESS-NAME":
++                if target.hasPrefix("/") { return ["process_path": target] }
++                return ["process_name": target]
++            case "SRC-PORT": return portMatcher(target, exact: "source_port", range: "source_port_range")
++            case "PORT", "DEST-PORT": return portMatcher(target, exact: "port", range: "port_range")
++            default: return nil
++            }
++        }
++
++        private static func matcherFields(_ value: String) -> [String: Any]? {
++            matcherFields(splitTopLevel(value, separator: ","))
++        }
++
++        private static func routeAction(_ value: String) -> [String: Any]? {
++            let action = value.trimmingCharacters(in: .whitespacesAndNewlines)
++            let upper = action.uppercased()
++            if upper.hasPrefix("REJECT") {
++                return ["action": "reject"]
++            }
++            if upper == "DIRECT" {
++                return ["action": "direct"]
++            }
++            return action.isEmpty ? nil : ["outbound": action]
++        }
++
++        private static func mitmRule(hostnames: [String], options: [String: Any]) -> [String: Any] {
++            var result = hostnameMatchRule(hostnames)
++            result["action"] = "route-options"
++            result["mitm"] = options
++            return result
++        }
++
++        private static func hostnameMatchRule(_ hostnames: [String]) -> [String: Any] {
++            var includes: [[String: Any]] = []
++            var excludes: [[String: Any]] = []
++            for rawHostname in hostnames {
++                let excluded = rawHostname.hasPrefix("-")
++                let hostname = excluded ? String(rawHostname.dropFirst()) : rawHostname
++                guard var matcher = hostnameMatcher(hostname) else { continue }
++                if excluded { matcher["invert"] = true }
++                if excluded { excludes.append(matcher) } else { includes.append(matcher) }
++            }
++            if includes.isEmpty {
++                includes.append(["domain_regex": ".*"])
++            }
++            let includeRule: [String: Any]
++            if includes.count == 1 {
++                includeRule = includes[0]
++            } else {
++                includeRule = ["type": "logical", "mode": "or", "rules": includes]
++            }
++            let matchRule: [String: Any]
++            if excludes.isEmpty {
++                matchRule = includeRule
++            } else {
++                matchRule = ["type": "logical", "mode": "and", "rules": [includeRule] + excludes]
++            }
++            return matchRule
++        }
++
++        private static func hostnameMatcher(_ value: String) -> [String: Any]? {
++            var hostname = value.trimmingCharacters(in: .whitespacesAndNewlines)
++            guard !hostname.isEmpty else { return nil }
++            var port: Int?
++            if let separator = hostname.lastIndex(of: ":"),
++               !hostname.hasSuffix("]"),
++               let parsedPort = Int(hostname[hostname.index(after: separator)...])
++            {
++                port = parsedPort
++                hostname = String(hostname[..<separator])
++            }
++            var matcher: [String: Any]
++            if hostname == "*" {
++                matcher = ["domain_regex": ".*"]
++            } else if hostname.hasPrefix("*.") {
++                matcher = ["domain_suffix": String(hostname.dropFirst(2))]
++            } else if hostname.contains("*") || hostname.contains("?") || hostname.contains("[") {
++                matcher = ["domain_regex": globRegex(hostname)]
++            } else {
++                matcher = ["domain": hostname]
++            }
++            if let port, port > 0 { matcher["port"] = port }
++            return matcher
++        }
++
++        private static func splitTopLevel(_ value: String, separator: Character) -> [String] {
++            var result: [String] = []
++            var current = ""
++            var depth = 0
++            var quote: Character?
++            var escaped = false
++            for character in value {
++                if escaped {
++                    current.append(character)
++                    escaped = false
++                    continue
++                }
++                if character == "\\" {
++                    current.append(character)
++                    escaped = true
++                    continue
++                }
++                if character == "\"" || character == "'" {
++                    if quote == character { quote = nil } else if quote == nil { quote = character }
++                    current.append(character)
++                    continue
++                }
++                if quote == nil {
++                    if "([{<".contains(character) { depth += 1 }
++                    if ")]}>".contains(character) { depth = max(0, depth - 1) }
++                    if character == separator, depth == 0 {
++                        result.append(current.trimmingCharacters(in: .whitespacesAndNewlines))
++                        current = ""
++                        continue
++                    }
++                }
++                current.append(character)
++            }
++            result.append(current.trimmingCharacters(in: .whitespacesAndNewlines))
++            return result
++        }
++
++        private static func splitOnce(_ value: String, separator: Character) -> [String] {
++            guard let index = value.firstIndex(of: separator) else { return [value] }
++            return [String(value[..<index]), String(value[value.index(after: index)...])]
++        }
++
++        private static func normalizeRegex(_ value: String) -> String {
++            value.replacingOccurrences(of: #"\/"#, with: "/")
++        }
++
++        private static func metadataValue(_ line: String, key: String) -> String? {
++            let prefix = "#!\(key)"
++            guard line.lowercased().hasPrefix(prefix.lowercased()) else { return nil }
++            let remainder = line.dropFirst(prefix.count).trimmingCharacters(in: .whitespacesAndNewlines)
++            guard remainder.hasPrefix("=") else { return nil }
++            return remainder.dropFirst().trimmingCharacters(in: .whitespacesAndNewlines)
++        }
++
++        private static func platformConditionalLine(_ rawLine: String) -> String? {
++            var line = rawLine.trimmingCharacters(in: .whitespacesAndNewlines)
++            let current: String
++            #if os(iOS)
++                current = "IOS"
++            #elseif os(macOS)
++                current = "MACOS"
++            #else
++                current = "TVOS"
++            #endif
++            for platform in ["IOS", "MACOS", "TVOS"] {
++                let marker = "#!\(platform)-ONLY"
++                if line.uppercased().hasPrefix(marker) {
++                    guard platform == current else { return nil }
++                    line = String(line.dropFirst(marker.count)).trimmingCharacters(in: .whitespacesAndNewlines)
++                }
++                if let range = line.range(of: marker, options: [.caseInsensitive, .backwards]) {
++                    guard platform == current else { return nil }
++                    line = String(line[..<range.lowerBound]).trimmingCharacters(in: .whitespacesAndNewlines)
++                }
++            }
++            // End-of-line requirements are comments on older Surge versions.
++            // Keep the line and remove the condition so supported content loads.
++            for marker in [" //!REQUIREMENT", " #!REQUIREMENT"] {
++                if let range = line.range(of: marker, options: [.caseInsensitive, .backwards]) {
++                    line = String(line[..<range.lowerBound]).trimmingCharacters(in: .whitespacesAndNewlines)
++                }
++            }
++            return line
++        }
++
++        private static var currentPlatformAliases: Set<String> {
++            #if os(iOS)
++                return ["ios"]
++            #elseif os(macOS)
++                return ["mac", "macos"]
++            #else
++                return ["tvos"]
++            #endif
++        }
++
++        private static func unquote(_ value: String) -> String {
++            guard value.count >= 2,
++                  let first = value.first,
++                  first == value.last,
++                  first == "\"" || first == "'"
++            else { return value }
++            return String(value.dropFirst().dropLast())
++        }
++
++        private static func scriptName(from path: String?) -> String {
++            guard let path, !path.isEmpty else { return "" }
++            let url = URL(string: unquote(path))
++            let component = url?.deletingPathExtension().lastPathComponent ?? ""
++            return component.removingPercentEncoding ?? component
++        }
++
++        private static func globRegex(_ value: String) -> String {
++            var result = "^"
++            var inCharacterClass = false
++            for character in value {
++                switch character {
++                case "*": result += ".*"
++                case "?": result += "."
++                case "[": inCharacterClass = true; result.append(character)
++                case "]": inCharacterClass = false; result.append(character)
++                default:
++                    if !inCharacterClass, #"\.^$|(){}+"#.contains(character) { result.append("\\") }
++                    result.append(character)
++                }
++            }
++            return result + "$"
++        }
++
++        private static func portMatcher(_ value: String, exact: String, range: String) -> [String: Any]? {
++            if let port = Int(value) { return [exact: port] }
++            if value.contains("-") { return [range: value] }
++            if value.hasPrefix(">=") { return [range: "\(value.dropFirst(2))-65535"] }
++            if value.hasPrefix(">") { return Int(value.dropFirst()).map { [range: "\($0 + 1)-65535"] } }
++            if value.hasPrefix("<=") { return [range: "0-\(value.dropFirst(2))"] }
++            if value.hasPrefix("<") { return Int(value.dropFirst()).map { [range: "0-\(max(0, $0 - 1))"] } }
++            return nil
++        }
++
++        private static func boolValue(_ value: String?) -> Bool {
++            guard let value else { return false }
++            return ["1", "true", "yes"].contains(value.lowercased())
++        }
++
++        private static func normalizedInterval(_ value: String?, fallback: String) -> String {
++            guard let value, !value.isEmpty, value != "0" else { return fallback }
++            if Int(value) != nil { return value + "s" }
++            return value
++        }
++
++        private static func assign(_ object: inout [String: Any], key: String, values: [String]) {
++            if !values.isEmpty { object[key] = values }
++        }
++
++        private static func captureGroups(_ value: String, pattern: String) -> [String] {
++            guard let regex = try? NSRegularExpression(pattern: pattern) else { return [] }
++            let range = NSRange(value.startIndex..., in: value)
++            return regex.matches(in: value, range: range).compactMap { match in
++                guard match.numberOfRanges > 1, let range = Range(match.range(at: 1), in: value) else { return nil }
++                return String(value[range])
++            }
++        }
++
++        private static func deduplicated(_ values: [[String: Any]], key: String) -> [[String: Any]] {
++            var seen: Set<String> = []
++            return values.filter { value in
++                guard let item = value[key] as? String else { return true }
++                return seen.insert(item).inserted
++            }
++        }
++    }
++#endif
+diff --git a/Extension/PacketTunnelProvider.swift b/Extension/PacketTunnelProvider.swift
+index fbeef8d..37bde83 100644
+--- a/Extension/PacketTunnelProvider.swift
++++ b/Extension/PacketTunnelProvider.swift
+@@ -1,4 +1,16 @@
+ import Foundation
+ import Library
++#if os(iOS)
++    import Libbox
++#endif
+ 
+-class PacketTunnelProvider: ExtensionProvider {}
++class PacketTunnelProvider: ExtensionProvider {
++    #if os(iOS)
++        override func startTunnel(options: [String: NSObject]?) async throws {
++            // Surge scripts run in WebKit's content process instead of the
++            // extension's own memory; goja remains the fallback.
++            LibboxSetScriptEngine(WebScriptEngine.shared)
++            try await super.startTunnel(options: options)
++        }
++    #endif
++}
+diff --git a/Extension/WebScriptEngine.swift b/Extension/WebScriptEngine.swift
+new file mode 100644
+index 0000000..759153f
+--- /dev/null
++++ b/Extension/WebScriptEngine.swift
+@@ -0,0 +1,1410 @@
++#if os(iOS)
++    import Foundation
++    import Libbox
++    import os
++    import WebKit
++
++    /// Runs Surge scripts in a WebKit page instead of the in-process goja
++    /// runtime. The JavaScript executes in WebKit's WebContent process, so a
++    /// script that needs 20 MiB to rewrite a 1 MiB body costs the Network
++    /// Extension only the copies of the body that cross the process boundary.
++    ///
++    /// The Go side falls back to goja while this engine reports itself
++    /// unavailable, and fails open (forwards the message unchanged) on script
++    /// errors and timeouts.
++    final class WebScriptEngine: NSObject, LibboxScriptEngineProtocol {
++        static let shared = WebScriptEngine()
++
++        /// How long past the script timeout the page may take to report back.
++        /// The Go side waits one second longer before failing open itself.
++        private static let resultGrace: Int64 = 2000
++
++        private let page = ScriptPage()
++
++        func execute(_ scriptID: String?, timeout: Int64, invocation: String?, body: String?, host: (any LibboxScriptHostProtocol)?) -> String {
++            guard let scriptID, let invocation, let host else {
++                return ScriptOutcome.error("invalid script invocation")
++            }
++            if Thread.isMainThread {
++                // WebKit completes the run on the main thread; waiting here
++                // would deadlock.
++                return ScriptOutcome.unavailable("script engine called on the main thread")
++            }
++            let run = ScriptRun(scriptID: scriptID, timeout: timeout, invocation: invocation, body: body ?? "", host: host)
++            DispatchQueue.main.async {
++                self.page.start(run)
++            }
++            let waitMilliseconds = Int(clamping: max(timeout, 0) + Self.resultGrace)
++            if run.wait(until: .now() + .milliseconds(waitMilliseconds)) {
++                return run.outcome
++            }
++            DispatchQueue.main.async {
++                self.page.abandon(run)
++            }
++            return ScriptOutcome.timeout
++        }
++    }
++
++    private enum ScriptOutcome {
++        static let timeout = #"{"status":"timeout"}"#
++
++        static func error(_ message: String) -> String {
++            encode(["status": "error", "error": message])
++        }
++
++        /// The engine cannot run scripts at all; Go falls back to goja.
++        static func unavailable(_ message: String) -> String {
++            encode(["status": "unavailable", "error": message])
++        }
++
++        /// No memory to spare right now; the run fails open without falling
++        /// back to goja, which would need even more.
++        static func skipped(_ message: String) -> String {
++            encode(["status": "skipped", "error": message])
++        }
++
++        /// Arguments for a host "log" call.
++        static func logArguments(_ message: String) -> String {
++            encode(["level": "info", "message": message])
++        }
++
++        /// A host reply that makes the script's API call throw.
++        static func hostError(_ message: String) -> String {
++            encode(["error": message])
++        }
++
++        private static func encode(_ object: [String: String]) -> String {
++            guard let data = try? JSONSerialization.data(withJSONObject: object),
++                  let text = String(data: data, encoding: .utf8)
++            else {
++                return #"{"status":"error","error":"encode outcome"}"#
++            }
++            return text
++        }
++    }
++
++    /// One Execute call. Created on a Go thread, then owned by the main
++    /// thread until finish(_:) wakes the waiting Go thread.
++    private final class ScriptRun {
++        let scriptID: String
++        let timeout: Int64
++        let invocation: String
++        /// The message body, kept out of the invocation JSON.
++        let body: String
++        let host: any LibboxScriptHostProtocol
++        let started = DispatchTime.now()
++        var token = ""
++        var sourceRetried = false
++        private(set) var isFinished = false
++        private(set) var outcome = ScriptOutcome.error("script did not finish")
++        private let semaphore = DispatchSemaphore(value: 0)
++
++        init(scriptID: String, timeout: Int64, invocation: String, body: String, host: any LibboxScriptHostProtocol) {
++            self.scriptID = scriptID
++            self.timeout = timeout
++            self.invocation = invocation
++            self.body = body
++            self.host = host
++        }
++
++        func finish(_ outcome: String) {
++            guard !isFinished else {
++                return
++            }
++            isFinished = true
++            self.outcome = outcome
++            semaphore.signal()
++        }
++
++        func wait(until deadline: DispatchTime) -> Bool {
++            semaphore.wait(timeout: deadline) == .success
++        }
++
++        /// The script timeout left after waiting for the page, so the page's
++        /// own timeout fires before the Go thread stops waiting.
++        func remainingMilliseconds() -> Int64 {
++            let elapsed = Int64((DispatchTime.now().uptimeNanoseconds - started.uptimeNanoseconds) / 1_000_000)
++            return max(timeout - elapsed, 1)
++        }
++    }
++
++    /// Breaks the retain cycle between the user content controller and the
++    /// page that owns it.
++    private final class WeakScriptMessageHandler: NSObject, WKScriptMessageHandlerWithReply {
++        weak var target: (any WKScriptMessageHandlerWithReply)?
++
++        init(_ target: any WKScriptMessageHandlerWithReply) {
++            self.target = target
++        }
++
++        func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage, replyHandler: @escaping (Any?, String?) -> Void) {
++            guard let target else {
++                replyHandler(ScriptOutcome.hostError("script engine closed"), nil)
++                return
++            }
++            target.userContentController(userContentController, didReceive: message, replyHandler: replyHandler)
++        }
++    }
++
++    /// The page all scripts run in. Every member is used on the main thread.
++    private final class ScriptPage: NSObject, WKNavigationDelegate, WKUIDelegate, WKScriptMessageHandlerWithReply {
++        private static let logger = Logger(subsystem: "io.nekohasekai.sfavt.extension", category: "WebScriptEngine")
++        private static let handlerName = "sgbox"
++        private static let promptPrefix = "sgbox:"
++        private static let missingScript = #"{"status":"missing"}"#
++        private static let loadTimeout: TimeInterval = 6
++        private static let idleTimeout: TimeInterval = 90
++        private static let probeTimeout: TimeInterval = 2
++        /// Creating the page loads WebKit's client side into the extension.
++        /// Go reserves that cost before the first run; this is only a floor
++        /// for when the headroom changed in between.
++        private static let minimumHeadroom = 12 * 1024 * 1024
++        private static let failureLimit = 3
++        private static let disableInterval: TimeInterval = 300
++
++        private let hostQueue = DispatchQueue(label: "io.nekohasekai.sfavt.script-host", qos: .userInitiated, attributes: .concurrent)
++        private var webView: WKWebView?
++        private var generation = 0
++        private var isReady = false
++        private var queued: [ScriptRun] = []
++        private var runs: [String: ScriptRun] = [:]
++        private var sentSources = Set<String>()
++        private var nextToken: UInt64 = 0
++        private var loadTimer: DispatchWorkItem?
++        private var idleTimer: DispatchWorkItem?
++        private var loadFailures = 0
++        private var disabledUntil: Date?
++        private var pageStartHeadroom = 0
++        private var pageStartTime = DispatchTime.now()
++        private var pageStartReporter: (any LibboxScriptHostProtocol)?
++
++        // MARK: Runs
++
++        func start(_ run: ScriptRun) {
++            if let disabledUntil, disabledUntil > Date() {
++                run.finish(ScriptOutcome.unavailable("WebKit script engine paused after repeated load failures"))
++                return
++            }
++            if webView == nil {
++                let headroom = os_proc_available_memory()
++                if headroom > 0, headroom < Self.minimumHeadroom {
++                    run.finish(ScriptOutcome.skipped("not enough memory to start WebKit"))
++                    return
++                }
++                pageStartHeadroom = headroom
++                pageStartTime = .now()
++                pageStartReporter = run.host
++                createPage()
++            }
++            nextToken &+= 1
++            run.token = String(nextToken)
++            runs[run.token] = run
++            idleTimer?.cancel()
++            idleTimer = nil
++            if isReady {
++                dispatch(run)
++            } else {
++                queued.append(run)
++            }
++        }
++
++        /// Called when the Go thread stopped waiting for run.
++        func abandon(_ run: ScriptRun) {
++            guard runs.removeValue(forKey: run.token) != nil else {
++                return
++            }
++            run.finish(ScriptOutcome.timeout)
++            queued.removeAll { $0 === run }
++            // The script timeout inside the page should have fired first, so
++            // the page is stuck in a loop or starved; replace it if it does
++            // not answer.
++            probe()
++            scheduleIdleTeardown()
++        }
++
++        private func dispatch(_ run: ScriptRun) {
++            guard let webView, !run.isFinished else {
++                return
++            }
++            if sentSources.contains(run.scriptID) {
++                evaluate(run, source: nil, in: webView)
++                return
++            }
++            let generation = generation
++            let host = run.host
++            // Go may hold locks while compiling, so never block the main
++            // thread on it.
++            hostQueue.async {
++                let source = host.source()
++                DispatchQueue.main.async { [weak self] in
++                    guard let self, generation == self.generation, let webView = self.webView, !run.isFinished else {
++                        return
++                    }
++                    self.evaluate(run, source: source, in: webView)
++                }
++            }
++        }
++
++        private func evaluate(_ run: ScriptRun, source: String?, in webView: WKWebView) {
++            let generation = generation
++            let arguments: [String: Any] = [
++                "token": run.token,
++                "scriptID": run.scriptID,
++                "invocation": run.invocation,
++                "body": run.body,
++                "remaining": run.remainingMilliseconds(),
++                "source": source.map { $0 as Any } ?? NSNull(),
++            ]
++            webView.callAsyncJavaScript(
++                "return await window.__sgbox.run(token, scriptID, invocation, body, source, remaining);",
++                arguments: arguments,
++                in: nil,
++                in: .page
++            ) { [weak self] result in
++                guard let self, generation == self.generation, !run.isFinished else {
++                    return
++                }
++                switch result {
++                case let .success(value):
++                    guard let outcome = value as? String else {
++                        self.finish(run, ScriptOutcome.error("script engine returned no outcome"))
++                        return
++                    }
++                    if outcome == Self.missingScript {
++                        // The page dropped the source; send it again.
++                        self.sentSources.remove(run.scriptID)
++                        if source == nil, !run.sourceRetried {
++                            run.sourceRetried = true
++                            self.dispatch(run)
++                        } else {
++                            self.finish(run, ScriptOutcome.error("script source rejected by the page"))
++                        }
++                        return
++                    }
++                    if source != nil {
++                        self.sentSources.insert(run.scriptID)
++                    }
++                    self.finish(run, outcome)
++                case let .failure(error):
++                    self.finish(run, ScriptOutcome.error("WebKit: \(error.localizedDescription)"))
++                }
++            }
++        }
++
++        private func finish(_ run: ScriptRun, _ outcome: String) {
++            runs.removeValue(forKey: run.token)
++            run.finish(outcome)
++            scheduleIdleTeardown()
++        }
++
++        // MARK: Page lifecycle
++
++        private func createPage() {
++            let userContentController = WKUserContentController()
++            userContentController.addUserScript(WKUserScript(source: scriptPrelude, injectionTime: .atDocumentStart, forMainFrameOnly: true))
++            userContentController.addScriptMessageHandler(WeakScriptMessageHandler(self), contentWorld: .page, name: Self.handlerName)
++            let configuration = WKWebViewConfiguration()
++            configuration.userContentController = userContentController
++            configuration.websiteDataStore = .nonPersistent()
++            configuration.suppressesIncrementalRendering = true
++            configuration.mediaTypesRequiringUserActionForPlayback = .all
++            configuration.dataDetectorTypes = []
++            let webView = WKWebView(frame: .zero, configuration: configuration)
++            webView.navigationDelegate = self
++            webView.uiDelegate = self
++            generation += 1
++            self.webView = webView
++            isReady = false
++            sentSources.removeAll()
++            webView.loadHTMLString("<!DOCTYPE html><html><head><meta charset=\"utf-8\"></head><body></body></html>", baseURL: nil)
++            let generation = generation
++            let loadTimer = DispatchWorkItem { [weak self] in
++                guard let self, generation == self.generation, !self.isReady else {
++                    return
++                }
++                self.pageFailed("WebKit page load timed out")
++            }
++            self.loadTimer = loadTimer
++            DispatchQueue.main.asyncAfter(deadline: .now() + Self.loadTimeout, execute: loadTimer)
++        }
++
++        private func destroyPage() {
++            loadTimer?.cancel()
++            loadTimer = nil
++            idleTimer?.cancel()
++            idleTimer = nil
++            guard let webView else {
++                return
++            }
++            generation += 1
++            webView.stopLoading()
++            webView.navigationDelegate = nil
++            webView.uiDelegate = nil
++            webView.configuration.userContentController.removeAllScriptMessageHandlers()
++            webView.configuration.userContentController.removeAllUserScripts()
++            self.webView = nil
++            isReady = false
++            sentSources.removeAll()
++            pageStartReporter = nil
++        }
++
++        /// Drops the page and ends its runs. Before the page ever loaded the
++        /// runs fall back to goja; once scripts ran in it they fail open,
++        /// since a script that crashed WebKit must not be retried inside the
++        /// extension.
++        private func pageFailed(_ reason: String) {
++            let loaded = isReady
++            Self.logger.error("\(reason, privacy: .public)")
++            destroyPage()
++            let failedRuns = Array(runs.values)
++            runs.removeAll()
++            queued.removeAll()
++            for run in failedRuns {
++                run.finish(loaded ? ScriptOutcome.error(reason) : ScriptOutcome.unavailable(reason))
++            }
++            if !loaded {
++                loadFailures += 1
++                if loadFailures >= Self.failureLimit {
++                    loadFailures = 0
++                    disabledUntil = Date().addingTimeInterval(Self.disableInterval)
++                }
++            }
++        }
++
++        /// Logs what starting WebKit cost the extension, through the host of
++        /// the run that started it (still waiting for the page).
++        private func reportPageStart() {
++            guard let reporter = pageStartReporter else {
++                return
++            }
++            pageStartReporter = nil
++            let elapsed = (DispatchTime.now().uptimeNanoseconds - pageStartTime.uptimeNanoseconds) / 1_000_000
++            var message = "WebKit script engine started in \(elapsed) ms"
++            let headroom = os_proc_available_memory()
++            if pageStartHeadroom > 0, headroom > 0 {
++                let mebibyte = 1024.0 * 1024.0
++                message += String(format: ", extension memory %+.1f MiB, %.1f MiB left", Double(pageStartHeadroom - headroom) / mebibyte, Double(headroom) / mebibyte)
++            }
++            let arguments = ScriptOutcome.logArguments(message)
++            hostQueue.async {
++                _ = reporter.call("log", arguments: arguments)
++            }
++        }
++
++        private func probe() {
++            guard let webView, isReady else {
++                return
++            }
++            let generation = generation
++            var answered = false
++            webView.evaluateJavaScript("0") { _, _ in
++                answered = true
++            }
++            DispatchQueue.main.asyncAfter(deadline: .now() + Self.probeTimeout) { [weak self] in
++                guard let self, generation == self.generation, !answered else {
++                    return
++                }
++                self.pageFailed("WebKit page stopped responding")
++            }
++        }
++
++        private func scheduleIdleTeardown() {
++            guard runs.isEmpty, webView != nil else {
++                return
++            }
++            idleTimer?.cancel()
++            let generation = generation
++            let idleTimer = DispatchWorkItem { [weak self] in
++                guard let self, generation == self.generation, self.runs.isEmpty else {
++                    return
++                }
++                // Idle pages are released so the WebContent process and the
++                // client-side objects in the extension go away.
++                self.destroyPage()
++            }
++            self.idleTimer = idleTimer
++            DispatchQueue.main.asyncAfter(deadline: .now() + Self.idleTimeout, execute: idleTimer)
++        }
++
++        // MARK: WKNavigationDelegate
++
++        func webView(_ webView: WKWebView, didFinish _: WKNavigation!) {
++            guard webView === self.webView, !isReady else {
++                return
++            }
++            isReady = true
++            loadFailures = 0
++            loadTimer?.cancel()
++            loadTimer = nil
++            reportPageStart()
++            let pending = queued
++            queued.removeAll()
++            for run in pending {
++                dispatch(run)
++            }
++        }
++
++        func webView(_ webView: WKWebView, didFail _: WKNavigation!, withError error: any Error) {
++            guard webView === self.webView else {
++                return
++            }
++            pageFailed("WebKit page load failed: \(error.localizedDescription)")
++        }
++
++        func webView(_ webView: WKWebView, didFailProvisionalNavigation _: WKNavigation!, withError error: any Error) {
++            guard webView === self.webView else {
++                return
++            }
++            pageFailed("WebKit page load failed: \(error.localizedDescription)")
++        }
++
++        func webViewWebContentProcessDidTerminate(_ webView: WKWebView) {
++            guard webView === self.webView else {
++                return
++            }
++            pageFailed("WebKit content process terminated")
++        }
++
++        func webView(_: WKWebView, decidePolicyFor _: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
++            // Only the initial blank document; a script must not navigate the
++            // page away from under the other runs.
++            decisionHandler(isReady ? .cancel : .allow)
++        }
++
++        // MARK: Host calls
++
++        func userContentController(_: WKUserContentController, didReceive message: WKScriptMessage, replyHandler: @escaping (Any?, String?) -> Void) {
++            guard let body = message.body as? [String: Any],
++                  let token = body["run"] as? String,
++                  let method = body["method"] as? String,
++                  let arguments = body["arguments"] as? String
++            else {
++                replyHandler(ScriptOutcome.hostError("invalid host call"), nil)
++                return
++            }
++            callHost(token: token, method: method, arguments: arguments) { reply in
++                replyHandler(reply, nil)
++            }
++        }
++
++        /// Serves the synchronous API calls ($persistentStore, $utils.ungzip):
++        /// the page blocks in prompt() until the completion handler runs.
++        func webView(_: WKWebView, runJavaScriptTextInputPanelWithPrompt prompt: String, defaultText _: String?, initiatedByFrame _: WKFrameInfo, completionHandler: @escaping (String?) -> Void) {
++            guard prompt.hasPrefix(Self.promptPrefix) else {
++                completionHandler(nil)
++                return
++            }
++            let fields = prompt.dropFirst(Self.promptPrefix.count).split(separator: "\n", maxSplits: 2, omittingEmptySubsequences: false)
++            guard fields.count == 3 else {
++                completionHandler(ScriptOutcome.hostError("invalid host call"))
++                return
++            }
++            callHost(token: String(fields[0]), method: String(fields[1]), arguments: String(fields[2]), completion: completionHandler)
++        }
++
++        func webView(_: WKWebView, runJavaScriptAlertPanelWithMessage _: String, initiatedByFrame _: WKFrameInfo, completionHandler: @escaping () -> Void) {
++            completionHandler()
++        }
++
++        func webView(_: WKWebView, runJavaScriptConfirmPanelWithMessage _: String, initiatedByFrame _: WKFrameInfo, completionHandler: @escaping (Bool) -> Void) {
++            completionHandler(false)
++        }
++
++        private func callHost(token: String, method: String, arguments: String, completion: @escaping (String) -> Void) {
++            guard let run = runs[token] else {
++                completion(ScriptOutcome.hostError("script run already finished"))
++                return
++            }
++            let host = run.host
++            // $httpClient may take seconds; the page keeps running meanwhile.
++            hostQueue.async {
++                let reply = host.call(method, arguments: arguments)
++                DispatchQueue.main.async {
++                    completion(reply)
++                }
++            }
++        }
++    }
++
++    /// Installed at document start. The page itself only dispatches: every
++    /// concurrently running script gets a slot, an iframe with its own global
++    /// object and its own copy of the Surge API runtime, so scripts neither
++    /// share implicit globals nor see values from a foreign realm.
++    private let scriptPrelude = #"""
++    (() => {
++      "use strict";
++      if (window.__sgbox) {
++        return;
++      }
++
++      // Evaluated from its source text inside every slot frame.
++      function installRuntime() {
++        "use strict";
++        const nativePrompt = window.prompt.bind(window);
++        const hostPort = (window.webkit || window.parent.webkit).messageHandlers.sgbox;
++        const indirectEval = window.eval;
++        const nativeSetTimeout = window.setTimeout.bind(window);
++        const nativeClearTimeout = window.clearTimeout.bind(window);
++        const nativeSetInterval = window.setInterval.bind(window);
++        const nativeClearInterval = window.clearInterval.bind(window);
++        // Scripts run at global scope, like in goja: the API is a set of
++        // global properties for the duration of the run. The slot runs one
++        // script at a time, and afterwards every global the run added is
++        // removed and every overridden native restored.
++        const API_GLOBALS = [
++          "$request", "request", "$response", "response", "$done", "done",
++          "$argument", "$arguments", "$script", "$environment", "$persistentStore",
++          "$httpClient", "$http", "$httpAPI", "$utils", "$notification", "$network",
++          "$cronexp",
++        ];
++        const OVERRIDDEN_GLOBALS = [
++          "console", "setTimeout", "clearTimeout", "setInterval", "clearInterval",
++          "setImmediate", "clearImmediate",
++        ];
++        const nativeGlobals = new Map(OVERRIDDEN_GLOBALS.map((name) => [name, Object.getOwnPropertyDescriptor(window, name)]));
++        const HTTP_METHODS = ["get", "post", "put", "delete", "head", "options", "patch", "trace"];
++        const MAX_LOG_LENGTH = 8 * 1024;
++        const MAX_HOST_PAYLOAD = 4 * 1024 * 1024;
++        // goja runs scripts with a top-level return inside a function; so do
++        // we. This message is only ever produced by the parser, before any
++        // of the script ran.
++        const RETURN_OUTSIDE_FUNCTION = /Return statements are only valid inside functions/;
++        const wrappedScripts = new Set();
++        const encoder = new TextEncoder();
++        const decoder = new TextDecoder();
++        let baselineGlobals = null;
++
++        function resetGlobals() {
++          for (const name of Object.getOwnPropertyNames(window)) {
++            if (!baselineGlobals.has(name)) {
++              Reflect.deleteProperty(window, name);
++            }
++          }
++          for (const [name, descriptor] of nativeGlobals) {
++            if (descriptor) {
++              Object.defineProperty(window, name, descriptor);
++            } else {
++              Reflect.deleteProperty(window, name);
++            }
++          }
++        }
++
++        function evaluateScript(scriptID, source) {
++          if (!wrappedScripts.has(scriptID)) {
++            try {
++              indirectEval(source);
++              return 0;
++            } catch (error) {
++              if (!(error instanceof SyntaxError) || !RETURN_OUTSIDE_FUNCTION.test(error.message)) {
++                throw error;
++              }
++              wrappedScripts.add(scriptID);
++            }
++          }
++          indirectEval("(function () {\n" + source + "\n})();");
++          return 1;
++        }
++
++        function base64ToBytes(data) {
++          const binary = atob(data);
++          const bytes = new Uint8Array(binary.length);
++          for (let index = 0; index < binary.length; index++) {
++            bytes[index] = binary.charCodeAt(index);
++          }
++          return bytes;
++        }
++
++        function bytesToBase64(bytes) {
++          let binary = "";
++          for (let index = 0; index < bytes.length; index += 0x8000) {
++            binary += String.fromCharCode.apply(null, bytes.subarray(index, index + 0x8000));
++          }
++          return btoa(binary);
++        }
++
++        function asBytes(value) {
++          if (ArrayBuffer.isView(value)) {
++            return value instanceof Uint8Array ? value : new Uint8Array(value.buffer, value.byteOffset, value.byteLength);
++          }
++          if (Object.prototype.toString.call(value) === "[object ArrayBuffer]") {
++            return new Uint8Array(value);
++          }
++          return null;
++        }
++
++        // Bodies from the host are {encoding: "utf8" | "base64", data}.
++        function wireText(body) {
++          if (body.text === undefined) {
++            body.text = body.encoding === "base64" ? decoder.decode(base64ToBytes(body.data)) : body.data;
++          }
++          return body.text;
++        }
++
++        function wireBytes(body) {
++          return body.encoding === "base64" ? base64ToBytes(body.data) : encoder.encode(body.data);
++        }
++
++        function sameBytes(left, right) {
++          if (left.length !== right.length) {
++            return false;
++          }
++          for (let index = 0; index < left.length; index++) {
++            if (left[index] !== right[index]) {
++              return false;
++            }
++          }
++          return true;
++        }
++
++        function defineBody(target, body, binaryMode) {
++          if (!body) {
++            return;
++          }
++          target.body = binaryMode ? wireBytes(body) : wireText(body);
++          let bytes;
++          Object.defineProperty(target, "bodyBytes", {
++            get() {
++              if (bytes === undefined) {
++                bytes = wireBytes(body);
++              }
++              return bytes;
++            },
++            set(value) {
++              bytes = value;
++            },
++            enumerable: true,
++            configurable: true,
++          });
++        }
++
++        function encodeBody(value, name) {
++          if (typeof value === "string") {
++            return { encoding: "utf8", data: value };
++          }
++          const bytes = asBytes(value);
++          if (bytes) {
++            return { encoding: "base64", data: bytesToBase64(bytes) };
++          }
++          throw new TypeError("invalid value: " + name + ": expected string or binary");
++        }
++
++        // An unchanged body is reported as "same" so it is not copied back.
++        function resultBody(object, input) {
++          let value = object.body;
++          let name = "body";
++          if (value === undefined || value === null) {
++            value = object.bodyBytes;
++            name = "bodyBytes";
++          }
++          if (value === undefined || value === null) {
++            return undefined;
++          }
++          if (input) {
++            if (typeof value === "string" && value === wireText(input)) {
++              return { encoding: "same", data: "" };
++            }
++            const bytes = asBytes(value);
++            if (bytes) {
++              if (input.bytes === undefined) {
++                input.bytes = wireBytes(input);
++              }
++              if (sameBytes(bytes, input.bytes)) {
++                return { encoding: "same", data: "" };
++              }
++            }
++          }
++          return encodeBody(value, name);
++        }
++
++        function headersToValue(list, fullHeaderMode) {
++          if (fullHeaderMode) {
++            return list.map(([field, value]) => ({ field, value }));
++          }
++          const headers = {};
++          for (const [field, value] of list) {
++            const existing = headers[field];
++            if (existing === undefined) {
++              headers[field] = value;
++            } else if (Array.isArray(existing)) {
++              existing.push(value);
++            } else {
++              headers[field] = [existing, value];
++            }
++          }
++          return headers;
++        }
++
++        const HEADER_TOKEN = /^[!#$%&'*+\-.^_`|~0-9A-Za-z]+$/;
++
++        // Mirrors Go's textproto.CanonicalMIMEHeaderKey.
++        function canonicalHeaderKey(key) {
++          if (!HEADER_TOKEN.test(key)) {
++            return key;
++          }
++          let result = "";
++          let upper = true;
++          for (const character of key) {
++            result += upper ? character.toUpperCase() : character.toLowerCase();
++            upper = character === "-";
++          }
++          return result;
++        }
++
++        // The {field, value} array form keeps every entry, like goja. In the
++        // object form a key replaces earlier keys that differ only in case,
++        // so setting headers["user-agent"] overrides "User-Agent".
++        function headersToList(value, name) {
++          if (value === undefined || value === null) {
++            return undefined;
++          }
++          if (typeof value !== "object") {
++            throw new TypeError("invalid value: " + name + ": expected object");
++          }
++          const list = [];
++          if (Array.isArray(value)) {
++            value.forEach((entry, index) => {
++              if (!entry || typeof entry !== "object") {
++                throw new TypeError("invalid value: " + name + "[" + index + "]: expected object");
++              }
++              list.push([String(entry.field), String(entry.value)]);
++            });
++            return list;
++          }
++          const fields = new Map();
++          for (const field of Object.keys(value)) {
++            const fieldValue = value[field];
++            if (fieldValue === undefined || fieldValue === null) {
++              continue;
++            }
++            const key = canonicalHeaderKey(field);
++            fields.delete(key);
++            fields.set(key, Array.isArray(fieldValue) ? fieldValue.map(String) : [String(fieldValue)]);
++          }
++          for (const [key, values] of fields) {
++            for (const item of values) {
++              list.push([key, item]);
++            }
++          }
++          return list;
++        }
++
++        function toStatus(value) {
++          const status = Number(value);
++          return Number.isFinite(status) ? Math.trunc(status) : 0;
++        }
++
++        function describe(error, lineOffset = 0) {
++          if (error instanceof Error) {
++            const line = typeof error.line === "number" && error.line > lineOffset ? " (line " + (error.line - lineOffset) + ")" : "";
++            return error.name + ": " + error.message + line;
++          }
++          return String(error);
++        }
++
++        function inspect(value) {
++          if (typeof value === "string") {
++            return value;
++          }
++          if (value instanceof Error) {
++            return describe(value);
++          }
++          if (value !== null && typeof value === "object") {
++            try {
++              return JSON.stringify(value);
++            } catch (error) {
++              return String(value);
++            }
++          }
++          return String(value);
++        }
++
++        function formatLog(args) {
++          if (args.length === 0) {
++            return "";
++          }
++          const rest = Array.prototype.slice.call(args, 1);
++          let message = inspect(args[0]);
++          if (typeof args[0] === "string") {
++            message = args[0].replace(/%[sdij%]/g, (directive) => {
++              if (directive === "%%") {
++                return "%";
++              }
++              if (rest.length === 0) {
++                return directive;
++              }
++              const value = rest.shift();
++              switch (directive) {
++                case "%s":
++                  return inspect(value);
++                case "%j":
++                  return JSON.stringify(value);
++                default:
++                  return String(Number(value));
++              }
++            });
++          }
++          for (const value of rest) {
++            message += " " + inspect(value);
++          }
++          if (message.length > MAX_LOG_LENGTH) {
++            message = message.slice(0, MAX_LOG_LENGTH) + " ... (" + (message.length - MAX_LOG_LENGTH) + " characters truncated)";
++          }
++          return message;
++        }
++
++        class Run {
++          constructor(token, invocation, bodyText, remaining, resolve) {
++            this.token = token;
++            this.invocation = invocation;
++            this.remaining = remaining;
++            this.resolve = resolve;
++            this.finished = false;
++            this.lineOffset = 0;
++            this.timers = new Set();
++            this.intervals = new Set();
++            this.timeout = undefined;
++            this.counts = new Map();
++            this.startTimes = new Map();
++            const message = invocation.type === "http-request" ? invocation.request : invocation.response;
++            this.input = (message && message.body) || null;
++            if (this.input) {
++              // The body data travels next to the invocation, not inside it.
++              this.input.data = bodyText;
++            }
++          }
++
++          start(scriptID, source) {
++            // The time the run already spent waiting in the engine counts.
++            this.timeout = nativeSetTimeout(() => this.finish("timeout", {}), Math.max(this.remaining, 1));
++            const bindings = this.bindings();
++            resetGlobals();
++            for (const name of API_GLOBALS.concat(OVERRIDDEN_GLOBALS)) {
++              Object.defineProperty(window, name, { value: bindings[name], writable: true, enumerable: true, configurable: true });
++            }
++            try {
++              this.lineOffset = evaluateScript(scriptID, source);
++            } catch (error) {
++              this.fail(error);
++            }
++          }
++
++          finish(status, fields) {
++            if (this.finished) {
++              return;
++            }
++            this.finished = true;
++            nativeClearTimeout(this.timeout);
++            for (const timer of this.timers) {
++              nativeClearTimeout(timer);
++            }
++            for (const timer of this.intervals) {
++              nativeClearInterval(timer);
++            }
++            resetGlobals();
++            // The result body follows the JSON after a newline, so it is not
++            // escaped into the JSON and the extension need not copy it out.
++            let frame = null;
++            const body = fields.value && fields.value.body;
++            if (body && body.encoding !== "same") {
++              frame = body.data;
++              fields.value.body = { encoding: body.encoding };
++              fields.framed = true;
++            }
++            let outcome;
++            try {
++              outcome = JSON.stringify(Object.assign({ status }, fields));
++              if (frame !== null) {
++                outcome += "\n" + frame;
++              }
++            } catch (error) {
++              outcome = JSON.stringify({ status: "error", error: describe(error) });
++            }
++            if (outcome.length > this.invocation.resultLimit) {
++              outcome = JSON.stringify({ status: "error", error: "script result exceeds " + this.invocation.resultLimit + " bytes" });
++            }
++            this.resolve(outcome);
++          }
++
++          fail(error) {
++            this.finish("error", { error: describe(error, this.lineOffset) });
++          }
++
++          done(value) {
++            if (this.finished) {
++              return;
++            }
++            let serialized;
++            try {
++              serialized = this.serializeDone(value);
++            } catch (error) {
++              this.fail(error);
++              return;
++            }
++            this.finish("done", serialized === undefined ? {} : { value: serialized });
++          }
++
++          serializeDone(value) {
++            if (value === undefined || value === null) {
++              return undefined;
++            }
++            if (typeof value !== "object") {
++              throw new TypeError("invalid value: done() argument: expected object");
++            }
++            const result = {};
++            if (value.abort === true) {
++              result.abort = true;
++            }
++            const type = this.invocation.type;
++            if (type !== "http-request" && type !== "http-response") {
++              return result;
++            }
++            if (type === "http-request") {
++              if (value.url !== undefined && value.url !== null) {
++                result.url = String(value.url);
++              }
++            } else {
++              const status = toStatus(value.status) || toStatus(value.statusCode);
++              if (status) {
++                result.status = status;
++              }
++            }
++            const headers = headersToList(value.headers, "headers");
++            if (headers) {
++              result.headers = headers;
++            }
++            const body = resultBody(value, this.input);
++            if (body) {
++              result.body = body;
++            }
++            if (type === "http-request" && value.response !== undefined && value.response !== null) {
++              if (typeof value.response !== "object") {
++                throw new TypeError("invalid value: response: expected object");
++              }
++              const response = {};
++              const status = toStatus(value.response.status) || toStatus(value.response.statusCode);
++              if (status) {
++                response.status = status;
++              }
++              const responseHeaders = headersToList(value.response.headers, "response.headers");
++              if (responseHeaders) {
++                response.headers = responseHeaders;
++              }
++              const responseBody = resultBody(value.response, null);
++              if (responseBody) {
++                response.body = responseBody;
++              }
++              result.response = response;
++            }
++            return result;
++          }
++
++          guard(callback) {
++            return (...args) => {
++              if (this.finished) {
++                return undefined;
++              }
++              try {
++                return callback(...args);
++              } catch (error) {
++                this.fail(error);
++                return undefined;
++              }
++            };
++          }
++
++          callSync(method, args) {
++            if (this.finished) {
++              throw new Error("script run already finished");
++            }
++            const payload = JSON.stringify(args);
++            if (payload.length > MAX_HOST_PAYLOAD) {
++              throw new RangeError(method + ": arguments exceed " + MAX_HOST_PAYLOAD + " bytes");
++            }
++            const reply = nativePrompt("sgbox:" + this.token + "\n" + method + "\n" + payload);
++            if (reply === null || reply === undefined) {
++              throw new Error(method + ": script host unavailable");
++            }
++            const result = JSON.parse(reply);
++            if (result.error !== undefined) {
++              throw new Error(result.error);
++            }
++            return result;
++          }
++
++          callAsync(method, args) {
++            if (this.finished) {
++              return Promise.reject(new Error("script run already finished"));
++            }
++            const payload = JSON.stringify(args);
++            if (payload.length > MAX_HOST_PAYLOAD) {
++              return Promise.reject(new RangeError(method + ": arguments exceed " + MAX_HOST_PAYLOAD + " bytes"));
++            }
++            return hostPort.postMessage({ run: this.token, method, arguments: payload }).then((reply) => JSON.parse(reply));
++          }
++
++          post(method, args) {
++            this.callAsync(method, args).catch(() => {});
++          }
++
++          log(level, args) {
++            if (!this.finished) {
++              this.post("log", { level, message: formatLog(args) });
++            }
++          }
++
++          httpRequest(method, options, callback) {
++            const request = {
++              method: method.toUpperCase(),
++              headers: [],
++              autoCookie: true,
++              autoRedirect: true,
++            };
++            let binaryMode = false;
++            let fullHeaderMode = false;
++            if (typeof options === "string") {
++              request.url = options;
++            } else if (options !== null && typeof options === "object") {
++              if (typeof options.url !== "string") {
++                throw new TypeError("invalid value: options.url: expected string");
++              }
++              request.url = options.url;
++              request.headers = headersToList(options.headers, "options.headers") || [];
++              const body = options.body;
++              if (body !== undefined && body !== null) {
++                if (typeof body === "object" && !asBytes(body)) {
++                  request.body = { encoding: "utf8", data: JSON.stringify(body) };
++                  if (!request.headers.some(([field]) => field.toLowerCase() === "content-type")) {
++                    request.headers.push(["Content-Type", "application/json"]);
++                  }
++                } else {
++                  request.body = encodeBody(body, "options.body");
++                }
++              }
++              const timeout = Number(options.timeout);
++              if (Number.isFinite(timeout) && timeout > 0) {
++                request.timeout = Math.trunc(timeout);
++              }
++              request.insecure = options.insecure === true;
++              if (options["auto-cookie"] !== undefined && options["auto-cookie"] !== null) {
++                request.autoCookie = options["auto-cookie"] === true;
++              }
++              if (options["auto-redirect"] !== undefined && options["auto-redirect"] !== null) {
++                request.autoRedirect = options["auto-redirect"] === true;
++              }
++              binaryMode = options["binary-mode"] === true;
++              fullHeaderMode = options["full-header-mode"] === true;
++            } else {
++              throw new TypeError("invalid argument: options: expected string or object");
++            }
++            if (typeof callback !== "function") {
++              throw new TypeError("invalid argument: callback: expected function");
++            }
++            const deliver = this.guard(callback);
++            this.callAsync("http", request).then((reply) => {
++              if (reply.error !== undefined) {
++                deliver(reply.error, undefined, undefined);
++                return;
++              }
++              const response = {
++                status: reply.status,
++                statusCode: reply.status,
++                headers: headersToValue(reply.headers || [], fullHeaderMode),
++              };
++              defineBody(response, reply.body || { encoding: "utf8", data: "" }, binaryMode);
++              deliver(null, response, response.body);
++            }, (error) => {
++              deliver(describe(error), undefined, undefined);
++            });
++          }
++
++          bindings() {
++            const invocation = this.invocation;
++            const binaryMode = invocation.binaryBodyMode;
++            const fullHeaderMode = invocation.fullHeaderMode;
++            const bindings = {};
++            if (invocation.request) {
++              const request = {
++                url: invocation.request.url,
++                method: invocation.request.method,
++                headers: headersToValue(invocation.request.headers || [], fullHeaderMode),
++              };
++              if (invocation.type === "http-request") {
++                defineBody(request, invocation.request.body, binaryMode);
++              }
++              request.id = invocation.request.id;
++              bindings.$request = request;
++              bindings.request = request;
++            }
++            if (invocation.response) {
++              const response = {
++                status: invocation.response.status,
++                statusCode: invocation.response.status,
++                headers: headersToValue(invocation.response.headers || [], fullHeaderMode),
++              };
++              defineBody(response, invocation.response.body, binaryMode);
++              bindings.$response = response;
++              bindings.response = response;
++            }
++            const done = (value) => this.done(value);
++            bindings.$done = done;
++            bindings.done = done;
++            bindings.$argument = invocation.argument;
++            bindings.$arguments = invocation.arguments.slice();
++            bindings.$script = {
++              name: invocation.tag,
++              type: invocation.type,
++              startTime: new Date(invocation.startedAt),
++              sessionID: invocation.sessionID,
++              binaryBodyMode: binaryMode,
++            };
++            bindings.$environment = Object.assign({}, invocation.environment, {
++              toString: () => "[sing-box Surge environment",
++            });
++            bindings.$persistentStore = {
++              get: (key) => this.readStore(key),
++              read: (key) => this.readStore(key),
++              set: (value, key) => {
++                this.writeStore(value, key);
++              },
++              write: (value, key) => {
++                this.writeStore(value, key);
++                return true;
++              },
++              toString: () => "[sing-box Surge persistentStore]",
++            };
++            const httpClient = { toString: () => "[sing-box Surge HTTP]" };
++            for (const method of HTTP_METHODS) {
++              httpClient[method] = (options, callback) => this.httpRequest(method, options, callback);
++            }
++            bindings.$httpClient = httpClient;
++            bindings.$http = httpClient;
++            bindings.$httpAPI = (method, path, body, callback) => {
++              if (typeof callback !== "function") {
++                throw new TypeError("$httpAPI requires method, path, body and callback");
++              }
++              callback({ success: false, error: "Surge HTTP API is not supported by sing-box" });
++            };
++            bindings.$utils = {
++              geoip: () => null,
++              ipasn: () => null,
++              ipaso: () => null,
++              ungzip: (data) => {
++                const bytes = asBytes(data);
++                if (!bytes) {
++                  throw new TypeError("invalid argument: binary: expected binary");
++                }
++                const reply = this.callSync("utils.ungzip", { data: bytesToBase64(bytes) });
++                return base64ToBytes(reply.data);
++              },
++              toString: () => "[sing-box Surge utils]",
++            };
++            bindings.$notification = {
++              post: (title, subtitle, body, options) => {
++                const notification = {
++                  title: title === undefined || title === null ? "" : String(title),
++                  subtitle: subtitle === undefined || subtitle === null ? "" : String(subtitle),
++                  body: body === undefined || body === null ? "" : String(body),
++                };
++                if (options !== null && typeof options === "object") {
++                  notification.options = {
++                    action: String(options.action || ""),
++                    url: String(options.url || ""),
++                    text: String(options.text || ""),
++                    "media-url": String(options["media-url"] || ""),
++                    "media-base64": String(options["media-base64"] || ""),
++                    "media-base64-mime": String(options["media-base64-mime"] || ""),
++                    "auto-dismiss": Math.trunc(Number(options["auto-dismiss"]) || 0),
++                  };
++                }
++                this.post("notification", notification);
++              },
++              toString: () => "[sing-box Surge notification]",
++            };
++            bindings.$network = { wifi: { ssid: null, bssid: null }, dns: [], v4: {}, v6: {} };
++            if (invocation.type === "cron" && invocation.cronExpression) {
++              bindings.$cronexp = invocation.cronExpression;
++            }
++            bindings.console = this.console();
++            bindings.setTimeout = (callback, delay, ...args) => {
++              if (this.finished) {
++                return 0;
++              }
++              const timer = nativeSetTimeout(() => {
++                this.timers.delete(timer);
++                this.guard(callback)(...args);
++              }, delay);
++              this.timers.add(timer);
++              return timer;
++            };
++            bindings.clearTimeout = (timer) => {
++              this.timers.delete(timer);
++              nativeClearTimeout(timer);
++            };
++            bindings.setInterval = (callback, delay, ...args) => {
++              if (this.finished) {
++                return 0;
++              }
++              const timer = nativeSetInterval(this.guard(() => callback(...args)), delay);
++              this.intervals.add(timer);
++              return timer;
++            };
++            bindings.clearInterval = (timer) => {
++              this.intervals.delete(timer);
++              nativeClearInterval(timer);
++            };
++            bindings.setImmediate = (callback, ...args) => bindings.setTimeout(callback, 0, ...args);
++            bindings.clearImmediate = bindings.clearTimeout;
++            return bindings;
++          }
++
++          readStore(key) {
++            const reply = this.callSync("persistentStore.read", { key: key === undefined || key === null ? "" : String(key) });
++            return reply.value === undefined ? null : reply.value;
++          }
++
++          writeStore(value, key) {
++            this.callSync("persistentStore.write", {
++              key: key === undefined || key === null ? "" : String(key),
++              value: value === undefined || value === null ? "" : String(value),
++            });
++          }
++
++          console() {
++            const log = (level) => (...args) => this.log(level, args);
++            return {
++              log: log("info"),
++              info: log("info"),
++              debug: log("debug"),
++              trace: log("debug"),
++              warn: log("warn"),
++              error: log("error"),
++              assert: (assertion, ...args) => {
++                if (!assertion) {
++                  this.log("error", args);
++                }
++              },
++              dir: (value) => this.log("info", [value]),
++              dirxml: (value) => this.log("info", [value]),
++              table: (value) => this.log("info", [value]),
++              count: (label = "default") => {
++                const count = (this.counts.get(label) || 0) + 1;
++                this.counts.set(label, count);
++                this.log("info", [label + ": " + count]);
++              },
++              countReset: (label = "default") => {
++                this.counts.delete(label);
++              },
++              time: (label = "default") => {
++                this.startTimes.set(label, Date.now());
++              },
++              timeLog: (label = "default") => {
++                if (!this.startTimes.has(label)) {
++                  this.log("error", ["Timer \"" + label + "\" doesn't exist."]);
++                  return;
++                }
++                this.log("info", [label + ": " + (Date.now() - this.startTimes.get(label)) + "ms"]);
++              },
++              timeEnd: (label = "default") => {
++                if (!this.startTimes.has(label)) {
++                  return;
++                }
++                this.log("info", [label + ": " + (Date.now() - this.startTimes.get(label)) + "ms - - timer ended"]);
++                this.startTimes.delete(label);
++              },
++              group: () => {},
++              groupCollapsed: () => {},
++              groupEnd: () => {},
++              clear: () => {},
++              profile: () => {},
++              profileEnd: () => {},
++              timeStamp: () => {},
++            };
++          }
++        }
++
++        window.__sgboxRuntime = {
++          run(token, scriptID, invocationText, bodyText, source, remaining) {
++            let invocation;
++            try {
++              invocation = JSON.parse(invocationText);
++            } catch (error) {
++              return Promise.resolve(JSON.stringify({ status: "error", error: describe(error) }));
++            }
++            return new Promise((resolve) => {
++              new Run(token, invocation, bodyText, remaining, resolve).start(scriptID, source);
++            });
++          },
++        };
++        baselineGlobals = new Set(Object.getOwnPropertyNames(window));
++      }
++
++      const MISSING = JSON.stringify({ status: "missing" });
++      const MAX_SOURCES = 32;
++      const MAX_SLOTS = 6;
++      // A slot's realm is replaced after this many runs, so state scripts
++      // leave behind in implicit globals does not accumulate forever.
++      const RUNS_PER_SLOT = 200;
++      const runtimeSource = "(" + installRuntime.toString() + ")();";
++      const sources = new Map();
++      const idleSlots = [];
++      let slotCount = 0;
++
++      function createSlot() {
++        const frame = document.createElement("iframe");
++        frame.style.display = "none";
++        document.body.appendChild(frame);
++        frame.contentWindow.eval(runtimeSource);
++        return { frame, runtime: frame.contentWindow.__sgboxRuntime, runs: 0 };
++      }
++
++      function releaseSlot(slot) {
++        slot.runs++;
++        if (slot.runs >= RUNS_PER_SLOT) {
++          slot.frame.remove();
++          slotCount--;
++          return;
++        }
++        idleSlots.push(slot);
++      }
++
++      window.__sgbox = {
++        run(token, scriptID, invocationText, bodyText, source, remaining) {
++          if (typeof source === "string") {
++            sources.delete(scriptID);
++            sources.set(scriptID, source);
++            while (sources.size > MAX_SOURCES) {
++              sources.delete(sources.keys().next().value);
++            }
++          } else {
++            source = sources.get(scriptID);
++            if (source === undefined) {
++              return Promise.resolve(MISSING);
++            }
++            sources.delete(scriptID);
++            sources.set(scriptID, source);
++          }
++          let slot = idleSlots.pop();
++          try {
++            if (!slot) {
++              if (slotCount >= MAX_SLOTS) {
++                return Promise.resolve(JSON.stringify({ status: "error", error: "too many scripts running at once" }));
++              }
++              slot = createSlot();
++              slotCount++;
++            }
++            return slot.runtime.run(token, scriptID, invocationText, bodyText, source, remaining).then((outcome) => {
++              releaseSlot(slot);
++              return outcome;
++            });
++          } catch (error) {
++            if (slot) {
++              slot.frame.remove();
++              slotCount--;
++            }
++            return Promise.resolve(JSON.stringify({ status: "error", error: String(error) }));
++          }
++        },
++      };
++    })();
++    """#
++#endif
+diff --git a/Library/Database/Profile+FilesMirror.swift b/Library/Database/Profile+FilesMirror.swift
+new file mode 100644
+index 0000000..d713198
+--- /dev/null
++++ b/Library/Database/Profile+FilesMirror.swift
+@@ -0,0 +1,268 @@
++import Foundation
++
++public extension Profile {
++    /// User-visible recovery copies. On iOS this directory is exposed as
++    /// On My iPhone/sing-box/Profiles when file sharing is enabled.
++    nonisolated static var filesMirrorDirectory: URL {
++        #if os(iOS)
++            let documents = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
++            return documents.appendingPathComponent("Profiles", isDirectory: true)
++        #else
++            return FilePath.workingDirectory.appendingPathComponent("profiles", isDirectory: true)
++        #endif
++    }
++
++    /// A non-cache recovery copy shared with the packet tunnel. This protects
++    /// profiles when the runtime configs directory is accidentally cleared.
++    nonisolated static var recoveryDirectory: URL {
++        FilePath.sharedDirectory
++            .appendingPathComponent("Backups", isDirectory: true)
++            .appendingPathComponent("Profiles", isDirectory: true)
++    }
++
++    /// Refreshes both recovery copies with the complete profile. MITM profiles
++    /// include the private CA, so these files must be handled as secrets.
++    nonisolated func updateFilesMirror(content: String? = nil) {
++        guard type != .icloud, let id else { return }
++        do {
++            let content = try content ?? read()
++            try Profile.writeBackup(content, profileID: id, path: path, directory: Profile.recoveryDirectory)
++            if Profile.canAccessUserDocuments {
++                try Profile.writeBackup(content, profileID: id, path: path, directory: Profile.filesMirrorDirectory)
++            }
++            Profile.removeFilesMirrorFiles(profileID: id, in: Profile.legacyFilesMirrorDirectory)
++        } catch {}
++    }
++
++    /// Restores a missing runtime profile from the durable or user-visible
++    /// backup. The database keeps the relative path, so restoration is
++    /// transparent to callers and to the packet tunnel.
++    nonisolated static func restoreProfileFileIfNeeded(profileID: Int64?, path: String) throws {
++        let destination = FilePath.sharedDirectory.appendingPathComponent(path)
++        guard !FileManager.default.fileExists(atPath: destination.path) else { return }
++
++        let fileName = backupFileName(profileID: profileID, path: path)
++        var candidates = [
++            recoveryDirectory.appendingPathComponent(fileName),
++        ]
++        if canAccessUserDocuments {
++            candidates.append(filesMirrorDirectory.appendingPathComponent(fileName))
++        }
++        if let profileID,
++           let legacyFile = legacyFilesMirrorFile(profileID: profileID)
++        {
++            candidates.append(legacyFile)
++        }
++        guard let source = candidates.first(where: { FileManager.default.fileExists(atPath: $0.path) }) else {
++            return
++        }
++
++        let content = try Data(contentsOf: source)
++        try FileManager.default.createDirectory(at: destination.deletingLastPathComponent(), withIntermediateDirectories: true)
++        try content.write(to: destination, options: .atomic)
++    }
++
++    /// Moves MITM route-options ahead of terminal routing rules. Route, reject
++    /// and hijack rules stop sing-box rule matching, so MITM rules left near
++    /// the end of a subscription are otherwise silently unreachable.
++    nonisolated static func normalizedMITMRuntimeContent(_ content: String) -> String? {
++        guard let data = content.data(using: .utf8),
++              var root = try? JSONSerialization.jsonObject(with: data) as? [String: Any]
++        else { return nil }
++
++        var changed = false
++        if var route = root["route"] as? [String: Any],
++           let rules = route["rules"] as? [[String: Any]]
++        {
++            let mitmRules = rules.filter { $0["mitm"] is [String: Any] }
++            if !mitmRules.isEmpty {
++                var otherRules = rules.filter { !($0["mitm"] is [String: Any]) }
++                let insertionIndex = otherRules.firstIndex(where: { ($0["action"] as? String) == "sniff" }).map { $0 + 1 } ?? 0
++                otherRules.insert(contentsOf: mitmRules, at: insertionIndex)
++                if !routeRulesEqual(rules, otherRules) {
++                    route["rules"] = otherRules
++                    root["route"] = route
++                    changed = true
++                }
++            }
++        }
++
++        if usesScriptHub(root), ensureScriptHubDNS(in: &root) {
++            changed = true
++        }
++        guard changed else { return nil }
++        guard JSONSerialization.isValidJSONObject(root),
++              let repairedData = try? JSONSerialization.data(withJSONObject: root, options: [.prettyPrinted, .sortedKeys]),
++              let repaired = String(data: repairedData, encoding: .utf8)
++        else { return nil }
++        return repaired + "\n"
++    }
++
++    nonisolated func removeFilesMirror() {
++        guard let id else { return }
++        Profile.removeFilesMirror(profileID: id)
++    }
++
++    nonisolated static func removeFilesMirror(profileID: Int64) {
++        removeFilesMirrorFiles(profileID: profileID, in: recoveryDirectory)
++        if canAccessUserDocuments {
++            removeFilesMirrorFiles(profileID: profileID, in: filesMirrorDirectory)
++        }
++        removeFilesMirrorFiles(profileID: profileID, in: legacyFilesMirrorDirectory)
++    }
++
++    /// Ensures every stored profile has an up-to-date mirror, e.g. after an
++    /// app update or after the working directory was cleared.
++    nonisolated static func backfillFilesMirrors() async {
++        guard let profiles = try? await ProfileManager.list() else { return }
++        for profile in profiles where profile.type != .icloud {
++            profile.updateFilesMirror()
++        }
++    }
++
++    private nonisolated static var canAccessUserDocuments: Bool {
++        #if os(iOS)
++            return Bundle.main.bundleURL.pathExtension == "app"
++        #else
++            return true
++        #endif
++    }
++
++    private nonisolated static var legacyFilesMirrorDirectory: URL {
++        FilePath.workingDirectory.appendingPathComponent("profiles", isDirectory: true)
++    }
++
++    private nonisolated static func backupFileName(profileID: Int64?, path: String) -> String {
++        let pathFileName = URL(fileURLWithPath: path).lastPathComponent
++        if !pathFileName.isEmpty {
++            return pathFileName
++        }
++        return "config_\(profileID ?? 0).json"
++    }
++
++    private nonisolated static func writeBackup(_ content: String, profileID: Int64, path: String, directory: URL) throws {
++        try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
++        removeFilesMirrorFiles(profileID: profileID, in: directory)
++        try content.write(
++            to: directory.appendingPathComponent(backupFileName(profileID: profileID, path: path)),
++            atomically: true,
++            encoding: .utf8
++        )
++    }
++
++    private nonisolated static func legacyFilesMirrorFile(profileID: Int64) -> URL? {
++        let prefix = "\(profileID)-"
++        guard let file = (try? FileManager.default.contentsOfDirectory(atPath: legacyFilesMirrorDirectory.path))?
++            .first(where: { $0.hasPrefix(prefix) && $0.hasSuffix(".json") })
++        else { return nil }
++        return legacyFilesMirrorDirectory.appendingPathComponent(file)
++    }
++
++    private nonisolated static func routeRulesEqual(_ lhs: [[String: Any]], _ rhs: [[String: Any]]) -> Bool {
++        guard JSONSerialization.isValidJSONObject(lhs), JSONSerialization.isValidJSONObject(rhs),
++              let lhsData = try? JSONSerialization.data(withJSONObject: lhs, options: [.sortedKeys]),
++              let rhsData = try? JSONSerialization.data(withJSONObject: rhs, options: [.sortedKeys])
++        else { return false }
++        return lhsData == rhsData
++    }
++
++    private nonisolated static func usesScriptHub(_ root: [String: Any]) -> Bool {
++        let scripts = root["scripts"] as? [[String: Any]] ?? []
++        if scripts.contains(where: { script in
++            let tag = (script["tag"] as? String ?? "").lowercased()
++            let url = (script["url"] as? String ?? "").lowercased()
++            return tag.contains("script hub") || url.contains("script-hub-org/script-hub")
++        }) {
++            return true
++        }
++        let route = root["route"] as? [String: Any]
++        let rules = route?["rules"] as? [[String: Any]] ?? []
++        return rules.contains { rule in
++            guard let mitm = rule["mitm"] as? [String: Any],
++                  let bindings = mitm["surge_script"] as? [[String: Any]]
++            else { return false }
++            return bindings.contains { binding in
++                let tag = (binding["tag"] as? String ?? "").lowercased()
++                let patterns = binding["pattern"] as? [String] ?? []
++                return tag.contains("script hub") || patterns.contains(where: { $0.lowercased().contains("script\\.hub") })
++            }
++        }
++    }
++
++    @discardableResult
++    private nonisolated static func ensureScriptHubDNS(in root: inout [String: Any]) -> Bool {
++        var dns = root["dns"] as? [String: Any] ?? [:]
++        var servers = dns["servers"] as? [[String: Any]] ?? []
++        var rules = dns["rules"] as? [[String: Any]] ?? []
++        let tag = "mitm-virtual-hosts"
++        let domains = ["script.hub", "www.script.hub"]
++
++        var changed = false
++        let server: [String: Any] = [
++            "type": "hosts",
++            "tag": tag,
++            "predefined": [
++                "script.hub": "198.18.0.1",
++                "www.script.hub": "198.18.0.1",
++            ],
++        ]
++        if let index = servers.firstIndex(where: { ($0["tag"] as? String) == tag }) {
++            if canonicalJSON(servers[index]) != canonicalJSON(server) {
++                servers[index] = server
++                changed = true
++            }
++        } else {
++            servers.append(server)
++            changed = true
++        }
++
++        let dnsRule: [String: Any] = [
++            "domain": domains,
++            "action": "route",
++            "server": tag,
++        ]
++        let matchingRuleIndex = rules.firstIndex { rule in
++            (rule["server"] as? String) == tag || Set(stringArray(rule["domain"])).isSuperset(of: domains)
++        }
++        if let matchingRuleIndex {
++            if canonicalJSON(rules[matchingRuleIndex]) != canonicalJSON(dnsRule) {
++                rules[matchingRuleIndex] = dnsRule
++                changed = true
++            }
++            if matchingRuleIndex != 0 {
++                let rule = rules.remove(at: matchingRuleIndex)
++                rules.insert(rule, at: 0)
++                changed = true
++            }
++        } else {
++            rules.insert(dnsRule, at: 0)
++            changed = true
++        }
++
++        if changed {
++            dns["servers"] = servers
++            dns["rules"] = rules
++            root["dns"] = dns
++        }
++        return changed
++    }
++
++    private nonisolated static func stringArray(_ value: Any?) -> [String] {
++        if let value = value as? String { return [value] }
++        return value as? [String] ?? []
++    }
++
++    private nonisolated static func canonicalJSON(_ object: [String: Any]) -> Data? {
++        guard JSONSerialization.isValidJSONObject(object) else { return nil }
++        return try? JSONSerialization.data(withJSONObject: object, options: [.sortedKeys])
++    }
++
++    private nonisolated static func removeFilesMirrorFiles(profileID: Int64, in directory: URL) {
++        let prefix = "\(profileID)-"
++        let configName = "config_\(profileID).json"
++        for file in (try? FileManager.default.contentsOfDirectory(atPath: directory.path)) ?? []
++        where file == configName || file.hasPrefix(prefix) {
++            try? FileManager.default.removeItem(at: directory.appendingPathComponent(file))
++        }
++    }
++}
+diff --git a/Library/Database/Profile+RW.swift b/Library/Database/Profile+RW.swift
+index 5d3cf75..b62c0b9 100644
+--- a/Library/Database/Profile+RW.swift
++++ b/Library/Database/Profile+RW.swift
+@@ -7,7 +7,15 @@ public extension Profile {
+         #endif
+         switch type {
+         case .local, .remote:
+-            return try String(contentsOf: FilePath.sharedDirectory.appendingPathComponent(path))
++            try Profile.restoreProfileFileIfNeeded(profileID: id, path: path)
++            let url = FilePath.sharedDirectory.appendingPathComponent(path)
++            let content = try String(contentsOf: url)
++            if let repaired = Profile.normalizedMITMRuntimeContent(content) {
++                try repaired.write(to: url, atomically: true, encoding: .utf8)
++                updateFilesMirror(content: repaired)
++                return repaired
++            }
++            return content
+         case .icloud:
+             return try String(contentsOf: FilePath.iCloudDirectory.appendingPathComponent(path))
+         }
+@@ -23,19 +31,32 @@ public extension Profile {
+         case .icloud:
+             try content.write(to: FilePath.iCloudDirectory.appendingPathComponent(path), atomically: true, encoding: .utf8)
+         }
++        updateFilesMirror(content: content)
+     }
+ 
+     func readAsync() async throws -> String {
+         let type = type
+         let path = path
+-        return try await BlockingIO.run {
++        let profileID = id
++        let result: (String, Bool) = try await BlockingIO.run {
+             switch type {
+             case .local, .remote:
+-                return try String(contentsOf: FilePath.sharedDirectory.appendingPathComponent(path))
++                try Profile.restoreProfileFileIfNeeded(profileID: profileID, path: path)
++                let url = FilePath.sharedDirectory.appendingPathComponent(path)
++                let content = try String(contentsOf: url)
++                if let repaired = Profile.normalizedMITMRuntimeContent(content) {
++                    try repaired.write(to: url, atomically: true, encoding: .utf8)
++                    return (repaired, true)
++                }
++                return (content, false)
+             case .icloud:
+-                return try String(contentsOf: FilePath.iCloudDirectory.appendingPathComponent(path))
++                return (try String(contentsOf: FilePath.iCloudDirectory.appendingPathComponent(path)), false)
+             }
+         }
++        if result.1 {
++            updateFilesMirror(content: result.0)
++        }
++        return result.0
+     }
+ 
+     func writeAsync(_ content: String) async throws {
+@@ -50,5 +71,6 @@ public extension Profile {
+                 try content.write(to: FilePath.iCloudDirectory.appendingPathComponent(path), atomically: true, encoding: .utf8)
+             }
+         }
++        updateFilesMirror(content: content)
+     }
+ }
+diff --git a/Library/Database/ProfileManager.swift b/Library/Database/ProfileManager.swift
+index 0a87c52..3d723f3 100644
+--- a/Library/Database/ProfileManager.swift
++++ b/Library/Database/ProfileManager.swift
+@@ -7,6 +7,7 @@ public enum ProfileManager {
+         try await Database.sharedWriter.write { db in
+             try profile.insert(db, onConflict: .fail)
+         }
++        profile.updateFilesMirror()
+     }
+ 
+     public nonisolated static func get(_ profileID: Int64) async throws -> Profile? {
+@@ -25,26 +26,36 @@ public enum ProfileManager {
+         _ = try await Database.sharedWriter.write { db in
+             try profile.delete(db)
+         }
++        profile.removeFilesMirror()
+     }
+ 
+     public nonisolated static func delete(by id: Int64) async throws {
+         _ = try await Database.sharedWriter.write { db in
+             try Profile.deleteOne(db, id: id)
+         }
++        Profile.removeFilesMirror(profileID: id)
+     }
+ 
+     public nonisolated static func delete(_ profileList: [Profile]) async throws -> Int {
+-        try await Database.sharedWriter.write { db in
++        let count = try await Database.sharedWriter.write { db in
+             try Profile.deleteAll(db, keys: profileList.map {
+                 ["id": $0.id!]
+             })
+         }
++        for profile in profileList {
++            profile.removeFilesMirror()
++        }
++        return count
+     }
+ 
+     public nonisolated static func delete(by id: [Int64]) async throws -> Int {
+-        try await Database.sharedWriter.write { db in
++        let count = try await Database.sharedWriter.write { db in
+             try Profile.deleteAll(db, ids: id)
+         }
++        for profileID in id {
++            Profile.removeFilesMirror(profileID: profileID)
++        }
++        return count
+     }
+ 
+     public nonisolated static func update(_ profile: Profile) async throws {
+diff --git a/SFI/ApplicationDelegate.swift b/SFI/ApplicationDelegate.swift
+index 6522528..bb4f994 100644
+--- a/SFI/ApplicationDelegate.swift
++++ b/SFI/ApplicationDelegate.swift
+@@ -109,6 +109,7 @@ class ApplicationDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCe
+             }
+             registerFileProviderDomain()
+         }
++        await Profile.backfillFilesMirrors()
+     }
+ 
+     @available(iOS 16.0, *)
