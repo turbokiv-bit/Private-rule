@@ -69,6 +69,13 @@ jobs:
             fi
           done
 
+      - name: Apply MITM app UI patch
+        working-directory: sfi
+        run: |
+          curl -sSL "https://raw.githubusercontent.com/turbokiv-bit/Private-rule/main/mitm-app-ui.patch" -o /tmp/mitm-app-ui.patch
+          git apply /tmp/mitm-app-ui.patch
+          echo "MITM app UI applied"
+
       - name: Fix SFI deployment target (iOS 16) before jailbreak build
         working-directory: sfi
         run: |
