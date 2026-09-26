@@ -3917,3 +3917,15 @@ index 6522528..bb4f994 100644
      }
  
      @available(iOS 16.0, *)
+diff --git a/sing-box.xcodeproj/project.pbxproj b/sing-box.xcodeproj/project.pbxproj
+index f9eab7c..50ffbe4 100644
+--- a/sing-box.xcodeproj/project.pbxproj
++++ b/sing-box.xcodeproj/project.pbxproj
+@@ -671,6 +671,7 @@
+ 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+ 			membershipExceptions = (
+ 				PacketTunnelProvider.swift,
++				WebScriptEngine.swift,
+ 			);
+ 			target = 3A096F852A4ED3DE00D4A2ED /* Extension */;
+ 		};
