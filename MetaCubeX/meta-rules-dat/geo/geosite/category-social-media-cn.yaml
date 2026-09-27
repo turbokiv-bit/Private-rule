@@ -26,9 +26,6 @@ payload:
     - +.zastatic.com
     - +.zhenai.com
     - +.zsxq.com
-    - +.hupu.com
-    - +.hupucdn.com
-    - +.shihuo.cn
     - +.zhihu.com
     - +.zhimg.com
     - +.laiyagushi.com
@@ -36,6 +33,14 @@ payload:
     - +.douban.com
     - +.douban.fm
     - +.doubanio.com
+    - +.gracg.com
+    - +.procg.cn
+    - +.hupu.com
+    - +.hupucdn.com
+    - +.shihuo.cn
+    - +.coolapk.com
+    - +.coolapkmarket.com
+    - +.coolapkmarket.net
     - +.ivwen.com
     - +.meipian.cn
     - +.meipian.me
@@ -44,11 +49,6 @@ payload:
     - +.okjike.com
     - +.okjk.co
     - +.ruguoapp.com
-    - +.coolapk.com
-    - +.coolapkmarket.com
-    - +.coolapkmarket.net
-    - +.gracg.com
-    - +.procg.cn
     - +.tieba.baidu.com
     - +.hoopchina.com.cn
     - +.crash2.zhihu.com

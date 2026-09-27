@@ -1,4 +1,8 @@
 payload:
+    - +.apple.www.letv.com
+    - +.ark.letv.com
+    - +.dc.letv.com
+    - +.g3.letv.com
     - +.ad.tencentmusic.com
     - +.adstats.tencentmusic.com
     - +.monitor.music.qq.com
@@ -6,31 +10,12 @@ payload:
     - +.stat.y.qq.com
     - +.tmead.y.qq.com
     - +.tmeadcomm.y.qq.com
-    - +.adbehavior.ximalaya.com
-    - +.adse.wsa.ximalaya.com
-    - +.adse.ximalaya.com
     - +.ads.service.kugou.com
     - +.adserviceretry.kglink.cn
     - +.adserviceretry.kugou.com
-    - +.log-upload.mihoyo.com
-    - +.adbkwai.com
-    - +.adkwai.com
-    - +.adukwai.com
-    - +.e.kuaishou.cn
-    - +.e.kuaishou.com
-    - log-sdk.gifshow.com
-    - wlog.kuaishou.com
-    - apilog-web.acfun.cn
-    - +.apple.www.letv.com
-    - +.ark.letv.com
-    - +.dc.letv.com
-    - +.g3.letv.com
-    - +.click.hunantv.com
-    - +.da.hunantv.com
-    - +.da.mgtv.com
-    - +.log.hunantv.com
-    - +.log.v2.hunantv.com
-    - +.res.hunantv.com
+    - +.adbehavior.ximalaya.com
+    - +.adse.wsa.ximalaya.com
+    - +.adse.ximalaya.com
     - ads3-normal-hl.zijieapi.com
     - ads3-normal.zijieapi.com
     - ads5-normal-hl.zijieapi.com
@@ -46,6 +31,21 @@ payload:
     - rtlog3-applog.fqnovel.com
     - rtlog5-applog-hl.fqnovel.com
     - rtlog5-applog.fqnovel.com
+    - +.adbkwai.com
+    - +.adkwai.com
+    - +.adukwai.com
+    - +.e.kuaishou.cn
+    - +.e.kuaishou.com
+    - log-sdk.gifshow.com
+    - wlog.kuaishou.com
+    - apilog-web.acfun.cn
+    - +.click.hunantv.com
+    - +.da.hunantv.com
+    - +.da.mgtv.com
+    - +.log.hunantv.com
+    - +.log.v2.hunantv.com
+    - +.res.hunantv.com
+    - +.log-upload.mihoyo.com
     - +.click.gamersky.com
     - +.ja.gamersky.com
     - +.ja1.gamersky.com
