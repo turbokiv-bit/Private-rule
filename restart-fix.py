@@ -229,8 +229,8 @@ must_replace(
 
 must_replace(
     p,
-    '\t\tpackets, err := b.batchTUN.BatchRead()\n\t\tif err != nil {\n\t\t\tselect {\n\t\t\tcase <-b.closed:\n\t\t\t\treturn\n\t\t\tdefault:\n\t\t\t}',
-    '\t\tpackets, err := b.batchTUN.BatchRead()\n\t\tif err != nil {\n\t\t\tselect {\n'
+    '\t\tpackets, err := b.batchTUN.BatchRead(headroom, 0)\n\t\tif err != nil {\n\t\t\tselect {\n\t\t\tcase <-b.closed:\n\t\t\t\treturn\n\t\t\tdefault:\n\t\t\t}',
+    '\t\tpackets, err := b.batchTUN.BatchRead(headroom, 0)\n\t\tif err != nil {\n\t\t\tselect {\n'
     '\t\t\tcase <-b.closed:\n\t\t\t\treturn\n'
     '\t\t\tcase <-b.stopReload:\n'
     '\t\t\t\t// Reload requested: exit so the reload can recreate the tun\n'
