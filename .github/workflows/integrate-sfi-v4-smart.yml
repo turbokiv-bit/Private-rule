@@ -29,6 +29,10 @@ jobs:
           echo "smart-ref1nd.patch 大小: $(wc -c < /tmp/smart-ref1nd.patch) bytes"
           git apply /tmp/smart-ref1nd.patch || { echo "❌ Smart patch 失败"; exit 1; }
 
+          echo "--- go mod tidy (补 go.mod/go.sum 依赖条目) ---"
+          go mod tidy || { echo "❌ go mod tidy 失败"; exit 1; }
+          echo "go.sum 当前行数: $(wc -l < go.sum)"
+
           echo "--- gofmt check (空输出=通过) ---"
           gofmt -l protocol/group/urltest.go protocol/group/smart.go
 
