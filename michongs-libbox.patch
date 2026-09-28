@@ -52,10 +52,10 @@ index 75942976..87de1249 100644
 +	}
 +}
 diff --git a/experimental/libbox/platform.go b/experimental/libbox/platform.go
-index 108cc209..bb60d021 100644
+index 108cc209..e727511b 100644
 --- a/experimental/libbox/platform.go
 +++ b/experimental/libbox/platform.go
-@@ -76,9 +76,26 @@ type ConnectionOwner struct {
+@@ -76,9 +76,18 @@ type ConnectionOwner struct {
  	UserId              int32
  	UserName            string
  	ProcessPath         string
@@ -69,14 +69,6 @@ index 108cc209..bb60d021 100644
 +
 +func (c *ConnectionOwner) ProcessPaths() StringIterator {
 +	return newIterator(c.processPaths)
-+}
-+
-+func (c *ConnectionOwner) SetAndroidPackageNames(names StringIterator) {
-+	c.androidPackageNames = iteratorToArray[string](names)
-+}
-+
-+func (c *ConnectionOwner) AndroidPackageNames() StringIterator {
-+	return newIterator(c.androidPackageNames)
 +}
 +
  func (c *ConnectionOwner) SetAndroidPackageNames(names StringIterator) {
