@@ -1,0 +1,49 @@
+name: Build SFI (from source) with MiChongs xiaobaf14g-stable core
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.25.5'
+
+      - name: Install tools
+        run: |
+          brew install dpkg ldid xcbeautify bash
+
+      - name: Clone sing-box-for-apple (with submodules)
+        run: git clone --depth 1 --recurse-submodules -b dev https://github.com/SagerNet/sing-box-for-apple.git sfi
+
+      - name: Clone MiChongs sing-box core
+        run: git clone --depth 1 -b xiaobaf14g-stable https://github.com/MiChongs/sing-box.git core
+
+      - name: Build Libbox.xcframework (official build_libbox)
+        working-directory: core
+        run: |
+          go install -v github.com/sagernet/gomobile/cmd/gomobile@v0.1.13
+          go install -v github.com/sagernet/gomobile/cmd/gobind@v0.1.13
+          export PATH="$(go env GOPATH)/bin:$PATH"
+          go run ./cmd/internal/build_libbox -target apple -platform ios/arm64
+          mv Libbox.xcframework "$GITHUB_WORKSPACE/sfi/"
+          ls "$GITHUB_WORKSPACE/sfi/Libbox.xcframework"
+
+      - name: Fix SFI deployment target (iOS 16) before jailbreak build
+        working-directory: sfi
+        run: |
+          curl -sSL "https://raw.githubusercontent.com/turbokiv-bit/Private-rule/main/sfi_deploytarget_fix.py" -o /tmp/sfi_deploytarget_fix.py
+          python3 /tmp/sfi_deploytarget_fix.py
+
+      - name: Build app & package jailbreak deb (official script)
+        working-directory: sfi
+        run: /opt/homebrew/bin/bash Jailbreak/package.sh
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: SFI-MiChongs-xiaobaf14g-deb
+          path: sfi/build/jailbreak/*.deb
