@@ -1,8 +1,8 @@
 diff --git a/experimental/libbox/command_server.go b/experimental/libbox/command_server.go
-index 5f62d03d..6e463436 100644
+index 5f62d03d..c123f8f4 100644
 --- a/experimental/libbox/command_server.go
 +++ b/experimental/libbox/command_server.go
-@@ -348,3 +348,17 @@ func (h *platformHandler) WriteDebugMessage(message string) {
+@@ -348,3 +348,25 @@ func (h *platformHandler) WriteDebugMessage(message string) {
  func (h *platformHandler) ConnectSSHAgent() (int32, error) {
  	return (*CommandServer)(h).handler.ConnectSSHAgent()
  }
@@ -19,6 +19,14 @@ index 5f62d03d..6e463436 100644
 +	if recorder != nil {
 +		recorder.RecordLockState(locked)
 +	}
++}
++
++func (s *CommandServer) WakeNow() {
++	instance := s.StartedService.Instance()
++	if instance == nil || instance.PauseManager() == nil {
++		return
++	}
++	instance.PauseManager().DeviceWake()
 +}
 diff --git a/experimental/libbox/debug.go b/experimental/libbox/debug.go
 index 75942976..87de1249 100644
@@ -52,10 +60,38 @@ index 75942976..87de1249 100644
 +	}
 +}
 diff --git a/experimental/libbox/platform.go b/experimental/libbox/platform.go
-index 108cc209..e727511b 100644
+index 108cc209..9e68e13c 100644
 --- a/experimental/libbox/platform.go
 +++ b/experimental/libbox/platform.go
-@@ -76,9 +76,18 @@ type ConnectionOwner struct {
+@@ -30,6 +30,8 @@ type PlatformInterface interface {
+ 	TailscaleHostname() string
+ 	UsePlatformBridge() bool
+ 	CreateBridge(options *BridgeOptions) (BridgeSession, error)
++	UsePlatformAutoRedirect() bool
++	CreateAutoRedirect(options []byte, handler AutoRedirectHandler) (AutoRedirectSession, error)
+ }
+ 
+ type BridgeOptions struct {
+@@ -50,6 +52,18 @@ type BridgeSession interface {
+ 	Close() error
+ }
+ 
++type AutoRedirectHandler interface {
++	JudgeFlow(ipProtocol int32, sourceAddress string, sourcePort int32, destinationAddress string, destinationPort int32, firstPacket []byte) (int32, error)
++	RedirectListenerFileDescriptor() (int32, error)
++	RouteAddressSetFileDescriptor() (int32, error)
++	WriteLog(level int32, message string)
++}
++
++type AutoRedirectSession interface {
++	Close() error
++	UpdateRouteAddressSet() error
++}
++
+ type PlatformUser struct {
+ 	Username string
+ 	Uid      int32
+@@ -76,9 +90,18 @@ type ConnectionOwner struct {
  	UserId              int32
  	UserName            string
  	ProcessPath         string
@@ -85,6 +121,22 @@ index 29648cf6..408942fa 100644
 +
 +func DiscardPowerReportDraft() {
 +	powerreport.DiscardDraft(sWorkingPath)
++}
+diff --git a/experimental/libbox/service.go b/experimental/libbox/service.go
+index 4cd6045a..6abb8d06 100644
+--- a/experimental/libbox/service.go
++++ b/experimental/libbox/service.go
+@@ -417,3 +417,11 @@ func RandomHex(length int32) *StringBox {
+ 	common.Must1(rand.Read(bytes))
+ 	return wrapString(hex.EncodeToString(bytes))
+ }
++
++func (w *platformInterfaceWrapper) UsePlatformAutoRedirect() bool {
++	return w.iif.UsePlatformAutoRedirect()
++}
++
++func (w *platformInterfaceWrapper) CreateAutoRedirect(options []byte, handler AutoRedirectHandler) (AutoRedirectSession, error) {
++	return w.iif.CreateAutoRedirect(options, handler)
 +}
 diff --git a/experimental/libbox/setup.go b/experimental/libbox/setup.go
 index a78cba54..da6630b1 100644
