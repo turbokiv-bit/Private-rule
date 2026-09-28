@@ -135,14 +135,11 @@ index a78cba54..da6630b1 100644
  		if sOOMMemoryLimit == 0 && C.IsIos {
  			sOOMMemoryLimit = oomkiller.DefaultAppleNetworkExtensionMemoryLimit
 diff --git a/service/powerreport/promote.go b/service/powerreport/promote.go
-index f1b0f8bb..7ad25d6a 100644
+index f1b0f8bb..bd0ef31a 100644
 --- a/service/powerreport/promote.go
 +++ b/service/powerreport/promote.go
-@@ -3,9 +3,12 @@ package powerreport
- import (
- 	"os"
- 	"path/filepath"
--	"strconv"
+@@ -6,6 +6,10 @@ import (
+ 	"strconv"
  )
  
 +func DiscardDraft(basePath string) {
