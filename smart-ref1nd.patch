@@ -669,6 +669,58 @@ index 0000000..ce6efea
 +	}
 +	return nil
 +}
+diff --git a/common/listener/listener_udp.go b/common/listener/listener_udp.go
+index 1ceb100..cb3abe4 100644
+--- a/common/listener/listener_udp.go
++++ b/common/listener/listener_udp.go
+@@ -48,9 +48,7 @@ func (l *Listener) ListenUDPWithConfig(listenConfig net.ListenConfig) (net.Packe
+ 	} else {
+ 		udpFragment = l.listenOptions.UDPFragmentDefault
+ 	}
+-	if udpFragment {
+-		listenConfig.Control = control.Append(listenConfig.Control, control.EnableUDPFragment())
+-	} else {
++	if !udpFragment {
+ 		listenConfig.Control = control.Append(listenConfig.Control, control.DisableUDPFragment())
+ 	}
+ 	if l.tproxy {
+@@ -71,7 +69,7 @@ func (l *Listener) ListenUDPWithConfig(listenConfig net.ListenConfig) (net.Packe
+ 	if !l.disableLog {
+ 		l.logger.Info("udp server started at ", udpConn.LocalAddr())
+ 	}
+-	return l.udpPacketConn(), nil
++	return udpConn, err
+ }
+ 
+ func (l *Listener) DialContext(dialer net.Dialer, ctx context.Context, network string, address string) (net.Conn, error) {
+@@ -91,7 +89,6 @@ func (l *Listener) DialContext(dialer net.Dialer, ctx context.Context, network s
+ 
+ func (l *Listener) ListenPacket(listenConfig net.ListenConfig, ctx context.Context, network string, address string) (net.PacketConn, error) {
+ 	return ListenNetworkNamespace[net.PacketConn](l.ctx, l.listenOptions.NetNs, func() (net.PacketConn, error) {
+-		listenConfig.Control = control.Append(listenConfig.Control, control.UDPSocketBuffer(UDPSocketBufferSize()))
+ 		if l.listenOptions.BindInterface != "" {
+ 			listenConfig.Control = control.Append(listenConfig.Control, control.BindToInterface(service.FromContext[adapter.NetworkManager](l.ctx).InterfaceFinder(), l.listenOptions.BindInterface, -1))
+ 		}
+@@ -224,7 +221,7 @@ func (l *Listener) loopUDPInBatch(handler adapter.PacketBatchHandler, readWaiter
+ }
+ 
+ func (l *Listener) loopUDPOut() {
+-	packetConn := sBufio.NewPacketConn(l.udpPacketConn())
++	packetConn := sBufio.NewPacketConn(l.udpConn)
+ 	batchWriter := sBufio.NewPacketBatchWriter(packetConn)
+ 	packets := make([]*N.PacketBuffer, 0, udpOutputBatchSize)
+ 	buffers := make([]*buf.Buffer, 0, udpOutputBatchSize)
+@@ -325,10 +322,3 @@ func (w *packetWriter) WritePacketBatch(buffers []*buf.Buffer, destinations []M.
+ 
+ func (w *packetWriter) WriteIsThreadUnsafe() {
+ }
+-
+-func (l *Listener) udpPacketConn() net.PacketConn {
+-	if l.disableGSO {
+-		return sBufio.NewUDPConnWithoutGSO(l.udpConn)
+-	}
+-	return l.udpConn
+-}
 diff --git a/common/smart/dbkey_test.go b/common/smart/dbkey_test.go
 new file mode 100644
 index 0000000..d24b8a1
@@ -11375,6 +11427,19 @@ index 0000000..07bed1c
 +		t.Fatal("different hosts must get distinct session caches")
 +	}
 +}
+diff --git a/constant/network.go b/constant/network.go
+index 7eeda1c..df8c1b2 100644
+--- a/constant/network.go
++++ b/constant/network.go
+@@ -5,6 +5,8 @@ import (
+ 	F "github.com/sagernet/sing/common/format"
+ )
+ 
++var URLTestUnifiedDelay = false
++
+ const UDPSocketBufferSize = 8 << 20
+ 
+ type InterfaceType uint8
 diff --git a/experimental/cachefile/cache.go b/experimental/cachefile/cache.go
 index 3c2d54d..0ac6c62 100644
 --- a/experimental/cachefile/cache.go
