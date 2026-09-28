@@ -663,7 +663,7 @@ index 0000000..ce6efea
 +	return nil
 +}
 diff --git a/common/dialer/default.go b/common/dialer/default.go
-index 2d42a26..9c351b9 100644
+index 2d42a26..736ed1d 100644
 --- a/common/dialer/default.go
 +++ b/common/dialer/default.go
 @@ -11,7 +11,6 @@ import (
@@ -847,15 +847,7 @@ index 2d42a26..9c351b9 100644
  				recorder.Touch(powerreport.DirectionOutbound, int(n), attribution)
  			}}))
  		}
-@@ -529,14 +494,12 @@ func (d *DefaultDialer) dialAttribution(ctx context.Context, destination M.Socks
- 			ProcessID:    metadata.ProcessInfo.ProcessID,
- 			UserID:       metadata.ProcessInfo.UserId,
- 			UserName:     metadata.ProcessInfo.UserName,
--			ProcessPaths: metadata.ProcessInfo.ProcessPaths,
--			PackageNames: metadata.ProcessInfo.PackageNames,
-+			ProcessPath:  metadata.ProcessInfo.ProcessPath,
-+			PackageNames: metadata.ProcessInfo.AndroidPackageNames,
- 		}
+@@ -535,8 +500,6 @@ func (d *DefaultDialer) dialAttribution(ctx context.Context, destination M.Socks
  	}
  	attribution.Rule = metadata.RouteRule
  	attribution.Outbound = metadata.Outbound
