@@ -168,7 +168,7 @@ index e349a1d..345c2d6 100644
 +	Selected() Outbound
 +}
 diff --git a/adapter/inbound.go b/adapter/inbound.go
-index f454faa..f6a35d6 100644
+index f454faa..b0fa8a5 100644
 --- a/adapter/inbound.go
 +++ b/adapter/inbound.go
 @@ -4,6 +4,7 @@ import (
@@ -197,15 +197,20 @@ index f454faa..f6a35d6 100644
  	SourceMACAddress                    net.HardwareAddr
  	SourceHostname                      string
  	QueryType                           uint16
-@@ -123,17 +122,59 @@ type InboundContext struct {
+@@ -123,6 +122,9 @@ type InboundContext struct {
  	DestinationPortMatch         bool
  	DeferredIPCIDRMatchGroups    uint8
  	IgnoreDestinationIPCIDRMatch bool
 +
 +	// extended metadata
 +	Extended *InboundContextExtended
-+}
-+
+ }
+ 
+ // ResolveProcessInfo upgrades a UID/package lookup only when a path matcher
+@@ -136,6 +138,56 @@ func (c *InboundContext) ResolveProcessInfo() *ConnectionOwner {
+ 	return c.ProcessInfo
+ }
+ 
 +type InboundContextExtended struct {
 +	RealOutboundChain []string
 +
@@ -226,20 +231,12 @@ index f454faa..f6a35d6 100644
 +	if c.Extended != nil {
 +		c.Extended.RealOutboundChain = append(c.Extended.RealOutboundChain, tag)
 +	}
- }
- 
--// ResolveProcessInfo upgrades a UID/package lookup only when a path matcher
--// needs it, without mutating the metadata or its cached owner. The resolver is
--// shared safely by copies of the connection metadata.
--// Inbound/platform-provided owners without a resolver remain authoritative.
--func (c *InboundContext) ResolveProcessInfo() *ConnectionOwner {
--	if c.ProcessInfoResolver != nil {
--		return c.ProcessInfoResolver()
++}
++
 +func (c *InboundContext) SetSelectedOutbound(group string, outbound string) {
 +	if c.Extended == nil {
 +		return
- 	}
--	return c.ProcessInfo
++	}
 +	c.Extended.selectedAccess.Lock()
 +	defer c.Extended.selectedAccess.Unlock()
 +	if c.Extended.selectedOutbounds == nil {
@@ -262,10 +259,12 @@ index f454faa..f6a35d6 100644
 +		return c.Extended.RealOutboundChain
 +	}
 +	return nil
- }
- 
++}
++
  func (c *InboundContext) ResetRuleCache() {
-@@ -208,17 +249,8 @@ func DNSTransportTagFromContext(ctx context.Context) (string, bool) {
+ 	c.IPCIDRMatchSource = false
+ 	c.IPCIDRAcceptEmpty = false
+@@ -208,17 +260,8 @@ func DNSTransportTagFromContext(ctx context.Context) (string, bool) {
  	return transportTag, loaded
  }
  
