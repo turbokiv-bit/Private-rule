@@ -17,8 +17,8 @@ payload:
     - +.kindle
     - +.imdb
     - +.aws
-    - +.wholefoodsmarket.com
-    - +.wfm.com
+    - +.amazonvideo.com
+    - +.aiv-cdn.net
     - +.aboutamazon.fr
     - +.aboutamazon.in
     - +.aboutamazon.it
@@ -35,17 +35,17 @@ payload:
     - +.amazon.cl
     - +.amazon.com
     - +.amazon.de
-    - +.primevideo.tv
-    - +.primevideo.org
-    - +.primevideo.info
-    - +.primevideo.com
-    - +.primevideo.cc
-    - +.prime-video.com
-    - +.amazonvideo.com
-    - +.amazonvideo.cc
-    - +.amazonprimevideos.com
-    - +.aiv-cdn.net
     - +.kindleoasis.us
+    - +.kindleoasis.org
+    - +.kindleoasis.jp
+    - +.kindleoasis.info
+    - +.kindleoasisnews.com
+    - +.kindle.jp
+    - +.kindle.in
+    - +.kindleproject.com
+    - +.kindle.fr
+    - +.kindle.es
+    - +.kindle.de
     - +.amazon.dev
     - +.amazon.eg
     - +.amazon.es
@@ -81,7 +81,7 @@ payload:
     - +.amzn.asia
     - +.amzn.com
     - +.amzn.to
-    - +.awstrust.com
+    - +.primevideo.tv
     - +.associates-amazon.com
     - +.gameon-masters.com
     - +.gdansk-amazon.com
@@ -96,16 +96,27 @@ payload:
     - +.alexa.com
     - +.audible.com
     - +.createspace.com
-    - +.amazontrust.com
-    - +.wholecitiesfoundation.org
-    - +.wholefoods.com
+    - +.primevideo.org
+    - +.amazonprimevideos.com
+    - +.amazonvideo.cc
     - +.aboutamazon.es
-    - +.wholekidsfoundation.org
-    - +.wholeplanetfoundation.org
-    - +.kindleoasis.org
+    - +.prime-video.com
+    - +.primevideo.cc
+    - +.primevideo.com
     - +.amznl.com
     - +.aboutamazon.eu
-    - +.kindleoasis.jp
+    - +.primevideo.info
+    - +.kindle.com
+    - +.kindleoasis.com
+    - +.wfm.com
+    - +.wholecitiesfoundation.org
+    - +.wholefoods.com
+    - +.wholefoodsmarket.com
+    - +.wholekidsfoundation.org
+    - +.wholeplanetfoundation.org
+    - +.kindle.it
+    - +.amazontrust.com
+    - +.awstrust.com
     - +.ss2.us
     - +.aboutamazon.de
     - +.awsbraket.com
@@ -154,40 +165,29 @@ payload:
     - +.amzndns.com
     - +.amzndns.org
     - +.amzndns.net
-    - +.kindleoasis.info
-    - +.kindleoasisnews.com
-    - +.kindle.jp
-    - +.kindle.in
+    - +.a2z.com
+    - +.media-imdb.com
+    - +.imdb.to
+    - +.imdb.com
     - +.aboutamazon.com
     - +.boxofficemojo.com
-    - +.imdb.com
-    - +.imdb.to
-    - +.media-imdb.com
-    - +.a2z.com
-    - +.kindle.it
-    - +.kindleoasis.com
-    - +.kindle.com
-    - +.kindle.de
-    - +.kindle.es
-    - +.kindle.fr
-    - +.kindleproject.com
-    - +.amazon.com.co
-    - +.amazonaws.co.uk
+    - +.amazon.co.jp
+    - +.amazon.co.za
     - +.wholefoodsmarket.co.uk
+    - +.kindle.co.uk
     - +.amazon.com.tr
     - +.amazon.com.ng
-    - +.kindle.co.jp
     - +.amzndns.co.uk
-    - +.kindle.co.uk
-    - +.amazon.com.be
-    - +.amazon.com.mx
-    - +.amazon.com.br
+    - +.amazonaws.co.uk
     - +.amazon.com.au
-    - +.amazon.co.za
+    - +.amazon.com.co
+    - +.amazon.com.br
+    - +.amazon.com.mx
     - +.amazon.co.uk
-    - +.amazon.co.jp
+    - +.amazon.com.be
     - +.aboutamazon.com.au
     - +.aboutamazon.co.uk
+    - +.kindle.co.jp
     - +.aboutamazon.cn
     - +.alexafund.cn
     - +.alexafund.com.cn
@@ -214,6 +214,8 @@ payload:
     - images-cn-8.ssl-images-amazon.com
     - +.amazon-adsystem.com
     - +.serving-sys.com
+    - +.amazonprimevideo.cn
+    - +.amazonprimevideo.com.cn
     - +.a2z.org.cn
     - +.amazonaws.cn
     - +.amazonaws.com.cn
@@ -243,5 +245,3 @@ payload:
     - +.kindle.cn
     - +.kindleoasis.cn
     - +.kindleoasis.com.cn
-    - +.amazonprimevideo.cn
-    - +.amazonprimevideo.com.cn

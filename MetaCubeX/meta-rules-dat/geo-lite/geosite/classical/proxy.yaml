@@ -152,7 +152,6 @@ payload:
     - DOMAIN-SUFFIX,blink.org
     - DOMAIN-SUFFIX,blizzard.com
     - DOMAIN-SUFFIX,blog.com
-    - DOMAIN-SUFFIX,blog.google
     - DOMAIN-SUFFIX,blogblog.com
     - DOMAIN-SUFFIX,blogcdn.com
     - DOMAIN-SUFFIX,blogger.com
@@ -501,7 +500,9 @@ payload:
     - DOMAIN-SUFFIX,gitbook.com
     - DOMAIN-SUFFIX,githack.com
     - DOMAIN-SUFFIX,github-avatars.oss-cn-hongkong.aliyuncs.com
+    - DOMAIN-SUFFIX,github.ai
     - DOMAIN-SUFFIX,github.blog
+    - DOMAIN-SUFFIX,github.career
     - DOMAIN-SUFFIX,github.com
     - DOMAIN-SUFFIX,github.community
     - DOMAIN-SUFFIX,github.dev
@@ -513,6 +514,7 @@ payload:
     - DOMAIN-SUFFIX,githubnext.com
     - DOMAIN-SUFFIX,githubpreview.dev
     - DOMAIN-SUFFIX,githubstatus.com
+    - DOMAIN-SUFFIX,githubsupport.com
     - DOMAIN-SUFFIX,githubuniverse.com
     - DOMAIN-SUFFIX,githubusercontent.com
     - DOMAIN-SUFFIX,gitlab.com
@@ -545,6 +547,7 @@ payload:
     - DOMAIN-SUFFIX,googel.com
     - DOMAIN-SUFFIX,googil.com
     - DOMAIN-SUFFIX,googl.com
+    - DOMAIN-SUFFIX,google
     - DOMAIN-SUFFIX,google-analytics-cn.com
     - DOMAIN-SUFFIX,google-analytics.com
     - DOMAIN-SUFFIX,google-syndication.com
@@ -795,6 +798,7 @@ payload:
     - DOMAIN-SUFFIX,googleusercontent.com
     - DOMAIN-SUFFIX,googlevads-cn.com
     - DOMAIN-SUFFIX,googleventures.com
+    - DOMAIN-SUFFIX,googlezip.net
     - DOMAIN-SUFFIX,googlr.com
     - DOMAIN-SUFFIX,goolge.com
     - DOMAIN-SUFFIX,gooogle.com
@@ -1177,7 +1181,6 @@ payload:
     - DOMAIN-SUFFIX,redirector.offline-maps.gvt1.com
     - DOMAIN-SUFFIX,redirector.snap.gvt1.com
     - DOMAIN-SUFFIX,redtube.com
-    - DOMAIN-SUFFIX,registry.google
     - DOMAIN-SUFFIX,repo.new
     - DOMAIN-SUFFIX,resilio.com
     - DOMAIN-SUFFIX,reuters.com
@@ -1601,6 +1604,7 @@ payload:
     - DOMAIN,clubhouse.pubnubapi.com
     - DOMAIN,copilot.microsoft.com
     - DOMAIN,e13252.dscg.akamaiedge.net
+    - DOMAIN,github-api.arkoselabs.com
     - DOMAIN,h-netflix.online-metrix.net
     - DOMAIN,lab.skk.moe
     - DOMAIN,location.microsoft.com
