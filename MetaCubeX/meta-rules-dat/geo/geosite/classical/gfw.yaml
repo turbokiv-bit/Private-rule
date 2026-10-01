@@ -1,6 +1,6 @@
 payload:
-    - DOMAIN-SUFFIX,slickvpn.com
-    - DOMAIN-SUFFIX,6park.com
+    - DOMAIN-SUFFIX,sleazyfork.org
+    - DOMAIN-SUFFIX,kuaichedao.co
     - DOMAIN-SUFFIX,zzcloud.me
     - DOMAIN-SUFFIX,1000giri.net
     - DOMAIN-SUFFIX,10beasts.net
@@ -54,7 +54,7 @@ payload:
     - DOMAIN-SUFFIX,69shuba.cx
     - DOMAIN-SUFFIX,6do.news
     - DOMAIN-SUFFIX,6do.world
-    - DOMAIN-SUFFIX,kepard.com
+    - DOMAIN-SUFFIX,6park.com
     - DOMAIN-SUFFIX,6parkbbs.com
     - DOMAIN-SUFFIX,6parker.com
     - DOMAIN-SUFFIX,6parknews.com
@@ -292,7 +292,7 @@ payload:
     - DOMAIN-SUFFIX,zeronet.io
     - DOMAIN-SUFFIX,atchinese.com
     - DOMAIN-SUFFIX,athenaeizou.com
-    - DOMAIN-SUFFIX,atlanta168.com
+    - DOMAIN-SUFFIX,kepard.com
     - DOMAIN-SUFFIX,atnext.com
     - DOMAIN-SUFFIX,zerohedge.com
     - DOMAIN-SUFFIX,audacy.com
@@ -1396,6 +1396,7 @@ payload:
     - DOMAIN-SUFFIX,futustatic.com
     - DOMAIN-SUFFIX,fututrade.com
     - DOMAIN-SUFFIX,fututrustee.com
+    - DOMAIN-SUFFIX,fuyin116.com
     - DOMAIN-SUFFIX,fw.cm
     - DOMAIN-SUFFIX,fxcm-chinese.com
     - DOMAIN-SUFFIX,fxnetworks.com
@@ -1762,7 +1763,7 @@ payload:
     - DOMAIN-SUFFIX,googleusercontent.com
     - DOMAIN-SUFFIX,googlevideo.com
     - DOMAIN-SUFFIX,googleweblight.com
-    - DOMAIN-SUFFIX,kenengba.com
+    - DOMAIN-SUFFIX,googlezip.net
     - DOMAIN-SUFFIX,gopetition.com
     - DOMAIN-SUFFIX,goreforum.com
     - DOMAIN-SUFFIX,goregrish.com
@@ -1885,7 +1886,7 @@ payload:
     - DOMAIN-SUFFIX,waymo.com
     - DOMAIN-SUFFIX,hkdc.us
     - DOMAIN-SUFFIX,hkej.com
-    - DOMAIN-SUFFIX,hket.com
+    - DOMAIN-SUFFIX,kendatire.com
     - DOMAIN-SUFFIX,hkfaa.com
     - DOMAIN-SUFFIX,hkgalden.com
     - DOMAIN-SUFFIX,hkgolden.com
@@ -2192,10 +2193,10 @@ payload:
     - DOMAIN-SUFFIX,kawase.com
     - DOMAIN-SUFFIX,vpnvip.com
     - DOMAIN-SUFFIX,kebrum.com
-    - DOMAIN-SUFFIX,kendatire.com
-    - DOMAIN-SUFFIX,googlezip.net
+    - DOMAIN-SUFFIX,hket.com
     - DOMAIN-SUFFIX,0rz.tw
-    - DOMAIN-SUFFIX,lvv2.com
+    - DOMAIN-SUFFIX,atlanta168.com
+    - DOMAIN-SUFFIX,kex.com
     - DOMAIN-SUFFIX,keycdn.com
     - DOMAIN-SUFFIX,kfor.com
     - DOMAIN-SUFFIX,khatrimaza.org
@@ -2228,7 +2229,7 @@ payload:
     - DOMAIN-SUFFIX,kraken.com
     - DOMAIN-SUFFIX,kspcoin.com
     - DOMAIN-SUFFIX,ktzhk.com
-    - DOMAIN-SUFFIX,kuaichedao.co
+    - DOMAIN-SUFFIX,kenengba.com
     - DOMAIN-SUFFIX,kucoin.com
     - DOMAIN-SUFFIX,kukuku.uk
     - DOMAIN-SUFFIX,kurtmunger.com
@@ -2358,7 +2359,7 @@ payload:
     - DOMAIN-SUFFIX,lupm.org
     - DOMAIN-SUFFIX,lushstories.com
     - DOMAIN-SUFFIX,lvhai.org
-    - DOMAIN-SUFFIX,kex.com
+    - DOMAIN-SUFFIX,lvv2.com
     - DOMAIN-SUFFIX,lyfhk.net
     - DOMAIN-SUFFIX,lzjscript.com
     - DOMAIN-SUFFIX,lzmtnews.org
@@ -2550,6 +2551,7 @@ payload:
     - DOMAIN-SUFFIX,mubi.com
     - DOMAIN-SUFFIX,mullvad.net
     - DOMAIN-SUFFIX,multiply.com
+    - DOMAIN-SUFFIX,muse.ai
     - DOMAIN-SUFFIX,voaindonesia.com
     - DOMAIN-SUFFIX,musixmatch.com
     - DOMAIN-SUFFIX,muzi.com
@@ -3288,9 +3290,9 @@ payload:
     - DOMAIN-SUFFIX,skyxvpn.com
     - DOMAIN-SUFFIX,slacker.com
     - DOMAIN-SUFFIX,slashine.onl
-    - DOMAIN-SUFFIX,sleazyfork.org
-    - DOMAIN-SUFFIX,slheng.com
     - DOMAIN-SUFFIX,000webhost.com
+    - DOMAIN-SUFFIX,slheng.com
+    - DOMAIN-SUFFIX,slickvpn.com
     - DOMAIN-SUFFIX,slides.com
     - DOMAIN-SUFFIX,slides.new
     - DOMAIN-SUFFIX,slideshare.net

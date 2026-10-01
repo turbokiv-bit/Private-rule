@@ -1,4 +1,12 @@
 payload:
+    - +.adbkwai.com
+    - +.adkwai.com
+    - +.adukwai.com
+    - +.e.kuaishou.cn
+    - +.e.kuaishou.com
+    - log-sdk.gifshow.com
+    - wlog.kuaishou.com
+    - apilog-web.acfun.cn
     - ads3-normal-hl.zijieapi.com
     - ads3-normal.zijieapi.com
     - ads5-normal-hl.zijieapi.com
@@ -18,15 +26,6 @@ payload:
     - +.ark.letv.com
     - +.dc.letv.com
     - +.g3.letv.com
-    - +.log-upload.mihoyo.com
-    - +.adbkwai.com
-    - +.adkwai.com
-    - +.adukwai.com
-    - +.e.kuaishou.cn
-    - +.e.kuaishou.com
-    - log-sdk.gifshow.com
-    - wlog.kuaishou.com
-    - apilog-web.acfun.cn
     - +.click.hunantv.com
     - +.da.hunantv.com
     - +.da.mgtv.com
@@ -45,9 +44,10 @@ payload:
     - +.stat.y.qq.com
     - +.tmead.y.qq.com
     - +.tmeadcomm.y.qq.com
-    - +.adbehavior.ximalaya.com
-    - +.adse.wsa.ximalaya.com
-    - +.adse.ximalaya.com
     - +.ads.service.kugou.com
     - +.adserviceretry.kglink.cn
     - +.adserviceretry.kugou.com
+    - +.adbehavior.ximalaya.com
+    - +.adse.wsa.ximalaya.com
+    - +.adse.ximalaya.com
+    - +.log-upload.mihoyo.com
