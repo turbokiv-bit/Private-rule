@@ -2,7 +2,7 @@
   "version": 2,
   "rules": [
     {
-      "ip_cidr": "2803:bbd0::/40"
+      "ip_cidr": "2803:bbd0::/39"
     }
   ]
 }
