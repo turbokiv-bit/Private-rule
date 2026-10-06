@@ -5,8 +5,8 @@ payload:
     - throneproj.github.io
     - trojan-gfw.github.io
     - xtls.github.io
-    - +.wgtunnel.com
-    - +.greatfirevpn.com
+    - +.wikileaks.org
+    - +.eff.org
     - +.akasha.world
     - +.amnezia.org
     - +.browserleaks.com
@@ -18,7 +18,7 @@ payload:
     - +.clashyun.com
     - +.dat.foundation
     - +.democracy.earth
-    - +.eff.org
+    - +.whonix.org
     - +.ffprofile.com
     - +.flclashx.app
     - +.flowvy.io
@@ -61,14 +61,33 @@ payload:
     - +.tunsafe.com
     - +.turkeyblocks.org
     - +.uproxy.org
-    - +.vpnrouter.homes
+    - +.wgtunnel.com
     - +.vuvuzela.io
+    - +.vpnrouter.homes
     - +.ahmia.fi
-    - +.2dust.link
-    - +.applecensorship.com
+    - +.paskoocheh.com
     - +.wireguard.com
     - +.wiresock.net
     - +.zeronet.io
+    - +.citizenlab.ca
+    - +.citizenlab.org
+    - +.epicbrowser.com
+    - +.applecensorship.com
+    - +.freebrowser.org
+    - +.freewechat.com
+    - +.freeweibo.com
+    - +.freezhihu.org
+    - +.googlecensorship.org
+    - +.googleplaycensorship.com
+    - +.greatfire.org
+    - +.greatfirevpn.com
+    - +.pao-pao.net
+    - +.wikiunblocked.org
+    - +.getlantern.org
+    - +.lantern.io
+    - +.softether.org
+    - +.softether-download.com
+    - +.torproject.org
     - +.opengw.net
     - +.vpngate.jp
     - +.vpngate.net
@@ -76,23 +95,6 @@ payload:
     - +.log.rw
     - +.remna.st
     - +.try.rw
-    - +.wikileaks.org
-    - +.freebrowser.org
-    - +.freewechat.com
-    - +.freeweibo.com
-    - +.freezhihu.org
-    - +.googlecensorship.org
-    - +.greatfire.org
-    - +.whonix.org
-    - +.pao-pao.net
-    - +.wikiunblocked.org
-    - +.haveibeenpwned.com
-    - +.pwnedpasswords.com
-    - +.getlantern.org
-    - +.lantern.io
-    - +.softether.org
-    - +.softether-download.com
-    - +.torproject.org
     - +.ipns.co
     - +.jorropo.net
     - +.crustwebsites.net
@@ -108,13 +110,12 @@ payload:
     - +.ipfs.tech
     - +.ceno.app
     - +.censorship.no
-    - +.citizenlab.ca
-    - +.citizenlab.org
+    - +.haveibeenpwned.com
+    - +.pwnedpasswords.com
     - +.v2fly.org
     - +.v2ray.cool
     - +.v2ray.com
-    - +.paskoocheh.com
-    - +.epicbrowser.com
+    - +.2dust.link
     - +.ipfs.eternum.io
     - +.ipfs.lain.la
     - +.ipfs.fleek.co

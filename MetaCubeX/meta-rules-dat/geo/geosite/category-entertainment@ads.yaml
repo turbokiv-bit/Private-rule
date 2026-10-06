@@ -1,7 +1,7 @@
 payload:
-    - +.ads.youtube.com
-    - +.ads-pixiv.net
     - +.analytics.tiktok.com
+    - +.ads-pixiv.net
+    - +.ads.youtube.com
     - disney.my.sentry.io
     - adeventtracker.spotify.com
     - adstudio-assets.scdn.co
