@@ -181,19 +181,15 @@ require(p)
 
 must_replace(
     p,
-    '\tsession       adapter.BridgeSession\n\tcurrentEgress string\n\n\tcloseOnce sync.Once\n\tclosed    chan struct{}\n\treadDone  chan struct{}\n}',
-    '\tsession       adapter.BridgeSession\n\tcurrentEgress string\n\n'
-    '\t// lifecycleMu serialises network-driven reload against concurrent\n'
-    '\t// Write/Port/Attach access.\n'
-    '\tlifecycleMu sync.Mutex\n'
+    '\tsession       adapter.BridgeSession\n\tcurrentEgress string\n\n\tclosed    <-chan struct{}\n\treadGroup sync.WaitGroup\n}',
+    '\tsession       adapter.BridgeSession\n\tcurrentEgress string\n'
     '\t// rebuild, when set by the owning Outbound, requests a full box reload\n'
     '\t// after the current egress could not be re-applied on a network change.\n'
-    '\trebuild func()\n\n'
-    '\tcloseOnce sync.Once\n\tclosed    chan struct{}\n'
-    '\t// stopReload is closed to make batchReadLoop exit before a reload.\n'
+    '\trebuild func()\n'
+    '\t// stopReload makes batchReadLoop exit before a reload recreates the tun.\n'
     '\tstopReload chan struct{}\n'
-    '\treadDone   chan struct{}\n}',
-    'backend.go struct fields',
+    '\tclosed    <-chan struct{}\n\treadGroup sync.WaitGroup\n}',
+    'backend.go struct fields (backendBase)',
 )
 
 must_replace(
@@ -221,12 +217,16 @@ require(p)
 
 must_replace(
     p,
-    '\tb.registerMonitors(b.syncSessionEgress)\n\tb.syncSessionEgress()\n\tgo b.batchReadLoop()',
-    '\tb.stopReload = make(chan struct{})\n'
-    '\tb.registerMonitors(b.syncSessionEgress)\n\tb.syncSessionEgress()\n\tgo b.batchReadLoop()',
-    'backend_darwin.go fresh stopReload per start',
+    '\tb.registerMonitors(scope, b.syncEgress)\n\tb.syncEgress()\n\tb.readGroup.Go(b.batchReadLoop)',
+    '\tb.registerMonitors(scope, b.syncEgress)\n\tb.syncEgress()\n\tb.stopReload = make(chan struct{})\n\tb.readGroup.Go(b.batchReadLoop)',
+    'backend_darwin.go fresh stopReload per start (start)',
 )
-
+must_replace(
+    p,
+    '\tb.registerMonitors(scope, b.syncSessionEgress)\n\tb.syncSessionEgress()\n\tb.readGroup.Go(b.batchReadLoop)',
+    '\tb.registerMonitors(scope, b.syncSessionEgress)\n\tb.syncSessionEgress()\n\tb.stopReload = make(chan struct{})\n\tb.readGroup.Go(b.batchReadLoop)',
+    'backend_darwin.go fresh stopReload per start (startPlatform)',
+)
 must_replace(
     p,
     '\t\tpackets, err := b.batchTUN.BatchRead(headroom, 0)\n\t\tif err != nil {\n\t\t\tselect {\n\t\t\tcase <-b.closed:\n\t\t\t\treturn\n\t\t\tdefault:\n\t\t\t}',
@@ -247,23 +247,21 @@ p = 'protocol/bridge/outbound.go'
 require(p)
 must_replace(
     p,
-    '\toutboundBackend, err := newBackend(ctx, logger, networkManager, tag, options)\n\tif err != nil {\n\t\treturn nil, err\n\t}\n',
+    '\toutboundBackend, err := newBackend(ctx, logger, networkManager, tag, options)\n\tif err != nil {\n\t\treturn nil, err\n\t}\n\treturn &Outbound{',
     '\toutboundBackend, err := newBackend(ctx, logger, networkManager, tag, options)\n\tif err != nil {\n\t\treturn nil, err\n\t}\n'
     '\t// When the bridge session goes stale, request a full box reload: the\n'
     '\t// existing daemon reload path rebuilds every outbound (including the\n'
     '\t// bridge, on the new interface).\n'
-    '\tif restarter, ok := outboundBackend.(*backendDarwin); ok {\n'
+    '\tif base, ok := outboundBackend.(*backendBase); ok {\n'
     '\t\tboxRestarter := service.FromContext[adapter.BoxRestartFunc](ctx)\n'
-    '\t\trestarter.rebuild = func() {\n'
-    '\t\t\tif boxRestarter != nil {\n'
-    '\t\t\t\t_ = boxRestarter.Restart()\n'
-    '\t\t\t}\n'
+    '\t\tbase.rebuild = func() {\n'
+    '\t\t\tif boxRestarter != nil {\n\t\t\t\t_ = boxRestarter.Restart()\n\t\t\t}\n'
     '\t\t}\n'
-    '\t}\n',
+    '\t}\n'
+    '\treturn &Outbound{',
     'outbound.go rebuild -> BoxRestartFunc',
 )
 
-# --------------------------------------------------------------------------
 # 6. provider node tag separator: "/" -> " " (display: "🏎️ HKG·X" not "🏎️/HKG·X")
 # --------------------------------------------------------------------------
 PROVIDER_SEP_FILES = [
