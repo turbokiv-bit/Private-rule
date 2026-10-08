@@ -48,7 +48,6 @@ payload:
     - +.trace.qq.com
     - +.ugdtimg.com
     - +.wit.qq.com
-    - +.badjs.weixinbridge.com
     - +.ad.tencentmusic.com
     - +.adstats.tencentmusic.com
     - +.monitor.music.qq.com
@@ -70,3 +69,4 @@ payload:
     - +.theta.sogoucdn.com
     - +.uranus.sogou.com
     - +.wuliao.epro.sogou.com
+    - +.badjs.weixinbridge.com
