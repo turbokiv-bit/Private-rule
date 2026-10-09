@@ -60,12 +60,12 @@ payload:
     - +.tribler.org
     - +.tunsafe.com
     - +.turkeyblocks.org
-    - +.vpngate.net
+    - +.v2fly.org
     - +.vuvuzela.io
     - +.vpnrouter.homes
     - +.uproxy.org
     - +.ahmia.fi
-    - +.getlantern.org
+    - +.pwnedpasswords.com
     - +.wikileaks.org
     - +.wireguard.com
     - +.wiresock.net
@@ -87,16 +87,24 @@ payload:
     - +.c4rex.co
     - +.ipfs.io
     - +.ipfs.tech
-    - +.vpngate.jp
-    - +.opengw.net
-    - +.softether-download.com
-    - +.softether.org
+    - +.v2ray.cool
+    - +.v2ray.com
+    - +.torproject.org
     - +.paskoocheh.com
     - +.lantern.io
+    - +.getlantern.org
     - +.2dust.link
-    - +.epicbrowser.com
+    - +.haveibeenpwned.com
     - +.ceno.app
     - +.censorship.no
+    - +.epicbrowser.com
+    - +.softether.org
+    - +.softether-download.com
+    - +.opengw.net
+    - +.vpngate.jp
+    - +.vpngate.net
+    - +.citizenlab.ca
+    - +.citizenlab.org
     - +.applecensorship.com
     - +.freebrowser.org
     - +.freewechat.com
@@ -108,14 +116,6 @@ payload:
     - +.greatfirevpn.com
     - +.pao-pao.net
     - +.wikiunblocked.org
-    - +.haveibeenpwned.com
-    - +.pwnedpasswords.com
-    - +.torproject.org
-    - +.v2ray.com
-    - +.v2ray.cool
-    - +.v2fly.org
-    - +.citizenlab.ca
-    - +.citizenlab.org
     - +.gateway.pinata.cloud
     - +.ipfs.anonymize.com
     - +.ipfs.best-practice.se

@@ -23,8 +23,6 @@ payload:
     - +.tns.simba.taobao.com
     - +.track.lc.quark.cn
     - +.v6-adashx.ut.taobao.com
-    - +.ads.uc.cn
-    - +.adslot.uc.cn
     - +.aaid.umeng.com
     - +.alog.umeng.com
     - +.alog.umengcloud.com
@@ -47,6 +45,9 @@ payload:
     - +.utoken.umeng.com
     - +.w.cnzz.com
     - +.z.gds.cnzz.com
+    - +.v6-adashx.ut.cainiao.com
+    - +.ads.uc.cn
+    - +.adslot.uc.cn
     - +.ad.api.3g.youku.com
     - +.ad.api.mobile.youku.com
     - +.ad.mobile.youku.com
@@ -82,7 +83,6 @@ payload:
     - +.logs.amap.com
     - +.optimus-ads.amap.com
     - +.v6-adashx.ut.amap.com
-    - +.v6-adashx.ut.cainiao.com
     - +.adashx.ut.ele.me
     - +.h-adashx.ut.ele.me
     - +.v6-adashx.ut.ele.me
