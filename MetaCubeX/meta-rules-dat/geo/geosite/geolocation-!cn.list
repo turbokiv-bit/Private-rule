@@ -96,6 +96,8 @@ DOMAIN-SUFFIX,cloudcode-pa.googleapis.com
 DOMAIN-SUFFIX,cloudsync-prod.s3.amazonaws.com
 DOMAIN-SUFFIX,configuration-lb.ls-apple.com.akadns.net
 DOMAIN-SUFFIX,copilot-proxy.githubusercontent.com
+DOMAIN-SUFFIX,copilot-telemetry-service.githubusercontent.com
+DOMAIN-SUFFIX,copilot-telemetry.githubusercontent.com
 DOMAIN-SUFFIX,copilot-workspace.githubnext.com
 DOMAIN-SUFFIX,copilotprodattachments.blob.core.windows.net
 DOMAIN-SUFFIX,crl.microsoft.com
@@ -264,6 +266,8 @@ DOMAIN-SUFFIX,img-prod-cms-rt-microsoft-com.akamaized.net
 DOMAIN-SUFFIX,img-s-msn-com.akamaized.net
 DOMAIN-SUFFIX,impala-media-production.s3.amazonaws.com
 DOMAIN-SUFFIX,imperial.insendi.com
+DOMAIN-SUFFIX,incoming-telemetry.thunderbird.net
+DOMAIN-SUFFIX,incoming.telemetry.mozilla.org
 DOMAIN-SUFFIX,lastfm-img.freetls.fastly.net
 DOMAIN-SUFFIX,lastfm.freetls.fastly.net
 DOMAIN-SUFFIX,lazer.ppy.sh

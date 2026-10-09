@@ -5,7 +5,7 @@ payload:
     - throneproj.github.io
     - trojan-gfw.github.io
     - xtls.github.io
-    - +.whonix.org
+    - +.wikileaks.org
     - +.eff.org
     - +.akasha.world
     - +.amnezia.org
@@ -18,7 +18,7 @@ payload:
     - +.clashyun.com
     - +.dat.foundation
     - +.democracy.earth
-    - +.wgtunnel.com
+    - +.whonix.org
     - +.ffprofile.com
     - +.flclashx.app
     - +.flowvy.io
@@ -60,16 +60,29 @@ payload:
     - +.tribler.org
     - +.tunsafe.com
     - +.turkeyblocks.org
-    - +.v2fly.org
+    - +.uproxy.org
+    - +.wgtunnel.com
     - +.vuvuzela.io
     - +.vpnrouter.homes
-    - +.uproxy.org
     - +.ahmia.fi
-    - +.pwnedpasswords.com
-    - +.wikileaks.org
+    - +.wikiunblocked.org
     - +.wireguard.com
     - +.wiresock.net
     - +.zeronet.io
+    - +.softether.org
+    - +.softether-download.com
+    - +.v2ray.com
+    - +.v2ray.cool
+    - +.v2fly.org
+    - +.citizenlab.ca
+    - +.citizenlab.org
+    - +.epicbrowser.com
+    - +.haveibeenpwned.com
+    - +.pwnedpasswords.com
+    - +.torproject.org
+    - +.opengw.net
+    - +.vpngate.jp
+    - +.vpngate.net
     - +.docs.rw
     - +.log.rw
     - +.remna.st
@@ -87,26 +100,15 @@ payload:
     - +.c4rex.co
     - +.ipfs.io
     - +.ipfs.tech
-    - +.v2ray.cool
-    - +.v2ray.com
-    - +.torproject.org
+    - +.ceno.app
+    - +.censorship.no
+    - +.applecensorship.com
+    - +.freebrowser.org
     - +.paskoocheh.com
     - +.lantern.io
     - +.getlantern.org
     - +.2dust.link
-    - +.haveibeenpwned.com
-    - +.ceno.app
-    - +.censorship.no
-    - +.epicbrowser.com
-    - +.softether.org
-    - +.softether-download.com
-    - +.opengw.net
-    - +.vpngate.jp
-    - +.vpngate.net
-    - +.citizenlab.ca
-    - +.citizenlab.org
-    - +.applecensorship.com
-    - +.freebrowser.org
+    - +.pao-pao.net
     - +.freewechat.com
     - +.freeweibo.com
     - +.freezhihu.org
@@ -114,14 +116,12 @@ payload:
     - +.googleplaycensorship.com
     - +.greatfire.org
     - +.greatfirevpn.com
-    - +.pao-pao.net
-    - +.wikiunblocked.org
-    - +.gateway.pinata.cloud
-    - +.ipfs.anonymize.com
-    - +.ipfs.best-practice.se
     - +.ipfs.eternum.io
     - +.ipfs.lain.la
     - +.ipfs.fleek.co
     - +.ipfs.runfission.com
     - +.twister.net.co
+    - +.ipfs.best-practice.se
+    - +.ipfs.anonymize.com
+    - +.gateway.pinata.cloud
     - +.ipfs.eth.aragon.network
