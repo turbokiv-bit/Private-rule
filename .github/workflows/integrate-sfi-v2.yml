@@ -23,8 +23,8 @@ jobs:
         run: git clone --depth 1 -b reF1nd-testing https://github.com/reF1nd/sing-box.git core
 
       - name: Apply core patches (restart-fix + lazy-recover)
+        working-directory: core
         run: |
-          cd core
           curl -sSL "https://raw.githubusercontent.com/turbokiv-bit/Private-rule/main/restart-fix.py" -o /tmp/restart-fix.py
           curl -sSL "https://raw.githubusercontent.com/turbokiv-bit/Private-rule/main/lazy_recover_patch.py" -o /tmp/lazy_recover_patch.py
           echo "restart-fix.py 大小: $(wc -c < /tmp/restart-fix.py) bytes"
@@ -35,7 +35,6 @@ jobs:
 
           echo "--- applying lazy_recover_patch.py ---"
           python3 /tmp/lazy_recover_patch.py || { echo "❌ lazy_recover 失败"; exit 1; }
-
 
           echo "--- gofmt check (空输出=通过) ---"
           gofmt -l protocol/group/urltest.go
@@ -60,6 +59,12 @@ jobs:
         run: |
           curl -sSL "https://raw.githubusercontent.com/turbokiv-bit/Private-rule/main/sfi_deploytarget_fix.py" -o /tmp/sfi_deploytarget_fix.py
           python3 /tmp/sfi_deploytarget_fix.py
+
+      - name: Fix ExtensionPlatformInterface protocol conformance (reF1nd)
+        working-directory: sfi
+        run: |
+          curl -sSL "https://raw.githubusercontent.com/turbokiv-bit/Private-rule/main/sfi_autoredirect_patch.py" -o /tmp/sfi_autoredirect_patch.py
+          python3 /tmp/sfi_autoredirect_patch.py
 
       - name: Build app & package jailbreak deb (official script)
         working-directory: sfi
