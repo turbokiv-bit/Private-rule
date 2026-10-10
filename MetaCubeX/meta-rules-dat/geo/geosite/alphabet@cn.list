@@ -120,5 +120,5 @@ DOMAIN-SUFFIX,o.pki.goog
 DOMAIN-SUFFIX,crl.pki.goog
 DOMAIN-SUFFIX,crls.pki.goog
 DOMAIN-SUFFIX,ocsp.pki.goog
-DOMAIN-SUFFIX,redirector.c.play.google.com
 DOMAIN-SUFFIX,ggpht.cn
+DOMAIN-SUFFIX,redirector.c.play.google.com

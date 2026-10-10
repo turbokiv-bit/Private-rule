@@ -1,13 +1,7 @@
 payload:
     - DOMAIN,sberpro.vedomosti.ru
-    - DOMAIN-SUFFIX,getsynapse.io
-    - DOMAIN-SUFFIX,spasibo.market
-    - DOMAIN-SUFFIX,sber.ru
-    - DOMAIN-SUFFIX,sberbank.com
-    - DOMAIN-SUFFIX,sberbank.ru
-    - DOMAIN-SUFFIX,sbrf.ru
-    - DOMAIN-SUFFIX,id.ru
-    - DOMAIN-SUFFIX,megamarket.ru
+    - DOMAIN-SUFFIX,payecom.ru
+    - DOMAIN-SUFFIX,playfamily.ru
     - DOMAIN-SUFFIX,megamarket.tech
     - DOMAIN-SUFFIX,sberauto.com
     - DOMAIN-SUFFIX,sberbank-insurance.ru
@@ -24,7 +18,7 @@ payload:
     - DOMAIN-SUFFIX,sberleasing.ru
     - DOMAIN-SUFFIX,sberlogistics.ru
     - DOMAIN-SUFFIX,sbermegamarket.ru
-    - DOMAIN-SUFFIX,okko.tv
+    - DOMAIN-SUFFIX,sbermobile.ru
     - DOMAIN-SUFFIX,sberpb.ru
     - DOMAIN-SUFFIX,sbertroika.ru
     - DOMAIN-SUFFIX,afisha.ru
@@ -32,7 +26,7 @@ payload:
     - DOMAIN-SUFFIX,cloud.ru
     - DOMAIN-SUFFIX,cloudru.cn
     - DOMAIN-SUFFIX,eaptechka.online
-    - DOMAIN-SUFFIX,eapteka.ru
+    - DOMAIN-SUFFIX,id.ru
     - DOMAIN-SUFFIX,21-school.ru
     - DOMAIN-SUFFIX,kuper.ru
     - DOMAIN-SUFFIX,restnproducts.ru
@@ -41,35 +35,43 @@ payload:
     - DOMAIN-SUFFIX,gitverse.ru
     - DOMAIN-SUFFIX,jivo.chat
     - DOMAIN-SUFFIX,jivo.ru
-    - DOMAIN-SUFFIX,okko.sport
-    - DOMAIN-SUFFIX,sbermobile.ru
-    - DOMAIN-SUFFIX,sber-bank.by
-    - DOMAIN-SUFFIX,2gis.ru
-    - DOMAIN-SUFFIX,playfamily.ru
-    - DOMAIN-SUFFIX,okkoapi.tv
-    - DOMAIN-SUFFIX,2gis.ge
+    - DOMAIN-SUFFIX,jivochat.com
     - DOMAIN-SUFFIX,jivochat.de
     - DOMAIN-SUFFIX,jivochat.es
     - DOMAIN-SUFFIX,jivochat.ng
     - DOMAIN-SUFFIX,jivochat.ru
+    - DOMAIN-SUFFIX,2gis.ge
+    - DOMAIN-SUFFIX,2gis.tj
     - DOMAIN-SUFFIX,jivosite.com
     - DOMAIN-SUFFIX,jivosite.ru
-    - DOMAIN-SUFFIX,payecom.ru
-    - DOMAIN-SUFFIX,platiecom.ru
-    - DOMAIN-SUFFIX,otello.ru
+    - DOMAIN-SUFFIX,eapteka.ru
+    - DOMAIN-SUFFIX,megamarket.ru
+    - DOMAIN-SUFFIX,sbertech.ru
     - DOMAIN-SUFFIX,sber.pro
+    - DOMAIN-SUFFIX,accesspoint.uz
+    - DOMAIN-SUFFIX,getsynapse.io
+    - DOMAIN-SUFFIX,otello.ru
+    - DOMAIN-SUFFIX,zvuk-b2b.com
+    - DOMAIN-SUFFIX,zvuk.com
+    - DOMAIN-SUFFIX,okkoapi.tv
+    - DOMAIN-SUFFIX,platiecom.ru
+    - DOMAIN-SUFFIX,okko.sport
+    - DOMAIN-SUFFIX,okko.tv
+    - DOMAIN-SUFFIX,bps-sberbank.by
+    - DOMAIN-SUFFIX,sber-bank.by
+    - DOMAIN-SUFFIX,sber.ru
+    - DOMAIN-SUFFIX,sberbank.com
+    - DOMAIN-SUFFIX,sberbank.ru
+    - DOMAIN-SUFFIX,sbrf.ru
+    - DOMAIN-SUFFIX,yookassa.ru
+    - DOMAIN-SUFFIX,yoomoney.ru
     - DOMAIN-SUFFIX,cplsb.ru
     - DOMAIN-SUFFIX,sberspasibo.ru
     - DOMAIN-SUFFIX,spasibo.digital
-    - DOMAIN-SUFFIX,jivochat.com
+    - DOMAIN-SUFFIX,spasibo.market
     - DOMAIN-SUFFIX,spasibobonus.ru
     - DOMAIN-SUFFIX,spasibosb.ru
     - DOMAIN-SUFFIX,spasibosberbank.ru
-    - DOMAIN-SUFFIX,accesspoint.uz
-    - DOMAIN-SUFFIX,bps-sberbank.by
-    - DOMAIN-SUFFIX,sbertech.ru
-    - DOMAIN-SUFFIX,zvuk-b2b.com
-    - DOMAIN-SUFFIX,zvuk.com
     - DOMAIN-SUFFIX,2gis.cz
     - DOMAIN-SUFFIX,2gis.uz
     - DOMAIN-SUFFIX,2gis.az
@@ -80,20 +82,20 @@ payload:
     - DOMAIN-SUFFIX,2gis.ae
     - DOMAIN-SUFFIX,2gis.am
     - DOMAIN-SUFFIX,2gis.kz
-    - DOMAIN-SUFFIX,2gis.tj
+    - DOMAIN-SUFFIX,2gis.ru
+    - DOMAIN-SUFFIX,jivochat.co.za
+    - DOMAIN-SUFFIX,jivochat.co.in
     - DOMAIN-SUFFIX,jivochat.com.br
+    - DOMAIN-SUFFIX,jivochat.com.co
+    - DOMAIN-SUFFIX,jivochat.com.pe
     - DOMAIN-SUFFIX,jivochat.com.tr
     - DOMAIN-SUFFIX,2gis.com.cy
-    - DOMAIN-SUFFIX,jivochat.com.pe
-    - DOMAIN-SUFFIX,jivochat.com.co
-    - DOMAIN-SUFFIX,jivochat.co.in
-    - DOMAIN-SUFFIX,jivochat.co.za
-    - DOMAIN-SUFFIX,ads.sber.ru
-    - DOMAIN-SUFFIX,clickstream.sberbank.ru
     - DOMAIN-SUFFIX,neon.click
     - DOMAIN-SUFFIX,sbermarketing.ru
     - DOMAIN,error-tracking.megamarket.tech
     - DOMAIN,metrics.21-school.ru
     - DOMAIN,sentry.sberauto.com
     - DOMAIN,tracing-http.megamarket.tech
+    - DOMAIN-SUFFIX,ads.sber.ru
+    - DOMAIN-SUFFIX,clickstream.sberbank.ru
     - DOMAIN,visor.sberbank.ru

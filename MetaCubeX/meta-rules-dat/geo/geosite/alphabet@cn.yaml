@@ -121,5 +121,5 @@ payload:
     - crl.pki.goog
     - crls.pki.goog
     - ocsp.pki.goog
-    - redirector.c.play.google.com
     - +.ggpht.cn
+    - redirector.c.play.google.com
