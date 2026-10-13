@@ -29,8 +29,6 @@ payload:
     - +.coolapk.com
     - +.coolapkmarket.com
     - +.coolapkmarket.net
-    - +.gracg.com
-    - +.procg.cn
     - +.hupu.com
     - +.hupucdn.com
     - +.shihuo.cn
@@ -49,6 +47,8 @@ payload:
     - +.douban.com
     - +.douban.fm
     - +.doubanio.com
+    - +.gracg.com
+    - +.procg.cn
     - +.tieba.baidu.com
     - +.hoopchina.com.cn
     - +.crash2.zhihu.com
