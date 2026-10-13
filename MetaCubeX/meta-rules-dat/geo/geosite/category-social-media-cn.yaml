@@ -26,12 +26,6 @@ payload:
     - +.zastatic.com
     - +.zhenai.com
     - +.zsxq.com
-    - +.coolapk.com
-    - +.coolapkmarket.com
-    - +.coolapkmarket.net
-    - +.hupu.com
-    - +.hupucdn.com
-    - +.shihuo.cn
     - +.ivwen.com
     - +.meipian.cn
     - +.meipian.me
@@ -47,6 +41,12 @@ payload:
     - +.douban.com
     - +.douban.fm
     - +.doubanio.com
+    - +.hupu.com
+    - +.hupucdn.com
+    - +.shihuo.cn
+    - +.coolapk.com
+    - +.coolapkmarket.com
+    - +.coolapkmarket.net
     - +.gracg.com
     - +.procg.cn
     - +.tieba.baidu.com

@@ -1,17 +1,17 @@
 payload:
-    - mdn.mozillademos.org
     - mozilla-ohttp.fastly-edge.com
     - mozilla.map.fastly.net
-    - +.mozilla.ro
-    - +.mozillalabs.com
+    - mdn.mozillademos.org
+    - +.allizom.net
+    - +.allizom.org
     - +.bugzilla.org
     - +.detodosparatodos.org
     - +.discovershiretoko.org
     - +.ecmascript.org
-    - +.allizom.net
+    - +.extensionworkshop.com
     - +.foxkeh.com
     - +.foxkeh.jp
-    - +.mozillademos.org
+    - +.getfirebug.com
     - +.getpersonas.com
     - +.getpocket.com
     - +.hackasaurus.org
@@ -36,13 +36,13 @@ payload:
     - +.mozilla.org
     - +.mozilla.pe
     - +.mozilla.pt
-    - +.extensionworkshop.com
-    - +.allizom.org
-    - +.getfirebug.com
+    - +.mozilla.ro
+    - +.mozillabd.org
+    - +.mozillademos.org
     - +.mozillafactory.org
     - +.mozillafoundation.org
     - +.mozillaignite.org
-    - +.mozillabd.org
+    - +.mozillalabs.com
     - +.mozillaquebec.org
     - +.mozillazine.jp
     - +.mozillians.org
@@ -57,15 +57,15 @@ payload:
     - +.thunderbird.net
     - +.thundermail.com
     - +.webmademovies.org
-    - +.mdn.dev
-    - +.mdnplay.dev
-    - +.mdnyalp.dev
     - +.extendfirefox.com
     - +.firefox-portal-detection.com
     - +.firefox.com
     - +.firefox.hu
-    - +.firefoxusercontent.com
     - +.firefoxtweetmachine.com
+    - +.firefoxusercontent.com
+    - +.mdn.dev
+    - +.mdnplay.dev
+    - +.mdnyalp.dev
     - +.mozilla.org.uk
     - ads-img.mozilla.org
     - ads.mozilla.org
