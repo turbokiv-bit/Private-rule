@@ -1,8 +1,9 @@
 payload:
-    - +.bluearchive-cn.com
     - +.leagueoflegends.cn
     - +.lpl.com.cn
     - +.xboxlive.cn
+    - +.yostar.cn
+    - +.bluearchive-cn.com
     - +.legendofzelda.cn
     - +.legendofzelda.com.cn
     - +.miitomo.com.cn
@@ -16,7 +17,6 @@ payload:
     - +.mariokart.com.cn
     - +.supermariobros.com.cn
     - gog.qtlglb.com
-    - +.yostar.cn
     - +.steamserver.net
     - +.steamusercontent.com
     - +.csgo.com.cn
