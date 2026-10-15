@@ -3,57 +3,14 @@ payload:
     - +.flocktory.com
     - +.roistat.com
     - +.targetads.io
-    - ads.x5.ru
-    - ads.x5media.ru
-    - sentry.x5.ru
-    - +.adfox.ru
-    - +.adfox.yandex.ru
-    - +.admetrica.ru
-    - +.ads.yandex
-    - +.ads.yandex.ru
-    - +.adv.yandex.com
-    - +.adv.yandex.ru
-    - +.an.yandex.ru
-    - +.appmetrica.yandex.com
-    - +.appmetrica.yandex.net
-    - +.appmetrica.yandex.ru
-    - +.appmetrica.yango.com
-    - +.bs.yandex.ru
-    - +.clck.yandex.ru
-    - +.counter.yandex.ru
-    - +.mc.yandex.ru
-    - +.metrika.yandex.com
-    - +.metrika.yandex.net
-    - +.metrika.yandex.ru
-    - +.webvisor.com
-    - +.webvisor.org
-    - +.yads.tech
-    - +.yandex-metrica.ru
-    - +.yandexmetrica.com
-    - +.yango-ads.com
-    - adfstat.yandex.ru
-    - ads.yandex.com
-    - ads.yango.com
-    - adsdk.yandex.ru
-    - amc.yandex.ru
-    - analytics.mobile.yandex.net
-    - clck.yandex.com
-    - clck.yandex.net
-    - clck.yango.com
-    - informer.yandex.ru
-    - log.strm.yandex.ru
-    - mc.yandex.com
-    - mc.yandex.net
-    - mc.yango.com
-    - pixel.yandex.com
-    - report.ap.yandex-net.ru
-    - +.a.mts.ru
-    - +.obs.mts.ru
-    - metrika.kontur.ru
-    - sentry.kontur.host
     - +.ads.sber.ru
     - +.clickstream.sberbank.ru
     - visor.sberbank.ru
+    - ads.x5.ru
+    - ads.x5media.ru
+    - sentry.x5.ru
+    - metrika.kontur.ru
+    - sentry.kontur.host
     - api-eu.carrotquest.app
     - api-eu.carrotquest.io
     - api-ru.carrotquest.app
@@ -65,6 +22,9 @@ payload:
     - api.carrottrack.app
     - api.dashly.app
     - api.dashlytrack.app
+    - +.a.mts.ru
+    - +.obs.mts.ru
+    - sentry.iptv.rt.ru
     - +.e.mindbox.ru
     - +.g.mindbox.ru
     - +.s.mindbox.ru
@@ -75,7 +35,6 @@ payload:
     - api.mindbox.ru
     - sentry.mindbox.ru
     - sentry.popmechanic.ru
-    - sentry.iptv.rt.ru
     - ad.ozone.ru
     - adv.ozon.ru
     - agency-adv.ozon.ru
@@ -163,6 +122,8 @@ payload:
     - top-staging.mail.ru
     - whiteline.mail.ru
     - xray.mail.ru
+    - +.log.dzen.ru
+    - +.ms.dzen.ru
     - +.adv.vk.com
     - +.analytics.vk.com
     - +.ms.vk.com
@@ -178,5 +139,44 @@ payload:
     - analytics.vk.ru
     - stats.vk-portal.net
     - target.vk.com
-    - +.log.dzen.ru
-    - +.ms.dzen.ru
+    - +.adfox.ru
+    - +.adfox.yandex.ru
+    - +.admetrica.ru
+    - +.ads.yandex
+    - +.ads.yandex.ru
+    - +.adv.yandex.com
+    - +.adv.yandex.ru
+    - +.an.yandex.ru
+    - +.appmetrica.yandex.com
+    - +.appmetrica.yandex.net
+    - +.appmetrica.yandex.ru
+    - +.appmetrica.yango.com
+    - +.bs.yandex.ru
+    - +.clck.yandex.ru
+    - +.counter.yandex.ru
+    - +.mc.yandex.ru
+    - +.metrika.yandex.com
+    - +.metrika.yandex.net
+    - +.metrika.yandex.ru
+    - +.webvisor.com
+    - +.webvisor.org
+    - +.yads.tech
+    - +.yandex-metrica.ru
+    - +.yandexmetrica.com
+    - +.yango-ads.com
+    - adfstat.yandex.ru
+    - ads.yandex.com
+    - ads.yango.com
+    - adsdk.yandex.ru
+    - amc.yandex.ru
+    - analytics.mobile.yandex.net
+    - clck.yandex.com
+    - clck.yandex.net
+    - clck.yango.com
+    - informer.yandex.ru
+    - log.strm.yandex.ru
+    - mc.yandex.com
+    - mc.yandex.net
+    - mc.yango.com
+    - pixel.yandex.com
+    - report.ap.yandex-net.ru

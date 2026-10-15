@@ -6,6 +6,10 @@ payload:
     - +.ingka-dt.cn
     - +.ingka-internal.cn
     - +.ingka-system.cn
+    - +.shopee.cn
+    - +.shopeesz.com
+    - +.booking.cn
+    - +.gucci.cn
     - +.adidas.cn
     - +.adidas.com.cn
     - +.adidasspecialtysports.cn
@@ -46,15 +50,12 @@ payload:
     - +.kijijidns.com.cn
     - +.mobileinternational.com.cn
     - +.terapeak.cn
+    - +.miniso.cn
+    - +.minisohome.cn
+    - +.minsio.cn
+    - +.walmart.cn
     - +.hm.com.cn
     - +.muji.com.cn
-    - +.gucci.cn
-    - +.bestbuy.cn
-    - +.bestbuy.com.cn
-    - +.magnoliaav.com.cn
-    - +.walmart.cn
-    - +.shopee.cn
-    - +.shopeesz.com
     - +.just-do-it.cn
     - +.nike-shox.cn
     - +.nike.cn
@@ -75,7 +76,6 @@ payload:
     - +.nikerunclub.com.cn
     - +.nikerunning.com.cn
     - +.nikestore.cn
-    - +.booking.cn
-    - +.miniso.cn
-    - +.minisohome.cn
-    - +.minsio.cn
+    - +.bestbuy.cn
+    - +.bestbuy.com.cn
+    - +.magnoliaav.com.cn
