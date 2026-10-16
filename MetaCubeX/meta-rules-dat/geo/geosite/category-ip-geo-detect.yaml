@@ -10,9 +10,9 @@ payload:
     - myip.dnsomatic.com
     - myip.happ.su
     - whatismyip.akamai.com
-    - +.jsonip.com
-    - +.extreme-ip-lookup.com
-    - +.2ip.io
+    - +.ipxapi.com
+    - +.whatismyipaddress.net
+    - +.2ip.ua
     - +.51degrees.com
     - +.abstractapi.com
     - +.addr.tools
@@ -21,6 +21,7 @@ payload:
     - +.bgp.tools
     - +.bigdatacloud.net
     - +.browserleaks.com
+    - +.bulkgeoip.com
     - +.check-host.net
     - +.checkip.org
     - +.checkip.ru
@@ -33,12 +34,12 @@ payload:
     - +.db-ip.com
     - +.dnscheck.tools
     - +.dnsleaktest.com
-    - +.l2.io
+    - +.extreme-ip-lookup.com
     - +.find-my-ip.com
     - +.find-my-ip.net
     - +.findip.net
     - +.flagfox.net
-    - +.fraudguard.io
+    - +.l2.io
     - +.fraudlogix.com
     - +.freegeoip.app
     - +.freeipapi.com
@@ -64,7 +65,7 @@ payload:
     - +.infosniper.net
     - +.ip-adress.com
     - +.ip-api.com
-    - +.maxmind.com
+    - +.ip-api.io
     - +.ip-api.ru
     - +.ip-check.info
     - +.ip-score.com
@@ -119,10 +120,10 @@ payload:
     - +.ipverify.com
     - +.ipwho.is
     - +.ipwhois.io
-    - +.ipxapi.com
-    - +.2ip.ua
+    - +.nodedata.io
     - +.2ip.ru
-    - +.ip-api.io
+    - +.fraudguard.io
+    - +.maxmind.com
     - +.mon-ip.com
     - +.monip.org
     - +.my-ip.io
@@ -166,7 +167,7 @@ payload:
     - +.myipaddress.com
     - +.myiplookup.com
     - +.mylocation.org
-    - +.nodedata.io
+    - +.2ip.io
     - +.nossl.sh
     - +.osint.sh
     - +.proxycheck.io
@@ -189,7 +190,7 @@ payload:
     - +.whatismyip.net
     - +.whatismyip.org
     - +.whatismyipaddress.com
-    - +.whatismyipaddress.net
+    - +.jsonip.com
     - +.whatismyisp.com
     - +.whatismyv6.com
     - +.whatsmyip.com
