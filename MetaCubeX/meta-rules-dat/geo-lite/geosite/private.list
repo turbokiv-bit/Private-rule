@@ -119,6 +119,8 @@ DOMAIN-SUFFIX,zte.home
 DOMAIN-SUFFIX,asusrouter.com
 DOMAIN-SUFFIX,instant.arubanetworks.com
 DOMAIN-SUFFIX,local.adguard.org
+DOMAIN-SUFFIX,localhost.weixin.qq.com
+DOMAIN-SUFFIX,localhost.work.weixin.qq.com
 DOMAIN-SUFFIX,miwifi.com
 DOMAIN-SUFFIX,oasisauth.h3c.com
 DOMAIN-SUFFIX,router.asus.com

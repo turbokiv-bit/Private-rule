@@ -6,6 +6,8 @@ DOMAIN-SUFFIX,www.asusrouter.com
 DOMAIN-SUFFIX,oasisauth.h3c.com
 DOMAIN-SUFFIX,routerlogin.com
 DOMAIN-SUFFIX,www.routerlogin.com
+DOMAIN-SUFFIX,localhost.weixin.qq.com
+DOMAIN-SUFFIX,localhost.work.weixin.qq.com
 DOMAIN-SUFFIX,tplogin.cn
 DOMAIN-SUFFIX,miwifi.com
 DOMAIN-SUFFIX,www.miwifi.com
