@@ -18,7 +18,7 @@ payload:
     - +.imdb
     - +.aws
     - +.awstrust.com
-    - +.createspace.com
+    - +.amazonpay.in
     - +.aboutamazon.es
     - +.aboutamazon.eu
     - +.aboutamazon.fr
@@ -42,10 +42,10 @@ payload:
     - +.wholefoods.com
     - +.wholecitiesfoundation.org
     - +.wfm.com
+    - +.pv-cdn.net
     - +.primevideo.tv
     - +.primevideo.org
     - +.primevideo.info
-    - +.primevideo.com
     - +.amazon.de
     - +.amazon.dev
     - +.amazon.eg
@@ -59,13 +59,13 @@ payload:
     - +.amazon.lu
     - +.amazon.nl
     - +.amazon.pl
-    - +.amazon.red
+    - +.amazonaws.biz
     - +.amazon.sa
     - +.amazon.se
     - +.amazon.sg
     - +.amazonalexavoxcon.com
     - +.amazonauthorinsights.com
-    - +.amazonbusiness.org
+    - +.aesworkshops.com
     - +.amazonbusinessblog.com
     - +.amazondevicesupport.com
     - +.amazonfctours.com
@@ -75,13 +75,13 @@ payload:
     - +.amazonliterarypartnership.com
     - +.amazonlumberyard.wang
     - +.amazonpay.com
-    - +.amazonpay.in
+    - +.amazonaws-china.com
     - +.amazonsdi.com
     - +.amazonstudiosguilds.com
     - +.amazonvideodirect.com
     - +.amzn.asia
     - +.amzn.com
-    - +.amazonaws.biz
+    - +.amzn.to
     - +.amznl.com
     - +.associates-amazon.com
     - +.gameon-masters.com
@@ -96,16 +96,16 @@ payload:
     - +.yamaxun.com
     - +.alexa.com
     - +.audible.com
-    - +.amazonaws-china.com
+    - +.createspace.com
     - +.amazontrust.com
-    - +.primevideo.cc
+    - +.primevideo.com
     - +.ss2.us
     - +.aboutamazon.com
     - +.awsbraket.com
     - +.thinkboxsoftware.com
-    - +.amzn.to
+    - +.amazonbusiness.org
     - +.aboutamazon.de
-    - +.aesworkshops.com
+    - +.amazon.red
     - +.amazonaws.com
     - +.amazonaws.info
     - +.amazonaws.net
@@ -147,11 +147,11 @@ payload:
     - +.amzndns.com
     - +.amzndns.org
     - +.amzndns.net
+    - +.primevideo.cc
     - +.prime-video.com
     - +.amazonvideo.com
     - +.amazonvideo.cc
     - +.amazonprimevideos.com
-    - +.aiv-cdn.net
     - +.boxofficemojo.com
     - +.imdb.com
     - +.imdb.to
@@ -171,13 +171,14 @@ payload:
     - +.kindleoasis.jp
     - +.kindleoasis.org
     - +.kindleoasis.us
+    - +.aiv-cdn.net
     - +.amazon.com.mx
-    - +.kindle.co.uk
+    - +.kindle.co.jp
     - +.aboutamazon.co.uk
     - +.amzndns.co.uk
     - +.amazonaws.co.uk
     - +.aboutamazon.com.au
-    - +.kindle.co.jp
+    - +.kindle.co.uk
     - +.amazon.com.tr
     - +.wholefoodsmarket.co.uk
     - +.amazon.com.ng

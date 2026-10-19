@@ -24,10 +24,8 @@ payload:
     - +.who.int
     - +.wi-fi.org
     - +.wto.org
-    - +.f-dro1d.org
-    - +.f-droid.com
-    - +.f-droid.org
-    - +.fdroid.org
+    - +.paskoocheh.com
+    - +.csis.org
     - +.ieee.org
     - +.ieee.tv
     - +.tryengineering.org
@@ -93,13 +91,21 @@ payload:
     - +.osmfoundation.org
     - +.stateofthemap.com
     - +.stateofthemap.org
+    - +.ppy.sh
     - +.rolfoundation.org
     - +.rolsociety.org
-    - +.csis.org
+    - +.ccstatic.org
+    - +.creativecommons.org
+    - +.creativecommons.engineering
+    - +.licensebuttons.net
     - +.emojipedia.org
     - +.worldemojiawards.com
     - +.worldemojiday.com
     - +.xn--yt8h.la
+    - +.f-dro1d.org
+    - +.f-droid.com
+    - +.f-droid.org
+    - +.fdroid.org
     - +.attestation.app
     - +.grapheneos.app
     - +.grapheneos.ca
@@ -124,9 +130,3 @@ payload:
     - +.messybrainz.org
     - +.metabrainz.org
     - +.musicbrainz.org
-    - +.paskoocheh.com
-    - +.ppy.sh
-    - +.ccstatic.org
-    - +.creativecommons.org
-    - +.creativecommons.engineering
-    - +.licensebuttons.net

@@ -1,5 +1,4 @@
 payload:
-    - flightsimulator.azureedge.net
     - prodforza.blob.core.windows.net
     - +.xbox
     - +.gamepass.com
@@ -25,8 +24,6 @@ payload:
     - +.xboxservices.com
     - +.xboxstudios.com
     - +.xbx.lv
-    - +.asobostudio.com
-    - +.flightsimulator.com
     - +.beth.games
     - +.bethesda.net
     - +.bethesdagamestudios.com
