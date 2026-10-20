@@ -1,7 +1,7 @@
 payload:
+    - +.rtde.live
+    - +.eurasiadaily.su
     - +.72.ru
-    - +.amic.ru
-    - +.e1.ru
     - +.ekat.ru
     - +.gazeta.ru
     - +.rambler.ru
@@ -10,7 +10,14 @@ payload:
     - +.eadaily.net
     - +.eadaily.org
     - +.eadaily.su
-    - +.eurasiadaily.su
+    - +.rtde.me
+    - +.azbyka.ru
+    - +.posledovania.ru
+    - +.pravoslavie.ru
+    - +.webtypikon.ru
+    - +.xn--80adfddrquddgz.xn--p1ai
+    - +.pravmir.com
+    - +.pravmir.ru
     - +.1prime.ru
     - +.sputnikimages.com
     - +.rossiyasegodnya.com
@@ -28,6 +35,7 @@ payload:
     - +.sputnikmediabank.com
     - +.sputniknews.com
     - +.tok.media
+    - +.ruptly.video
     - +.asiangooglenetwork.com
     - +.rt.com
     - +.rtnewsru.com
@@ -53,7 +61,7 @@ payload:
     - +.de-rt.com
     - +.de-rt.org
     - +.de-rtnews.com
-    - +.de-rtnews.net
+    - +.rtde.media
     - +.dert.online
     - +.dert.site
     - +.dert.tech
@@ -65,9 +73,9 @@ payload:
     - +.rtde.express
     - +.rtde.info
     - +.rtde.life
-    - +.rtde.live
-    - +.rtde.me
-    - +.rtde.media
+    - +.e1.ru
+    - +.amic.ru
+    - +.de-rtnews.net
     - +.rtde.online
     - +.rtde.org
     - +.rtde.press
@@ -138,5 +146,4 @@ payload:
     - +.rt-school.online
     - +.ruptly.agency
     - +.ruptly.tv
-    - +.ruptly.video
     - +.gazetarussa.com.br

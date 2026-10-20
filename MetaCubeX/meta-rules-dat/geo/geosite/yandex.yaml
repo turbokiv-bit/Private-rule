@@ -1,7 +1,9 @@
 payload:
+    - kp-config-smart-tv.akamaized.net
+    - kp-configs-smart-tv.s3.eu-central-1.amazonaws.com
     - +.yandex
     - +.yandex.kg
-    - +.yango-b2b.com
+    - +.sourcecraft.dev
     - +.beru.ru
     - +.bookmate.ru
     - +.cabconnect.org
@@ -25,13 +27,13 @@ payload:
     - +.shedevrum.ai
     - +.shedevrum.com
     - +.shedevrum.ru
-    - +.sourcecraft.dev
+    - +.xn--d1acpjx3f.xn--p1ai
     - +.static-storage.net
     - +.support-uber.com
     - +.taxiaid.org
     - +.taxiguru.org
     - +.taxitax.org
-    - +.yandex.kz
+    - +.thequestion.ru
     - +.turbopages.org
     - +.vezet.ru
     - +.ya.cc
@@ -48,15 +50,15 @@ payload:
     - +.yandex.com
     - +.yandex.de
     - +.yandex.ee
-    - +.yandex.eu
+    - +.yandex.jobs
     - +.yandex.fi
     - +.kinopoisk.ru
     - +.yndx.net
     - +.yandex.fr
     - +.yandex.it
+    - +.yandex.eu
     - +.berizaryad.ru
-    - +.yandex.jobs
-    - +.thequestion.ru
+    - +.yandex.kz
     - +.yandex.lt
     - +.yandex.lv
     - +.yandex.market
@@ -90,7 +92,7 @@ payload:
     - +.yandexlyceum.ru
     - +.yandexwebcache.net
     - +.yandexwebcache.org
-    - +.xn--d1acpjx3f.xn--p1ai
+    - +.yango-b2b.com
     - +.yango-team.com
     - +.yango-tech.com
     - +.yango.africa
