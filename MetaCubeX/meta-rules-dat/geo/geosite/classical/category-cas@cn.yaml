@@ -15,6 +15,7 @@ payload:
     - DOMAIN,crl.pki.goog
     - DOMAIN,crls.pki.goog
     - DOMAIN,ocsp.pki.goog
+    - DOMAIN,www.entrust.cn
     - DOMAIN-SUFFIX,oemssl.cn
     - DOMAIN-SUFFIX,oemssl.cn.cdn.cloudflare.net
     - DOMAIN-SUFFIX,sectigochina.com
@@ -29,4 +30,3 @@ payload:
     - DOMAIN,ocsp2.apple.com
     - DOMAIN,valid.apple.com
     - DOMAIN,valid.origin-apple.com.akadns.net
-    - DOMAIN,www.entrust.cn
