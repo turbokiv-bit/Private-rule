@@ -1,9 +1,9 @@
 payload:
-    - +.ovdinfo.legal
-    - +.24.kg
+    - +.ozodi.org
+    - +.ovd.info
     - +.agents.media
     - +.arbatmedia.kz
-    - +.ozodi.org
+    - +.arsvest.ru
     - +.astra.press
     - +.azathabar.com
     - +.azattyq.org
@@ -25,7 +25,7 @@ payload:
     - +.euronews.com
     - +.euroradio.fm
     - +.fn-volga.ru
-    - +.paperpaper.ru
+    - +.fonge.org
     - +.fortanga.org
     - +.freeburyatia.org
     - +.freemedia.io
@@ -47,7 +47,7 @@ payload:
     - +.korrespondent.net
     - +.kovcheg.live
     - +.krymr.com
-    - +.locals.md
+    - +.24.kg
     - +.zerkalo.io
     - +.zasekin.ru
     - +.zahav.ru
@@ -55,6 +55,7 @@ payload:
     - +.meduza.io
     - +.metla.press
     - +.mignews.com
+    - +.navalny.com
     - +.newizv.ru
     - +.newtimes.ru
     - +.novaya.media
@@ -62,10 +63,10 @@ payload:
     - +.novayagazeta.ru
     - +.openmedia.io
     - +.opposition-news.com
-    - +.ovd.info
-    - +.arsvest.ru
+    - +.paperpaper.ru
     - +.activatica.org
-    - +.fonge.org
+    - +.locals.md
+    - +.ovdinfo.legal
     - +.poligon.media
     - +.polit.ru
     - +.wonderzine.com

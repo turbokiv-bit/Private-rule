@@ -7,7 +7,9 @@ IP-CIDR6,2a0e:acc0:ac01::/48
 IP-CIDR6,2a0e:acc0:ac02::/47
 IP-CIDR6,2a0e:acc0:ac04::/46
 IP-CIDR6,2a0e:acc0:ac08::/47
-IP-CIDR6,2a0e:acc0:ac10::/45
+IP-CIDR6,2a0e:acc0:ac10::/46
+IP-CIDR6,2a0e:acc0:ac15::/48
+IP-CIDR6,2a0e:acc0:ac16::/47
 IP-CIDR6,2a0e:acc0:ac18::/47
 IP-CIDR6,2a0e:acc0:ac20::/46
 IP-CIDR6,2a0e:acc0:ac24::/48
@@ -18,7 +20,9 @@ IP-CIDR6,2a0e:acc0:ac32::/48
 IP-CIDR6,2a0e:acc0:ac34::/47
 IP-CIDR6,2a0e:acc0:ac36::/48
 IP-CIDR6,2a0e:acc0:ac38::/48
-IP-CIDR6,2a0e:acc0:ac40::/45
+IP-CIDR6,2a0e:acc0:ac40::/46
+IP-CIDR6,2a0e:acc0:ac44::/48
+IP-CIDR6,2a0e:acc0:ac46::/47
 IP-CIDR6,2a0e:acc0:ac48::/47
 IP-CIDR6,2a0e:acc0:ac50::/45
 IP-CIDR6,2a0e:acc0:ac58::/47
@@ -31,8 +35,8 @@ IP-CIDR6,2a0e:acc0:ac78::/47
 IP-CIDR6,2a0e:acc0:ac80::/47
 IP-CIDR6,2a0e:acc0:ac82::/48
 IP-CIDR6,2a0e:acc0:ac85::/48
-IP-CIDR6,2a0e:acc0:ac86::/48
-IP-CIDR6,2a0e:acc0:ac88::/48
+IP-CIDR6,2a0e:acc0:ac86::/47
+IP-CIDR6,2a0e:acc0:ac88::/47
 IP-CIDR6,2a0e:acc0:ac90::/47
 IP-CIDR6,2a0e:acc0:ac92::/48
 IP-CIDR6,2a0e:acc0:ac95::/48
