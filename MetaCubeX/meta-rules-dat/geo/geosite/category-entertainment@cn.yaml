@@ -1,8 +1,6 @@
 payload:
-    - amp-api.podcasts.apple.com
-    - podcasts.apple.com
-    - +.ggpht.cn
-    - gog.qtlglb.com
+    - +.leagueoflegends.cn
+    - +.lpl.com.cn
     - +.steamserver.net
     - +.steamusercontent.com
     - +.csgo.com.cn
@@ -23,9 +21,6 @@ payload:
     - +.steamchina.com
     - +.gstore.val.manlaxy.com
     - +.yostar.cn
-    - +.bluearchive-cn.com
-    - +.leagueoflegends.cn
-    - +.lpl.com.cn
     - +.legendofzelda.cn
     - +.legendofzelda.com.cn
     - +.miitomo.com.cn
@@ -38,7 +33,11 @@ payload:
     - +.mariokart.cn
     - +.mariokart.com.cn
     - +.supermariobros.com.cn
+    - gog.qtlglb.com
     - +.xboxlive.cn
+    - +.bluearchive-cn.com
+    - amp-api.podcasts.apple.com
+    - podcasts.apple.com
     - amp-api-edge.music.apple.com
     - amp-api.music.apple.com
     - js-cdn.music.apple.com
@@ -46,9 +45,6 @@ payload:
     - musicstatus.music.apple.com
     - play.music.apple.com
     - speedysub.music.apple.com
-    - +.shanghaidisneyresort.com
-    - +.amazonprimevideo.cn
-    - +.amazonprimevideo.com.cn
     - +.apple-itunes.cn
     - +.itunes-apple.cn
     - +.itunesapple.cn
@@ -99,3 +95,7 @@ payload:
     - itunes.apple.com
     - itunesconnect.apple.com
     - osxapps.itunes.g.aaplimg.com
+    - +.ggpht.cn
+    - +.amazonprimevideo.cn
+    - +.amazonprimevideo.com.cn
+    - +.shanghaidisneyresort.com
