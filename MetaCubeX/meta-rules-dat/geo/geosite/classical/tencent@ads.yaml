@@ -26,6 +26,7 @@ payload:
     - DOMAIN-SUFFIX,bugly.qq.com
     - DOMAIN-SUFFIX,e.qq.com
     - DOMAIN-SUFFIX,gdt.qq.com
+    - DOMAIN-SUFFIX,gdtimg.com
     - DOMAIN-SUFFIX,hq-tracking.qq.com
     - DOMAIN-SUFFIX,htrace.wetvinfo.com
     - DOMAIN-SUFFIX,isdspeed.qq.com
@@ -48,7 +49,6 @@ payload:
     - DOMAIN-SUFFIX,trace.qq.com
     - DOMAIN-SUFFIX,ugdtimg.com
     - DOMAIN-SUFFIX,wit.qq.com
-    - DOMAIN-SUFFIX,badjs.weixinbridge.com
     - DOMAIN-SUFFIX,ad.tencentmusic.com
     - DOMAIN-SUFFIX,adstats.tencentmusic.com
     - DOMAIN-SUFFIX,monitor.music.qq.com
@@ -70,3 +70,4 @@ payload:
     - DOMAIN-SUFFIX,theta.sogoucdn.com
     - DOMAIN-SUFFIX,uranus.sogou.com
     - DOMAIN-SUFFIX,wuliao.epro.sogou.com
+    - DOMAIN-SUFFIX,badjs.weixinbridge.com

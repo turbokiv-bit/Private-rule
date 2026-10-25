@@ -5,6 +5,27 @@ payload:
     - DOMAIN-SUFFIX,targetads.io
     - DOMAIN-SUFFIX,terratraf.com
     - DOMAIN-SUFFIX,terratraf.io
+    - DOMAIN,api-eu.carrotquest.app
+    - DOMAIN,api-eu.carrotquest.io
+    - DOMAIN,api-ru.carrotquest.app
+    - DOMAIN,api-ru.carrotquest.io
+    - DOMAIN,api-secure.carrotquest.app
+    - DOMAIN,api-secure.carrottrack.app
+    - DOMAIN,api.carrotquest.app
+    - DOMAIN,api.carrotquest.io
+    - DOMAIN,api.carrottrack.app
+    - DOMAIN,api.dashly.app
+    - DOMAIN,api.dashlytrack.app
+    - DOMAIN-SUFFIX,neon.click
+    - DOMAIN-SUFFIX,sbermarketing.ru
+    - DOMAIN,error-tracking.megamarket.tech
+    - DOMAIN,metrics.21-school.ru
+    - DOMAIN,sentry.sberauto.com
+    - DOMAIN,tracing-http.megamarket.tech
+    - DOMAIN-SUFFIX,ads.sber.ru
+    - DOMAIN-SUFFIX,clickstream.sberbank.ru
+    - DOMAIN,visor.sberbank.ru
+    - DOMAIN,sentry.iptv.rt.ru
     - DOMAIN-SUFFIX,ad.mail.ru
     - DOMAIN-SUFFIX,ads.viqeo.tv
     - DOMAIN-SUFFIX,adsadvisor.io
@@ -58,8 +79,6 @@ payload:
     - DOMAIN,top-staging.mail.ru
     - DOMAIN,whiteline.mail.ru
     - DOMAIN,xray.mail.ru
-    - DOMAIN-SUFFIX,log.dzen.ru
-    - DOMAIN-SUFFIX,ms.dzen.ru
     - DOMAIN-SUFFIX,adv.vk.com
     - DOMAIN-SUFFIX,analytics.vk.com
     - DOMAIN-SUFFIX,ms.vk.com
@@ -75,11 +94,8 @@ payload:
     - DOMAIN,analytics.vk.ru
     - DOMAIN,stats.vk-portal.net
     - DOMAIN,target.vk.com
-    - DOMAIN,metrika.kontur.ru
-    - DOMAIN,sentry.kontur.host
-    - DOMAIN,sentry.iptv.rt.ru
-    - DOMAIN-SUFFIX,a.mts.ru
-    - DOMAIN-SUFFIX,obs.mts.ru
+    - DOMAIN-SUFFIX,log.dzen.ru
+    - DOMAIN-SUFFIX,ms.dzen.ru
     - DOMAIN-SUFFIX,e.mindbox.ru
     - DOMAIN-SUFFIX,g.mindbox.ru
     - DOMAIN-SUFFIX,s.mindbox.ru
@@ -90,29 +106,11 @@ payload:
     - DOMAIN,api.mindbox.ru
     - DOMAIN,sentry.mindbox.ru
     - DOMAIN,sentry.popmechanic.ru
-    - DOMAIN,api-eu.carrotquest.app
-    - DOMAIN,api-eu.carrotquest.io
-    - DOMAIN,api-ru.carrotquest.app
-    - DOMAIN,api-ru.carrotquest.io
-    - DOMAIN,api-secure.carrotquest.app
-    - DOMAIN,api-secure.carrottrack.app
-    - DOMAIN,api.carrotquest.app
-    - DOMAIN,api.carrotquest.io
-    - DOMAIN,api.carrottrack.app
-    - DOMAIN,api.dashly.app
-    - DOMAIN,api.dashlytrack.app
-    - DOMAIN-SUFFIX,ads.sber.ru
-    - DOMAIN-SUFFIX,clickstream.sberbank.ru
-    - DOMAIN,visor.sberbank.ru
     - DOMAIN,ads.x5.ru
     - DOMAIN,ads.x5media.ru
     - DOMAIN,sentry.x5.ru
-    - DOMAIN-SUFFIX,neon.click
-    - DOMAIN-SUFFIX,sbermarketing.ru
-    - DOMAIN,error-tracking.megamarket.tech
-    - DOMAIN,metrics.21-school.ru
-    - DOMAIN,sentry.sberauto.com
-    - DOMAIN,tracing-http.megamarket.tech
+    - DOMAIN,metrika.kontur.ru
+    - DOMAIN,sentry.kontur.host
     - DOMAIN-SUFFIX,ads.sber.ru
     - DOMAIN-SUFFIX,clickstream.sberbank.ru
     - DOMAIN,visor.sberbank.ru
@@ -157,6 +155,9 @@ payload:
     - DOMAIN,mc.yango.com
     - DOMAIN,pixel.yandex.com
     - DOMAIN,report.ap.yandex-net.ru
+    - DOMAIN-SUFFIX,a.mts.ru
+    - DOMAIN-SUFFIX,obs.mts.ru
+    - DOMAIN,stats.avito.ru
     - DOMAIN,ad.ozone.ru
     - DOMAIN,adv.ozon.ru
     - DOMAIN,agency-adv.ozon.ru
@@ -190,4 +191,3 @@ payload:
     - DOMAIN,marketplace-sentry.wb.ru
     - DOMAIN,sentry.wb.ru
     - DOMAIN,web-analytics.wildberries.ru
-    - DOMAIN,stats.avito.ru

@@ -1,6 +1,6 @@
 payload:
-    - +.videoxiaoyouxi.com
-    - +.wegame.com
+    - +.wcbygame.com
+    - +.yxdmgame.com
     - +.gameloop.com
     - +.gcloudcs.com
     - +.gcloudcstest.com
@@ -8,7 +8,6 @@ payload:
     - +.gclouddolphin.com
     - +.gcloudsdk.com
     - +.gcloudsvcs.com
-    - +.yxdmgame.com
     - +.goto-game.com
     - +.goto-game.mobi
     - +.goto-game.org
@@ -21,7 +20,7 @@ payload:
     - +.ludosuperstar.cn
     - +.ludoworld.net
     - +.mahjongai.net
-    - +.battlecare.net
+    - +.mahjongcup.cn
     - +.mahjongcup.com
     - +.mahjongcup.net
     - +.metalrevolution.com
@@ -33,7 +32,7 @@ payload:
     - +.pubgtool.com
     - +.qqgameapp.com
     - +.rmwxgame.com
-    - +.skydweller.cn
+    - +.yximg.cn
     - +.syxlgame.com
     - +.tencent-gcloud.com
     - +.tencentstart.com
@@ -41,10 +40,10 @@ payload:
     - +.texasholdemcup.com
     - +.texasholdemcup.net
     - +.timibase.com
-    - +.mahjongcup.cn
+    - +.videoxiaoyouxi.com
     - +.gameitop.com
-    - +.gdtimg.com
-    - +.yximg.cn
+    - +.battlecare.net
+    - +.skydweller.cn
     - +.yxwsgame.com
     - +.yzyxgame.com
     - +.zcjbgame.com
@@ -63,7 +62,7 @@ payload:
     - +.17roco.com
     - +.gtgres.com
     - +.realcybertron.com
-    - +.wcbygame.com
+    - +.wegame.com
     - +.anticheatexpert.com
     - +.tcfmglobal.com
     - +.bcfmglobal.com
