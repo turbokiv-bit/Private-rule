@@ -1,8 +1,8 @@
 payload:
     - kp-config-smart-tv.akamaized.net
     - kp-configs-smart-tv.s3.eu-central-1.amazonaws.com
-    - +.rutube.ru
-    - +.rutubelist.ru
+    - +.restream-media.net
+    - +.restream.ru
     - +.kinescopecdn.net
     - +.trbcdn.net
     - +.kinorium.com
@@ -19,17 +19,17 @@ payload:
     - +.viju.ru
     - +.ivi.ru
     - +.promodj.com
+    - +.more.tv
+    - +.wink.am
+    - +.wink.ru
+    - +.rutube.ru
+    - +.rutubelist.ru
     - +.rtbcdn.ru
     - +.rutube.sport
     - +.kinopoisk.ru
-    - +.wink.ru
-    - +.wink.am
+    - +.okko.tv
+    - +.okko.sport
     - +.okkoapi.tv
     - +.playfamily.ru
-    - +.okko.sport
-    - +.okko.tv
-    - +.restream-media.net
-    - +.restream.ru
-    - +.more.tv
     - +.kp.yandex.net
     - +.kinopoisk-ru.clstorage.net
