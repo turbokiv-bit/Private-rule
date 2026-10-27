@@ -7,8 +7,6 @@ DOMAIN-SUFFIX,firebasedynamiclinks-ipv6.googleapis.com
 DOMAIN-SUFFIX,firebasedynamiclinks.googleapis.com
 DOMAIN-SUFFIX,firebaseinappmessaging.googleapis.com
 DOMAIN-SUFFIX,firebaseinstallations.googleapis.com
-DOMAIN-SUFFIX,firebaselogging-pa.googleapis.com
-DOMAIN-SUFFIX,firebaselogging.googleapis.com
 DOMAIN-SUFFIX,firebaseperusertopics-pa.googleapis.com
 DOMAIN-SUFFIX,firebaseremoteconfig.googleapis.com
 DOMAIN-SUFFIX,crashlytics.com
@@ -20,4 +18,6 @@ DOMAIN-SUFFIX,firebaseio.com
 DOMAIN-SUFFIX,firebase.google.com
 DOMAIN-SUFFIX,crashlyticsreports-pa.googleapis.com
 DOMAIN-SUFFIX,firebase-settings.crashlytics.com
+DOMAIN-SUFFIX,firebaselogging-pa.googleapis.com
+DOMAIN-SUFFIX,firebaselogging.googleapis.com
 DOMAIN-SUFFIX,update.crashlytics.com

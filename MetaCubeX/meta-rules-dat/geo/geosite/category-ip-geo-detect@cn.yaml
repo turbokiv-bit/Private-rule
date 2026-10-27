@@ -42,7 +42,6 @@ payload:
     - +.todetect.cn
     - +.whatip.cn
     - +.whatismyip.com.cn
-    - +.testipv6.cn
     - ip.3322.net
     - ip.gymcalc.cn
     - ip.kutool.com
@@ -53,3 +52,4 @@ payload:
     - mip.chinaz.com
     - v6test.ipgg.cn
     - +.whois.pconline.com.cn
+    - +.testipv6.cn

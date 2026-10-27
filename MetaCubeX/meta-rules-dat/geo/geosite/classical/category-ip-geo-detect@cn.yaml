@@ -42,7 +42,6 @@ payload:
     - DOMAIN-SUFFIX,todetect.cn
     - DOMAIN-SUFFIX,whatip.cn
     - DOMAIN-SUFFIX,whatismyip.com.cn
-    - DOMAIN-SUFFIX,testipv6.cn
     - DOMAIN,ip.3322.net
     - DOMAIN,ip.gymcalc.cn
     - DOMAIN,ip.kutool.com
@@ -53,3 +52,4 @@ payload:
     - DOMAIN,mip.chinaz.com
     - DOMAIN,v6test.ipgg.cn
     - DOMAIN-SUFFIX,whois.pconline.com.cn
+    - DOMAIN-SUFFIX,testipv6.cn

@@ -3,7 +3,6 @@ DOMAIN-SUFFIX,audio4-ak-spotify-com.akamaized.net
 DOMAIN-SUFFIX,cdn-spotify-experiments.conductrics.com
 DOMAIN-SUFFIX,heads-ak-spotify-com.akamaized.net
 DOMAIN-SUFFIX,heads4-ak-spotify-com.akamaized.net
-DOMAIN-SUFFIX,spotify.com.edgesuite.net
 DOMAIN-SUFFIX,spotify.map.fastly.net
 DOMAIN-SUFFIX,spotify.map.fastlylb.net
 DOMAIN-SUFFIX,byspotify.com
@@ -23,6 +22,7 @@ DOMAIN-SUFFIX,spotifyforbrands.com
 DOMAIN-SUFFIX,spotifyforvendors.com
 DOMAIN-SUFFIX,spotifyjobs.com
 DOMAIN-SUFFIX,tospotify.com
+DOMAIN-SUFFIX,spotify.com.edgesuite.net
 DOMAIN-SUFFIX,adeventtracker.spotify.com
 DOMAIN-SUFFIX,adstudio-assets.scdn.co
 DOMAIN-SUFFIX,bloodhound.spotify.com

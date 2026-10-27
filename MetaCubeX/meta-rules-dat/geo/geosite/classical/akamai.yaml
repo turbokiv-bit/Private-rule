@@ -61,7 +61,6 @@ payload:
     - DOMAIN-SUFFIX,akastream.com
     - DOMAIN-SUFFIX,akastream.net
     - DOMAIN-SUFFIX,akatns.net
-    - DOMAIN-SUFFIX,akstat.io
     - DOMAIN-SUFFIX,edgekey.net
     - DOMAIN-SUFFIX,edgesuite.net
     - DOMAIN-SUFFIX,iamakamai.com
@@ -74,6 +73,7 @@ payload:
     - DOMAIN-SUFFIX,akadns99.net
     - DOMAIN-SUFFIX,akamai.com
     - DOMAIN-SUFFIX,akcdn.com.cn
+    - DOMAIN-SUFFIX,akstat.io
     - DOMAIN-SUFFIX,aptdn.net
     - DOMAIN-SUFFIX,edgekey88.net
     - DOMAIN-SUFFIX,janrain.biz

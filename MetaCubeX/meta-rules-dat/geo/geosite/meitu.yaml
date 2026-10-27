@@ -1,7 +1,6 @@
 payload:
     - +.meitu.com
     - +.meitudata.com
-    - +.meitustat.com
     - +.designkit.cn
     - +.kaipai.com
     - +.meipai.com
@@ -12,3 +11,4 @@ payload:
     - +.whee.com
     - +.wink.cn
     - +.zcool.com.cn
+    - +.meitustat.com

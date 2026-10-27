@@ -100,6 +100,7 @@ payload:
     - DOMAIN-SUFFIX,chinacloudapp.cn
     - DOMAIN-SUFFIX,chinacloudsites.cn
     - DOMAIN-SUFFIX,hdinsightservices.cn
+    - DOMAIN-SUFFIX,in.applicationinsights.azure.com
     - DOMAIN-SUFFIX,management-azure-devices-provisioning.cn
     - DOMAIN-SUFFIX,management-azure-devices.cn
     - DOMAIN-SUFFIX,mcchcdn.com
@@ -139,6 +140,8 @@ payload:
     - DOMAIN-SUFFIX,azchcdnq.com
     - DOMAIN-SUFFIX,azchcdnr.com
     - DOMAIN-SUFFIX,azchcdns.com
+    - DOMAIN,dc.applicationinsights.azure.com
+    - DOMAIN,live.applicationinsights.azure.com
     - DOMAIN-SUFFIX,azure-dns.cn
     - DOMAIN-SUFFIX,azure-dns-1.cn
     - DOMAIN-SUFFIX,azure-dns-2.cn

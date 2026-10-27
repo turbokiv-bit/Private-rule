@@ -26,13 +26,8 @@ payload:
     - +.zastatic.com
     - +.zhenai.com
     - +.zsxq.com
-    - +.hupu.com
-    - +.hupucdn.com
-    - +.shihuo.cn
-    - +.zhihu.com
-    - +.zhimg.com
-    - +.laiyagushi.com
-    - +.vzuu.com
+    - +.gracg.com
+    - +.procg.cn
     - +.ivwen.com
     - +.meipian.cn
     - +.meipian.me
@@ -47,8 +42,13 @@ payload:
     - +.douban.com
     - +.douban.fm
     - +.doubanio.com
-    - +.gracg.com
-    - +.procg.cn
+    - +.hupu.com
+    - +.hupucdn.com
+    - +.shihuo.cn
+    - +.zhihu.com
+    - +.zhimg.com
+    - +.laiyagushi.com
+    - +.vzuu.com
     - +.tieba.baidu.com
     - +.hoopchina.com.cn
     - +.crash2.zhihu.com

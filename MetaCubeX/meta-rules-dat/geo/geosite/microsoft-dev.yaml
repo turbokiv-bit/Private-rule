@@ -72,4 +72,6 @@ payload:
     - +.microsoftreactor.cn
     - +.microsoftreactor.com.cn
     - +.reactorms.com.cn
+    - dc.services.visualstudio.com
     - download.visualstudio.microsoft.com
+    - rt.services.visualstudio.com
