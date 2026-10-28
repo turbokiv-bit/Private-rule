@@ -97,16 +97,6 @@ payload:
     - +.signalprocessingsociety.org
     - +.technologyandsociety.org
     - +.vtsociety.org
-    - +.acousticbrainz.org
-    - +.bookbrainz.org
-    - +.coverartarchive.org
-    - +.critiquebrainz.org
-    - +.listenbrainz.org
-    - +.messybrainz.org
-    - +.metabrainz.org
-    - +.musicbrainz.org
-    - +.nist.gov
-    - +.time.gov
     - +.openmaps.org
     - +.openstreetmap.com
     - +.openstreetmap.net
@@ -122,11 +112,21 @@ payload:
     - +.creativecommons.org
     - +.creativecommons.engineering
     - +.licensebuttons.net
-    - +.csis.org
     - +.emojipedia.org
     - +.worldemojiawards.com
     - +.worldemojiday.com
     - +.xn--yt8h.la
+    - +.acousticbrainz.org
+    - +.bookbrainz.org
+    - +.coverartarchive.org
+    - +.critiquebrainz.org
+    - +.listenbrainz.org
+    - +.messybrainz.org
+    - +.metabrainz.org
+    - +.musicbrainz.org
+    - +.nist.gov
+    - +.time.gov
     - +.rolfoundation.org
     - +.rolsociety.org
+    - +.csis.org
     - sentry.ppy.sh
