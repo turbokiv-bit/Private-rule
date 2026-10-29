@@ -1,7 +1,6 @@
 DOMAIN-SUFFIX,applogcdn.com
 DOMAIN-SUFFIX,extlog.snssdk.com
 DOMAIN-SUFFIX,log.zijieapi.com
-DOMAIN-SUFFIX,volceapplog.com
 DOMAIN-SUFFIX,log3-applog-hl.fqnovel.com
 DOMAIN-SUFFIX,log3-applog.fqnovel.com
 DOMAIN-SUFFIX,log5-applog-hl.fqnovel.com
@@ -10,3 +9,4 @@ DOMAIN-SUFFIX,rtlog3-applog-hl.fqnovel.com
 DOMAIN-SUFFIX,rtlog3-applog.fqnovel.com
 DOMAIN-SUFFIX,rtlog5-applog-hl.fqnovel.com
 DOMAIN-SUFFIX,rtlog5-applog.fqnovel.com
+DOMAIN-SUFFIX,volceapplog.com

@@ -2,7 +2,6 @@ payload:
     - +.applogcdn.com
     - +.extlog.snssdk.com
     - +.log.zijieapi.com
-    - +.volceapplog.com
     - log3-applog-hl.fqnovel.com
     - log3-applog.fqnovel.com
     - log5-applog-hl.fqnovel.com
@@ -11,3 +10,4 @@ payload:
     - rtlog3-applog.fqnovel.com
     - rtlog5-applog-hl.fqnovel.com
     - rtlog5-applog.fqnovel.com
+    - +.volceapplog.com
