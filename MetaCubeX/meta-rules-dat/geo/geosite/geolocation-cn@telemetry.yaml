@@ -1,4 +1,4 @@
 payload:
-    - +.shuqistat.com
-    - +.meitustat.com
     - +.cloudflareinsights-cn.com
+    - +.meitustat.com
+    - +.shuqistat.com

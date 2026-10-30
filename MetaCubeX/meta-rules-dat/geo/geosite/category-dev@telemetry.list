@@ -1,8 +1,8 @@
+DOMAIN-SUFFIX,dc.services.visualstudio.com
+DOMAIN-SUFFIX,rt.services.visualstudio.com
 DOMAIN-SUFFIX,analytics.cloud.unity3d.com
 DOMAIN-SUFFIX,perf.cloud.unity3d.com
 DOMAIN-SUFFIX,perf-events.cloud.unity3d.com
-DOMAIN-SUFFIX,dc.services.visualstudio.com
-DOMAIN-SUFFIX,rt.services.visualstudio.com
 DOMAIN-SUFFIX,crashlyticsreports-pa.googleapis.com
 DOMAIN-SUFFIX,firebase-settings.crashlytics.com
 DOMAIN-SUFFIX,firebaselogging-pa.googleapis.com
