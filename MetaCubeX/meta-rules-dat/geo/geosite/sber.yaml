@@ -1,7 +1,7 @@
 payload:
     - sberpro.vedomosti.ru
     - +.payecom.ru
-    - +.playfamily.ru
+    - +.sber-bank.by
     - +.megamarket.tech
     - +.sberauto.com
     - +.sberbank-insurance.ru
@@ -40,8 +40,8 @@ payload:
     - +.jivochat.es
     - +.jivochat.ng
     - +.jivochat.ru
-    - +.2gis.ge
-    - +.2gis.tj
+    - +.okko.tv
+    - +.okko.sport
     - +.jivosite.com
     - +.jivosite.ru
     - +.eapteka.ru
@@ -53,12 +53,8 @@ payload:
     - +.otello.ru
     - +.zvuk-b2b.com
     - +.zvuk.com
-    - +.okkoapi.tv
-    - +.platiecom.ru
-    - +.okko.sport
-    - +.okko.tv
     - +.bps-sberbank.by
-    - +.sber-bank.by
+    - +.platiecom.ru
     - +.sber.ru
     - +.sberbank.com
     - +.sberbank.ru
@@ -83,13 +79,17 @@ payload:
     - +.2gis.am
     - +.2gis.kz
     - +.2gis.ru
-    - +.jivochat.co.za
-    - +.jivochat.co.in
-    - +.jivochat.com.br
-    - +.jivochat.com.co
+    - +.2gis.tj
+    - +.2gis.ge
+    - +.playfamily.ru
+    - +.okkoapi.tv
     - +.jivochat.com.pe
     - +.jivochat.com.tr
     - +.2gis.com.cy
+    - +.jivochat.com.co
+    - +.jivochat.com.br
+    - +.jivochat.co.za
+    - +.jivochat.co.in
     - +.neon.click
     - +.sbermarketing.ru
     - error-tracking.megamarket.tech

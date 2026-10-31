@@ -1,7 +1,7 @@
 payload:
     - location.microsoft.com
     - +.bing
-    - +.masalladeloslimites.com
+    - +.flipwithsurface.com
     - +.microsoftpartnersolutions.com
     - +.bing123.com
     - +.bingagencyawards.com
@@ -9,20 +9,21 @@ payload:
     - +.bingapistatistics.com
     - +.bingparachute.com
     - +.bingsandbox.com
+    - +.bingstatic.com
     - +.bingvisualsearch.com
     - +.bingworld.com
     - +.bluehatnights.com
     - +.dictate.ms
-    - +.flipwithsurface.com
     - +.bing.com
     - +.bing.net
+    - +.masalladeloslimites.com
+    - +.office365love.com
     - +.microsoftdiplomados.com
-    - +.microsoft-give.com
     - +.microsoftlatamholiday.com
     - +.microsoftmxfilantropia.com
-    - +.microsoftcloudsummit.com
+    - +.microsoft-give.com
     - +.msunlimitedcloudsummit.com
-    - +.office365love.com
+    - +.microsoftcloudsummit.com
     - +.office365tw.com
     - +.renovacionoffice.com
     - +.sprinklesapp.com
