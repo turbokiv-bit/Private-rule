@@ -5,6 +5,8 @@ payload:
     - +.data.microsoft.com
     - +.telemetry.microsoft.com
     - +.nelreports.net
+    - +.browser.events.data.msn.cn
+    - +.browser.events.data.msn.com
     - +.in.applicationinsights.azure.com
     - dc.applicationinsights.azure.com
     - live.applicationinsights.azure.com
@@ -14,5 +16,3 @@ payload:
     - copilot-telemetry.githubusercontent.com
     - dc.services.visualstudio.com
     - rt.services.visualstudio.com
-    - +.browser.events.data.msn.cn
-    - +.browser.events.data.msn.com
