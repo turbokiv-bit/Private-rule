@@ -11,7 +11,7 @@ payload:
     - p8-juejin.byteimg.com
     - p9-juejin.byteimg.com
     - +.larkoffice.com
-    - +.ihuoshanstatic.com
+    - +.volcenginepaas.com
     - +.activity-dy.com
     - +.activity01.com
     - +.activity02.com
@@ -137,7 +137,7 @@ payload:
     - +.bytetstatic.com
     - +.bytetstatic.net
     - +.byteurl.cn
-    - +.larkofficeapp-boe.com
+    - +.bytevalk.com
     - +.bytevcloudapi.com
     - +.bytevcloudvod.com
     - +.bytexservice.com
@@ -148,6 +148,7 @@ payload:
     - +.doubo03.com
     - +.draftstatic.com
     - +.druid.vip
+    - +.edge-byted.com
     - +.fedlearner.net
     - +.feelgood.cn
     - +.gcloudcache.com
@@ -323,6 +324,7 @@ payload:
     - +.ppxstatic.com
     - +.ppxvod.com
     - +.xiaoxiaapi.com
+    - +.haimian.com
     - +.dailygn.com
     - +.nvsgames.cn
     - +.buydouke.com
@@ -433,9 +435,9 @@ payload:
     - +.larkfn.com
     - +.larkmeetings.cn
     - +.larkmeetings.com
-    - +.douyinliving.com
+    - +.volcalb.com
     - +.99uri.com
-    - +.bytevalk.com
+    - +.mchost.guru
     - +.larkofficeapp-pre.com
     - +.larkofficeapp.com
     - +.larkofficeboe.com
@@ -458,7 +460,7 @@ payload:
     - +.mcdemo.show
     - +.open-douyin.com
     - +.lifexue.com
-    - +.mchost.guru
+    - +.larkofficeapp-boe.com
     - +.mcprev.cn
     - +.tcwqqdy.guru
     - +.trae.cn
@@ -602,7 +604,7 @@ payload:
     - +.volc-embed.com
     - +.volcadocean.com
     - +.volcadvc.com
-    - +.volcalb.com
+    - +.99uri.cn
     - +.volcanoaisearchshare.com
     - +.qingfuwu.com
     - +.ai-kaleidoscope.com
@@ -646,7 +648,7 @@ payload:
     - +.volcengineapi.com
     - +.volcenginedns.com
     - +.volcenginedns.net
-    - +.volcenginepaas.com
+    - +.thelarkcloud.com
     - +.volces-test.com
     - +.volces.cn
     - +.volces.com
@@ -774,6 +776,7 @@ payload:
     - +.instreet.com
     - +.doubao-dev.com
     - +.doubao.com
+    - +.doubaoapps.com
     - +.doubaocdn.com
     - +.hi-butterfly.cn
     - +.maoxiangai.com
@@ -801,7 +804,7 @@ payload:
     - +.douyinact.net
     - +.douyincdn.com
     - +.douyinfe.com
-    - +.99uri.cn
+    - +.douyinliving.com
     - +.douyinmusicpromotion.com
     - +.douyinpic.com
     - +.douyinstatic.com
@@ -835,7 +838,7 @@ payload:
     - +.ihst8.com
     - +.ihuoshanimg.com
     - +.ihuoshanlive.com
-    - +.thelarkcloud.com
+    - +.ihuoshanstatic.com
     - +.ihuoshanvod.com
     - +.kolbuyer.cn
     - +.nextvid.net
@@ -949,7 +952,6 @@ payload:
     - roovza.launches.appsflyersdk.com
     - roovza.skadsdk.appsflyersdk.com
     - +.analytics.tiktok.com
-    - +.volceapplog.com
     - +.coze.com
     - +.marscode.com
     - +.trae.ai
@@ -957,3 +959,4 @@ payload:
     - +.ciciai.com
     - +.ciciaicdn.com
     - +.dola.com
+    - +.volceapplog.com

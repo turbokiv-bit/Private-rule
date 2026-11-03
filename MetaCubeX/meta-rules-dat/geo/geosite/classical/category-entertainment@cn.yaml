@@ -1,4 +1,14 @@
 payload:
+    - DOMAIN,amp-api-edge.music.apple.com
+    - DOMAIN,amp-api.music.apple.com
+    - DOMAIN,js-cdn.music.apple.com
+    - DOMAIN,music.apple.com
+    - DOMAIN,musicstatus.music.apple.com
+    - DOMAIN,play.music.apple.com
+    - DOMAIN,speedysub.music.apple.com
+    - DOMAIN-SUFFIX,ggpht.cn
+    - DOMAIN-SUFFIX,shanghaidisneyresort.com
+    - DOMAIN-SUFFIX,xboxlive.cn
     - DOMAIN-SUFFIX,bluearchive-cn.com
     - DOMAIN,gog.qtlglb.com
     - DOMAIN-SUFFIX,steamserver.net
@@ -36,8 +46,11 @@ payload:
     - DOMAIN-SUFFIX,supermariobros.com.cn
     - DOMAIN-SUFFIX,leagueoflegends.cn
     - DOMAIN-SUFFIX,lpl.com.cn
-    - DOMAIN-SUFFIX,xboxlive.cn
     - DOMAIN-SUFFIX,yostar.cn
+    - DOMAIN-SUFFIX,amazonprimevideo.cn
+    - DOMAIN-SUFFIX,amazonprimevideo.com.cn
+    - DOMAIN,amp-api.podcasts.apple.com
+    - DOMAIN,podcasts.apple.com
     - DOMAIN-SUFFIX,apple-itunes.cn
     - DOMAIN-SUFFIX,itunes-apple.cn
     - DOMAIN-SUFFIX,itunesapple.cn
@@ -88,16 +101,3 @@ payload:
     - DOMAIN,itunes.apple.com
     - DOMAIN,itunesconnect.apple.com
     - DOMAIN,osxapps.itunes.g.aaplimg.com
-    - DOMAIN,amp-api-edge.music.apple.com
-    - DOMAIN,amp-api.music.apple.com
-    - DOMAIN,js-cdn.music.apple.com
-    - DOMAIN,music.apple.com
-    - DOMAIN,musicstatus.music.apple.com
-    - DOMAIN,play.music.apple.com
-    - DOMAIN,speedysub.music.apple.com
-    - DOMAIN-SUFFIX,shanghaidisneyresort.com
-    - DOMAIN,amp-api.podcasts.apple.com
-    - DOMAIN,podcasts.apple.com
-    - DOMAIN-SUFFIX,amazonprimevideo.cn
-    - DOMAIN-SUFFIX,amazonprimevideo.com.cn
-    - DOMAIN-SUFFIX,ggpht.cn

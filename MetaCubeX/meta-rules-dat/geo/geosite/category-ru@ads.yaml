@@ -5,8 +5,6 @@ payload:
     - +.targetads.io
     - +.terratraf.com
     - +.terratraf.io
-    - metrika.kontur.ru
-    - sentry.kontur.host
     - +.neon.click
     - +.sbermarketing.ru
     - error-tracking.megamarket.tech
@@ -16,10 +14,6 @@ payload:
     - +.ads.sber.ru
     - +.clickstream.sberbank.ru
     - visor.sberbank.ru
-    - sentry.iptv.rt.ru
-    - ads.x5.ru
-    - ads.x5media.ru
-    - sentry.x5.ru
     - api-eu.carrotquest.app
     - api-eu.carrotquest.io
     - api-ru.carrotquest.app
@@ -44,6 +38,8 @@ payload:
     - +.ads.sber.ru
     - +.clickstream.sberbank.ru
     - visor.sberbank.ru
+    - metrika.kontur.ru
+    - sentry.kontur.host
     - +.a.mts.ru
     - +.obs.mts.ru
     - stats.avito.ru
@@ -133,6 +129,8 @@ payload:
     - top-staging.mail.ru
     - whiteline.mail.ru
     - xray.mail.ru
+    - +.log.dzen.ru
+    - +.ms.dzen.ru
     - +.adv.vk.com
     - +.analytics.vk.com
     - +.ms.vk.com
@@ -148,8 +146,10 @@ payload:
     - analytics.vk.ru
     - stats.vk-portal.net
     - target.vk.com
-    - +.log.dzen.ru
-    - +.ms.dzen.ru
+    - ads.x5.ru
+    - ads.x5media.ru
+    - sentry.x5.ru
+    - sentry.iptv.rt.ru
     - +.adfox.ru
     - +.adfox.yandex.ru
     - +.admetrica.ru

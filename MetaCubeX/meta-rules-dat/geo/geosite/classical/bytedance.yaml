@@ -11,7 +11,7 @@ payload:
     - DOMAIN,p8-juejin.byteimg.com
     - DOMAIN,p9-juejin.byteimg.com
     - DOMAIN-SUFFIX,larkoffice.com
-    - DOMAIN-SUFFIX,ihuoshanstatic.com
+    - DOMAIN-SUFFIX,volcenginepaas.com
     - DOMAIN-SUFFIX,activity-dy.com
     - DOMAIN-SUFFIX,activity01.com
     - DOMAIN-SUFFIX,activity02.com
@@ -137,7 +137,7 @@ payload:
     - DOMAIN-SUFFIX,bytetstatic.com
     - DOMAIN-SUFFIX,bytetstatic.net
     - DOMAIN-SUFFIX,byteurl.cn
-    - DOMAIN-SUFFIX,larkofficeapp-boe.com
+    - DOMAIN-SUFFIX,bytevalk.com
     - DOMAIN-SUFFIX,bytevcloudapi.com
     - DOMAIN-SUFFIX,bytevcloudvod.com
     - DOMAIN-SUFFIX,bytexservice.com
@@ -148,6 +148,7 @@ payload:
     - DOMAIN-SUFFIX,doubo03.com
     - DOMAIN-SUFFIX,draftstatic.com
     - DOMAIN-SUFFIX,druid.vip
+    - DOMAIN-SUFFIX,edge-byted.com
     - DOMAIN-SUFFIX,fedlearner.net
     - DOMAIN-SUFFIX,feelgood.cn
     - DOMAIN-SUFFIX,gcloudcache.com
@@ -323,6 +324,7 @@ payload:
     - DOMAIN-SUFFIX,ppxstatic.com
     - DOMAIN-SUFFIX,ppxvod.com
     - DOMAIN-SUFFIX,xiaoxiaapi.com
+    - DOMAIN-SUFFIX,haimian.com
     - DOMAIN-SUFFIX,dailygn.com
     - DOMAIN-SUFFIX,nvsgames.cn
     - DOMAIN-SUFFIX,buydouke.com
@@ -433,9 +435,9 @@ payload:
     - DOMAIN-SUFFIX,larkfn.com
     - DOMAIN-SUFFIX,larkmeetings.cn
     - DOMAIN-SUFFIX,larkmeetings.com
-    - DOMAIN-SUFFIX,douyinliving.com
+    - DOMAIN-SUFFIX,volcalb.com
     - DOMAIN-SUFFIX,99uri.com
-    - DOMAIN-SUFFIX,bytevalk.com
+    - DOMAIN-SUFFIX,mchost.guru
     - DOMAIN-SUFFIX,larkofficeapp-pre.com
     - DOMAIN-SUFFIX,larkofficeapp.com
     - DOMAIN-SUFFIX,larkofficeboe.com
@@ -458,7 +460,7 @@ payload:
     - DOMAIN-SUFFIX,mcdemo.show
     - DOMAIN-SUFFIX,open-douyin.com
     - DOMAIN-SUFFIX,lifexue.com
-    - DOMAIN-SUFFIX,mchost.guru
+    - DOMAIN-SUFFIX,larkofficeapp-boe.com
     - DOMAIN-SUFFIX,mcprev.cn
     - DOMAIN-SUFFIX,tcwqqdy.guru
     - DOMAIN-SUFFIX,trae.cn
@@ -602,7 +604,7 @@ payload:
     - DOMAIN-SUFFIX,volc-embed.com
     - DOMAIN-SUFFIX,volcadocean.com
     - DOMAIN-SUFFIX,volcadvc.com
-    - DOMAIN-SUFFIX,volcalb.com
+    - DOMAIN-SUFFIX,99uri.cn
     - DOMAIN-SUFFIX,volcanoaisearchshare.com
     - DOMAIN-SUFFIX,qingfuwu.com
     - DOMAIN-SUFFIX,ai-kaleidoscope.com
@@ -646,7 +648,7 @@ payload:
     - DOMAIN-SUFFIX,volcengineapi.com
     - DOMAIN-SUFFIX,volcenginedns.com
     - DOMAIN-SUFFIX,volcenginedns.net
-    - DOMAIN-SUFFIX,volcenginepaas.com
+    - DOMAIN-SUFFIX,thelarkcloud.com
     - DOMAIN-SUFFIX,volces-test.com
     - DOMAIN-SUFFIX,volces.cn
     - DOMAIN-SUFFIX,volces.com
@@ -774,6 +776,7 @@ payload:
     - DOMAIN-SUFFIX,instreet.com
     - DOMAIN-SUFFIX,doubao-dev.com
     - DOMAIN-SUFFIX,doubao.com
+    - DOMAIN-SUFFIX,doubaoapps.com
     - DOMAIN-SUFFIX,doubaocdn.com
     - DOMAIN-SUFFIX,hi-butterfly.cn
     - DOMAIN-SUFFIX,maoxiangai.com
@@ -801,7 +804,7 @@ payload:
     - DOMAIN-SUFFIX,douyinact.net
     - DOMAIN-SUFFIX,douyincdn.com
     - DOMAIN-SUFFIX,douyinfe.com
-    - DOMAIN-SUFFIX,99uri.cn
+    - DOMAIN-SUFFIX,douyinliving.com
     - DOMAIN-SUFFIX,douyinmusicpromotion.com
     - DOMAIN-SUFFIX,douyinpic.com
     - DOMAIN-SUFFIX,douyinstatic.com
@@ -835,7 +838,7 @@ payload:
     - DOMAIN-SUFFIX,ihst8.com
     - DOMAIN-SUFFIX,ihuoshanimg.com
     - DOMAIN-SUFFIX,ihuoshanlive.com
-    - DOMAIN-SUFFIX,thelarkcloud.com
+    - DOMAIN-SUFFIX,ihuoshanstatic.com
     - DOMAIN-SUFFIX,ihuoshanvod.com
     - DOMAIN-SUFFIX,kolbuyer.cn
     - DOMAIN-SUFFIX,nextvid.net
@@ -949,7 +952,6 @@ payload:
     - DOMAIN,roovza.launches.appsflyersdk.com
     - DOMAIN,roovza.skadsdk.appsflyersdk.com
     - DOMAIN-SUFFIX,analytics.tiktok.com
-    - DOMAIN-SUFFIX,volceapplog.com
     - DOMAIN-SUFFIX,coze.com
     - DOMAIN-SUFFIX,marscode.com
     - DOMAIN-SUFFIX,trae.ai
@@ -957,3 +959,4 @@ payload:
     - DOMAIN-SUFFIX,ciciai.com
     - DOMAIN-SUFFIX,ciciaicdn.com
     - DOMAIN-SUFFIX,dola.com
+    - DOMAIN-SUFFIX,volceapplog.com

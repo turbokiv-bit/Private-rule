@@ -4,8 +4,6 @@ DOMAIN-SUFFIX,roistat.com
 DOMAIN-SUFFIX,targetads.io
 DOMAIN-SUFFIX,terratraf.com
 DOMAIN-SUFFIX,terratraf.io
-DOMAIN,metrika.kontur.ru
-DOMAIN,sentry.kontur.host
 DOMAIN-SUFFIX,neon.click
 DOMAIN-SUFFIX,sbermarketing.ru
 DOMAIN,error-tracking.megamarket.tech
@@ -15,10 +13,6 @@ DOMAIN,tracing-http.megamarket.tech
 DOMAIN-SUFFIX,ads.sber.ru
 DOMAIN-SUFFIX,clickstream.sberbank.ru
 DOMAIN,visor.sberbank.ru
-DOMAIN,sentry.iptv.rt.ru
-DOMAIN,ads.x5.ru
-DOMAIN,ads.x5media.ru
-DOMAIN,sentry.x5.ru
 DOMAIN,api-eu.carrotquest.app
 DOMAIN,api-eu.carrotquest.io
 DOMAIN,api-ru.carrotquest.app
@@ -40,6 +34,8 @@ DOMAIN,api.mindbox.cloud
 DOMAIN,api.mindbox.ru
 DOMAIN,sentry.mindbox.ru
 DOMAIN,sentry.popmechanic.ru
+DOMAIN,metrika.kontur.ru
+DOMAIN,sentry.kontur.host
 DOMAIN-SUFFIX,a.mts.ru
 DOMAIN-SUFFIX,obs.mts.ru
 DOMAIN,stats.avito.ru
@@ -129,6 +125,8 @@ DOMAIN,t.mail.ru
 DOMAIN,top-staging.mail.ru
 DOMAIN,whiteline.mail.ru
 DOMAIN,xray.mail.ru
+DOMAIN-SUFFIX,log.dzen.ru
+DOMAIN-SUFFIX,ms.dzen.ru
 DOMAIN-SUFFIX,adv.vk.com
 DOMAIN-SUFFIX,analytics.vk.com
 DOMAIN-SUFFIX,ms.vk.com
@@ -144,8 +142,10 @@ DOMAIN,advk.vk.ru
 DOMAIN,analytics.vk.ru
 DOMAIN,stats.vk-portal.net
 DOMAIN,target.vk.com
-DOMAIN-SUFFIX,log.dzen.ru
-DOMAIN-SUFFIX,ms.dzen.ru
+DOMAIN,ads.x5.ru
+DOMAIN,ads.x5media.ru
+DOMAIN,sentry.x5.ru
+DOMAIN,sentry.iptv.rt.ru
 DOMAIN-SUFFIX,adfox.ru
 DOMAIN-SUFFIX,adfox.yandex.ru
 DOMAIN-SUFFIX,admetrica.ru
