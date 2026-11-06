@@ -1,6 +1,4 @@
 payload:
-    - DOMAIN-SUFFIX,jetbrains.com.cn
-    - DOMAIN-SUFFIX,cdn.jetbrains.com
     - DOMAIN,cdn.ampproject.org
     - DOMAIN,crashlyticsreports-pa.googleapis.com
     - DOMAIN,firebase-settings.crashlytics.com
@@ -23,3 +21,5 @@ payload:
     - DOMAIN-SUFFIX,researchkit.com.cn
     - DOMAIN-SUFFIX,swiftui.cn
     - DOMAIN-SUFFIX,swiftui.com.cn
+    - DOMAIN-SUFFIX,jetbrains.com.cn
+    - DOMAIN-SUFFIX,cdn.jetbrains.com

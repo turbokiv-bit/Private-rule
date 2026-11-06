@@ -1,4 +1,5 @@
 payload:
+    - csis-prod.s3.amazonaws.com
     - a.ppy.sh
     - assets.ppy.sh
     - c.ppy.sh
@@ -7,7 +8,6 @@ payload:
     - lazer.ppy.sh
     - notify.ppy.sh
     - spectator.ppy.sh
-    - csis-prod.s3.amazonaws.com
     - +.aomedia.org
     - +.atypi.org
     - +.change.org
@@ -23,7 +23,30 @@ payload:
     - +.who.int
     - +.wi-fi.org
     - +.wto.org
-    - +.ppy.sh
+    - +.acousticbrainz.org
+    - +.bookbrainz.org
+    - +.coverartarchive.org
+    - +.critiquebrainz.org
+    - +.listenbrainz.org
+    - +.messybrainz.org
+    - +.metabrainz.org
+    - +.musicbrainz.org
+    - +.openmaps.org
+    - +.openstreetmap.com
+    - +.openstreetmap.net
+    - +.openstreetmap.org
+    - +.openstreetmaps.org
+    - +.osm.org
+    - +.osmfoundation.org
+    - +.stateofthemap.com
+    - +.stateofthemap.org
+    - +.rolfoundation.org
+    - +.rolsociety.org
+    - +.csis.org
+    - +.emojipedia.org
+    - +.worldemojiawards.com
+    - +.worldemojiday.com
+    - +.xn--yt8h.la
     - +.f-dro1d.org
     - +.f-droid.com
     - +.f-droid.org
@@ -44,28 +67,6 @@ payload:
     - +.grapheneos.social
     - +.seamlessupdate.app
     - +.vanadium.app
-    - +.nist.gov
-    - +.time.gov
-    - +.openmaps.org
-    - +.openstreetmap.com
-    - +.openstreetmap.net
-    - +.openstreetmap.org
-    - +.openstreetmaps.org
-    - +.osm.org
-    - +.osmfoundation.org
-    - +.stateofthemap.com
-    - +.stateofthemap.org
-    - +.rolfoundation.org
-    - +.rolsociety.org
-    - +.ccstatic.org
-    - +.creativecommons.org
-    - +.creativecommons.engineering
-    - +.licensebuttons.net
-    - +.csis.org
-    - +.emojipedia.org
-    - +.worldemojiawards.com
-    - +.worldemojiday.com
-    - +.xn--yt8h.la
     - +.ieee.org
     - +.ieee.tv
     - +.tryengineering.org
@@ -120,13 +121,12 @@ payload:
     - +.signalprocessingsociety.org
     - +.technologyandsociety.org
     - +.vtsociety.org
-    - +.acousticbrainz.org
-    - +.bookbrainz.org
-    - +.coverartarchive.org
-    - +.critiquebrainz.org
-    - +.listenbrainz.org
-    - +.messybrainz.org
-    - +.metabrainz.org
-    - +.musicbrainz.org
+    - +.nist.gov
+    - +.time.gov
     - +.paskoocheh.com
+    - +.ppy.sh
+    - +.ccstatic.org
+    - +.creativecommons.org
+    - +.creativecommons.engineering
+    - +.licensebuttons.net
     - sentry.ppy.sh
