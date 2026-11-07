@@ -1,27 +1,9 @@
 payload:
-    - +.clarity.ms
-    - +.microsoftads.com
-    - +.msads.net
-    - +.nelreports.net
-    - +.browser.events.data.msn.cn
-    - +.browser.events.data.msn.com
-    - +.bingads.com
-    - +.amazon-adsystem.com
-    - +.serving-sys.com
-    - +.e.mindbox.ru
-    - +.g.mindbox.ru
-    - +.s.mindbox.ru
-    - api-js.mindbox.ru
-    - api-ru.mindbox.cloud
-    - api-staging.mindbox.ru
-    - api.mindbox.cloud
-    - api.mindbox.ru
-    - sentry.mindbox.ru
-    - sentry.popmechanic.ru
-    - sentry.iptv.rt.ru
-    - +.ads-api.duolingo.com
-    - +.analytics.vpc.duolingo.com
-    - +.metrics.duolingo.com
+    - +.samsungadhub.com
+    - +.samsungads.com
+    - +.ads.yahoo.com
+    - +.gemini.yahoo.com
+    - +.ysm.yahoo.com
     - +.2mdn-cn.net
     - +.2mdn.net
     - +.admob-cn.com
@@ -76,23 +58,11 @@ payload:
     - +.urchin.com
     - analytics.google.com
     - +.ads.youtube.com
-    - sentry.hetzner.company
-    - +.snapads.com
-    - +.analytics.facebook.com
-    - +.facebookads.com
-    - +.pixel.facebook.com
-    - +.graph.instagram.com
-    - +.graph-fallback.instagram.com
-    - +.samsungadhub.com
-    - +.samsungads.com
-    - +.advertising.adobe.com
-    - +.demdex.net
-    - +.tubemogul.com
-    - ads-img.mozilla.org
-    - ads.mozilla.org
-    - +.ads.yahoo.com
-    - +.gemini.yahoo.com
-    - +.ysm.yahoo.com
+    - +.advertising.apple.com
+    - +.api-adservices.apple.com
+    - +.iadsdk.apple.com
+    - +.iad.apple.com
+    - +.qwapi.com
     - api-eu.carrotquest.app
     - api-eu.carrotquest.io
     - api-ru.carrotquest.app
@@ -104,6 +74,18 @@ payload:
     - api.carrottrack.app
     - api.dashly.app
     - api.dashlytrack.app
+    - +.a.mts.ru
+    - +.obs.mts.ru
+    - +.clarity.ms
+    - +.microsoftads.com
+    - +.msads.net
+    - +.nelreports.net
+    - +.browser.events.data.msn.cn
+    - +.browser.events.data.msn.com
+    - +.bingads.com
+    - +.ads-api.duolingo.com
+    - +.analytics.vpc.duolingo.com
+    - +.metrics.duolingo.com
     - +.ad.mail.ru
     - +.ads.viqeo.tv
     - +.adsadvisor.io
@@ -174,6 +156,30 @@ payload:
     - analytics.vk.ru
     - stats.vk-portal.net
     - target.vk.com
+    - +.e.mindbox.ru
+    - +.g.mindbox.ru
+    - +.s.mindbox.ru
+    - api-js.mindbox.ru
+    - api-ru.mindbox.cloud
+    - api-staging.mindbox.ru
+    - api.mindbox.cloud
+    - api.mindbox.ru
+    - sentry.mindbox.ru
+    - sentry.popmechanic.ru
+    - ads-img.mozilla.org
+    - ads.mozilla.org
+    - sentry.iptv.rt.ru
+    - sentry.hetzner.company
+    - +.analytics.facebook.com
+    - +.facebookads.com
+    - +.pixel.facebook.com
+    - +.graph.instagram.com
+    - +.graph-fallback.instagram.com
+    - +.amazon-adsystem.com
+    - +.serving-sys.com
+    - +.advertising.adobe.com
+    - +.demdex.net
+    - +.tubemogul.com
     - +.adfox.ru
     - +.adfox.yandex.ru
     - +.admetrica.ru
@@ -215,10 +221,4 @@ payload:
     - mc.yango.com
     - pixel.yandex.com
     - report.ap.yandex-net.ru
-    - +.a.mts.ru
-    - +.obs.mts.ru
-    - +.advertising.apple.com
-    - +.api-adservices.apple.com
-    - +.iadsdk.apple.com
-    - +.iad.apple.com
-    - +.qwapi.com
+    - +.snapads.com

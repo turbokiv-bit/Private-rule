@@ -4,12 +4,12 @@ payload:
     - firebaselogging-pa.googleapis.com
     - firebaselogging.googleapis.com
     - update.crashlytics.com
-    - +.analytics.cloud.unity3d.com
-    - +.perf.cloud.unity3d.com
-    - +.perf-events.cloud.unity3d.com
     - +.cafe.github.com
     - +.collector.github.com
     - copilot-telemetry-service.githubusercontent.com
     - copilot-telemetry.githubusercontent.com
     - dc.services.visualstudio.com
     - rt.services.visualstudio.com
+    - +.analytics.cloud.unity3d.com
+    - +.perf.cloud.unity3d.com
+    - +.perf-events.cloud.unity3d.com
