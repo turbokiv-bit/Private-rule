@@ -1,5 +1,6 @@
 DOMAIN-SUFFIX,copilot-proxy.githubusercontent.com
 DOMAIN-SUFFIX,copilot-workspace.githubnext.com
+DOMAIN-SUFFIX,production-copilot-host-westus.webpubsub.azure.com
 DOMAIN-SUFFIX,copilotprodattachments.blob.core.windows.net
 DOMAIN-SUFFIX,githubcopilot.com
 DOMAIN-SUFFIX,copilot-telemetry-service.githubusercontent.com
