@@ -4,10 +4,6 @@ payload:
     - +.wetv.vip
     - +.wetvinfo.com
     - wetv.qq.com
-    - +.tencentgames.com
-    - +.levelinfinite.com
-    - +.nikke-en.com
-    - +.webnovel.com
     - +.intltencentcos.com
     - +.ap-hongkong.myqcloud.com
     - +.ap-singapore.myqcloud.com
@@ -71,3 +67,7 @@ payload:
     - +.ger.file.myqcloud.com
     - +.rumt-sg.com
     - +.rumt-us.com
+    - +.tencentgames.com
+    - +.levelinfinite.com
+    - +.nikke-en.com
+    - +.webnovel.com

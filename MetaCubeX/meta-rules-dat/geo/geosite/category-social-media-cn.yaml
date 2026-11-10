@@ -29,9 +29,16 @@ payload:
     - +.douban.com
     - +.douban.fm
     - +.doubanio.com
+    - +.gracg.com
+    - +.procg.cn
     - +.hupu.com
     - +.hupucdn.com
     - +.shihuo.cn
+    - +.jike.city
+    - +.jikecdn.com
+    - +.okjike.com
+    - +.okjk.co
+    - +.ruguoapp.com
     - +.ivwen.com
     - +.meipian.cn
     - +.meipian.me
@@ -42,13 +49,6 @@ payload:
     - +.coolapk.com
     - +.coolapkmarket.com
     - +.coolapkmarket.net
-    - +.gracg.com
-    - +.procg.cn
-    - +.jike.city
-    - +.jikecdn.com
-    - +.okjike.com
-    - +.okjk.co
-    - +.ruguoapp.com
     - +.tieba.baidu.com
     - +.hoopchina.com.cn
     - +.crash2.zhihu.com
