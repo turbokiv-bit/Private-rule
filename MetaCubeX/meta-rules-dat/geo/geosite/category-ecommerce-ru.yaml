@@ -1,22 +1,6 @@
 payload:
-    - +.drom.ru
-    - +.rdrom.ru
-    - +.apiauto.ru
-    - +.auto.ru
-    - +.autoru.me
-    - +.avto.ru
-    - +.cm.expert
-    - +.avito.com
-    - +.avito.ru
-    - +.avito.st
-    - +.avito.tech
-    - +.cian.ru
-    - +.cian.site
-    - +.ciangroup.ru
-    - +.dmir.ru
-    - +.poudobnee.com
-    - +.xn--80aaafbpzn5blfby1p.xn--p1ai
-    - +.xn--80aaeib8abrryx4k.xn--p1ai
+    - +.wbrep.ru
+    - +.paywb.com
     - +.flowwow-images.com
     - +.flowwow.com
     - +.funpay.com
@@ -55,7 +39,7 @@ payload:
     - +.ozonpartners.by
     - +.ozonpartners.ru
     - +.ozonrocet.by
-    - +.ozonroket.by
+    - +.drom.ru
     - +.xn----8sbahiqzthbd0bn.xn--p1ai
     - +.ozonru.com
     - +.ozonru.eu
@@ -69,7 +53,7 @@ payload:
     - +.geobasket.ru
     - +.mp.world
     - +.onlyjobs.ru
-    - +.paywb.com
+    - +.wbstatic.net
     - +.paywb.ru
     - +.russoutdoor.ru
     - +.rwb.ru
@@ -97,9 +81,9 @@ payload:
     - +.wbmotivator.ru
     - +.wbpay.ru
     - +.wbr.by
-    - +.wbrep.ru
-    - +.wbstatic.net
-    - +.wbstatic.ru
+    - +.ozonroket.by
+    - +.rdrom.ru
+    - +.cian.site
     - +.wbtek.ru
     - +.wbwh.ru
     - +.wbwh.tech
@@ -161,12 +145,27 @@ payload:
     - +.wolfberries.ru
     - +.xn--80acbjgmges7ca.xn--p1ai
     - +.xn--80acbjgsdq2cl.xn--p1ai
-    - +.ozon.com.by
-    - +.ozonru.co.il
-    - +.ozon.com.kz
+    - +.apiauto.ru
+    - +.xn--80aaeib8abrryx4k.xn--p1ai
+    - +.xn--80aaafbpzn5blfby1p.xn--p1ai
+    - +.poudobnee.com
+    - +.dmir.ru
+    - +.auto.ru
+    - +.autoru.me
+    - +.avto.ru
+    - +.cm.expert
+    - +.avito.com
+    - +.avito.ru
+    - +.avito.st
+    - +.avito.tech
+    - +.cian.ru
+    - +.wbstatic.ru
+    - +.ciangroup.ru
     - +.ewisdom.us.kg
+    - +.ozon.com.kz
+    - +.ozonru.co.il
+    - +.ozon.com.by
     - +.wildberries.co.il
-    - stats.avito.ru
     - ad.ozone.ru
     - adv.ozon.ru
     - agency-adv.ozon.ru
@@ -200,3 +199,4 @@ payload:
     - marketplace-sentry.wb.ru
     - sentry.wb.ru
     - web-analytics.wildberries.ru
+    - stats.avito.ru

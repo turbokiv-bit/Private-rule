@@ -1,7 +1,4 @@
 payload:
-    - +.analytics.vpc.duolingo.com
-    - +.metrics.duolingo.com
-    - sentry.iptv.rt.ru
     - +.apptracer.ru
     - +.metrics.viqeo.tv
     - sentry-ng.g.smailru.net
@@ -18,6 +15,10 @@ payload:
     - stats.vk-portal.net
     - sentry.mindbox.ru
     - sentry.popmechanic.ru
+    - +.adobestats.io
+    - +.analytics.vpc.duolingo.com
+    - +.metrics.duolingo.com
+    - sentry.iptv.rt.ru
     - incoming.telemetry.mozilla.org
     - incoming-telemetry.thunderbird.net
     - +.appmetrica.yandex.com
@@ -43,22 +44,21 @@ payload:
     - firebaselogging-pa.googleapis.com
     - firebaselogging.googleapis.com
     - update.crashlytics.com
+    - sentry.hetzner.company
     - +.applicationinsights.io
     - +.applicationinsights.net
     - +.aria.ms
     - +.data.microsoft.com
     - +.telemetry.microsoft.com
     - +.nelreports.net
+    - +.browser.events.data.msn.cn
+    - +.browser.events.data.msn.com
+    - +.in.applicationinsights.azure.com
+    - dc.applicationinsights.azure.com
+    - live.applicationinsights.azure.com
     - +.cafe.github.com
     - +.collector.github.com
     - copilot-telemetry-service.githubusercontent.com
     - copilot-telemetry.githubusercontent.com
     - dc.services.visualstudio.com
     - rt.services.visualstudio.com
-    - +.browser.events.data.msn.cn
-    - +.browser.events.data.msn.com
-    - +.in.applicationinsights.azure.com
-    - dc.applicationinsights.azure.com
-    - live.applicationinsights.azure.com
-    - sentry.hetzner.company
-    - +.adobestats.io
