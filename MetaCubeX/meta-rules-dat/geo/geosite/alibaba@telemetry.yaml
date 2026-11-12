@@ -16,8 +16,7 @@ payload:
     - +.m-adash.m.taobao.com
     - +.retcode.taobao.com
     - +.v6-adashx.ut.taobao.com
-    - +.adash-emas.cn-hangzhou.aliyuncs.com
-    - +.adash.man.aliyuncs.com
+    - +.shuqistat.com
     - +.alog.umeng.com
     - +.alog.umengcloud.com
     - +.alogs.umeng.com
@@ -27,6 +26,12 @@ payload:
     - +.plbslog.umeng.com
     - +.ulogs.umeng.com
     - +.ulogs.umengcloud.com
+    - +.adash-emas.cn-hangzhou.aliyuncs.com
+    - +.adash.man.aliyuncs.com
+    - +.v6-adashx.ut.cainiao.com
+    - +.adashx.ut.ele.me
+    - +.h-adashx.ut.ele.me
+    - +.v6-adashx.ut.ele.me
     - +.adashx.ut.youku.com
     - +.e.stat.ykimg.com
     - +.h-adashx.ut.youku.com
@@ -41,8 +46,3 @@ payload:
     - +.dualstack-logs.amap.com
     - +.logs.amap.com
     - +.v6-adashx.ut.amap.com
-    - +.v6-adashx.ut.cainiao.com
-    - +.adashx.ut.ele.me
-    - +.h-adashx.ut.ele.me
-    - +.v6-adashx.ut.ele.me
-    - +.shuqistat.com

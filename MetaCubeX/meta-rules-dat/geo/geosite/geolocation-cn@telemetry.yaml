@@ -1,6 +1,5 @@
 payload:
     - +.meitustat.com
-    - +.shuqistat.com
     - +.cloudflareinsights-cn.com
     - +.base.api.my7v.com
     - +.dc-conf-o.api.leiniao.com
@@ -11,3 +10,4 @@ payload:
     - +.dc-ut.api.leiniao.com
     - +.qms-report-o.api.leiniao.com
     - +.qms-report-t.api.leiniao.com
+    - +.shuqistat.com
