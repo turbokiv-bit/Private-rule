@@ -242,4 +242,3 @@ payload:
     - IP-CIDR,2a10:100::/30
     - IP-CIDR,2a10:9007:4:1::/64
     - IP-CIDR,2a13:2640::/29
-    - IP-CIDR,2a14:67c2:8de::/48
