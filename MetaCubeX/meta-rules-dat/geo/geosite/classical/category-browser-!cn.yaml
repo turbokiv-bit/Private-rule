@@ -7,7 +7,7 @@ payload:
     - DOMAIN-SUFFIX,basilisk-browser.org
     - DOMAIN-SUFFIX,brave.com
     - DOMAIN-SUFFIX,bromite.org
-    - DOMAIN-SUFFIX,librewolf.net
+    - DOMAIN-SUFFIX,torproject.org
     - DOMAIN-SUFFIX,cromite.org
     - DOMAIN-SUFFIX,decentr.net
     - DOMAIN-SUFFIX,dothq.org
@@ -24,7 +24,6 @@ payload:
     - DOMAIN-SUFFIX,vivaldi.com
     - DOMAIN-SUFFIX,waterfox.net
     - DOMAIN-SUFFIX,zen-browser.app
-    - DOMAIN-SUFFIX,torproject.org
     - DOMAIN-SUFFIX,ceno.app
     - DOMAIN-SUFFIX,censorship.no
     - DOMAIN-SUFFIX,epicbrowser.com
@@ -35,4 +34,5 @@ payload:
     - DOMAIN-SUFFIX,firefoxtweetmachine.com
     - DOMAIN-SUFFIX,firefoxusercontent.com
     - DOMAIN-SUFFIX,librewolf.dev
+    - DOMAIN-SUFFIX,librewolf.net
     - DOMAIN-SUFFIX,browser.kagi.com

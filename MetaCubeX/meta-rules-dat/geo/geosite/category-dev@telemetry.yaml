@@ -1,6 +1,4 @@
 payload:
-    - dc.services.visualstudio.com
-    - rt.services.visualstudio.com
     - +.cafe.github.com
     - +.collector.github.com
     - copilot-telemetry-service.githubusercontent.com
@@ -8,6 +6,8 @@ payload:
     - +.analytics.cloud.unity3d.com
     - +.perf.cloud.unity3d.com
     - +.perf-events.cloud.unity3d.com
+    - dc.services.visualstudio.com
+    - rt.services.visualstudio.com
     - crashlyticsreports-pa.googleapis.com
     - firebase-settings.crashlytics.com
     - firebaselogging-pa.googleapis.com
