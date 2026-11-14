@@ -49,15 +49,6 @@ payload:
     - +.ycgame.com
     - +.yjwujian.cn
     - +.yysls.cn
-    - +.cowlevel.net
-    - +.cdncl.net
-    - +.dobest.com
-    - +.langrenclub.com
-    - +.sanguosha.com
-    - +.xhlsgs.com
-    - +.xinwuji.com
-    - +.yokaverse.com
-    - +.zhuoyou.com
     - +.3304399.com
     - +.3304399.net
     - +.3839.com
@@ -121,6 +112,7 @@ payload:
     - +.yxhapi.com
     - +.yxhhdl.com
     - +.yxhimg.com
+    - +.sl916.com
     - +.17173.com
     - +.17173cdn.com
     - +.changyou.com
@@ -128,11 +120,6 @@ payload:
     - +.playcool.com
     - +.yeyou.com
     - +.yeyoucdn.com
-    - +.hero.com
-    - +.herogame.com
-    - +.heroesports.com
-    - +.shyxhy.com
-    - +.yingxiong.com
     - +.mhystatic.com
     - +.mhyurl.cn
     - +.mihayo.com
@@ -153,7 +140,17 @@ payload:
     - +.jiaoyimao.cn
     - +.jiaoyimao.com
     - +.lingxigames.com
-    - +.sl916.com
+    - +.bilibiligame.cn
+    - +.bilibiligame.co
+    - +.bilibiligame.net
+    - +.biligame.co
+    - +.biligame.com
+    - +.biligame.net
+    - +.hero.com
+    - +.herogame.com
+    - +.heroesports.com
+    - +.shyxhy.com
+    - +.yingxiong.com
     - +.seasungames.cn
     - +.seasungames.com
     - +.seasunwbl.com
@@ -164,16 +161,19 @@ payload:
     - +.testplus.cn
     - +.tiancity.com
     - +.tiancitycdn.com
+    - +.dobest.com
+    - +.langrenclub.com
+    - +.sanguosha.com
+    - +.xhlsgs.com
+    - +.xinwuji.com
+    - +.yokaverse.com
+    - +.zhuoyou.com
+    - +.cowlevel.net
+    - +.cdncl.net
     - +.vrzwk.cn
     - +.vrzwk.com
     - +.vrzwk.net
     - +.vrzwk.top
-    - +.bilibiligame.cn
-    - +.bilibiligame.co
-    - +.bilibiligame.net
-    - +.biligame.co
-    - +.biligame.com
-    - +.biligame.net
     - +.37.com.cn
     - +.nikkigames.com.cn
     - +.log-upload.mihoyo.com

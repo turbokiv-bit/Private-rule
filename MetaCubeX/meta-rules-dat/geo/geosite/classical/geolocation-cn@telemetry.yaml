@@ -1,6 +1,6 @@
 payload:
-    - DOMAIN-SUFFIX,cloudflareinsights-cn.com
     - DOMAIN-SUFFIX,shuqistat.com
+    - DOMAIN-SUFFIX,cloudflareinsights-cn.com
     - DOMAIN-SUFFIX,base.api.my7v.com
     - DOMAIN-SUFFIX,dc-conf-o.api.leiniao.com
     - DOMAIN-SUFFIX,dc-conf-t.api.leiniao.com

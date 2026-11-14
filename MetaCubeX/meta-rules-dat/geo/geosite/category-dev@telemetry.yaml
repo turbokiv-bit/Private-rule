@@ -1,4 +1,6 @@
 payload:
+    - dc.services.visualstudio.com
+    - rt.services.visualstudio.com
     - +.cafe.github.com
     - +.collector.github.com
     - copilot-telemetry-service.githubusercontent.com
@@ -11,5 +13,3 @@ payload:
     - firebaselogging-pa.googleapis.com
     - firebaselogging.googleapis.com
     - update.crashlytics.com
-    - dc.services.visualstudio.com
-    - rt.services.visualstudio.com

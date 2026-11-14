@@ -1,4 +1,6 @@
 payload:
+    - DOMAIN,dc.services.visualstudio.com
+    - DOMAIN,rt.services.visualstudio.com
     - DOMAIN-SUFFIX,cafe.github.com
     - DOMAIN-SUFFIX,collector.github.com
     - DOMAIN,copilot-telemetry-service.githubusercontent.com
@@ -11,5 +13,3 @@ payload:
     - DOMAIN,firebaselogging-pa.googleapis.com
     - DOMAIN,firebaselogging.googleapis.com
     - DOMAIN,update.crashlytics.com
-    - DOMAIN,dc.services.visualstudio.com
-    - DOMAIN,rt.services.visualstudio.com

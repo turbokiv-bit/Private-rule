@@ -7,7 +7,7 @@ payload:
     - +.basilisk-browser.org
     - +.brave.com
     - +.bromite.org
-    - +.epicbrowser.com
+    - +.librewolf.net
     - +.cromite.org
     - +.decentr.net
     - +.dothq.org
@@ -24,6 +24,10 @@ payload:
     - +.vivaldi.com
     - +.waterfox.net
     - +.zen-browser.app
+    - +.torproject.org
+    - +.ceno.app
+    - +.censorship.no
+    - +.epicbrowser.com
     - +.extendfirefox.com
     - +.firefox-portal-detection.com
     - +.firefox.com
@@ -31,8 +35,4 @@ payload:
     - +.firefoxtweetmachine.com
     - +.firefoxusercontent.com
     - +.librewolf.dev
-    - +.librewolf.net
-    - +.torproject.org
-    - +.ceno.app
-    - +.censorship.no
     - +.browser.kagi.com

@@ -1,7 +1,5 @@
 IP-CIDR6,2a0d:3dc1:15ce::/48
-IP-CIDR6,2a0d:3dc1:162b::/48
 IP-CIDR6,2a0d:3dc1:2a8c::/48
-IP-CIDR6,2a0d:3dc1:2f5d::/48
 IP-CIDR6,2a0d:3dc1:3ce0::/48
 IP-CIDR6,2a0d:3dc1:44c3::/48
 IP-CIDR6,2a0d:3dc1:4d9c::/48
@@ -24,7 +22,7 @@ IP-CIDR6,2a0d:3dc1:7d11::/48
 IP-CIDR6,2a0d:3dc1:7d12::/48
 IP-CIDR6,2a0d:3dc1:892d::/48
 IP-CIDR6,2a0d:3dc1:a3e6::/48
-IP-CIDR6,2a0d:3dc1:abcb::/48
+IP-CIDR6,2a0d:3dc1:afbb::/48
 IP-CIDR6,2a0d:3dc1:c0f8::/47
 IP-CIDR6,2a0d:3dc1:c0fa::/48
 IP-CIDR6,2a0d:3dc1:c21d::/48
