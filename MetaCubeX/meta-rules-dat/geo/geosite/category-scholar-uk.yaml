@@ -1,9 +1,6 @@
 payload:
     - imperial.insendi.com
-    - +.oxfordmusiconline.com
-    - +.imperialbusiness.school
-    - +.cambridgemaths.org
-    - +.cambridgedigital.net
+    - +.oxfordreference.com
     - +.oxfordfirstsource.com
     - +.oxfordscholarlyeditions.com
     - +.blackstonespoliceservice.com
@@ -20,20 +17,23 @@ payload:
     - +.oxforddnb.com
     - +.anb.org
     - +.oxfordpoliticstrove.com
-    - +.ac.uk
     - +.amamanualofstyle.com
     - +.oxfordmedicine.com
+    - +.oxfordmusiconline.com
+    - +.ac.uk
     - +.oxfordhandbooks.com
     - +.oxfordre.com
-    - +.oxfordreference.com
     - +.oxfordlawtrove.com
     - +.oxfordscholarship.com
     - +.oxfordwesternmusic.com
     - +.sipriyearbook.org
     - +.ukwhoswho.com
     - +.universitypressscholarship.com
-    - +.cambridgeschoolshakespeare.com
+    - +.imperialbusiness.school
     - +.livinno.org
     - +.opac-project.eu
+    - +.cambridgemaths.org
+    - +.cambridgedigital.net
     - +.cambridge.org
+    - +.cambridgeschoolshakespeare.com
     - +.dlib.eastview.com
