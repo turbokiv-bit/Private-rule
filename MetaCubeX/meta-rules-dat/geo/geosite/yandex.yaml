@@ -3,7 +3,7 @@ payload:
     - kp-configs-smart-tv.s3.eu-central-1.amazonaws.com
     - +.yandex
     - +.yandex.kg
-    - +.sourcecraft.dev
+    - +.yandex.sx
     - +.beru.ru
     - +.bookmate.ru
     - +.cabconnect.org
@@ -27,7 +27,7 @@ payload:
     - +.shedevrum.ai
     - +.shedevrum.com
     - +.shedevrum.ru
-    - +.xn--d1acpjx3f.xn--p1ai
+    - +.sourcecraft.dev
     - +.static-storage.net
     - +.support-uber.com
     - +.taxiaid.org
@@ -50,32 +50,32 @@ payload:
     - +.yandex.com
     - +.yandex.de
     - +.yandex.ee
-    - +.yandex.jobs
+    - +.yandex.eu
     - +.yandex.fi
     - +.kinopoisk.ru
     - +.yndx.net
     - +.yandex.fr
     - +.yandex.it
-    - +.yandex.eu
+    - +.yandex.jobs
+    - +.xn--d1acpjx3f.xn--p1ai
     - +.berizaryad.ru
-    - +.yandex.kz
-    - +.yandex.lt
     - +.yandex.lv
+    - +.yandex.kz
     - +.yandex.market
     - +.yandex.md
     - +.yandex.mobi
     - +.yandex.net
     - +.ydb.tech
     - +.yccdn.ru
+    - +.yb-payment.ru
     - +.yastatic.net
     - +.yastatic-net.ru
-    - +.yastat.net
     - +.yandex.org
     - +.yandex.pl
     - +.yandex.pro
     - +.yandex.ru
     - +.yandex.st
-    - +.yandex.sx
+    - +.yandex.lt
     - +.yandex.taxi
     - +.yandex.tj
     - +.yandex.tm
@@ -98,12 +98,13 @@ payload:
     - +.yango.africa
     - +.yango.ao
     - +.yango.bh
-    - +.yangofellowship.com
+    - +.yastat.net
     - +.yango.com
     - +.yango.fi
     - +.yango.qa
     - +.yango.taxi
     - +.yango.tech
+    - +.yangofellowship.com
     - +.yango.co.il
     - +.yandex.net.ru
     - +.yandex.com.ua

@@ -69,8 +69,10 @@ DOMAIN-SUFFIX,inappcheck.itunes.apple.com
 DOMAIN-SUFFIX,init.itunes.apple.com
 DOMAIN-SUFFIX,iosapps.itunes.apple.com
 DOMAIN-SUFFIX,misc-assets.itunes.apple.com
+DOMAIN-SUFFIX,musicstatus.itunes.apple.com
 DOMAIN-SUFFIX,mvod.itunes.apple.com
 DOMAIN-SUFFIX,myapp.itunes.apple.com
+DOMAIN-SUFFIX,mzstorekit.itunes.apple.com
 DOMAIN-SUFFIX,np-edge.itunes.apple.com
 DOMAIN-SUFFIX,osxapps.itunes.apple.com
 DOMAIN-SUFFIX,pd-nk.itunes.apple.com

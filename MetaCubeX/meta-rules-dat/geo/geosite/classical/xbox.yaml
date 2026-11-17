@@ -24,6 +24,12 @@ payload:
     - DOMAIN-SUFFIX,xboxservices.com
     - DOMAIN-SUFFIX,xboxstudios.com
     - DOMAIN-SUFFIX,xbx.lv
+    - DOMAIN-SUFFIX,beth.games
+    - DOMAIN-SUFFIX,bethesda.net
+    - DOMAIN-SUFFIX,bethesdagamestudios.com
+    - DOMAIN-SUFFIX,bethsoft.com
+    - DOMAIN-SUFFIX,doom.com
+    - DOMAIN-SUFFIX,elderscrolls.com
     - DOMAIN-SUFFIX,forza.net
     - DOMAIN-SUFFIX,forzamotorsport.net
     - DOMAIN-SUFFIX,forzaracingchampionship.com
@@ -34,10 +40,4 @@ payload:
     - DOMAIN-SUFFIX,minecraftservices.com
     - DOMAIN-SUFFIX,minecraftshop.com
     - DOMAIN-SUFFIX,mojang.com
-    - DOMAIN-SUFFIX,beth.games
-    - DOMAIN-SUFFIX,bethesda.net
-    - DOMAIN-SUFFIX,bethesdagamestudios.com
-    - DOMAIN-SUFFIX,bethsoft.com
-    - DOMAIN-SUFFIX,doom.com
-    - DOMAIN-SUFFIX,elderscrolls.com
     - DOMAIN-SUFFIX,xboxlive.cn

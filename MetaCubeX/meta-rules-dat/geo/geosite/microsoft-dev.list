@@ -1,13 +1,16 @@
 DOMAIN-SUFFIX,az764295.vo.msecnd.net
 DOMAIN-SUFFIX,bingsettingssearch.trafficmanager.net
+DOMAIN-SUFFIX,builds.dotnet.microsoft.com
 DOMAIN-SUFFIX,default.exp-tas.com
 DOMAIN-SUFFIX,developer.microsoft.com
+DOMAIN-SUFFIX,dotnetcli.trafficmanager.net
 DOMAIN-SUFFIX,dtlgalleryint.cloudapp.net
 DOMAIN-SUFFIX,packages.microsoft.com
 DOMAIN-SUFFIX,poshtestgallery.cloudapp.net
 DOMAIN-SUFFIX,psg-int-centralus.cloudapp.net
 DOMAIN-SUFFIX,psg-int-eastus.cloudapp.net
 DOMAIN-SUFFIX,rink.hockeyapp.net
+DOMAIN-SUFFIX,sundry-star-net-geo.trafficmanager.net
 DOMAIN-SUFFIX,vscode-sync-insiders.trafficmanager.net
 DOMAIN-SUFFIX,vscode-sync.trafficmanager.net
 DOMAIN-SUFFIX,vscode.blob.core.windows.net
@@ -74,3 +77,4 @@ DOMAIN-SUFFIX,reactorms.com.cn
 DOMAIN-SUFFIX,dc.services.visualstudio.com
 DOMAIN-SUFFIX,download.visualstudio.microsoft.com
 DOMAIN-SUFFIX,rt.services.visualstudio.com
+DOMAIN-SUFFIX,vscode.download.prss.microsoft.com
