@@ -3,17 +3,37 @@ payload:
     - paper-attachments.s3.amazonaws.com
     - +.onedrive
     - +.onedriveupdater
-    - +.dropboxusercontent.com
+    - +.dropboxlegal.com
+    - +.dropboxforum.com
     - +.onedrive.com
+    - +.sharepoint.cn
+    - +.livefilestore.com
+    - +.sharepoint.com
+    - +.1drv.com
+    - +.transfer.it
+    - +.megas4.com
+    - +.megapay.nz
+    - +.megaad.nz
+    - +.mega.nz
+    - +.mega.io
+    - +.hellosign.com
+    - +.mypikpak.com
+    - +.mypikpak.net
+    - +.pickpackapp.com
+    - +.pikpak.io
+    - +.pikpak.me
+    - +.pikpakdrive.com
+    - +.1024terabox.com
+    - +.bestclouddrive.com
     - +.freeterabox.com
     - +.nephobox.com
     - +.terabox.com
     - +.terabox1024.com
     - +.teraboxcdn.com
     - +.userdrive.org
+    - +.microsoftpersonalcontent.com
     - +.usersdrive.com
-    - +.addtodropbox.com
-    - +.dash.ai
+    - +.sharepointonline.com
     - +.db.tt
     - +.docsend.com
     - +.dropbox-dns.com
@@ -23,43 +43,23 @@ payload:
     - +.dropboxbusiness.com
     - +.dropboxcaptcha.com
     - +.dropboxexperiment.com
-    - +.dropboxforum.com
+    - +.addtodropbox.com
     - +.dropboxforums.com
     - +.dropboxinsiders.com
-    - +.dropboxlegal.com
+    - +.dash.ai
     - +.dropboxmail.com
     - +.dropboxpartners.com
     - +.dropboxstatic.com
     - +.dropboxteam.com
-    - +.bestclouddrive.com
-    - +.1024terabox.com
-    - +.sharepoint.com
-    - +.hellosign.com
-    - +.mega.io
-    - +.mega.nz
-    - +.megaad.nz
-    - +.megapay.nz
-    - +.megas4.com
-    - +.transfer.it
-    - +.sharepointonline.com
-    - +.microsoftpersonalcontent.com
+    - +.dropboxusercontent.com
     - +.getdropbox.com
-    - +.sharepoint.cn
-    - +.livefilestore.com
     - +.hellofax.com
-    - +.1drv.com
-    - +.mypikpak.com
-    - +.mypikpak.net
-    - +.pickpackapp.com
-    - +.pikpakdrive.com
-    - +.pikpak.me
-    - +.pikpak.io
-    - +.storage.live.com
+    - +.onedrive.live.com
+    - +.photos.live.com
     - +.oneclient.sfx.ms
+    - +.storage.live.com
     - +.spoprod-a.akamaihd.net
     - +.storage.msn.com
     - +.mega.co.nz
-    - +.photos.live.com
-    - +.onedrive.live.com
     - +.skydrive.wns.windows.com
     - o4504926511693824.ingest.sentry.io

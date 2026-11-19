@@ -185,8 +185,8 @@ payload:
     - +.checkip.com
     - +.checkip.de
     - +.checkip.dev
-    - +.ipip.net
     - +.test-ipv6.in
+    - +.test-ipv6.jp
     - +.checkip.gr
     - +.checkip.hk
     - +.checkip.in
@@ -254,9 +254,9 @@ payload:
     - +.dnsleak.com
     - +.dnsleak.dev
     - +.dnsleak.net
-    - +.test-ipv6.jp
     - +.test-ipv6.cz
     - +.test-ipv6.nl
+    - +.test-ipv6.run
     - +.dnsleaktest.com
     - +.dnsleaktest.org
     - +.echoip.de
@@ -304,7 +304,7 @@ payload:
     - +.fullip.info
     - +.geodatatool.com
     - +.geoip.cc
-    - +.test-ipv6.run
+    - +.test-ipv6.com
     - +.geoip.com
     - +.geoip.hu
     - +.geoip.online
@@ -356,7 +356,7 @@ payload:
     - +.getmyip.se
     - +.getmyip.sh
     - +.getmyip.uk
-    - +.test-ipv6.com
+    - +.test-ipv6.se
     - +.getmyipaddress.io
     - +.getmyipaddress.org
     - +.grabify.link
@@ -496,8 +496,8 @@ payload:
     - +.ip.app
     - +.ip.cc
     - +.ip.ci
-    - +.test-ipv6.se
     - +.test-ipv6.cl
+    - +.ip6.ro
     - +.ip.fm
     - +.ip.gs
     - +.ip.guide
@@ -506,7 +506,7 @@ payload:
     - +.ip.info
     - +.ip.me
     - +.ip.net
-    - +.ip6.ro
+    - +.testipv6.be
     - +.ip.network
     - +.ip.pn
     - +.ip.sb
@@ -594,7 +594,7 @@ payload:
     - +.ipaddress.ai
     - +.ipaddress.be
     - +.ipaddress.ca
-    - +.testipv6.be
+    - +.testipv6.ca
     - +.ipaddress.com
     - +.ipaddress.dev
     - +.ipaddress.es
@@ -615,7 +615,7 @@ payload:
     - +.ipaddress.to
     - +.ipaddress.uk
     - +.ipaddress.you
-    - +.testipv6.ca
+    - +.testipv6.de
     - +.ipaddressdetails.com
     - +.ipaddresslocation.net
     - +.ipaddresslocation.org
@@ -656,7 +656,7 @@ payload:
     - +.ipchaxun.org
     - +.ipcheck.be
     - +.ipcheck.cc
-    - +.testipv6.de
+    - +.testipv6.net
     - +.ipcheck.dev
     - +.ipcheck.fyi
     - +.ipcheck.gr
@@ -834,7 +834,7 @@ payload:
     - +.iplocate.net
     - +.iplocate.org
     - +.iplocate.ru
-    - +.testipv6.net
+    - +.sixte.st
     - +.iplocation.com
     - +.iplocation.info
     - +.iplocation.io
@@ -901,12 +901,12 @@ payload:
     - +.ipqs.xyz
     - +.ipqualityscore.com
     - +.ipquery.io
-    - +.sixte.st
+    - +.ipv6ready.me
     - +.ipregistry.co
     - +.iprisk.ai
     - +.iprisk.top
     - +.iproyal.com
-    - +.ipv6ready.me
+    - +.ipv6.uz
     - +.ipscan.me
     - +.ipscan.tr
     - +.ipscaner.com
@@ -986,7 +986,7 @@ payload:
     - +.l2.io
     - +.leakcentral.xyz
     - +.localizaip.com
-    - +.ipv6.uz
+    - +.test-ipv6.hu
     - +.location-with-ip.com
     - +.lookip.io
     - +.lookip.net
@@ -1003,7 +1003,7 @@ payload:
     - +.meip.eu
     - +.meipaddress.com
     - +.meu-ip.pt
-    - +.test-ipv6.hu
+    - +.ipip.net
     - +.meuip.app
     - +.meuip.co
     - +.meuip.com
@@ -1562,7 +1562,7 @@ payload:
     - +.showip.com.tw
     - +.sabermeuip.com.br
     - +.queip.com.br
-    - +.address.co.il
+    - +.test-ipv6.arauc.br
     - +.mylocation.co.kr
     - +.myipnumber.com.br
     - +.myip.com.ua
@@ -1598,7 +1598,7 @@ payload:
     - +.ipcheck.com.br
     - +.ipaddresscheck.co.uk
     - +.ipaddress.co.uk
-    - +.test-ipv6.arauc.br
+    - +.test.version6.ru
     - +.ip.etc.br
     - +.ip.com.ro
     - +.getmyipaddress.co.uk
@@ -1606,7 +1606,8 @@ payload:
     - +.dnsleaktest.co.uk
     - +.checkip.com.vn
     - +.checkip.com.br
-    - +.test.version6.ru
+    - +.test-ipv6.triplebit.us
+    - +.address.co.il
     - +.test-ipv6.cgates.lt
     - +.test-ipv6.roedu.net
     - +.test-ipv6.fratec.net
@@ -1619,13 +1620,12 @@ payload:
     - +.test-ipv6.freerangecloud.com
     - +.test-ipv6.amelek.net
     - +.test-ipv6.coloradointerlink.net
-    - +.test-ipv6.triplebit.us
     - +.ipv4.internet.yandex.net
     - +.geoip.noc.gov.ru
+    - +.ipv6.internet.yandex.net
     - +.test-ipv6.ams.vr.org
     - +.test-ipv6.cs.umd.edu
     - +.test-ipv6.csclub.uwaterloo.ca
-    - +.ipv6.internet.yandex.net
     - +.chaip.me
     - +.check-host.cn
     - +.cip.cc
@@ -1679,5 +1679,5 @@ payload:
     - mip.chinaz.com
     - v6test.ipgg.cn
     - +.whois.pconline.com.cn
-    - +.testipv6.cn
     - +.myip.la
+    - +.testipv6.cn

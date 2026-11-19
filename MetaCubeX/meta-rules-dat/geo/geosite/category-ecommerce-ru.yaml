@@ -1,27 +1,6 @@
 payload:
-    - +.drom.ru
-    - +.rdrom.ru
-    - +.apiauto.ru
-    - +.auto.ru
-    - +.autoru.me
-    - +.avto.ru
-    - +.cm.expert
-    - +.avito.com
-    - +.avito.ru
-    - +.avito.st
-    - +.avito.tech
-    - +.cian.ru
-    - +.cian.site
-    - +.ciangroup.ru
-    - +.dmir.ru
-    - +.poudobnee.com
-    - +.xn--80aaafbpzn5blfby1p.xn--p1ai
-    - +.xn--80aaeib8abrryx4k.xn--p1ai
-    - +.flowwow-images.com
-    - +.flowwow.com
-    - +.funpay.com
-    - +.funpay.ru
-    - +.sfunpay.com
+    - +.wbwh.tech
+    - +.rwbautomation.tech
     - +.ozon.tm
     - +.ozon.tech
     - +.o3t.ru
@@ -60,7 +39,7 @@ payload:
     - +.ozonru.com
     - +.ozonru.eu
     - +.ozonru.me
-    - +.ozonsport.ru
+    - +.drom.ru
     - +.ozonstatus.ru
     - +.ozonusercontent.com
     - +.digital-wb.ru
@@ -74,7 +53,7 @@ payload:
     - +.russoutdoor.ru
     - +.rwb.ru
     - +.rwbautomation.ru
-    - +.rwbautomation.tech
+    - +.wibes.com
     - +.rwbgeo.ru
     - +.vamzakaz.ru
     - +.vsemrabota.ru
@@ -102,9 +81,9 @@ payload:
     - +.wbstatic.ru
     - +.wbtek.ru
     - +.wbwh.ru
-    - +.wbwh.tech
-    - +.wibes.com
-    - +.wibes.ru
+    - +.ozonsport.ru
+    - +.rdrom.ru
+    - +.xn--80aaeib8abrryx4k.xn--p1ai
     - +.wildberries.am
     - +.wildberries.by
     - +.wildberries.es
@@ -161,12 +140,32 @@ payload:
     - +.wolfberries.ru
     - +.xn--80acbjgmges7ca.xn--p1ai
     - +.xn--80acbjgsdq2cl.xn--p1ai
-    - +.ozon.com.by
-    - +.ozonru.co.il
-    - +.ozon.com.kz
+    - +.apiauto.ru
+    - +.sfunpay.com
+    - +.funpay.ru
+    - +.funpay.com
+    - +.flowwow.com
+    - +.auto.ru
+    - +.autoru.me
+    - +.avto.ru
+    - +.cm.expert
+    - +.avito.com
+    - +.avito.ru
+    - +.avito.st
+    - +.avito.tech
+    - +.cian.ru
+    - +.cian.site
+    - +.ciangroup.ru
+    - +.dmir.ru
+    - +.poudobnee.com
+    - +.xn--80aaafbpzn5blfby1p.xn--p1ai
+    - +.wibes.ru
+    - +.flowwow-images.com
     - +.ewisdom.us.kg
+    - +.ozon.com.kz
+    - +.ozonru.co.il
+    - +.ozon.com.by
     - +.wildberries.co.il
-    - stats.avito.ru
     - ad.ozone.ru
     - adv.ozon.ru
     - agency-adv.ozon.ru
@@ -200,3 +199,4 @@ payload:
     - marketplace-sentry.wb.ru
     - sentry.wb.ru
     - web-analytics.wildberries.ru
+    - stats.avito.ru
