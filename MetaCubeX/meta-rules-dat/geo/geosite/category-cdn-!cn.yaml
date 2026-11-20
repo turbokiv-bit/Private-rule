@@ -7,6 +7,12 @@ payload:
     - +.gcdn.co
     - +.gcore.com
     - +.gcore.pro
+    - +.esm.run
+    - +.jsdelivr.com
+    - +.jsdelivr.net
+    - +.vrcdn.cloud
+    - +.vrcdn.live
+    - +.vrcdn.video
     - +.ak1.net
     - +.aka-ai.com
     - +.aka-ai.net
@@ -132,21 +138,8 @@ payload:
     - +.workers.dev
     - +.cf-ipfs.com
     - +.cloudflare-ipfs.com
-    - +.fastly-edge.com
-    - +.fastly-terrarium.com
-    - +.fastly.com
-    - +.fastly.io
-    - +.fastly.net
-    - +.fastlylabs.com
-    - +.fastlylb.net
     - +.imgix.com
     - +.imgix.net
-    - +.pagecdn.com
-    - +.pagecdn.io
-    - +.quantil.com
-    - +.esm.run
-    - +.jsdelivr.com
-    - +.jsdelivr.net
     - +.delvenetworks.com
     - +.limelight.com
     - +.lldns.net
@@ -155,11 +148,18 @@ payload:
     - +.llnw.net
     - +.llnwd.net
     - +.llnwi.net
+    - +.pagecdn.com
+    - +.pagecdn.io
+    - +.quantil.com
     - +.stackpath.com
     - +.stackpath.dev
-    - +.vrcdn.cloud
-    - +.vrcdn.live
-    - +.vrcdn.video
+    - +.fastly-edge.com
+    - +.fastly-terrarium.com
+    - +.fastly.com
+    - +.fastly.io
+    - +.fastly.net
+    - +.fastlylabs.com
+    - +.fastlylb.net
     - +.akamai.co.kr
     - +.one.one.one
     - +.accdn.com.cn
