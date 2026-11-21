@@ -69,6 +69,7 @@ payload:
     - DOMAIN-SUFFIX,ahmia.fi
     - DOMAIN-SUFFIX,fteproxy.org
     - DOMAIN-SUFFIX,zeronet.io
+    - DOMAIN-SUFFIX,torproject.org
     - DOMAIN-SUFFIX,docs.rw
     - DOMAIN-SUFFIX,log.rw
     - DOMAIN-SUFFIX,remna.dev
@@ -76,13 +77,27 @@ payload:
     - DOMAIN-SUFFIX,try.rw
     - DOMAIN-SUFFIX,ceno.app
     - DOMAIN-SUFFIX,censorship.no
-    - DOMAIN-SUFFIX,citizenlab.ca
-    - DOMAIN-SUFFIX,citizenlab.org
-    - DOMAIN-SUFFIX,haveibeenpwned.com
-    - DOMAIN-SUFFIX,pwnedpasswords.com
-    - DOMAIN-SUFFIX,paskoocheh.com
-    - DOMAIN-SUFFIX,softether.org
-    - DOMAIN-SUFFIX,softether-download.com
+    - DOMAIN-SUFFIX,epicbrowser.com
+    - DOMAIN-SUFFIX,applecensorship.com
+    - DOMAIN-SUFFIX,freebrowser.org
+    - DOMAIN-SUFFIX,freewechat.com
+    - DOMAIN-SUFFIX,freeweibo.com
+    - DOMAIN-SUFFIX,freezhihu.org
+    - DOMAIN-SUFFIX,googlecensorship.org
+    - DOMAIN-SUFFIX,googleplaycensorship.com
+    - DOMAIN-SUFFIX,greatfire.org
+    - DOMAIN-SUFFIX,greatfirevpn.com
+    - DOMAIN-SUFFIX,manyvoices.news
+    - DOMAIN-SUFFIX,pao-pao.net
+    - DOMAIN-SUFFIX,wikiunblocked.org
+    - DOMAIN-SUFFIX,getlantern.org
+    - DOMAIN-SUFFIX,lantern.io
+    - DOMAIN-SUFFIX,v2ray.com
+    - DOMAIN-SUFFIX,v2ray.cool
+    - DOMAIN-SUFFIX,v2fly.org
+    - DOMAIN-SUFFIX,opengw.net
+    - DOMAIN-SUFFIX,vpngate.jp
+    - DOMAIN-SUFFIX,vpngate.net
     - DOMAIN-SUFFIX,ipns.co
     - DOMAIN-SUFFIX,jorropo.net
     - DOMAIN-SUFFIX,crustwebsites.net
@@ -96,30 +111,15 @@ payload:
     - DOMAIN-SUFFIX,c4rex.co
     - DOMAIN-SUFFIX,ipfs.io
     - DOMAIN-SUFFIX,ipfs.tech
-    - DOMAIN-SUFFIX,epicbrowser.com
-    - DOMAIN-SUFFIX,applecensorship.com
-    - DOMAIN-SUFFIX,freebrowser.org
-    - DOMAIN-SUFFIX,freewechat.com
-    - DOMAIN-SUFFIX,vpngate.net
-    - DOMAIN-SUFFIX,vpngate.jp
-    - DOMAIN-SUFFIX,opengw.net
-    - DOMAIN-SUFFIX,v2fly.org
-    - DOMAIN-SUFFIX,v2ray.cool
-    - DOMAIN-SUFFIX,freeweibo.com
-    - DOMAIN-SUFFIX,freezhihu.org
-    - DOMAIN-SUFFIX,googlecensorship.org
-    - DOMAIN-SUFFIX,googleplaycensorship.com
-    - DOMAIN-SUFFIX,greatfire.org
-    - DOMAIN-SUFFIX,greatfirevpn.com
-    - DOMAIN-SUFFIX,manyvoices.news
-    - DOMAIN-SUFFIX,pao-pao.net
-    - DOMAIN-SUFFIX,wikiunblocked.org
-    - DOMAIN-SUFFIX,getlantern.org
-    - DOMAIN-SUFFIX,lantern.io
-    - DOMAIN-SUFFIX,torproject.org
-    - DOMAIN-SUFFIX,v2ray.com
-    - DOMAIN-SUFFIX,ipfs.eternum.io
+    - DOMAIN-SUFFIX,citizenlab.ca
+    - DOMAIN-SUFFIX,citizenlab.org
+    - DOMAIN-SUFFIX,haveibeenpwned.com
+    - DOMAIN-SUFFIX,pwnedpasswords.com
+    - DOMAIN-SUFFIX,softether-download.com
+    - DOMAIN-SUFFIX,softether.org
+    - DOMAIN-SUFFIX,paskoocheh.com
     - DOMAIN-SUFFIX,ipfs.lain.la
+    - DOMAIN-SUFFIX,ipfs.eternum.io
     - DOMAIN-SUFFIX,ipfs.fleek.co
     - DOMAIN-SUFFIX,ipfs.runfission.com
     - DOMAIN-SUFFIX,twister.net.co
