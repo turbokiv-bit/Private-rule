@@ -268,4 +268,4 @@ URL-REGEX,^https://tv\.gooodies\.bid/elta/.*\.m3u
 DOMAIN-SUFFIX,eltaott.tv
 DOMAIN-SUFFIX,tv.gooodies.bid
 DOMAIN-SUFFIX,gooodies.bid
-DOMAIN-SUFFIX,.hinet.net
+DOMAIN-SUFFIX,hinet.net
