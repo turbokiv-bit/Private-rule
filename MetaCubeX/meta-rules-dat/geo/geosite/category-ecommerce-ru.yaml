@@ -1,11 +1,6 @@
 payload:
-    - +.drom.ru
-    - +.rdrom.ru
-    - +.apiauto.ru
-    - +.auto.ru
-    - +.autoru.me
-    - +.avto.ru
-    - +.cm.expert
+    - +.wb.ru
+    - +.ozonru.eu
     - +.avito.com
     - +.avito.ru
     - +.avito.st
@@ -44,7 +39,7 @@ payload:
     - +.ozon.market
     - +.rocketozon.by
     - +.o3.ru
-    - +.ozon.ru
+    - +.drom.ru
     - +.ozon.express
     - +.xn--80aafgovrgbc7am.xn--p1ai
     - +.ozoncard.ru
@@ -58,7 +53,7 @@ payload:
     - +.ozonroket.by
     - +.xn----8sbahiqzthbd0bn.xn--p1ai
     - +.ozonru.com
-    - +.ozonru.eu
+    - +.wbautomation.ru
     - +.ozonru.me
     - +.ozonsport.ru
     - +.ozonstatus.ru
@@ -86,9 +81,9 @@ payload:
     - +.wb.am
     - +.wb.kg
     - +.wb.kz
-    - +.wb.ru
-    - +.wbautomation.ru
-    - +.wbautomation.tech
+    - +.ozon.ru
+    - +.rdrom.ru
+    - +.cm.expert
     - +.wbbasket.ru
     - +.wbcontent.net
     - +.wbdubna.ru
@@ -161,10 +156,15 @@ payload:
     - +.wolfberries.ru
     - +.xn--80acbjgmges7ca.xn--p1ai
     - +.xn--80acbjgsdq2cl.xn--p1ai
-    - +.ozon.com.by
-    - +.ozonru.co.il
-    - +.ozon.com.kz
+    - +.apiauto.ru
+    - +.avto.ru
+    - +.autoru.me
+    - +.wbautomation.tech
+    - +.auto.ru
     - +.ewisdom.us.kg
+    - +.ozonru.co.il
+    - +.ozon.com.by
+    - +.ozon.com.kz
     - +.wildberries.co.il
     - stats.avito.ru
     - ad.ozone.ru
