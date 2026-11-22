@@ -20,6 +20,7 @@ DOMAIN,admin.sports.mfkzb.xyz
 DOMAIN,one.liminalnet.com
 DOMAIN,emby.902541.xyz
 DOMAIN-SUFFIX,public.shrekmedia.org
+DOMAIN-SUFFIX,gooodies.bid
 DOMAIN,d46c0ebf9ef94053848fdd7b1f2f6b90.mediatailor.eu-central-1.amazonaws.com
 DOMAIN,18f2fbf906cb473e8adbe37026e7e27f.mediatailor.us-east-1.amazonaws.com
 DOMAIN,1d7f286dfb844497ac68dd9d6eeb6ea6.mediatailor.us-west-2.amazonaws.com
@@ -257,3 +258,13 @@ DOMAIN-SUFFIX,iptv.852851.xyz
 DOMAIN-SUFFIX,dpdns.org
 IP-CIDR,192.166.82.72/32,no-resolve
 DOMAIN,kan.waiguotai.top
+URL-REGEX,^https://tv\.gooodies\.bid/ofiii/.*\.m3u
+URL-REGEX,^https://tv\.gooodies\.bid/yt/.*\.m3u
+URL-REGEX,^https://tv\.gooodies\.bid/hami/.*\.m3u
+URL-REGEX,^https://tv\.gooodies\.bid/channel/.*\.m3u
+URL-REGEX,^https://tv\.gooodies\.bid/custom/.*\.m3u
+URL-REGEX,^https://tv\.gooodies\.bid/myvideo/.*\.m3u
+URL-REGEX,^https://tv\.gooodies\.bid/elta/.*\.m3u
+DOMAIN-SUFFIX,eltaott.tv
+DOMAIN-SUFFIX,tv.gooodies.bid
+DOMAIN-SUFFIX,gooodies.bid
