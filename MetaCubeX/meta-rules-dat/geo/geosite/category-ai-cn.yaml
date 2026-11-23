@@ -7,12 +7,12 @@ payload:
     - +.rwkv.cn
     - +.rwkv.com
     - +.tapnow.top
-    - +.deepseeksvc.com
+    - +.xiaomimimo.com
     - +.qianwen.com
     - +.qianwenai.com
     - +.qwen.ai
     - +.qwenlm.ai
-    - +.deepseek.com
+    - +.xiaoaiassist.com
     - +.tongyi.com
     - +.antafu.com
     - +.antaq.com
@@ -20,7 +20,7 @@ payload:
     - +.happyhorse.cn
     - +.happyshrimp.cn
     - +.sleeplesshorizon.cn
-    - +.diandianlife.top
+    - +.miaibox.com
     - +.dumate.cn
     - +.miaoda.cn
     - +.mcpworld.com
@@ -32,15 +32,15 @@ payload:
     - +.zhipucn.com
     - +.kimi.com
     - +.moonshot.cn
-    - +.askdiandian.com
+    - +.yoma.cn
     - +.hailuoai.com
     - +.minimaxi.com
     - +.xingyeai.com
     - +.codebuddy.cn
     - +.workbuddy.cn
-    - +.xiaomimimo.com
-    - +.xiaoaiassist.com
-    - +.miaibox.com
+    - +.trae.guru
+    - +.trae.cn
+    - +.tcwqqdy.guru
     - +.baichuan-ai.com
     - +.nia-teams.com
     - +.cueme.cn
@@ -76,6 +76,10 @@ payload:
     - +.favonis.com
     - +.favonis.space
     - +.ai-indeed.com
+    - +.askdiandian.com
+    - +.diandianlife.top
+    - +.deepseek.com
+    - +.deepseeksvc.com
     - +.butterfly-static.cn
     - +.butterflyai.cn
     - +.coze-dns-01.com
@@ -115,16 +119,12 @@ payload:
     - +.mcdemo.show
     - +.mchost.guru
     - +.mcprev.cn
-    - +.tcwqqdy.guru
-    - +.trae.cn
-    - +.trae.guru
-    - +.yoma.cn
-    - +.marscode.com.cn
-    - +.trae.com.cn
     - +.yuanqi.tencent.com
     - +.yuanbao.tencent.com
     - +.hunyuan.tencent.com
     - +.xinghuo.xfyun.cn
+    - +.marscode.com.cn
+    - +.trae.com.cn
     - +.yiyan.baidu.com
     - +.tongyi.aliyun.com
     - +.qianwen.aliyun.com

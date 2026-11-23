@@ -1,8 +1,6 @@
 payload:
     - sentry.mindbox.ru
     - sentry.popmechanic.ru
-    - sentry.iptv.rt.ru
-    - +.adobestats.io
     - +.apptracer.ru
     - +.metrics.viqeo.tv
     - sentry-ng.g.smailru.net
@@ -15,17 +13,14 @@ payload:
     - stats.dev.telega.info
     - stats.rustore.ru
     - stats.telega.info
-    - +.log.dzen.ru
     - stats.vk-portal.net
+    - +.log.dzen.ru
     - +.applicationinsights.io
     - +.applicationinsights.net
     - +.aria.ms
     - +.data.microsoft.com
     - +.telemetry.microsoft.com
     - +.nelreports.net
-    - +.in.applicationinsights.azure.com
-    - dc.applicationinsights.azure.com
-    - live.applicationinsights.azure.com
     - +.cafe.github.com
     - +.collector.github.com
     - copilot-telemetry-service.githubusercontent.com
@@ -34,9 +29,9 @@ payload:
     - rt.services.visualstudio.com
     - +.browser.events.data.msn.cn
     - +.browser.events.data.msn.com
-    - sentry.hetzner.company
-    - +.analytics.vpc.duolingo.com
-    - +.metrics.duolingo.com
+    - +.in.applicationinsights.azure.com
+    - dc.applicationinsights.azure.com
+    - live.applicationinsights.azure.com
     - incoming.telemetry.mozilla.org
     - incoming-telemetry.thunderbird.net
     - crashlyticsreports-pa.googleapis.com
@@ -44,6 +39,11 @@ payload:
     - firebaselogging-pa.googleapis.com
     - firebaselogging.googleapis.com
     - update.crashlytics.com
+    - +.analytics.vpc.duolingo.com
+    - +.metrics.duolingo.com
+    - sentry.hetzner.company
+    - sentry.iptv.rt.ru
+    - +.adobestats.io
     - +.appmetrica.yandex.com
     - +.appmetrica.yandex.net
     - +.appmetrica.yandex.ru

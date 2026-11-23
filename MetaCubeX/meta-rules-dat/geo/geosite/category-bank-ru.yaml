@@ -2,7 +2,7 @@ payload:
     - edu.tinkoff.ru
     - education.tbank.ru
     - +.novikom.ru
-    - +.tinkoff-edu.ru
+    - +.tinkoffjournal.ru
     - +.alfabank.st
     - +.alfa.me
     - +.myapelsin.ru
@@ -151,7 +151,7 @@ payload:
     - +.finambank.ru
     - +.finstarbank.ru
     - +.forabank.ru
-    - +.spasibosberbank.ru
+    - +.tinkoff-edu.ru
     - +.forshtadt.ru
     - +.gaztransbank.ru
     - +.gebank.ru
@@ -195,9 +195,9 @@ payload:
     - +.resocreditbank.ru
     - +.rsb.ru
     - +.rshb.ru
-    - +.spasibosb.ru
-    - +.spasibobonus.ru
-    - +.spasibo.market
+    - +.prodcontest.com
+    - +.cu.ru
+    - +.centraluniversity.ru
     - +.sbibankllc.ru
     - +.sdm.ru
     - +.seb.ru
@@ -210,7 +210,7 @@ payload:
     - +.smbcr-bank.ru
     - +.sngb.ru
     - +.socium-bank.ru
-    - +.spasibo.digital
+    - +.xn--h1ao.site
     - +.svoi.ru
     - +.tagbank.ru
     - +.tatsotsbank.ru
@@ -229,6 +229,21 @@ payload:
     - +.vlbb.ru
     - +.wb-bank.ru
     - +.ziraatbank.ru
+    - +.bps-sberbank.by
+    - +.sber-bank.by
+    - +.sber.ru
+    - +.sberbank.com
+    - +.sberbank.ru
+    - +.sbrf.ru
+    - +.yookassa.ru
+    - +.yoomoney.ru
+    - +.cplsb.ru
+    - +.sberspasibo.ru
+    - +.spasibo.digital
+    - +.spasibo.market
+    - +.spasibobonus.ru
+    - +.spasibosb.ru
+    - +.spasibosberbank.ru
     - +.xn----7sbhmncai5a0arm7c1e.xn--p1ai
     - +.xn----8sbkfzespdwig.xn--p1ai
     - +.xn----8sbwjbxyd.xn--p1ai
@@ -323,7 +338,7 @@ payload:
     - +.tinkoffcapital.ru
     - +.tinkoffinsurance.ru
     - +.tinkoffinsurancefuture.ru
-    - +.tinkoffjournal.ru
+    - +.novobank.ru
     - +.tinkoffmobile.com
     - +.tinsurance.ru
     - +.tinsurancefuture.ru
@@ -334,21 +349,6 @@ payload:
     - +.xn--90aifd0az.shop
     - +.xn--b1aechhj6bof8g5a.site
     - +.xn--d1abkf4ap.fun
-    - +.xn--h1ao.site
-    - +.centraluniversity.ru
-    - +.cu.ru
-    - +.prodcontest.com
-    - +.novobank.ru
-    - +.bps-sberbank.by
-    - +.sber-bank.by
-    - +.sber.ru
-    - +.sberbank.com
-    - +.sberbank.ru
-    - +.sbrf.ru
-    - +.yookassa.ru
-    - +.yoomoney.ru
-    - +.cplsb.ru
-    - +.sberspasibo.ru
     - +.ssb.msk.ru
     - +.ru.ccb.com
     - +.finance.ozon.ru

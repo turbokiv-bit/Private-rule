@@ -1,4 +1,9 @@
 payload:
+    - DOMAIN-SUFFIX,4008-517-517.cn
+    - DOMAIN-SUFFIX,mcd.cn
+    - DOMAIN-SUFFIX,mcdchina.net
+    - DOMAIN-SUFFIX,mcdonalds.com.cn
+    - DOMAIN-SUFFIX,starbucks.com.cn
     - DOMAIN,ntp.aliyun.com
     - DOMAIN,ntp1.aliyun.com
     - DOMAIN,ntp2.aliyun.com
@@ -22,11 +27,6 @@ payload:
     - DOMAIN-SUFFIX,ntp.neu.edu.cn
     - DOMAIN-SUFFIX,ntp.ntsc.ac.cn
     - DOMAIN-SUFFIX,ntp.org.cn
-    - DOMAIN-SUFFIX,4008-517-517.cn
-    - DOMAIN-SUFFIX,mcd.cn
-    - DOMAIN-SUFFIX,mcdchina.net
-    - DOMAIN-SUFFIX,mcdonalds.com.cn
-    - DOMAIN-SUFFIX,starbucks.com.cn
     - DOMAIN-REGEX,^.+-mihayo\.akamaized\.net$
     - DOMAIN-SUFFIX,a2z.org.cn
     - DOMAIN-SUFFIX,amazonaws.cn
