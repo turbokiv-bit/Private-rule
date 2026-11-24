@@ -1,6 +1,4 @@
 payload:
-    - DOMAIN-REGEX,^cdn\d-epicgames-\d+\.file\.myqcloud\.com$
-    - DOMAIN-REGEX,^epicgames-download\d-\d+\.file\.myqcloud\.com$
     - DOMAIN-SUFFIX,yostar.cn
     - DOMAIN-SUFFIX,legendofzelda.cn
     - DOMAIN-SUFFIX,legendofzelda.com.cn
@@ -14,6 +12,12 @@ payload:
     - DOMAIN-SUFFIX,mariokart.cn
     - DOMAIN-SUFFIX,mariokart.com.cn
     - DOMAIN-SUFFIX,supermariobros.com.cn
+    - DOMAIN-REGEX,^cdn\d-epicgames-\d+\.file\.myqcloud\.com$
+    - DOMAIN-REGEX,^epicgames-download\d-\d+\.file\.myqcloud\.com$
+    - DOMAIN,gog.qtlglb.com
+    - DOMAIN-SUFFIX,xboxlive.cn
+    - DOMAIN-SUFFIX,leagueoflegends.cn
+    - DOMAIN-SUFFIX,lpl.com.cn
     - DOMAIN-SUFFIX,steamserver.net
     - DOMAIN-SUFFIX,steamusercontent.com
     - DOMAIN-SUFFIX,csgo.com.cn
@@ -33,8 +37,4 @@ payload:
     - DOMAIN,xz.pphimalayanrt.com
     - DOMAIN-SUFFIX,steamchina.com
     - DOMAIN-SUFFIX,gstore.val.manlaxy.com
-    - DOMAIN,gog.qtlglb.com
-    - DOMAIN-SUFFIX,leagueoflegends.cn
-    - DOMAIN-SUFFIX,lpl.com.cn
     - DOMAIN-SUFFIX,bluearchive-cn.com
-    - DOMAIN-SUFFIX,xboxlive.cn
