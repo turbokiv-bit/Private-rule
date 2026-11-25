@@ -1,40 +1,105 @@
 payload:
-    - +.analytics.vpc.duolingo.com
-    - +.metrics.duolingo.com
+    - +.insights-collector.gog.com
+    - +.ifacelog.iqiyi.com
+    - +.mbdlog.iqiyi.com
+    - +.stat.m.jd.com
+    - sentry.mindbox.ru
+    - sentry.popmechanic.ru
+    - sentry.x5.ru
+    - sentry.ozon.ru
+    - +.apptracer.ru
+    - +.metrics.viqeo.tv
+    - sentry-ng.g.smailru.net
+    - srch-telemeter10.g.smailru.net
+    - sentry.dev-my.com
+    - sentry.dev-my.games
+    - sentry.rustore.ru
+    - sentry.viqeo.tv
+    - stats.dahlmessenger.com
+    - stats.dev.telega.info
+    - stats.rustore.ru
+    - stats.telega.info
+    - +.log.dzen.ru
+    - stats.vk-portal.net
+    - +.fclog.baidu.com
+    - +.pimlog.baidu.com
+    - +.beacon.sina.com.cn
+    - +.log.sina.cn
+    - +.log2.sina.cn
+    - +.sbeacon.sina.com.cn
+    - +.slog.sina.cn
+    - +.slog.sina.com.cn
+    - +.beacon.cdn.qq.com
+    - +.beacon.qq.com
+    - +.beaconcdn.qq.com
+    - +.btrace.qq.com
+    - +.bugly.qq.com
+    - +.htrace.wetvinfo.com
+    - +.log.tbs.qq.com
+    - +.monitor.uu.qq.com
+    - +.mtrace.qq.com
+    - +.report.qqweb.qq.com
+    - +.rmonitor.qq.com
+    - +.sngmta.qq.com
+    - +.tpstelemetry.tencent.com
+    - +.trace.qq.com
+    - +.badjs.weixinbridge.com
+    - +.monitor.music.qq.com
+    - +.report.tencentmusic.com
+    - +.stat.y.qq.com
+    - +.log.hunantv.com
+    - +.log.v2.hunantv.com
+    - +.analytics.163.com
+    - +.crash.163.com
+    - +.crashlytics.163.com
+    - +.sentry.music.163.com
+    - +.extlog.snssdk.com
+    - +.log.zijieapi.com
+    - log3-applog-hl.fqnovel.com
+    - log3-applog.fqnovel.com
+    - log5-applog-hl.fqnovel.com
+    - log5-applog.fqnovel.com
+    - rtlog3-applog-hl.fqnovel.com
+    - rtlog3-applog.fqnovel.com
+    - rtlog5-applog-hl.fqnovel.com
+    - rtlog5-applog.fqnovel.com
+    - disney.my.sentry.io
+    - log-sdk.gifshow.com
+    - wlog.kuaishou.com
+    - apilog-web.acfun.cn
+    - browser-intake-datadoghq.com
+    - o33249.ingest.sentry.io
+    - o33249.ingest.us.sentry.io
+    - +.logger.qmai.cn
+    - +.tracking.mcdonalds.com.cn
+    - +.trackingprd.hwwt8.com
+    - +.trackserver.shuxinyc.com
+    - o4504926511693824.ingest.sentry.io
     - error-tracking.megamarket.tech
     - metrics.21-school.ru
     - sentry.sberauto.com
     - tracing-http.megamarket.tech
     - +.clickstream.sberbank.ru
-    - +.fclog.baidu.com
-    - +.pimlog.baidu.com
+    - +.data.mistat.india.xiaomi.com
+    - +.data.mistat.intl.xiaomi.com
+    - +.data.mistat.rus.xiaomi.com
+    - +.data.mistat.xiaomi.com
+    - +.logupdate.avlyun.sec.miui.com
+    - +.sentry.d.mi.com
+    - +.sentry.d.xiaomi.net
+    - +.stats.music.xiaomi.com
+    - +.crash2.zhihu.com
+    - +.zhihu-web-analytics.zhihu.com
+    - sentry.hetzner.company
+    - stats.avito.ru
+    - metrika.kontur.ru
+    - sentry.kontur.host
+    - +.nelreports.net
+    - +.browser.events.data.msn.cn
+    - +.browser.events.data.msn.com
     - +.log-upload-os.hoyoverse.com
     - +.log-upload.mihoyo.com
-    - +.collector.xhamster.com
-    - +.appmetrica.yandex.com
-    - +.appmetrica.yandex.net
-    - +.appmetrica.yandex.ru
-    - +.appmetrica.yango.com
-    - +.counter.yandex.ru
-    - +.mc.yandex.ru
-    - +.metrika.yandex.com
-    - +.metrika.yandex.net
-    - +.metrika.yandex.ru
-    - +.webvisor.com
-    - +.webvisor.org
-    - +.yandex-metrica.ru
-    - +.yandexmetrica.com
-    - analytics.mobile.yandex.net
-    - log.strm.yandex.ru
-    - mc.yandex.com
-    - mc.yandex.net
-    - mc.yango.com
-    - stats.avito.ru
-    - +.analytics.163.com
-    - +.crash.163.com
-    - +.crashlytics.163.com
-    - +.sentry.music.163.com
-    - o4504926511693824.ingest.sentry.io
+    - sentry.iptv.rt.ru
     - +.adash-c.m.taobao.com
     - +.adash-c.ut.taobao.com
     - +.adash.m.taobao.com
@@ -51,15 +116,10 @@ payload:
     - +.m-adash.m.taobao.com
     - +.retcode.taobao.com
     - +.v6-adashx.ut.taobao.com
-    - +.adash-emas.cn-hangzhou.aliyuncs.com
-    - +.adash.man.aliyuncs.com
     - +.adashx.ut.amap.com
     - +.dualstack-logs.amap.com
     - +.logs.amap.com
     - +.v6-adashx.ut.amap.com
-    - +.adashx.ut.ele.me
-    - +.h-adashx.ut.ele.me
-    - +.v6-adashx.ut.ele.me
     - +.alog.umeng.com
     - +.alog.umengcloud.com
     - +.alogs.umeng.com
@@ -79,95 +139,12 @@ payload:
     - +.stat.youku.com
     - +.statis.api.3g.youku.com
     - +.v6-adashx.ut.youku.com
+    - +.adash-emas.cn-hangzhou.aliyuncs.com
+    - +.adash.man.aliyuncs.com
     - +.v6-adashx.ut.cainiao.com
-    - browser-intake-datadoghq.com
-    - o33249.ingest.sentry.io
-    - o33249.ingest.us.sentry.io
-    - sentry.x5.ru
-    - +.data.mistat.india.xiaomi.com
-    - +.data.mistat.intl.xiaomi.com
-    - +.data.mistat.rus.xiaomi.com
-    - +.data.mistat.xiaomi.com
-    - +.logupdate.avlyun.sec.miui.com
-    - +.sentry.d.mi.com
-    - +.sentry.d.xiaomi.net
-    - +.stats.music.xiaomi.com
-    - +.crash2.zhihu.com
-    - +.zhihu-web-analytics.zhihu.com
-    - +.extlog.snssdk.com
-    - +.log.zijieapi.com
-    - log3-applog-hl.fqnovel.com
-    - log3-applog.fqnovel.com
-    - log5-applog-hl.fqnovel.com
-    - log5-applog.fqnovel.com
-    - rtlog3-applog-hl.fqnovel.com
-    - rtlog3-applog.fqnovel.com
-    - rtlog5-applog-hl.fqnovel.com
-    - rtlog5-applog.fqnovel.com
-    - log-sdk.gifshow.com
-    - wlog.kuaishou.com
-    - apilog-web.acfun.cn
-    - sentry.iptv.rt.ru
-    - +.analytics.cloud.unity3d.com
-    - +.perf.cloud.unity3d.com
-    - +.perf-events.cloud.unity3d.com
-    - +.logger.qmai.cn
-    - +.tracking.mcdonalds.com.cn
-    - +.trackingprd.hwwt8.com
-    - +.trackserver.shuxinyc.com
-    - +.log.hunantv.com
-    - +.log.v2.hunantv.com
-    - analytics-stage.wildberries.ru
-    - analytics.wildberries.ru
-    - marketplace-sentry.wb.ru
-    - sentry.wb.ru
-    - web-analytics.wildberries.ru
-    - sentry.mindbox.ru
-    - sentry.popmechanic.ru
-    - disney.my.sentry.io
-    - +.apptracer.ru
-    - +.metrics.viqeo.tv
-    - sentry-ng.g.smailru.net
-    - srch-telemeter10.g.smailru.net
-    - sentry.dev-my.com
-    - sentry.dev-my.games
-    - sentry.rustore.ru
-    - sentry.viqeo.tv
-    - stats.dahlmessenger.com
-    - stats.dev.telega.info
-    - stats.rustore.ru
-    - stats.telega.info
-    - +.log.dzen.ru
-    - stats.vk-portal.net
-    - sentry.ozon.ru
-    - +.beacon.cdn.qq.com
-    - +.beacon.qq.com
-    - +.beaconcdn.qq.com
-    - +.btrace.qq.com
-    - +.bugly.qq.com
-    - +.htrace.wetvinfo.com
-    - +.log.tbs.qq.com
-    - +.monitor.uu.qq.com
-    - +.mtrace.qq.com
-    - +.report.qqweb.qq.com
-    - +.rmonitor.qq.com
-    - +.sngmta.qq.com
-    - +.tpstelemetry.tencent.com
-    - +.trace.qq.com
-    - +.badjs.weixinbridge.com
-    - +.monitor.music.qq.com
-    - +.report.tencentmusic.com
-    - +.stat.y.qq.com
-    - +.stat.m.jd.com
-    - +.nelreports.net
-    - +.browser.events.data.msn.cn
-    - +.browser.events.data.msn.com
-    - +.beacon.sina.com.cn
-    - +.log.sina.cn
-    - +.log2.sina.cn
-    - +.sbeacon.sina.com.cn
-    - +.slog.sina.cn
-    - +.slog.sina.com.cn
+    - +.adashx.ut.ele.me
+    - +.h-adashx.ut.ele.me
+    - +.v6-adashx.ut.ele.me
     - +.api-secure.amplitude.com
     - +.api-secure.eu.amplitude.com
     - +.api-sr.amplitude.com
@@ -189,89 +166,53 @@ payload:
     - +.regionconfig.eu.amplitude.com
     - +.sr-client-cfg.amplitude.com
     - +.sr-client-cfg.eu.amplitude.com
-    - sentry.hetzner.company
-    - +.ifacelog.iqiyi.com
-    - +.mbdlog.iqiyi.com
-    - +.insights-collector.gog.com
-    - metrika.kontur.ru
-    - sentry.kontur.host
-    - +.log.dzen.ru
-    - apilog-web.acfun.cn
-    - +.badjs.weixinbridge.com
-    - +.analytics.cloud.unity3d.com
-    - +.perf.cloud.unity3d.com
-    - +.perf-events.cloud.unity3d.com
-    - +.adashx.ut.ele.me
-    - +.h-adashx.ut.ele.me
-    - +.v6-adashx.ut.ele.me
-    - +.insights-collector.gog.com
-    - +.log-upload-os.hoyoverse.com
-    - +.clickstream.sberbank.ru
-    - +.volceapplog.com
     - analytics-stage.wildberries.ru
     - analytics.wildberries.ru
     - marketplace-sentry.wb.ru
     - sentry.wb.ru
     - web-analytics.wildberries.ru
-    - +.log-upload.mihoyo.com
-    - +.beacon.sina.com.cn
-    - +.log.sina.cn
-    - +.log2.sina.cn
-    - +.sbeacon.sina.com.cn
-    - +.slog.sina.cn
-    - +.slog.sina.com.cn
     - +.collector.xhamster.com
-    - +.cloudflareinsights.com
-    - +.cloudflareinsights-cn.com
-    - +.cafe.github.com
-    - +.collector.github.com
-    - copilot-telemetry-service.githubusercontent.com
-    - copilot-telemetry.githubusercontent.com
-    - +.meitustat.com
-    - +.beacon.cdn.qq.com
-    - +.beacon.qq.com
-    - +.beaconcdn.qq.com
-    - +.btrace.qq.com
-    - +.bugly.qq.com
-    - +.htrace.wetvinfo.com
-    - +.log.tbs.qq.com
-    - +.monitor.uu.qq.com
-    - +.mtrace.qq.com
-    - +.report.qqweb.qq.com
-    - +.rmonitor.qq.com
-    - +.sngmta.qq.com
-    - +.tpstelemetry.tencent.com
-    - +.trace.qq.com
-    - +.badjs.weixinbridge.com
-    - +.monitor.music.qq.com
-    - +.report.tencentmusic.com
-    - +.stat.y.qq.com
+    - +.analytics.vpc.duolingo.com
+    - +.metrics.duolingo.com
+    - +.analytics.cloud.unity3d.com
+    - +.perf.cloud.unity3d.com
+    - +.perf-events.cloud.unity3d.com
+    - +.appmetrica.yandex.com
+    - +.appmetrica.yandex.net
+    - +.appmetrica.yandex.ru
+    - +.appmetrica.yango.com
+    - +.counter.yandex.ru
+    - +.mc.yandex.ru
+    - +.metrika.yandex.com
+    - +.metrika.yandex.net
+    - +.metrika.yandex.ru
+    - +.webvisor.com
+    - +.webvisor.org
+    - +.yandex-metrica.ru
+    - +.yandexmetrica.com
+    - analytics.mobile.yandex.net
+    - log.strm.yandex.ru
+    - mc.yandex.com
+    - mc.yandex.net
+    - mc.yango.com
+    - +.adobestats.io
+    - +.adashx.ut.amap.com
+    - +.dualstack-logs.amap.com
+    - +.logs.amap.com
+    - +.v6-adashx.ut.amap.com
+    - stats.avito.ru
+    - +.logger.qmai.cn
+    - +.tracking.mcdonalds.com.cn
+    - +.trackingprd.hwwt8.com
+    - +.trackserver.shuxinyc.com
+    - o4504926511693824.ingest.sentry.io
     - error-tracking.megamarket.tech
     - metrics.21-school.ru
     - sentry.sberauto.com
     - tracing-http.megamarket.tech
     - +.clickstream.sberbank.ru
-    - +.alog.umeng.com
-    - +.alog.umengcloud.com
-    - +.alogs.umeng.com
-    - +.alogus.umeng.com
-    - +.cnlogs.umeng.com
-    - +.cnlogs.umengcloud.com
-    - +.plbslog.umeng.com
-    - +.ulogs.umeng.com
-    - +.ulogs.umengcloud.com
-    - +.adashx.ut.youku.com
-    - +.e.stat.ykimg.com
-    - +.h-adashx.ut.youku.com
-    - +.lstat.youku.com
-    - +.p-log.ykimg.com
-    - +.passport-log.youku.com
-    - +.s-adashx.ut.youku.com
-    - +.stat.youku.com
-    - +.statis.api.3g.youku.com
-    - +.v6-adashx.ut.youku.com
-    - +.adobestats.io
-    - sentry.iptv.rt.ru
+    - +.clickstream.sberbank.ru
+    - +.collector.xhamster.com
     - +.mmstat.com
     - +.shuqistat.com
     - +.adash-c.m.taobao.com
@@ -290,15 +231,10 @@ payload:
     - +.m-adash.m.taobao.com
     - +.retcode.taobao.com
     - +.v6-adashx.ut.taobao.com
-    - +.adash-emas.cn-hangzhou.aliyuncs.com
-    - +.adash.man.aliyuncs.com
     - +.adashx.ut.amap.com
     - +.dualstack-logs.amap.com
     - +.logs.amap.com
     - +.v6-adashx.ut.amap.com
-    - +.adashx.ut.ele.me
-    - +.h-adashx.ut.ele.me
-    - +.v6-adashx.ut.ele.me
     - +.alog.umeng.com
     - +.alog.umengcloud.com
     - +.alogs.umeng.com
@@ -318,89 +254,16 @@ payload:
     - +.stat.youku.com
     - +.statis.api.3g.youku.com
     - +.v6-adashx.ut.youku.com
-    - +.v6-adashx.ut.cainiao.com
-    - disney.my.sentry.io
-    - log3-applog-hl.fqnovel.com
-    - log3-applog.fqnovel.com
-    - log5-applog-hl.fqnovel.com
-    - log5-applog.fqnovel.com
-    - rtlog3-applog-hl.fqnovel.com
-    - rtlog3-applog.fqnovel.com
-    - rtlog5-applog-hl.fqnovel.com
-    - rtlog5-applog.fqnovel.com
-    - copilot-telemetry-service.githubusercontent.com
-    - copilot-telemetry.githubusercontent.com
-    - log-sdk.gifshow.com
-    - wlog.kuaishou.com
-    - apilog-web.acfun.cn
-    - browser-intake-datadoghq.com
-    - o33249.ingest.sentry.io
-    - o33249.ingest.us.sentry.io
-    - +.shuqistat.com
-    - stats.vk-portal.net
-    - +.applogcdn.com
-    - +.volceapplog.com
-    - +.extlog.snssdk.com
-    - +.log.zijieapi.com
-    - log3-applog-hl.fqnovel.com
-    - log3-applog.fqnovel.com
-    - log5-applog-hl.fqnovel.com
-    - log5-applog.fqnovel.com
-    - rtlog3-applog-hl.fqnovel.com
-    - rtlog3-applog.fqnovel.com
-    - rtlog5-applog-hl.fqnovel.com
-    - rtlog5-applog.fqnovel.com
-    - +.apptracer.ru
-    - +.metrics.viqeo.tv
-    - sentry-ng.g.smailru.net
-    - srch-telemeter10.g.smailru.net
-    - sentry.dev-my.com
-    - sentry.dev-my.games
-    - sentry.rustore.ru
-    - sentry.viqeo.tv
-    - stats.dahlmessenger.com
-    - stats.dev.telega.info
-    - stats.rustore.ru
-    - stats.telega.info
-    - +.log.dzen.ru
-    - stats.vk-portal.net
-    - +.base.api.my7v.com
-    - +.dc-conf-o.api.leiniao.com
-    - +.dc-conf-t.api.leiniao.com
-    - +.dc-o.api.leiniao.com
-    - +.dc-t.api.leiniao.com
-    - +.dc-uo.api.leiniao.com
-    - +.dc-ut.api.leiniao.com
-    - +.qms-report-o.api.leiniao.com
-    - +.qms-report-t.api.leiniao.com
-    - sentry.x5.ru
     - +.adash-emas.cn-hangzhou.aliyuncs.com
     - +.adash.man.aliyuncs.com
-    - +.analytics.vpc.duolingo.com
-    - +.metrics.duolingo.com
-    - crashlyticsreports-pa.googleapis.com
-    - firebase-settings.crashlytics.com
-    - update.crashlytics.com
-    - firebaselogging-pa.googleapis.com
-    - firebaselogging.googleapis.com
-    - sentry.mindbox.ru
-    - sentry.popmechanic.ru
     - +.v6-adashx.ut.cainiao.com
-    - +.analytics.163.com
-    - +.crash.163.com
-    - +.crashlytics.163.com
-    - +.sentry.music.163.com
-    - +.monitor.music.qq.com
-    - +.report.tencentmusic.com
-    - +.stat.y.qq.com
-    - +.data.mistat.india.xiaomi.com
-    - +.data.mistat.intl.xiaomi.com
-    - +.data.mistat.rus.xiaomi.com
-    - +.data.mistat.xiaomi.com
-    - +.logupdate.avlyun.sec.miui.com
-    - +.sentry.d.mi.com
-    - +.sentry.d.xiaomi.net
-    - +.stats.music.xiaomi.com
+    - +.adashx.ut.ele.me
+    - +.h-adashx.ut.ele.me
+    - +.v6-adashx.ut.ele.me
+    - +.adash-emas.cn-hangzhou.aliyuncs.com
+    - +.adash.man.aliyuncs.com
+    - metrika.kontur.ru
+    - sentry.kontur.host
     - +.appmetrica.yandex.com
     - +.appmetrica.yandex.net
     - +.appmetrica.yandex.ru
@@ -419,54 +282,20 @@ payload:
     - mc.yandex.com
     - mc.yandex.net
     - mc.yango.com
-    - +.cloudflareinsights-cn.com
-    - +.ifacelog.iqiyi.com
-    - +.mbdlog.iqiyi.com
-    - sentry.ppy.sh
-    - +.akstat.io
-    - +.logger.qmai.cn
-    - +.tracking.mcdonalds.com.cn
-    - +.trackingprd.hwwt8.com
-    - +.trackserver.shuxinyc.com
-    - metrika.kontur.ru
-    - sentry.kontur.host
-    - +.applicationinsights.io
-    - +.applicationinsights.net
-    - +.aria.ms
-    - +.data.microsoft.com
-    - +.telemetry.microsoft.com
-    - +.cafe.github.com
-    - +.collector.github.com
-    - copilot-telemetry-service.githubusercontent.com
-    - copilot-telemetry.githubusercontent.com
-    - dc.services.visualstudio.com
-    - rt.services.visualstudio.com
-    - +.in.applicationinsights.azure.com
-    - dc.applicationinsights.azure.com
-    - live.applicationinsights.azure.com
-    - +.nelreports.net
-    - +.browser.events.data.msn.cn
-    - +.browser.events.data.msn.com
-    - incoming.telemetry.mozilla.org
-    - incoming-telemetry.thunderbird.net
-    - stats.avito.ru
-    - +.in.applicationinsights.azure.com
-    - dc.applicationinsights.azure.com
-    - live.applicationinsights.azure.com
-    - +.stat.m.jd.com
-    - +.paypalbeacon.com
-    - +.adashx.ut.amap.com
-    - +.dualstack-logs.amap.com
-    - +.logs.amap.com
-    - +.v6-adashx.ut.amap.com
-    - +.log.hunantv.com
-    - +.log.v2.hunantv.com
-    - dc.services.visualstudio.com
-    - rt.services.visualstudio.com
-    - sentry.ozon.ru
-    - o4504926511693824.ingest.sentry.io
-    - +.crash2.zhihu.com
-    - +.zhihu-web-analytics.zhihu.com
+    - +.extlog.snssdk.com
+    - +.log.zijieapi.com
+    - log3-applog-hl.fqnovel.com
+    - log3-applog.fqnovel.com
+    - log5-applog-hl.fqnovel.com
+    - log5-applog.fqnovel.com
+    - rtlog3-applog-hl.fqnovel.com
+    - rtlog3-applog.fqnovel.com
+    - rtlog5-applog-hl.fqnovel.com
+    - rtlog5-applog.fqnovel.com
+    - +.applogcdn.com
+    - +.volceapplog.com
+    - +.insights-collector.gog.com
+    - +.log-upload.mihoyo.com
     - +.api-secure.amplitude.com
     - +.api-secure.eu.amplitude.com
     - +.api-sr.amplitude.com
@@ -488,8 +317,179 @@ payload:
     - +.regionconfig.eu.amplitude.com
     - +.sr-client-cfg.amplitude.com
     - +.sr-client-cfg.eu.amplitude.com
+    - +.cloudflareinsights.com
+    - +.cloudflareinsights-cn.com
+    - +.base.api.my7v.com
+    - +.dc-conf-o.api.leiniao.com
+    - +.dc-conf-t.api.leiniao.com
+    - +.dc-o.api.leiniao.com
+    - +.dc-t.api.leiniao.com
+    - +.dc-uo.api.leiniao.com
+    - +.dc-ut.api.leiniao.com
+    - +.qms-report-o.api.leiniao.com
+    - +.qms-report-t.api.leiniao.com
+    - +.analytics.cloud.unity3d.com
+    - +.perf.cloud.unity3d.com
+    - +.perf-events.cloud.unity3d.com
+    - +.volceapplog.com
+    - log3-applog-hl.fqnovel.com
+    - log3-applog.fqnovel.com
+    - log5-applog-hl.fqnovel.com
+    - log5-applog.fqnovel.com
+    - rtlog3-applog-hl.fqnovel.com
+    - rtlog3-applog.fqnovel.com
+    - rtlog5-applog-hl.fqnovel.com
+    - rtlog5-applog.fqnovel.com
+    - stats.vk-portal.net
+    - +.akstat.io
+    - +.log.dzen.ru
+    - +.apptracer.ru
+    - +.metrics.viqeo.tv
+    - sentry-ng.g.smailru.net
+    - srch-telemeter10.g.smailru.net
+    - sentry.dev-my.com
+    - sentry.dev-my.games
+    - sentry.rustore.ru
+    - sentry.viqeo.tv
+    - stats.dahlmessenger.com
+    - stats.dev.telega.info
+    - stats.rustore.ru
+    - stats.telega.info
+    - +.log.dzen.ru
+    - stats.vk-portal.net
+    - +.badjs.weixinbridge.com
+    - apilog-web.acfun.cn
+    - +.in.applicationinsights.azure.com
+    - dc.applicationinsights.azure.com
+    - live.applicationinsights.azure.com
+    - sentry.hetzner.company
+    - +.log-upload-os.hoyoverse.com
+    - +.beacon.sina.com.cn
+    - +.log.sina.cn
+    - +.log2.sina.cn
+    - +.sbeacon.sina.com.cn
+    - +.slog.sina.cn
+    - +.slog.sina.com.cn
+    - +.alog.umeng.com
+    - +.alog.umengcloud.com
+    - +.alogs.umeng.com
+    - +.alogus.umeng.com
+    - +.cnlogs.umeng.com
+    - +.cnlogs.umengcloud.com
+    - +.plbslog.umeng.com
+    - +.ulogs.umeng.com
+    - +.ulogs.umengcloud.com
+    - +.analytics.vpc.duolingo.com
+    - +.metrics.duolingo.com
+    - copilot-telemetry-service.githubusercontent.com
+    - copilot-telemetry.githubusercontent.com
+    - +.meitustat.com
+    - incoming.telemetry.mozilla.org
+    - incoming-telemetry.thunderbird.net
+    - +.shuqistat.com
     - +.fclog.baidu.com
     - +.pimlog.baidu.com
-    - sentry.hetzner.company
+    - firebaselogging-pa.googleapis.com
+    - firebaselogging.googleapis.com
+    - crashlyticsreports-pa.googleapis.com
+    - firebase-settings.crashlytics.com
+    - update.crashlytics.com
+    - +.log.hunantv.com
+    - +.log.v2.hunantv.com
+    - sentry.x5.ru
+    - +.data.mistat.india.xiaomi.com
+    - +.data.mistat.intl.xiaomi.com
+    - +.data.mistat.rus.xiaomi.com
+    - +.data.mistat.xiaomi.com
+    - +.logupdate.avlyun.sec.miui.com
+    - +.sentry.d.mi.com
+    - +.sentry.d.xiaomi.net
+    - +.stats.music.xiaomi.com
+    - log-sdk.gifshow.com
+    - wlog.kuaishou.com
+    - apilog-web.acfun.cn
     - +.browser.events.data.msn.cn
     - +.browser.events.data.msn.com
+    - sentry.ppy.sh
+    - analytics-stage.wildberries.ru
+    - analytics.wildberries.ru
+    - marketplace-sentry.wb.ru
+    - sentry.wb.ru
+    - web-analytics.wildberries.ru
+    - disney.my.sentry.io
+    - +.paypalbeacon.com
+    - sentry.iptv.rt.ru
+    - +.monitor.music.qq.com
+    - +.report.tencentmusic.com
+    - +.stat.y.qq.com
+    - +.adashx.ut.youku.com
+    - +.e.stat.ykimg.com
+    - +.h-adashx.ut.youku.com
+    - +.lstat.youku.com
+    - +.p-log.ykimg.com
+    - +.passport-log.youku.com
+    - +.s-adashx.ut.youku.com
+    - +.stat.youku.com
+    - +.statis.api.3g.youku.com
+    - +.v6-adashx.ut.youku.com
+    - +.adashx.ut.ele.me
+    - +.h-adashx.ut.ele.me
+    - +.v6-adashx.ut.ele.me
+    - +.nelreports.net
+    - +.browser.events.data.msn.cn
+    - +.browser.events.data.msn.com
+    - +.applicationinsights.io
+    - +.applicationinsights.net
+    - +.aria.ms
+    - +.data.microsoft.com
+    - +.telemetry.microsoft.com
+    - dc.services.visualstudio.com
+    - rt.services.visualstudio.com
+    - +.in.applicationinsights.azure.com
+    - dc.applicationinsights.azure.com
+    - live.applicationinsights.azure.com
+    - +.cafe.github.com
+    - +.collector.github.com
+    - copilot-telemetry-service.githubusercontent.com
+    - copilot-telemetry.githubusercontent.com
+    - dc.services.visualstudio.com
+    - rt.services.visualstudio.com
+    - sentry.mindbox.ru
+    - sentry.popmechanic.ru
+    - +.cloudflareinsights-cn.com
+    - +.cafe.github.com
+    - +.collector.github.com
+    - copilot-telemetry-service.githubusercontent.com
+    - copilot-telemetry.githubusercontent.com
+    - browser-intake-datadoghq.com
+    - o33249.ingest.sentry.io
+    - o33249.ingest.us.sentry.io
+    - sentry.ozon.ru
+    - +.ifacelog.iqiyi.com
+    - +.mbdlog.iqiyi.com
+    - +.beacon.cdn.qq.com
+    - +.beacon.qq.com
+    - +.beaconcdn.qq.com
+    - +.btrace.qq.com
+    - +.bugly.qq.com
+    - +.htrace.wetvinfo.com
+    - +.log.tbs.qq.com
+    - +.monitor.uu.qq.com
+    - +.mtrace.qq.com
+    - +.report.qqweb.qq.com
+    - +.rmonitor.qq.com
+    - +.sngmta.qq.com
+    - +.tpstelemetry.tencent.com
+    - +.trace.qq.com
+    - +.badjs.weixinbridge.com
+    - +.monitor.music.qq.com
+    - +.report.tencentmusic.com
+    - +.stat.y.qq.com
+    - +.crash2.zhihu.com
+    - +.zhihu-web-analytics.zhihu.com
+    - +.v6-adashx.ut.cainiao.com
+    - +.stat.m.jd.com
+    - +.analytics.163.com
+    - +.crash.163.com
+    - +.crashlytics.163.com
+    - +.sentry.music.163.com

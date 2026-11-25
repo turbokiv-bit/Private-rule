@@ -1,8 +1,8 @@
 payload:
     - +.ir
     - +.xn--mgba3a4f16a
-    - +.janebi.com
-    - +.emofid.com
+    - +.mehrnews.com
+    - +.bitbarg.me
     - +.loxblog.com
     - +.niniweblog.com
     - +.rozblog.com
@@ -22,45 +22,7 @@ payload:
     - +.mahex.com
     - +.podro.com
     - +.tipaxco.com
-    - +.faradars.org
-    - +.maktabkhooneh.org
-    - +.newdars.com
-    - +.toplearn.com
-    - +.melotar.com
-    - +.iranlms.org
-    - +.webinarplus.online
-    - +.mellatinsurance.com
-    - +.bimehasia.com
-    - +.dana-insurance.com
-    - +.dayins.com
-    - +.bimeh.com
-    - +.bimeonline.com
-    - +.novininsurance.com
-    - +.sinainsurance.com
-    - +.abrha.net
-    - +.afranet.com
-    - +.arvancloud.com
-    - +.arzex.io
-    - +.cafebazaar.org
-    - +.datisnetwork.com
-    - +.farsroid.com
-    - +.ipnumberia.com
-    - +.iranmobile.org
-    - +.iranserver.com
-    - +.mihanwebhost.com
-    - +.p30download.com
-    - +.parsonline.com
-    - +.parspack.com
-    - +.pazhnetwork.com
-    - +.picofile.com
-    - +.pishgaman.net
-    - +.sarmayex.com
-    - +.sarzamindownload.com
-    - +.skyroom.online
-    - +.smshooshmand.com
-    - +.softgozar.com
-    - +.yasdl.com
-    - +.zhaket.com
+    - +.quera.org
     - +.adivery.com
     - +.kaprila.com
     - +.najva.com
@@ -76,6 +38,7 @@ payload:
     - +.bmibourse.com
     - +.bt-broker.com
     - +.danabroker.com
+    - +.emofid.com
     - +.mofidonline.com
     - +.etminansahm.com
     - +.hafezbourse.com
@@ -100,40 +63,30 @@ payload:
     - +.ramzinex.com
     - +.tabdeal.org
     - +.tetherland.com
+    - +.faradars.org
+    - +.maktabkhooneh.org
+    - +.newdars.com
+    - +.toplearn.com
+    - +.melotar.com
+    - +.iranlms.org
+    - +.webinarplus.online
     - +.cinematicket.org
     - +.melodify.app
     - +.melodify.pw
     - +.telewebion.net
-    - +.sheypoor.com
+    - +.aparat.com
     - +.aparatkids.com
     - +.aparatsport.com
     - +.filimo.com
     - +.filimo.school
-    - +.digi-kala.com
-    - +.blogfa.com
-    - +.blogsky.com
-    - +.aparat.com
-    - +.torob.com
-    - +.digikala.com
-    - +.digikalabusiness.com
-    - +.digikalajet.com
-    - +.digistyle.com
-    - +.divar.cloud
-    - +.divarcdn.com
     - +.vandar.app
     - +.behpardakht.com
-    - +.bitbarg.me
     - +.mydigipay.com
     - +.asanpardakht.net
     - +.zarinpal.com
     - +.asanpardakht.com
     - +.vandar.io
     - +.weswap.digital
-    - +.tehrantimes.com
-    - +.sanjesh.org
-    - +.sharif.edu
-    - +.srttu.edu
-    - +.resalat-news.com
     - +.flightio.com
     - +.mrbilit.com
     - +.tap30.services
@@ -153,29 +106,14 @@ payload:
     - +.snappfood.dev
     - +.snapproom.com
     - +.snapptrip.com
-    - +.bale.ai
-    - +.eitaa.com
-    - +.gap.im
-    - +.gaplication.com
-    - +.niniban.com
-    - +.ninisite.com
-    - +.virasty.com
-    - +.agri-bank.com
-    - +.ansarbank.com
-    - +.blubank.com
-    - +.hibank24.com
-    - +.parsian-bank.com
-    - +.sb24.com
-    - +.quera.org
-    - +.agrieng.org
-    - +.khorasannews.com
     - +.asriran.com
     - +.eghtesadnews.com
     - +.fararu.com
     - +.hawzahnews.com
-    - +.iraneconomist.com
-    - +.mehrnews.com
     - +.parsine.com
+    - +.iraneconomist.com
+    - +.blogfa.com
+    - +.blogsky.com
     - +.qodsna.com
     - +.saat24.com
     - +.sobhanehonline.com
@@ -189,3 +127,65 @@ payload:
     - +.financialtribune.com
     - +.iran-newspaper.com
     - +.khabarvarzeshi.com
+    - +.khorasannews.com
+    - +.resalat-news.com
+    - +.tehrantimes.com
+    - +.sanjesh.org
+    - +.sharif.edu
+    - +.srttu.edu
+    - +.sinainsurance.com
+    - +.digi-kala.com
+    - +.janebi.com
+    - +.sheypoor.com
+    - +.torob.com
+    - +.digikala.com
+    - +.digikalabusiness.com
+    - +.digikalajet.com
+    - +.digistyle.com
+    - +.divar.cloud
+    - +.divarcdn.com
+    - +.bale.ai
+    - +.eitaa.com
+    - +.gap.im
+    - +.gaplication.com
+    - +.niniban.com
+    - +.ninisite.com
+    - +.virasty.com
+    - +.abrha.net
+    - +.afranet.com
+    - +.arvancloud.com
+    - +.arzex.io
+    - +.cafebazaar.org
+    - +.datisnetwork.com
+    - +.farsroid.com
+    - +.ipnumberia.com
+    - +.iranmobile.org
+    - +.iranserver.com
+    - +.mihanwebhost.com
+    - +.p30download.com
+    - +.parsonline.com
+    - +.parspack.com
+    - +.pazhnetwork.com
+    - +.picofile.com
+    - +.pishgaman.net
+    - +.sarmayex.com
+    - +.sarzamindownload.com
+    - +.skyroom.online
+    - +.smshooshmand.com
+    - +.softgozar.com
+    - +.yasdl.com
+    - +.zhaket.com
+    - +.agri-bank.com
+    - +.ansarbank.com
+    - +.blubank.com
+    - +.hibank24.com
+    - +.parsian-bank.com
+    - +.sb24.com
+    - +.agrieng.org
+    - +.mellatinsurance.com
+    - +.bimehasia.com
+    - +.dana-insurance.com
+    - +.dayins.com
+    - +.bimeh.com
+    - +.bimeonline.com
+    - +.novininsurance.com
