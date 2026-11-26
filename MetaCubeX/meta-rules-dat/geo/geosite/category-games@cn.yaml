@@ -1,8 +1,8 @@
 payload:
-    - gog.qtlglb.com
     - +.leagueoflegends.cn
     - +.lpl.com.cn
-    - +.xboxlive.cn
+    - gog.qtlglb.com
+    - +.yostar.cn
     - +.steamserver.net
     - +.steamusercontent.com
     - +.csgo.com.cn
@@ -35,4 +35,4 @@ payload:
     - +.mariokart.cn
     - +.mariokart.com.cn
     - +.supermariobros.com.cn
-    - +.yostar.cn
+    - +.xboxlive.cn

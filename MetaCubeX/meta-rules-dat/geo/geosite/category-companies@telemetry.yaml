@@ -1,10 +1,11 @@
 payload:
-    - sentry.hetzner.company
     - crashlyticsreports-pa.googleapis.com
     - firebase-settings.crashlytics.com
     - firebaselogging-pa.googleapis.com
     - firebaselogging.googleapis.com
     - update.crashlytics.com
+    - sentry.hetzner.company
+    - +.adobestats.io
     - +.appmetrica.yandex.com
     - +.appmetrica.yandex.net
     - +.appmetrica.yandex.ru
@@ -39,11 +40,7 @@ payload:
     - stats.telega.info
     - +.log.dzen.ru
     - stats.vk-portal.net
-    - incoming.telemetry.mozilla.org
-    - incoming-telemetry.thunderbird.net
     - sentry.iptv.rt.ru
-    - sentry.mindbox.ru
-    - sentry.popmechanic.ru
     - +.applicationinsights.io
     - +.applicationinsights.net
     - +.aria.ms
@@ -61,4 +58,7 @@ payload:
     - +.collector.github.com
     - copilot-telemetry-service.githubusercontent.com
     - copilot-telemetry.githubusercontent.com
-    - +.adobestats.io
+    - sentry.mindbox.ru
+    - sentry.popmechanic.ru
+    - incoming.telemetry.mozilla.org
+    - incoming-telemetry.thunderbird.net

@@ -13,6 +13,8 @@ payload:
     - DOMAIN,crl.pki.goog
     - DOMAIN,crls.pki.goog
     - DOMAIN,ocsp.pki.goog
+    - DOMAIN-SUFFIX,sslcom.cn
+    - DOMAIN,www.entrust.cn
     - DOMAIN-SUFFIX,alphassl.com
     - DOMAIN-SUFFIX,easy-signing.com
     - DOMAIN-SUFFIX,globalsign.cn
@@ -20,7 +22,6 @@ payload:
     - DOMAIN-SUFFIX,globalsigncdn.com
     - DOMAIN,cdn.globalsigncdn.com.cdn.cloudflare.net
     - DOMAIN,crl.globalsign.net
-    - DOMAIN-SUFFIX,sslcom.cn
     - DOMAIN,certs-lb.apple.com.akadns.net
     - DOMAIN,certs.apple.com
     - DOMAIN,crl-lb.apple.com.akadns.net
@@ -29,4 +30,3 @@ payload:
     - DOMAIN,ocsp2.apple.com
     - DOMAIN,valid.apple.com
     - DOMAIN,valid.origin-apple.com.akadns.net
-    - DOMAIN,www.entrust.cn
