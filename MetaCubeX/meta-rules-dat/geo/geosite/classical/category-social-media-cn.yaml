@@ -26,6 +26,13 @@ payload:
     - DOMAIN-SUFFIX,zastatic.com
     - DOMAIN-SUFFIX,zhenai.com
     - DOMAIN-SUFFIX,zsxq.com
+    - DOMAIN-SUFFIX,douban.com
+    - DOMAIN-SUFFIX,douban.fm
+    - DOMAIN-SUFFIX,doubanio.com
+    - DOMAIN-SUFFIX,zhihu.com
+    - DOMAIN-SUFFIX,zhimg.com
+    - DOMAIN-SUFFIX,laiyagushi.com
+    - DOMAIN-SUFFIX,vzuu.com
     - DOMAIN-SUFFIX,coolapk.com
     - DOMAIN-SUFFIX,coolapkmarket.com
     - DOMAIN-SUFFIX,coolapkmarket.net
@@ -34,13 +41,6 @@ payload:
     - DOMAIN-SUFFIX,hupu.com
     - DOMAIN-SUFFIX,hupucdn.com
     - DOMAIN-SUFFIX,shihuo.cn
-    - DOMAIN-SUFFIX,zhihu.com
-    - DOMAIN-SUFFIX,zhimg.com
-    - DOMAIN-SUFFIX,laiyagushi.com
-    - DOMAIN-SUFFIX,vzuu.com
-    - DOMAIN-SUFFIX,douban.com
-    - DOMAIN-SUFFIX,douban.fm
-    - DOMAIN-SUFFIX,doubanio.com
     - DOMAIN-SUFFIX,ivwen.com
     - DOMAIN-SUFFIX,meipian.cn
     - DOMAIN-SUFFIX,meipian.me
