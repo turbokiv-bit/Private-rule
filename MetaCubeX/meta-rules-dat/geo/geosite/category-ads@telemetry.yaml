@@ -1,9 +1,39 @@
 payload:
-    - analytics-stage.wildberries.ru
-    - analytics.wildberries.ru
-    - marketplace-sentry.wb.ru
-    - sentry.wb.ru
-    - web-analytics.wildberries.ru
+    - +.api-secure.amplitude.com
+    - +.api-secure.eu.amplitude.com
+    - +.api-sr.amplitude.com
+    - +.api-sr.eu.amplitude.com
+    - +.api.amplitude.com
+    - +.api.eu.amplitude.com
+    - +.api2.amplitude.com
+    - +.assistant-api.amplitude.com
+    - +.assistant-api.eu.amplitude.com
+    - +.cdn.amplitude.com
+    - +.cdn.eu.amplitude.com
+    - +.engagement-static.amplitude.com
+    - +.engagement-static.eu.amplitude.com
+    - +.gs.amplitude.com
+    - +.gs.eu.amplitude.com
+    - +.lab.amplitude.com
+    - +.lab.eu.amplitude.com
+    - +.regionconfig.amplitude.com
+    - +.regionconfig.eu.amplitude.com
+    - +.sr-client-cfg.amplitude.com
+    - +.sr-client-cfg.eu.amplitude.com
+    - browser-intake-datadoghq.com
+    - o33249.ingest.sentry.io
+    - o33249.ingest.us.sentry.io
+    - sentry.x5.ru
+    - +.collector.xhamster.com
+    - +.beacon.sina.com.cn
+    - +.log.sina.cn
+    - +.log2.sina.cn
+    - +.sbeacon.sina.com.cn
+    - +.slog.sina.cn
+    - +.slog.sina.com.cn
+    - log-sdk.gifshow.com
+    - wlog.kuaishou.com
+    - apilog-web.acfun.cn
     - +.extlog.snssdk.com
     - +.log.zijieapi.com
     - log3-applog-hl.fqnovel.com
@@ -14,31 +44,14 @@ payload:
     - rtlog3-applog.fqnovel.com
     - rtlog5-applog-hl.fqnovel.com
     - rtlog5-applog.fqnovel.com
-    - +.stat.m.jd.com
-    - +.log.hunantv.com
-    - +.log.v2.hunantv.com
-    - +.apptracer.ru
-    - +.metrics.viqeo.tv
-    - sentry-ng.g.smailru.net
-    - srch-telemeter10.g.smailru.net
-    - sentry.dev-my.com
-    - sentry.dev-my.games
-    - sentry.rustore.ru
-    - sentry.viqeo.tv
-    - stats.dahlmessenger.com
-    - stats.dev.telega.info
-    - stats.rustore.ru
-    - stats.telega.info
-    - +.log.dzen.ru
-    - stats.vk-portal.net
-    - +.log-upload-os.hoyoverse.com
-    - +.log-upload.mihoyo.com
+    - +.analytics.vpc.duolingo.com
+    - +.metrics.duolingo.com
     - sentry.iptv.rt.ru
-    - error-tracking.megamarket.tech
-    - metrics.21-school.ru
-    - sentry.sberauto.com
-    - tracing-http.megamarket.tech
-    - +.clickstream.sberbank.ru
+    - +.ifacelog.iqiyi.com
+    - +.mbdlog.iqiyi.com
+    - +.analytics.cloud.unity3d.com
+    - +.perf.cloud.unity3d.com
+    - +.perf-events.cloud.unity3d.com
     - +.analytics.163.com
     - +.crash.163.com
     - +.crashlytics.163.com
@@ -61,48 +74,19 @@ payload:
     - mc.yandex.com
     - mc.yandex.net
     - mc.yango.com
-    - sentry.ozon.ru
-    - +.api-secure.amplitude.com
-    - +.api-secure.eu.amplitude.com
-    - +.api-sr.amplitude.com
-    - +.api-sr.eu.amplitude.com
-    - +.api.amplitude.com
-    - +.api.eu.amplitude.com
-    - +.api2.amplitude.com
-    - +.assistant-api.amplitude.com
-    - +.assistant-api.eu.amplitude.com
-    - +.cdn.amplitude.com
-    - +.cdn.eu.amplitude.com
-    - +.engagement-static.amplitude.com
-    - +.engagement-static.eu.amplitude.com
-    - +.gs.amplitude.com
-    - +.gs.eu.amplitude.com
-    - +.lab.amplitude.com
-    - +.lab.eu.amplitude.com
-    - +.regionconfig.amplitude.com
-    - +.regionconfig.eu.amplitude.com
-    - +.sr-client-cfg.amplitude.com
-    - +.sr-client-cfg.eu.amplitude.com
-    - disney.my.sentry.io
-    - +.crash2.zhihu.com
-    - +.zhihu-web-analytics.zhihu.com
-    - +.ifacelog.iqiyi.com
-    - +.mbdlog.iqiyi.com
-    - browser-intake-datadoghq.com
-    - o33249.ingest.sentry.io
-    - o33249.ingest.us.sentry.io
-    - o4504926511693824.ingest.sentry.io
-    - +.analytics.cloud.unity3d.com
-    - +.perf.cloud.unity3d.com
-    - +.perf-events.cloud.unity3d.com
     - +.fclog.baidu.com
     - +.pimlog.baidu.com
-    - +.insights-collector.gog.com
-    - metrika.kontur.ru
-    - sentry.kontur.host
-    - +.nelreports.net
-    - +.browser.events.data.msn.cn
-    - +.browser.events.data.msn.com
+    - error-tracking.megamarket.tech
+    - metrics.21-school.ru
+    - sentry.sberauto.com
+    - tracing-http.megamarket.tech
+    - +.clickstream.sberbank.ru
+    - +.logger.qmai.cn
+    - +.tracking.mcdonalds.com.cn
+    - +.trackingprd.hwwt8.com
+    - +.trackserver.shuxinyc.com
+    - +.log.hunantv.com
+    - +.log.v2.hunantv.com
     - +.beacon.cdn.qq.com
     - +.beacon.qq.com
     - +.beaconcdn.qq.com
@@ -117,10 +101,11 @@ payload:
     - +.sngmta.qq.com
     - +.tpstelemetry.tencent.com
     - +.trace.qq.com
-    - +.badjs.weixinbridge.com
     - +.monitor.music.qq.com
     - +.report.tencentmusic.com
     - +.stat.y.qq.com
+    - +.badjs.weixinbridge.com
+    - sentry.ozon.ru
     - +.data.mistat.india.xiaomi.com
     - +.data.mistat.intl.xiaomi.com
     - +.data.mistat.rus.xiaomi.com
@@ -129,22 +114,24 @@ payload:
     - +.sentry.d.mi.com
     - +.sentry.d.xiaomi.net
     - +.stats.music.xiaomi.com
-    - stats.avito.ru
-    - sentry.hetzner.company
+    - +.insights-collector.gog.com
     - sentry.mindbox.ru
     - sentry.popmechanic.ru
-    - +.analytics.vpc.duolingo.com
-    - +.metrics.duolingo.com
-    - log-sdk.gifshow.com
-    - wlog.kuaishou.com
-    - apilog-web.acfun.cn
-    - +.collector.xhamster.com
-    - +.beacon.sina.com.cn
-    - +.log.sina.cn
-    - +.log2.sina.cn
-    - +.sbeacon.sina.com.cn
-    - +.slog.sina.cn
-    - +.slog.sina.com.cn
+    - analytics-stage.wildberries.ru
+    - analytics.wildberries.ru
+    - marketplace-sentry.wb.ru
+    - sentry.wb.ru
+    - web-analytics.wildberries.ru
+    - metrika.kontur.ru
+    - sentry.kontur.host
+    - sentry.hetzner.company
+    - +.stat.m.jd.com
+    - +.crash2.zhihu.com
+    - +.zhihu-web-analytics.zhihu.com
+    - o4504926511693824.ingest.sentry.io
+    - stats.avito.ru
+    - +.log-upload-os.hoyoverse.com
+    - +.log-upload.mihoyo.com
     - +.adash-c.m.taobao.com
     - +.adash-c.ut.taobao.com
     - +.adash.m.taobao.com
@@ -161,6 +148,9 @@ payload:
     - +.m-adash.m.taobao.com
     - +.retcode.taobao.com
     - +.v6-adashx.ut.taobao.com
+    - +.adashx.ut.ele.me
+    - +.h-adashx.ut.ele.me
+    - +.v6-adashx.ut.ele.me
     - +.adashx.ut.youku.com
     - +.e.stat.ykimg.com
     - +.h-adashx.ut.youku.com
@@ -171,12 +161,6 @@ payload:
     - +.stat.youku.com
     - +.statis.api.3g.youku.com
     - +.v6-adashx.ut.youku.com
-    - +.adash-emas.cn-hangzhou.aliyuncs.com
-    - +.adash.man.aliyuncs.com
-    - +.adashx.ut.amap.com
-    - +.dualstack-logs.amap.com
-    - +.logs.amap.com
-    - +.v6-adashx.ut.amap.com
     - +.v6-adashx.ut.cainiao.com
     - +.alog.umeng.com
     - +.alog.umengcloud.com
@@ -187,11 +171,27 @@ payload:
     - +.plbslog.umeng.com
     - +.ulogs.umeng.com
     - +.ulogs.umengcloud.com
-    - +.adashx.ut.ele.me
-    - +.h-adashx.ut.ele.me
-    - +.v6-adashx.ut.ele.me
-    - +.logger.qmai.cn
-    - +.tracking.mcdonalds.com.cn
-    - +.trackingprd.hwwt8.com
-    - +.trackserver.shuxinyc.com
-    - sentry.x5.ru
+    - +.adash-emas.cn-hangzhou.aliyuncs.com
+    - +.adash.man.aliyuncs.com
+    - +.adashx.ut.amap.com
+    - +.dualstack-logs.amap.com
+    - +.logs.amap.com
+    - +.v6-adashx.ut.amap.com
+    - disney.my.sentry.io
+    - +.apptracer.ru
+    - +.metrics.viqeo.tv
+    - sentry-ng.g.smailru.net
+    - srch-telemeter10.g.smailru.net
+    - sentry.dev-my.com
+    - sentry.dev-my.games
+    - sentry.rustore.ru
+    - sentry.viqeo.tv
+    - stats.dahlmessenger.com
+    - stats.dev.telega.info
+    - stats.rustore.ru
+    - stats.telega.info
+    - +.log.dzen.ru
+    - stats.vk-portal.net
+    - +.nelreports.net
+    - +.browser.events.data.msn.cn
+    - +.browser.events.data.msn.com

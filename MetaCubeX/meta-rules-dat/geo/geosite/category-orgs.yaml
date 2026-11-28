@@ -23,6 +23,10 @@ payload:
     - +.who.int
     - +.wi-fi.org
     - +.wto.org
+    - +.ccstatic.org
+    - +.creativecommons.org
+    - +.creativecommons.engineering
+    - +.licensebuttons.net
     - +.csis.org
     - +.f-dro1d.org
     - +.f-droid.com
@@ -98,16 +102,6 @@ payload:
     - +.signalprocessingsociety.org
     - +.technologyandsociety.org
     - +.vtsociety.org
-    - +.paskoocheh.com
-    - +.ppy.sh
-    - +.ccstatic.org
-    - +.creativecommons.org
-    - +.creativecommons.engineering
-    - +.licensebuttons.net
-    - +.emojipedia.org
-    - +.worldemojiawards.com
-    - +.worldemojiday.com
-    - +.xn--yt8h.la
     - +.acousticbrainz.org
     - +.bookbrainz.org
     - +.coverartarchive.org
@@ -127,6 +121,12 @@ payload:
     - +.osmfoundation.org
     - +.stateofthemap.com
     - +.stateofthemap.org
+    - +.emojipedia.org
+    - +.worldemojiawards.com
+    - +.worldemojiday.com
+    - +.xn--yt8h.la
+    - +.paskoocheh.com
+    - +.ppy.sh
     - +.rolfoundation.org
     - +.rolsociety.org
     - sentry.ppy.sh
